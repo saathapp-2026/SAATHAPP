@@ -70,6 +70,11 @@ export default function App() {
     });
   };
 
+  const getCartQuantity = (productId) => {
+    const item = cartItems.find(i => i.id === productId);
+    return item ? item.quantity : 0;
+  };
+
   const handleGPSDetect = () => {
     setIsGpsLoading(true);
     setTimeout(() => {
