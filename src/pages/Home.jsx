@@ -40,6 +40,7 @@ export default function Home({
   onSearch,
   onLogin,
   onSignup,
+  onLogout,
   isAuthenticated = false,
   user,
   onProfile,
@@ -88,9 +89,11 @@ export default function Home({
         onCartClick={onCartClick}
         location={location}
         onLocationClick={onLocationClick}
+        onLocationChange={setLocation}
         onSearch={onSearch}
         onLogin={onLogin}
         onSignup={onSignup}
+        onLogout={onLogout}
         isAuthenticated={isAuthenticated}
         user={user}
         onProfile={onProfile}

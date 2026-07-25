@@ -1,16 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Search, Mic, Camera, ShoppingCart, User, Menu, MapPin, 
-  ChevronDown, Sun, Moon, Bell, ArrowRight, X, Sparkles, Flame, History,
-  Heart, Package, Settings, LogOut
+  Search, Mic, Camera, ShoppingCart, User, Menu, Sun, Moon, Bell, ArrowRight, X, Sparkles, Flame, History,
+  Heart, Package, Settings, LogOut, MapPin, ChevronDown
 } from 'lucide-react';
+import SaathAppLogo from '../assets/saathapp-logo.jpeg';
 
 export default function Header({ 
   cartCount, 
   onCartClick, 
   location, 
   onLocationClick,
+  onLocationChange,
   onSearch, 
   onLogin,
   onSignup,
@@ -21,6 +23,7 @@ export default function Header({
   onOrdersPage,
   onWishlistPage,
   onSettingsPage,
+  onLogout,
   darkMode, 
   toggleDarkMode,
   onVoiceSearchClick,
@@ -30,6 +33,7 @@ export default function Header({
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const searchRef = useRef(null);
+  const navigate = useNavigate();
 
   const popularSearches = [
     'Electrician', 'Tomato 1kg', 'Ultratech Cement', 'AC Servicing', 'Cables', 'Ghee'
@@ -80,37 +84,44 @@ export default function Header({
           
           {/* Logo & Mobile Menu Toggle */}
           <div className="flex items-center gap-3 shrink-0">
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="text-2xl font-extrabold tracking-tight flex items-center gap-2 cursor-pointer"
+            <Link
+              to="/"
+              onClick={(event) => {
+                if (window.location.pathname === '/') {
+                  event.preventDefault();
+                  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+                }
+              }}
+              aria-label="Go to Home"
             >
-              <div className="w-10 h-10 rounded-btn bg-gradient-primary flex items-center justify-center text-white shadow-glow-primary">
-                <span className="font-black text-xl">S</span>
-              </div>
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hidden sm:inline-block">
-                Saath<span className="text-secondary-dark dark:text-secondary">App</span>
-              </span>
-            </motion.div>
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="h-10 w-32 cursor-pointer"
+              >
+                <img 
+                  src={SaathAppLogo} 
+                  alt="SaathApp Logo" 
+                  className="h-full w-full object-contain"
+                />
+              </motion.div>
+            </Link>
           </div>
 
-          {/* Location Picker (Blinkit style next to Logo) */}
-          <motion.div 
-            onClick={onLocationClick}
-            whileHover={{ scale: 1.02 }}
-            className="hidden md:flex items-center gap-2 cursor-pointer bg-slate-100 dark:bg-slate-800/60 py-2 px-3.5 rounded-btn border border-slate-200/50 dark:border-slate-700/50 max-w-xs shrink"
+          <button
+            type="button"
+            onClick={() => navigate('/location')}
+            className="hidden md:flex items-center gap-2 rounded-btn border border-slate-200/70 bg-slate-100/90 px-3.5 py-2.5 text-slate-700 shadow-sm transition hover:shadow-md dark:border-slate-700/70 dark:bg-slate-800/70 dark:text-slate-200"
           >
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary dark:text-primary-light">
-              <MapPin size={16} className="animate-bounce" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <MapPin size={16} />
             </div>
-            <div className="text-left leading-none max-w-[160px] truncate">
-              <span className="text-[10px] font-bold text-slate-400 block uppercase tracking-wider">Delivery to</span>
-              <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 truncate block">
-                {location || 'Select Location...'}
-              </span>
+            <div className="text-left">
+              <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">Deliver to</div>
+              <div className="max-w-[220px] truncate text-sm font-semibold text-slate-800 dark:text-slate-100">{location || 'Select Location...'}</div>
             </div>
             <ChevronDown size={14} className="text-slate-400" />
-          </motion.div>
+          </button>
 
           {/* Amazon style Search Bar */}
           <div ref={searchRef} className="flex-1 max-w-2xl relative z-40">
@@ -313,6 +324,17 @@ export default function Header({
               </div>
               <span className="hidden sm:inline">My Cart</span>
             </motion.button>
+
+            {isAuthenticated && (
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.96 }}
+                onClick={onLogout}
+                className="hidden sm:flex items-center gap-1.5 rounded-btn border border-slate-200 bg-white/80 px-3 py-2 text-xs font-bold text-slate-700 transition-all hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:bg-slate-800"
+              >
+                <span>Logout</span>
+              </motion.button>
+            )}
 
             {/* User Profile Avatar — direct navigation (no dropdown) */}
             <div className="relative">

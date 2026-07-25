@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Send, ShieldCheck, MapPin, Phone, Mail, Award, CheckCircle 
 } from 'lucide-react';
+import SaathAppLogo from '../assets/saathapp-logo.jpeg';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -25,13 +27,12 @@ export default function Footer() {
           
           {/* Logo Brand info */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-btn bg-gradient-primary flex items-center justify-center text-white">
-                <span className="font-black text-xl">S</span>
-              </div>
-              <span className="text-2xl font-black text-white tracking-tight">
-                Saath<span className="text-secondary">App</span>
-              </span>
+            <div className="h-12 w-48">
+              <img 
+                src={SaathAppLogo} 
+                alt="SaathApp Logo" 
+                className="h-full w-full object-contain"
+              />
             </div>
             <p className="text-xs sm:text-sm text-slate-400 max-w-sm font-medium leading-relaxed">
               India's premier Hyperlocal Super App combining local groceries, construction hardware, seeds and agricultural supplies, and on-demand professional technicians into a single unified marketplace.
@@ -72,10 +73,18 @@ export default function Footer() {
           <div>
             <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Company</h4>
             <ul className="space-y-3 text-xs font-semibold">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
+              <li>
+                <Link
+                  to="/about"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  About Us
+                </Link>
+              </li>
               <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Saath Blog</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Press & Media</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
             </ul>
           </div>
 
@@ -84,9 +93,9 @@ export default function Footer() {
             <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Business</h4>
             <ul className="space-y-3 text-xs font-semibold">
               <li><a href="#" className="hover:text-white transition-colors">Become Seller</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Become Service Partner</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Become Franchise</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Advertise Store</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Become Service Professional</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Become Delivery Partner</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Advertise with Us</a></li>
             </ul>
           </div>
 
@@ -95,9 +104,9 @@ export default function Footer() {
             <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Support</h4>
             <ul className="space-y-3 text-xs font-semibold">
               <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact Support</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Service Warranty</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Faq</a></li>
+              <li><Link to="/faq" className="hover:text-white transition-colors">Frequently Asked Questions</Link></li>
             </ul>
           </div>
 
@@ -107,19 +116,19 @@ export default function Footer() {
             <ul className="space-y-3 text-xs font-semibold">
               <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Seller Policies</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Rider Agreement</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Seller Policy</a></li>
+              <li><Link to="/delivery-partner-agreement" className="hover:text-white transition-colors">Delivery Partner Agreement</Link></li>
             </ul>
           </div>
 
           {/* Col 5 */}
           <div>
-            <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Trust Center</h4>
+            <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Trust</h4>
             <ul className="space-y-3 text-xs font-semibold">
-              <li><a href="#" className="hover:text-white transition-colors">ISO 27001 Certified</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Secured Escrows</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Refund Guarantees</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Vendor Audits</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Verified Sellers</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Secure Online Payments</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Privacy Protected</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Customer Support</a></li>
             </ul>
           </div>
 
@@ -129,15 +138,15 @@ export default function Footer() {
             <ul className="space-y-3 text-xs font-semibold text-slate-400">
               <li className="flex items-start gap-2">
                 <MapPin size={14} className="text-primary shrink-0" />
-                <span>Sector 62, Noida, UP, India</span>
+                <span>Bhatahar, Tharthari<br />Nalanda, Bihar – 801307<br />India</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={14} className="text-primary shrink-0" />
-                <span>+91 120 456 7890</span>
+                <span>+91 9128842027</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={14} className="text-primary shrink-0" />
-                <span>support@saathapp.com</span>
+                <span>support@saathapp.in</span>
               </li>
             </ul>
           </div>
@@ -147,60 +156,37 @@ export default function Footer() {
         {/* Bottom Segment: Trust seals, Socials, Copyright */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pt-10 text-xs">
           
-          {/* Left copyright and payments */}
-          <div className="space-y-3">
+          {/* Left copyright */}
+          <div>
             <p className="font-semibold text-slate-500">
-              © {new Date().getFullYear()} SaathApp Private Limited. All Rights Reserved.
+              © {new Date().getFullYear()} SAATHAPPNOVA PRIVATE LIMITED. All Rights Reserved.
             </p>
-            
-            {/* Payments list mockup */}
-            <div className="flex flex-wrap items-center gap-3 text-slate-600 font-extrabold uppercase text-[9px] tracking-widest">
-              <span>Accepted Payments:</span>
-              <div className="flex gap-1.5 text-slate-400 font-bold bg-slate-800 py-1 px-2.5 rounded-md border border-slate-750">
-                <span>UPI</span>
-              </div>
-              <div className="flex gap-1.5 text-slate-400 font-bold bg-slate-800 py-1 px-2.5 rounded-md border border-slate-750">
-                <span>RuPay</span>
-              </div>
-              <div className="flex gap-1.5 text-slate-400 font-bold bg-slate-800 py-1 px-2.5 rounded-md border border-slate-750">
-                <span>Visa</span>
-              </div>
-              <div className="flex gap-1.5 text-slate-400 font-bold bg-slate-800 py-1 px-2.5 rounded-md border border-slate-750">
-                <span>COD</span>
-              </div>
-            </div>
           </div>
 
           {/* Right Socials & Certs */}
           <div className="flex flex-col items-start md:items-end gap-3.5">
             {/* Social icons (Inline SVGs) */}
             <div className="flex gap-3">
-              {/* Facebook */}
-              <a href="#" className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white" title="Facebook">
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M22,12c0-5.52-4.48-10-10-10S2,6.48,2,12c0,4.84,3.44,8.87,8,9.8V15H8v-3h2V9.5C10,7.57,11.57,6,13.5,6H16v3h-2c-0.55,0-1,0.45-1,1v2h3v3h-3v6.8C18.56,20.87,22,16.84,22,12z"/>
-                </svg>
-              </a>
-              {/* Twitter / X */}
-              <a href="#" className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white" title="Twitter / X">
-                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
               {/* Instagram */}
-              <a href="#" className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white" title="Instagram">
+              <a href="https://instagram.com/saathapp.tech" className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white" title="Instagram">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
                 </svg>
               </a>
+              {/* X (Twitter) */}
+              <a href="https://x.com/saathappT" className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white" title="X (Twitter)">
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
               {/* LinkedIn */}
-              <a href="#" className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white" title="LinkedIn">
+              <a href="https://linkedin.com/company/saathapp-tech" className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white" title="LinkedIn">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                 </svg>
               </a>
               {/* YouTube */}
-              <a href="#" className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white" title="YouTube">
+              <a href="https://youtube.com/@saathappofficial" className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white" title="YouTube">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.53 3.5 12 3.5 12 3.5s-7.53 0-9.388.555A3.003 3.003 0 0 0 .502 6.163C0 8.07 0 12 0 12s0 3.93.502 5.837a3.003 3.003 0 0 0 2.11 2.108C4.47 20.5 12 20.5 12 20.5s7.53 0 9.388-.555a3.003 3.003 0 0 0 2.11-2.108C24 15.93 24 12 24 12s0-3.93-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
