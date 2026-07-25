@@ -8,7 +8,8 @@ export default function FeaturedProducts({
   onQuickView, 
   cartItems, 
   selectedCategory, 
-  setSelectedCategory 
+  setSelectedCategory,
+  searchQuery = ''
 }) {
   const [wishlistedIds, setWishlistedIds] = useState([]);
 
@@ -23,10 +24,20 @@ export default function FeaturedProducts({
     return item ? item.quantity : 0;
   };
 
-  // Filter products by selected category
-  const filteredProducts = selectedCategory === 'all' 
-    ? featuredProducts 
-    : featuredProducts.filter(p => p.category === selectedCategory);
+  const normalizedSearch = searchQuery.trim().toLowerCase();
+
+  // Filter products by selected category and search text
+  const filteredProducts = featuredProducts.filter((product) => {
+    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+    const matchesSearch = !normalizedSearch || [
+      product.name,
+      product.category,
+      product.badge,
+      product.description
+    ].some((value) => value?.toLowerCase().includes(normalizedSearch));
+
+    return matchesCategory && matchesSearch;
+  });
 
   const filterTabs = [
     { id: 'all', label: 'All Products' },
@@ -81,12 +92,17 @@ export default function FeaturedProducts({
         </div>
 
         {/* Products Grid Layout */}
-        <motion.div 
-          layout 
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredProducts.map((product) => {
+        {filteredProducts.length === 0 ? (
+          <div className="rounded-card border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm font-medium text-slate-500 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-400">
+            No items matched your search. Try a different keyword like “grocery”, “electric”, or “cement”.
+          </div>
+        ) : (
+          <motion.div 
+            layout 
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredProducts.map((product) => {
               const qty = getCartQuantity(product.id);
               const isWishlisted = wishlistedIds.includes(product.id);
 
@@ -207,9 +223,10 @@ export default function FeaturedProducts({
 
                 </motion.div>
               );
-            })}
-          </AnimatePresence>
-        </motion.div>
+              })}
+            </AnimatePresence>
+          </motion.div>
+        )}
 
       </div>
     </section>

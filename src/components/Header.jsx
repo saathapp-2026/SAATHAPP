@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Search, Mic, Camera, ShoppingCart, User, Menu, MapPin, 
-  ChevronDown, Sun, Moon, Bell, ArrowRight, X, Sparkles, Flame, History
+  ChevronDown, Sun, Moon, Bell, ArrowRight, X, Sparkles, Flame, History,
+  Heart, Package, Settings, LogOut
 } from 'lucide-react';
 
 export default function Header({ 
@@ -11,6 +12,15 @@ export default function Header({
   location, 
   onLocationClick,
   onSearch, 
+  onLogin,
+  onSignup,
+  onProfile,
+  user,
+  isAuthenticated = false,
+  onCartPage,
+  onOrdersPage,
+  onWishlistPage,
+  onSettingsPage,
   darkMode, 
   toggleDarkMode,
   onVoiceSearchClick,
@@ -250,6 +260,26 @@ export default function Header({
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-danger rounded-full" />
             </button>
 
+            {!isAuthenticated && (
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                onClick={onLogin}
+                className="hidden sm:flex items-center gap-1 px-3.5 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 bg-white/80 hover:bg-slate-100 dark:bg-slate-900/70 dark:hover:bg-slate-800 border border-slate-200/70 dark:border-slate-700/70 rounded-btn transition-all"
+              >
+                <span>Login</span>
+              </motion.button>
+            )}
+
+            {!isAuthenticated && (
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                onClick={onSignup}
+                className="hidden sm:flex items-center gap-1 px-3.5 py-2 text-xs font-bold text-white bg-gradient-primary hover:bg-gradient-primary/95 rounded-btn shadow-glow-primary transition-all"
+              >
+                <span>Sign Up</span>
+              </motion.button>
+            )}
+
             {/* Partner Button (Urban Company / Meesho feel) */}
             <motion.button 
               whileHover={{ scale: 1.02 }}
@@ -284,9 +314,19 @@ export default function Header({
               <span className="hidden sm:inline">My Cart</span>
             </motion.button>
 
-            {/* User Profile Avatar */}
-            <div className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden cursor-pointer border border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-500 shrink-0">
-              <User size={18} />
+            {/* User Profile Avatar — direct navigation (no dropdown) */}
+            <div className="relative">
+              <button
+                onClick={() => onProfile()}
+                className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden cursor-pointer border border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-500 shrink-0"
+                title="Open profile"
+              >
+                {user?.photo ? (
+                  <img src={user.photo} alt={user.name || 'Profile'} className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-sm font-black">{(user?.name || 'U').charAt(0).toUpperCase()}</span>
+                )}
+              </button>
             </div>
           </div>
 
