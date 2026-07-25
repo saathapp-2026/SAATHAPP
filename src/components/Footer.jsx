@@ -114,8 +114,24 @@ export default function Footer() {
           <div>
             <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Legal</h4>
             <ul className="space-y-3 text-xs font-semibold">
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+              <li>
+                <Link
+                  to="/privacy-policy"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/terms-of-service"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Terms of Service
+                </Link>
+              </li>
               <li><a href="#" className="hover:text-white transition-colors">Seller Policy</a></li>
               <li><Link to="/delivery-partner-agreement" className="hover:text-white transition-colors">Delivery Partner Agreement</Link></li>
             </ul>
