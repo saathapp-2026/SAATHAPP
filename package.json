@@ -13,10 +13,12 @@
     "@tailwindcss/postcss": "^4.3.3",
     "autoprefixer": "^10.5.4",
     "framer-motion": "^12.42.2",
+    "i18next": "^26.3.6",
     "lucide-react": "^1.26.0",
     "postcss": "^8.5.22",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-i18next": "^17.0.11",
     "react-router-dom": "^7.18.1",
     "tailwindcss": "^4.3.3"
   },

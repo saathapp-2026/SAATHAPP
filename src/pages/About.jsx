@@ -8,7 +8,7 @@ import {
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-export default function About({ onBack, onLogout }) {
+export default function About({ onBack, onLogout, isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -81,15 +81,16 @@ export default function About({ onBack, onLogout }) {
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}
-        isAuthenticated={false}
-        onProfile={() => {}}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        onProfile={() => navigate('/profile')}
         onCartPage={() => {}}
         onOrdersPage={() => {}}
         onWishlistPage={() => {}}
         onSettingsPage={() => {}}
         onLogout={onLogout}
-        darkMode={false}
-        toggleDarkMode={() => {}}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
         onVoiceSearchClick={() => {}}
         onImageSearchClick={() => {}}
       />
@@ -397,7 +398,7 @@ export default function About({ onBack, onLogout }) {
 
             <div className="mt-6 border-t border-white/10 pt-6">
               <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Communication Channels</p>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <div className="flex items-center gap-3">
                   <Mail size={16} className="text-emerald-400 shrink-0" />
                   <div>
@@ -408,8 +409,8 @@ export default function About({ onBack, onLogout }) {
                 <div className="flex items-center gap-3">
                   <Mail size={16} className="text-emerald-400 shrink-0" />
                   <div>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase">Business Enquiries</p>
-                    <a href="mailto:business@saathapp.in" className="text-sm font-bold hover:underline text-white">business@saathapp.in</a>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase">Company</p>
+                    <a href="mailto:company@saathapp.in" className="text-sm font-bold hover:underline text-white">company@saathapp.in</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -419,18 +420,16 @@ export default function About({ onBack, onLogout }) {
                     <a href="mailto:careers@saathapp.in" className="text-sm font-bold hover:underline text-white">careers@saathapp.in</a>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Mail size={16} className="text-emerald-400 shrink-0" />
-                  <div>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase">Legal & Compliance</p>
-                    <a href="mailto:legal@saathapp.in" className="text-sm font-bold hover:underline text-white">legal@saathapp.in</a>
-                  </div>
-                </div>
               </div>
 
               <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-250 font-medium">
                 <span className="flex items-center gap-2"><Phone size={14} className="text-emerald-400" /> +91 9128842027</span>
-                <span className="flex items-center gap-2"><Globe size={14} className="text-emerald-400" /> www.saathapp.in</span>
+                <span className="flex items-center gap-2">
+                  <Globe size={14} className="text-emerald-400" /> 
+                  <a href="https://www.saathappnova.co.in" target="_blank" rel="noopener noreferrer" className="hover:underline text-white">
+                    www.saathappnova.co.in
+                  </a>
+                </span>
               </div>
             </div>
           </motion.section>

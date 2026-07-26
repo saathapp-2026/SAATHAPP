@@ -6,6 +6,7 @@ import {
   Heart, Package, Settings, LogOut, MapPin, ChevronDown
 } from 'lucide-react';
 import SaathAppLogo from '../assets/saathapp-logo.jpeg';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Header({ 
   cartCount, 
@@ -29,6 +30,7 @@ export default function Header({
   onVoiceSearchClick,
   onImageSearchClick
 }) {
+  const { t } = useLanguage();
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -129,7 +131,7 @@ export default function Header({
               <div className="relative w-full">
                 <input
                   type="text"
-                  placeholder='Search for "Electrician", "Tomatoes", "Cement", "Cables"...'
+                  placeholder={t('search') + '...'}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsSearchFocused(true)}
@@ -277,7 +279,7 @@ export default function Header({
                 onClick={onLogin}
                 className="hidden sm:flex items-center gap-1 px-3.5 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 bg-white/80 hover:bg-slate-100 dark:bg-slate-900/70 dark:hover:bg-slate-800 border border-slate-200/70 dark:border-slate-700/70 rounded-btn transition-all"
               >
-                <span>Login</span>
+                <span>{t('login')}</span>
               </motion.button>
             )}
 
@@ -287,18 +289,20 @@ export default function Header({
                 onClick={onSignup}
                 className="hidden sm:flex items-center gap-1 px-3.5 py-2 text-xs font-bold text-white bg-gradient-primary hover:bg-gradient-primary/95 rounded-btn shadow-glow-primary transition-all"
               >
-                <span>Sign Up</span>
+                <span>{t('signup')}</span>
               </motion.button>
             )}
 
             {/* Partner Button (Urban Company / Meesho feel) */}
-            <motion.button 
-              whileHover={{ scale: 1.02 }}
-              className="hidden lg:flex items-center gap-1 px-3.5 py-2 text-xs font-bold text-primary dark:text-primary-light bg-primary/5 hover:bg-primary/10 border border-primary/20 dark:border-primary/10 rounded-btn transition-all"
-            >
-              <span>Become Partner</span>
-              <ArrowRight size={12} />
-            </motion.button>
+            {!isAuthenticated && (
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                className="hidden lg:flex items-center gap-1 px-3.5 py-2 text-xs font-bold text-primary dark:text-primary-light bg-primary/5 hover:bg-primary/10 border border-primary/20 dark:border-primary/10 rounded-btn transition-all"
+              >
+                <span>{t('become_partner')}</span>
+                <ArrowRight size={12} />
+              </motion.button>
+            )}
 
             {/* Zepto/Blinkit Style Cart Button */}
             <motion.button
@@ -322,7 +326,7 @@ export default function Header({
                   )}
                 </AnimatePresence>
               </div>
-              <span className="hidden sm:inline">My Cart</span>
+              <span className="hidden sm:inline">{t('my_cart')}</span>
             </motion.button>
 
             {isAuthenticated && (
@@ -332,14 +336,14 @@ export default function Header({
                 onClick={onLogout}
                 className="hidden sm:flex items-center gap-1.5 rounded-btn border border-slate-200 bg-white/80 px-3 py-2 text-xs font-bold text-slate-700 transition-all hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:bg-slate-800"
               >
-                <span>Logout</span>
+                <span>{t('logout')}</span>
               </motion.button>
             )}
 
             {/* User Profile Avatar — direct navigation (no dropdown) */}
             <div className="relative">
               <button
-                onClick={() => onProfile()}
+                onClick={() => navigate('/profile')}
                 className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden cursor-pointer border border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-500 shrink-0"
                 title="Open profile"
               >

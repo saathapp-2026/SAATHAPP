@@ -93,7 +93,7 @@ export default function Footer() {
               </li>
               <li>
                 <a 
-                  href="https://saathappnova.co.in/careers" 
+                  href="https://www.saathappnova.co.in/careers" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="hover:text-white transition-colors"
@@ -101,7 +101,6 @@ export default function Footer() {
                   Careers
                 </a>
               </li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
             </ul>
           </div>
 
@@ -122,7 +121,16 @@ export default function Footer() {
             <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Support</h4>
             <ul className="space-y-3 text-xs font-semibold">
               <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
+              <li>
+                <a 
+                  href="https://www.saathappnova.co.in/contact" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-white transition-colors"
+                >
+                  Contact Us
+                </a>
+              </li>
               <li>
                 <Link 
                   to="/service-warranty" 
@@ -200,7 +208,7 @@ export default function Footer() {
               <li className="flex items-start gap-2.5">
                 <Mail size={14} className="text-primary shrink-0 mt-0.5" />
                 <div>
-                  <span className="block text-white font-bold mb-0.5">Business Inquiry:</span>
+                  <span className="block text-white font-bold mb-0.5">Company:</span>
                   <a href="mailto:company@saathapp.in" className="hover:text-white transition-colors">company@saathapp.in</a>
                 </div>
               </li>
@@ -216,12 +224,12 @@ export default function Footer() {
                 <div>
                   <span className="block text-white font-bold mb-0.5">Official Website:</span>
                   <a 
-                    href="https://saathappnova.co.in" 
+                    href="https://www.saathappnova.co.in" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="hover:text-white transition-colors"
                   >
-                    https://saathappnova.co.in
+                    www.saathappnova.co.in
                   </a>
                 </div>
               </li>

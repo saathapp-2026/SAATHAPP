@@ -8,7 +8,7 @@ import {
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-export default function OurStory({ onBack, onLogout }) {
+export default function OurStory({ onBack, onLogout, isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
   const navigate = useNavigate();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -81,15 +81,16 @@ export default function OurStory({ onBack, onLogout }) {
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}
-        isAuthenticated={false}
-        onProfile={() => {}}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        onProfile={() => navigate('/profile')}
         onCartPage={() => {}}
         onOrdersPage={() => {}}
         onWishlistPage={() => {}}
         onSettingsPage={() => {}}
         onLogout={onLogout}
-        darkMode={false}
-        toggleDarkMode={() => {}}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
         onVoiceSearchClick={() => {}}
         onImageSearchClick={() => {}}
       />

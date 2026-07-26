@@ -1,0 +1,706 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Clock, Briefcase, Award, Star, Bell, ShieldCheck, MapPin, Calendar, Wallet,
+  Activity, User, Settings, LifeBuoy, Zap, Phone, Globe, ChevronDown, CheckCircle, Navigation, Play, Trash2, Info, LayoutDashboard, ClipboardCheck, DollarSign, AlertCircle
+} from 'lucide-react';
+
+// Import worker components
+import Sidebar from '../../components/worker/Sidebar';
+import Topbar from '../../components/worker/Topbar';
+import StatsCard from '../../components/worker/StatsCard';
+import JobsCard from '../../components/worker/JobsCard';
+import AttendanceCard from '../../components/worker/AttendanceCard';
+import PerformanceCard from '../../components/worker/PerformanceCard';
+import WalletCard from '../../components/worker/WalletCard';
+import ReviewCard from '../../components/worker/ReviewCard';
+import NotificationPanel from '../../components/worker/NotificationPanel';
+import ProfileCard from '../../components/worker/ProfileCard';
+import CalendarWidget from '../../components/worker/CalendarWidget';
+
+export default function WorkerDashboardPage({
+  darkMode,
+  toggleDarkMode,
+  onLogout,
+  onBack
+}) {
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [isOnline, setIsOnline] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Attendance state punching
+  const [attendance, setAttendance] = useState({
+    isClockedIn: false,
+    totalHours: 176,
+    lateMarks: 2,
+    leavesTaken: 3
+  });
+
+  // Dynamic state list for jobs
+  const [jobs, setJobs] = useState([
+    {
+      id: 'JOB-3042',
+      customerName: 'Sunita Roy',
+      customerPhone: '9876543202',
+      serviceName: 'Kitchen Switch Replacement',
+      address: 'Malviya Nagar, Sector 4, New Delhi',
+      date: 'July 26, 2026',
+      time: '11:00 AM',
+      incentive: 350,
+      priority: 'high',
+      status: 'assigned',
+      assignedBy: 'Rahul Kumar (SaathApp Partner)',
+      otp: '1050',
+      scopeDescription: 'Replace 2 burnt modular light switches. Install safe earth lines.'
+    },
+    {
+      id: 'JOB-3091',
+      customerName: 'Vijay Khanna',
+      customerPhone: '9876543204',
+      serviceName: 'Living Room Fan Install',
+      address: 'Green Park Ext, H-12, New Delhi',
+      date: 'July 26, 2026',
+      time: '04:00 PM',
+      incentive: 450,
+      priority: 'medium',
+      status: 'assigned',
+      assignedBy: 'Rahul Kumar (SaathApp Partner)',
+      otp: '3200',
+      scopeDescription: 'Unbox and assemble Orient ceiling fan. Secure ceiling hook, adjust regulator switch.'
+    },
+    {
+      id: 'JOB-2900',
+      customerName: 'Preeti Sharma',
+      customerPhone: '9876543203',
+      serviceName: 'Aadhaar Verified Light Install',
+      address: 'Hauz Khas Village, Block B, New Delhi',
+      date: 'July 25, 2026',
+      time: '02:00 PM',
+      incentive: 750,
+      priority: 'low',
+      status: 'completed',
+      assignedBy: 'Rahul Kumar (SaathApp Partner)',
+      otp: '4820',
+      rating: 5
+    }
+  ]);
+
+  const [activeLiveJob, setActiveLiveJob] = useState(null);
+
+  // Dynamic state list for notifications
+  const [notifications, setNotifications] = useState([
+    { id: 1, title: 'New Job Assigned', description: 'Kitchen Switch Replacement assigned by Rahul Kumar', time: '15 mins ago', type: 'new_job', read: false },
+    { id: 2, title: 'Salary Settled', description: '₹18,500 base salary credited to your bank account', time: 'Jul 01, 2026', type: 'salary_credited', read: false },
+    { id: 3, title: 'Outstanding Review', description: 'Preeti Sharma rated you 5 stars: "Very quick switchboard check..."', time: 'Yesterday', type: 'review_received', read: true }
+  ]);
+
+  // Support tickets state
+  const [supportTickets, setSupportTickets] = useState([
+    { id: 'TCK-501', subject: 'Incentive calculation error on JOB-2810', status: 'closed', response: 'Incentive of ₹350 resolved.' },
+    { id: 'TCK-608', subject: 'Late mark disputer for Jul 10 shift', status: 'open', response: 'Under operational review.' }
+  ]);
+
+  const [ticketSubject, setTicketSubject] = useState('');
+
+  useEffect(() => {
+    document.title = 'Worker Portal | SaathApp';
+  }, []);
+
+  // Job handlers
+  const handleAcceptJob = (jobId) => {
+    setJobs(prev => prev.map(j => j.id === jobId ? { ...j, status: 'accepted' } : j));
+    
+    // Add system notification
+    const newNotif = {
+      id: Date.now(),
+      title: 'Job Accepted',
+      description: `You accepted job ${jobId}. Expected arrival timeline updated.`,
+      time: 'Just now',
+      type: 'system_info',
+      read: false
+    };
+    setNotifications(prev => [newNotif, ...prev]);
+    alert(`Job accepted! Settle checkups inside today's timeline.`);
+  };
+
+  const handleRejectJob = (jobId) => {
+    setJobs(prev => prev.map(j => j.id === jobId ? { ...j, status: 'cancelled' } : j));
+    alert(`Job declined successfully.`);
+  };
+
+  const handleSelectLiveJob = (jobObj) => {
+    setActiveLiveJob(jobObj);
+    setActiveTab('today_jobs'); // Go to live jobs tab
+  };
+
+  const handleCompleteJob = (jobId, notes) => {
+    setJobs(prev => prev.map(j => j.id === jobId ? { ...j, status: 'completed' } : j));
+    setActiveLiveJob(null);
+
+    // Credit incentive payout dynamically
+    const matchedJob = jobs.find(j => j.id === jobId);
+    
+    // Add notify
+    const newNotif = {
+      id: Date.now(),
+      title: 'Incentive Payout Credited',
+      description: `₹${matchedJob.incentive} incentive added to wallet for job ${jobId}.`,
+      time: 'Just now',
+      type: 'salary_credited',
+      read: false
+    };
+    setNotifications(prev => [newNotif, ...prev]);
+    alert(`Job completed! Incentive of ₹${matchedJob.incentive} credited to wallet.`);
+  };
+
+  // Shift Punch handlers
+  const handleClockIn = () => {
+    setAttendance(prev => ({ ...prev, isClockedIn: true }));
+    alert('Clocked In successfully! Active shift timer started.');
+  };
+
+  const handleClockOut = () => {
+    setAttendance(prev => ({ 
+      ...prev, 
+      isClockedIn: false,
+      totalHours: prev.totalHours + 8 
+    }));
+    alert('Clocked Out successfully! Shift log saved.');
+  };
+
+  // Notification handlers
+  const handleMarkRead = (id) => {
+    setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
+  };
+
+  const handleClearAllNotifs = () => {
+    setNotifications([]);
+  };
+
+  // Ticket handler
+  const handleRaiseTicket = (e) => {
+    e.preventDefault();
+    if (!ticketSubject.trim()) return;
+
+    const newTicket = {
+      id: `TCK-${Math.floor(1000 + Math.random() * 9000)}`,
+      subject: ticketSubject,
+      status: 'open',
+      response: 'Support request logged. Review timeline: 4 hours.'
+    };
+
+    setSupportTickets(prev => [newTicket, ...prev]);
+    setTicketSubject('');
+    alert('Support ticket raised.');
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 flex flex-col justify-between overflow-x-hidden transition-colors duration-300">
+      
+      {/* Outer viewport frame */}
+      <div className="flex-1 flex flex-col lg:flex-row">
+        
+        {/* SIDEBAR */}
+        <Sidebar
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          isOnline={isOnline}
+          setIsOnline={setIsOnline}
+          isOpen={sidebarOpen}
+          setIsOpen={setSidebarOpen}
+          onLogout={onLogout}
+        />
+
+        {/* WORKSPACE FRAME */}
+        <div className="flex-1 flex flex-col overflow-x-hidden min-h-screen pb-16 lg:pb-0">
+          
+          {/* TOPBAR */}
+          <Topbar
+            sidebarOpen={sidebarOpen}
+            setSidebarOpen={setSidebarOpen}
+            darkMode={darkMode}
+            toggleDarkMode={toggleDarkMode}
+            notifications={notifications}
+            onLogout={onLogout}
+          />
+
+          {/* DYNAMIC TAB VIEWPORTS */}
+          <div className="p-4 sm:p-6 lg:p-8 flex-1 space-y-6">
+            
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.25 }}
+              >
+                
+                {/* 1. CENTRAL WORKER DASHBOARD */}
+                {activeTab === 'dashboard' && (
+                  <div className="space-y-6">
+                    
+                    {/* Active shift notification if not clocked in */}
+                    {!attendance.isClockedIn && (
+                      <div className="flex items-center justify-between p-4 bg-amber-50 dark:bg-amber-955/20 text-amber-600 border border-amber-205/50 rounded-card text-xs font-semibold">
+                        <div className="flex items-center gap-2">
+                          <AlertCircle size={16} />
+                          <span>Shift inactive. Click Clock In to start receiving job updates and log hours.</span>
+                        </div>
+                        <button
+                          onClick={() => setActiveTab('attendance')}
+                          className="px-3.5 py-1.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-[10px] font-black uppercase tracking-wider shadow-sm cursor-pointer"
+                        >
+                          Clock In
+                        </button>
+                      </div>
+                    )}
+
+                    {/* STATS CARD GRID */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                      <StatsCard
+                        title="Today's Jobs"
+                        value={jobs.filter(j => j.status !== 'completed' && j.status !== 'cancelled').length}
+                        icon={Briefcase}
+                        progress={50}
+                        progressColor="bg-primary"
+                        colorClass="text-primary bg-primary/10"
+                      />
+                      <StatsCard
+                        title="Incentives"
+                        value="₹1,450"
+                        icon={Wallet}
+                        growth={14}
+                        growthType="up"
+                        progress={68}
+                        progressColor="bg-emerald-500"
+                        colorClass="text-emerald-500 bg-emerald-500/10"
+                      />
+                      <StatsCard
+                        title="Attendance Rate"
+                        value="94.2%"
+                        icon={Calendar}
+                        progress={94}
+                        progressColor="bg-blue-500"
+                        colorClass="text-blue-500 bg-blue-500/10"
+                      />
+                      <StatsCard
+                        title="Overall Rating"
+                        value="4.90 ★"
+                        icon={Star}
+                        progress={98}
+                        progressColor="bg-amber-500"
+                        colorClass="text-amber-500 bg-amber-500/10"
+                      />
+                    </div>
+
+                    {/* Prominent Active Job resume banner if active */}
+                    {activeLiveJob && (
+                      <div className="p-5 bg-gradient-to-tr from-brand-600 to-emerald-700 text-white rounded-card shadow-premium text-left flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div className="space-y-1">
+                          <span className="text-[9px] bg-slate-900/30 border border-white/10 px-2 py-0.5 rounded-full font-black uppercase text-secondary inline-block">
+                            Active Task
+                          </span>
+                          <h4 className="text-sm sm:text-base font-black">Resume Job: {activeLiveJob.serviceName}</h4>
+                          <p className="text-[11px] text-white/80 font-medium">{activeLiveJob.address}</p>
+                        </div>
+                        <button
+                          onClick={() => setActiveTab('today_jobs')}
+                          className="px-5 py-2.5 bg-white text-slate-900 font-black text-xs uppercase tracking-wider rounded-btn shadow cursor-pointer transition-colors"
+                        >
+                          Resume Job Execution →
+                        </button>
+                      </div>
+                    )}
+
+                    {/* ASSIGNED JOBS DISPATCH LIST */}
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between text-left">
+                        <div>
+                          <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Assigned Job Alerts</h3>
+                          <p className="text-[10px] text-slate-450 mt-0.5">Accept or reject pending supervisor dispatches</p>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {jobs.filter(j => j.status === 'assigned').map((job) => (
+                          <JobsCard
+                            key={job.id}
+                            job={job}
+                            mode="assigned"
+                            onAccept={handleAcceptJob}
+                            onReject={handleRejectJob}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* TODAY'S SCHEDULE LIST TIMELINE */}
+                    <div className="space-y-4 text-left">
+                      <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Today's Timeline</h3>
+                      
+                      <div className="space-y-4">
+                        {jobs.filter(j => j.status === 'accepted').map((job) => (
+                          <JobsCard
+                            key={job.id}
+                            job={job}
+                            mode="today"
+                            onSelectLiveJob={handleSelectLiveJob}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+                )}
+
+                {/* 2. TODAY'S JOBS TIMELINE OR ACTIVE TASK */}
+                {activeTab === 'today_jobs' && (
+                  <div className="space-y-4 text-left">
+                    {!activeLiveJob ? (
+                      <div className="space-y-4">
+                        <div>
+                          <h2 className="text-lg font-black text-slate-855 dark:text-white uppercase tracking-wider">Today's Jobs Timeline</h2>
+                          <p className="text-[11px] text-slate-400">Select any accepted job to initiate live execution workflow</p>
+                        </div>
+
+                        <div className="space-y-4">
+                          {jobs.filter(j => j.status === 'accepted').map((job) => (
+                            <JobsCard
+                              key={job.id}
+                              job={job}
+                              mode="today"
+                              onSelectLiveJob={handleSelectLiveJob}
+                            />
+                          ))}
+                          {jobs.filter(j => j.status === 'accepted').length === 0 && (
+                            <div className="py-12 text-center text-slate-400 text-xs sm:text-sm font-semibold">
+                              No active jobs scheduled for today. Check "Assigned Jobs" to accept requests.
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h2 className="text-lg font-black text-slate-855 dark:text-white uppercase tracking-wider">Live Job Tracker</h2>
+                            <p className="text-[11px] text-slate-455">Execute the current task systematically</p>
+                          </div>
+                          <button
+                            onClick={() => setActiveLiveJob(null)}
+                            className="px-3.5 py-1.5 border border-slate-200 text-slate-500 rounded-xl text-xs font-black uppercase cursor-pointer"
+                          >
+                            Minimize Task
+                          </button>
+                        </div>
+
+                        <JobsCard
+                          job={activeLiveJob}
+                          mode="live"
+                          onComplete={handleCompleteJob}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* 3. ASSIGNED JOBS */}
+                {activeTab === 'assigned_jobs' && (
+                  <div className="space-y-4 text-left">
+                    <div>
+                      <h2 className="text-lg font-black text-slate-855 dark:text-white uppercase tracking-wider">Supervisor Job Dispatches</h2>
+                      <p className="text-[11px] text-slate-400">Review dispatches assigned to your worker profile</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {jobs.filter(j => j.status === 'assigned').map((job) => (
+                        <JobsCard
+                          key={job.id}
+                          job={job}
+                          mode="assigned"
+                          onAccept={handleAcceptJob}
+                          onReject={handleRejectJob}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* 4. COMPLETED JOBS */}
+                {activeTab === 'completed_jobs' && (
+                  <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft text-left">
+                    <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Completed History Log</h3>
+                    
+                    <div className="divide-y divide-slate-100 dark:divide-slate-850 space-y-1">
+                      {jobs.filter(j => j.status === 'completed').map((job) => (
+                        <JobsCard
+                          key={job.id}
+                          job={job}
+                          mode="history"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* 5. EARNINGS STATEMENT PANEL */}
+                {activeTab === 'earnings' && (
+                  <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left space-y-6">
+                    <div className="pb-4 border-b border-slate-100 dark:border-slate-850/80 flex items-center justify-between">
+                      <div>
+                        <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Salary & Incentive Breakdown</h3>
+                        <p className="text-[10px] text-slate-450 mt-0.5">Overview of settled salary logs, bonus payouts, and incentives</p>
+                      </div>
+                      <button
+                        onClick={() => alert('Salary statements downloaded.')}
+                        className="px-3.5 py-1.5 bg-primary text-white text-xs font-black uppercase rounded-xl cursor-pointer"
+                      >
+                        Download PDF
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                      <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl">
+                        <span className="text-[9px] font-black text-slate-450 uppercase block">Monthly base</span>
+                        <p className="text-lg font-black text-slate-800 dark:text-slate-200 mt-1">₹18,500</p>
+                      </div>
+                      <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl">
+                        <span className="text-[9px] font-black text-slate-455 uppercase block">Accumulated Incentives</span>
+                        <p className="text-lg font-black text-slate-800 dark:text-slate-200 mt-1">₹1,450</p>
+                      </div>
+                      <div className="p-4 bg-slate-50 dark:bg-slate-955 rounded-xl">
+                        <span className="text-[9px] font-black text-slate-455 uppercase block">Attendance Bonus</span>
+                        <p className="text-lg font-black text-slate-805 dark:text-slate-200 mt-1">₹500</p>
+                      </div>
+                      <div className="p-4 bg-slate-50 dark:bg-slate-955 rounded-xl">
+                        <span className="text-[9px] font-black text-slate-455 uppercase block">Total Settled</span>
+                        <p className="text-lg font-black text-primary mt-1">₹20,450</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 6. ATTENDANCE CARD VIEW */}
+                {activeTab === 'attendance' && (
+                  <AttendanceCard
+                    attendance={attendance}
+                    onClockIn={handleClockIn}
+                    onClockOut={handleClockOut}
+                  />
+                )}
+
+                {/* 7. CALENDAR GRID */}
+                {activeTab === 'calendar' && (
+                  <CalendarWidget />
+                )}
+
+                {/* 8. PERFORMANCE SCORE PANEL */}
+                {activeTab === 'performance' && (
+                  <PerformanceCard />
+                )}
+
+                {/* 9. REVIEWS FEEDBACK PANEL */}
+                {activeTab === 'reviews' && (
+                  <ReviewCard />
+                )}
+
+                {/* 10. WALLET PAYOUTS */}
+                {activeTab === 'wallet' && (
+                  <WalletCard />
+                )}
+
+                {/* 11. DOCUMENTS UPLOADS */}
+                {activeTab === 'documents' && (
+                  <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left space-y-6 max-w-2xl">
+                    <div className="pb-4 border-b border-slate-100 dark:border-slate-800/40">
+                      <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Worker Verifications</h3>
+                      <p className="text-[10px] text-slate-450 mt-0.5">Government credentials uploaded for verification checking</p>
+                    </div>
+
+                    <div className="space-y-4">
+                      {[
+                        { name: 'Aadhaar Card', file: 'aadhaar_scanned_verified.pdf', status: 'verified' },
+                        { name: 'PAN Card', file: 'pan_card_ramesh.jpg', status: 'verified' },
+                        { name: 'Driving License', file: 'dl_scanned.jpg', status: 'verified' },
+                        { name: 'Experience Certificate', file: 'electrician_license_proof.pdf', status: 'verified' }
+                      ].map((doc, idx) => (
+                        <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/60 dark:border-slate-800 flex items-center justify-between">
+                          <div>
+                            <span className="text-xs font-black text-slate-800 dark:text-slate-200">{doc.name}</span>
+                            <p className="text-[10px] text-slate-450 font-mono mt-0.5">{doc.file}</p>
+                          </div>
+                          <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-250/50 text-[9px] font-black uppercase">
+                            Verified
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* 12. NOTIFICATIONS PANELS */}
+                {activeTab === 'notifications' && (
+                  <NotificationPanel
+                    notifications={notifications}
+                    onMarkRead={handleMarkRead}
+                    onClearAll={handleClearAllNotifs}
+                  />
+                )}
+
+                {/* 13. HELP & CHAT SUPPORT */}
+                {activeTab === 'support' && (
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-left">
+                    <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft flex flex-col justify-between h-96">
+                      <div className="space-y-4 w-full">
+                        <div>
+                          <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Worker Support Desk</h3>
+                          <p className="text-[10px] text-slate-455 mt-0.5">Submit tickets directly to your manager (Rahul Kumar) or SaathApp Support</p>
+                        </div>
+
+                        <form onSubmit={handleRaiseTicket} className="space-y-3.5">
+                          <div className="space-y-1">
+                            <label className="field-label">Subject</label>
+                            <input
+                              type="text"
+                              required
+                              value={ticketSubject}
+                              onChange={(e) => setTicketSubject(e.target.value)}
+                              placeholder="e.g. Salary settlement verification delay"
+                              className="input-field dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                            />
+                          </div>
+
+                          <button
+                            type="submit"
+                            className="btn-primary w-full cursor-pointer text-xs"
+                          >
+                            Submit Support Ticket
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+
+                    <div className="space-y-6">
+                      <div className="bg-gradient-to-tr from-brand-600 to-emerald-700 text-white rounded-card p-6 shadow-soft flex flex-col justify-between h-40">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-black uppercase text-white/80">Manager Hotline</span>
+                          <Phone size={18} className="text-white/60" />
+                        </div>
+                        <div className="space-y-1">
+                          <h4 className="text-lg font-black leading-none">Rahul Kumar</h4>
+                          <p className="text-[10px] text-white/70 font-semibold">Contact Supervisor: +91 98765 43299</p>
+                        </div>
+                        <a
+                          href="tel:+919876543299"
+                          className="w-full py-1.5 bg-white text-slate-900 text-center font-extrabold text-[10px] uppercase rounded-btn block hover:bg-slate-100 shadow-sm"
+                        >
+                          Call Supervisor
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 14. PROFILE INFORMATION */}
+                {activeTab === 'profile' && (
+                  <ProfileCard />
+                )}
+
+                {/* 15. SETTINGS PANEL */}
+                {activeTab === 'settings' && (
+                  <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left space-y-6 max-w-2xl">
+                    <div className="pb-4 border-b border-slate-105 dark:border-slate-800/40">
+                      <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Worker Preferences</h3>
+                      <p className="text-[10px] text-slate-455 mt-0.5">Toggle systems config settings</p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-3.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50/50 dark:bg-slate-950/20">
+                        <div className="space-y-0.5">
+                          <span className="text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wider block">Dark Visual Mode</span>
+                          <p className="text-[10px] text-slate-450">Toggles background dark theme across dashboard layouts.</p>
+                        </div>
+                        <button
+                          onClick={toggleDarkMode}
+                          className={`w-10 h-6 rounded-full p-1 cursor-pointer transition-colors duration-300 flex items-center ${
+                            darkMode ? 'bg-primary' : 'bg-slate-300 dark:bg-slate-800'
+                          }`}
+                        >
+                          <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
+                            darkMode ? 'translate-x-4' : 'translate-x-0'
+                          }`} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+              </motion.div>
+            </AnimatePresence>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* MOBILE BOTTOM NAVIGATION BAR */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-200/60 dark:border-slate-850 px-4 py-2 flex items-center justify-around shadow-premium">
+        <button 
+          onClick={() => setActiveTab('dashboard')} 
+          className={`flex flex-col items-center gap-0.5 cursor-pointer ${
+            activeTab === 'dashboard' ? 'text-primary font-black' : 'text-slate-450 hover:text-slate-600'
+          }`}
+        >
+          <LayoutDashboard size={20} />
+          <span className="text-[9px] font-black uppercase">Dashboard</span>
+        </button>
+        
+        <button 
+          onClick={() => setActiveTab('today_jobs')} 
+          className={`flex flex-col items-center gap-0.5 cursor-pointer ${
+            activeTab === 'today_jobs' ? 'text-primary font-black' : 'text-slate-450 hover:text-slate-600'
+          }`}
+        >
+          <Clock size={20} />
+          <span className="text-[9px] font-black uppercase">Jobs</span>
+        </button>
+
+        <button 
+          onClick={() => setActiveTab('wallet')} 
+          className={`flex flex-col items-center gap-0.5 cursor-pointer ${
+            activeTab === 'wallet' ? 'text-primary font-black' : 'text-slate-450 hover:text-slate-600'
+          }`}
+        >
+          <Wallet size={20} />
+          <span className="text-[9px] font-black uppercase">Wallet</span>
+        </button>
+
+        <button 
+          onClick={() => setActiveTab('notifications')} 
+          className={`flex flex-col items-center gap-0.5 cursor-pointer relative ${
+            activeTab === 'notifications' ? 'text-primary font-black' : 'text-slate-450 hover:text-slate-600'
+          }`}
+        >
+          <Bell size={20} />
+          {notifications.filter(n => !n.read).length > 0 && (
+            <span className="absolute top-0 right-1 w-2.5 h-2.5 bg-danger border border-white dark:border-slate-900 rounded-full" />
+          )}
+          <span className="text-[9px] font-black uppercase">Alerts</span>
+        </button>
+
+        <button 
+          onClick={() => setActiveTab('profile')} 
+          className={`flex flex-col items-center gap-0.5 cursor-pointer ${
+            activeTab === 'profile' ? 'text-primary font-black' : 'text-slate-450 hover:text-slate-600'
+          }`}
+        >
+          <User size={20} />
+          <span className="text-[9px] font-black uppercase">Profile</span>
+        </button>
+      </div>
+
+    </div>
+  );
+}
