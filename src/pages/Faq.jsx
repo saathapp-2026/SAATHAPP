@@ -62,7 +62,7 @@ const faqSections = [
     items: [
       {
         question: 'What payment methods are supported?',
-        answer: 'SaathApp supports UPI, debit and credit cards, net banking, wallet payments, and cash on delivery where available.',
+        answer: 'SaathApp supports UPI, RuPay, Visa, Mastercard, Net Banking, and Cash on Delivery (where available).',
       },
       {
         question: 'Is my payment information secure?',
@@ -194,7 +194,7 @@ const faqSections = [
   },
 ];
 
-export default function Faq({ onBack }) {
+export default function Faq({ onBack, isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [openSection, setOpenSection] = useState('General Questions');
@@ -246,15 +246,16 @@ export default function Faq({ onBack }) {
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}
-        isAuthenticated={false}
-        onProfile={() => {}}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        onProfile={() => navigate('/profile')}
         onCartPage={() => {}}
         onOrdersPage={() => {}}
         onWishlistPage={() => {}}
         onSettingsPage={() => {}}
         onLogout={() => {}}
-        darkMode={false}
-        toggleDarkMode={() => {}}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
         onVoiceSearchClick={() => {}}
         onImageSearchClick={() => {}}
       />
@@ -426,7 +427,7 @@ export default function Faq({ onBack }) {
                 <p className="mt-2 text-sm text-slate-300">support@saathapp.in</p>
               </div>
               <div className="rounded-[24px] border border-white/10 bg-white/10 p-5">
-                <p className="text-sm font-black">Business Enquiries</p>
+                <p className="text-sm font-black">Company</p>
                 <p className="mt-2 text-sm text-slate-300">company@saathapp.in</p>
               </div>
             </div>

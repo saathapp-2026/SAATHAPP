@@ -527,7 +527,7 @@ export const whySaathAppFeatures = [
   },
   {
     title: 'Secure Payments',
-    description: 'UPI, Cards, NetBanking, and Cash on Delivery (COD) with secure escrows for services.',
+    description: 'UPI, Cards, NetBanking, and Cash on Delivery (COD) with secure online and COD payments for services.',
     icon: ShieldCheck,
     color: 'text-blue-600',
     bg: 'bg-blue-50'

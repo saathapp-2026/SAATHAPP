@@ -233,14 +233,14 @@ const sections = [
     intro: 'Please contact the Company using the details below for support or questions.',
     bullets: [
       'Customer Support: support@saathapp.in',
-      'Partner Support: Company@saathapp.in',
+      'Partner Support: company@saathapp.in',
       'Phone / WhatsApp: +91 9128842027',
       'Registered Office: Bhatahar, Tharthari, Nalanda, Bihar – 801307, India',
     ],
   },
 ];
 
-export default function DeliveryPartnerAgreement() {
+export default function DeliveryPartnerAgreement({ isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
   const [activeSection, setActiveSection] = useState('purpose');
   const [progress, setProgress] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -314,15 +314,15 @@ export default function DeliveryPartnerAgreement() {
         onLogin={() => {}}
         onSignup={() => {}}
         onProfile={() => {}}
-        user={null}
-        isAuthenticated={false}
+        user={user}
+        isAuthenticated={isAuthenticated}
         onCartPage={() => {}}
         onOrdersPage={() => {}}
         onWishlistPage={() => {}}
         onSettingsPage={() => {}}
         onLogout={() => {}}
-        darkMode={false}
-        toggleDarkMode={() => {}}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
         onVoiceSearchClick={() => {}}
         onImageSearchClick={() => {}}
       />
@@ -475,7 +475,7 @@ export default function DeliveryPartnerAgreement() {
                   </div>
                   <div className="rounded-2xl border border-slate-200 bg-white p-4">
                     <p className="text-sm font-black text-slate-900">Partner Support</p>
-                    <p className="mt-2 text-sm text-slate-600">Company@saathapp.in</p>
+                    <p className="mt-2 text-sm text-slate-600">company@saathapp.in</p>
                   </div>
                 </div>
                 <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-600">

@@ -12,11 +12,11 @@ export default function HelpSupport({ onBack }) {
         </div>
         <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
           <div className="flex items-center gap-2 font-semibold text-slate-800"><PhoneCall size={16} className="text-emerald-600" /> Call Customer Care</div>
-          <div className="mt-1 text-sm text-slate-600">1800-123-4567</div>
+          <div className="mt-1 text-sm text-slate-600">+91 9128842027</div>
         </div>
         <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
           <div className="flex items-center gap-2 font-semibold text-slate-800"><Mail size={16} className="text-amber-600" /> Email Support</div>
-          <div className="mt-1 text-sm text-slate-600">support@saathapp.com</div>
+          <div className="mt-1 text-sm text-slate-600">support@saathapp.in</div>
         </div>
       </div>
     </SectionPage>

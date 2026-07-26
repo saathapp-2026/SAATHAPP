@@ -30,7 +30,7 @@ export default function DownloadApp() {
             </h2>
 
             <p className="text-sm sm:text-base text-white/80 max-w-xl font-normal leading-relaxed">
-              Order daily fresh groceries, building materials, local hardware and book professional plumbing, AC service or electrician saathis instantly. Experience lightning fast checkout, real-time live tracking, and secured cash-on-delivery escrows.
+              Order daily fresh groceries, building materials, local hardware and book professional plumbing, AC service or electrician saathis instantly. Experience lightning fast checkout, real-time live tracking, and secured cash-on-delivery payments.
             </p>
 
             {/* List specifications */}

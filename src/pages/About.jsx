@@ -1,204 +1,78 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, BadgeCheck, CheckCircle2, ChevronRight, Clock3, FileText, Mail, MapPin, Phone, ShieldCheck, Sparkles, Wrench } from 'lucide-react';
+import { 
+  ArrowLeft, BadgeCheck, CheckCircle2, ShieldCheck, Mail, Phone, Globe, 
+  Award, Sparkles, Target, Eye, Heart, Compass, Zap, Users, ArrowRight 
+} from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const policySections = [
-  {
-    title: '1. Purpose',
-    body: 'This Service Warranty Policy explains the warranty, revisit, complaint resolution, and support process for services booked through the SaathApp Platform.',
-    bullets: [
-      'The policy outlines how warranty support is handled for eligible services.',
-      'It provides the framework for customer service, revisit requests, and issue resolution.',
-      'It is intended to create transparency between the customer, SaathApp, and the service professional.'
-    ]
-  },
-  {
-    title: '2. Scope',
-    body: 'This Policy applies only to eligible services where a warranty is specifically mentioned at the time of booking. It does not create a universal warranty for all services.',
-    bullets: [
-      'Warranty benefits apply only when the booking clearly states that a warranty or service guarantee is included.',
-      'The policy does not apply to services that are excluded by the booking terms or service description.',
-      'The Company may update the scope of warranty coverage for specific service categories where required.'
-    ]
-  },
-  {
-    title: '3. Warranty Period',
-    body: 'The warranty period for eligible services will be communicated at the time of booking and may vary depending on the service category.',
-    bullets: [
-      'The warranty period begins from the date of service completion.',
-      'Warranty timelines are subject to the terms listed in the booking confirmation.',
-      'Any extension or additional warranty benefit must be explicitly stated in writing.'
-    ]
-  },
-  {
-    title: '4. What Is Covered',
-    body: 'Warranty support may cover defects, issues, or failures arising from service workmanship or installation defects where such issues are directly attributable to the service provided.',
-    bullets: [
-      'Coverage may include defects that appear due to faulty workmanship or incorrect installation.',
-      'Issues that fall within the stated warranty terms may be eligible for a revisit or corrective action.',
-      'Coverage must be validated by the Company before warranty support is processed.'
-    ]
-  },
-  {
-    title: '5. What Is Not Covered',
-    body: 'Certain issues are not covered by warranty and may be treated as chargeable service requests or excluded matters.',
-    bullets: [
-      'Normal wear and tear or natural depreciation.',
-      'Damage caused by misuse, negligence, accidental impact, or unauthorized alterations.',
-      'Problems caused by third-party repairs or unapproved third-party components.'
-    ]
-  },
-  {
-    title: '6. Spare Parts',
-    body: 'Any spare parts required to complete warranty work will be handled according to the service terms and availability.',
-    bullets: [
-      'Spare parts may be supplied by the service professional or the Company, depending on the booking terms.',
-      'The customer may be responsible for the cost of parts if the issue is not covered under warranty.',
-      'Replacement parts must be compatible with the original service requirement.'
-    ]
-  },
-  {
-    title: '7. Revisit Policy',
-    body: 'A revisit may be arranged where a service issue is validated and falls within the scope of the warranty.',
-    bullets: [
-      'Revisit requests must be raised within the warranty period and in accordance with the booking terms.',
-      'The Company may schedule a revisit based on technician availability and service category.',
-      'Repeated revisit requests for the same issue may result in further assessment.'
-    ]
-  },
-  {
-    title: '8. Warranty Claim Process',
-    body: 'Customers may raise a warranty claim through the SaathApp Platform by submitting the issue with supporting details.',
-    bullets: [
-      'The customer must provide the booking reference, service details, and issue description.',
-      'The Company may request photographs, videos, or additional information to evaluate the claim.',
-      'Claims will be reviewed on a case-by-case basis and communicated to the customer promptly.'
-    ]
-  },
-  {
-    title: '9. Inspection',
-    body: 'The Company or service professional may inspect the issue before deciding whether the matter qualifies for warranty support.',
-    bullets: [
-      'Inspection may be done remotely or in person depending on the nature of the issue.',
-      'The customer is expected to provide reasonable access to the affected area or item.',
-      'Failure to cooperate may delay or invalidate the warranty claim.'
-    ]
-  },
-  {
-    title: '10. Resolution Options',
-    body: 'Where a warranty claim is approved, the Company may offer one or more appropriate resolution options.',
-    bullets: [
-      'A free revisit or corrective service visit.',
-      'Replacement or repair of the affected component where applicable.',
-      'A refund, credit, or alternative resolution where the Company determines it is appropriate.'
-    ]
-  },
-  {
-    title: '11. Customer Responsibilities',
-    body: 'Customers are expected to cooperate with the Company and service professional during the warranty process.',
-    bullets: [
-      'Customers must provide accurate information about the issue and the service performed.',
-      'They must ensure that the affected item or area is accessible for support.',
-      'They must avoid tampering with the service outcome or making unauthorized repairs.'
-    ]
-  },
-  {
-    title: '12. Service Professional Responsibilities',
-    body: 'Service professionals are expected to perform work professionally and in accordance with the service standards applicable to the booking.',
-    bullets: [
-      'They must conduct the service responsibly and with reasonable care.',
-      'They must follow the agreed scope of work and documented service instructions.',
-      'They must communicate any issues that may affect warranty support clearly and promptly.'
-    ]
-  },
-  {
-    title: '13. Situations Where Warranty May Be Declined',
-    body: 'The Company may decline warranty support in certain situations where the issue falls outside the policy or cannot be validated.',
-    bullets: [
-      'If the issue is caused by misuse, unauthorized modification, or external damage.',
-      'If the service has been completed beyond the stated warranty window.',
-      'If the customer fails to provide required information or access to inspect the issue.'
-    ]
-  },
-  {
-    title: '14. Cancellation of Warranty Visit',
-    body: 'If a scheduled warranty visit is cancelled or postponed by the customer without reasonable notice, the Company may reschedule or decline the visit.',
-    bullets: [
-      'Repeated cancellations may affect future warranty support eligibility.',
-      'The Company may charge a rescheduling fee where applicable under the booking terms.',
-      'The Company may issue an alternative resolution if the visit cannot be completed.'
-    ]
-  },
-  {
-    title: '15. Limitation of Liability',
-    body: 'To the extent permitted by law, the Company shall not be liable for indirect, incidental, or consequential damages arising from warranty-related service issues.',
-    bullets: [
-      'The Company’s liability for warranty-related matters shall be limited to the remedies expressly provided in this Policy.',
-      'The Company does not guarantee uninterrupted service or the complete absence of future issues.',
-      'Any limitation of liability is subject to applicable law.'
-    ]
-  },
-  {
-    title: '16. Changes to This Policy',
-    body: 'The Company may revise or update this Policy from time to time in response to operational, legal, or business requirements.',
-    bullets: [
-      'Changes will be published through the Platform or other reasonable communication channels.',
-      'Continued use of the Platform after the change constitutes acceptance of the updated policy.',
-      'Customers are encouraged to review the latest version before raising a warranty claim.'
-    ]
-  },
-  {
-    title: '17. Governing Law',
-    body: 'This Policy shall be governed by the laws of India.',
-    bullets: [
-      'Any dispute arising under this Policy shall be resolved in accordance with applicable Indian law.',
-      'The Company may seek appropriate legal remedies where necessary.',
-      'The policy is intended to operate in a manner consistent with applicable consumer protection and service laws.'
-    ]
-  },
-  {
-    title: '18. Contact Us',
-    body: 'For service warranty support, customer assistance, or policy-related questions, please contact the Company using the details below.',
-    bullets: [
-      'Customer Support: support@saathapp.in',
-      'Partner Support: company@saathapp.in',
-      'Phone / WhatsApp: +91 9128842027',
-      'Registered Office: Bhatahar, Tharthari, Nalanda, Bihar – 801307, India'
-    ]
-  },
-  {
-    title: '19. Customer Acknowledgement',
-    body: 'By booking a service through SaathApp, you acknowledge that you have read, understood, and agreed to this Service Warranty Policy.',
-    bullets: [
-      'You agree to comply with the policy and any additional service terms communicated by SaathApp.',
-      'You understand that warranty support is subject to eligibility, verification, and the applicable booking conditions.',
-      'You accept that the Company may resolve warranty issues in a manner consistent with this policy and applicable law.'
-    ]
-  }
-];
-
-export default function About({ onBack, onLogout }) {
+export default function About({ onBack, onLogout, isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'Service Warranty Policy | SaathApp';
+    document.title = 'About Us | SaathApp';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Read the SaathApp Service Warranty Policy covering warranty coverage, revisit support, inspection, claims, and customer responsibilities.');
+      metaDescription.setAttribute('content', "Welcome to SaathApp, India's next-generation hyperlocal super app built by SAATHAPPNOVA PRIVATE LIMITED to connect people with everything they need from their own city, town, and village.");
     } else {
       const meta = document.createElement('meta');
       meta.name = 'description';
-      meta.content = 'Read the SaathApp Service Warranty Policy covering warranty coverage, revisit support, inspection, claims, and customer responsibilities.';
+      meta.content = "Welcome to SaathApp, India's next-generation hyperlocal super app built by SAATHAPPNOVA PRIVATE LIMITED to connect people with everything they need from their own city, town, and village.";
       document.head.appendChild(meta);
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   }, []);
 
+  const offers = [
+    { category: 'Grocery & Daily Essentials', description: 'Fresh kitchen staples and household needs.' },
+    { category: 'Fruits & Vegetables', description: 'Farm fresh produce delivered daily.' },
+    { category: 'Dairy Products', description: 'Fresh milk, paneer, ghee, and curd.' },
+    { category: 'Electrical & Electronics', description: 'Gadgets, appliances, and electric essentials.' },
+    { category: 'Hardware & Construction Materials', description: 'Cement, paint, tools, and building supplies.' },
+    { category: 'Agricultural Products', description: 'Seeds, fertilizers, and farm equipment.' },
+    { category: 'Furniture & Home Essentials', description: 'Elegant home furniture and decor.' },
+    { category: 'Mobile & Computer Accessories', description: 'Chargers, cases, and tech accessories.' },
+    { category: 'Professional Services', description: 'Electricians, Plumbers, Carpenters, AC & Appliance Repair, Cleaning Services.' },
+    { category: 'Delivery Services', description: 'Lightning-fast delivery from neighborhood shops.' },
+    { category: 'Local Business Marketplace', description: 'Discover and support neighborhood stores.' }
+  ];
+
+  const whyChoose = [
+    { title: 'Local First', text: 'We believe local businesses are the backbone of India\'s economy. Our platform helps them compete in the digital world.', icon: Heart, color: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-950/30' },
+    { title: 'Verified Businesses', text: 'We encourage verification of sellers and service professionals to build customer trust and maintain platform quality.', icon: BadgeCheck, color: 'text-emerald-500', bg: 'bg-emerald-50 dark:bg-emerald-950/30' },
+    { title: 'Faster Local Delivery', text: 'By connecting customers with nearby businesses, we aim to reduce delivery time while supporting local commerce.', icon: Zap, color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-950/30' },
+    { title: 'Secure Transactions', text: 'We prioritize secure payment experiences and continuously work to improve platform safety and reliability.', icon: ShieldCheck, color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-950/30' },
+    { title: 'Customer-Centric Experience', text: 'Every feature is designed with simplicity, transparency, and convenience in mind.', icon: Compass, color: 'text-indigo-500', bg: 'bg-indigo-50 dark:bg-indigo-950/30' }
+  ];
+
+  const values = [
+    { title: 'Trust', text: 'Building long-term relationships through honesty, transparency, and reliability.', icon: ShieldCheck },
+    { title: 'Innovation', text: 'Using technology to simplify local commerce and improve everyday life.', icon: Sparkles },
+    { title: 'Community', text: 'Supporting local businesses, entrepreneurs, and professionals.', icon: Users },
+    { title: 'Quality', text: 'Maintaining high standards across products, services, and customer support.', icon: Award },
+    { title: 'Responsibility', text: 'Operating responsibly while respecting customers, partners, and communities.', icon: Heart }
+  ];
+
+  const ecosystem = [
+    { role: 'Customers', text: 'Shop locally, book services, and discover nearby businesses.' },
+    { role: 'Sellers', text: 'Expand your business online and reach more customers.' },
+    { role: 'Service Professionals', text: 'Offer your professional skills and grow your customer base.' },
+    { role: 'Delivery Partners', text: 'Earn income by delivering products safely and efficiently.' }
+  ];
+
+  const futurePlans = [
+    'AI-powered recommendations',
+    'Smart logistics',
+    'Digital payment innovations',
+    'Business analytics tools',
+    'Advanced seller solutions',
+    'New commerce and service categories'
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800" style={{ scrollBehavior: 'smooth' }}>
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300" style={{ scrollBehavior: 'smooth' }}>
       <Header
         cartCount={0}
         onCartClick={() => {}}
@@ -207,26 +81,28 @@ export default function About({ onBack, onLogout }) {
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}
-        isAuthenticated={false}
-        onProfile={() => {}}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        onProfile={() => navigate('/profile')}
         onCartPage={() => {}}
         onOrdersPage={() => {}}
         onWishlistPage={() => {}}
         onSettingsPage={() => {}}
         onLogout={onLogout}
-        darkMode={false}
-        toggleDarkMode={() => {}}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
         onVoiceSearchClick={() => {}}
         onImageSearchClick={() => {}}
       />
 
+      {/* Back button top */}
       <div className="px-4 pt-6 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-7xl">
           <motion.div whileHover={{ y: -2, scale: 1.01 }} className="inline-flex">
             <button
               type="button"
               onClick={() => (onBack ? onBack() : navigate('/', { replace: true }))}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/95 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:bg-white hover:shadow-md"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-350 shadow-sm transition-all duration-300 hover:bg-white dark:hover:bg-slate-900 hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
               Back to Home
@@ -236,120 +112,355 @@ export default function About({ onBack, onLogout }) {
       </div>
 
       <main className="px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6">
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 md:gap-12">
+          
+          {/* Hero Header Card */}
           <motion.section
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-            className="overflow-hidden rounded-[32px] border border-emerald-100 bg-gradient-to-br from-emerald-600 via-green-600 to-teal-700 p-8 text-white shadow-[0_20px_70px_rgba(16,185,129,0.18)] sm:p-10 lg:p-12"
+            transition={{ duration: 0.5 }}
+            className="overflow-hidden rounded-[32px] border border-emerald-100 dark:border-emerald-900/40 bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 p-8 text-white shadow-[0_20px_50px_rgba(16,185,129,0.15)] sm:p-10 lg:p-12 text-left"
           >
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div className="max-w-3xl">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm font-semibold uppercase tracking-[0.25em]">
-                  <ShieldCheck size={16} />
-                  SaathApp Policy
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-3xl space-y-4">
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em]">
+                  <Sparkles size={14} />
+                  About Us
                 </div>
-                <h1 className="text-3xl font-black sm:text-4xl lg:text-5xl">Service Warranty Policy</h1>
-                <p className="mt-4 text-lg text-emerald-50/95">Effective Date: 25 July 2026</p>
-                <p className="text-lg text-emerald-50/95">Last Updated: 25 July 2026</p>
-                <p className="mt-5 max-w-2xl text-base leading-8 text-emerald-50/90">
-                  Welcome to SaathApp, operated by SAATHAPPNOVA PRIVATE LIMITED (&quot;Company&quot;, &quot;we&quot;, &quot;our&quot;, or &quot;us&quot;). This Service Warranty Policy explains the warranty, revisit, complaint resolution, and support process for services booked through the SaathApp Platform.
+                <h1 className="text-3xl font-black sm:text-4xl lg:text-5xl tracking-tight leading-none">
+                  SAATHAPPNOVA PRIVATE LIMITED
+                </h1>
+                <p className="text-xl font-bold text-emerald-150 tracking-wide uppercase">
+                  Everything Near You.
                 </p>
-                <p className="mt-3 max-w-2xl text-base leading-8 text-emerald-50/90">
-                  This Policy applies only to eligible services where a warranty is specifically mentioned at the time of booking. It does not create a universal warranty for all services. By booking a service through SaathApp, you agree to this Policy.
+                <div className="h-1 w-20 bg-white/30 rounded-full" />
+                <p className="text-base sm:text-lg leading-relaxed text-emerald-50/95 font-medium">
+                  Welcome to SaathApp, India's next-generation hyperlocal super app built to connect people with everything they need from their own city, town, and village. Whether it's groceries, construction materials, hardware, agricultural supplies, home services, electronics, furniture, or daily essentials, SaathApp brings local businesses and customers together on one trusted digital platform.
                 </p>
-              </div>
-              <div className="rounded-[24px] border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15">
-                    <FileText size={20} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-100">Company</p>
-                    <p className="text-lg font-black">SAATHAPPNOVA PRIVATE LIMITED</p>
-                  </div>
-                </div>
+                <p className="text-sm sm:text-base leading-relaxed text-emerald-100/90">
+                  Developed and operated by SAATHAPPNOVA PRIVATE LIMITED, SaathApp is on a mission to digitally empower local businesses while making shopping and service booking faster, easier, and more reliable for every Indian.
+                </p>
               </div>
             </div>
           </motion.section>
 
-          {policySections.map((section, index) => (
+          {/* Our Story & Mission/Vision Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            {/* Story */}
             <motion.section
-              key={section.title}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.02 }}
-              className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_15px_45px_rgba(15,23,42,0.06)] sm:p-8"
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="lg:col-span-7 rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm flex flex-col justify-between text-left"
             >
-              <div className="flex items-start gap-3">
-                <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">
-                  {index % 2 === 0 ? <ShieldCheck size={18} /> : <Wrench size={18} />}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
+                    <Award size={20} />
+                  </div>
+                  <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">Our Story</h2>
                 </div>
-                <div className="flex-1">
-                  <h2 className="text-xl font-black text-slate-900">{section.title}</h2>
-                  <p className="mt-3 text-sm leading-8 text-slate-700">{section.body}</p>
-                  <ul className="mt-4 space-y-2">
-                    {section.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-2 text-sm text-slate-700">
-                        <ChevronRight size={16} className="mt-0.5 shrink-0 text-emerald-600" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <p className="text-sm sm:text-base leading-relaxed text-slate-650 dark:text-slate-300">
+                  India is home to millions of local shops, skilled professionals, and small businesses that serve their communities every day. However, many of them still struggle to reach customers through digital platforms.
+                </p>
+                <p className="text-sm sm:text-base leading-relaxed text-slate-650 dark:text-slate-300 font-semibold text-emerald-600 dark:text-emerald-400">
+                  SaathApp was created to solve this problem.
+                </p>
+                <p className="text-sm sm:text-base leading-relaxed text-slate-650 dark:text-slate-300">
+                  Instead of replacing local businesses, we help them grow by providing technology, digital visibility, and an online marketplace where customers can discover, compare, and order products and services from nearby verified sellers.
+                </p>
+              </div>
+              <div className="mt-6 p-4 rounded-2xl bg-slate-55 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50">
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Our Core Vision Summary</p>
+                <p className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-1">
+                  Every local business deserves a digital identity, and every customer deserves easy access to trusted local products and services.
+                </p>
+              </div>
+            </motion.section>
+
+            {/* Mission & Vision Column */}
+            <div className="lg:col-span-5 flex flex-col gap-6">
+              
+              {/* Mission */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+                className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm text-left flex-1"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-100 dark:bg-teal-950 text-teal-600 dark:text-teal-400">
+                    <Target size={20} />
+                  </div>
+                  <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">Our Mission</h2>
+                </div>
+                <p className="text-sm leading-relaxed text-slate-650 dark:text-slate-300">
+                  To build India's most trusted hyperlocal commerce ecosystem by connecting customers, businesses, delivery partners, and service professionals through a secure, reliable, and technology-driven platform. We aim to:
+                </p>
+                <ul className="mt-3 space-y-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-350">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-emerald-500" />
+                    <span>Empower local businesses through digital transformation.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-emerald-500" />
+                    <span>Create new opportunities for delivery partners & service pros.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-emerald-500" />
+                    <span>Strengthen local economies by promoting neighborhood commerce.</span>
+                  </li>
+                </ul>
+              </motion.div>
+
+              {/* Vision */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+                className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm text-left flex-1"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
+                    <Eye size={20} />
+                  </div>
+                  <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">Our Vision</h2>
+                </div>
+                <p className="text-sm leading-relaxed text-slate-650 dark:text-slate-300">
+                  To become India's leading hyperlocal super app and build a technology ecosystem that connects every village, town, and city with local commerce. We enable millions of businesses to scale through digital tools.
+                </p>
+              </motion.div>
+
+            </div>
+          </div>
+
+          {/* What We Offer */}
+          <motion.section
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.4 }}
+            className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 lg:p-10 shadow-sm text-left"
+          >
+            <div className="max-w-3xl space-y-2 mb-8">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">What We Offer</h2>
+              <p className="text-sm sm:text-base text-slate-500">
+                SaathApp is designed as a multi-category hyperlocal marketplace where customers discover and order products and services from verified local partners.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {offers.map((item, idx) => (
+                <div key={idx} className="p-5 rounded-2xl border border-slate-100 dark:border-slate-800/80 bg-slate-55/50 dark:bg-slate-850/40 hover:border-emerald-500/30 transition-all group">
+                  <p className="font-bold text-sm text-slate-800 dark:text-slate-200 group-hover:text-emerald-500 transition-colors">
+                    {item.category}
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* Why Choose SaathApp? */}
+          <motion.section
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.5 }}
+            className="space-y-6 text-left"
+          >
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white text-center md:text-left">
+              Why Choose SaathApp?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+              {whyChoose.map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <div key={idx} className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm flex flex-col justify-between hover:shadow-md transition-all hover:-translate-y-0.5">
+                    <div className="space-y-3">
+                      <div className={`w-10 h-10 rounded-xl ${item.bg} ${item.color} flex items-center justify-center`}>
+                        <Icon size={20} />
+                      </div>
+                      <h3 className="font-extrabold text-sm text-slate-900 dark:text-white">{item.title}</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-450 leading-relaxed">{item.text}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.section>
+
+          {/* Our Core Values */}
+          <motion.section
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.6 }}
+            className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm text-left"
+          >
+            <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white mb-6">Our Core Values</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              {values.map((val, idx) => {
+                const Icon = val.icon;
+                return (
+                  <div key={idx} className="p-4 rounded-xl bg-slate-55/60 dark:bg-slate-850/30 border border-slate-100 dark:border-slate-800/80">
+                    <div className="flex items-center gap-2 mb-2 text-emerald-600 dark:text-emerald-400">
+                      <Icon size={16} />
+                      <h3 className="font-bold text-sm text-slate-850 dark:text-slate-200">{val.title}</h3>
+                    </div>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{val.text}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.section>
+
+          {/* Ecosystem Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 text-left">
+            
+            {/* Our Ecosystem */}
+            <motion.section
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.7 }}
+              className="md:col-span-8 rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm"
+            >
+              <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white mb-2">Our Ecosystem</h2>
+              <p className="text-sm text-slate-500 mb-6">Together, we form a connected hyperlocal ecosystem that benefits everyone.</p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {ecosystem.map((member, idx) => (
+                  <div key={idx} className="p-4 rounded-xl border border-slate-100 dark:border-slate-800/50 bg-slate-55/30 dark:bg-slate-850/20">
+                    <p className="font-black text-sm text-emerald-600 dark:text-emerald-400">{member.role}</p>
+                    <p className="text-xs text-slate-650 dark:text-slate-350 mt-1 leading-relaxed">{member.text}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.section>
+
+            {/* Our Commitment & Future */}
+            <motion.section
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.8 }}
+              className="md:col-span-4 rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm flex flex-col justify-between"
+            >
+              <div className="space-y-4">
+                <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">Our Future</h2>
+                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                  Our roadmap focuses on expanding across India while continuously improving our technology platform. Future initiatives include:
+                </p>
+                <div className="space-y-2">
+                  {futurePlans.map((plan, idx) => (
+                    <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                      <ArrowRight size={12} className="text-emerald-500 shrink-0" />
+                      <span>{plan}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </motion.section>
-          ))}
+          </div>
 
+          {/* Company Information & Contact Details */}
           <motion.section
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="rounded-[32px] border border-slate-200 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-7 text-white shadow-[0_20px_65px_rgba(15,23,42,0.14)] sm:p-8"
+            transition={{ duration: 0.4 }}
+            className="rounded-[32px] border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 text-white shadow-[0_20px_50px_rgba(15,23,42,0.15)] text-left"
           >
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 mb-6">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10">
-                <Clock3 size={20} />
+                <Globe size={20} className="text-emerald-400" />
               </div>
               <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">Contact</p>
-                <h2 className="text-2xl font-black">Contact Us</h2>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-400">Corporate Details</p>
+                <h2 className="text-2xl font-black">Company Information</h2>
               </div>
             </div>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <div className="rounded-[24px] border border-white/10 bg-white/10 p-5">
-                <p className="text-sm font-black">Company</p>
-                <p className="mt-2 text-sm text-slate-300">SAATHAPPNOVA PRIVATE LIMITED</p>
+            
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4.5">
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Company Name</p>
+                <p className="mt-1.5 text-sm font-black text-white">SAATHAPPNOVA PRIVATE LIMITED</p>
               </div>
-              <div className="rounded-[24px] border border-white/10 bg-white/10 p-5">
-                <p className="text-sm font-black">Registered Office</p>
-                <p className="mt-2 text-sm text-slate-300">Bhatahar, Tharthari, Nalanda, Bihar – 801307, India</p>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4.5">
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Platform Name</p>
+                <p className="mt-1.5 text-sm font-black text-white">SaathApp</p>
               </div>
-              <div className="rounded-[24px] border border-white/10 bg-white/10 p-5">
-                <p className="text-sm font-black">Customer Support</p>
-                <p className="mt-2 text-sm text-slate-300">support@saathapp.in</p>
-              </div>
-              <div className="rounded-[24px] border border-white/10 bg-white/10 p-5">
-                <p className="text-sm font-black">Partner Support</p>
-                <p className="mt-2 text-sm text-slate-300">company@saathapp.in</p>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4.5 md:col-span-2">
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Head Office / Registered Address</p>
+                <p className="mt-1.5 text-sm font-black text-white">
+                  Bhatahar, Tharthari, Nalanda, Bihar – 801307, India
+                </p>
               </div>
             </div>
-            <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-300">
-              <span className="inline-flex items-center gap-2"><Phone size={16} className="text-emerald-300" /> +91 9128842027</span>
-              <span className="inline-flex items-center gap-2"><Mail size={16} className="text-emerald-300" /> support@saathapp.in</span>
-              <span className="inline-flex items-center gap-2"><MapPin size={16} className="text-emerald-300" /> Bhatahar, Tharthari, Nalanda, Bihar – 801307, India</span>
+
+            <div className="mt-6 border-t border-white/10 pt-6">
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Communication Channels</p>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="flex items-center gap-3">
+                  <Mail size={16} className="text-emerald-400 shrink-0" />
+                  <div>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase">Customer Support</p>
+                    <a href="mailto:support@saathapp.in" className="text-sm font-bold hover:underline text-white">support@saathapp.in</a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail size={16} className="text-emerald-400 shrink-0" />
+                  <div>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase">Company</p>
+                    <a href="mailto:company@saathapp.in" className="text-sm font-bold hover:underline text-white">company@saathapp.in</a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail size={16} className="text-emerald-400 shrink-0" />
+                  <div>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase">Careers</p>
+                    <a href="mailto:careers@saathapp.in" className="text-sm font-bold hover:underline text-white">careers@saathapp.in</a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-250 font-medium">
+                <span className="flex items-center gap-2"><Phone size={14} className="text-emerald-400" /> +91 9128842027</span>
+                <span className="flex items-center gap-2">
+                  <Globe size={14} className="text-emerald-400" /> 
+                  <a href="https://www.saathappnova.co.in" target="_blank" rel="noopener noreferrer" className="hover:underline text-white">
+                    www.saathappnova.co.in
+                  </a>
+                </span>
+              </div>
             </div>
           </motion.section>
+
+          {/* Our Promise Footer Banner */}
+          <motion.section
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-slate-55/40 dark:bg-slate-900/60 p-6 sm:p-8 text-center space-y-3"
+          >
+            <h3 className="font-extrabold text-slate-850 dark:text-white text-lg">Our Promise</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-350 max-w-3xl mx-auto leading-relaxed">
+              At SaathApp, we believe technology should strengthen local communities—not replace them. Every order placed, every service booked, and every business onboarded contributes to a stronger local economy and creates new opportunities for entrepreneurs, workers, and customers alike.
+            </p>
+            <p className="text-base font-extrabold text-emerald-600 dark:text-emerald-400">
+              SaathApp – Everything Near You.
+            </p>
+          </motion.section>
+
         </div>
       </main>
 
+      {/* Back button bottom */}
       <div className="px-4 pb-8 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-7xl justify-center">
           <motion.div whileHover={{ y: -2, scale: 1.01 }} className="inline-flex">
             <button
               type="button"
               onClick={() => (onBack ? onBack() : navigate('/', { replace: true }))}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:bg-slate-50 hover:shadow-md"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-5 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
               Back to Home
