@@ -25,6 +25,8 @@ import AboutPage from './pages/About';
 import DeliveryPartnerAgreementPage from './pages/DeliveryPartnerAgreement';
 import TermsOfServicePage from './pages/TermsOfService';
 import PrivacyPolicyPublicPage from './pages/PrivacyPolicyPublic';
+import ServiceWarrantyPolicyPage from './pages/ServiceWarrantyPolicy';
+import SellerPolicyPage from './pages/SellerPolicy';
 import FaqPage from './pages/Faq';
 import LocationPage from './pages/LocationPage';
 import AddAddressPage from './pages/AddAddressPage';
@@ -330,6 +332,14 @@ export default function App() {
 
   if (routerLocation.pathname === '/privacy-policy') {
     return <PrivacyPolicyPublicPage />;
+  }
+
+  if (routerLocation.pathname === '/service-warranty-policy') {
+    return <ServiceWarrantyPolicyPage />;
+  }
+
+  if (routerLocation.pathname === '/seller-policy') {
+    return <SellerPolicyPage />;
   }
 
   if (routerLocation.pathname === '/location') {

@@ -83,8 +83,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Press & Media</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
+              {/* <li><a href="#" className="hover:text-white transition-colors">Press & Media</a></li> */}
+              {/* <li><a href="#" className="hover:text-white transition-colors">Blog</a></li> */}
             </ul>
           </div>
 
@@ -93,6 +93,8 @@ export default function Footer() {
             <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Business</h4>
             <ul className="space-y-3 text-xs font-semibold">
               <li><a href="#" className="hover:text-white transition-colors">Become Seller</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Become a Franchise Partner</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Become a Wholesale</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Become Service Professional</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Become Delivery Partner</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Advertise with Us</a></li>
@@ -105,7 +107,15 @@ export default function Footer() {
             <ul className="space-y-3 text-xs font-semibold">
               <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Service Warranty</a></li>
+              <li>
+                <Link
+                  to="/service-warranty-policy"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Service Warranty Policy
+                </Link>
+              </li>
               <li><Link to="/faq" className="hover:text-white transition-colors">Frequently Asked Questions</Link></li>
             </ul>
           </div>
@@ -132,7 +142,15 @@ export default function Footer() {
                   Terms of Service
                 </Link>
               </li>
-              <li><a href="#" className="hover:text-white transition-colors">Seller Policy</a></li>
+              <li>
+                <Link
+                  to="/seller-policy"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Seller Policy
+                </Link>
+              </li>
               <li><Link to="/delivery-partner-agreement" className="hover:text-white transition-colors">Delivery Partner Agreement</Link></li>
             </ul>
           </div>
