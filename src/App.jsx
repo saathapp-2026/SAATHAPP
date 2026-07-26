@@ -22,6 +22,8 @@ import HelpSupportPage from './pages/HelpSupport';
 import PrivacyPolicyPage from './pages/PrivacyPolicy';
 import TermsPage from './pages/Terms';
 import AboutPage from './pages/About';
+import ServiceWarrantyPage from './pages/ServiceWarranty';
+import OurStoryPage from './pages/OurStory';
 import DeliveryPartnerAgreementPage from './pages/DeliveryPartnerAgreement';
 import FaqPage from './pages/Faq';
 import LocationPage from './pages/LocationPage';
@@ -308,10 +310,18 @@ export default function App() {
     return null;
   }
 
-  const isPublicRoute = routerLocation.pathname === '/' || routerLocation.pathname === '/about' || routerLocation.pathname === '/faq' || routerLocation.pathname === '/login' || routerLocation.pathname === '/signup';
+  const isPublicRoute = routerLocation.pathname === '/' || routerLocation.pathname === '/about' || routerLocation.pathname === '/service-warranty' || routerLocation.pathname === '/our-story' || routerLocation.pathname === '/faq' || routerLocation.pathname === '/login' || routerLocation.pathname === '/signup';
 
   if (routerLocation.pathname === '/about') {
     return <AboutPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} />;
+  }
+
+  if (routerLocation.pathname === '/service-warranty') {
+    return <ServiceWarrantyPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} />;
+  }
+
+  if (routerLocation.pathname === '/our-story') {
+    return <OurStoryPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} />;
   }
 
   if (routerLocation.pathname === '/faq') {
@@ -508,6 +518,14 @@ export default function App() {
 
   if (activePage === 'about') {
     return <AboutPage onBack={() => setActivePage('home')} onLogout={handleLogout} />;
+  }
+
+  if (activePage === 'service-warranty') {
+    return <ServiceWarrantyPage onBack={() => setActivePage('home')} onLogout={handleLogout} />;
+  }
+
+  if (activePage === 'our-story') {
+    return <OurStoryPage onBack={() => setActivePage('home')} onLogout={handleLogout} />;
   }
 
   if (activePage === 'cart') {

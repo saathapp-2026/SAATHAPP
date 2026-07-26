@@ -62,7 +62,7 @@ const faqSections = [
     items: [
       {
         question: 'What payment methods are supported?',
-        answer: 'SaathApp supports UPI, debit and credit cards, net banking, wallet payments, and cash on delivery where available.',
+        answer: 'SaathApp supports UPI, RuPay, Visa, Mastercard, Net Banking, and Cash on Delivery (where available).',
       },
       {
         question: 'Is my payment information secure?',
@@ -427,7 +427,7 @@ export default function Faq({ onBack }) {
               </div>
               <div className="rounded-[24px] border border-white/10 bg-white/10 p-5">
                 <p className="text-sm font-black">Business Enquiries</p>
-                <p className="mt-2 text-sm text-slate-300">company@saathapp.in</p>
+                <p className="mt-2 text-sm text-slate-300">business@saathapp.in</p>
               </div>
             </div>
             <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-300">
