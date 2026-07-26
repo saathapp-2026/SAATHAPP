@@ -83,8 +83,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              {/* <li><a href="#" className="hover:text-white transition-colors">Press & Media</a></li> */}
-              {/* <li><a href="#" className="hover:text-white transition-colors">Blog</a></li> */}
             </ul>
           </div>
 
@@ -96,7 +94,15 @@ export default function Footer() {
               <li><a href="#" className="hover:text-white transition-colors">Become a Franchise Partner</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Become a Wholesale</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Become Service Professional</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Become Delivery Partner</a></li>
+              <li>
+                <Link
+                  to="/become-delivery-partner"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Become Delivery Partner
+                </Link>
+              </li>
               <li><a href="#" className="hover:text-white transition-colors">Advertise with Us</a></li>
             </ul>
           </div>
