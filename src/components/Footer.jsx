@@ -109,8 +109,18 @@ export default function Footer() {
             <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Business</h4>
             <ul className="space-y-3 text-xs font-semibold">
               <li><a href="#" className="hover:text-white transition-colors">Become Seller</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Become a Franchise Partner</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Become a Wholesale</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Become Service Professional</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Become Delivery Partner</a></li>
+              <li>
+                <Link
+                  to="/become-delivery-partner"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Become Delivery Partner
+                </Link>
+              </li>
               <li><a href="#" className="hover:text-white transition-colors">Franchise</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Advertise with Us</a></li>
             </ul>
@@ -133,11 +143,11 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  to="/service-warranty" 
+                  to="/service-warranty-policy" 
                   onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
                   className="hover:text-white transition-colors"
                 >
-                  Service Warranty
+                  Service Warranty Policy
                 </Link>
               </li>
               <li>
@@ -174,7 +184,15 @@ export default function Footer() {
                   Terms of Service
                 </Link>
               </li>
-              <li><a href="#" className="hover:text-white transition-colors">Seller Policy</a></li>
+              <li>
+                <Link
+                  to="/seller-policy"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Seller Policy
+                </Link>
+              </li>
               <li>
                 <Link 
                   to="/delivery-partner-agreement" 
@@ -184,7 +202,15 @@ export default function Footer() {
                   Delivery Partner Agreement
                 </Link>
               </li>
-              <li><a href="#" className="hover:text-white transition-colors">Refund & Cancellation Policy</a></li>
+              <li>
+                <Link
+                  to="/refund-cancellation-policy"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Refund & Cancellation Policy
+                </Link>
+              </li>
             </ul>
           </div>
 

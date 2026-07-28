@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Store, Truck, Briefcase, Award, ArrowRight } from 'lucide-react';
+import { Store, Truck, Briefcase, Award, ArrowRight, Megaphone, Warehouse } from 'lucide-react';
 
 const partners = [
   {
@@ -34,6 +34,22 @@ const partners = [
     icon: Award,
     gradient: 'from-purple-600 to-violet-700',
     shadow: 'hover-glow-blue'
+  },
+  {
+    title: 'Advertise With Us',
+    description: 'Promote your brand, store, or services to thousands of local customers across the SaathApp hyperlocal network.',
+    cta: 'Start Advertising',
+    icon: Megaphone,
+    gradient: 'from-teal-600 to-cyan-700',
+    shadow: 'hover-glow-green'
+  },
+  {
+    title: 'Become a Wholesaler (Sale in Bulk)',
+    description: 'Supply products in bulk to retailers and businesses. Expand your reach with SaathApp wholesale marketplace.',
+    cta: 'Register Wholesale',
+    icon: Warehouse,
+    gradient: 'from-rose-600 to-pink-700',
+    shadow: 'hover-glow-yellow'
   }
 ];
 
@@ -52,13 +68,13 @@ export default function BecomePartner({ onBecomePartnerSelect }) {
         </div>
 
         {/* Partners Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {partners.map((partner, index) => {
             const Icon = partner.icon;
 
             return (
               <motion.div
-                key={index}
+                key={partner.title}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

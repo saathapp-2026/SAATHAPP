@@ -27,6 +27,9 @@ import OurStoryPage from './pages/OurStory';
 import DeliveryPartnerAgreementPage from './pages/DeliveryPartnerAgreement';
 import TermsOfServicePage from './pages/TermsOfService';
 import PrivacyPolicyPublicPage from './pages/PrivacyPolicyPublic';
+import ServiceWarrantyPolicyPage from './pages/ServiceWarrantyPolicy';
+import SellerPolicyPage from './pages/SellerPolicy';
+import DeliveryAgentLandingPage from './pages/DeliveryAgentLanding';
 import FaqPage from './pages/Faq';
 import LocationPage from './pages/LocationPage';
 import AddAddressPage from './pages/AddAddressPage';
@@ -441,6 +444,18 @@ export default function App() {
     return <PrivacyPolicyPublicPage />;
   }
 
+  if (routerLocation.pathname === '/service-warranty-policy') {
+    return <ServiceWarrantyPolicyPage />;
+  }
+
+  if (routerLocation.pathname === '/seller-policy') {
+    return <SellerPolicyPage />;
+  }
+
+  if (routerLocation.pathname === '/become-delivery-partner') {
+    return <DeliveryAgentLandingPage />;
+  }
+
   if (routerLocation.pathname === '/location') {
     return (
       <LocationPage
@@ -533,6 +548,10 @@ export default function App() {
           document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
         }}
         onBecomePartnerSelect={(role) => {
+          if (role === 'Become Delivery Agent') {
+            navigate('/become-delivery-partner');
+            return;
+          }
           alert(`Partner application loading for: ${role}`);
         }}
         onShopSelect={(shop) => {
