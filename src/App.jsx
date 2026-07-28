@@ -29,6 +29,7 @@ import TermsOfServicePage from './pages/TermsOfService';
 import PrivacyPolicyPublicPage from './pages/PrivacyPolicyPublic';
 import ServiceWarrantyPolicyPage from './pages/ServiceWarrantyPolicy';
 import SellerPolicyPage from './pages/SellerPolicy';
+import RefundCancellationPolicyPage from './pages/RefundCancellationPolicy';
 import DeliveryAgentLandingPage from './pages/DeliveryAgentLanding';
 import FaqPage from './pages/Faq';
 import LocationPage from './pages/LocationPage';
@@ -450,6 +451,10 @@ export default function App() {
 
   if (routerLocation.pathname === '/seller-policy') {
     return <SellerPolicyPage />;
+  }
+
+  if (routerLocation.pathname === '/refund-cancellation-policy') {
+    return <RefundCancellationPolicyPage />;
   }
 
   if (routerLocation.pathname === '/become-delivery-partner') {
