@@ -130,7 +130,15 @@ export default function Footer() {
           <div>
             <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Support</h4>
             <ul className="space-y-3 text-xs font-semibold">
-              <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
+              <li>
+                <Link
+                  to="/help-center"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Help Center
+                </Link>
+              </li>
               <li>
                 <a 
                   href="https://www.saathappnova.co.in/contact" 

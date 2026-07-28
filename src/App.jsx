@@ -37,6 +37,7 @@ import AddAddressPage from './pages/AddAddressPage';
 import ServiceProfessionalPage from './pages/ServiceProfessional';
 import ProfessionalDashboardPage from './pages/professional/Dashboard';
 import WorkerDashboardPage from './pages/worker/Dashboard';
+import HelpCenterPage from './pages/HelpCenter/HelpCenterPage';
 import { getStoredUsers, registerUser, authenticateUser, resetPassword as resetAuthPassword, getStoredAuthSession, saveAuthSession, clearAuthSession, isSessionValid } from './services/authService';
 
 export default function App() {
@@ -329,7 +330,11 @@ export default function App() {
     return null;
   }
 
-  const isPublicRoute = routerLocation.pathname === '/' || routerLocation.pathname === '/about' || routerLocation.pathname === '/service-warranty' || routerLocation.pathname === '/our-story' || routerLocation.pathname === '/faq' || routerLocation.pathname === '/login' || routerLocation.pathname === '/signup' || routerLocation.pathname === '/service-professional' || routerLocation.pathname === '/professional/dashboard' || routerLocation.pathname === '/worker/dashboard';
+  const isPublicRoute = routerLocation.pathname === '/' || routerLocation.pathname === '/about' || routerLocation.pathname === '/service-warranty' || routerLocation.pathname === '/our-story' || routerLocation.pathname === '/faq' || routerLocation.pathname === '/login' || routerLocation.pathname === '/signup' || routerLocation.pathname === '/service-professional' || routerLocation.pathname === '/professional/dashboard' || routerLocation.pathname === '/worker/dashboard' || routerLocation.pathname === '/help-center';
+
+  if (routerLocation.pathname === '/help-center') {
+    return <HelpCenterPage />;
+  }
 
   if (routerLocation.pathname === '/about') {
     return <AboutPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} />;

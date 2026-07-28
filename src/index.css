@@ -374,7 +374,10 @@ html.dark a.bg-gradient-primary {
   background-color: #16A34A !important;
 }
 
-html.dark svg {
-  color: currentColor !important;
-}
 
+/* Shared SAAS Responsive Container for Help Center */
+.saas-container {
+  max-width: 1440px;
+  width: min(1440px, calc(100% - 80px));
+  margin-inline: auto;
+}
