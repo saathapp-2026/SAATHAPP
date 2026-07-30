@@ -38,6 +38,10 @@ import ServiceProfessionalPage from './pages/ServiceProfessional';
 import ProfessionalDashboardPage from './pages/professional/Dashboard';
 import WorkerDashboardPage from './pages/worker/Dashboard';
 import HelpCenterPage from './pages/HelpCenter/HelpCenterPage';
+import VerifiedSellersPage from "./pages/trust/VerifiedSellers";
+import SecureOnlinePaymentsPage from "./pages/trust/SecureOnlinePayments";
+import PrivacyProtectedPage from "./pages/trust/PrivacyProtected";
+import CustomerSupportPage from "./pages/trust/CustomerSupport";
 import { getStoredUsers, registerUser, authenticateUser, resetPassword as resetAuthPassword, getStoredAuthSession, saveAuthSession, clearAuthSession, isSessionValid } from './services/authService';
 
 export default function App() {
@@ -330,7 +334,8 @@ export default function App() {
     return null;
   }
 
-  const isPublicRoute = routerLocation.pathname === '/' || routerLocation.pathname === '/about' || routerLocation.pathname === '/service-warranty' || routerLocation.pathname === '/our-story' || routerLocation.pathname === '/faq' || routerLocation.pathname === '/login' || routerLocation.pathname === '/signup' || routerLocation.pathname === '/service-professional' || routerLocation.pathname === '/professional/dashboard' || routerLocation.pathname === '/worker/dashboard' || routerLocation.pathname === '/help-center';
+  const trustRoutes = ['/verified-sellers', '/secure-online-payments', '/privacy-protected', '/customer-support'];
+  const isPublicRoute = routerLocation.pathname === '/' || routerLocation.pathname === '/about' || routerLocation.pathname === '/service-warranty' || routerLocation.pathname === '/our-story' || routerLocation.pathname === '/faq' || routerLocation.pathname === '/login' || routerLocation.pathname === '/signup' || routerLocation.pathname === '/service-professional' || routerLocation.pathname === '/professional/dashboard' || routerLocation.pathname === '/worker/dashboard' || routerLocation.pathname === '/help-center' || trustRoutes.includes(routerLocation.pathname);
 
   if (routerLocation.pathname === '/help-center') {
     return <HelpCenterPage />;
@@ -464,6 +469,22 @@ export default function App() {
 
   if (routerLocation.pathname === '/become-delivery-partner') {
     return <DeliveryAgentLandingPage />;
+  }
+
+  if (routerLocation.pathname === '/verified-sellers') {
+    return <VerifiedSellersPage />;
+  }
+
+  if (routerLocation.pathname === '/secure-online-payments') {
+    return <SecureOnlinePaymentsPage />;
+  }
+
+  if (routerLocation.pathname === '/privacy-protected') {
+    return <PrivacyProtectedPage />;
+  }
+
+  if (routerLocation.pathname === '/customer-support') {
+    return <CustomerSupportPage />;
   }
 
   if (routerLocation.pathname === '/location') {

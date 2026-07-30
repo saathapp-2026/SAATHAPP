@@ -226,10 +226,42 @@ export default function Footer() {
           <div>
             <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Trust</h4>
             <ul className="space-y-3 text-xs font-semibold">
-              <li><a href="#" className="hover:text-white transition-colors">Verified Sellers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Secure Online Payments</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Protected</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Customer Support</a></li>
+              <li>
+                <Link
+                  to="/verified-sellers"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Verified Sellers
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/secure-online-payments"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Secure Online Payments
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/privacy-protected"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Privacy Protected
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/customer-support"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Customer Support
+                </Link>
+              </li>
             </ul>
           </div>
 
