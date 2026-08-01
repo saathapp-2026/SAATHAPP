@@ -17,7 +17,7 @@ import BecomePartner from '../components/BecomePartner';
 import DownloadApp from '../components/DownloadApp';
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
-import { Home as HomeIcon, Grid, Briefcase, ShoppingCart, User } from 'lucide-react';
+import { Home as HomeIcon, Grid, Briefcase, ShoppingCart, User, HardHat, Wrench } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Home({
@@ -357,6 +357,79 @@ export default function Home({
                   >
                     <span className="text-xl leading-none">📍</span>
                   </motion.div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* 🔧 Service Professional Dashboard */}
+            <motion.div
+              onClick={() => navigate('/professional/dashboard')}
+              whileHover={{ y: -8, scale: 1.01 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="mt-6 relative overflow-hidden cursor-pointer rounded-card bg-gradient-to-br from-emerald-700 via-green-700 to-teal-800 p-8 sm:p-12 border-0 shadow-premium hover:shadow-glow-primary transition-all flex flex-col md:flex-row items-center justify-between gap-8 group"
+            >
+              <div className="absolute top-0 right-0 -mr-24 -mt-24 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+              <div className="flex-1 space-y-6 text-left relative z-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 border border-white/20">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-white">⚡ Service Professional Dashboard</span>
+                </div>
+                <h3 className="text-2xl sm:text-4xl font-black text-white leading-tight drop-shadow-md">
+                  Manage bookings, earnings & customers
+                </h3>
+                <p className="text-sm sm:text-base text-emerald-50/90 font-medium leading-relaxed max-w-2xl">
+                  Access your partner portal — bookings, calendar, wallet, reviews, service area, and availability.
+                </p>
+                <motion.button
+                  onClick={(e) => { e.stopPropagation(); navigate('/professional/dashboard'); }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="py-3 px-6 rounded-btn bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-extrabold text-xs sm:text-sm cursor-pointer shadow-lg border-0"
+                >
+                  Open Professional Dashboard →
+                </motion.button>
+              </div>
+              <div className="relative w-full md:w-64 h-48 flex items-center justify-center shrink-0">
+                <div className="w-36 h-36 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
+                  <Wrench size={56} className="text-white" />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* 👷 Service Worker Dashboard */}
+            <motion.div
+              onClick={() => {
+                navigate('/worker/dashboard');
+              }}
+              whileHover={{ y: -8, scale: 1.01 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="mt-6 relative overflow-hidden cursor-pointer rounded-card bg-gradient-to-br from-blue-700 via-indigo-700 to-violet-800 p-8 sm:p-12 border-0 shadow-premium hover:shadow-glow-primary transition-all flex flex-col md:flex-row items-center justify-between gap-8 group"
+            >
+              <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+              <div className="flex-1 space-y-6 text-left relative z-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 border border-white/20">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-white">👷 Service Worker Dashboard</span>
+                </div>
+                <h3 className="text-2xl sm:text-4xl font-black text-white leading-tight drop-shadow-md">
+                  View assigned jobs, earnings & schedule
+                </h3>
+                <p className="text-sm sm:text-base text-blue-50/90 font-medium leading-relaxed max-w-2xl">
+                  Track today's jobs, accept assignments, clock attendance, manage wallet, and complete live job workflows.
+                </p>
+                <motion.button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate('/worker/dashboard');
+                  }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="py-3 px-6 rounded-btn bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-extrabold text-xs sm:text-sm cursor-pointer shadow-lg border-0"
+                >
+                  Open Worker Dashboard →
+                </motion.button>
+              </div>
+              <div className="relative w-full md:w-64 h-48 flex items-center justify-center shrink-0">
+                <div className="w-36 h-36 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
+                  <HardHat size={56} className="text-white" />
                 </div>
               </div>
             </motion.div>

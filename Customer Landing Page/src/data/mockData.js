@@ -570,3 +570,403 @@ export const liveStats = [
   { value: 5000, label: 'Successful Orders Today', prefix: '', suffix: '+' },
   { value: 300, label: 'Active Saathi Partners', prefix: '', suffix: '+' }
 ];
+
+// ─── Worker Dashboard Mock Data ───────────────────────────────────────────
+
+export const workerProfile = {
+  name: 'Ramesh Kumar',
+  id: 'WRK-4829',
+  type: 'Electrician',
+  email: 'ramesh.kumar@saathapp.com',
+  phone: '+91 9876543211',
+  photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&h=200&q=80',
+  verified: true,
+  city: 'New Delhi',
+  experience: '4 Years',
+  skills: ['Wiring', 'Switchboards', 'Fan Installation', 'DB Box Repair'],
+  bankAccount: 'HDFC •••• 4821',
+  emergencyContact: 'Sunita Kumar (+91 9876543299)',
+};
+
+export const workerJobs = [
+  {
+    id: 'JOB-3042',
+    customerName: 'Sunita Roy',
+    customerPhone: '9876543202',
+    serviceName: 'Kitchen Switch Replacement',
+    address: 'Malviya Nagar, Sector 4, New Delhi',
+    date: 'July 28, 2026',
+    time: '11:00 AM',
+    incentive: 350,
+    priority: 'high',
+    status: 'assigned',
+    assignedBy: 'Rahul Kumar (SaathApp Partner)',
+    otp: '1050',
+    scopeDescription: 'Replace 2 burnt modular light switches. Install safe earth lines.',
+    estimatedTime: '45 mins',
+    materials: ['Modular switches x2', 'Earth wire', 'Screws'],
+    photos: [],
+  },
+  {
+    id: 'JOB-3091',
+    customerName: 'Vijay Khanna',
+    customerPhone: '9876543204',
+    serviceName: 'Living Room Fan Install',
+    address: 'Green Park Ext, H-12, New Delhi',
+    date: 'July 28, 2026',
+    time: '04:00 PM',
+    incentive: 450,
+    priority: 'medium',
+    status: 'assigned',
+    assignedBy: 'Rahul Kumar (SaathApp Partner)',
+    otp: '3200',
+    scopeDescription: 'Unbox and assemble Orient ceiling fan. Secure ceiling hook, adjust regulator switch.',
+    estimatedTime: '60 mins',
+    materials: ['Ceiling hook', 'Regulator'],
+    photos: [],
+  },
+  {
+    id: 'JOB-3110',
+    customerName: 'Anita Mehta',
+    customerPhone: '9876543215',
+    serviceName: 'Bathroom Geyser Wiring',
+    address: 'Saket, Pocket A, New Delhi',
+    date: 'July 28, 2026',
+    time: '09:30 AM',
+    incentive: 520,
+    priority: 'high',
+    status: 'accepted',
+    assignedBy: 'SaathApp Dispatch',
+    otp: '7841',
+    scopeDescription: 'Install dedicated 16A line for geyser. Test MCB and earthing.',
+    estimatedTime: '90 mins',
+    materials: ['16A MCB', 'Copper wire'],
+    photos: [],
+  },
+  {
+    id: 'JOB-2900',
+    customerName: 'Preeti Sharma',
+    customerPhone: '9876543203',
+    serviceName: 'Aadhaar Verified Light Install',
+    address: 'Hauz Khas Village, Block B, New Delhi',
+    date: 'July 27, 2026',
+    time: '02:00 PM',
+    incentive: 750,
+    priority: 'low',
+    status: 'completed',
+    assignedBy: 'Rahul Kumar (SaathApp Partner)',
+    otp: '4820',
+    rating: 5,
+    scopeDescription: 'Install LED panel lights in living room.',
+    estimatedTime: '45 mins',
+    materials: ['LED panels x3'],
+    photos: ['https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=200&q=80'],
+  },
+  {
+    id: 'JOB-2855',
+    customerName: 'Karan Singh',
+    customerPhone: '9876543218',
+    serviceName: 'Outdoor Wiring Check',
+    address: 'Defence Colony, New Delhi',
+    date: 'July 26, 2026',
+    time: '03:00 PM',
+    incentive: 400,
+    priority: 'medium',
+    status: 'cancelled',
+    assignedBy: 'Rahul Kumar (SaathApp Partner)',
+    otp: '9012',
+    scopeDescription: 'Inspect patio wiring and waterproofing.',
+    estimatedTime: '30 mins',
+    materials: [],
+    photos: [],
+  },
+  {
+    id: 'JOB-2820',
+    customerName: 'Meera Joshi',
+    customerPhone: '9876543220',
+    serviceName: 'DB Box Leakage Fix',
+    address: 'Lajpat Nagar, New Delhi',
+    date: 'July 28, 2026',
+    time: '01:00 PM',
+    incentive: 600,
+    priority: 'high',
+    status: 'pending',
+    assignedBy: 'SaathApp Dispatch',
+    otp: '5510',
+    scopeDescription: 'Fix ELCB tripping issue in main distribution box.',
+    estimatedTime: '75 mins',
+    materials: ['ELCB', 'Insulation tape'],
+    photos: [],
+  },
+];
+
+export const workerStats = {
+  todayJobs: 4,
+  assignedJobs: 2,
+  completedJobs: 12,
+  pendingJobs: 1,
+  cancelledJobs: 1,
+  todayEarnings: 1450,
+  monthlyEarnings: 20450,
+  performanceScore: 94,
+  workingHours: 7.5,
+  attendancePercent: 94.2,
+  monthlySalary: 18500,
+  incentives: 1450,
+  averageRating: 4.9,
+};
+
+export const workerEarnings = {
+  today: 1450,
+  weekly: 4200,
+  monthly: 20450,
+  salary: 18500,
+  bonus: 500,
+  incentives: 1450,
+  statements: [
+    { month: 'July 2026', amount: 20450, status: 'paid' },
+    { month: 'June 2026', amount: 19800, status: 'paid' },
+    { month: 'May 2026', amount: 19200, status: 'paid' },
+  ],
+};
+
+export const workerAttendance = {
+  isClockedIn: false,
+  totalHours: 176,
+  lateMarks: 2,
+  leavesTaken: 3,
+  todayHours: 0,
+  calendar: [
+    { date: '2026-07-28', status: 'present', hours: 0 },
+    { date: '2026-07-27', status: 'present', hours: 8 },
+    { date: '2026-07-26', status: 'late', hours: 7.5 },
+    { date: '2026-07-25', status: 'present', hours: 8 },
+    { date: '2026-07-24', status: 'leave', hours: 0 },
+  ],
+};
+
+export const workerPerformance = {
+  completionRate: 96,
+  acceptanceRate: 92,
+  customerRating: 4.9,
+  averageJobTime: '52 mins',
+  rank: 12,
+  totalWorkers: 340,
+  badges: [
+    { name: 'Top Performer', icon: 'Award', color: 'amber' },
+    { name: 'Punctuality Star', icon: 'Clock', color: 'blue' },
+    { name: '5-Star Streak', icon: 'Star', color: 'emerald' },
+  ],
+};
+
+export const workerReviews = [
+  { id: 1, customer: 'Preeti Sharma', rating: 5, text: 'Very quick switchboard check. Professional and polite.', date: 'Jul 27, 2026', replied: false },
+  { id: 2, customer: 'Aman Varma', rating: 5, text: 'Excellent wiring work. Would recommend.', date: 'Jul 20, 2026', replied: true },
+  { id: 3, customer: 'Neha Gupta', rating: 4, text: 'Good job but arrived 10 mins late.', date: 'Jul 15, 2026', replied: false },
+];
+
+export const workerWallet = {
+  balance: 8450,
+  salaryStatus: 'paid',
+  pendingSalary: 0,
+  bonus: 500,
+  withdrawHistory: [
+    { id: 'WD-901', amount: 5000, date: 'Jul 15, 2026', status: 'completed' },
+    { id: 'WD-882', amount: 3500, date: 'Jul 01, 2026', status: 'completed' },
+  ],
+};
+
+export const workerDocuments = [
+  { name: 'Aadhaar Card', file: 'aadhaar_scanned_verified.pdf', status: 'verified' },
+  { name: 'PAN Card', file: 'pan_card_ramesh.jpg', status: 'verified' },
+  { name: 'Driving License', file: 'dl_scanned.jpg', status: 'verified' },
+  { name: 'Experience Certificate', file: 'electrician_license_proof.pdf', status: 'verified' },
+];
+
+export const workerNotifications = [
+  { id: 1, title: 'New Job Assigned', description: 'Kitchen Switch Replacement assigned by Rahul Kumar', time: '15 mins ago', type: 'new_job', read: false },
+  { id: 2, title: 'Salary Settled', description: '₹18,500 base salary credited to your bank account', time: 'Jul 01, 2026', type: 'salary_credited', read: false },
+  { id: 3, title: 'Outstanding Review', description: 'Preeti Sharma rated you 5 stars', time: 'Yesterday', type: 'review_received', read: true },
+  { id: 4, title: 'Company Announcement', description: 'New safety training module available in Help section', time: '2 days ago', type: 'announcement', read: true },
+];
+
+export const workerSupportFaqs = [
+  { q: 'How are incentives calculated?', a: 'Incentives are based on job complexity, priority, and customer rating bonus.' },
+  { q: 'When is salary credited?', a: 'Base salary is credited on the 1st of every month. Incentives settle weekly on Tuesdays.' },
+  { q: 'How to dispute a late mark?', a: 'Raise a support ticket under Attendance with your shift log details.' },
+];
+
+export const workerTrainingVideos = [
+  { title: 'Safety Protocols for Electrical Work', duration: '8 min' },
+  { title: 'Customer Communication Best Practices', duration: '5 min' },
+  { title: 'Photo Documentation Guidelines', duration: '4 min' },
+];
+
+// ─── Professional Dashboard Mock Data ───────────────────────────────────────
+
+export const professionalProfile = {
+  name: 'Rahul Kumar',
+  id: 'PRO-7821',
+  type: 'Electrician',
+  email: 'rahul.kumar@saathapp.com',
+  phone: '+91 9876543210',
+  photo: 'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=200&h=200&q=80',
+  verified: true,
+  city: 'New Delhi, NCR',
+  serviceRadius: 15,
+  rating: 4.8,
+  totalCustomers: 248,
+  repeatCustomers: 89,
+};
+
+export const professionalBookings = [
+  {
+    id: 'BKG-9842',
+    customerName: 'Preeti Sharma',
+    customerPhone: '9876543203',
+    serviceName: 'Full House Wiring Check',
+    address: 'Hauz Khas Village, Block B, New Delhi',
+    date: 'July 28, 2026',
+    time: '02:00 PM',
+    amount: 2200,
+    status: 'upcoming',
+    paymentStatus: 'secured',
+    distance: 3.5,
+    otp: '4820',
+    scopeDescription: 'Inspect all power sockets, test DB box leakage switch, repair burnt lines in guest room.',
+  },
+  {
+    id: 'BKG-9750',
+    customerName: 'Vijay Khanna',
+    customerPhone: '9876543204',
+    serviceName: 'Electric Meter Switch Install',
+    address: 'Green Park Extension, H-12, New Delhi',
+    date: 'July 28, 2026',
+    time: '04:00 PM',
+    amount: 450,
+    status: 'pending',
+    paymentStatus: 'pending',
+    distance: 1.8,
+    otp: '9150',
+    scopeDescription: 'Install HPL single-phase changeover switch next to the main supply line.',
+  },
+  {
+    id: 'BKG-9700',
+    customerName: 'Sunita Roy',
+    customerPhone: '9876543202',
+    serviceName: 'AC Installation Support',
+    address: 'Malviya Nagar, Sector 4, New Delhi',
+    date: 'July 28, 2026',
+    time: '11:00 AM',
+    amount: 1800,
+    status: 'in_progress',
+    paymentStatus: 'secured',
+    distance: 2.1,
+    otp: '3310',
+    scopeDescription: 'Support AC unit mounting and electrical connection.',
+  },
+  {
+    id: 'BKG-9610',
+    customerName: 'Aman Varma',
+    customerPhone: '9876543212',
+    serviceName: 'Generator Transfer Switch Repair',
+    address: 'Saket Metro Road, Pocket 4, New Delhi',
+    date: 'July 27, 2026',
+    time: '11:00 AM',
+    amount: 1560,
+    status: 'completed',
+    paymentStatus: 'released',
+    distance: 6.2,
+    otp: '7822',
+    rating: 5,
+    scopeDescription: 'Repair contactor coil inside the automatic transfer switch box.',
+  },
+  {
+    id: 'BKG-9580',
+    customerName: 'Karan Singh',
+    customerPhone: '9876543218',
+    serviceName: 'Outdoor Lighting Setup',
+    address: 'Defence Colony, New Delhi',
+    date: 'July 26, 2026',
+    time: '03:00 PM',
+    amount: 3200,
+    status: 'cancelled',
+    paymentStatus: 'refunded',
+    distance: 4.5,
+    otp: '9012',
+    scopeDescription: 'Install garden LED lighting with timer switch.',
+  },
+];
+
+export const professionalStats = {
+  todayJobs: 3,
+  upcomingJobs: 2,
+  completedJobs: 45,
+  cancelledJobs: 3,
+  pendingJobs: 1,
+  inProgressJobs: 1,
+  monthlyEarnings: 68000,
+  pendingPayments: 450,
+  customerRating: 4.8,
+  acceptanceRate: 94,
+  responseTime: '8 mins',
+  totalEarnings: 318000,
+  averageRating: 4.8,
+  totalCustomers: 248,
+  repeatCustomers: 89,
+};
+
+export const professionalSchedule = [
+  { time: '09:00 AM', service: 'Electrical Repair', customer: 'Anita Mehta', status: 'completed' },
+  { time: '11:00 AM', service: 'AC Installation', customer: 'Sunita Roy', status: 'in_progress' },
+  { time: '02:00 PM', service: 'Wiring Check', customer: 'Preeti Sharma', status: 'upcoming' },
+  { time: '04:00 PM', service: 'Meter Switch Install', customer: 'Vijay Khanna', status: 'pending' },
+];
+
+export const professionalCustomers = [
+  { id: 1, name: 'Preeti Sharma', phone: '9876543203', location: 'Hauz Khas', jobs: 5, rating: 5, repeat: true },
+  { id: 2, name: 'Vijay Khanna', phone: '9876543204', location: 'Green Park', jobs: 3, rating: 4.8, repeat: true },
+  { id: 3, name: 'Aman Varma', phone: '9876543212', location: 'Saket', jobs: 2, rating: 5, repeat: false },
+  { id: 4, name: 'Sunita Roy', phone: '9876543202', location: 'Malviya Nagar', jobs: 4, rating: 4.9, repeat: true },
+];
+
+export const professionalNotifications = [
+  { id: 1, title: 'New Booking Request', description: 'Electric Meter Install requested by Vijay Khanna', time: '10 mins ago', type: 'new_booking', read: false },
+  { id: 2, title: 'Payment Released', description: '₹1,560 credited to wallet for Generator ATS Repair', time: '1 hour ago', type: 'payment_received', read: false },
+  { id: 3, title: 'New Review Added', description: 'Aman Varma left a 5-star review', time: 'Yesterday', type: 'review_received', read: true },
+  { id: 4, title: 'System Update', description: 'New calendar sync feature available', time: '2 days ago', type: 'system', read: true },
+];
+
+export const professionalWallet = {
+  currentBalance: 12450,
+  pendingBalance: 450,
+  withdrawHistory: [
+    { id: 'WD-701', amount: 10000, date: 'Jul 20, 2026', status: 'completed' },
+    { id: 'WD-688', amount: 8000, date: 'Jul 06, 2026', status: 'completed' },
+  ],
+  transactions: [
+    { id: 'TX-901', type: 'credit', amount: 1560, desc: 'BKG-9610 payout', date: 'Jul 27, 2026' },
+    { id: 'TX-902', type: 'debit', amount: 10000, desc: 'Bank withdrawal', date: 'Jul 20, 2026' },
+  ],
+};
+
+export const professionalDocuments = [
+  { name: 'Aadhaar Card', file: 'aadhaar_verified.pdf', status: 'verified' },
+  { name: 'PAN Card', file: 'pan_rahul.jpg', status: 'verified' },
+  { name: 'Driving License', file: 'dl_rahul.jpg', status: 'verified' },
+  { name: 'Profile Photo', file: 'profile_photo.jpg', status: 'verified' },
+  { name: 'Electrician Certificate', file: 'iti_certificate.pdf', status: 'verified' },
+  { name: 'Experience Proof', file: 'experience_letter.pdf', status: 'pending' },
+];
+
+export const professionalReviews = [
+  { id: 1, customer: 'Aman Varma', rating: 5, text: 'Arrived right on time. Fixed ATS switch perfectly.', date: 'Jul 27, 2026', replied: false },
+  { id: 2, customer: 'Preeti Sharma', rating: 5, text: 'Thorough wiring inspection. Very professional.', date: 'Jul 22, 2026', replied: true },
+  { id: 3, customer: 'Vijay Khanna', rating: 4, text: 'Good work on meter switch. Slightly delayed.', date: 'Jul 18, 2026', replied: false },
+];
+
+export const professionalSupportFaqs = [
+  { q: 'How long to clear payouts?', a: 'Completed payouts settle in available balance instantly. Bank transfers happen weekly on Tuesdays.' },
+  { q: 'What is client escrow?', a: 'Payments are secured in escrow upon booking to guarantee you get paid for completed work.' },
+  { q: 'How to boost my profile?', a: 'Complete verification, maintain high ratings, and stay online during peak hours.' },
+];

@@ -14,6 +14,7 @@ export default function NotificationPanel({
         return <Wallet className="text-emerald-500" size={16} />;
       case 'review_received':
         return <Star className="text-amber-500" size={16} fill="currentColor" />;
+      case 'announcement':
       case 'company_announcement':
         return <Award className="text-blue-500" size={16} />;
       default:

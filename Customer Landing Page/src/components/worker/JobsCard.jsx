@@ -12,7 +12,8 @@ export default function JobsCard({
   onNavigate,
   onStart,
   onComplete,
-  onSelectLiveJob
+  onSelectLiveJob,
+  onViewDetails
 }) {
   const [expanded, setExpanded] = useState(false);
   const [otp, setOtp] = useState('');
@@ -116,6 +117,12 @@ export default function JobsCard({
 
             <div className="flex items-center gap-2">
               <button
+                onClick={() => onViewDetails?.(job)}
+                className="px-3.5 py-1.5 rounded-btn border border-slate-200 hover:bg-slate-50 text-slate-600 text-[10px] font-extrabold uppercase cursor-pointer"
+              >
+                View Details
+              </button>
+              <button
                 onClick={() => onReject(job.id)}
                 className="px-3.5 py-1.5 rounded-btn border border-rose-200 hover:bg-rose-50 text-rose-500 text-[10px] font-extrabold uppercase cursor-pointer"
               >
@@ -174,6 +181,13 @@ export default function JobsCard({
               >
                 <Phone size={14} />
               </a>
+              <button
+                type="button"
+                onClick={() => alert(`Navigating to ${job.address}`)}
+                className="p-2 bg-blue-50 dark:bg-blue-950/30 border border-blue-200/50 dark:border-blue-900/50 hover:bg-blue-100 rounded-xl text-blue-600"
+              >
+                <Navigation size={14} />
+              </button>
               <button
                 onClick={() => onSelectLiveJob(job)}
                 className="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-black uppercase flex items-center gap-1 cursor-pointer shadow-sm"

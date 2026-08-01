@@ -20,6 +20,12 @@ import CalendarWidget from '../../components/professional/CalendarWidget';
 import CustomerTable from '../../components/professional/CustomerTable';
 import DocumentsCard from '../../components/professional/DocumentsCard';
 import AvailabilityCard from '../../components/professional/AvailabilityCard';
+import {
+  professionalBookings as initialBookings,
+  professionalStats,
+  professionalNotifications as initialProfessionalNotifications,
+  professionalSupportFaqs,
+} from '../../data/mockData';
 
 export default function ProfessionalDashboardPage({
   darkMode,
@@ -31,62 +37,9 @@ export default function ProfessionalDashboardPage({
   const [isOnline, setIsOnline] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Dynamic state list for bookings
-  const [bookings, setBookings] = useState([
-    {
-      id: 'BKG-9842',
-      customerName: 'Preeti Sharma',
-      customerPhone: '9876543203',
-      serviceName: 'Full House Wiring Check',
-      address: 'Hauz Khas Village, Block B, New Delhi',
-      date: 'July 26, 2026',
-      time: '02:00 PM',
-      amount: 2200,
-      status: 'upcoming',
-      paymentStatus: 'secured',
-      distance: 3.5,
-      otp: '4820',
-      scopeDescription: 'Inspect all power sockets, test DB box leakage switch, repair burnt lines in guest room, isolate patio switches.'
-    },
-    {
-      id: 'BKG-9750',
-      customerName: 'Vijay Khanna',
-      customerPhone: '9876543204',
-      serviceName: 'Electric Meter Switch Install',
-      address: 'Green Park Extension, H-12, New Delhi',
-      date: 'July 26, 2026',
-      time: '04:00 PM',
-      amount: 450,
-      status: 'pending',
-      paymentStatus: 'pending',
-      distance: 1.8,
-      otp: '9150',
-      scopeDescription: 'Install HPL single-phase changeover switch next to the main supply line. Secure wires and test indicator lights.'
-    },
-    {
-      id: 'BKG-9610',
-      customerName: 'Aman Varma',
-      customerPhone: '9876543212',
-      serviceName: 'Generator Transfer Switch Repair',
-      address: 'Saket Metro Road, Pocket 4, New Delhi',
-      date: 'July 25, 2026',
-      time: '11:00 AM',
-      amount: 1560,
-      status: 'completed',
-      paymentStatus: 'released',
-      distance: 6.2,
-      otp: '7822',
-      rating: 5,
-      scopeDescription: 'Repair contactor coil inside the automatic transfer switch box. Test changeover function on load.'
-    }
-  ]);
+  const [bookings, setBookings] = useState(initialBookings);
 
-  // Dynamic state list for notifications
-  const [notifications, setNotifications] = useState([
-    { id: 1, title: 'New Booking Request', description: 'Electric Meter Install requested by Vijay Khanna', time: '10 mins ago', type: 'new_booking', read: false },
-    { id: 2, title: 'Payment Released', description: '₹1,560 credited to wallet for Generator ATS Repair', time: '1 hour ago', type: 'payment_received', read: false },
-    { id: 3, title: 'New Review Added', description: 'Aman Varma left a 5-star review: "Arrived right on time..."', time: 'Yesterday', type: 'review_received', read: true }
-  ]);
+  const [notifications, setNotifications] = useState(initialProfessionalNotifications);
 
   // Support tickets state
   const [supportTickets, setSupportTickets] = useState([
@@ -223,46 +176,17 @@ export default function ProfessionalDashboardPage({
                   <div className="space-y-6">
                     {/* STATS COUNTER GRID */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-                      <StatCard
-                        title="Today's Jobs"
-                        value={bookings.filter(b => b.status !== 'completed' && b.status !== 'cancelled').length}
-                        icon={Briefcase}
-                        growth={15}
-                        growthType="up"
-                        progress={60}
-                        progressColor="bg-primary"
-                        colorClass="text-primary bg-primary/10"
-                      />
-                      <StatCard
-                        title="Completed Jobs"
-                        value={bookings.filter(b => b.status === 'completed').length}
-                        icon={CheckCircle}
-                        growth={8}
-                        growthType="up"
-                        progress={88}
-                        progressColor="bg-emerald-500"
-                        colorClass="text-emerald-500 bg-emerald-500/10"
-                      />
-                      <StatCard
-                        title="Active Rating"
-                        value="4.8 ★"
-                        icon={Star}
-                        growth={2}
-                        growthType="up"
-                        progress={96}
-                        progressColor="bg-amber-500"
-                        colorClass="text-amber-500 bg-amber-500/10"
-                      />
-                      <StatCard
-                        title="Total Earnings"
-                        value="₹17,700"
-                        icon={Wallet}
-                        growth={12}
-                        growthType="up"
-                        progress={75}
-                        progressColor="bg-blue-500"
-                        colorClass="text-blue-500 bg-blue-500/10"
-                      />
+                      <StatCard title="Today's Jobs" value={bookings.filter(b => !['completed', 'cancelled'].includes(b.status)).length} icon={Briefcase} growth={15} growthType="up" progress={60} progressColor="bg-primary" colorClass="text-primary bg-primary/10" />
+                      <StatCard title="Completed Jobs" value={bookings.filter(b => b.status === 'completed').length} icon={CheckCircle} growth={8} growthType="up" progress={88} progressColor="bg-emerald-500" colorClass="text-emerald-500 bg-emerald-500/10" />
+                      <StatCard title="Pending Jobs" value={bookings.filter(b => b.status === 'pending').length} icon={AlertCircle} progress={35} progressColor="bg-amber-500" colorClass="text-amber-500 bg-amber-500/10" />
+                      <StatCard title="Cancelled Jobs" value={bookings.filter(b => b.status === 'cancelled').length} icon={AlertCircle} progress={12} progressColor="bg-rose-500" colorClass="text-rose-500 bg-rose-500/10" />
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                      <StatCard title="Total Earnings" value={`₹${professionalStats.totalEarnings.toLocaleString()}`} icon={Wallet} growth={12} growthType="up" progress={75} progressColor="bg-blue-500" colorClass="text-blue-500 bg-blue-500/10" />
+                      <StatCard title="Monthly Earnings" value={`₹${professionalStats.monthlyEarnings.toLocaleString()}`} icon={Wallet} growth={15} growthType="up" progress={82} progressColor="bg-indigo-500" colorClass="text-indigo-500 bg-indigo-500/10" />
+                      <StatCard title="Avg Rating" value={`${professionalStats.averageRating} ★`} icon={Star} growth={2} growthType="up" progress={96} progressColor="bg-amber-500" colorClass="text-amber-500 bg-amber-500/10" />
+                      <StatCard title="Repeat Customers" value={professionalStats.repeatCustomers} icon={Award} progress={78} progressColor="bg-emerald-500" colorClass="text-emerald-500 bg-emerald-500/10" />
                     </div>
 
                     {/* CHARTS CONTAINER */}
@@ -562,14 +486,12 @@ export default function ProfessionalDashboardPage({
                       <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft text-left">
                         <h4 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Partner FAQs</h4>
                         <div className="space-y-3.5 text-xs text-slate-600 dark:text-slate-400">
-                          <div>
-                            <span className="font-black text-slate-800 dark:text-slate-300 block">How long to clear payouts?</span>
-                            <p className="mt-1 font-medium leading-relaxed">Completed payouts settle in available balance instantly. Available balance settles to banks weekly on Tuesdays.</p>
-                          </div>
-                          <div>
-                            <span className="font-black text-slate-800 dark:text-slate-300 block">What is client escrow?</span>
-                            <p className="mt-1 font-medium leading-relaxed">We secure payments in escrow upon job booking to guarantee you get paid for completed work.</p>
-                          </div>
+                          {professionalSupportFaqs.map((faq, i) => (
+                            <div key={i}>
+                              <span className="font-black text-slate-800 dark:text-slate-300 block">{faq.q}</span>
+                              <p className="mt-1 font-medium leading-relaxed">{faq.a}</p>
+                            </div>
+                          ))}
                         </div>
                       </div>
 
