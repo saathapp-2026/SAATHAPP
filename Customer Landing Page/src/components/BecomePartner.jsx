@@ -28,11 +28,19 @@ const partners = [
     shadow: 'hover-glow-blue'
   },
   {
-    title: 'Become Service Provider',
+    title: 'Become a Service Professional',
     description: 'Are you an electrician, painter, plumber, or mechanic? Join as a certified Saathi and get steady local service leads.',
-    cta: 'Apply as Saathi',
+    cta: 'Apply as Pro',
     icon: Award,
     gradient: 'from-purple-600 to-violet-700',
+    shadow: 'hover-glow-blue'
+  },
+  {
+    title: 'Become a Service Worker',
+    description: 'Partner with verified professionals, get steady local job assignments, and secure your weekly income with a flexible schedule.',
+    cta: 'Apply as Helper',
+    icon: Briefcase,
+    gradient: 'from-indigo-600 to-blue-700',
     shadow: 'hover-glow-blue'
   },
   {

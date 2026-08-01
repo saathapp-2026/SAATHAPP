@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, CheckCircle2, Award, Clock, Wallet, TrendingUp, UserCheck, BookOpen,
@@ -47,6 +48,7 @@ export default function ServiceProfessionalPage({
   onCategorySelect,
   onBack
 }) {
+  const navigate = useNavigate();
   // Page configurations and states
   const [activeSubTab, setActiveSubTab] = useState('hero');
   const [journeyTab, setJourneyTab] = useState('joining'); // 'booking', 'professional', 'joining'
@@ -288,21 +290,21 @@ export default function ServiceProfessionalPage({
 
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <motion.button
-                  onClick={() => setShowApplyModal(true)}
+                  onClick={() => navigate('/professional/register')}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="py-3.5 px-8 rounded-btn bg-brand-600 text-white font-extrabold text-sm sm:text-base cursor-pointer hover:bg-brand-700 shadow-premium hover:shadow-glow-primary transition-colors flex items-center gap-2"
+                  className="py-3.5 px-8 rounded-btn bg-brand-600 text-white font-extrabold text-sm sm:text-base cursor-pointer hover:bg-brand-700 shadow-premium hover:shadow-glow-primary transition-colors flex items-center gap-2 border-0"
                 >
                   <span>Apply Now</span>
                   <ArrowRight size={16} />
                 </motion.button>
                 <motion.button
-                  onClick={() => scrollToSection('journey')}
+                  onClick={() => navigate('/professional/login')}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   className="py-3.5 px-8 rounded-btn border border-slate-200 dark:border-slate-700 bg-white/40 dark:bg-slate-800/40 text-slate-700 dark:text-slate-200 font-extrabold text-sm sm:text-base cursor-pointer hover:bg-white/70 dark:hover:bg-slate-800/70 transition-colors"
                 >
-                  View Process
+                  Partner Login
                 </motion.button>
               </div>
 
@@ -725,7 +727,7 @@ export default function ServiceProfessionalPage({
 
               {/* "Many More" Card */}
               <motion.div
-                onClick={() => setShowApplyModal(true)}
+                onClick={() => navigate('/professional/register')}
                 whileHover={{ y: -4, scale: 1.02 }}
                 className="p-6 rounded-card border text-left flex flex-col justify-between h-44 bg-gradient-primary border-primary text-white cursor-pointer shadow-premium hover:shadow-glow-primary transition-all"
               >
@@ -889,8 +891,8 @@ export default function ServiceProfessionalPage({
 
                 <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
                   <button
-                    onClick={() => setShowApplyModal(true)}
-                    className="py-3 px-8 rounded-btn bg-secondary hover:bg-secondary-dark text-slate-900 font-extrabold text-sm sm:text-base cursor-pointer shadow-md hover:shadow-lg transition-all"
+                    onClick={() => navigate('/professional/register')}
+                    className="py-3 px-8 rounded-btn bg-secondary hover:bg-secondary-dark text-slate-900 font-extrabold text-sm sm:text-base cursor-pointer shadow-md hover:shadow-lg transition-all border-0"
                   >
                     Apply Now
                   </button>

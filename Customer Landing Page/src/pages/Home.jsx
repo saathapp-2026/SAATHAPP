@@ -361,9 +361,9 @@ export default function Home({
               </div>
             </motion.div>
 
-            {/* 🔧 Service Professional Dashboard */}
+            {/* 🚀 Become a Service Professional */}
             <motion.div
-              onClick={() => navigate('/professional/dashboard')}
+              onClick={() => navigate('/become-professional')}
               whileHover={{ y: -8, scale: 1.01 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               className="mt-6 relative overflow-hidden cursor-pointer rounded-card bg-gradient-to-br from-emerald-700 via-green-700 to-teal-800 p-8 sm:p-12 border-0 shadow-premium hover:shadow-glow-primary transition-all flex flex-col md:flex-row items-center justify-between gap-8 group"
@@ -371,22 +371,32 @@ export default function Home({
               <div className="absolute top-0 right-0 -mr-24 -mt-24 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none" />
               <div className="flex-1 space-y-6 text-left relative z-10">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 border border-white/20">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-white">⚡ Service Professional Dashboard</span>
+                  <span className="text-[10px] font-black uppercase tracking-wider text-white">⚡ Become a Service Professional</span>
                 </div>
                 <h3 className="text-2xl sm:text-4xl font-black text-white leading-tight drop-shadow-md">
-                  Manage bookings, earnings & customers
+                  Become a Service Professional
                 </h3>
                 <p className="text-sm sm:text-base text-emerald-50/90 font-medium leading-relaxed max-w-2xl">
-                  Access your partner portal — bookings, calendar, wallet, reviews, service area, and availability.
+                  Join India's trusted hyperlocal service network. Earn more, work flexibly and grow your business with SaathApp.
                 </p>
-                <motion.button
-                  onClick={(e) => { e.stopPropagation(); navigate('/professional/dashboard'); }}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="py-3 px-6 rounded-btn bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-extrabold text-xs sm:text-sm cursor-pointer shadow-lg border-0"
-                >
-                  Open Professional Dashboard →
-                </motion.button>
+                <div className="flex gap-4">
+                  <motion.button
+                    onClick={(e) => { e.stopPropagation(); navigate('/become-professional'); }}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="py-3 px-6 rounded-btn bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-extrabold text-xs sm:text-sm cursor-pointer shadow-lg border-0"
+                  >
+                    Join Now →
+                  </motion.button>
+                  <motion.button
+                    onClick={(e) => { e.stopPropagation(); navigate('/become-professional'); }}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="py-3 px-6 rounded-btn border border-white/30 bg-white/10 hover:bg-white/20 text-white font-extrabold text-xs sm:text-sm cursor-pointer"
+                  >
+                    Learn More
+                  </motion.button>
+                </div>
               </div>
               <div className="relative w-full md:w-64 h-48 flex items-center justify-center shrink-0">
                 <div className="w-36 h-36 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
@@ -395,11 +405,9 @@ export default function Home({
               </div>
             </motion.div>
 
-            {/* 👷 Service Worker Dashboard */}
+            {/* 👷 Become a Service Worker */}
             <motion.div
-              onClick={() => {
-                navigate('/worker/dashboard');
-              }}
+              onClick={() => navigate('/become-worker')}
               whileHover={{ y: -8, scale: 1.01 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               className="mt-6 relative overflow-hidden cursor-pointer rounded-card bg-gradient-to-br from-blue-700 via-indigo-700 to-violet-800 p-8 sm:p-12 border-0 shadow-premium hover:shadow-glow-primary transition-all flex flex-col md:flex-row items-center justify-between gap-8 group"
@@ -407,25 +415,32 @@ export default function Home({
               <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none" />
               <div className="flex-1 space-y-6 text-left relative z-10">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 border border-white/20">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-white">👷 Service Worker Dashboard</span>
+                  <span className="text-[10px] font-black uppercase tracking-wider text-white">👷 Become a Service Worker</span>
                 </div>
                 <h3 className="text-2xl sm:text-4xl font-black text-white leading-tight drop-shadow-md">
-                  View assigned jobs, earnings & schedule
+                  Become a Service Worker
                 </h3>
                 <p className="text-sm sm:text-base text-blue-50/90 font-medium leading-relaxed max-w-2xl">
-                  Track today's jobs, accept assignments, clock attendance, manage wallet, and complete live job workflows.
+                  Partner with verified professionals, get steady local job assignments, and secure your weekly income with a flexible schedule.
                 </p>
-                <motion.button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    navigate('/worker/dashboard');
-                  }}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="py-3 px-6 rounded-btn bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-extrabold text-xs sm:text-sm cursor-pointer shadow-lg border-0"
-                >
-                  Open Worker Dashboard →
-                </motion.button>
+                <div className="flex gap-4">
+                  <motion.button
+                    onClick={(e) => { e.stopPropagation(); navigate('/become-worker'); }}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="py-3 px-6 rounded-btn bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-extrabold text-xs sm:text-sm cursor-pointer shadow-lg border-0"
+                  >
+                    Join Now →
+                  </motion.button>
+                  <motion.button
+                    onClick={(e) => { e.stopPropagation(); navigate('/become-worker'); }}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="py-3 px-6 rounded-btn border border-white/30 bg-white/10 hover:bg-white/20 text-white font-extrabold text-xs sm:text-sm cursor-pointer"
+                  >
+                    Learn More
+                  </motion.button>
+                </div>
               </div>
               <div className="relative w-full md:w-64 h-48 flex items-center justify-center shrink-0">
                 <div className="w-36 h-36 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">

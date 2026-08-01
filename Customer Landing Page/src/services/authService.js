@@ -147,3 +147,145 @@ export function updateLastLogin(users, userId) {
   saveUsers(nextUsers);
   return nextUsers;
 }
+
+// --- Partners (Professionals and Workers) Authentication ---
+const PARTNERS_STORAGE_KEY = 'saathapp-partners';
+const PARTNER_SESSION_STORAGE_KEY = 'saathapp-partner-session';
+
+const DEFAULT_PROFESSIONAL = {
+  id: 'partner-prof-demo',
+  name: 'Rahul Kumar',
+  phone: '9876543201',
+  email: 'professional@saathapp.com',
+  passwordHash: '', // Allow bypass/empty password for demo account
+  category: 'Electrician',
+  experience: '5 Years',
+  role: 'professional',
+  status: 'approved',
+  createdAt: new Date().toISOString()
+};
+
+const DEFAULT_WORKER = {
+  id: 'partner-worker-demo',
+  name: 'Amit Singh',
+  phone: '9876543202',
+  email: 'worker@saathapp.com',
+  passwordHash: '', // Allow bypass/empty password for demo account
+  category: 'Helper',
+  experience: '2 Years',
+  role: 'worker',
+  status: 'approved',
+  createdAt: new Date().toISOString()
+};
+
+export function getStoredPartners() {
+  if (typeof window === 'undefined') return [DEFAULT_PROFESSIONAL, DEFAULT_WORKER];
+  try {
+    const stored = window.localStorage.getItem(PARTNERS_STORAGE_KEY);
+    if (!stored) {
+      window.localStorage.setItem(PARTNERS_STORAGE_KEY, JSON.stringify([DEFAULT_PROFESSIONAL, DEFAULT_WORKER]));
+      return [DEFAULT_PROFESSIONAL, DEFAULT_WORKER];
+    }
+    const parsed = JSON.parse(stored);
+    return parsed.length ? parsed : [DEFAULT_PROFESSIONAL, DEFAULT_WORKER];
+  } catch (error) {
+    console.error('Unable to read partners storage', error);
+    return [DEFAULT_PROFESSIONAL, DEFAULT_WORKER];
+  }
+}
+
+export function savePartners(partners) {
+  if (typeof window === 'undefined') return;
+  window.localStorage.setItem(PARTNERS_STORAGE_KEY, JSON.stringify(partners));
+}
+
+export function getStoredPartnerSession() {
+  if (typeof window === 'undefined') return null;
+  try {
+    const stored = window.localStorage.getItem(PARTNER_SESSION_STORAGE_KEY);
+    if (!stored) return null;
+    const parsed = JSON.parse(stored);
+    return parsed && isSessionValid(parsed) ? parsed : null;
+  } catch (error) {
+    console.error('Unable to read partner session', error);
+    return null;
+  }
+}
+
+export function savePartnerSession(partner) {
+  if (typeof window === 'undefined' || !partner) return;
+  const session = {
+    user: partner,
+    token: `saathapp-partner-session-${partner.id}-${Date.now()}`,
+    expiresAt: Date.now() + AUTH_SESSION_TTL_MS,
+  };
+  window.localStorage.setItem(PARTNER_SESSION_STORAGE_KEY, JSON.stringify(session));
+}
+
+export function clearPartnerSession() {
+  if (typeof window === 'undefined') return;
+  window.localStorage.removeItem(PARTNER_SESSION_STORAGE_KEY);
+}
+
+export async function registerPartner(partners, partnerData) {
+  const normalizedEmail = partnerData.email.trim().toLowerCase();
+  const normalizedPhone = partnerData.phone.replace(/\D/g, '');
+  const existing = partners.find((entry) => entry.email?.toLowerCase() === normalizedEmail || entry.phone?.replace(/\D/g, '') === normalizedPhone);
+  if (existing) {
+    return { success: false, message: 'An account with this email or phone already exists.' };
+  }
+
+  const passwordHash = await hashPassword(partnerData.password);
+  const newPartner = {
+    id: `partner-${Date.now()}`,
+    name: partnerData.name.trim(),
+    phone: partnerData.phone.trim(),
+    email: normalizedEmail,
+    passwordHash,
+    category: partnerData.category || 'General',
+    experience: partnerData.experience || '1 Year',
+    role: partnerData.role, // 'professional' or 'worker'
+    status: 'pending', // Registration starts as pending KYC verification
+    createdAt: new Date().toISOString(),
+  };
+
+  const nextPartners = [...partners, newPartner];
+  savePartners(nextPartners);
+  return { success: true, partner: newPartner, partners: nextPartners };
+}
+
+export async function authenticatePartner(partners, { identifier, password, role }) {
+  const normalizedIdentifier = identifier.trim().toLowerCase();
+  const normalizedPhone = identifier.replace(/\D/g, '');
+
+  const existing = partners.find((entry) => {
+    const entryEmail = entry.email?.toLowerCase();
+    const entryPhone = entry.phone?.replace(/\D/g, '');
+    const matchesRole = entry.role === role;
+    return matchesRole && (entryEmail === normalizedIdentifier || entryPhone === normalizedPhone);
+  });
+
+  if (!existing) {
+    return { success: false, reason: 'not_found' };
+  }
+
+  // Check demo password bypass
+  if (existing.passwordHash === '') {
+    // For demo user, allow password bypass (any password or 'password')
+    return { success: true, partner: { ...existing, lastLogin: new Date().toISOString() } };
+  }
+
+  const passwordHash = await hashPassword(password);
+  if (existing.passwordHash !== passwordHash) {
+    return { success: false, reason: 'wrong_password' };
+  }
+
+  return { success: true, partner: { ...existing, lastLogin: new Date().toISOString() } };
+}
+
+export function updatePartnerStatus(partners, partnerId, status) {
+  const nextPartners = partners.map((entry) => (entry.id === partnerId ? { ...entry, status } : entry));
+  savePartners(nextPartners);
+  return nextPartners;
+}
+

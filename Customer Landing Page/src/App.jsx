@@ -35,14 +35,30 @@ import FaqPage from './pages/Faq';
 import LocationPage from './pages/LocationPage';
 import AddAddressPage from './pages/AddAddressPage';
 import ServiceProfessionalPage from './pages/ServiceProfessional';
+import ServiceWorkerPage from './pages/ServiceWorker';
 import ProfessionalDashboardPage from './pages/professional/Dashboard';
+import ProfessionalLoginPage from './pages/professional/Login';
+import ProfessionalRegisterPage from './pages/professional/Register';
 import WorkerDashboardPage from './pages/worker/Dashboard';
+import WorkerLoginPage from './pages/worker/Login';
+import WorkerRegisterPage from './pages/worker/Register';
 import HelpCenterPage from './pages/HelpCenter/HelpCenterPage';
 import VerifiedSellersPage from "./pages/trust/VerifiedSellers";
 import SecureOnlinePaymentsPage from "./pages/trust/SecureOnlinePayments";
 import PrivacyProtectedPage from "./pages/trust/PrivacyProtected";
 import CustomerSupportPage from "./pages/trust/CustomerSupport";
-import { getStoredUsers, registerUser, authenticateUser, resetPassword as resetAuthPassword, getStoredAuthSession, saveAuthSession, clearAuthSession, isSessionValid } from './services/authService';
+import {
+  getStoredUsers,
+  registerUser,
+  authenticateUser,
+  resetPassword as resetAuthPassword,
+  getStoredAuthSession,
+  saveAuthSession,
+  clearAuthSession,
+  isSessionValid,
+  getStoredPartnerSession,
+  clearPartnerSession
+} from './services/authService';
 
 export default function App() {
   const routerLocation = useLocation();
@@ -318,6 +334,7 @@ export default function App() {
 
   const handleLogout = () => {
     clearAuthSession();
+    clearPartnerSession();
     setIsAuthenticated(false);
     setUser(null);
     setAuthView('login');
@@ -335,7 +352,23 @@ export default function App() {
   }
 
   const trustRoutes = ['/verified-sellers', '/secure-online-payments', '/privacy-protected', '/customer-support'];
-  const isPublicRoute = routerLocation.pathname === '/' || routerLocation.pathname === '/about' || routerLocation.pathname === '/service-warranty' || routerLocation.pathname === '/our-story' || routerLocation.pathname === '/faq' || routerLocation.pathname === '/login' || routerLocation.pathname === '/signup' || routerLocation.pathname === '/service-professional' || routerLocation.pathname === '/professional/dashboard' || routerLocation.pathname === '/worker/dashboard' || routerLocation.pathname === '/help-center' || trustRoutes.includes(routerLocation.pathname);
+  const partnerRoutes = [
+    '/become-professional', '/become-worker',
+    '/professional/login', '/professional/register',
+    '/worker/login', '/worker/register',
+    '/professional/dashboard', '/worker/dashboard'
+  ];
+  const isPublicRoute = routerLocation.pathname === '/' ||
+    routerLocation.pathname === '/about' ||
+    routerLocation.pathname === '/service-warranty' ||
+    routerLocation.pathname === '/our-story' ||
+    routerLocation.pathname === '/faq' ||
+    routerLocation.pathname === '/login' ||
+    routerLocation.pathname === '/signup' ||
+    routerLocation.pathname === '/service-professional' ||
+    routerLocation.pathname === '/help-center' ||
+    partnerRoutes.includes(routerLocation.pathname) ||
+    trustRoutes.includes(routerLocation.pathname);
 
   if (routerLocation.pathname === '/help-center') {
     return <HelpCenterPage />;
@@ -361,7 +394,38 @@ export default function App() {
     return <DeliveryPartnerAgreementPage isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} />;
   }
 
-  if (routerLocation.pathname === '/service-professional') {
+  if (routerLocation.pathname === '/become-worker') {
+    return (
+      <ServiceWorkerPage
+        cartCount={cartCount}
+        location={location}
+        darkMode={darkMode}
+        toggleDarkMode={() => setDarkMode((v) => !v)}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        onProfile={() => navigate('/profile')}
+      />
+    );
+  }
+
+  if (routerLocation.pathname === '/professional/login') {
+    return <ProfessionalLoginPage darkMode={darkMode} onBack={() => navigate('/become-professional')} />;
+  }
+
+  if (routerLocation.pathname === '/professional/register') {
+    return <ProfessionalRegisterPage />;
+  }
+
+  if (routerLocation.pathname === '/worker/login') {
+    return <WorkerLoginPage darkMode={darkMode} onBack={() => navigate('/become-worker')} />;
+  }
+
+  if (routerLocation.pathname === '/worker/register') {
+    return <WorkerRegisterPage />;
+  }
+
+  if (routerLocation.pathname === '/service-professional' || routerLocation.pathname === '/become-professional') {
     return (
       <ServiceProfessionalPage
         cartItems={cartItems}
@@ -426,6 +490,10 @@ export default function App() {
   }
 
   if (routerLocation.pathname === '/professional/dashboard') {
+    const session = getStoredPartnerSession();
+    if (!session || session.user.role !== 'professional') {
+      return <ProfessionalLoginPage darkMode={darkMode} onBack={() => navigate('/become-professional')} />;
+    }
     return (
       <ProfessionalDashboardPage
         darkMode={darkMode}
@@ -437,6 +505,10 @@ export default function App() {
   }
 
   if (routerLocation.pathname === '/worker/dashboard') {
+    const session = getStoredPartnerSession();
+    if (!session || session.user.role !== 'worker') {
+      return <WorkerLoginPage darkMode={darkMode} onBack={() => navigate('/become-worker')} />;
+    }
     return (
       <WorkerDashboardPage
         darkMode={darkMode}
@@ -581,6 +653,14 @@ export default function App() {
         onBecomePartnerSelect={(role) => {
           if (role === 'Become Delivery Agent') {
             navigate('/become-delivery-partner');
+            return;
+          }
+          if (role === 'Become a Service Professional') {
+            navigate('/become-professional');
+            return;
+          }
+          if (role === 'Become a Service Worker') {
+            navigate('/become-worker');
             return;
           }
           alert(`Partner application loading for: ${role}`);
