@@ -4,10 +4,18 @@ import {
   ArrowLeft, Bell, Heart, ShoppingBag, MapPin, Settings, Wallet, ShieldCheck,
   LogOut, Pencil, Sparkles, Globe, CreditCard, Gift, RefreshCw, Shield,
   HelpCircle, FileText, Info, ArrowRight, User, Trash2, CheckCircle2,
-  Lock, KeyRound, Eye, Plus, Check, Moon, Sun, Smartphone, Laptop, Calendar, Search
+  Lock, KeyRound, Eye, Plus, Check, Moon, Sun, Smartphone, Laptop, Calendar, Search,
+  Wrench, Star, ShoppingCart
 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
+
+// Import customer dashboard sub-tabs
+import ServicesTab from '../components/customer/ServicesTab';
+import WishlistTab from '../components/customer/WishlistTab';
+import CartTab from '../components/customer/CartTab';
+import PaymentsTab from '../components/customer/PaymentsTab';
+import ReviewsTab from '../components/customer/ReviewsTab';
 
 // ==========================================
 // 1. LOCAL STORAGE MOCK DATABASE INITIALIZER
@@ -96,6 +104,26 @@ export default function Profile({ user, onBack, onLogout }) {
   const [notifications, setNotifications] = useState([]);
   const [tickets, setTickets] = useState([]);
   
+  // Custom states for new tabs
+  const [wishlist, setWishlist] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [reviewsList, setReviewsList] = useState([]);
+  const [servicesFilter, setServicesFilter] = useState('All');
+  const [servicesSearch, setServicesSearch] = useState('');
+  
+  // Booking modal states
+  const [showBookingFormModal, setShowBookingFormModal] = useState(false);
+  const [selectedServiceToBook, setSelectedServiceToBook] = useState(null);
+  const [bookingDate, setBookingDate] = useState('');
+  const [bookingTime, setBookingTime] = useState('09:00 AM - 11:00 AM');
+  const [bookingDesc, setBookingDesc] = useState('');
+  
+  // Review modal states
+  const [showReviewFormModal, setShowReviewFormModal] = useState(false);
+  const [selectedBookingToReview, setSelectedBookingToReview] = useState(null);
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewText, setReviewText] = useState('');
+  
   // App States
   const [isLoading, setIsLoading] = useState(true);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -120,10 +148,10 @@ export default function Profile({ user, onBack, onLogout }) {
     return () => window.removeEventListener('resize', handleResize);
   }, [activeTab]);
 
-  // Load and refresh state from Mock DB
+  // Initial data loader
   const loadData = () => {
     initMockDB(user);
-    setProfile(JSON.parse(localStorage.getItem('saath_profile')));
+    setProfile(JSON.parse(localStorage.getItem('saath_profile') || '{}'));
     setWalletBalance(parseFloat(localStorage.getItem('saath_wallet_balance') || '0.00'));
     setOrders(JSON.parse(localStorage.getItem('saath_orders') || '[]'));
     setTransactions(JSON.parse(localStorage.getItem('saath_transactions') || '[]'));
@@ -132,6 +160,28 @@ export default function Profile({ user, onBack, onLogout }) {
     setRewards(JSON.parse(localStorage.getItem('saath_rewards') || '{"points":0,"history":[]}'));
     setNotifications(JSON.parse(localStorage.getItem('saath_notifications') || '[]'));
     setTickets(JSON.parse(localStorage.getItem('saath_tickets') || '[]'));
+    
+    // Initialize custom states
+    if (!localStorage.getItem('saath_wishlist')) {
+      localStorage.setItem('saath_wishlist', JSON.stringify([
+        { id: 'w-1', name: 'Syska LED Bulb 9W', price: 120, image: '💡', desc: 'Energy efficient LED bulb with 2 years warranty.' },
+        { id: 'w-2', name: 'Cumi Grinding Wheel', price: 450, image: '⚙️', desc: 'Premium wheel for angle grinders.' }
+      ]));
+    }
+    if (!localStorage.getItem('saath_cart')) {
+      localStorage.setItem('saath_cart', JSON.stringify([
+        { id: 'c-1', name: 'Premium Copper Wire 90m', price: 1599, count: 1, image: '🔌' },
+        { id: 'c-2', name: 'Tap Connector Brass', price: 180, count: 2, image: '🚰' }
+      ]));
+    }
+    if (!localStorage.getItem('saath_user_reviews')) {
+      localStorage.setItem('saath_user_reviews', JSON.stringify([
+        { id: 'rev-1', serviceName: 'Living Room Painting', rating: 5, date: 'July 15, 2026', text: 'Excellent job by Vijay Painters! Very neat work.' }
+      ]));
+    }
+    setWishlist(JSON.parse(localStorage.getItem('saath_wishlist') || '[]'));
+    setCart(JSON.parse(localStorage.getItem('saath_cart') || '[]'));
+    setReviewsList(JSON.parse(localStorage.getItem('saath_user_reviews') || '[]'));
   };
 
   useEffect(() => {
@@ -313,12 +363,16 @@ export default function Profile({ user, onBack, onLogout }) {
               {[
                 { tab: 'dashboard', label: t('dashboard'), icon: Laptop },
                 { tab: 'orders', label: t('orders'), icon: ShoppingBag },
+                { tab: 'services', label: 'Services', icon: Wrench },
                 { tab: 'bookings', label: t('bookings'), icon: Calendar },
-                { tab: 'wallet', label: t('wallet'), icon: Wallet },
-                { tab: 'rewards', label: t('rewards'), icon: Gift },
+                { tab: 'wishlist', label: 'Wishlist', icon: Heart },
+                { tab: 'cart', label: 'Cart', icon: ShoppingCart },
                 { tab: 'addresses', label: t('saved_addresses'), icon: MapPin },
-                { tab: 'notifications', label: t('notifications'), icon: Bell },
+                { tab: 'payments', label: 'Payments', icon: CreditCard },
+                { tab: 'wallet', label: t('wallet'), icon: Wallet },
+                { tab: 'reviews', label: 'Reviews', icon: Star },
                 { tab: 'support', label: t('customer_support'), icon: HelpCircle },
+                { tab: 'notifications', label: t('notifications'), icon: Bell },
                 { tab: 'profile', label: t('profile'), icon: User },
                 { tab: 'settings', label: t('settings'), icon: Settings },
               ].map((item) => {
@@ -1293,6 +1347,60 @@ export default function Profile({ user, onBack, onLogout }) {
                     </div>
 
                   </div>
+                )}
+
+                {activeTab === 'services' && (
+                  <ServicesTab
+                    bookings={bookings}
+                    setBookings={setBookings}
+                    walletBalance={walletBalance}
+                    setWalletBalance={setWalletBalance}
+                    transactions={transactions}
+                    setTransactions={setTransactions}
+                    orders={orders}
+                    setOrders={setOrders}
+                    setActiveTab={setActiveTab}
+                  />
+                )}
+
+                {activeTab === 'wishlist' && (
+                  <WishlistTab
+                    wishlist={wishlist}
+                    setWishlist={setWishlist}
+                    cart={cart}
+                    setCart={setCart}
+                  />
+                )}
+
+                {activeTab === 'cart' && (
+                  <CartTab
+                    cart={cart}
+                    setCart={setCart}
+                    walletBalance={walletBalance}
+                    setWalletBalance={setWalletBalance}
+                    orders={orders}
+                    setOrders={setOrders}
+                    transactions={transactions}
+                    setTransactions={setTransactions}
+                    setActiveTab={setActiveTab}
+                  />
+                )}
+
+                {activeTab === 'payments' && (
+                  <PaymentsTab
+                    orders={orders}
+                    transactions={transactions}
+                    walletBalance={walletBalance}
+                    setShowAddMoneyModal={setShowAddMoneyModal}
+                  />
+                )}
+
+                {activeTab === 'reviews' && (
+                  <ReviewsTab
+                    bookings={bookings}
+                    reviewsList={reviewsList}
+                    setReviewsList={setReviewsList}
+                  />
                 )}
 
               </motion.div>
