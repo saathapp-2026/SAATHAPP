@@ -35,7 +35,8 @@ import FaqPage from './pages/Faq';
 import LocationPage from './pages/LocationPage';
 import AddAddressPage from './pages/AddAddressPage';
 import ServiceProfessionalPage from './pages/ServiceProfessional';
-import ServiceWorkerPage from './pages/ServiceWorker';
+import CustomerPortal from './pages/customer/CustomerPortal';
+import WorkerPortal from './pages/worker/WorkerPortal';
 import ProfessionalLoginPage from './pages/professional/Login';
 import ProfessionalRegisterPage from './pages/professional/Register';
 import WorkerLoginPage from './pages/worker/Login';
@@ -346,7 +347,7 @@ export default function App() {
 
   const trustRoutes = ['/verified-sellers', '/secure-online-payments', '/privacy-protected', '/customer-support'];
   const partnerRoutes = [
-    '/service-professional', '/become-professional', '/become-worker',
+    '/service-professional', '/become-professional', '/become-worker', '/customer',
     '/professional/login', '/professional/register', '/worker/login', '/worker/register',
     '/professional/dashboard', '/worker/dashboard'
   ];
@@ -452,29 +453,30 @@ export default function App() {
 
   if (routerLocation.pathname === '/become-worker') {
     return (
-      <ServiceWorkerPage
+      <WorkerPortal
         cartCount={cartCount}
-        location={location}
-        darkMode={darkMode}
-        isAuthenticated={isAuthenticated}
-        user={user}
+        cartItems={cartItems}
+        cartTotal={cartTotal}
         onCartClick={() => setIsCartOpen(true)}
-        onLocationClick={() => setIsLocationModalOpen(true)}
-        onSearch={(query) => {
-          setSearchQuery(query);
-          navigate('/');
-        }}
-        onLogin={() => {
-          setAuthView('login');
-          navigate('/login');
-        }}
-        onSignup={() => {
-          setAuthView('signup');
-          navigate('/signup');
-        }}
-        onLogout={handleLogout}
-        onProfile={() => navigate('/profile')}
+        darkMode={darkMode}
         toggleDarkMode={() => setDarkMode((v) => !v)}
+        user={user}
+        onLogout={handleLogout}
+      />
+    );
+  }
+
+  if (routerLocation.pathname === '/customer') {
+    return (
+      <CustomerPortal
+        cartCount={cartCount}
+        cartItems={cartItems}
+        cartTotal={cartTotal}
+        onCartClick={() => setIsCartOpen(true)}
+        darkMode={darkMode}
+        toggleDarkMode={() => setDarkMode((v) => !v)}
+        user={user}
+        onLogout={handleLogout}
       />
     );
   }
@@ -664,6 +666,10 @@ export default function App() {
           document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
         }}
         onBecomePartnerSelect={(role) => {
+          if (role === 'Become a Customer') {
+            navigate('/customer');
+            return;
+          }
           if (role === 'Become a Service Professional') {
             navigate('/become-professional');
             return;

@@ -292,110 +292,138 @@ export default function Home({
               );
             })()}
 
-            {/* 👤 Customer Dashboard Glassmorphic Section */}
-            <motion.div
-              onClick={() => {
-                if (isAuthenticated) {
-                  navigate('/customer/dashboard');
-                } else {
-                  navigate('/login', { state: { from: '/customer/dashboard' } });
-                }
-              }}
-              whileHover={{ y: -8, scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className="mt-6 relative overflow-hidden cursor-pointer rounded-card bg-gradient-to-br from-indigo-600 via-[#6C3BFF] to-[#FF5A7A] p-8 sm:p-12 border-0 shadow-premium hover:shadow-glow-primary transition-all flex flex-col md:flex-row items-center justify-between gap-8 group"
-            >
-              {/* Background glowing gradients */}
-              <div className="absolute top-0 right-0 -mr-24 -mt-24 w-80 h-80 rounded-full bg-white/10 blur-3xl group-hover:scale-110 transition-transform duration-700 pointer-events-none" />
-              <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-80 h-80 rounded-full bg-white/10 blur-3xl group-hover:scale-110 transition-transform duration-700 pointer-events-none" />
+            {/* 👤 Customer Portal / Dashboard Section */}
+            {(() => {
+              const hasCustSession = isAuthenticated; // customer session active
               
-              {/* Left Side Info */}
-              <div className="flex-1 space-y-6 text-left relative z-10">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 border border-white/20">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-300 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-400" />
-                  </span>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-white">👤 {t('profile')} / {t('dashboard')}</span>
-                </div>
-                
-                <div className="space-y-3">
-                  <h3 className="text-2xl sm:text-4xl font-black text-white leading-tight drop-shadow-md">
-                    Customer Dashboard
-                  </h3>
-                  <p className="text-sm sm:text-base text-white/90 font-medium leading-relaxed max-w-2xl drop-shadow">
-                    Manage your orders, bookings, wallet, addresses, profile, rewards and settings from one place.
-                  </p>
-                </div>
-                
-                {/* Buttons */}
-                <div className="flex flex-wrap items-center gap-4 pt-2">
-                  <motion.button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      if (isAuthenticated) {
-                        navigate('/customer/dashboard');
-                      } else {
-                        navigate('/login', { state: { from: '/customer/dashboard' } });
-                      }
-                    }}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="py-3 px-6 rounded-btn bg-white hover:bg-slate-100 text-[#6C3BFF] font-extrabold text-xs sm:text-sm flex items-center gap-2 cursor-pointer shadow-lg transition-colors border-0"
-                  >
-                    <span>Go to Dashboard</span>
-                    <span className="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
-                  </motion.button>
+              return (
+                <motion.div
+                  onClick={() => navigate(hasCustSession ? '/customer/dashboard' : '/customer')}
+                  whileHover={{ y: -8, scale: 1.01 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="mt-6 relative overflow-hidden cursor-pointer rounded-card bg-gradient-to-br from-indigo-600 via-[#6C3BFF] to-[#FF5A7A] p-8 sm:p-12 border-0 shadow-premium hover:shadow-glow-primary transition-all flex flex-col md:flex-row items-center justify-between gap-8 group"
+                >
+                  {/* Background glowing gradients */}
+                  <div className="absolute top-0 right-0 -mr-24 -mt-24 w-80 h-80 rounded-full bg-white/10 blur-3xl group-hover:scale-110 transition-transform duration-700 pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-80 h-80 rounded-full bg-white/10 blur-3xl group-hover:scale-110 transition-transform duration-700 pointer-events-none" />
                   
-                  <motion.button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      alert('SaathApp Customer Dashboard allows you to manage purchases, schedule on-demand home repairs, check rewards balance, and update default profile addresses.');
-                    }}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="py-3 px-6 rounded-btn border border-white/30 bg-white/10 text-white font-extrabold text-xs sm:text-sm cursor-pointer hover:bg-white/20 transition-colors"
-                  >
-                    Learn More
-                  </motion.button>
-                </div>
-              </div>
+                  {/* Left Side Info */}
+                  <div className="flex-1 space-y-6 text-left relative z-10">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 border border-white/20">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-300 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-400" />
+                      </span>
+                      <span className="text-[10px] font-black uppercase tracking-wider text-white">👤 {hasCustSession ? 'Customer Portal Active' : 'Become a Customer'}</span>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <h3 className="text-2xl sm:text-4xl font-black text-white leading-tight drop-shadow-md">
+                        {hasCustSession ? 'Customer Dashboard' : 'Become a Customer'}
+                      </h3>
+                      <p className="text-sm sm:text-base text-white/90 font-medium leading-relaxed max-w-2xl drop-shadow">
+                        {hasCustSession 
+                          ? 'Manage your orders, bookings, wallet, addresses, profile, rewards and settings from one place.'
+                          : 'Join India\'s trusted hyperlocal convenience network. Shop fresh groceries, book home repair services, and track orders live.'}
+                      </p>
+                    </div>
+                    
+                    {/* Buttons */}
+                    <div className="flex flex-wrap items-center gap-4 pt-2">
+                      {hasCustSession ? (
+                        <>
+                          <motion.button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate('/customer/dashboard');
+                            }}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="py-3 px-6 rounded-btn bg-white hover:bg-slate-100 text-[#6C3BFF] font-extrabold text-xs sm:text-sm flex items-center gap-2 cursor-pointer shadow-lg transition-colors border-0"
+                          >
+                            <span>Go to Dashboard</span>
+                            <span className="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+                          </motion.button>
+                          <motion.button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate('/customer');
+                            }}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="py-3 px-6 rounded-btn border border-white/30 bg-white/10 text-white font-extrabold text-xs sm:text-sm cursor-pointer hover:bg-white/20 transition-colors"
+                          >
+                            Learn More
+                          </motion.button>
+                        </>
+                      ) : (
+                        <>
+                          <motion.button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate('/login', { state: { from: '/customer/dashboard' } });
+                            }}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="py-3 px-6 rounded-btn bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-extrabold text-xs sm:text-sm flex items-center gap-2 cursor-pointer shadow-lg transition-colors border-0"
+                          >
+                            <span>Join Now</span>
+                            <span className="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+                          </motion.button>
+                          <motion.button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate('/customer');
+                            }}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="py-3 px-6 rounded-btn border border-white/30 bg-white/10 text-white font-extrabold text-xs sm:text-sm cursor-pointer hover:bg-white/20 transition-colors"
+                          >
+                            Learn More
+                          </motion.button>
+                        </>
+                      )}
+                    </div>
+                  </div>
 
-              {/* Right Side Illustration */}
-              <div className="relative w-full md:w-80 h-64 flex items-center justify-center shrink-0">
-                {/* Background decorative rings */}
-                <div className="absolute w-48 h-48 rounded-full border border-white/10 animate-spin-slow pointer-events-none" />
-                <div className="absolute w-36 h-36 rounded-full border border-dashed border-white/20 animate-spin pointer-events-none" style={{ animationDuration: '20s' }} />
-                
-                {/* Character Illustration Container */}
-                <div className="relative z-10 w-44 h-44 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-premium group-hover:scale-105 transition-transform duration-500">
-                  <User size={64} className="text-white drop-shadow" />
-                  
-                  {/* Floating helper icons */}
-                  <motion.div 
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                    className="absolute -top-3 -left-3 p-2.5 rounded-xl bg-white text-[#6C3BFF] shadow-premium border border-white/20 flex items-center justify-center"
-                  >
-                    <span className="text-xl leading-none">📦</span>
-                  </motion.div>
-                  <motion.div 
-                    animate={{ y: [0, 8, 0] }}
-                    transition={{ repeat: Infinity, duration: 4, delay: 1, ease: "easeInOut" }}
-                    className="absolute -bottom-3 -right-3 p-2.5 rounded-xl bg-white text-emerald-500 shadow-premium border border-white/20 flex items-center justify-center"
-                  >
-                    <span className="text-xl leading-none">💰</span>
-                  </motion.div>
-                  <motion.div 
-                    animate={{ x: [0, 10, 0] }}
-                    transition={{ repeat: Infinity, duration: 4, delay: 2, ease: "easeInOut" }}
-                    className="absolute top-1/2 -right-6 -translate-y-1/2 p-2.5 rounded-xl bg-white text-rose-500 shadow-premium border border-white/20 flex items-center justify-center"
-                  >
-                    <span className="text-xl leading-none">📍</span>
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
+                  {/* Right Side Illustration */}
+                  <div className="relative w-full md:w-80 h-64 flex items-center justify-center shrink-0">
+                    {/* Background decorative rings */}
+                    <div className="absolute w-48 h-48 rounded-full border border-white/10 animate-spin-slow pointer-events-none" />
+                    <div className="absolute w-36 h-36 rounded-full border border-dashed border-white/20 animate-spin pointer-events-none" style={{ animationDuration: '20s' }} />
+                    
+                    {/* Character Illustration Container */}
+                    <div className="relative z-10 w-44 h-44 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-premium group-hover:scale-105 transition-transform duration-500">
+                      <User size={64} className="text-white drop-shadow" />
+                      
+                      {/* Floating helper icons */}
+                      <motion.div 
+                        animate={{ y: [0, -10, 0] }}
+                        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                        className="absolute -top-3 -left-3 p-2.5 rounded-xl bg-white text-[#6C3BFF] shadow-premium border border-white/20 flex items-center justify-center"
+                      >
+                        <span className="text-xl leading-none">📦</span>
+                      </motion.div>
+                      <motion.div 
+                        animate={{ y: [0, 8, 0] }}
+                        transition={{ repeat: Infinity, duration: 4, delay: 1, ease: "easeInOut" }}
+                        className="absolute -bottom-3 -right-3 p-2.5 rounded-xl bg-white text-emerald-500 shadow-premium border border-white/20 flex items-center justify-center"
+                      >
+                        <span className="text-xl leading-none">💰</span>
+                      </motion.div>
+                      <motion.div 
+                        animate={{ x: [0, 10, 0] }}
+                        transition={{ repeat: Infinity, duration: 4, delay: 2, ease: "easeInOut" }}
+                        className="absolute top-1/2 -right-6 -translate-y-1/2 p-2.5 rounded-xl bg-white text-rose-500 shadow-premium border border-white/20 flex items-center justify-center"
+                      >
+                        <span className="text-xl leading-none">📍</span>
+                      </motion.div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })()}
+
 
             {/* 🚀 Become a Service Worker Glassmorphic Section */}
             {(() => {
