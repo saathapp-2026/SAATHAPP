@@ -35,8 +35,8 @@ import FaqPage from './pages/Faq';
 import LocationPage from './pages/LocationPage';
 import AddAddressPage from './pages/AddAddressPage';
 import ServiceProfessionalPage from './pages/ServiceProfessional';
-import CustomerPortal from './pages/customer/CustomerPortal';
-import WorkerPortal from './pages/worker/WorkerPortal';
+import CustomerPortalPage from './pages/customer/CustomerPortal';
+import WorkerPortalPage from './pages/worker/WorkerPortal';
 import ProfessionalLoginPage from './pages/professional/Login';
 import ProfessionalRegisterPage from './pages/professional/Register';
 import WorkerLoginPage from './pages/worker/Login';
@@ -451,32 +451,146 @@ export default function App() {
     );
   }
 
-  if (routerLocation.pathname === '/become-worker') {
+  if (routerLocation.pathname === '/customer') {
     return (
-      <WorkerPortal
-        cartCount={cartCount}
+      <CustomerPortalPage
         cartItems={cartItems}
+        cartCount={cartCount}
         cartTotal={cartTotal}
-        onCartClick={() => setIsCartOpen(true)}
+        location={location}
+        pincode={pincode}
+        selectedCategory={selectedCategory}
+        searchQuery={searchQuery}
         darkMode={darkMode}
-        toggleDarkMode={() => setDarkMode((v) => !v)}
-        user={user}
+        isCartOpen={isCartOpen}
+        isVoiceModalOpen={isVoiceModalOpen}
+        isImageModalOpen={isImageModalOpen}
+        isLocationModalOpen={isLocationModalOpen}
+        isGpsLoading={isGpsLoading}
+        isListening={isListening}
+        isUploading={isUploading}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/');
+          setTimeout(() => {
+            document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }}
+        onLogin={() => {
+          setAuthView('login');
+          navigate('/login');
+        }}
+        onSignup={() => {
+          setAuthView('signup');
+          navigate('/signup');
+        }}
         onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        onProfile={() => navigate('/profile')}
+        onCartPage={() => {
+          setActivePage('cart');
+          navigate('/');
+        }}
+        onOrdersPage={() => {
+          setActivePage('orders');
+          navigate('/');
+        }}
+        onWishlistPage={() => {
+          setActivePage('wishlist');
+          navigate('/');
+        }}
+        onSettingsPage={() => {
+          setActivePage('settings');
+          navigate('/');
+        }}
+        toggleDarkMode={() => setDarkMode((value) => !value)}
+        onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
+        onImageSearchClick={() => setIsImageModalOpen(true)}
+        onDetectGPS={handleGPSDetect}
+        onAddToCart={handleAddToCart}
+        onCategorySelect={(category) => {
+          setSelectedCategory(category);
+          navigate('/');
+          setTimeout(() => {
+            document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }}
+        onBack={() => navigate('/')}
       />
     );
   }
 
-  if (routerLocation.pathname === '/customer') {
+  if (routerLocation.pathname === '/become-worker') {
     return (
-      <CustomerPortal
-        cartCount={cartCount}
+      <WorkerPortalPage
         cartItems={cartItems}
+        cartCount={cartCount}
         cartTotal={cartTotal}
-        onCartClick={() => setIsCartOpen(true)}
+        location={location}
+        pincode={pincode}
+        selectedCategory={selectedCategory}
+        searchQuery={searchQuery}
         darkMode={darkMode}
-        toggleDarkMode={() => setDarkMode((v) => !v)}
-        user={user}
+        isCartOpen={isCartOpen}
+        isVoiceModalOpen={isVoiceModalOpen}
+        isImageModalOpen={isImageModalOpen}
+        isLocationModalOpen={isLocationModalOpen}
+        isGpsLoading={isGpsLoading}
+        isListening={isListening}
+        isUploading={isUploading}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/');
+          setTimeout(() => {
+            document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }}
+        onLogin={() => {
+          setAuthView('login');
+          navigate('/login');
+        }}
+        onSignup={() => {
+          setAuthView('signup');
+          navigate('/signup');
+        }}
         onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        onProfile={() => navigate('/profile')}
+        onCartPage={() => {
+          setActivePage('cart');
+          navigate('/');
+        }}
+        onOrdersPage={() => {
+          setActivePage('orders');
+          navigate('/');
+        }}
+        onWishlistPage={() => {
+          setActivePage('wishlist');
+          navigate('/');
+        }}
+        onSettingsPage={() => {
+          setActivePage('settings');
+          navigate('/');
+        }}
+        toggleDarkMode={() => setDarkMode((value) => !value)}
+        onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
+        onImageSearchClick={() => setIsImageModalOpen(true)}
+        onDetectGPS={handleGPSDetect}
+        onAddToCart={handleAddToCart}
+        onCategorySelect={(category) => {
+          setSelectedCategory(category);
+          navigate('/');
+          setTimeout(() => {
+            document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }}
+        onBack={() => navigate('/')}
       />
     );
   }
@@ -666,10 +780,6 @@ export default function App() {
           document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
         }}
         onBecomePartnerSelect={(role) => {
-          if (role === 'Become a Customer') {
-            navigate('/customer');
-            return;
-          }
           if (role === 'Become a Service Professional') {
             navigate('/become-professional');
             return;

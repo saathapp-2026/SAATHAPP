@@ -52,14 +52,6 @@ const partners = [
     shadow: 'hover-glow-green'
   },
   {
-    title: 'Become a Customer',
-    description: 'Join India\'s trusted hyperlocal convenience network. Shop fresh groceries, book home repair services, and track orders live.',
-    cta: 'Become Customer',
-    icon: Store,
-    gradient: 'from-[#6C3BFF] to-[#FF5A7A]',
-    shadow: 'hover-glow-blue'
-  },
-  {
     title: 'Become a Wholesaler (Sale in Bulk)',
     description: 'Supply products in bulk to retailers and businesses. Expand your reach with SaathApp wholesale marketplace.',
     cta: 'Register Wholesale',
