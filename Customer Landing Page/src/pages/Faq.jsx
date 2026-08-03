@@ -268,7 +268,7 @@ export default function Faq({ onBack, isAuthenticated = false, user = null, dark
           className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/95 px-4 py-2 text-sm font-semibold text-slate-700 shadow-lg backdrop-blur"
         >
           <ArrowLeft size={16} />
-          Back to Home
+          Back
         </motion.button>
       </div>
 

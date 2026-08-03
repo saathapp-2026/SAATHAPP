@@ -131,20 +131,8 @@ export default function ServiceProfessionalPage({
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    setApplyFormSubmitted(true);
-    setTimeout(() => {
-      setShowApplyModal(false);
-      setApplyFormSubmitted(false);
-      setFormData({
-        fullName: '',
-        phone: '',
-        city: '',
-        category: 'Electrician',
-        experience: '1-3 Years',
-        terms: true
-      });
-      alert('Application simulation submitted successfully! An agent will contact you shortly.');
-    }, 2500);
+    setShowApplyModal(false);
+    navigate('/professional/register');
   };
 
   // Badges array for Section 1 Hero illustration
@@ -237,7 +225,7 @@ export default function ServiceProfessionalPage({
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-500 hover:text-primary transition-colors cursor-pointer"
           >
             <ArrowLeft size={16} />
-            <span>Back to Home</span>
+            <span>Back</span>
           </motion.button>
         </div>
 

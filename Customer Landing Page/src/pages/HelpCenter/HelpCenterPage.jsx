@@ -20,7 +20,7 @@ export default function HelpCenterPage() {
     <div className="min-h-screen bg-[#f8faf9] text-slate-900 overflow-x-hidden">
       <Navbar />
 
-      {/* Sub-header Bar Below Navbar with Back to Home Button & Breadcrumb */}
+      {/* Sub-header Bar Below Navbar with Back Button & Breadcrumb */}
       <div className="bg-white border-b border-[#E2E8F0] py-3.5 px-4 sm:px-8 shadow-xs">
         <div className="saas-container flex flex-wrap items-center justify-between gap-3">
           <Link
@@ -42,7 +42,7 @@ export default function HelpCenterPage() {
             "
           >
             <ArrowLeft size={16} />
-            <span>Back to Home</span>
+            <span>Back</span>
           </Link>
 
           {/* Breadcrumb Indicator */}

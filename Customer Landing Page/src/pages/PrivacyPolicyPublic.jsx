@@ -497,7 +497,7 @@ export default function PrivacyPolicyPublicPage() {
               className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-white"
             >
               <ArrowLeft size={16} />
-              Back to Home
+              Back
             </Link>
           </div>
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1.5 text-sm font-semibold text-primary shadow-sm">
@@ -574,7 +574,7 @@ export default function PrivacyPolicyPublicPage() {
             className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100"
           >
             <ArrowLeft size={16} />
-            Back to Home
+            Back
           </Link>
         </div>
       </div>

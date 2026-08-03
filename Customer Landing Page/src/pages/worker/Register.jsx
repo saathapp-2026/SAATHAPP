@@ -104,7 +104,7 @@ export default function WorkerRegisterPage() {
             onClick={() => step === 2 ? setStep(1) : navigate('/')}
             className="inline-flex items-center gap-1 text-xs font-black uppercase text-slate-400 hover:text-white mb-6 border-0 bg-transparent cursor-pointer"
           >
-            <ArrowLeft size={12} /> {step === 2 ? 'Back to Step 1' : 'Back to Home'}
+            <ArrowLeft size={12} /> {step === 2 ? 'Back to Step 1' : 'Back'}
           </button>
         )}
 

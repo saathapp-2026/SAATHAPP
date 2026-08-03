@@ -6,7 +6,7 @@ export default function Cart({ onBack }) {
     <div className="min-h-screen bg-slate-50 px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
         <button onClick={onBack} className="flex items-center gap-2 text-sm font-semibold text-slate-600">
-          <ArrowLeft size={16} /> Back to home
+          <ArrowLeft size={16} /> Back
         </button>
         <div className="mt-8 flex flex-col items-center justify-center rounded-[24px] border border-dashed border-slate-300 bg-slate-50 px-6 py-16 text-center">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">

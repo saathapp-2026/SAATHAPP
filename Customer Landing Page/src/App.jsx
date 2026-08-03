@@ -39,6 +39,12 @@ import CustomerPortalPage from './pages/customer/CustomerPortal';
 import WorkerPortalPage from './pages/worker/WorkerPortal';
 import ProfessionalLoginPage from './pages/professional/Login';
 import ProfessionalRegisterPage from './pages/professional/Register';
+import ProfessionalOnboardingFeePage from './pages/professional/OnboardingFee';
+import ProfessionalPaymentSuccessPage from './pages/professional/PaymentSuccess';
+import ProfessionalReviewPage from './pages/professional/Review';
+import ProfessionalSubmittedPage from './pages/professional/Submitted';
+import ProfessionalTermsPage from './pages/professional/TermsAndConditions';
+import { ProfessionalOnboardingProvider } from './context/ProfessionalOnboardingContext';
 import WorkerLoginPage from './pages/worker/Login';
 import WorkerRegisterPage from './pages/worker/Register';
 import ProfessionalDashboardPage from './pages/professional/Dashboard';
@@ -48,6 +54,7 @@ import VerifiedSellersPage from "./pages/trust/VerifiedSellers";
 import SecureOnlinePaymentsPage from "./pages/trust/SecureOnlinePayments";
 import PrivacyProtectedPage from "./pages/trust/PrivacyProtected";
 import CustomerSupportPage from "./pages/trust/CustomerSupport";
+import SellerRoutes from './pages/seller/SellerRoutes';
 import { 
   getStoredUsers, registerUser, authenticateUser, resetPassword as resetAuthPassword, 
   getStoredAuthSession, saveAuthSession, clearAuthSession, isSessionValid,
@@ -347,10 +354,13 @@ export default function App() {
 
   const trustRoutes = ['/verified-sellers', '/secure-online-payments', '/privacy-protected', '/customer-support'];
   const partnerRoutes = [
-    '/service-professional', '/become-professional', '/become-worker', '/customer',
-    '/professional/login', '/professional/register', '/worker/login', '/worker/register',
+    '/service-professional', '/become-professional', '/professional', '/become-worker', '/customer',
+    '/professional/login', '/professional/register', '/professional/onboarding-fee',
+    '/professional/payment-success', '/professional/review', '/professional/submitted',
+    '/professional/terms', '/worker/login', '/worker/register',
     '/professional/dashboard', '/worker/dashboard'
   ];
+  const isSellerRoute = routerLocation.pathname.startsWith('/seller');
   const isPublicRoute = routerLocation.pathname === '/' || 
                         routerLocation.pathname === '/about' || 
                         routerLocation.pathname === '/service-warranty' || 
@@ -360,8 +370,13 @@ export default function App() {
                         routerLocation.pathname === '/signup' || 
                         routerLocation.pathname === '/help-center' || 
                         partnerRoutes.includes(routerLocation.pathname) || 
-                        trustRoutes.includes(routerLocation.pathname);
+                        trustRoutes.includes(routerLocation.pathname) ||
+                        isSellerRoute;
 
+
+  if (isSellerRoute) {
+    return <SellerRoutes />;
+  }
 
   if (routerLocation.pathname === '/help-center') {
     return <HelpCenterPage />;
@@ -387,7 +402,11 @@ export default function App() {
     return <DeliveryPartnerAgreementPage isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} />;
   }
 
-  if (routerLocation.pathname === '/service-professional' || routerLocation.pathname === '/become-professional') {
+  if (
+    routerLocation.pathname === '/service-professional'
+    || routerLocation.pathname === '/become-professional'
+    || routerLocation.pathname === '/professional'
+  ) {
     return (
       <ServiceProfessionalPage
         cartItems={cartItems}
@@ -599,8 +618,29 @@ export default function App() {
     return <ProfessionalLoginPage />;
   }
 
-  if (routerLocation.pathname === '/professional/register') {
-    return <ProfessionalRegisterPage />;
+  const professionalOnboardingRoutes = [
+    '/professional/register',
+    '/professional/onboarding-fee',
+    '/professional/payment-success',
+    '/professional/review',
+    '/professional/submitted',
+    '/professional/terms',
+  ];
+
+  if (professionalOnboardingRoutes.includes(routerLocation.pathname)) {
+    const pageMap = {
+      '/professional/register': <ProfessionalRegisterPage />,
+      '/professional/onboarding-fee': <ProfessionalOnboardingFeePage />,
+      '/professional/payment-success': <ProfessionalPaymentSuccessPage />,
+      '/professional/review': <ProfessionalReviewPage />,
+      '/professional/submitted': <ProfessionalSubmittedPage />,
+      '/professional/terms': <ProfessionalTermsPage />,
+    };
+    return (
+      <ProfessionalOnboardingProvider>
+        {pageMap[routerLocation.pathname]}
+      </ProfessionalOnboardingProvider>
+    );
   }
 
   if (routerLocation.pathname === '/worker/login') {
@@ -786,6 +826,10 @@ export default function App() {
           }
           if (role === 'Become a Service Worker' || role === 'Become Delivery Agent') {
             navigate('/become-worker');
+            return;
+          }
+          if (role === 'Become a Seller') {
+            navigate('/seller');
             return;
           }
           alert(`Partner application loading for: ${role}`);

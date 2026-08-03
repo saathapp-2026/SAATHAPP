@@ -230,7 +230,7 @@ export default function ServiceWarranty({ onBack, onLogout, isAuthenticated = fa
               className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/95 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:bg-white hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
-              Back to Home
+              Back
             </button>
           </motion.div>
         </div>
@@ -353,7 +353,7 @@ export default function ServiceWarranty({ onBack, onLogout, isAuthenticated = fa
               className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:bg-slate-50 hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
-              Back to Home
+              Back
             </button>
           </motion.div>
         </div>

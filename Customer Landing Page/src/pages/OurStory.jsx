@@ -95,7 +95,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
         onImageSearchClick={() => {}}
       />
 
-      {/* Top Back to Home Button */}
+      {/* Top Back Button */}
       <div className="px-4 pt-6 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-4xl">
           <motion.div whileHover={{ y: -2, scale: 1.01 }} className="inline-flex">
@@ -105,7 +105,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
               className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-4 py-2 text-sm font-semibold text-slate-750 dark:text-slate-300 shadow-sm transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
-              Back to Home
+              Back
             </button>
           </motion.div>
         </div>
@@ -366,7 +366,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
         </div>
       </main>
 
-      {/* Bottom Back to Home Button */}
+      {/* Bottom Back Button */}
       <div className="px-4 pb-8 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-4xl justify-center">
           <motion.div whileHover={{ y: -2, scale: 1.01 }} className="inline-flex">
@@ -376,7 +376,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
               className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-5 py-3 text-sm font-semibold text-slate-700 dark:text-slate-350 shadow-sm transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
-              Back to Home
+              Back
             </button>
           </motion.div>
         </div>

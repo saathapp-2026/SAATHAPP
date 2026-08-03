@@ -335,7 +335,7 @@ export default function DeliveryPartnerAgreement({ isAuthenticated = false, user
         <div className="mb-4 flex flex-wrap items-center gap-3">
           <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100">
             <ArrowLeft size={16} />
-            Back to Home
+            Back
           </Link>
         </div>
 
@@ -490,7 +490,7 @@ export default function DeliveryPartnerAgreement({ isAuthenticated = false, user
         <div className="mt-6 flex flex-wrap items-center gap-3">
           <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100">
             <ArrowLeft size={16} />
-            Back to Home
+            Back
           </Link>
         </div>
       </div>

@@ -65,7 +65,7 @@ export default function ProfessionalLoginPage() {
           onClick={() => navigate('/')}
           className="inline-flex items-center gap-1 text-xs font-black uppercase text-slate-400 hover:text-white mb-6 border-0 bg-transparent cursor-pointer"
         >
-          <ArrowLeft size={12} /> Back to Home
+          <ArrowLeft size={12} /> Back
         </button>
 
         <div className="text-center mb-8">

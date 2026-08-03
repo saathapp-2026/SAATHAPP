@@ -219,7 +219,7 @@ export default function WorkerPortal({
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-500 hover:text-primary transition-colors cursor-pointer"
           >
             <ArrowLeft size={16} />
-            <span>Back to Home</span>
+            <span>Back</span>
           </motion.button>
         </div>
 

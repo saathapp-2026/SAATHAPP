@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "optional": true,
+  "note": "Monthly Professional Membership is completely optional and separate from the One-Time Professional Onboarding Fee.",
+  "welcomeKit": {
+    "eligiblePlans": ["growth", "enterprise"],
+    "label": "Complimentary Professional Welcome Kit",
+    "badge": "FREE — Included with Growth & Enterprise Membership",
+    "deliveryAfter": "successful verification and activation",
+    "items": [
+      "QR Stand",
+      "QR Sticker",
+      "Certificate",
+      "Premium Logo Stickers",
+      "Professional Badge",
+      "Professional ID Card",
+      "Digital Profile",
+      "Verified Badge",
+      "Portfolio Listing",
+      "Welcome Branding Kit"
+    ],
+    "rules": [
+      "Welcome Kit provided only once",
+      "Non-transferable",
+      "Non-exchangeable",
+      "No cash redemption",
+      "Replacement items are chargeable"
+    ]
+  },
+  "plans": [
+    {
+      "id": "free",
+      "name": "Free",
+      "price": 0,
+      "billingCycle": "month",
+      "tagline": "Start after approval without membership",
+      "highlights": ["Basic profile", "Booking access", "Community support"]
+    },
+    {
+      "id": "starter",
+      "name": "Starter",
+      "price": 799,
+      "billingCycle": "month",
+      "tagline": "For growing professionals",
+      "highlights": ["Priority listing boost", "Basic analytics", "WhatsApp support"]
+    },
+    {
+      "id": "growth",
+      "name": "Growth",
+      "price": 2499,
+      "billingCycle": "month",
+      "tagline": "Includes Complimentary Welcome Kit",
+      "recommended": true,
+      "highlights": ["Welcome Kit", "Verified Badge", "Digital Portfolio", "Priority leads"]
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise",
+      "price": 4999,
+      "billingCycle": "month",
+      "tagline": "For agencies and multi-service teams",
+      "highlights": ["Welcome Kit", "Multi-staff tools", "Dedicated support", "Highest priority"]
+    }
+  ]
+}
