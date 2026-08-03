@@ -110,7 +110,15 @@ export default function Footer() {
             <ul className="space-y-3 text-xs font-semibold">
               <li><a href="#" className="hover:text-white transition-colors">Become Seller</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Become a Franchise Partner</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Become a Wholesale</a></li>
+              <li>
+                <Link
+                  to="/wholesale"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Become a Wholesale
+                </Link>
+              </li>
               <li><a href="#" className="hover:text-white transition-colors">Become Service Professional</a></li>
               <li>
                 <Link

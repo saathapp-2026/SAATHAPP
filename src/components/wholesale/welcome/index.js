@@ -1,0 +1,9 @@
+export { default as HeroSection } from './HeroSection';
+export { default as BenefitsSection } from './BenefitsSection';
+export { default as OnboardingTimeSection } from './OnboardingTimeSection';
+export { default as HowItWorksSection } from './HowItWorksSection';
+export { default as StatisticsSection } from './StatisticsSection';
+export { default as WhyChooseSection } from './WhyChooseSection';
+export { default as FAQSection } from './FAQSection';
+export { default as CTASection } from './CTASection';
+export { default as OnboardingPricingSection } from './OnboardingPricingSection';

@@ -80,9 +80,9 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full transition-all duration-300 glass-premium border-b border-slate-200/80 dark:border-slate-800/80 shadow-soft">
+    <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20 gap-4">
+        <div className="flex items-center justify-between h-[72px] gap-4 py-1.5">
           
           {/* Logo & Mobile Menu Toggle */}
           <div className="flex items-center gap-3 shrink-0">
@@ -113,20 +113,20 @@ export default function Header({
           <button
             type="button"
             onClick={() => navigate('/location')}
-            className="hidden md:flex items-center gap-2 rounded-btn border border-slate-200/70 bg-slate-100/90 px-3.5 py-2.5 text-slate-700 shadow-sm transition hover:shadow-md dark:border-slate-700/70 dark:bg-slate-800/70 dark:text-slate-200"
+            className="hidden md:flex items-center gap-2 rounded-btn border border-slate-200/70 bg-slate-100/90 px-3 py-2 text-slate-700 shadow-xs transition hover:shadow-sm dark:border-slate-700/70 dark:bg-slate-800/70 dark:text-slate-200"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <MapPin size={16} />
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <MapPin size={15} />
             </div>
             <div className="text-left">
-              <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">Deliver to</div>
-              <div className="max-w-[220px] truncate text-sm font-semibold text-slate-800 dark:text-slate-100">{location || 'Select Location...'}</div>
+              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Deliver to</div>
+              <div className="max-w-[200px] truncate text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100">{location || 'Select Location...'}</div>
             </div>
             <ChevronDown size={14} className="text-slate-400" />
           </button>
 
           {/* Amazon style Search Bar */}
-          <div ref={searchRef} className="flex-1 max-w-2xl relative z-40">
+          <div ref={searchRef} className="flex-1 max-w-4xl relative z-40">
             <form onSubmit={handleSearchSubmit} className="relative flex items-center">
               <div className="relative w-full">
                 <input

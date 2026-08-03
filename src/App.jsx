@@ -42,6 +42,8 @@ import VerifiedSellersPage from "./pages/trust/VerifiedSellers";
 import SecureOnlinePaymentsPage from "./pages/trust/SecureOnlinePayments";
 import PrivacyProtectedPage from "./pages/trust/PrivacyProtected";
 import CustomerSupportPage from "./pages/trust/CustomerSupport";
+import WholesalePortalPage from "./pages/wholesale/WholesalePortalPage";
+import DeliveryPartnerPortalPage from "./pages/delivery/DeliveryPartnerPortalPage";
 import { getStoredUsers, registerUser, authenticateUser, resetPassword as resetAuthPassword, getStoredAuthSession, saveAuthSession, clearAuthSession, isSessionValid } from './services/authService';
 
 export default function App() {
@@ -335,7 +337,7 @@ export default function App() {
   }
 
   const trustRoutes = ['/verified-sellers', '/secure-online-payments', '/privacy-protected', '/customer-support'];
-  const isPublicRoute = routerLocation.pathname === '/' || routerLocation.pathname === '/about' || routerLocation.pathname === '/service-warranty' || routerLocation.pathname === '/our-story' || routerLocation.pathname === '/faq' || routerLocation.pathname === '/login' || routerLocation.pathname === '/signup' || routerLocation.pathname === '/service-professional' || routerLocation.pathname === '/professional/dashboard' || routerLocation.pathname === '/worker/dashboard' || routerLocation.pathname === '/help-center' || trustRoutes.includes(routerLocation.pathname);
+  const isPublicRoute = routerLocation.pathname === '/' || routerLocation.pathname === '/about' || routerLocation.pathname === '/service-warranty' || routerLocation.pathname === '/our-story' || routerLocation.pathname === '/faq' || routerLocation.pathname === '/login' || routerLocation.pathname === '/signup' || routerLocation.pathname === '/service-professional' || routerLocation.pathname === '/professional/dashboard' || routerLocation.pathname === '/worker/dashboard' || routerLocation.pathname === '/help-center' || routerLocation.pathname.startsWith('/wholesale') || routerLocation.pathname === '/become-a-wholeseller' || routerLocation.pathname === '/become-delivery-partner' || trustRoutes.includes(routerLocation.pathname);
 
   if (routerLocation.pathname === '/help-center') {
     return <HelpCenterPage />;
@@ -467,8 +469,76 @@ export default function App() {
     return <RefundCancellationPolicyPage />;
   }
 
-  if (routerLocation.pathname === '/become-delivery-partner') {
-    return <DeliveryAgentLandingPage />;
+  if (routerLocation.pathname.startsWith('/become-delivery-partner') || routerLocation.pathname.startsWith('/delivery')) {
+    return (
+      <DeliveryPartnerPortalPage
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={() => setDarkMode((value) => !value)}
+        onLogin={() => navigate('/login')}
+        onSignup={() => navigate('/signup')}
+        onProfile={() => navigate('/profile')}
+        onCartPage={() => {
+          setActivePage('cart');
+          navigate('/');
+        }}
+        onOrdersPage={() => {
+          setActivePage('orders');
+          navigate('/');
+        }}
+      />
+    );
+  }
+
+  if (routerLocation.pathname === '/become-a-wholeseller') {
+    navigate('/wholesale', { replace: true });
+    return null;
+  }
+
+  if (routerLocation.pathname.startsWith('/wholesale')) {
+    return (
+      <WholesalePortalPage
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={() => setDarkMode((value) => !value)}
+        onLogin={() => navigate('/login')}
+        onSignup={() => navigate('/signup')}
+        onProfile={() => navigate('/profile')}
+        onCartPage={() => {
+          setActivePage('cart');
+          navigate('/');
+        }}
+        onOrdersPage={() => {
+          setActivePage('orders');
+          navigate('/');
+        }}
+        onWishlistPage={() => {
+          setActivePage('wishlist');
+          navigate('/');
+        }}
+        onSettingsPage={() => {
+          setActivePage('settings');
+          navigate('/');
+        }}
+        onLogout={handleLogout}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/');
+        }}
+        onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
+        onImageSearchClick={() => setIsImageModalOpen(true)}
+      />
+    );
   }
 
   if (routerLocation.pathname === '/verified-sellers') {
@@ -581,6 +651,10 @@ export default function App() {
         onBecomePartnerSelect={(role) => {
           if (role === 'Become Delivery Agent') {
             navigate('/become-delivery-partner');
+            return;
+          }
+          if (role.includes('Wholesale') || role.includes('Wholesaler')) {
+            navigate('/wholesale');
             return;
           }
           alert(`Partner application loading for: ${role}`);
