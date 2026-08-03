@@ -1,0 +1,1217 @@
+{
+  "version": "3.1.0",
+  "validityYears": 2,
+  "renewalPercentage": 50,
+  "feeRangeDisplay": "₹500 – ₹2,00,000",
+  "commissionRangeDisplay": "5–12%",
+  "locationTiers": [
+    {
+      "id": "village",
+      "label": "Village"
+    },
+    {
+      "id": "tier3",
+      "label": "Tier 3 Town"
+    },
+    {
+      "id": "tier2",
+      "label": "Tier 2 City"
+    },
+    {
+      "id": "tier1",
+      "label": "Tier 1 Metro"
+    }
+  ],
+  "categoryGroups": {
+    "home_maintenance": {
+      "label": "Home Maintenance",
+      "categories": [
+        "electrician",
+        "plumber",
+        "carpenter",
+        "mason",
+        "painter",
+        "welder",
+        "fabricator",
+        "tile_installer",
+        "pop_worker",
+        "glass_fitter"
+      ]
+    },
+    "cleaning": {
+      "label": "Cleaning Services",
+      "categories": [
+        "home_cleaner",
+        "office_cleaner",
+        "bathroom_cleaner",
+        "kitchen_cleaner",
+        "sofa_cleaner",
+        "carpet_cleaner",
+        "water_tank_cleaner",
+        "sweeper"
+      ]
+    },
+    "appliance_technical": {
+      "label": "Appliance & Technical Services",
+      "categories": [
+        "ac_technician",
+        "refrigerator_technician",
+        "washing_machine_technician",
+        "ro_technician",
+        "geyser_technician",
+        "water_purifier_technician",
+        "cctv_technician",
+        "solar_technician",
+        "inverter_technician",
+        "generator_technician",
+        "electric_motor_repair",
+        "lift_technician"
+      ]
+    },
+    "electronics_it": {
+      "label": "Electronics & IT",
+      "categories": [
+        "mobile_repair",
+        "laptop_repair",
+        "computer_repair",
+        "printer_repair",
+        "cctv_installation",
+        "wifi_network_installation"
+      ]
+    },
+    "personal": {
+      "label": "Personal Services",
+      "categories": [
+        "barber",
+        "hair_stylist",
+        "beautician",
+        "makeup_artist",
+        "mehndi_artist",
+        "tailor",
+        "washerman",
+        "ironing_service"
+      ]
+    },
+    "kitchen_domestic": {
+      "label": "Kitchen & Domestic Services",
+      "categories": [
+        "cook",
+        "chef",
+        "maid",
+        "housekeeper",
+        "babysitter",
+        "caretaker",
+        "elder_care",
+        "patient_care"
+      ]
+    },
+    "vehicle": {
+      "label": "Vehicle Services",
+      "categories": [
+        "car_washer",
+        "bike_washer",
+        "car_detailer",
+        "mechanic",
+        "puncture_repair",
+        "battery_service"
+      ]
+    },
+    "construction_labour": {
+      "label": "Construction & Labour",
+      "categories": [
+        "civil_contractor",
+        "labour_contractor",
+        "building_contractor",
+        "interior_contractor",
+        "pop_contractor",
+        "tiles_contractor",
+        "steel_fabricator"
+      ]
+    }
+  },
+  "categoryLabels": {
+    "electrician": "Electrician",
+    "plumber": "Plumber",
+    "carpenter": "Carpenter",
+    "mason": "Mason",
+    "painter": "Painter",
+    "welder": "Welder",
+    "fabricator": "Fabricator",
+    "tile_installer": "Tile Installer",
+    "pop_worker": "POP Worker",
+    "glass_fitter": "Glass Fitter",
+    "home_cleaner": "Home Cleaner",
+    "office_cleaner": "Office Cleaner",
+    "bathroom_cleaner": "Bathroom Cleaner",
+    "kitchen_cleaner": "Kitchen Cleaner",
+    "sofa_cleaner": "Sofa Cleaner",
+    "carpet_cleaner": "Carpet Cleaner",
+    "water_tank_cleaner": "Water Tank Cleaner",
+    "sweeper": "Sweeper",
+    "ac_technician": "AC Technician",
+    "refrigerator_technician": "Refrigerator Technician",
+    "washing_machine_technician": "Washing Machine Technician",
+    "ro_technician": "RO Technician",
+    "geyser_technician": "Geyser Technician",
+    "water_purifier_technician": "Water Purifier Technician",
+    "cctv_technician": "CCTV Technician",
+    "solar_technician": "Solar Technician",
+    "inverter_technician": "Inverter Technician",
+    "generator_technician": "Generator Technician",
+    "electric_motor_repair": "Electric Motor Repair",
+    "lift_technician": "Lift Technician",
+    "mobile_repair": "Mobile Repair",
+    "laptop_repair": "Laptop Repair",
+    "computer_repair": "Computer Repair",
+    "printer_repair": "Printer Repair",
+    "cctv_installation": "CCTV Installation",
+    "wifi_network_installation": "Wi-Fi & Network Installation",
+    "barber": "Barber",
+    "hair_stylist": "Hair Stylist",
+    "beautician": "Beautician",
+    "makeup_artist": "Makeup Artist",
+    "mehndi_artist": "Mehndi Artist",
+    "tailor": "Tailor",
+    "washerman": "Washerman",
+    "ironing_service": "Ironing Service",
+    "cook": "Cook",
+    "chef": "Chef",
+    "maid": "Maid",
+    "housekeeper": "Housekeeper",
+    "babysitter": "Babysitter",
+    "caretaker": "Caretaker",
+    "elder_care": "Elder Care",
+    "patient_care": "Patient Care",
+    "car_washer": "Car Washer",
+    "bike_washer": "Bike Washer",
+    "car_detailer": "Car Detailer",
+    "mechanic": "Mechanic",
+    "puncture_repair": "Puncture Repair",
+    "battery_service": "Battery Service",
+    "civil_contractor": "Civil Contractor",
+    "labour_contractor": "Labour Contractor",
+    "building_contractor": "Building Contractor",
+    "interior_contractor": "Interior Contractor",
+    "pop_contractor": "POP Contractor",
+    "tiles_contractor": "Tiles Contractor",
+    "steel_fabricator": "Steel Fabricator"
+  },
+  "villageFees": {
+    "electrician": {
+      "min": 500,
+      "max": 3000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "plumber": {
+      "min": 500,
+      "max": 3000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "carpenter": {
+      "min": 500,
+      "max": 3500,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "mason": {
+      "min": 500,
+      "max": 3500,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "painter": {
+      "min": 500,
+      "max": 3000,
+      "commissionMin": 7,
+      "commissionMax": 11
+    },
+    "welder": {
+      "min": 800,
+      "max": 4000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "fabricator": {
+      "min": 800,
+      "max": 4000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "tile_installer": {
+      "min": 500,
+      "max": 3500,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "pop_worker": {
+      "min": 500,
+      "max": 3500,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "glass_fitter": {
+      "min": 500,
+      "max": 3500,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "home_cleaner": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "office_cleaner": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "bathroom_cleaner": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "kitchen_cleaner": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "sofa_cleaner": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "carpet_cleaner": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "water_tank_cleaner": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "sweeper": {
+      "min": 500,
+      "max": 1500,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "ac_technician": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 9,
+      "commissionMax": 12
+    },
+    "refrigerator_technician": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 9,
+      "commissionMax": 12
+    },
+    "washing_machine_technician": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 9,
+      "commissionMax": 12
+    },
+    "ro_technician": {
+      "min": 800,
+      "max": 4000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "geyser_technician": {
+      "min": 800,
+      "max": 4000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "water_purifier_technician": {
+      "min": 800,
+      "max": 4000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "cctv_technician": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 9,
+      "commissionMax": 12
+    },
+    "solar_technician": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 9,
+      "commissionMax": 12
+    },
+    "inverter_technician": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 9,
+      "commissionMax": 12
+    },
+    "generator_technician": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 9,
+      "commissionMax": 12
+    },
+    "electric_motor_repair": {
+      "min": 800,
+      "max": 4000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "lift_technician": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 9,
+      "commissionMax": 12
+    },
+    "mobile_repair": {
+      "min": 800,
+      "max": 4000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "laptop_repair": {
+      "min": 800,
+      "max": 4500,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "computer_repair": {
+      "min": 800,
+      "max": 4500,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "printer_repair": {
+      "min": 800,
+      "max": 4500,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "cctv_installation": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 9,
+      "commissionMax": 12
+    },
+    "wifi_network_installation": {
+      "min": 800,
+      "max": 4500,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "barber": {
+      "min": 500,
+      "max": 2500,
+      "commissionMin": 5,
+      "commissionMax": 9
+    },
+    "hair_stylist": {
+      "min": 500,
+      "max": 2500,
+      "commissionMin": 5,
+      "commissionMax": 9
+    },
+    "beautician": {
+      "min": 500,
+      "max": 2500,
+      "commissionMin": 5,
+      "commissionMax": 9
+    },
+    "makeup_artist": {
+      "min": 500,
+      "max": 2500,
+      "commissionMin": 5,
+      "commissionMax": 9
+    },
+    "mehndi_artist": {
+      "min": 500,
+      "max": 2500,
+      "commissionMin": 5,
+      "commissionMax": 9
+    },
+    "tailor": {
+      "min": 500,
+      "max": 2500,
+      "commissionMin": 5,
+      "commissionMax": 9
+    },
+    "washerman": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "ironing_service": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "cook": {
+      "min": 500,
+      "max": 2500,
+      "commissionMin": 5,
+      "commissionMax": 9
+    },
+    "chef": {
+      "min": 500,
+      "max": 2500,
+      "commissionMin": 5,
+      "commissionMax": 9
+    },
+    "maid": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "housekeeper": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "babysitter": {
+      "min": 500,
+      "max": 2500,
+      "commissionMin": 5,
+      "commissionMax": 9
+    },
+    "caretaker": {
+      "min": 500,
+      "max": 2500,
+      "commissionMin": 5,
+      "commissionMax": 9
+    },
+    "elder_care": {
+      "min": 500,
+      "max": 2500,
+      "commissionMin": 5,
+      "commissionMax": 9
+    },
+    "patient_care": {
+      "min": 500,
+      "max": 2500,
+      "commissionMin": 5,
+      "commissionMax": 9
+    },
+    "car_washer": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "bike_washer": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "car_detailer": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "mechanic": {
+      "min": 800,
+      "max": 4000,
+      "commissionMin": 6,
+      "commissionMax": 10
+    },
+    "puncture_repair": {
+      "min": 500,
+      "max": 2000,
+      "commissionMin": 5,
+      "commissionMax": 8
+    },
+    "battery_service": {
+      "min": 800,
+      "max": 4000,
+      "commissionMin": 6,
+      "commissionMax": 10
+    },
+    "civil_contractor": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "labour_contractor": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "building_contractor": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "interior_contractor": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "pop_contractor": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "tiles_contractor": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    },
+    "steel_fabricator": {
+      "min": 1000,
+      "max": 5000,
+      "commissionMin": 8,
+      "commissionMax": 12
+    }
+  },
+  "tier3Fees": {
+    "basic_home": {
+      "label": "Basic Home Services",
+      "min": 1500,
+      "max": 8000,
+      "commissionMin": 7,
+      "commissionMax": 11,
+      "categories": [
+        "electrician",
+        "plumber",
+        "painter"
+      ]
+    },
+    "skilled_technicians": {
+      "label": "Skilled Technicians",
+      "min": 2500,
+      "max": 12000,
+      "commissionMin": 8,
+      "commissionMax": 12,
+      "categories": [
+        "ac_technician",
+        "refrigerator_technician",
+        "washing_machine_technician",
+        "ro_technician",
+        "geyser_technician",
+        "water_purifier_technician",
+        "cctv_technician",
+        "solar_technician",
+        "inverter_technician",
+        "generator_technician",
+        "electric_motor_repair",
+        "lift_technician",
+        "cctv_installation",
+        "wifi_network_installation"
+      ]
+    },
+    "construction": {
+      "label": "Construction Services",
+      "min": 3000,
+      "max": 15000,
+      "commissionMin": 8,
+      "commissionMax": 12,
+      "categories": [
+        "carpenter",
+        "mason",
+        "welder",
+        "fabricator",
+        "tile_installer",
+        "pop_worker",
+        "glass_fitter",
+        "civil_contractor",
+        "labour_contractor",
+        "building_contractor",
+        "interior_contractor",
+        "pop_contractor",
+        "tiles_contractor",
+        "steel_fabricator"
+      ]
+    },
+    "cleaning": {
+      "label": "Cleaning Services",
+      "min": 1500,
+      "max": 7000,
+      "commissionMin": 5,
+      "commissionMax": 9,
+      "categories": [
+        "home_cleaner",
+        "office_cleaner",
+        "bathroom_cleaner",
+        "kitchen_cleaner",
+        "sofa_cleaner",
+        "carpet_cleaner",
+        "water_tank_cleaner",
+        "sweeper",
+        "maid",
+        "housekeeper"
+      ]
+    },
+    "beauty": {
+      "label": "Beauty & Grooming",
+      "min": 1500,
+      "max": 8000,
+      "commissionMin": 5,
+      "commissionMax": 9,
+      "categories": [
+        "barber",
+        "hair_stylist",
+        "beautician",
+        "makeup_artist",
+        "mehndi_artist",
+        "tailor",
+        "washerman",
+        "ironing_service"
+      ]
+    },
+    "vehicle": {
+      "label": "Vehicle Services",
+      "min": 2000,
+      "max": 10000,
+      "commissionMin": 6,
+      "commissionMax": 10,
+      "categories": [
+        "car_washer",
+        "bike_washer",
+        "car_detailer",
+        "mechanic",
+        "puncture_repair",
+        "battery_service"
+      ]
+    },
+    "repair": {
+      "label": "Repair Services",
+      "min": 2500,
+      "max": 12000,
+      "commissionMin": 8,
+      "commissionMax": 12,
+      "categories": [
+        "mobile_repair",
+        "laptop_repair",
+        "computer_repair",
+        "printer_repair"
+      ]
+    },
+    "care": {
+      "label": "Care Services",
+      "min": 1500,
+      "max": 8000,
+      "commissionMin": 5,
+      "commissionMax": 9,
+      "categories": [
+        "cook",
+        "chef",
+        "babysitter",
+        "caretaker",
+        "elder_care",
+        "patient_care"
+      ]
+    }
+  },
+  "tier2Fees": {
+    "individual": {
+      "label": "Individual Professionals",
+      "min": 5000,
+      "max": 25000,
+      "commissionMin": 7,
+      "commissionMax": 11,
+      "entityTypes": [
+        "individual"
+      ],
+      "categories": [
+        "electrician",
+        "plumber",
+        "carpenter",
+        "mason",
+        "painter",
+        "welder",
+        "fabricator",
+        "tile_installer",
+        "pop_worker",
+        "glass_fitter",
+        "home_cleaner",
+        "office_cleaner",
+        "bathroom_cleaner",
+        "kitchen_cleaner",
+        "sofa_cleaner",
+        "carpet_cleaner",
+        "water_tank_cleaner",
+        "sweeper",
+        "barber",
+        "hair_stylist",
+        "beautician",
+        "makeup_artist",
+        "mehndi_artist",
+        "tailor",
+        "washerman",
+        "ironing_service",
+        "cook",
+        "chef",
+        "maid",
+        "housekeeper",
+        "babysitter",
+        "caretaker",
+        "elder_care",
+        "patient_care",
+        "car_washer",
+        "bike_washer",
+        "car_detailer",
+        "mechanic",
+        "puncture_repair",
+        "battery_service",
+        "civil_contractor",
+        "labour_contractor",
+        "building_contractor",
+        "interior_contractor",
+        "pop_contractor",
+        "tiles_contractor",
+        "steel_fabricator"
+      ]
+    },
+    "skilled_technicians": {
+      "label": "Skilled Technicians",
+      "min": 8000,
+      "max": 35000,
+      "commissionMin": 8,
+      "commissionMax": 12,
+      "entityTypes": [
+        "individual",
+        "agency"
+      ],
+      "categories": [
+        "ac_technician",
+        "refrigerator_technician",
+        "washing_machine_technician",
+        "ro_technician",
+        "geyser_technician",
+        "water_purifier_technician",
+        "cctv_technician",
+        "solar_technician",
+        "inverter_technician",
+        "generator_technician",
+        "electric_motor_repair",
+        "lift_technician",
+        "cctv_installation",
+        "wifi_network_installation",
+        "mobile_repair",
+        "laptop_repair",
+        "computer_repair",
+        "printer_repair"
+      ]
+    },
+    "construction_contractors": {
+      "label": "Construction Contractors",
+      "min": 15000,
+      "max": 60000,
+      "commissionMin": 8,
+      "commissionMax": 12,
+      "entityTypes": [
+        "agency"
+      ],
+      "categories": [
+        "carpenter",
+        "mason",
+        "welder",
+        "fabricator",
+        "tile_installer",
+        "pop_worker",
+        "glass_fitter",
+        "civil_contractor",
+        "labour_contractor",
+        "building_contractor",
+        "interior_contractor",
+        "pop_contractor",
+        "tiles_contractor",
+        "steel_fabricator"
+      ]
+    },
+    "cleaning_agencies": {
+      "label": "Cleaning Agencies",
+      "min": 10000,
+      "max": 40000,
+      "commissionMin": 5,
+      "commissionMax": 9,
+      "entityTypes": [
+        "agency"
+      ],
+      "categories": [
+        "home_cleaner",
+        "office_cleaner",
+        "bathroom_cleaner",
+        "kitchen_cleaner",
+        "sofa_cleaner",
+        "carpet_cleaner",
+        "water_tank_cleaner",
+        "sweeper",
+        "maid",
+        "housekeeper"
+      ]
+    },
+    "beauty_agencies": {
+      "label": "Beauty Agencies",
+      "min": 10000,
+      "max": 45000,
+      "commissionMin": 5,
+      "commissionMax": 9,
+      "entityTypes": [
+        "agency"
+      ],
+      "categories": [
+        "barber",
+        "hair_stylist",
+        "beautician",
+        "makeup_artist",
+        "mehndi_artist",
+        "tailor",
+        "washerman",
+        "ironing_service",
+        "cook",
+        "chef",
+        "babysitter",
+        "caretaker",
+        "elder_care",
+        "patient_care"
+      ]
+    },
+    "repair_agencies": {
+      "label": "Repair Agencies",
+      "min": 12000,
+      "max": 50000,
+      "commissionMin": 8,
+      "commissionMax": 12,
+      "entityTypes": [
+        "agency"
+      ],
+      "categories": [
+        "mobile_repair",
+        "laptop_repair",
+        "computer_repair",
+        "printer_repair",
+        "ac_technician",
+        "refrigerator_technician",
+        "washing_machine_technician",
+        "ro_technician",
+        "geyser_technician",
+        "water_purifier_technician",
+        "cctv_technician",
+        "solar_technician",
+        "inverter_technician",
+        "generator_technician",
+        "electric_motor_repair",
+        "lift_technician",
+        "cctv_installation",
+        "wifi_network_installation",
+        "electrician",
+        "plumber",
+        "painter",
+        "car_washer",
+        "bike_washer",
+        "car_detailer",
+        "mechanic",
+        "puncture_repair",
+        "battery_service"
+      ]
+    },
+    "multi_service": {
+      "label": "Multi-Service Agencies",
+      "min": 20000,
+      "max": 80000,
+      "commissionMin": 7,
+      "commissionMax": 11,
+      "entityTypes": [
+        "agency"
+      ],
+      "minStaff": 5
+    }
+  },
+  "metroFees": {
+    "individual": {
+      "label": "Individual Professionals",
+      "min": 10000,
+      "max": 40000,
+      "commissionMin": 7,
+      "commissionMax": 11,
+      "entityTypes": [
+        "individual"
+      ],
+      "categories": [
+        "electrician",
+        "plumber",
+        "carpenter",
+        "mason",
+        "painter",
+        "welder",
+        "fabricator",
+        "tile_installer",
+        "pop_worker",
+        "glass_fitter",
+        "home_cleaner",
+        "office_cleaner",
+        "bathroom_cleaner",
+        "kitchen_cleaner",
+        "sofa_cleaner",
+        "carpet_cleaner",
+        "water_tank_cleaner",
+        "sweeper",
+        "barber",
+        "hair_stylist",
+        "beautician",
+        "makeup_artist",
+        "mehndi_artist",
+        "tailor",
+        "washerman",
+        "ironing_service",
+        "cook",
+        "chef",
+        "maid",
+        "housekeeper",
+        "babysitter",
+        "caretaker",
+        "elder_care",
+        "patient_care",
+        "car_washer",
+        "bike_washer",
+        "car_detailer",
+        "mechanic",
+        "puncture_repair",
+        "battery_service",
+        "civil_contractor",
+        "labour_contractor",
+        "building_contractor",
+        "interior_contractor",
+        "pop_contractor",
+        "tiles_contractor",
+        "steel_fabricator"
+      ]
+    },
+    "skilled_technicians": {
+      "label": "Skilled Technicians",
+      "min": 15000,
+      "max": 55000,
+      "commissionMin": 8,
+      "commissionMax": 12,
+      "entityTypes": [
+        "individual",
+        "agency"
+      ],
+      "categories": [
+        "ac_technician",
+        "refrigerator_technician",
+        "washing_machine_technician",
+        "ro_technician",
+        "geyser_technician",
+        "water_purifier_technician",
+        "cctv_technician",
+        "solar_technician",
+        "inverter_technician",
+        "generator_technician",
+        "electric_motor_repair",
+        "lift_technician",
+        "cctv_installation",
+        "wifi_network_installation",
+        "mobile_repair",
+        "laptop_repair",
+        "computer_repair",
+        "printer_repair"
+      ]
+    },
+    "professional_contractors": {
+      "label": "Professional Contractors",
+      "min": 30000,
+      "max": 100000,
+      "commissionMin": 8,
+      "commissionMax": 12,
+      "entityTypes": [
+        "agency"
+      ],
+      "categories": [
+        "carpenter",
+        "mason",
+        "welder",
+        "fabricator",
+        "tile_installer",
+        "pop_worker",
+        "glass_fitter",
+        "civil_contractor",
+        "labour_contractor",
+        "building_contractor",
+        "interior_contractor",
+        "pop_contractor",
+        "tiles_contractor",
+        "steel_fabricator"
+      ]
+    },
+    "home_service_agencies": {
+      "label": "Home Service Agencies",
+      "min": 25000,
+      "max": 90000,
+      "commissionMin": 6,
+      "commissionMax": 10,
+      "entityTypes": [
+        "agency"
+      ],
+      "categories": [
+        "home_cleaner",
+        "office_cleaner",
+        "bathroom_cleaner",
+        "kitchen_cleaner",
+        "sofa_cleaner",
+        "carpet_cleaner",
+        "water_tank_cleaner",
+        "sweeper",
+        "maid",
+        "housekeeper",
+        "cook",
+        "chef",
+        "babysitter",
+        "caretaker",
+        "elder_care",
+        "patient_care",
+        "electrician",
+        "plumber",
+        "painter",
+        "car_washer",
+        "bike_washer",
+        "car_detailer",
+        "mechanic",
+        "puncture_repair",
+        "battery_service"
+      ]
+    },
+    "beauty_wellness_chains": {
+      "label": "Beauty & Wellness Chains",
+      "min": 25000,
+      "max": 95000,
+      "commissionMin": 5,
+      "commissionMax": 9,
+      "entityTypes": [
+        "agency"
+      ],
+      "categories": [
+        "barber",
+        "hair_stylist",
+        "beautician",
+        "makeup_artist",
+        "mehndi_artist",
+        "tailor",
+        "washerman",
+        "ironing_service",
+        "cook",
+        "chef",
+        "babysitter",
+        "caretaker",
+        "elder_care",
+        "patient_care"
+      ]
+    },
+    "multi_service_companies": {
+      "label": "Multi-Service Companies",
+      "min": 40000,
+      "max": 150000,
+      "commissionMin": 7,
+      "commissionMax": 11,
+      "entityTypes": [
+        "agency"
+      ],
+      "minStaff": 10
+    },
+    "enterprise": {
+      "label": "Enterprise Service Providers",
+      "min": 75000,
+      "max": 200000,
+      "commissionMin": 5,
+      "commissionMax": 10,
+      "entityTypes": [
+        "agency"
+      ],
+      "minStaff": 25,
+      "businessScale": [
+        "large",
+        "enterprise"
+      ]
+    }
+  },
+  "experienceOptions": [
+    {
+      "id": "1-3 Years",
+      "label": "1–3 Years",
+      "modifier": 0
+    },
+    {
+      "id": "3-5 Years",
+      "label": "3–5 Years",
+      "modifier": 0.15
+    },
+    {
+      "id": "5+ Years",
+      "label": "5+ Years",
+      "modifier": 0.3
+    }
+  ],
+  "modifiers": {
+    "serviceRadius": {
+      "0-5": 0,
+      "5-10": 0.1,
+      "10-20": 0.2,
+      "20+": 0.35
+    },
+    "entityType": {
+      "individual": 0,
+      "agency": 0.25
+    },
+    "staffCount": {
+      "1": 0,
+      "2-5": 0.1,
+      "6-15": 0.25,
+      "16-50": 0.4,
+      "50+": 0.55
+    },
+    "equipmentLevel": {
+      "none": 0,
+      "basic": 0.1,
+      "standard": 0.2,
+      "advanced": 0.35
+    },
+    "verificationLevel": {
+      "basic": 0,
+      "standard": 0.1,
+      "enhanced": 0.2,
+      "premium": 0.35
+    },
+    "businessScale": {
+      "solo": 0,
+      "small": 0.15,
+      "medium": 0.3,
+      "large": 0.45,
+      "enterprise": 0.6
+    }
+  },
+  "factorWeights": {
+    "experience": 0.12,
+    "serviceRadius": 0.12,
+    "entityType": 0.15,
+    "staffCount": 0.15,
+    "equipmentLevel": 0.12,
+    "verificationLevel": 0.14,
+    "businessScale": 0.2
+  }
+}

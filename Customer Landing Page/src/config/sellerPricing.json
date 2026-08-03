@@ -1,0 +1,91 @@
+{
+  "version": "1.0.0",
+  "validityYears": 2,
+  "renewalPercentage": 50,
+  "locationTiers": [
+    { "id": "village", "label": "Village", "multiplier": 1 },
+    { "id": "tier3", "label": "Tier 3 Town", "multiplier": 1.5 },
+    { "id": "tier2", "label": "Tier 2 City", "multiplier": 2 },
+    { "id": "tier1", "label": "Tier 1 Metro", "multiplier": 3 }
+  ],
+  "baseCategoryFees": {
+    "grocery": { "min": 500, "max": 3000 },
+    "agriculture": { "min": 500, "max": 3000 },
+    "furniture": { "min": 1000, "max": 5000 },
+    "mobile_laptop": { "min": 2000, "max": 8000 },
+    "vehicle_parts": { "min": 3000, "max": 10000 },
+    "cosmetics": { "min": 500, "max": 3000 },
+    "electronics": { "min": 2000, "max": 10000 },
+    "construction_materials": { "min": 3000, "max": 15000 },
+    "household": { "min": 500, "max": 5000 },
+    "footwear": { "min": 1000, "max": 5000 },
+    "hardware": { "min": 2000, "max": 10000 }
+  },
+  "categoryLabels": {
+    "grocery": "Grocery",
+    "agriculture": "Agriculture",
+    "furniture": "Furniture",
+    "mobile_laptop": "Mobile & Laptop",
+    "vehicle_parts": "Vehicle Parts",
+    "cosmetics": "Cosmetics",
+    "electronics": "Electronics",
+    "construction_materials": "Construction Materials",
+    "household": "Household",
+    "footwear": "Footwear",
+    "hardware": "Hardware"
+  },
+  "modifiers": {
+    "deliveryRadius": {
+      "0-5": 0,
+      "5-10": 0.1,
+      "10-20": 0.2,
+      "20-50": 0.35,
+      "50+": 0.5
+    },
+    "productCount": {
+      "1-25": 0,
+      "26-100": 0.15,
+      "101-500": 0.3,
+      "501-1000": 0.45,
+      "1000+": 0.6
+    },
+    "storeSize": {
+      "small": 0,
+      "medium": 0.15,
+      "large": 0.3,
+      "xlarge": 0.45
+    },
+    "warehouseSize": {
+      "none": 0,
+      "small": 0.1,
+      "medium": 0.2,
+      "large": 0.35
+    },
+    "annualTurnover": {
+      "under_5L": 0,
+      "5L_25L": 0.15,
+      "25L_1Cr": 0.3,
+      "1Cr_5Cr": 0.5,
+      "above_5Cr": 0.7
+    },
+    "verificationLevel": {
+      "basic": 0,
+      "standard": 0.1,
+      "enhanced": 0.2,
+      "premium": 0.35
+    },
+    "businessServices": {
+      "perService": 0.05,
+      "maxServices": 5
+    }
+  },
+  "factorWeights": {
+    "deliveryRadius": 0.12,
+    "productCount": 0.15,
+    "storeSize": 0.12,
+    "warehouseSize": 0.1,
+    "annualTurnover": 0.25,
+    "verificationLevel": 0.13,
+    "businessServices": 0.13
+  }
+}

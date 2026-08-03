@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "defaultRange": { "min": 0, "max": 8 },
+  "categories": {
+    "grocery": { "min": 0, "max": 5 },
+    "agriculture": { "min": 0, "max": 5 },
+    "furniture": { "min": 3, "max": 8 },
+    "mobile_laptop": { "min": 3, "max": 8 },
+    "vehicle_parts": { "min": 3, "max": 8 },
+    "cosmetics": { "min": 3, "max": 7 },
+    "electronics": { "min": 3, "max": 8 },
+    "construction_materials": { "min": 3, "max": 8 },
+    "household": { "min": 0, "max": 6 },
+    "footwear": { "min": 3, "max": 7 },
+    "hardware": { "min": 3, "max": 8 }
+  },
+  "note": "Commission applies only on successful completed orders, not part of onboarding fee."
+}

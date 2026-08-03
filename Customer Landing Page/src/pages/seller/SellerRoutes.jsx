@@ -1,0 +1,251 @@
+import React, { Suspense, lazy, useEffect, useState } from 'react';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { OnboardingProvider, useOnboarding } from '../../context/SellerOnboardingContext';
+import { SellerUIProvider, useSellerUI } from '../../context/SellerUIContext';
+import {
+  getStoredSellerAuth,
+  isSellerSessionValid,
+  clearSellerAuth,
+} from '../../services/sellerAuthService';
+import PageSkeleton from '../../components/seller/PageSkeleton';
+import OnboardingStepGuard from '../../components/seller/OnboardingStepGuard';
+import {
+  getPostLoginRedirect,
+  isApproved,
+  isVerificationPending,
+  getLastIncompleteStepPath,
+} from '../../utils/sellerRouteUtils';
+
+const SellerWelcome = lazy(() => import('./Welcome'));
+const SellerLanding = lazy(() => import('./Landing'));
+const SellerLogin = lazy(() => import('./Login'));
+const SellerRegister = lazy(() => import('./Register'));
+const BasicInformation = lazy(() => import('./BasicInformation'));
+const BusinessInformation = lazy(() => import('./BusinessInformation'));
+const Address = lazy(() => import('./Address'));
+const Delivery = lazy(() => import('./Delivery'));
+const Documents = lazy(() => import('./Documents'));
+const Bank = lazy(() => import('./Bank'));
+const Tax = lazy(() => import('./Tax'));
+const OnboardingFee = lazy(() => import('./OnboardingFee'));
+const Membership = lazy(() => import('./Membership'));
+const Review = lazy(() => import('./Review'));
+const Submitted = lazy(() => import('./Submitted'));
+const PaymentSuccess = lazy(() => import('./PaymentSuccess'));
+const TermsAndConditions = lazy(() => import('./TermsAndConditions'));
+const Pricing = lazy(() => import('./Pricing'));
+const SellerErrorPage = lazy(() => import('./errors/SellerErrorPage'));
+const DashboardLayout = lazy(() => import('../../components/seller/DashboardLayout'));
+const DashboardHome = lazy(() => import('./dashboard/DashboardHome'));
+const OnboardingDashboard = lazy(() => import('./dashboard/OnboardingDashboard'));
+const LazyOrders = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.OrdersPage })));
+const LazyProducts = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.ProductsPage })));
+const LazyInventory = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.InventoryPage })));
+const LazyCustomers = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.CustomersPage })));
+const LazyMarketing = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.MarketingPage })));
+const LazyAnalytics = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.AnalyticsPage })));
+const LazyWallet = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.WalletPage })));
+const LazyPayments = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.PaymentsPage })));
+const LazyInvoices = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.InvoicesPage })));
+const LazyReports = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.ReportsPage })));
+const LazyCoupons = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.CouponsPage })));
+const LazyAdvertisements = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.AdvertisementsPage })));
+const LazyStoreSettings = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.StoreSettingsPage })));
+const LazyDocuments = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.DocumentsPage })));
+const LazySupport = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.SupportPage })));
+const BrandingStorePage = lazy(() => import('./dashboard/BrandingStorePage'));
+const WelcomeKitPage = lazy(() => import('./dashboard/WelcomeKitPage'));
+const PublicBranding = lazy(() => import('./Branding'));
+
+function SuspenseWrap({ children }) {
+  return <Suspense fallback={<PageSkeleton />}>{children}</Suspense>;
+}
+
+function RequireAuth({ children }) {
+  const navigate = useNavigate();
+  const [ready, setReady] = useState(false);
+  const [sessionExpired, setSessionExpired] = useState(false);
+
+  useEffect(() => {
+    const auth = getStoredSellerAuth();
+    if (auth && !isSellerSessionValid(auth)) {
+      clearSellerAuth();
+      setSessionExpired(true);
+      return;
+    }
+    if (!auth) {
+      navigate('/seller/login', { replace: true, state: { from: window.location.pathname } });
+    } else {
+      setReady(true);
+    }
+  }, [navigate]);
+
+  if (sessionExpired) return <SellerErrorPage type="session-expired" />;
+  if (!ready) return <PageSkeleton />;
+  return children;
+}
+
+function OnboardingRoute({ children }) {
+  return (
+    <RequireAuth>
+      <OnboardingGuard>
+        <OnboardingStepGuard>{children}</OnboardingStepGuard>
+      </OnboardingGuard>
+    </RequireAuth>
+  );
+}
+
+function OfflineGuard({ children }) {
+  const { isOnline } = useSellerUI();
+  if (!isOnline) return <SellerErrorPage type="offline" />;
+  return children;
+}
+
+function OnboardingGuard({ children }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { data } = useOnboarding();
+  const applicationStatus = data?.status;
+
+  useEffect(() => {
+    const auth = getStoredSellerAuth();
+    if (isApproved(data, auth?.seller)) {
+      navigate('/seller/dashboard', { replace: true });
+      return;
+    }
+    if (isVerificationPending(data, auth?.seller) && location.pathname !== '/seller/submitted') {
+      navigate('/seller/submitted', { replace: true });
+    }
+  }, [data, applicationStatus, navigate, location.pathname]);
+
+  const auth = getStoredSellerAuth();
+  if (isApproved(data, auth?.seller)) return null;
+  if (isVerificationPending(data, auth?.seller) && location.pathname !== '/seller/submitted') return null;
+
+  return children;
+}
+
+function DashboardGuard({ children }) {
+  const navigate = useNavigate();
+  const { data } = useOnboarding();
+  const applicationStatus = data?.status;
+
+  useEffect(() => {
+    const auth = getStoredSellerAuth();
+    if (!isApproved(data, auth?.seller)) {
+      if (isVerificationPending(data, auth?.seller)) {
+        navigate('/seller/submitted', { replace: true });
+      } else {
+        navigate(getLastIncompleteStepPath(data), { replace: true });
+      }
+    }
+  }, [data, applicationStatus, navigate]);
+
+  const auth = getStoredSellerAuth();
+  if (!isApproved(data, auth?.seller)) return <PageSkeleton />;
+  return children;
+}
+
+function GuestRedirect() {
+  const navigate = useNavigate();
+  const { data } = useOnboarding();
+  const applicationStatus = data?.status;
+
+  useEffect(() => {
+    const auth = getStoredSellerAuth();
+    if (auth && isSellerSessionValid(auth)) {
+      navigate(getPostLoginRedirect(data, auth.seller), { replace: true });
+    }
+  }, [data, applicationStatus, navigate]);
+
+  return null;
+}
+
+function DashboardLayoutWrapper({ onLogout }) {
+  const auth = getStoredSellerAuth();
+  return <DashboardLayout seller={auth?.seller} onLogout={onLogout} />;
+}
+
+export default function SellerRoutes() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    clearSellerAuth();
+    navigate('/', { replace: true });
+  };
+
+  const auth = getStoredSellerAuth();
+  const sellerId = auth?.seller?.id;
+
+  return (
+    <OnboardingProvider sellerId={sellerId}>
+      <SellerUIProvider>
+      <Suspense fallback={<PageSkeleton />}>
+        <Routes>
+          <Route path="/seller" element={<Navigate to="/seller/welcome" replace />} />
+          <Route path="/seller/welcome" element={<><GuestRedirect /><SellerWelcome /></>} />
+          <Route path="/seller/hub" element={<><GuestRedirect /><SellerLanding /></>} />
+          <Route path="/seller/login" element={<><GuestRedirect /><SellerLogin /></>} />
+          <Route path="/seller/register" element={<SellerRegister />} />
+          <Route path="/seller/terms" element={<TermsAndConditions />} />
+          <Route path="/seller/pricing" element={<Pricing />} />
+          <Route path="/seller/branding" element={<PublicBranding />} />
+          <Route path="/seller/session-expired" element={<SellerErrorPage type="session-expired" />} />
+          <Route path="/seller/offline" element={<SellerErrorPage type="offline" />} />
+          <Route path="/seller/forbidden" element={<SellerErrorPage type="403" />} />
+          <Route path="/seller/error" element={<SellerErrorPage type="500" />} />
+
+          <Route path="/seller/basic-information" element={<OnboardingRoute><BasicInformation /></OnboardingRoute>} />
+          <Route path="/seller/business-information" element={<OnboardingRoute><BusinessInformation /></OnboardingRoute>} />
+          <Route path="/seller/address" element={<OnboardingRoute><Address /></OnboardingRoute>} />
+          <Route path="/seller/delivery" element={<OnboardingRoute><Delivery /></OnboardingRoute>} />
+          <Route path="/seller/documents" element={<OnboardingRoute><Documents /></OnboardingRoute>} />
+          <Route path="/seller/bank" element={<OnboardingRoute><Bank /></OnboardingRoute>} />
+          <Route path="/seller/tax" element={<OnboardingRoute><Tax /></OnboardingRoute>} />
+          <Route path="/seller/onboarding-fee" element={<OnboardingRoute><OnboardingFee /></OnboardingRoute>} />
+          <Route path="/seller/membership" element={<RequireAuth><OnboardingStepGuard><Membership mode="onboarding" /></OnboardingStepGuard></RequireAuth>} />
+          <Route path="/seller/payment-success" element={<OnboardingRoute><PaymentSuccess /></OnboardingRoute>} />
+          <Route path="/seller/review" element={<OnboardingRoute><Review /></OnboardingRoute>} />
+          <Route path="/seller/submitted" element={<RequireAuth><Submitted /></RequireAuth>} />
+
+          <Route
+            path="/seller/dashboard"
+            element={
+              <RequireAuth>
+                <OfflineGuard>
+                  <DashboardGuard>
+                    <DashboardLayoutWrapper onLogout={handleLogout} />
+                  </DashboardGuard>
+                </OfflineGuard>
+              </RequireAuth>
+            }
+          >
+            <Route index element={<SuspenseWrap><DashboardHome /></SuspenseWrap>} />
+            <Route path="orders" element={<SuspenseWrap><LazyOrders /></SuspenseWrap>} />
+            <Route path="products" element={<SuspenseWrap><LazyProducts /></SuspenseWrap>} />
+            <Route path="inventory" element={<SuspenseWrap><LazyInventory /></SuspenseWrap>} />
+            <Route path="customers" element={<SuspenseWrap><LazyCustomers /></SuspenseWrap>} />
+            <Route path="marketing" element={<SuspenseWrap><LazyMarketing /></SuspenseWrap>} />
+            <Route path="analytics" element={<SuspenseWrap><LazyAnalytics /></SuspenseWrap>} />
+            <Route path="wallet" element={<SuspenseWrap><LazyWallet /></SuspenseWrap>} />
+            <Route path="payments" element={<SuspenseWrap><LazyPayments /></SuspenseWrap>} />
+            <Route path="invoices" element={<SuspenseWrap><LazyInvoices /></SuspenseWrap>} />
+            <Route path="reports" element={<SuspenseWrap><LazyReports /></SuspenseWrap>} />
+            <Route path="coupons" element={<SuspenseWrap><LazyCoupons /></SuspenseWrap>} />
+            <Route path="advertisements" element={<SuspenseWrap><LazyAdvertisements /></SuspenseWrap>} />
+            <Route path="onboarding" element={<SuspenseWrap><OnboardingDashboard /></SuspenseWrap>} />
+            <Route path="membership" element={<SuspenseWrap><Membership mode="dashboard" /></SuspenseWrap>} />
+            <Route path="welcome-kit" element={<SuspenseWrap><WelcomeKitPage /></SuspenseWrap>} />
+            <Route path="branding" element={<SuspenseWrap><BrandingStorePage /></SuspenseWrap>} />
+            <Route path="settings" element={<SuspenseWrap><LazyStoreSettings /></SuspenseWrap>} />
+            <Route path="documents" element={<SuspenseWrap><LazyDocuments /></SuspenseWrap>} />
+            <Route path="support" element={<SuspenseWrap><LazySupport /></SuspenseWrap>} />
+          </Route>
+
+          <Route path="/seller/*" element={<SellerErrorPage type="404" />} />
+        </Routes>
+      </Suspense>
+      </SellerUIProvider>
+    </OnboardingProvider>
+  );
+}

@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "title": "Business Branding & Hardware",
+  "subtitle": "Available at additional cost based on product, size, quantity, branding, and shipping.",
+  "note": "Optional branding materials, hardware devices, replacement items, additional quantities, and customized products are available at separate charges.",
+  "products": [
+    { "id": "tshirt", "name": "Branded T-Shirts", "icon": "👕", "description": "Custom branded apparel for your shop staff and team." },
+    { "id": "cap", "name": "Caps", "icon": "🧢", "description": "Branded caps with your store logo and SaathApp badge." },
+    { "id": "shop_banner", "name": "Shop Banner", "icon": "🪧", "description": "High-quality vinyl shop banner for storefront display." },
+    { "id": "flex_banner", "name": "Flex Banner / Hoarding", "icon": "🏢", "description": "Large format flex banners and hoardings for outdoor advertising." },
+    { "id": "logo_stickers", "name": "Additional Logo Stickers", "icon": "🏷️", "description": "Extra premium logo stickers for packaging and branding." },
+    { "id": "id_cards", "name": "Extra ID Cards", "icon": "🪪", "description": "Additional official SaathApp seller ID cards for staff." },
+    { "id": "mug", "name": "Coffee Mugs", "icon": "☕", "description": "Branded coffee mugs for your business or promotional gifts." },
+    { "id": "bottle", "name": "Water Bottles", "icon": "🥤", "description": "Custom branded water bottles for staff and customers." },
+    { "id": "packaging", "name": "Packaging Materials", "icon": "📦", "description": "Branded boxes, wraps, and packaging supplies." },
+    { "id": "carry_bags", "name": "Carry Bags", "icon": "🛍️", "description": "Eco-friendly branded carry bags for customer orders." },
+    { "id": "visiting_cards", "name": "Visiting Cards", "icon": "📇", "description": "Premium business cards with QR code integration." },
+    { "id": "letterheads", "name": "Letterheads", "icon": "📄", "description": "Professional letterhead designs for official correspondence." },
+    { "id": "bill_books", "name": "Bill Books", "icon": "📒", "description": "Custom printed bill books for offline transactions." },
+    { "id": "receipt_books", "name": "Receipt Books", "icon": "🧾", "description": "Branded receipt books for cash transactions." },
+    { "id": "pos_machine", "name": "POS Machine", "icon": "💳", "description": "Point-of-sale machine for seamless payment processing." },
+    { "id": "android_pos", "name": "Android POS Terminal", "icon": "📱", "description": "All-in-one Android POS terminal with SaathApp integration." },
+    { "id": "barcode_scanner", "name": "Barcode Scanner", "icon": "📷", "description": "High-speed barcode scanner for inventory management." },
+    { "id": "thermal_printer", "name": "Thermal Printer", "icon": "🖨️", "description": "Thermal receipt printer for billing and invoices." },
+    { "id": "label_printer", "name": "Barcode Label Printer", "icon": "🖨️", "description": "Dedicated label printer for product barcodes." },
+    { "id": "cash_drawer", "name": "Cash Drawer", "icon": "💵", "description": "Secure cash drawer integrated with POS systems." },
+    { "id": "barcode_labels", "name": "Barcode Labels", "icon": "🏷️", "description": "Rolls of barcode labels for product tagging." },
+    { "id": "nfc_card", "name": "NFC Business Card", "icon": "📲", "description": "Smart NFC business cards with digital profile link." },
+    { "id": "promo_materials", "name": "Promotional Materials", "icon": "📢", "description": "Flyers, standees, and marketing collateral." },
+    { "id": "shop_branding_kit", "name": "Complete Shop Branding Kit", "icon": "🏬", "description": "Full shop branding package — banners, stickers, signage, and more." }
+  ]
+}

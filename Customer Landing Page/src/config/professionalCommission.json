@@ -1,0 +1,270 @@
+{
+  "version": "3.0.0",
+  "defaultRange": {
+    "min": 5,
+    "max": 12
+  },
+  "note": "Commission (5–12%) applies only on successfully completed service booking value, separate from the one-time onboarding fee and optional membership. Every profession has an explicit commission mapping.",
+  "categories": {
+    "electrician": {
+      "min": 8,
+      "max": 12
+    },
+    "plumber": {
+      "min": 8,
+      "max": 12
+    },
+    "carpenter": {
+      "min": 8,
+      "max": 12
+    },
+    "mason": {
+      "min": 8,
+      "max": 12
+    },
+    "painter": {
+      "min": 7,
+      "max": 11
+    },
+    "welder": {
+      "min": 8,
+      "max": 12
+    },
+    "fabricator": {
+      "min": 8,
+      "max": 12
+    },
+    "tile_installer": {
+      "min": 8,
+      "max": 12
+    },
+    "pop_worker": {
+      "min": 8,
+      "max": 12
+    },
+    "glass_fitter": {
+      "min": 8,
+      "max": 12
+    },
+    "home_cleaner": {
+      "min": 5,
+      "max": 8
+    },
+    "office_cleaner": {
+      "min": 5,
+      "max": 8
+    },
+    "bathroom_cleaner": {
+      "min": 5,
+      "max": 8
+    },
+    "kitchen_cleaner": {
+      "min": 5,
+      "max": 8
+    },
+    "sofa_cleaner": {
+      "min": 5,
+      "max": 8
+    },
+    "carpet_cleaner": {
+      "min": 5,
+      "max": 8
+    },
+    "water_tank_cleaner": {
+      "min": 5,
+      "max": 8
+    },
+    "sweeper": {
+      "min": 5,
+      "max": 8
+    },
+    "ac_technician": {
+      "min": 9,
+      "max": 12
+    },
+    "refrigerator_technician": {
+      "min": 9,
+      "max": 12
+    },
+    "washing_machine_technician": {
+      "min": 9,
+      "max": 12
+    },
+    "ro_technician": {
+      "min": 8,
+      "max": 12
+    },
+    "geyser_technician": {
+      "min": 8,
+      "max": 12
+    },
+    "water_purifier_technician": {
+      "min": 8,
+      "max": 12
+    },
+    "cctv_technician": {
+      "min": 9,
+      "max": 12
+    },
+    "solar_technician": {
+      "min": 9,
+      "max": 12
+    },
+    "inverter_technician": {
+      "min": 9,
+      "max": 12
+    },
+    "generator_technician": {
+      "min": 9,
+      "max": 12
+    },
+    "electric_motor_repair": {
+      "min": 8,
+      "max": 12
+    },
+    "lift_technician": {
+      "min": 9,
+      "max": 12
+    },
+    "mobile_repair": {
+      "min": 8,
+      "max": 12
+    },
+    "laptop_repair": {
+      "min": 8,
+      "max": 12
+    },
+    "computer_repair": {
+      "min": 8,
+      "max": 12
+    },
+    "printer_repair": {
+      "min": 8,
+      "max": 12
+    },
+    "cctv_installation": {
+      "min": 9,
+      "max": 12
+    },
+    "wifi_network_installation": {
+      "min": 8,
+      "max": 12
+    },
+    "barber": {
+      "min": 5,
+      "max": 9
+    },
+    "hair_stylist": {
+      "min": 5,
+      "max": 9
+    },
+    "beautician": {
+      "min": 5,
+      "max": 9
+    },
+    "makeup_artist": {
+      "min": 5,
+      "max": 9
+    },
+    "mehndi_artist": {
+      "min": 5,
+      "max": 9
+    },
+    "tailor": {
+      "min": 5,
+      "max": 9
+    },
+    "washerman": {
+      "min": 5,
+      "max": 8
+    },
+    "ironing_service": {
+      "min": 5,
+      "max": 8
+    },
+    "cook": {
+      "min": 5,
+      "max": 9
+    },
+    "chef": {
+      "min": 5,
+      "max": 9
+    },
+    "maid": {
+      "min": 5,
+      "max": 8
+    },
+    "housekeeper": {
+      "min": 5,
+      "max": 8
+    },
+    "babysitter": {
+      "min": 5,
+      "max": 9
+    },
+    "caretaker": {
+      "min": 5,
+      "max": 9
+    },
+    "elder_care": {
+      "min": 5,
+      "max": 9
+    },
+    "patient_care": {
+      "min": 5,
+      "max": 9
+    },
+    "car_washer": {
+      "min": 5,
+      "max": 8
+    },
+    "bike_washer": {
+      "min": 5,
+      "max": 8
+    },
+    "car_detailer": {
+      "min": 5,
+      "max": 8
+    },
+    "mechanic": {
+      "min": 6,
+      "max": 10
+    },
+    "puncture_repair": {
+      "min": 5,
+      "max": 8
+    },
+    "battery_service": {
+      "min": 6,
+      "max": 10
+    },
+    "civil_contractor": {
+      "min": 8,
+      "max": 12
+    },
+    "labour_contractor": {
+      "min": 8,
+      "max": 12
+    },
+    "building_contractor": {
+      "min": 8,
+      "max": 12
+    },
+    "interior_contractor": {
+      "min": 8,
+      "max": 12
+    },
+    "pop_contractor": {
+      "min": 8,
+      "max": 12
+    },
+    "tiles_contractor": {
+      "min": 8,
+      "max": 12
+    },
+    "steel_fabricator": {
+      "min": 8,
+      "max": 12
+    }
+  }
+}
