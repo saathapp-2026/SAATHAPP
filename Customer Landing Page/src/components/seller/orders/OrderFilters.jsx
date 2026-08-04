@@ -1,5 +1,5 @@
-import React from 'react';
-import { Filter, X, Calendar } from 'lucide-react';
+import React, { useState } from 'react';
+import { Search, Filter, RotateCcw, ChevronDown, X } from 'lucide-react';
 import {
   DATE_FILTERS,
   STATUS_FILTER_OPTIONS,
@@ -8,134 +8,198 @@ import {
   OTHER_FILTERS,
 } from '../../../config/seller/orderConstants';
 
-function ChipGroup({ label, options, selected, onToggle }) {
+const STATUS_PILLS = [
+  { id: 'all', label: 'All' },
+  ...STATUS_FILTER_OPTIONS,
+];
+
+function Select({ label, value, options, onChange, allLabel }) {
   return (
-    <div>
-      <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">{label}</p>
-      <div className="flex flex-wrap gap-1.5">
-        {options.map((opt) => {
-          const active = selected.includes(opt.id);
-          return (
-            <button
-              key={opt.id}
-              type="button"
-              onClick={() => onToggle(opt.id)}
-              aria-pressed={active}
-              className={`px-2.5 py-1 rounded-lg text-xs font-medium border transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
-                active
-                  ? 'bg-emerald-500 text-white border-emerald-500'
-                  : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
-              }`}
-            >
-              {opt.label}
-            </button>
-          );
-        })}
-      </div>
-    </div>
+    <label className="relative min-w-[120px]">
+      <span className="sr-only">{label}</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        aria-label={label}
+        className="w-full appearance-none pl-3 pr-8 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+      >
+        <option value="">{allLabel}</option>
+        {options.map((o) => (
+          <option key={o.id} value={o.id}>{o.label}</option>
+        ))}
+      </select>
+      <ChevronDown size={14} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
+    </label>
   );
 }
 
-export default function OrderFilters({ filters, onChange, onReset }) {
-  const toggle = (key, id) => {
-    const list = filters[key] || [];
-    const next = list.includes(id) ? list.filter((x) => x !== id) : [...list, id];
-    onChange({ ...filters, [key]: next });
+export default function OrderFilters({
+  filters,
+  search,
+  onSearchChange,
+  onChange,
+  onReset,
+  statusCounts = {},
+}) {
+  const [showMore, setShowMore] = useState(false);
+  const activeStatus = filters.statuses?.length === 1 ? filters.statuses[0] : 'all';
+
+  const setStatusPill = (id) => {
+    onChange({
+      ...filters,
+      statuses: id === 'all' ? [] : [id],
+    });
   };
 
-  const activeCount =
-    (filters.dateFilter && filters.dateFilter !== 'all' ? 1 : 0) +
-    (filters.statuses?.length || 0) +
-    (filters.paymentModes?.length || 0) +
-    (filters.deliveryModes?.length || 0) +
-    (filters.other?.length || 0);
-
   return (
-    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 space-y-4">
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <Filter size={16} className="text-slate-500" aria-hidden="true" />
-          <h3 className="font-semibold text-sm">Filters</h3>
-          {activeCount > 0 && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">
-              {activeCount} active
-            </span>
+    <div className="space-y-3">
+      {/* Compact toolbar */}
+      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 flex flex-col xl:flex-row gap-2.5 xl:items-center">
+        <div className="relative flex-1 min-w-[200px]">
+          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => onSearchChange(e.target.value)}
+            placeholder="Search by Order ID, Customer, Phone or Product…"
+            aria-label="Search orders"
+            className="w-full pl-9 pr-8 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          />
+          {search && (
+            <button type="button" onClick={() => onSearchChange('')} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400" aria-label="Clear search">
+              <X size={14} />
+            </button>
           )}
         </div>
-        {activeCount > 0 && (
+
+        <div className="flex flex-wrap gap-2 items-center">
+          <Select
+            label="Date Range"
+            value={filters.dateFilter === 'all' ? '' : filters.dateFilter}
+            options={DATE_FILTERS}
+            allLabel="Date Range"
+            onChange={(v) => onChange({ ...filters, dateFilter: v || 'all' })}
+          />
+          <Select
+            label="Order Status"
+            value={filters.statuses?.[0] || ''}
+            options={STATUS_FILTER_OPTIONS}
+            allLabel="All Status"
+            onChange={(v) => onChange({ ...filters, statuses: v ? [v] : [] })}
+          />
+          <Select
+            label="Payment Mode"
+            value={filters.paymentModes?.[0] || ''}
+            options={PAYMENT_FILTERS}
+            allLabel="Payment"
+            onChange={(v) => onChange({ ...filters, paymentModes: v ? [v] : [] })}
+          />
+          <Select
+            label="Delivery Mode"
+            value={filters.deliveryModes?.[0] || ''}
+            options={DELIVERY_FILTERS}
+            allLabel="Delivery"
+            onChange={(v) => onChange({ ...filters, deliveryModes: v ? [v] : [] })}
+          />
+
+          <button
+            type="button"
+            onClick={() => setShowMore((v) => !v)}
+            className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border transition-colors ${
+              showMore
+                ? 'bg-emerald-50 border-emerald-300 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800 dark:text-emerald-300'
+                : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+            }`}
+          >
+            <Filter size={14} /> Filters
+          </button>
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex items-center gap-1 text-xs text-slate-500 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
-            <X size={12} /> Clear all
+            <RotateCcw size={14} /> Reset
           </button>
-        )}
-      </div>
-
-      <div>
-        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2 flex items-center gap-1">
-          <Calendar size={12} /> Date
-        </p>
-        <div className="flex flex-wrap gap-1.5">
-          {DATE_FILTERS.map((opt) => {
-            const active = filters.dateFilter === opt.id;
-            return (
-              <button
-                key={opt.id}
-                type="button"
-                onClick={() => onChange({ ...filters, dateFilter: active ? 'all' : opt.id })}
-                aria-pressed={active}
-                className={`px-2.5 py-1 rounded-lg text-xs font-medium border transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
-                  active
-                    ? 'bg-emerald-500 text-white border-emerald-500'
-                    : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
-                }`}
-              >
-                {opt.label}
-              </button>
-            );
-          })}
         </div>
-        {filters.dateFilter === 'custom' && (
-          <div className="mt-2 flex flex-wrap gap-2">
-            <label className="text-xs text-slate-500">
-              From
-              <input
-                type="date"
-                value={filters.customRange?.from || ''}
-                onChange={(e) =>
-                  onChange({
-                    ...filters,
-                    customRange: { ...filters.customRange, from: e.target.value },
-                  })
-                }
-                className="ml-1 px-2 py-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-xs"
-              />
-            </label>
-            <label className="text-xs text-slate-500">
-              To
-              <input
-                type="date"
-                value={filters.customRange?.to || ''}
-                onChange={(e) =>
-                  onChange({
-                    ...filters,
-                    customRange: { ...filters.customRange, to: e.target.value },
-                  })
-                }
-                className="ml-1 px-2 py-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-xs"
-              />
-            </label>
-          </div>
-        )}
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <ChipGroup label="Status" options={STATUS_FILTER_OPTIONS} selected={filters.statuses || []} onToggle={(id) => toggle('statuses', id)} />
-        <ChipGroup label="Payment" options={PAYMENT_FILTERS} selected={filters.paymentModes || []} onToggle={(id) => toggle('paymentModes', id)} />
-        <ChipGroup label="Delivery" options={DELIVERY_FILTERS} selected={filters.deliveryModes || []} onToggle={(id) => toggle('deliveryModes', id)} />
-        <ChipGroup label="Other" options={OTHER_FILTERS} selected={filters.other || []} onToggle={(id) => toggle('other', id)} />
+      {filters.dateFilter === 'custom' && (
+        <div className="flex flex-wrap gap-2 px-1">
+          <input
+            type="date"
+            value={filters.customRange?.from || ''}
+            onChange={(e) => onChange({ ...filters, customRange: { ...filters.customRange, from: e.target.value } })}
+            className="px-2 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-sm bg-white dark:bg-slate-900"
+          />
+          <input
+            type="date"
+            value={filters.customRange?.to || ''}
+            onChange={(e) => onChange({ ...filters, customRange: { ...filters.customRange, to: e.target.value } })}
+            className="px-2 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-sm bg-white dark:bg-slate-900"
+          />
+        </div>
+      )}
+
+      {showMore && (
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3">
+          <p className="text-xs font-semibold text-slate-500 mb-2">More filters</p>
+          <div className="flex flex-wrap gap-1.5">
+            {OTHER_FILTERS.map((opt) => {
+              const active = (filters.other || []).includes(opt.id);
+              return (
+                <button
+                  key={opt.id}
+                  type="button"
+                  onClick={() => {
+                    const list = filters.other || [];
+                    onChange({
+                      ...filters,
+                      other: active ? list.filter((x) => x !== opt.id) : [...list, opt.id],
+                    });
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-medium border ${
+                    active
+                      ? 'bg-emerald-500 text-white border-emerald-500'
+                      : 'border-slate-200 dark:border-slate-700'
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Status pills */}
+      <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin" role="tablist" aria-label="Order status">
+        {STATUS_PILLS.map((pill) => {
+          const active = activeStatus === pill.id || (pill.id === 'all' && !filters.statuses?.length);
+          const count = pill.id === 'all'
+            ? Object.values(statusCounts).reduce((a, b) => a + b, 0) || undefined
+            : statusCounts[pill.id];
+          return (
+            <button
+              key={pill.id}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              onClick={() => setStatusPill(pill.id)}
+              className={`shrink-0 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
+                active
+                  ? 'bg-emerald-500 text-white shadow-sm'
+                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+              }`}
+            >
+              {pill.label}
+              {count != null && count > 0 && (
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${active ? 'bg-white/25' : 'bg-slate-100 dark:bg-slate-800'}`}>
+                  {count}
+                </span>
+              )}
+            </button>
+          );
+        })}
       </div>
     </div>
   );

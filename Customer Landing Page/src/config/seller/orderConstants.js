@@ -52,10 +52,10 @@ export const STATUS_LABELS = {
 /** Step 20 — Professional status colors */
 export const STATUS_COLORS = {
   [ORDER_STATUS.NEW]: {
-    bg: 'bg-amber-100 dark:bg-amber-900/30',
-    text: 'text-amber-700 dark:text-amber-300',
-    dot: 'bg-amber-500',
-    label: '🟡',
+    bg: 'bg-violet-100 dark:bg-violet-900/30',
+    text: 'text-violet-700 dark:text-violet-300',
+    dot: 'bg-violet-500',
+    label: '🟣',
   },
   [ORDER_STATUS.ACCEPTED]: {
     bg: 'bg-blue-100 dark:bg-blue-900/30',

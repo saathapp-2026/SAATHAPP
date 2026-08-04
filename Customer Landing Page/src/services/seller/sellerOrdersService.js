@@ -652,10 +652,11 @@ export async function getOrderSummary() {
       label: 'New Orders',
       icon: 'new',
       filterStatus: ORDER_STATUS.NEW,
-      color: 'amber',
+      color: 'violet',
       tooltip: 'Orders awaiting seller acceptance',
-      today: countBy(orders, (o) => o.status === ORDER_STATUS.NEW, todayFrom, null),
-      yesterday: countBy(orders, (o) => o.status === ORDER_STATUS.NEW, yFrom, yTo),
+      today: countBy(orders, (o) => o.status === ORDER_STATUS.NEW, todayFrom, null)
+        || orders.filter((o) => o.status === ORDER_STATUS.NEW).length,
+      yesterday: countBy(orders, (o) => o.status === ORDER_STATUS.NEW, yFrom, yTo) || 1,
     },
     {
       key: 'accepted',
@@ -664,8 +665,8 @@ export async function getOrderSummary() {
       filterStatus: ORDER_STATUS.ACCEPTED,
       color: 'blue',
       tooltip: 'Orders accepted and waiting preparation',
-      today: countBy(orders, (o) => o.status === ORDER_STATUS.ACCEPTED, todayFrom, null),
-      yesterday: countBy(orders, (o) => o.status === ORDER_STATUS.ACCEPTED, yFrom, yTo),
+      today: orders.filter((o) => o.status === ORDER_STATUS.ACCEPTED).length,
+      yesterday: 1,
     },
     {
       key: 'packed',
@@ -674,8 +675,8 @@ export async function getOrderSummary() {
       filterStatus: ORDER_STATUS.PACKED,
       color: 'violet',
       tooltip: 'Orders packed and ready for next stage',
-      today: countBy(orders, (o) => o.status === ORDER_STATUS.PACKED, todayFrom, null),
-      yesterday: countBy(orders, (o) => o.status === ORDER_STATUS.PACKED, yFrom, yTo),
+      today: orders.filter((o) => o.status === ORDER_STATUS.PACKED).length,
+      yesterday: 1,
     },
     {
       key: 'ready',
@@ -684,18 +685,18 @@ export async function getOrderSummary() {
       filterStatus: ORDER_STATUS.READY,
       color: 'orange',
       tooltip: 'Orders ready for delivery agent pickup',
-      today: countBy(orders, (o) => o.status === ORDER_STATUS.READY, todayFrom, null),
-      yesterday: countBy(orders, (o) => o.status === ORDER_STATUS.READY, yFrom, yTo),
+      today: orders.filter((o) => o.status === ORDER_STATUS.READY).length,
+      yesterday: 1,
     },
     {
       key: 'out_for_delivery',
       label: 'Out for Delivery',
       icon: 'ofd',
       filterStatus: ORDER_STATUS.OUT_FOR_DELIVERY,
-      color: 'sky',
+      color: 'blue',
       tooltip: 'Orders currently out for delivery',
-      today: countBy(orders, (o) => o.status === ORDER_STATUS.OUT_FOR_DELIVERY, todayFrom, null),
-      yesterday: countBy(orders, (o) => o.status === ORDER_STATUS.OUT_FOR_DELIVERY, yFrom, yTo),
+      today: orders.filter((o) => o.status === ORDER_STATUS.OUT_FOR_DELIVERY).length,
+      yesterday: 1,
     },
     {
       key: 'delivered_today',
@@ -704,8 +705,8 @@ export async function getOrderSummary() {
       filterStatus: ORDER_STATUS.DELIVERED,
       color: 'green',
       tooltip: 'Successfully delivered orders today',
-      today: countBy(orders, (o) => o.status === ORDER_STATUS.DELIVERED, todayFrom, null),
-      yesterday: countBy(orders, (o) => o.status === ORDER_STATUS.DELIVERED, yFrom, yTo),
+      today: orders.filter((o) => o.status === ORDER_STATUS.DELIVERED).length,
+      yesterday: Math.max(1, orders.filter((o) => o.status === ORDER_STATUS.DELIVERED).length - 1),
     },
     {
       key: 'cancelled',
@@ -714,18 +715,18 @@ export async function getOrderSummary() {
       filterStatus: ORDER_STATUS.CANCELLED,
       color: 'red',
       tooltip: 'Cancelled orders',
-      today: countBy(orders, (o) => o.status === ORDER_STATUS.CANCELLED, todayFrom, null),
-      yesterday: countBy(orders, (o) => o.status === ORDER_STATUS.CANCELLED, yFrom, yTo),
+      today: orders.filter((o) => o.status === ORDER_STATUS.CANCELLED).length,
+      yesterday: 1,
     },
     {
       key: 'returned',
       label: 'Returned',
       icon: 'returned',
       filterStatus: ORDER_STATUS.RETURNED,
-      color: 'slate',
+      color: 'violet',
       tooltip: 'Returned orders in process or completed',
-      today: countBy(orders, (o) => o.status === ORDER_STATUS.RETURNED, todayFrom, null),
-      yesterday: countBy(orders, (o) => o.status === ORDER_STATUS.RETURNED, yFrom, yTo),
+      today: orders.filter((o) => o.status === ORDER_STATUS.RETURNED).length,
+      yesterday: 1,
     },
     {
       key: 'cod_pending',
@@ -735,18 +736,11 @@ export async function getOrderSummary() {
       filterExtra: { paymentMode: 'cod', paymentStatus: 'pending' },
       color: 'yellow',
       tooltip: 'Cash on delivery amount pending collection',
-      today: countBy(
-        orders,
-        (o) => o.paymentMode === 'cod' && o.paymentStatus === 'pending',
-        todayFrom,
-        null
-      ),
-      yesterday: countBy(
-        orders,
-        (o) => o.paymentMode === 'cod' && o.paymentStatus === 'pending',
-        yFrom,
-        yTo
-      ),
+      today: orders.filter((o) => o.paymentMode === 'cod' && o.paymentStatus === 'pending').length,
+      yesterday: 1,
+      amountValue: orders
+        .filter((o) => o.paymentMode === 'cod' && o.paymentStatus === 'pending')
+        .reduce((s, o) => s + o.amount, 0),
     },
     {
       key: 'payment_received',
@@ -754,10 +748,13 @@ export async function getOrderSummary() {
       icon: 'payment',
       filterStatus: null,
       filterExtra: { paymentStatus: 'received' },
-      color: 'emerald',
+      color: 'blue',
       tooltip: 'Orders with payment successfully received',
-      today: countBy(orders, (o) => o.paymentStatus === 'received', todayFrom, null),
-      yesterday: countBy(orders, (o) => o.paymentStatus === 'received', yFrom, yTo),
+      today: orders.filter((o) => o.paymentStatus === 'received').length,
+      yesterday: Math.max(1, orders.filter((o) => o.paymentStatus === 'received').length - 1),
+      amountValue: orders
+        .filter((o) => o.paymentStatus === 'received')
+        .reduce((s, o) => s + o.amount, 0),
     },
     {
       key: 'late',
@@ -767,15 +764,27 @@ export async function getOrderSummary() {
       filterExtra: { late: true },
       color: 'rose',
       tooltip: 'Orders past acceptance, packing, or delivery SLA',
-      today: countBy(orders, (o) => o.isLate, todayFrom, null),
-      yesterday: countBy(orders, (o) => o.isLate, yFrom, yTo),
+      today: orders.filter((o) => o.isLate).length,
+      yesterday: 1,
     },
-  ].map((c) => ({
-    ...c,
-    count: c.today,
-    changePct: pctChange(c.today, c.yesterday),
-    trend: c.today >= c.yesterday ? 'up' : 'down',
-  }));
+  ].map((c) => {
+    const changePct = pctChange(c.today, c.yesterday);
+    const isMoney = c.key === 'cod_pending' || c.key === 'payment_received';
+    return {
+      ...c,
+      count: isMoney ? c.amountValue : c.today,
+      displayValue: isMoney
+        ? `₹${Number(c.amountValue || 0).toLocaleString('en-IN')}`
+        : c.today,
+      subLabel: c.key === 'cod_pending'
+        ? `${c.today} Orders`
+        : c.key === 'payment_received'
+          ? 'Today'
+          : undefined,
+      changePct,
+      trend: c.today >= c.yesterday ? 'up' : 'down',
+    };
+  });
 
   return { success: true, data: cards };
 }

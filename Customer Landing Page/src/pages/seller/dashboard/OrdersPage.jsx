@@ -3,7 +3,6 @@ import toast, { Toaster } from 'react-hot-toast';
 import {
   OrderSummaryCards,
   OrderFilters,
-  OrderSearch,
   OrdersTable,
   OrderDetailsDrawer,
   DeliveryAssignModal,
@@ -11,7 +10,6 @@ import {
   ConfirmDialog,
   ReasonDialog,
   OrderAnalytics,
-  FloatingQuickActionBar,
   BulkActionsBar,
   printInvoice,
   printShippingLabel,
@@ -20,7 +18,6 @@ import {
   printPackingSlip,
   downloadPdfPlaceholder,
 } from '../../../components/seller/orders';
-import DashboardBreadcrumbs from '../../../components/seller/DashboardBreadcrumbs';
 import {
   getOrderSummary,
   getOrders,
@@ -76,7 +73,7 @@ export default function OrdersPage() {
   const [sortBy, setSortBy] = useState('createdAt');
   const [sortDir, setSortDir] = useState('desc');
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(8);
+  const [pageSize, setPageSize] = useState(6);
 
   const [orders, setOrders] = useState([]);
   const [meta, setMeta] = useState({ total: 0, totalPages: 1 });
@@ -92,7 +89,7 @@ export default function OrdersPage() {
   const [reasonState, setReasonState] = useState(null);
   const [assignOrder, setAssignOrder] = useState(null);
   const [handoverOrder, setHandoverOrder] = useState(null);
-  const [showAnalytics, setShowAnalytics] = useState(true);
+  const [showAnalytics, setShowAnalytics] = useState(false);
 
   const queryFilters = useMemo(
     () => ({
@@ -417,32 +414,66 @@ export default function OrdersPage() {
     });
   };
 
-  const newOrdersCount = summary.find((c) => c.key === 'new')?.count || 0;
+  const newOrdersCount = summary.find((c) => c.key === 'new')?.today || 0;
+
+  const statusCounts = useMemo(() => {
+    const map = {};
+    summary.forEach((c) => {
+      if (c.filterStatus) map[c.filterStatus] = c.today;
+    });
+    return map;
+  }, [summary]);
+
+  const handleExport = async () => {
+    const res = await exportOrders('csv', queryFilters);
+    if (!res.success) return toast.error('Export failed');
+    const blob = new Blob([res.data.content], { type: res.data.mime });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = res.data.filename;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Exported');
+  };
 
   return (
-    <div className="space-y-6 pb-24">
+    <div className="space-y-4 pb-28">
       <Toaster position="top-right" toastOptions={{ duration: 2800 }} />
-      <DashboardBreadcrumbs />
 
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold">Orders</h1>
-          <p className="text-slate-500 text-sm mt-0.5">Manage and fulfill customer orders</p>
+          <h1 className="text-2xl font-bold tracking-tight">Orders</h1>
+          <p className="text-slate-500 text-sm mt-0.5">Manage and fulfill customer orders efficiently.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => setShowAnalytics((v) => !v)}
-            className="px-4 py-2 rounded-xl text-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
+            onClick={handleExport}
+            className="px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
-            {showAnalytics ? 'Hide Analytics' : 'Show Analytics'}
+            Export
           </button>
           <button
             type="button"
-            onClick={refreshAll}
-            className="px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600"
+            onClick={() => toast('Import orders (API placeholder)')}
+            className="px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
-            Refresh
+            Import
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowAnalytics((v) => !v)}
+            className="px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800"
+          >
+            {showAnalytics ? 'Hide Reports' : 'Reports'}
+          </button>
+          <button
+            type="button"
+            onClick={() => toast.success('Create Order (API placeholder)')}
+            className="px-4 py-2 rounded-lg text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm"
+          >
+            Create Order
           </button>
         </div>
       </div>
@@ -452,26 +483,22 @@ export default function OrdersPage() {
         loading={summaryLoading}
         onCardClick={handleCardClick}
         activeKey={activeCard}
+        primaryOnly
       />
 
       {showAnalytics && <OrderAnalytics filters={queryFilters} />}
 
-      <OrderSearch value={search} onChange={(v) => { setSearch(v); setPage(1); }} />
-
       <OrderFilters
         filters={filters}
+        search={search}
+        onSearchChange={(v) => { setSearch(v); setPage(1); }}
         onChange={(f) => { setFilters(f); setPage(1); }}
-        onReset={() => { setFilters(DEFAULT_FILTERS); setActiveCard(null); setPage(1); }}
-      />
-
-      <BulkActionsBar
-        count={selectedIds.size}
-        onAction={handleBulk}
-        loading={loadingAction === 'bulk'}
+        onReset={() => { setFilters(DEFAULT_FILTERS); setSearch(''); setActiveCard(null); setPage(1); }}
+        statusCounts={statusCounts}
       />
 
       {error ? (
-        <div className="rounded-2xl border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/20 p-6 text-center" role="alert">
+        <div className="rounded-xl border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/20 p-6 text-center" role="alert">
           <p className="text-sm text-red-600 mb-3">{error}</p>
           <button type="button" onClick={loadOrders} className="text-sm font-medium text-red-600 hover:underline">
             Try again
@@ -489,14 +516,22 @@ export default function OrdersPage() {
           sortDir={sortDir}
           onSort={handleSort}
           page={page}
+          pageSize={pageSize}
           totalPages={meta.totalPages}
           total={meta.total}
           onPageChange={setPage}
+          onPageSizeChange={(n) => { setPageSize(n); setPage(1); }}
           onAction={handleAction}
           loadingAction={loadingAction}
           onRowClick={openDetails}
         />
       )}
+
+      <BulkActionsBar
+        count={selectedIds.size}
+        onAction={handleBulk}
+        loading={loadingAction === 'bulk'}
+      />
 
       <OrderDetailsDrawer
         open={drawerOpen}
@@ -511,7 +546,6 @@ export default function OrdersPage() {
           else if (id === 'chat') handleAction('chat', selectedOrder);
           else if (id === 'directions') handleAction('directions', selectedOrder);
           else if (id === 'previous') {
-            setFilters((f) => ({ ...f }));
             setSearch(selectedOrder.customer.phone);
             setDrawerOpen(false);
             toast('Showing previous orders for customer');
@@ -520,7 +554,7 @@ export default function OrdersPage() {
             await blockCustomer(selectedOrder.customer.id, !selectedOrder.customer.blocked);
             toast.success(selectedOrder.customer.blocked ? 'Customer unblocked' : 'Customer blocked');
             await refreshAll();
-          } else if (id === 'notes') toast('Scroll to notes section below');
+          } else if (id === 'notes') toast('Notes section is in the drawer overview');
         }}
         onReturnAdvance={async (next) => {
           const res = await runWithLoading(
@@ -569,7 +603,7 @@ export default function OrdersPage() {
             () => confirmHandover(order.id, data),
             'Handover verified — out for delivery'
           );
-          if (res?.success) notify('Agent Arrived / Handover', `Order ${order.id}`);
+          if (res?.data) notify('Agent Arrived / Handover', `Order ${order.id}`);
         }}
       />
 
@@ -591,21 +625,10 @@ export default function OrdersPage() {
         onConfirm={confirmState?.onConfirm}
       />
 
-      <FloatingQuickActionBar
-        badgeCount={newOrdersCount}
-        onAction={(id) => {
-          if (id === 'new_orders') {
-            handleCardClick({ key: 'new', filterStatus: ORDER_STATUS.NEW });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (id === 'support') toast('Customer support (placeholder)');
-          else if (id === 'delivery') setFilters((f) => ({ ...f, statuses: [ORDER_STATUS.READY, ORDER_STATUS.PICKUP_ASSIGNED] }));
-          else if (id === 'print') toast('Select orders and use Print Invoice / Labels');
-          else if (id === 'reports') {
-            setShowAnalytics(true);
-            window.scrollTo({ top: 400, behavior: 'smooth' });
-          }
-        }}
-      />
+      {/* Subtle badge for new orders — matches mock sidebar badge intent */}
+      {newOrdersCount > 0 && (
+        <span className="sr-only">{newOrdersCount} new orders</span>
+      )}
     </div>
   );
 }

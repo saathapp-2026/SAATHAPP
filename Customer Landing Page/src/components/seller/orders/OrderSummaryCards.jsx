@@ -2,8 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
   ShoppingBag,
-  CheckCircle2,
-  Package,
   PackageCheck,
   Truck,
   BadgeCheck,
@@ -11,15 +9,12 @@ import {
   RotateCcw,
   Banknote,
   CreditCard,
-  ClockAlert,
   TrendingUp,
   TrendingDown,
 } from 'lucide-react';
 
 const ICONS = {
   new: ShoppingBag,
-  accepted: CheckCircle2,
-  packed: Package,
   ready: PackageCheck,
   ofd: Truck,
   delivered: BadgeCheck,
@@ -27,42 +22,55 @@ const ICONS = {
   returned: RotateCcw,
   cod: Banknote,
   payment: CreditCard,
-  late: ClockAlert,
 };
 
-const COLOR_MAP = {
-  amber: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-900',
-  blue: 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-900',
-  violet: 'text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 border-violet-200 dark:border-violet-900',
-  orange: 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/40 border-orange-200 dark:border-orange-900',
-  sky: 'text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-950/40 border-sky-200 dark:border-sky-900',
-  green: 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/40 border-green-200 dark:border-green-900',
-  red: 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-900',
-  slate: 'text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700',
-  yellow: 'text-yellow-700 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-950/40 border-yellow-200 dark:border-yellow-900',
-  emerald: 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-900',
-  rose: 'text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-900',
+const ICON_BG = {
+  violet: 'bg-violet-100 text-violet-600 dark:bg-violet-900/40 dark:text-violet-300',
+  orange: 'bg-orange-100 text-orange-600 dark:bg-orange-900/40 dark:text-orange-300',
+  blue: 'bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300',
+  sky: 'bg-sky-100 text-sky-600 dark:bg-sky-900/40 dark:text-sky-300',
+  green: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-300',
+  red: 'bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-300',
+  slate: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300',
+  yellow: 'bg-amber-100 text-amber-600 dark:bg-amber-900/40 dark:text-amber-300',
+  emerald: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-300',
+  amber: 'bg-violet-100 text-violet-600 dark:bg-violet-900/40 dark:text-violet-300',
 };
+
+/** Primary cards shown in the mockup row */
+export const PRIMARY_SUMMARY_KEYS = [
+  'new',
+  'ready',
+  'out_for_delivery',
+  'delivered_today',
+  'cancelled',
+  'returned',
+  'cod_pending',
+  'payment_received',
+];
 
 function SummaryCardSkeleton() {
   return (
-    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 animate-pulse">
-      <div className="flex items-start justify-between mb-3">
-        <div className="h-9 w-9 rounded-xl bg-slate-200 dark:bg-slate-700" />
-        <div className="h-4 w-12 rounded bg-slate-200 dark:bg-slate-700" />
+    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3.5 animate-pulse min-w-[140px]">
+      <div className="flex justify-between mb-3">
+        <div className="h-9 w-9 rounded-lg bg-slate-200 dark:bg-slate-700" />
       </div>
-      <div className="h-3 w-20 rounded bg-slate-200 dark:bg-slate-700 mb-2" />
-      <div className="h-7 w-10 rounded bg-slate-200 dark:bg-slate-700 mb-2" />
-      <div className="h-3 w-24 rounded bg-slate-200 dark:bg-slate-700" />
+      <div className="h-3 w-16 rounded bg-slate-200 dark:bg-slate-700 mb-2" />
+      <div className="h-6 w-12 rounded bg-slate-200 dark:bg-slate-700 mb-2" />
+      <div className="h-3 w-20 rounded bg-slate-200 dark:bg-slate-700" />
     </div>
   );
 }
 
-export default function OrderSummaryCards({ cards = [], loading, onCardClick, activeKey }) {
+export default function OrderSummaryCards({ cards = [], loading, onCardClick, activeKey, primaryOnly = true }) {
+  const visible = primaryOnly
+    ? PRIMARY_SUMMARY_KEYS.map((k) => cards.find((c) => c.key === k)).filter(Boolean)
+    : cards;
+
   if (loading) {
     return (
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3" aria-busy="true" aria-label="Loading order summary">
-        {Array.from({ length: 11 }).map((_, i) => (
+      <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-3" aria-busy="true">
+        {Array.from({ length: 8 }).map((_, i) => (
           <SummaryCardSkeleton key={i} />
         ))}
       </div>
@@ -70,43 +78,44 @@ export default function OrderSummaryCards({ cards = [], loading, onCardClick, ac
   }
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3" role="list" aria-label="Order summary cards">
-      {cards.map((card, i) => {
+    <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-3" role="list" aria-label="Order summary cards">
+      {visible.map((card, i) => {
         const Icon = ICONS[card.icon] || ShoppingBag;
-        const colors = COLOR_MAP[card.color] || COLOR_MAP.slate;
+        const iconBg = ICON_BG[card.color] || ICON_BG.slate;
         const active = activeKey === card.key;
-        const TrendIcon = card.trend === 'up' ? TrendingUp : TrendingDown;
-        const trendColor = card.trend === 'up' ? 'text-emerald-600' : 'text-red-500';
+        const up = card.trend === 'up';
+        const TrendIcon = up ? TrendingUp : TrendingDown;
 
         return (
           <motion.button
             key={card.key}
             type="button"
             role="listitem"
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.03 }}
+            transition={{ delay: i * 0.02 }}
             title={card.tooltip}
-            aria-label={`${card.label}: ${card.count}. Today ${card.today}, yesterday ${card.yesterday}, ${card.changePct}% ${card.trend}`}
             onClick={() => onCardClick?.(card)}
-            className={`text-left rounded-2xl border p-4 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 ${colors} ${
-              active ? 'ring-2 ring-emerald-500 shadow-md' : ''
+            className={`text-left rounded-xl border bg-white dark:bg-slate-900 p-3.5 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
+              active
+                ? 'border-emerald-500 shadow-md ring-1 ring-emerald-500'
+                : 'border-slate-200 dark:border-slate-800'
             }`}
           >
-            <div className="flex items-start justify-between mb-2">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/70 dark:bg-slate-950/40">
-                <Icon size={18} aria-hidden="true" />
-              </span>
-              <span className={`inline-flex items-center gap-0.5 text-xs font-semibold ${trendColor}`}>
-                <TrendIcon size={12} aria-hidden="true" />
-                {Math.abs(card.changePct)}%
-              </span>
+            <div className={`inline-flex h-9 w-9 items-center justify-center rounded-lg mb-2.5 ${iconBg}`}>
+              <Icon size={17} aria-hidden="true" />
             </div>
-            <p className="text-xs font-medium opacity-80 mb-1 truncate">{card.label}</p>
-            <p className="text-2xl font-bold tabular-nums leading-none mb-1">{card.count}</p>
-            <p className="text-[11px] opacity-70">
-              Today {card.today} · Yday {card.yesterday}
+            <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate mb-1">{card.label}</p>
+            <p className="text-xl font-bold tabular-nums text-slate-900 dark:text-slate-50 leading-none mb-1.5">
+              {card.displayValue ?? card.count}
             </p>
+            <p className={`inline-flex items-center gap-0.5 text-[10px] font-semibold ${up ? 'text-emerald-600' : 'text-red-500'}`}>
+              <TrendIcon size={10} />
+              {up ? '+' : '-'}{Math.abs(card.changePct)}% from yesterday
+            </p>
+            {card.subLabel && (
+              <p className="text-[10px] text-slate-400 mt-0.5">{card.subLabel}</p>
+            )}
           </motion.button>
         );
       })}
