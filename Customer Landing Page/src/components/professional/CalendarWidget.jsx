@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, Info, Check, Plus, AlertTriangle } from 'lucide-react';
+import { Calendar, Info, Plus } from 'lucide-react';
 
 export default function CalendarWidget() {
   const [blockedDates, setBlockedDates] = useState([12, 18, 25]); // Days in July 2026

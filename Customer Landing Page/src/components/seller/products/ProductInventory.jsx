@@ -12,7 +12,7 @@ export default function ProductInventory({ value, errors = {}, onChange, sku }) 
   return (
     <div className="space-y-4">
       <SectionCard number={5} title="Inventory Management">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="Initial Stock" required error={errors.initialStock}>
             <TextInput type="number" min="0" value={value.initialStock} onChange={(e) => set('initialStock', e.target.value)} />
           </Field>
@@ -35,14 +35,14 @@ export default function ProductInventory({ value, errors = {}, onChange, sku }) 
           <Field label="Maximum Stock">
             <TextInput type="number" min="0" value={value.maxStock} onChange={(e) => set('maxStock', e.target.value)} />
           </Field>
-          <Field label="Reserved Stock">
+          <Field label="Reserved Stock" className="sm:col-span-2">
             <TextInput type="number" min="0" value={value.reservedStock} onChange={(e) => set('reservedStock', e.target.value)} />
           </Field>
         </div>
       </SectionCard>
 
       <SectionCard number="5b" title="Package Dimensions">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Field label="Weight (kg)">
             <TextInput type="number" min="0" step="0.01" value={value.weight} onChange={(e) => set('weight', e.target.value)} />
           </Field>

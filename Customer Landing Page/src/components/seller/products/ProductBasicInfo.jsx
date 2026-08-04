@@ -21,8 +21,8 @@ export default function ProductBasicInfo({
 
   return (
     <SectionCard number={1} title="Basic Information">
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-        <Field label="Product Name" required error={errors.name} className="sm:col-span-2 lg:col-span-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Field label="Product Name" required error={errors.name} className="sm:col-span-2">
           <TextInput
             value={value.name}
             onChange={(e) => set('name', e.target.value)}

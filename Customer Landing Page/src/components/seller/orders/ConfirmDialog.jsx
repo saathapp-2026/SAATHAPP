@@ -1,5 +1,7 @@
 import React from 'react';
 import { X } from 'lucide-react';
+import SellerOverlay from '../SellerOverlay';
+import { SELLER_Z } from '../../../config/seller/sellerZIndex';
 
 export default function ConfirmDialog({
   open,
@@ -13,12 +15,9 @@ export default function ConfirmDialog({
   onCancel,
   children,
 }) {
-  if (!open) return null;
-
   return (
-    <div className="fixed inset-0 z-[80] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
-      <button type="button" className="absolute inset-0 bg-black/50" aria-label="Close dialog" onClick={onCancel} />
-      <div className="relative w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-4">
+    <SellerOverlay open={open} onClose={onCancel} labelledBy="confirm-title" zIndex={SELLER_Z.modal}>
+      <div className="w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-4">
         <div className="flex items-start justify-between gap-3">
           <div>
             <h2 id="confirm-title" className="font-bold text-lg">{title}</h2>
@@ -50,6 +49,6 @@ export default function ConfirmDialog({
           </button>
         </div>
       </div>
-    </div>
+    </SellerOverlay>
   );
 }

@@ -1,10 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Search, Mic, Camera, ShoppingCart, User, Menu, Sun, Moon, Bell, ArrowRight, X, Sparkles, Flame, History,
-  Heart, Package, Settings, LogOut, MapPin, ChevronDown
-} from 'lucide-react';
+import { Search, Mic, Camera, ShoppingCart, Sun, Moon, Bell, ArrowRight, Sparkles, Flame, History, MapPin, ChevronDown } from 'lucide-react';
 import SaathAppLogo from '../assets/saathapp-logo.jpeg';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -12,18 +9,18 @@ export default function Header({
   cartCount, 
   onCartClick, 
   location, 
-  onLocationClick,
-  onLocationChange,
+  _onLocationClick,
+  _onLocationChange,
   onSearch, 
   onLogin,
   onSignup,
-  onProfile,
+  _onProfile,
   user,
   isAuthenticated = false,
-  onCartPage,
-  onOrdersPage,
-  onWishlistPage,
-  onSettingsPage,
+  _onCartPage,
+  _onOrdersPage,
+  _onWishlistPage,
+  _onSettingsPage,
   onLogout,
   darkMode, 
   toggleDarkMode,

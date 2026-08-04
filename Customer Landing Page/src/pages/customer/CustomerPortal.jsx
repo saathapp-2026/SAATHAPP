@@ -1,28 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {
-  ArrowLeft, CheckCircle2, ShoppingBag, Truck, ShieldCheck, MapPin, Star,
-  HelpCircle, ChevronUp, Wrench, Sparkles, DollarSign, Calendar, ArrowRight,
-  Lock, Search, Shield, Zap, Info, Play, ThumbsUp, UserCheck, Heart
-} from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Truck, ShieldCheck, MapPin, ChevronUp, Wrench, Sparkles, ArrowRight, Lock, Zap, ThumbsUp, UserCheck } from 'lucide-react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 export default function CustomerPortal({
-  cartItems,
+  _cartItems,
   cartCount,
-  cartTotal,
+  _cartTotal,
   location,
-  pincode,
+  _pincode,
   darkMode,
-  isCartOpen,
-  isVoiceModalOpen,
-  isImageModalOpen,
-  isLocationModalOpen,
-  isGpsLoading,
-  isListening,
-  isUploading,
+  _isCartOpen,
+  _isVoiceModalOpen,
+  _isImageModalOpen,
+  _isLocationModalOpen,
+  _isGpsLoading,
+  _isListening,
+  _isUploading,
   onCartClick,
   onLocationClick,
   onSearch,
@@ -39,13 +35,13 @@ export default function CustomerPortal({
   toggleDarkMode,
   onVoiceSearchClick,
   onImageSearchClick,
-  onDetectGPS,
-  onAddToCart,
-  onCategorySelect,
+  _onDetectGPS,
+  _onAddToCart,
+  _onCategorySelect,
   onBack
 }) {
   const navigate = useNavigate();
-  const [activeSubTab, setActiveSubTab] = useState('hero');
+  const [_activeSubTab, setActiveSubTab] = useState('hero');
   const [faqOpen, setFaqOpen] = useState([false, false, false, false, false]);
 
   const sectionRefs = {

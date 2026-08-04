@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {
-  ShieldCheck, ArrowLeft, Store, AlertTriangle, CheckCircle2,
-  Lock, Search, PhoneCall, Mail, ChevronDown, ChevronUp, ExternalLink, Award
-} from 'lucide-react';
+import { ShieldCheck, ArrowLeft, Store, AlertTriangle, CheckCircle2, Mail, ChevronDown, ChevronUp, Award } from 'lucide-react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 

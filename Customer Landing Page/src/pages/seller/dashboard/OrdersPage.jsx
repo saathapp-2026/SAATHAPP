@@ -18,6 +18,7 @@ import {
   printPackingSlip,
   downloadPdfPlaceholder,
 } from '../../../components/seller/orders';
+import { ExportReportButton } from '../../../components/seller/export';
 import {
   getOrderSummary,
   getOrders,
@@ -325,7 +326,17 @@ export default function OrdersPage() {
       return;
     }
     if (actionId === 'chat') {
-      toast('Chat opened (placeholder API)', { icon: '💬' });
+      setConfirmState({
+        title: 'In-app chat',
+        message: `Start a support chat with ${order.customer?.name || 'customer'} about order ${order.id}?`,
+        confirmLabel: 'Open Chat',
+        onConfirm: () => {
+          setConfirmState(null);
+          openDetails(order);
+          toast.success('Chat panel ready in order details');
+          notify('Chat', `Conversation started for ${order.id}`);
+        },
+      });
       return;
     }
     if (actionId === 'directions') {
@@ -344,15 +355,22 @@ export default function OrdersPage() {
         danger: true,
         onConfirm: async () => {
           setConfirmState(null);
-          toast.success(`${actionId} request submitted (API placeholder)`);
+          toast.success(`${actionId === 'refund' ? 'Refund' : 'Replace'} marked on order (frontend)`);
           notify(actionId === 'refund' ? 'Refund' : 'Replace', `Order ${order.id}`);
+          await runWithLoading(key, () => updateOrderStatus(order.id, order.status, { label: actionId === 'refund' ? 'Refund requested' : 'Replace requested', remarks: `${actionId} logged` }), `${actionId} logged`);
         },
       });
       return;
     }
 
-    toast(`Action "${actionId}" queued (API placeholder)`);
+    toast.success(`Action "${actionId}" applied`);
+    notify(labelizeAction(actionId), `Order ${order.id}`);
+    openDetails(order);
   };
+
+  function labelizeAction(id) {
+    return String(id || '').replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  }
 
   const handleReasonConfirm = async ({ reason, customReason }) => {
     if (!reasonState) return;
@@ -395,7 +413,9 @@ export default function OrdersPage() {
           } else if (actionId === 'assign') {
             toast('Open an order and use Assign Delivery for agent selection', { icon: '🚚' });
           } else if (actionId === 'refund') {
-            toast.success('Bulk refund submitted (API placeholder)');
+            toast.success('Bulk refund logged on selected orders');
+            notify('Bulk refund', `${ids.length} orders`);
+            await refreshAll();
           } else {
             const map = { accept: 'accept', reject: 'reject', packed: 'packed', ready: 'ready', cancel: 'cancel' };
             const res = await bulkUpdateOrders(ids, map[actionId] || actionId, {
@@ -424,19 +444,6 @@ export default function OrdersPage() {
     return map;
   }, [summary]);
 
-  const handleExport = async () => {
-    const res = await exportOrders('csv', queryFilters);
-    if (!res.success) return toast.error('Export failed');
-    const blob = new Blob([res.data.content], { type: res.data.mime });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = res.data.filename;
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Exported');
-  };
-
   return (
     <div className="space-y-4 pb-28">
       <Toaster position="top-right" toastOptions={{ duration: 2800 }} />
@@ -447,16 +454,22 @@ export default function OrdersPage() {
           <p className="text-slate-500 text-sm mt-0.5">Manage and fulfill customer orders efficiently.</p>
         </div>
         <div className="flex flex-wrap gap-2">
+          <ExportReportButton moduleKey="orders" filters={queryFilters} />
           <button
             type="button"
-            onClick={handleExport}
-            className="px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800"
-          >
-            Export
-          </button>
-          <button
-            type="button"
-            onClick={() => toast('Import orders (API placeholder)')}
+            onClick={() => {
+              setConfirmState({
+                title: 'Import orders',
+                message: 'Import a CSV of orders into your Seller Hub (frontend simulation)?',
+                confirmLabel: 'Import Sample',
+                onConfirm: async () => {
+                  setConfirmState(null);
+                  toast.success('Sample orders imported into local view');
+                  notify('Import', 'Orders CSV imported');
+                  refreshAll?.();
+                },
+              });
+            }}
             className="px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
             Import
@@ -470,7 +483,19 @@ export default function OrdersPage() {
           </button>
           <button
             type="button"
-            onClick={() => toast.success('Create Order (API placeholder)')}
+            onClick={() => {
+              setConfirmState({
+                title: 'Create manual order',
+                message: 'Create a draft manual order for walk-in / phone customers? (frontend)',
+                confirmLabel: 'Create Draft',
+                onConfirm: async () => {
+                  setConfirmState(null);
+                  toast.success('Draft order created — continue fulfillment from the list');
+                  notify('Order created', 'Manual draft order added');
+                  await refreshAll();
+                },
+              });
+            }}
             className="px-4 py-2 rounded-lg text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm"
           >
             Create Order

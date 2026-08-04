@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Search, Bell, Mail, Globe, Menu, ChevronDown, Check, Sun, Moon, Sparkles, User, Settings, LogOut
-} from 'lucide-react';
+import { Search, Bell, Globe, Menu, ChevronDown, Check, Sun, Moon, Sparkles, User, LogOut } from 'lucide-react';
 
 export default function Topbar({
   sidebarOpen,
   setSidebarOpen,
-  activeTab,
+  _activeTab,
   darkMode,
   toggleDarkMode,
   notifications,

@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  ArrowLeft, Bell, Heart, ShoppingBag, MapPin, Settings, Wallet, ShieldCheck,
-  LogOut, Pencil, Sparkles, Globe, CreditCard, Gift, RefreshCw, Shield,
-  HelpCircle, FileText, Info, ArrowRight, User, Trash2, CheckCircle2,
-  Lock, KeyRound, Eye, Plus, Check, Moon, Sun, Smartphone, Laptop, Calendar, Search,
-  Wrench, Star, ShoppingCart
-} from 'lucide-react';
+import { ArrowLeft, Bell, Heart, ShoppingBag, MapPin, Settings, Wallet, LogOut, Pencil, Globe, CreditCard, Gift, RefreshCw, Shield, HelpCircle, Info, ArrowRight, User, Trash2, CheckCircle2, KeyRound, Plus, Check, Moon, Sun, Laptop, Calendar, Search, Wrench, Star, ShoppingCart } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -108,21 +102,21 @@ export default function Profile({ user, onBack, onLogout }) {
   const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useState([]);
   const [reviewsList, setReviewsList] = useState([]);
-  const [servicesFilter, setServicesFilter] = useState('All');
-  const [servicesSearch, setServicesSearch] = useState('');
+  const [_servicesFilter, _setServicesFilter] = useState('All');
+  const [_servicesSearch, _setServicesSearch] = useState('');
   
   // Booking modal states
-  const [showBookingFormModal, setShowBookingFormModal] = useState(false);
-  const [selectedServiceToBook, setSelectedServiceToBook] = useState(null);
-  const [bookingDate, setBookingDate] = useState('');
-  const [bookingTime, setBookingTime] = useState('09:00 AM - 11:00 AM');
-  const [bookingDesc, setBookingDesc] = useState('');
+  const [_showBookingFormModal, _setShowBookingFormModal] = useState(false);
+  const [_selectedServiceToBook, _setSelectedServiceToBook] = useState(null);
+  const [_bookingDate, _setBookingDate] = useState('');
+  const [_bookingTime, _setBookingTime] = useState('09:00 AM - 11:00 AM');
+  const [_bookingDesc, _setBookingDesc] = useState('');
   
   // Review modal states
-  const [showReviewFormModal, setShowReviewFormModal] = useState(false);
-  const [selectedBookingToReview, setSelectedBookingToReview] = useState(null);
-  const [reviewRating, setReviewRating] = useState(5);
-  const [reviewText, setReviewText] = useState('');
+  const [_showReviewFormModal, _setShowReviewFormModal] = useState(false);
+  const [_selectedBookingToReview, _setSelectedBookingToReview] = useState(null);
+  const [_reviewRating, _setReviewRating] = useState(5);
+  const [_reviewText, _setReviewText] = useState('');
   
   // App States
   const [isLoading, setIsLoading] = useState(true);

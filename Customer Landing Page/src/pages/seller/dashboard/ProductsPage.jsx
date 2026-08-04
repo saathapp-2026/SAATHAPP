@@ -23,6 +23,7 @@ import {
   CartesianGrid,
 } from 'recharts';
 import { ProductWizard, BulkUploadModal } from '../../../components/seller/products';
+import { ExportReportButton } from '../../../components/seller/export';
 import {
   getProducts,
   getProductSummaryStats,
@@ -171,8 +172,22 @@ export default function ProductsPage() {
     []
   );
 
+  // Wizard replaces list view — stays inside dashboard content (never under sidebar)
+  if (wizardOpen) {
+    return (
+      <>
+        <Toaster position="top-right" />
+        <ProductWizard
+          initialDraft={editDraft}
+          onClose={() => { setWizardOpen(false); setEditDraft(null); }}
+          onSaved={() => { load(); }}
+        />
+      </>
+    );
+  }
+
   return (
-    <div className="space-y-4 pb-8">
+    <div className="space-y-4 pb-8 w-full max-w-[1400px] mx-auto overflow-x-hidden">
       <Toaster position="top-right" />
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -181,6 +196,7 @@ export default function ProductsPage() {
           <p className="text-sm text-slate-500 mt-0.5">Manage your wholesale product inventory and details.</p>
         </div>
         <div className="flex flex-wrap gap-2">
+          <ExportReportButton moduleKey="products" />
           <button
             type="button"
             onClick={() => setShowAnalytics((v) => !v)}
@@ -463,14 +479,6 @@ export default function ProductsPage() {
           </>
         )}
       </div>
-
-      {wizardOpen && (
-        <ProductWizard
-          initialDraft={editDraft}
-          onClose={() => { setWizardOpen(false); setEditDraft(null); }}
-          onSaved={() => { load(); }}
-        />
-      )}
 
       <BulkUploadModal
         open={bulkOpen}

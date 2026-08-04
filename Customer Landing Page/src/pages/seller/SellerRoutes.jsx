@@ -6,6 +6,9 @@ import {
   getStoredSellerAuth,
   isSellerSessionValid,
   clearSellerAuth,
+  restoreSellerSession,
+  SELLER_AUTH_BYPASS,
+  ensureDevSellerBypass,
 } from '../../services/sellerAuthService';
 import PageSkeleton from '../../components/seller/PageSkeleton';
 import OnboardingStepGuard from '../../components/seller/OnboardingStepGuard';
@@ -40,19 +43,19 @@ const DashboardHome = lazy(() => import('./dashboard/DashboardHome'));
 const OnboardingDashboard = lazy(() => import('./dashboard/OnboardingDashboard'));
 const LazyOrders = lazy(() => import('./dashboard/OrdersPage'));
 const LazyProducts = lazy(() => import('./dashboard/ProductsPage'));
-const LazyInventory = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.InventoryPage })));
-const LazyCustomers = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.CustomersPage })));
-const LazyMarketing = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.MarketingPage })));
-const LazyAnalytics = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.AnalyticsPage })));
-const LazyWallet = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.WalletPage })));
-const LazyPayments = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.PaymentsPage })));
-const LazyInvoices = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.InvoicesPage })));
-const LazyReports = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.ReportsPage })));
-const LazyCoupons = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.CouponsPage })));
-const LazyAdvertisements = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.AdvertisementsPage })));
-const LazyStoreSettings = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.StoreSettingsPage })));
-const LazyDocuments = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.DocumentsPage })));
-const LazySupport = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.SupportPage })));
+const LazyInventory = lazy(() => import('./dashboard/InventoryPage'));
+const LazyCustomers = lazy(() => import('./dashboard/CustomersPage'));
+const LazyMarketing = lazy(() => import('./dashboard/MarketingPage'));
+const LazyAnalytics = lazy(() => import('./dashboard/AnalyticsPage'));
+const LazyWallet = lazy(() => import('./dashboard/WalletPage'));
+const LazyPayments = lazy(() => import('./dashboard/PaymentsPage'));
+const LazyInvoices = lazy(() => import('./dashboard/InvoicesPage'));
+const LazyReports = lazy(() => import('./dashboard/ReportsPage'));
+const LazyCoupons = lazy(() => import('./dashboard/CouponsPage'));
+const LazyAdvertisements = lazy(() => import('./dashboard/AdvertisementsPage'));
+const LazyStoreSettings = lazy(() => import('./dashboard/StoreSettingsPage'));
+const LazyDocuments = lazy(() => import('./dashboard/DocumentsPage'));
+const LazySupport = lazy(() => import('./dashboard/SupportPage'));
 const BrandingStorePage = lazy(() => import('./dashboard/BrandingStorePage'));
 const WelcomeKitPage = lazy(() => import('./dashboard/WelcomeKitPage'));
 const PublicBranding = lazy(() => import('./Branding'));
@@ -67,17 +70,26 @@ function RequireAuth({ children }) {
   const [sessionExpired, setSessionExpired] = useState(false);
 
   useEffect(() => {
-    const auth = getStoredSellerAuth();
-    if (auth && !isSellerSessionValid(auth)) {
-      clearSellerAuth();
-      setSessionExpired(true);
+    if (SELLER_AUTH_BYPASS) {
+      ensureDevSellerBypass();
+      setReady(true);
       return;
     }
-    if (!auth) {
+
+    const session = restoreSellerSession();
+
+    if (!session) {
+      const raw = getStoredSellerAuth();
+      if (raw && !isSellerSessionValid(raw)) {
+        clearSellerAuth();
+        setSessionExpired(true);
+        return;
+      }
       navigate('/seller/login', { replace: true, state: { from: window.location.pathname } });
-    } else {
-      setReady(true);
+      return;
     }
+
+    setReady(true);
   }, [navigate]);
 
   if (sessionExpired) return <SellerErrorPage type="session-expired" />;
@@ -108,7 +120,7 @@ function OnboardingGuard({ children }) {
   const applicationStatus = data?.status;
 
   useEffect(() => {
-    const auth = getStoredSellerAuth();
+    const auth = restoreSellerSession() || getStoredSellerAuth();
     if (isApproved(data, auth?.seller)) {
       navigate('/seller/dashboard', { replace: true });
       return;
@@ -131,7 +143,11 @@ function DashboardGuard({ children }) {
   const applicationStatus = data?.status;
 
   useEffect(() => {
-    const auth = getStoredSellerAuth();
+    if (SELLER_AUTH_BYPASS) {
+      ensureDevSellerBypass();
+      return;
+    }
+    const auth = restoreSellerSession() || getStoredSellerAuth();
     if (!isApproved(data, auth?.seller)) {
       if (isVerificationPending(data, auth?.seller)) {
         navigate('/seller/submitted', { replace: true });
@@ -140,6 +156,8 @@ function DashboardGuard({ children }) {
       }
     }
   }, [data, applicationStatus, navigate]);
+
+  if (SELLER_AUTH_BYPASS) return children;
 
   const auth = getStoredSellerAuth();
   if (!isApproved(data, auth?.seller)) return <PageSkeleton />;
@@ -152,9 +170,15 @@ function GuestRedirect() {
   const applicationStatus = data?.status;
 
   useEffect(() => {
-    const auth = getStoredSellerAuth();
-    if (auth && isSellerSessionValid(auth)) {
-      navigate(getPostLoginRedirect(data, auth.seller), { replace: true });
+    if (SELLER_AUTH_BYPASS) {
+      ensureDevSellerBypass();
+      navigate('/seller/dashboard', { replace: true });
+      return;
+    }
+    const session = restoreSellerSession();
+    if (session && isSellerSessionValid(session)) {
+      const dest = getPostLoginRedirect(data, session.seller);
+      navigate(dest, { replace: true });
     }
   }, [data, applicationStatus, navigate]);
 
@@ -169,11 +193,24 @@ function DashboardLayoutWrapper({ onLogout }) {
 export default function SellerRoutes() {
   const navigate = useNavigate();
 
+  // Hydrate/refresh persisted session before first paint of guards
+  useState(() => {
+    if (SELLER_AUTH_BYPASS) ensureDevSellerBypass();
+    else restoreSellerSession();
+    return true;
+  });
+
   const handleLogout = () => {
+    if (SELLER_AUTH_BYPASS) {
+      ensureDevSellerBypass();
+      navigate('/seller/dashboard', { replace: true });
+      return;
+    }
     clearSellerAuth();
-    navigate('/', { replace: true });
+    navigate('/seller/login', { replace: true });
   };
 
+  // Always read live storage so login/logout updates sellerId for OnboardingProvider
   const auth = getStoredSellerAuth();
   const sellerId = auth?.seller?.id;
 
@@ -182,11 +219,19 @@ export default function SellerRoutes() {
       <SellerUIProvider>
       <Suspense fallback={<PageSkeleton />}>
         <Routes>
-          <Route path="/seller" element={<Navigate to="/seller/welcome" replace />} />
+          <Route
+            path="/seller"
+            element={<Navigate to={SELLER_AUTH_BYPASS ? '/seller/dashboard' : '/seller/welcome'} replace />}
+          />
           <Route path="/seller/welcome" element={<><GuestRedirect /><SellerWelcome /></>} />
           <Route path="/seller/hub" element={<><GuestRedirect /><SellerLanding /></>} />
           <Route path="/seller/login" element={<><GuestRedirect /><SellerLogin /></>} />
-          <Route path="/seller/register" element={<SellerRegister />} />
+          <Route
+            path="/seller/register"
+            element={
+              SELLER_AUTH_BYPASS ? <Navigate to="/seller/dashboard" replace /> : <SellerRegister />
+            }
+          />
           <Route path="/seller/terms" element={<TermsAndConditions />} />
           <Route path="/seller/pricing" element={<Pricing />} />
           <Route path="/seller/branding" element={<PublicBranding />} />

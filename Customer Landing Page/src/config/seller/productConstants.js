@@ -247,7 +247,7 @@ export function calcPricing(pricing) {
   const gstAmount = pricing.taxInclusive ? (base * gstPct) / (100 + gstPct) : (base * gstPct) / 100;
   const commission = base * PLATFORM_COMMISSION_RATE;
   const platformFee = PLATFORM_FEE_FLAT;
-  const net = base - commission - platformFee + (pricing.taxInclusive ? 0 : 0) - packaging * 0;
+  const net = base - commission - platformFee;
   const costBasis = Number(pricing.wholesalePrice) || base * 0.7;
   const profit = net - costBasis;
   const margin = base > 0 ? Math.round((profit / base) * 10000) / 100 : 0;

@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ShoppingBag, Calendar, UserPlus, ArrowRight, Zap, Hammer, 
-  Tractor, ShoppingCart, Sparkles, ChevronLeft, ChevronRight 
-} from 'lucide-react';
+import { ShoppingBag, ArrowRight, Zap, Hammer, Tractor, ShoppingCart, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const slides = [
   {

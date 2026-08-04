@@ -15,7 +15,7 @@ export default function Signup({ onLogin, onSignup }) {
     { label: 'One special character (@ # $ % & * !)', test: /[^A-Za-z0-9]/.test(form.password) },
   ];
 
-  const passwordValid = passwordChecks.every((item) => item.test);
+  const _passwordValid = passwordChecks.every((item) => item.test);
 
   const validatePassword = () => {
     const messages = [];

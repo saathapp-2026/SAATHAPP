@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ShieldCheck, User, Phone, Mail, Award, Lock, UploadCloud, ArrowLeft, CheckCircle2, Info, Eye, EyeOff } from 'lucide-react';
+import { ShieldCheck, User, Phone, Mail, Lock, UploadCloud, ArrowLeft, CheckCircle2, Info, Eye, EyeOff } from 'lucide-react';
 import { getStoredPartners, registerPartner, updatePartnerStatus, savePartnerSession } from '../../services/authService';
 
 export default function WorkerRegisterPage() {
@@ -72,7 +72,7 @@ export default function WorkerRegisterPage() {
       } else {
         setError(result.message);
       }
-    } catch (err) {
+    } catch {
       setError('Failed to register. Please try again.');
     } finally {
       setLoading(false);

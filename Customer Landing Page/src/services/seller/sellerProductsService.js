@@ -246,9 +246,37 @@ export function loadProductDraft() {
 }
 
 export function saveProductDraftLocal(draft) {
-  const payload = { ...draft, updatedAt: Date.now() };
-  localStorage.setItem(DRAFT_KEY, JSON.stringify(payload));
-  return payload;
+  try {
+    const payload = { ...draft, updatedAt: Date.now() };
+    // Avoid blowing localStorage quota with huge data-URLs — keep a slim copy for recovery
+    const slim = {
+      ...payload,
+      media: {
+        ...payload.media,
+        mainImage: payload.media?.mainImage
+          ? {
+              id: payload.media.mainImage.id,
+              name: payload.media.mainImage.name,
+              progress: payload.media.mainImage.progress,
+              // Persist data/http URLs; blob URLs are session-only
+              url: payload.media.mainImage.url?.startsWith('blob:')
+                ? ''
+                : payload.media.mainImage.url,
+            }
+          : null,
+        gallery: (payload.media?.gallery || []).map((g) => ({
+          id: g.id,
+          name: g.name,
+          progress: g.progress,
+          url: g.url?.startsWith('blob:') ? '' : g.url,
+        })),
+      },
+    };
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(slim));
+    return payload;
+  } catch {
+    return draft;
+  }
 }
 
 export function clearProductDraftLocal() {
@@ -400,7 +428,16 @@ export function validateProductStep(draft, step) {
     }
   }
   if (step === 2) {
-    if (!draft.media.mainImage) errors.mainImage = 'Main image is required';
+    const main = draft?.media?.mainImage;
+    const url = main?.url;
+    const hasValidImage =
+      !!main &&
+      typeof url === 'string' &&
+      url.length > 32 &&
+      (url.startsWith('data:image') || url.startsWith('blob:') || url.startsWith('http://') || url.startsWith('https://'));
+    if (!hasValidImage) {
+      errors.mainImage = 'Main image is required';
+    }
   }
   if (step === 3) {
     if (!draft.description.short?.trim()) errors.short = 'Short description is required';

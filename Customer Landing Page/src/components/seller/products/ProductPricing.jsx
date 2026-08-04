@@ -22,7 +22,7 @@ export default function ProductPricing({ value, errors = {}, onChange }) {
   return (
     <div className="space-y-4">
       <SectionCard number={4} title="Pricing">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="MRP (₹)" required error={errors.mrp}>
             <TextInput type="number" min="0" value={value.mrp} onChange={(e) => set('mrp', e.target.value)} />
           </Field>
@@ -51,7 +51,7 @@ export default function ProductPricing({ value, errors = {}, onChange }) {
           <Field label="Min Order Qty (MOQ)">
             <TextInput type="number" min="1" value={value.moq} onChange={(e) => set('moq', e.target.value)} />
           </Field>
-          <Field label="Max Order Qty">
+          <Field label="Max Order Qty" className="sm:col-span-2">
             <TextInput type="number" min="1" value={value.maxOrderQty} onChange={(e) => set('maxOrderQty', e.target.value)} />
           </Field>
         </div>

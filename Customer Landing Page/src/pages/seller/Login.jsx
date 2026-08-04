@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
-import { loginSeller, getStoredOnboarding } from '../../services/sellerAuthService';
+import { loginSeller, getStoredOnboarding, normalizeEmail } from '../../services/sellerAuthService';
 import { getPostLoginRedirect } from '../../utils/sellerRouteUtils';
 
 export default function SellerLogin() {
@@ -17,13 +17,23 @@ export default function SellerLogin() {
     e.preventDefault();
     setLoading(true);
     setError('');
-    const result = await loginSeller({ email, password });
-    setLoading(false);
-    if (result.success) {
-      const onboarding = getStoredOnboarding();
-      navigate(getPostLoginRedirect(onboarding, result.seller));
-    } else {
-      setError(result.message);
+    try {
+      const result = await loginSeller({
+        email: normalizeEmail(email),
+        password,
+      });
+      if (result.success) {
+        const onboarding = getStoredOnboarding(result.seller?.id);
+        const dest = getPostLoginRedirect(onboarding, result.seller);
+        navigate(dest, { replace: true });
+      } else {
+        setError(result.message);
+      }
+    } catch (err) {
+      console.error('[SellerAuth] Login error', err);
+      setError('Login failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 

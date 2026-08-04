@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { User, Briefcase, CreditCard, Shield, Check, Edit2 } from 'lucide-react';
 
 export default function ProfileCard() {

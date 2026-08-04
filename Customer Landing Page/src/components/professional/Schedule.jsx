@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, MapPin, CheckCircle, Zap } from 'lucide-react';
+import { Clock, MapPin } from 'lucide-react';
 
 export default function Schedule() {
   const scheduleItems = [

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DashboardBreadcrumbs from '../../../components/seller/DashboardBreadcrumbs';
+import { ExportReportButton } from '../../../components/seller/export';
 import BrandingStore from '../../../components/seller/BrandingStore';
 import BrandingRequestsList from '../../../components/seller/BrandingRequestsList';
 import ActionBanner from '../../../components/seller/ActionBanner';
@@ -18,6 +19,9 @@ export default function BrandingStorePage() {
     <div className="space-y-6">
       <ActionBanner banner={banner} onDismiss={() => setBanner(null)} />
       <DashboardBreadcrumbs />
+      <div className="flex justify-end">
+        <ExportReportButton moduleKey="branding" />
+      </div>
       <BrandingStore variant="light" onRequestSubmitted={handleRequestSubmitted} />
       {requests.length > 0 && <BrandingRequestsList requests={requests} variant="light" />}
     </div>

@@ -47,7 +47,7 @@ export default function WorkerLoginPage() {
           setError('Incorrect password. Please try again.');
         }
       }
-    } catch (err) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);

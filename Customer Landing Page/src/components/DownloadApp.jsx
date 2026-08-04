@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Smartphone, Download, CheckCircle, Star } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 
 export default function DownloadApp() {
   return (

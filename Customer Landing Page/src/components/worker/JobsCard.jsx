@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  User, MapPin, Calendar, Clock, Phone, Navigation, Play, CheckCircle2, ChevronDown, ChevronUp, Check, AlertCircle, Upload, FileText, Camera, RefreshCw
-} from 'lucide-react';
+import { User, MapPin, Calendar, Clock, Phone, Navigation, Play, CheckCircle2, AlertCircle, Camera, RefreshCw } from 'lucide-react';
 
 export default function JobsCard({
   job,
   mode = 'assigned', // 'assigned', 'today', 'live', 'history'
   onAccept,
   onReject,
-  onNavigate,
-  onStart,
+  _onNavigate,
+  _onStart,
   onComplete,
   onSelectLiveJob,
   onViewDetails
 }) {
-  const [expanded, setExpanded] = useState(false);
+  const [_expanded, _setExpanded] = useState(false);
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState(false);
   

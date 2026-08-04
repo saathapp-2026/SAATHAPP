@@ -4,9 +4,6 @@ import SplashScreen from './pages/SplashScreen';
 import HomePage from './pages/Home';
 import LoginPage from './pages/Login';
 import SignupPage from './pages/Signup';
-import ForgotPasswordPage from './pages/ForgotPassword';
-import VerifyOTPPage from './pages/VerifyOTP';
-import ResetPasswordPage from './pages/ResetPassword';
 import ProfilePage from './pages/Profile';
 import CartPage from './pages/Cart';
 import OrdersPage from './pages/Orders';
@@ -57,11 +54,15 @@ import CustomerSupportPage from "./pages/trust/CustomerSupport";
 import WholesalePortalPage from "./pages/wholesale/WholesalePortalPage";
 import DeliveryPartnerPortalPage from "./pages/delivery/DeliveryPartnerPortalPage";
 import SellerRoutes from './pages/seller/SellerRoutes';
+<<<<<<< HEAD
 import { 
   getStoredUsers, registerUser, authenticateUser, resetPassword as resetAuthPassword, 
   getStoredAuthSession, saveAuthSession, clearAuthSession, isSessionValid,
   getStoredPartnerSession, clearPartnerSession
 } from './services/authService';
+=======
+import { getStoredUsers, registerUser, authenticateUser, getStoredAuthSession, saveAuthSession, clearAuthSession, isSessionValid, getStoredPartnerSession, clearPartnerSession } from './services/authService';
+>>>>>>> 6b95f6e (Update Customer Landing)
 
 export default function App() {
   const routerLocation = useLocation();
@@ -92,13 +93,12 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [darkMode, setDarkMode] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
-  const [authView, setAuthView] = useState(initialAuthSession && isSessionValid(initialAuthSession) ? 'home' : 'login');
+  const [, setAuthView] = useState(initialAuthSession && isSessionValid(initialAuthSession) ? 'home' : 'login');
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(initialAuthSession && isSessionValid(initialAuthSession)));
   const [user, setUser] = useState(initialAuthSession?.user ?? null);
   const [authReady, setAuthReady] = useState(false);
   const [activePage, setActivePage] = useState('home');
   const [errorMessage, setErrorMessage] = useState('');
-  const [otpContext, setOtpContext] = useState(null);
   const [users, setUsers] = useState(getStoredUsers());
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
@@ -282,7 +282,7 @@ export default function App() {
   const cartTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  const handleLogin = async ({ identifier, password, mode }) => {
+  const handleLogin = async ({ identifier, password, _mode }) => {
     const result = await authenticateUser(users, { identifier, password });
     if (!result.success) {
       if (result.reason === 'not_found') {
@@ -689,7 +689,6 @@ export default function App() {
       />
     );
   }
-
 
   if (routerLocation.pathname === '/terms-of-service') {
     return <TermsOfServicePage />;

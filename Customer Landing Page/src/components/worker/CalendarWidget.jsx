@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Clock, Info } from 'lucide-react';
+import { Calendar, Info } from 'lucide-react';
 
 export default function CalendarWidget() {
   // July 2026 calendar configurations

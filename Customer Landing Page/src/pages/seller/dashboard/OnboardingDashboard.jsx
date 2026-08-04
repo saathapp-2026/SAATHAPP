@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import OnboardingStatusCard from '../../../components/seller/OnboardingStatusCard';
 import DashboardBreadcrumbs from '../../../components/seller/DashboardBreadcrumbs';
+import { ExportReportButton } from '../../../components/seller/export';
 import ActionBanner from '../../../components/seller/ActionBanner';
 import { useOnboarding } from '../../../context/SellerOnboardingContext';
 import { renewSeller } from '../../../services/sellerApi';
@@ -33,9 +34,12 @@ export default function OnboardingDashboard() {
     <div className="space-y-6">
       <ActionBanner banner={banner} onDismiss={() => setBanner(null)} />
       <DashboardBreadcrumbs />
-      <div>
-        <h1 className="text-2xl font-bold">Seller Onboarding</h1>
-        <p className="text-slate-500 text-sm">Your one-time onboarding fee status and validity</p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold">Seller Onboarding</h1>
+          <p className="text-slate-500 text-sm">Your one-time onboarding fee status and validity</p>
+        </div>
+        <ExportReportButton moduleKey="onboarding" />
       </div>
       <OnboardingStatusCard
         onboardingFee={data.onboardingFee}

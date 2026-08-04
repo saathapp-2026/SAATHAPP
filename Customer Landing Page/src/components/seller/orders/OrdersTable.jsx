@@ -155,7 +155,7 @@ export default function OrdersTable({
   onToggleSelect,
   onToggleSelectAll,
   sortBy,
-  sortDir,
+  _sortDir,
   onSort,
   page,
   pageSize = 8,

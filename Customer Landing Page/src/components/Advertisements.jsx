@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Tag, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Tag, ChevronLeft, ChevronRight } from 'lucide-react';
 import { advertisements } from '../data/mockData';
 
 export default function Advertisements() {

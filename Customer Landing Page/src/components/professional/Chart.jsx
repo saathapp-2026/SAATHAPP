@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Calendar, DollarSign, PieChart, TrendingUp, Check } from 'lucide-react';
+import { Download, TrendingUp } from 'lucide-react';
 
 export default function Chart() {
   const [timeframe, setTimeframe] = useState('weekly'); // 'daily', 'weekly', 'monthly', 'yearly'

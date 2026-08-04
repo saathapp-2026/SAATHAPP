@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Navigation, Compass, Store, Timer, HelpCircle } from 'lucide-react';
+import { MapPin, Navigation, Store, Timer } from 'lucide-react';
 
 export default function LocationBar({ 
   location, 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Star, MessageSquare, ShieldCheck, Award } from 'lucide-react';
+import { Search, Star, Award } from 'lucide-react';
 
 export default function CustomerTable() {
   const [search, setSearch] = useState('');

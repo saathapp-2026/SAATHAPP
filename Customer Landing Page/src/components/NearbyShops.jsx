@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Store, Star, ArrowRight, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, ArrowRight, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { nearbyShops } from '../data/mockData';
 
 export default function NearbyShops({ onShopSelect }) {

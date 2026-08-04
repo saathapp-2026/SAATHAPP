@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Search, Wrench, ArrowRight } from 'lucide-react';
+import { Search } from 'lucide-react';
 
-export default function ServicesTab({ bookings, setBookings, walletBalance, setWalletBalance, transactions, setTransactions, orders, setOrders, setActiveTab }) {
+export default function ServicesTab({ _bookings, setBookings, _walletBalance, _setWalletBalance, _transactions, _setTransactions, _orders, _setOrders, setActiveTab }) {
   const [filter, setFilter] = useState('All');
   const [search, setSearch] = useState('');
   

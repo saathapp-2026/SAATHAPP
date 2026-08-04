@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  User, MapPin, Calendar, Clock, DollarSign, ChevronDown, ChevronUp, CheckCircle, Navigation, Play, FileText, Check
-} from 'lucide-react';
+import { User, MapPin, Calendar, Clock, ChevronDown, ChevronUp, CheckCircle, Navigation, Play } from 'lucide-react';
 
 export default function BookingCard({
   booking,

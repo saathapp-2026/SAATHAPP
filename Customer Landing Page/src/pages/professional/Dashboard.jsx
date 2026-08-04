@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Briefcase, Wrench, ShieldCheck, MapPin, Compass, AlertCircle, Phone, Mail, HelpCircle, FileText, Play, CheckCircle, Award, Star, MessageSquare, Wallet
-} from 'lucide-react';
+import { Briefcase, MapPin, AlertCircle, Phone, CheckCircle, Award, Star, Wallet } from 'lucide-react';
 
 // Import modular components
 import Sidebar from '../../components/professional/Sidebar';
@@ -21,25 +19,11 @@ import CustomerTable from '../../components/professional/CustomerTable';
 import DocumentsCard from '../../components/professional/DocumentsCard';
 import AvailabilityCard from '../../components/professional/AvailabilityCard';
 import { getStoredProfessionalOnboarding } from '../../services/professionalOnboardingService';
-import {
-  getStoredProfessionalMembership,
-  saveProfessionalMembership,
-} from '../../config/professional/membershipPlans';
+import { getStoredProfessionalMembership, saveProfessionalMembership } from '../../config/professional/membershipPlans';
 import { getWelcomeKitEligibilityStatus } from '../../config/professional/welcomeKitConfig';
 import { getStoredPartnerSession } from '../../services/authService';
 import { getProfessionalPricingConfig } from '../../config/professionalOnboardingConfig';
-import {
-  ProfessionalProfileSection,
-  MembershipSection,
-  WelcomeKitSection,
-  OnboardingInfoSection,
-  VerificationSection,
-  FeeSummarySection,
-  CommissionSection,
-  EquipmentSection,
-  BusinessServicesSection,
-  TermsCardSection,
-} from '../../components/professional/ControlSections';
+import { ProfessionalProfileSection, MembershipSection, WelcomeKitSection, OnboardingInfoSection, VerificationSection, FeeSummarySection, CommissionSection, EquipmentSection, BusinessServicesSection, TermsCardSection } from '../../components/professional/ControlSections';
 
 const EMPTY_STATS = {
   totalEarnings: 0,
@@ -58,7 +42,7 @@ export default function ProfessionalDashboardPage({
   darkMode,
   toggleDarkMode,
   onLogout,
-  onBack
+  _onBack
 }) {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isOnline, setIsOnline] = useState(true);

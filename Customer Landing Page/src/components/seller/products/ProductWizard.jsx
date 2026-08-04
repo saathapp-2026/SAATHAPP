@@ -25,29 +25,73 @@ import {
   aiDescriptionTools,
 } from '../../../services/seller/sellerProductsService';
 
+/**
+ * In-flow wizard — lives inside DashboardLayout main content.
+ * Never uses fixed full-viewport overlay (avoids sidebar collision).
+ */
 export default function ProductWizard({ initialDraft, onClose, onSaved }) {
   const [draft, setDraft] = useState(() => initialDraft || loadProductDraft() || emptyProductDraft());
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(() => {
+    const completed = (initialDraft || loadProductDraft())?.completedSteps || [];
+    if (!completed.length) return 1;
+    return Math.min(8, Math.max(...completed) + 1);
+  });
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [aiLoading, setAiLoading] = useState(null);
   const [suggesting, setSuggesting] = useState(false);
   const draftRef = useRef(draft);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     draftRef.current = draft;
   }, [draft]);
 
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+    setErrors({});
+  }, [step]);
+
   const updateDraft = useCallback((patch) => {
     setDraft((prev) => {
-      const next = typeof patch === 'function' ? patch(prev) : { ...prev, ...patch };
-      return { ...next, updatedAt: Date.now() };
+      let next;
+      if (typeof patch === 'function') {
+        next = { ...patch(prev), updatedAt: Date.now() };
+      } else {
+        next = { ...prev, ...patch, updatedAt: Date.now() };
+        // Nested media: allow function updater OR plain object
+        if (patch && typeof patch.media === 'function') {
+          next.media = patch.media(prev.media);
+        }
+      }
+      draftRef.current = next;
+      return next;
     });
     setDirty(true);
   }, []);
 
-  // Auto-save every 30s
+  const [mediaUploading, setMediaUploading] = useState(false);
+
+  const handleMediaChange = useCallback((nextMedia) => {
+    const media = { ...(nextMedia || {}) };
+    delete media.mainImageReady;
+    updateDraft({ media });
+    const url = media?.mainImage?.url;
+    if (
+      url &&
+      typeof url === 'string' &&
+      (url.startsWith('data:') || url.startsWith('blob:') || url.startsWith('http'))
+    ) {
+      setErrors((prev) => {
+        if (!prev.mainImage) return prev;
+        const next = { ...prev };
+        delete next.mainImage;
+        return next;
+      });
+    }
+  }, [updateDraft]);
+
   useEffect(() => {
     const id = setInterval(() => {
       if (!dirty) return;
@@ -58,7 +102,6 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
     return () => clearInterval(id);
   }, [dirty]);
 
-  // Unsaved changes warning
   useEffect(() => {
     const onBeforeUnload = (e) => {
       if (!dirty) return;
@@ -69,12 +112,9 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
     return () => window.removeEventListener('beforeunload', onBeforeUnload);
   }, [dirty]);
 
-  // Sync GST from basic tax slab when entering pricing
   useEffect(() => {
     if (step === 4 && draft.basic.taxSlab != null && draft.pricing.gstPct !== draft.basic.taxSlab) {
-      updateDraft({
-        pricing: { ...draft.pricing, gstPct: draft.basic.taxSlab },
-      });
+      updateDraft({ pricing: { ...draft.pricing, gstPct: draft.basic.taxSlab } });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
@@ -101,15 +141,35 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
   };
 
   const goNext = async () => {
-    const stepErrors = validateProductStep(draft, step);
-    setErrors(stepErrors);
-    if (Object.keys(stepErrors).length) {
-      toast.error('Please fix validation errors');
+    if (mediaUploading) {
+      toast.error('Please wait for image upload to finish');
       return;
     }
-    const completed = Array.from(new Set([...(draft.completedSteps || []), step]));
+    // Prefer live React state for media (ref can lag one tick behind uploads)
+    const current = {
+      ...draftRef.current,
+      ...draft,
+      media: draft.media || draftRef.current.media,
+    };
+    draftRef.current = current;
+    const stepErrors = validateProductStep(current, step);
+    setErrors(stepErrors);
+    if (Object.keys(stepErrors).length) {
+      toast.error(
+        step === 2
+          ? 'Upload a main product image before continuing'
+          : 'Please fix validation errors'
+      );
+      return;
+    }
+    const completed = Array.from(new Set([...(current.completedSteps || []), step]));
+    const nextDraft = { ...current, completedSteps: completed };
     updateDraft({ completedSteps: completed });
-    saveProductDraftLocal({ ...draft, completedSteps: completed });
+    try {
+      saveProductDraftLocal(nextDraft);
+    } catch {
+      // storage may be unavailable
+    }
     if (step < 8) setStep(step + 1);
   };
 
@@ -178,37 +238,14 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
       const res = await aiDescriptionTools(action, draft.description.long || draft.description.short, draft.basic.name);
       if (!res.success) return;
       if (action === 'generate') {
-        updateDraft({
-          description: {
-            ...draft.description,
-            short: res.data.short,
-            long: res.data.long,
-          },
-        });
+        updateDraft({ description: { ...draft.description, short: res.data.short, long: res.data.long } });
       } else if (action === 'seo') {
-        updateDraft({
-          description: {
-            ...draft.description,
-            long: res.data.text,
-            seoKeywords: res.data.keywords,
-          },
-        });
+        updateDraft({ description: { ...draft.description, long: res.data.text, seoKeywords: res.data.keywords } });
       } else if (action === 'keywords') {
-        updateDraft({
-          description: {
-            ...draft.description,
-            seoKeywords: (res.data.keywords || []).join(', '),
-          },
-        });
+        updateDraft({ description: { ...draft.description, seoKeywords: (res.data.keywords || []).join(', ') } });
         toast.success('Keywords suggested');
-      } else if (action === 'translate') {
-        updateDraft({
-          description: { ...draft.description, long: res.data.text },
-        });
       } else {
-        updateDraft({
-          description: { ...draft.description, long: res.data.text },
-        });
+        updateDraft({ description: { ...draft.description, long: res.data.text } });
       }
       toast.success(`AI ${action} done`);
     } finally {
@@ -217,29 +254,34 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
   };
 
   return (
-    <div className="fixed inset-0 z-[60] bg-slate-50 dark:bg-slate-950 overflow-hidden flex flex-col">
-      <header className="shrink-0 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-3">
-        <div className="flex items-start justify-between gap-3 max-w-[1400px] mx-auto">
-          <div>
-            <h1 className="text-lg md:text-xl font-bold">Add Wholesale Product SKU</h1>
-            <p className="text-xs text-slate-500">Manage your wholesale product inventory and details.</p>
+    <div className="w-full max-w-[1400px] mx-auto flex flex-col min-h-[calc(100vh-7.5rem)] overflow-x-hidden">
+      {/* Header + stepper */}
+      <div className="shrink-0 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 sm:p-6 mb-4">
+        <div className="flex items-start justify-between gap-3 mb-4">
+          <div className="min-w-0">
+            <h1 className="text-xl sm:text-2xl font-bold truncate">Add Wholesale Product SKU</h1>
+            <p className="text-sm text-slate-500 mt-0.5">Manage your wholesale product inventory and details.</p>
           </div>
-          <button type="button" onClick={handleClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close wizard">
+          <button
+            type="button"
+            onClick={handleClose}
+            className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 shrink-0"
+            aria-label="Close wizard"
+          >
             <X size={18} />
           </button>
         </div>
-        <div className="max-w-[1400px] mx-auto mt-3">
-          <StepProgress
-            currentStep={step}
-            completedSteps={draft.completedSteps || []}
-            onStepClick={(id) => setStep(id)}
-          />
-        </div>
-      </header>
+        <StepProgress
+          currentStep={step}
+          completedSteps={draft.completedSteps || []}
+          onStepClick={(id) => setStep(id)}
+        />
+      </div>
 
-      <div className="flex-1 overflow-y-auto">
-        <div className="max-w-[1400px] mx-auto p-4 md:p-6 grid lg:grid-cols-[1fr_300px] gap-4 pb-28">
-          <div className="min-w-0 space-y-4">
+      {/* Body */}
+      <div ref={scrollRef} className="flex-1 min-w-0 overflow-x-hidden">
+        <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_280px] gap-4 min-w-0">
+          <div className="min-w-0 w-full space-y-4 overflow-x-hidden">
             {step === 1 && (
               <ProductBasicInfo
                 value={draft.basic}
@@ -254,7 +296,8 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
               <ProductMediaUpload
                 value={draft.media}
                 errors={errors}
-                onChange={(media) => updateDraft({ media })}
+                onUploadingChange={setMediaUploading}
+                onChange={handleMediaChange}
               />
             )}
             {step === 3 && (
@@ -296,22 +339,27 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
                 onChange={(delivery) => updateDraft({ delivery })}
               />
             )}
-            {step === 8 && <ProductPreview draft={draft} />}
+            {step === 8 && (
+              <ProductPreview
+                draft={draft}
+                onGoToImages={() => setStep(2)}
+              />
+            )}
           </div>
 
-          <div className="hidden lg:block">
+          <div className="hidden xl:block min-w-0">
             <ProductSummarySidebar draft={draft} errors={errors} />
           </div>
         </div>
       </div>
 
-      {/* Sticky footer */}
-      <footer className="shrink-0 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur px-4 py-3">
-        <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-between gap-2">
+      {/* Sticky footer — stays inside content column, not under sidebar */}
+      <div className="sticky bottom-0 z-20 mt-4 -mx-0">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur shadow-lg px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2">
           <button
             type="button"
             onClick={handleClose}
-            className="px-4 py-2 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
+            className="px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
             Cancel
           </button>
@@ -320,7 +368,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
               type="button"
               disabled={saving}
               onClick={saveDraftNow}
-              className="px-4 py-2 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50"
+              className="px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50"
             >
               Save Draft
             </button>
@@ -328,7 +376,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
               <button
                 type="button"
                 onClick={goPrev}
-                className="px-4 py-2 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700"
+                className="px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700"
               >
                 Previous
               </button>
@@ -337,16 +385,17 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
               <button
                 type="button"
                 onClick={goNext}
-                className="px-5 py-2 rounded-xl text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600"
+                disabled={mediaUploading}
+                className="px-5 py-2.5 rounded-xl text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
               >
-                Save & Continue
+                {mediaUploading ? 'Uploading…' : 'Save & Continue'}
               </button>
             ) : (
               <button
                 type="button"
                 disabled={saving}
                 onClick={publish}
-                className="px-5 py-2 rounded-xl text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
+                className="px-5 py-2.5 rounded-xl text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
               >
                 Publish Product
               </button>
@@ -354,7 +403,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
           </div>
         </div>
         <p className="sr-only">{WIZARD_STEPS.find((s) => s.id === step)?.label}</p>
-      </footer>
+      </div>
     </div>
   );
 }
