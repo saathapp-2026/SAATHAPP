@@ -21,6 +21,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
+import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
 
 export const SIDEBAR_ITEMS = [
   { id: 'overview', label: 'Dashboard Overview', icon: LayoutDashboard, badge: null },
@@ -44,10 +45,10 @@ export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboa
 
   return (
     <aside className="w-64 shrink-0 bg-slate-950 text-slate-300 border-r border-slate-800 flex flex-col h-screen sticky top-0 z-30">
-      {/* Header Profile Brand */}
+      {/* Header Profile Brand with Official SaathApp Logo */}
       <div className="p-4 border-b border-slate-800 flex items-center gap-3">
-        <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-black shadow-lg">
-          S
+        <div className="h-10 w-10 rounded-2xl bg-white flex items-center justify-center p-1 shadow-lg overflow-hidden shrink-0 border border-emerald-500/30">
+          <img src={saathAppLogo} alt="SaathApp Always With You" className="w-full h-full object-contain" />
         </div>
         <div className="overflow-hidden">
           <div className="flex items-center gap-1">

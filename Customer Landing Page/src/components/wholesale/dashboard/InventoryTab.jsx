@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
-import { Warehouse, AlertTriangle, ArrowLeftRight, Package, CheckCircle2, ShieldAlert } from 'lucide-react';
+import { Warehouse, AlertTriangle, ArrowLeftRight, Package, CheckCircle2, ShieldAlert, FileText, ArrowRight } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
+import InterWarehouseTransferModal from './InterWarehouseTransferModal';
 
 export default function InventoryTab() {
-  const { formData, addToast } = useWholesale();
+  const { formData, addToast } = useWholesale ? useWholesale() : { formData: {}, addToast: console.log };
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
-  const [transferItem, setTransferItem] = useState('Fortune Sunflower Oil 15L');
-  const [fromWh, setFromWh] = useState('Delhi NCR Hub');
-  const [toWh, setToWh] = useState('Mumbai Express Depot');
-  const [qty, setQty] = useState('50');
 
-  const handleTransferSubmit = (e) => {
-    e.preventDefault();
-    addToast(`Transferred ${qty} units of "${transferItem}" from ${fromWh} to ${toWh}`, 'success');
-    setIsTransferModalOpen(false);
-  };
+  const warehousesList = formData?.additionalWarehouses || [
+    { name: 'Delhi NCR Logistics Hub', city: 'Gurugram', area: '45,000 sq ft', manager: 'Rajesh Sharma' },
+    { name: 'Mumbai Express Depot', city: 'Mumbai', area: '32,000 sq ft', manager: 'Vikram Mehta' },
+    { name: 'Bengaluru Tech Park Hub', city: 'Bengaluru', area: '28,000 sq ft', manager: 'Anish Kumar' },
+  ];
 
   return (
     <div className="space-y-6">
@@ -27,7 +24,7 @@ export default function InventoryTab() {
         <button
           type="button"
           onClick={() => setIsTransferModalOpen(true)}
-          className="inline-flex items-center gap-1.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition"
+          className="inline-flex items-center gap-1.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition hover:scale-[1.02] cursor-pointer"
         >
           <ArrowLeftRight size={16} /> Inter-Warehouse Transfer
         </button>
@@ -35,7 +32,7 @@ export default function InventoryTab() {
 
       {/* Warehouses Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {formData.additionalWarehouses.map((wh, idx) => (
+        {warehousesList.map((wh, idx) => (
           <div
             key={idx}
             className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3"
@@ -110,94 +107,11 @@ export default function InventoryTab() {
         </div>
       </div>
 
-      {/* Transfer Modal */}
-      {isTransferModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-4">
-              Inter-Warehouse Inventory Transfer
-            </h3>
-            <form onSubmit={handleTransferSubmit} className="space-y-4 text-xs">
-              <div>
-                <label className="block font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">
-                  Select Product Item
-                </label>
-                <select
-                  value={transferItem}
-                  onChange={(e) => setTransferItem(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 p-2.5 font-semibold text-slate-900 dark:text-white"
-                >
-                  <option value="Fortune Sunflower Oil 15L">Fortune Sunflower Oil 15L</option>
-                  <option value="Tata Salt 1kg Pack">Tata Salt 1kg Pack</option>
-                  <option value="Cement 50kg PPC Bag">Cement 50kg PPC Bag</option>
-                  <option value="Basmati Rice 25kg">Basmati Rice 25kg</option>
-                </select>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">
-                    From Warehouse
-                  </label>
-                  <select
-                    value={fromWh}
-                    onChange={(e) => setFromWh(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 p-2.5 font-semibold text-slate-900 dark:text-white"
-                  >
-                    <option value="Delhi NCR Hub">Delhi NCR Hub</option>
-                    <option value="Mumbai Express Depot">Mumbai Express Depot</option>
-                    <option value="Kolkata East Logistics">Kolkata East Logistics</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">
-                    To Warehouse
-                  </label>
-                  <select
-                    value={toWh}
-                    onChange={(e) => setToWh(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 p-2.5 font-semibold text-slate-900 dark:text-white"
-                  >
-                    <option value="Mumbai Express Depot">Mumbai Express Depot</option>
-                    <option value="Delhi NCR Hub">Delhi NCR Hub</option>
-                    <option value="Kolkata East Logistics">Kolkata East Logistics</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">
-                  Quantity to Transfer (Units)
-                </label>
-                <input
-                  type="number"
-                  required
-                  value={qty}
-                  onChange={(e) => setQty(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 p-2.5 font-semibold text-slate-900 dark:text-white"
-                />
-              </div>
-
-              <div className="pt-3 flex justify-end gap-3">
-                <button
-                  type="button"
-                  onClick={() => setIsTransferModalOpen(false)}
-                  className="rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="rounded-xl bg-emerald-600 text-white px-6 py-2 text-xs font-extrabold shadow"
-                >
-                  Confirm Transfer
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      {/* Complete 15-Step 4-Section Inter-Warehouse Transfer Modal */}
+      <InterWarehouseTransferModal
+        isOpen={isTransferModalOpen}
+        onClose={() => setIsTransferModalOpen(false)}
+      />
     </div>
   );
 }

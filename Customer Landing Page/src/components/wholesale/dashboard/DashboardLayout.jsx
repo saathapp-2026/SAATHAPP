@@ -106,6 +106,7 @@ export default function DashboardLayout({
             <ProductsTab
               isAddModalOpen={isAddProductModalOpen}
               onCloseAddModal={() => setIsAddProductModalOpen(false)}
+              onOpenAddModal={() => setIsAddProductModalOpen(true)}
             />
           )}
 
@@ -125,6 +126,7 @@ export default function DashboardLayout({
             <FinanceTab
               isWithdrawModalOpen={isWithdrawModalOpen}
               onCloseWithdrawModal={() => setIsWithdrawModalOpen(false)}
+              onSelectTab={onSelectTab}
             />
           )}
 
