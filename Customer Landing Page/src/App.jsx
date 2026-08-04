@@ -54,15 +54,7 @@ import CustomerSupportPage from "./pages/trust/CustomerSupport";
 import WholesalePortalPage from "./pages/wholesale/WholesalePortalPage";
 import DeliveryPartnerPortalPage from "./pages/delivery/DeliveryPartnerPortalPage";
 import SellerRoutes from './pages/seller/SellerRoutes';
-<<<<<<< HEAD
-import { 
-  getStoredUsers, registerUser, authenticateUser, resetPassword as resetAuthPassword, 
-  getStoredAuthSession, saveAuthSession, clearAuthSession, isSessionValid,
-  getStoredPartnerSession, clearPartnerSession
-} from './services/authService';
-=======
 import { getStoredUsers, registerUser, authenticateUser, getStoredAuthSession, saveAuthSession, clearAuthSession, isSessionValid, getStoredPartnerSession, clearPartnerSession } from './services/authService';
->>>>>>> 6b95f6e (Update Customer Landing)
 
 export default function App() {
   const routerLocation = useLocation();
