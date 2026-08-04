@@ -39,7 +39,7 @@ const DashboardLayout = lazy(() => import('../../components/seller/DashboardLayo
 const DashboardHome = lazy(() => import('./dashboard/DashboardHome'));
 const OnboardingDashboard = lazy(() => import('./dashboard/OnboardingDashboard'));
 const LazyOrders = lazy(() => import('./dashboard/OrdersPage'));
-const LazyProducts = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.ProductsPage })));
+const LazyProducts = lazy(() => import('./dashboard/ProductsPage'));
 const LazyInventory = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.InventoryPage })));
 const LazyCustomers = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.CustomersPage })));
 const LazyMarketing = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.MarketingPage })));

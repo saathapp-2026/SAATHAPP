@@ -1,0 +1,360 @@
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
+import { X } from 'lucide-react';
+import StepProgress from './StepProgress';
+import ProductBasicInfo from './ProductBasicInfo';
+import ProductMediaUpload from './ProductMediaUpload';
+import ProductDescription from './ProductDescription';
+import ProductPricing from './ProductPricing';
+import ProductInventory from './ProductInventory';
+import ProductVariants from './ProductVariants';
+import ProductDelivery from './ProductDelivery';
+import ProductPreview from './ProductPreview';
+import ProductSummarySidebar from './ProductSummarySidebar';
+import {
+  emptyProductDraft,
+  WIZARD_STEPS,
+} from '../../../config/seller/productConstants';
+import {
+  validateProductStep,
+  saveProductDraftLocal,
+  loadProductDraft,
+  saveProduct,
+  autoGenerateSku,
+  suggestCategory,
+  aiDescriptionTools,
+} from '../../../services/seller/sellerProductsService';
+
+export default function ProductWizard({ initialDraft, onClose, onSaved }) {
+  const [draft, setDraft] = useState(() => initialDraft || loadProductDraft() || emptyProductDraft());
+  const [step, setStep] = useState(1);
+  const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
+  const [dirty, setDirty] = useState(false);
+  const [aiLoading, setAiLoading] = useState(null);
+  const [suggesting, setSuggesting] = useState(false);
+  const draftRef = useRef(draft);
+
+  useEffect(() => {
+    draftRef.current = draft;
+  }, [draft]);
+
+  const updateDraft = useCallback((patch) => {
+    setDraft((prev) => {
+      const next = typeof patch === 'function' ? patch(prev) : { ...prev, ...patch };
+      return { ...next, updatedAt: Date.now() };
+    });
+    setDirty(true);
+  }, []);
+
+  // Auto-save every 30s
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (!dirty) return;
+      saveProductDraftLocal(draftRef.current);
+      toast('Draft auto-saved', { icon: '💾', duration: 1500 });
+      setDirty(false);
+    }, 30000);
+    return () => clearInterval(id);
+  }, [dirty]);
+
+  // Unsaved changes warning
+  useEffect(() => {
+    const onBeforeUnload = (e) => {
+      if (!dirty) return;
+      e.preventDefault();
+      e.returnValue = '';
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, [dirty]);
+
+  // Sync GST from basic tax slab when entering pricing
+  useEffect(() => {
+    if (step === 4 && draft.basic.taxSlab != null && draft.pricing.gstPct !== draft.basic.taxSlab) {
+      updateDraft({
+        pricing: { ...draft.pricing, gstPct: draft.basic.taxSlab },
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
+  const handleClose = () => {
+    if (dirty && !window.confirm('You have unsaved changes. Leave without saving draft?')) return;
+    onClose?.();
+  };
+
+  const saveDraftNow = async () => {
+    setSaving(true);
+    try {
+      saveProductDraftLocal(draft);
+      const res = await saveProduct({ ...draft, status: 'draft' }, { publish: false });
+      if (res.success) {
+        setDraft(res.data);
+        setDirty(false);
+        toast.success('Draft saved');
+        onSaved?.(res.data);
+      }
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const goNext = async () => {
+    const stepErrors = validateProductStep(draft, step);
+    setErrors(stepErrors);
+    if (Object.keys(stepErrors).length) {
+      toast.error('Please fix validation errors');
+      return;
+    }
+    const completed = Array.from(new Set([...(draft.completedSteps || []), step]));
+    updateDraft({ completedSteps: completed });
+    saveProductDraftLocal({ ...draft, completedSteps: completed });
+    if (step < 8) setStep(step + 1);
+  };
+
+  const goPrev = () => {
+    if (step > 1) setStep(step - 1);
+  };
+
+  const publish = async () => {
+    for (let s = 1; s <= 7; s += 1) {
+      const e = validateProductStep(draft, s);
+      if (Object.keys(e).length) {
+        setStep(s);
+        setErrors(e);
+        toast.error(`Complete step ${s} before publishing`);
+        return;
+      }
+    }
+    setSaving(true);
+    try {
+      const res = await saveProduct(
+        { ...draft, completedSteps: [1, 2, 3, 4, 5, 6, 7, 8] },
+        { publish: true, submitReview: !!draft.approval?.required }
+      );
+      if (res.success) {
+        toast.success(res.data.status === 'pending_review' ? 'Submitted for review' : 'Product published');
+        setDirty(false);
+        onSaved?.(res.data);
+        onClose?.();
+      }
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleGenerateSku = async () => {
+    const res = await autoGenerateSku(draft.basic.name);
+    if (res.success) {
+      updateDraft({ basic: { ...draft.basic, sku: res.data, skuManual: false } });
+      toast.success('SKU generated');
+    }
+  };
+
+  const handleSuggestCategory = async () => {
+    setSuggesting(true);
+    try {
+      const res = await suggestCategory(draft.basic.name);
+      if (res.success) {
+        updateDraft({
+          basic: {
+            ...draft.basic,
+            category: res.data.category,
+            subCategory: res.data.subCategory,
+            tags: res.data.tags,
+          },
+        });
+        toast.success('Category suggested');
+      }
+    } finally {
+      setSuggesting(false);
+    }
+  };
+
+  const handleAi = async (action) => {
+    setAiLoading(action);
+    try {
+      const res = await aiDescriptionTools(action, draft.description.long || draft.description.short, draft.basic.name);
+      if (!res.success) return;
+      if (action === 'generate') {
+        updateDraft({
+          description: {
+            ...draft.description,
+            short: res.data.short,
+            long: res.data.long,
+          },
+        });
+      } else if (action === 'seo') {
+        updateDraft({
+          description: {
+            ...draft.description,
+            long: res.data.text,
+            seoKeywords: res.data.keywords,
+          },
+        });
+      } else if (action === 'keywords') {
+        updateDraft({
+          description: {
+            ...draft.description,
+            seoKeywords: (res.data.keywords || []).join(', '),
+          },
+        });
+        toast.success('Keywords suggested');
+      } else if (action === 'translate') {
+        updateDraft({
+          description: { ...draft.description, long: res.data.text },
+        });
+      } else {
+        updateDraft({
+          description: { ...draft.description, long: res.data.text },
+        });
+      }
+      toast.success(`AI ${action} done`);
+    } finally {
+      setAiLoading(null);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[60] bg-slate-50 dark:bg-slate-950 overflow-hidden flex flex-col">
+      <header className="shrink-0 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-3">
+        <div className="flex items-start justify-between gap-3 max-w-[1400px] mx-auto">
+          <div>
+            <h1 className="text-lg md:text-xl font-bold">Add Wholesale Product SKU</h1>
+            <p className="text-xs text-slate-500">Manage your wholesale product inventory and details.</p>
+          </div>
+          <button type="button" onClick={handleClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close wizard">
+            <X size={18} />
+          </button>
+        </div>
+        <div className="max-w-[1400px] mx-auto mt-3">
+          <StepProgress
+            currentStep={step}
+            completedSteps={draft.completedSteps || []}
+            onStepClick={(id) => setStep(id)}
+          />
+        </div>
+      </header>
+
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-[1400px] mx-auto p-4 md:p-6 grid lg:grid-cols-[1fr_300px] gap-4 pb-28">
+          <div className="min-w-0 space-y-4">
+            {step === 1 && (
+              <ProductBasicInfo
+                value={draft.basic}
+                errors={errors}
+                onChange={(basic) => updateDraft({ basic })}
+                onGenerateSku={handleGenerateSku}
+                onSuggestCategory={handleSuggestCategory}
+                suggesting={suggesting}
+              />
+            )}
+            {step === 2 && (
+              <ProductMediaUpload
+                value={draft.media}
+                errors={errors}
+                onChange={(media) => updateDraft({ media })}
+              />
+            )}
+            {step === 3 && (
+              <ProductDescription
+                value={draft.description}
+                errors={errors}
+                onChange={(description) => updateDraft({ description })}
+                onAiAction={handleAi}
+                aiLoading={aiLoading}
+              />
+            )}
+            {step === 4 && (
+              <ProductPricing
+                value={draft.pricing}
+                errors={errors}
+                onChange={(pricing) => updateDraft({ pricing })}
+              />
+            )}
+            {step === 5 && (
+              <ProductInventory
+                value={draft.inventory}
+                errors={errors}
+                sku={draft.basic.sku}
+                onChange={(inventory) => updateDraft({ inventory })}
+              />
+            )}
+            {step === 6 && (
+              <ProductVariants
+                value={draft.variants}
+                errors={errors}
+                baseSku={draft.basic.sku}
+                onChange={(variants) => updateDraft({ variants })}
+              />
+            )}
+            {step === 7 && (
+              <ProductDelivery
+                value={draft.delivery}
+                errors={errors}
+                onChange={(delivery) => updateDraft({ delivery })}
+              />
+            )}
+            {step === 8 && <ProductPreview draft={draft} />}
+          </div>
+
+          <div className="hidden lg:block">
+            <ProductSummarySidebar draft={draft} errors={errors} />
+          </div>
+        </div>
+      </div>
+
+      {/* Sticky footer */}
+      <footer className="shrink-0 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur px-4 py-3">
+        <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-between gap-2">
+          <button
+            type="button"
+            onClick={handleClose}
+            className="px-4 py-2 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
+          >
+            Cancel
+          </button>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              disabled={saving}
+              onClick={saveDraftNow}
+              className="px-4 py-2 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50"
+            >
+              Save Draft
+            </button>
+            {step > 1 && (
+              <button
+                type="button"
+                onClick={goPrev}
+                className="px-4 py-2 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700"
+              >
+                Previous
+              </button>
+            )}
+            {step < 8 ? (
+              <button
+                type="button"
+                onClick={goNext}
+                className="px-5 py-2 rounded-xl text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600"
+              >
+                Save & Continue
+              </button>
+            ) : (
+              <button
+                type="button"
+                disabled={saving}
+                onClick={publish}
+                className="px-5 py-2 rounded-xl text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
+              >
+                Publish Product
+              </button>
+            )}
+          </div>
+        </div>
+        <p className="sr-only">{WIZARD_STEPS.find((s) => s.id === step)?.label}</p>
+      </footer>
+    </div>
+  );
+}
