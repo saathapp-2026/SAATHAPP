@@ -38,7 +38,7 @@ const SellerErrorPage = lazy(() => import('./errors/SellerErrorPage'));
 const DashboardLayout = lazy(() => import('../../components/seller/DashboardLayout'));
 const DashboardHome = lazy(() => import('./dashboard/DashboardHome'));
 const OnboardingDashboard = lazy(() => import('./dashboard/OnboardingDashboard'));
-const LazyOrders = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.OrdersPage })));
+const LazyOrders = lazy(() => import('./dashboard/OrdersPage'));
 const LazyProducts = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.ProductsPage })));
 const LazyInventory = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.InventoryPage })));
 const LazyCustomers = lazy(() => import('./dashboard/sections').then((m) => ({ default: m.CustomersPage })));

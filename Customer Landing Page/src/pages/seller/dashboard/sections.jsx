@@ -9,7 +9,7 @@ function makePage(sectionKey, breadcrumbExtra) {
   };
 }
 
-export const OrdersPage = makePage('orders');
+export { default as OrdersPage } from './OrdersPage';
 export const ProductsPage = makePage('products', [{ label: 'Add Product' }]);
 export const InventoryPage = makePage('inventory');
 export const CustomersPage = makePage('customers');
