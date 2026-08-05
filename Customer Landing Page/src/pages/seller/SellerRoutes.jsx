@@ -46,6 +46,13 @@ const LazyProducts = lazy(() => import('./dashboard/ProductsPage'));
 const LazyInventory = lazy(() => import('./dashboard/InventoryPage'));
 const LazyCustomers = lazy(() => import('./dashboard/CustomersPage'));
 const LazyMarketing = lazy(() => import('./dashboard/MarketingPage'));
+const LazyMarketingCampaigns = lazy(() => import('./dashboard/marketing/MarketingCampaignsPage'));
+const LazyMarketingReview = lazy(() => import('./dashboard/marketing/MarketingReviewPage'));
+const LazyMarketingScheduler = lazy(() => import('./dashboard/marketing/MarketingSchedulerPage'));
+const LazyMarketingAnalytics = lazy(() => import('./dashboard/marketing/MarketingAnalyticsPage'));
+const LazyMarketingReports = lazy(() => import('./dashboard/marketing/MarketingReportsPage'));
+const LazyMarketingBilling = lazy(() => import('./dashboard/marketing/MarketingBillingPage'));
+const LazyMarketingNotifications = lazy(() => import('./dashboard/marketing/MarketingNotificationsPage'));
 const LazyAnalytics = lazy(() => import('./dashboard/AnalyticsPage'));
 const LazyWallet = lazy(() => import('./dashboard/WalletPage'));
 const LazyPayments = lazy(() => import('./dashboard/PaymentsPage'));
@@ -270,7 +277,16 @@ export default function SellerRoutes() {
             <Route path="products" element={<SuspenseWrap><LazyProducts /></SuspenseWrap>} />
             <Route path="inventory" element={<SuspenseWrap><LazyInventory /></SuspenseWrap>} />
             <Route path="customers" element={<SuspenseWrap><LazyCustomers /></SuspenseWrap>} />
-            <Route path="marketing" element={<SuspenseWrap><LazyMarketing /></SuspenseWrap>} />
+            <Route path="marketing" element={<SuspenseWrap><LazyMarketing /></SuspenseWrap>}>
+              <Route index element={<Navigate to="campaigns" replace />} />
+              <Route path="campaigns" element={<SuspenseWrap><LazyMarketingCampaigns /></SuspenseWrap>} />
+              <Route path="review" element={<SuspenseWrap><LazyMarketingReview /></SuspenseWrap>} />
+              <Route path="scheduler" element={<SuspenseWrap><LazyMarketingScheduler /></SuspenseWrap>} />
+              <Route path="analytics" element={<SuspenseWrap><LazyMarketingAnalytics /></SuspenseWrap>} />
+              <Route path="reports" element={<SuspenseWrap><LazyMarketingReports /></SuspenseWrap>} />
+              <Route path="billing" element={<SuspenseWrap><LazyMarketingBilling /></SuspenseWrap>} />
+              <Route path="notifications" element={<SuspenseWrap><LazyMarketingNotifications /></SuspenseWrap>} />
+            </Route>
             <Route path="analytics" element={<SuspenseWrap><LazyAnalytics /></SuspenseWrap>} />
             <Route path="wallet" element={<SuspenseWrap><LazyWallet /></SuspenseWrap>} />
             <Route path="payments" element={<SuspenseWrap><LazyPayments /></SuspenseWrap>} />

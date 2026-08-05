@@ -378,7 +378,7 @@ export function approveSeller(sellerId) {
 }
 
 /** Temporary local bypass — skip login/signup and open Seller Dashboard as approved. */
-export const SELLER_AUTH_BYPASS = true;
+export const SELLER_AUTH_BYPASS = false;
 
 const DEV_BYPASS_SELLER_ID = 'seller-dev-bypass';
 

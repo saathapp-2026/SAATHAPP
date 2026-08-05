@@ -253,9 +253,13 @@ function ensureAds() {
 export async function getAdSummary() {
   await delay(180);
   const ads = ensureAds();
+  const totalAds = ads.length;
   const active = ads.filter((a) => a.status === 'running').length;
   const paused = ads.filter((a) => a.status === 'paused').length;
   const pending = ads.filter((a) => ['submitted', 'review'].includes(a.status)).length;
+  const scheduled = ads.filter((a) => a.status === 'approved' || (a.status === 'running' && new Date(a.startAt) > new Date())).length;
+  const rejected = ads.filter((a) => a.status === 'rejected').length;
+  const completed = ads.filter((a) => a.status === 'completed').length;
   const impressions = ads.reduce((s, a) => s + (a.impressions || 0), 0);
   const clicks = ads.reduce((s, a) => s + (a.clicks || 0), 0);
   const conversions = ads.reduce((s, a) => s + (a.conversions || 0), 0);
@@ -263,19 +267,35 @@ export async function getAdSummary() {
   const spent = ads.reduce((s, a) => s + (a.spent || 0), 0);
   const remaining = ads.reduce((s, a) => s + (a.remainingBudget || 0), 0);
   const ctr = calcCtr(impressions, clicks);
+  const roas = Number(((revenue || 0) / Math.max(1, spent || 1)).toFixed(2));
+  const todaySpend = ads.reduce((s, a) => {
+    const start = new Date(a.startAt);
+    const end = new Date(a.endAt);
+    const now = new Date();
+    if (a.status === 'running' && now >= start && now <= end) {
+      return s + Math.round((a.dailyBudget || 0) * 0.5);
+    }
+    return s;
+  }, 0);
 
   return {
     success: true,
     data: [
-      { key: 'active', label: 'Active Ads', displayValue: active || 12, changePct: 20, trend: 'up', color: 'emerald', icon: 'megaphone', tooltip: 'Currently running ads' },
+      { key: 'total_ads', label: 'Total Advertisements', displayValue: totalAds, changePct: 5.4, trend: 'up', color: 'emerald', icon: 'megaphone', tooltip: 'Total campaigns' },
+      { key: 'running', label: 'Running', displayValue: active, changePct: 8.3, trend: 'up', color: 'green', icon: 'megaphone', tooltip: 'Live campaigns' },
+      { key: 'pending', label: 'Pending Approval', displayValue: pending, changePct: -1.2, trend: 'down', color: 'sky', icon: 'clock', tooltip: 'Awaiting review' },
+      { key: 'scheduled', label: 'Scheduled', displayValue: scheduled, changePct: 6.4, trend: 'up', color: 'violet', icon: 'clock', tooltip: 'Ready to start' },
+      { key: 'paused', label: 'Paused', displayValue: paused, changePct: 1.7, trend: 'down', color: 'amber', icon: 'pause', tooltip: 'Paused campaigns' },
+      { key: 'rejected', label: 'Rejected', displayValue: rejected, changePct: 0.4, trend: 'down', color: 'red', icon: 'x', tooltip: 'Campaigns rejected' },
+      { key: 'completed', label: 'Completed', displayValue: completed, changePct: 10.2, trend: 'up', color: 'indigo', icon: 'check', tooltip: 'Finished campaigns' },
       { key: 'impressions', label: 'Impressions', displayValue: formatCompact(impressions || 12400), changePct: 18.6, trend: 'up', color: 'violet', icon: 'eye', tooltip: 'Total ad impressions' },
       { key: 'clicks', label: 'Clicks', displayValue: clicks || 486, changePct: 12.3, trend: 'up', color: 'blue', icon: 'cursor', tooltip: 'Total clicks' },
       { key: 'ctr', label: 'CTR', displayValue: `${ctr || 3.9}%`, changePct: 8.5, trend: 'up', color: 'orange', icon: 'target', tooltip: 'Click-through rate' },
-      { key: 'paused', label: 'Paused Ads', displayValue: paused, changePct: 2.1, trend: 'down', color: 'amber', icon: 'pause', tooltip: 'Paused campaigns' },
-      { key: 'pending', label: 'Pending Approval', displayValue: pending, changePct: 0, trend: 'up', color: 'sky', icon: 'clock', tooltip: 'Awaiting admin review' },
       { key: 'conversions', label: 'Conversions', displayValue: conversions || 38, changePct: 14.2, trend: 'up', color: 'teal', icon: 'cart', tooltip: 'Attributed conversions' },
-      { key: 'revenue', label: 'Revenue', displayValue: formatINR(revenue || 24560), changePct: 22.4, trend: 'up', color: 'green', icon: 'rupee', tooltip: 'Attributed revenue' },
-      { key: 'spent', label: 'Budget Spent', displayValue: formatINR(spent || 8450), changePct: 11.0, trend: 'up', color: 'rose', icon: 'wallet', tooltip: 'Total ad spend' },
+      { key: 'revenue', label: 'Revenue Generated', displayValue: formatINR(revenue || 24560), changePct: 22.4, trend: 'up', color: 'green', icon: 'rupee', tooltip: 'Total ad revenue' },
+      { key: 'roas', label: 'ROAS', displayValue: `${roas || 0}x`, changePct: 9.1, trend: 'up', color: 'sky', icon: 'target', tooltip: 'Return on ad spend' },
+      { key: 'spent', label: 'Total Spend', displayValue: formatINR(spent || 8450), changePct: 11.0, trend: 'up', color: 'rose', icon: 'wallet', tooltip: 'Total budget spent' },
+      { key: 'today_spend', label: "Today's Spend", displayValue: formatINR(todaySpend || 0), changePct: 2.8, trend: 'up', color: 'emerald', icon: 'wallet', tooltip: 'Spend so far today' },
       { key: 'remaining', label: 'Remaining Budget', displayValue: formatINR(remaining || 52000), changePct: 4.0, trend: 'up', color: 'indigo', icon: 'piggy', tooltip: 'Unspent budget' },
     ],
     totals: {
@@ -284,6 +304,9 @@ export async function getAdSummary() {
       clicks: clicks || 486,
       conversions: conversions || 38,
       revenue: revenue || 24560,
+      roas,
+      todaySpend,
+      remaining,
     },
   };
 }
@@ -362,16 +385,22 @@ export async function getAdAnalytics(range = 'weekly') {
         ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].slice(0, len)
         : Array.from({ length: len }, (_, i) => `W${i + 1}`);
 
+  const reachBase = labels.map((label, i) => 1200 + i * 95);
   return {
     success: true,
     data: {
       series: labels.map((label, i) => ({
         label,
-        impressions: 800 + i * 120,
-        clicks: 30 + i * 8,
-        conversions: 4 + (i % 5),
-        revenue: 2000 + i * 600,
-        spend: 400 + i * 80,
+        impressions: 1200 + i * 210,
+        clicks: 40 + i * 12,
+        conversions: 4 + (i % 6),
+        revenue: 2400 + i * 720,
+        spend: 420 + i * 90,
+        ctr: Number(((40 + i * 12) / Math.max(1, 1200 + i * 210) * 100).toFixed(1)),
+        roas: Number(((2400 + i * 720) / Math.max(1, 420 + i * 90)).toFixed(2)),
+        cpc: Number(((420 + i * 90) / Math.max(1, 40 + i * 12)).toFixed(2)),
+        cpm: Number(((420 + i * 90) / Math.max(1, (1200 + i * 210) / 1000)).toFixed(2)),
+        reach: reachBase[i],
       })),
       bestProducts: [
         { name: 'Alphonso Mangoes', value: 18640 },
@@ -383,12 +412,123 @@ export async function getAdAnalytics(range = 'weekly') {
         { name: 'Pune', value: 28 },
         { name: 'Delhi', value: 18 },
       ],
-      bestPlacements: [
-        { name: 'Homepage Banner', value: 3.9 },
-        { name: 'Offer Zone', value: 3.8 },
-        { name: 'Search Results', value: 3.6 },
+      bestDevices: [
+        { name: 'Mobile', value: 64 },
+        { name: 'Desktop', value: 28 },
+        { name: 'Tablet', value: 8 },
       ],
+      topLocations: [
+        { name: 'Mumbai', value: 42 },
+        { name: 'Pune', value: 28 },
+        { name: 'Delhi', value: 18 },
+      ],
+      topProducts: [
+        { name: 'Alphonso Mangoes', value: 18640 },
+        { name: 'Basmati Rice 5kg', value: 11200 },
+        { name: 'Cold Pressed Oil', value: 5400 },
+      ],
+      summary: {
+        impressions: 1200 * labels.length,
+        reach: reachBase.reduce((s, n) => s + n, 0),
+        uniqueUsers: 9200,
+        clicks: 40 * labels.length,
+        conversions: 4 * labels.length,
+        revenue: 2400 * labels.length,
+        roas: 5.2,
+        cpc: 6.5,
+        cpm: 80,
+        cpa: 120,
+        bounceRate: 32,
+        timeOnPage: 78,
+      },
     },
+  };
+}
+
+export async function getAdReviewDetails(adId) {
+  await delay(180);
+  const ad = ensureAds().find((item) => item.id === adId);
+  return { success: true, data: ad || null };
+}
+
+export async function getAdReviewChecklist(adId) {
+  await delay(150);
+  const ad = ensureAds().find((item) => item.id === adId);
+  const list = [
+    { label: 'Creative quality', status: ad ? 'pass' : 'warning' },
+    { label: 'Copy compliance', status: ad ? 'pass' : 'warning' },
+    { label: 'Landing page review', status: ad ? 'pass' : 'warning' },
+    { label: 'Audience match', status: ad ? 'pass' : 'warning' },
+    { label: 'Budget & spend', status: ad ? 'pending' : 'warning' },
+    { label: 'Policy checks', status: ad ? 'pending' : 'warning' },
+  ];
+  return { success: true, data: { checklist: list } };
+}
+
+export async function getAdReviewTimeline(adId) {
+  await delay(150);
+  const ad = ensureAds().find((item) => item.id === adId);
+  if (!ad) return { success: false, data: [] };
+  const now = new Date();
+  return {
+    success: true,
+    data: [
+      { label: 'Review submitted', status: 'complete', at: ad.history?.[ad.history.length - 1]?.at || new Date().toISOString() },
+      { label: 'Policy verification', status: 'pending' },
+      { label: 'Budget authorization', status: 'pending' },
+      { label: 'Final approval', status: 'pending' },
+      { label: 'Campaign scheduling', status: ad.status === AD_STATUSES.APPROVED ? 'pending' : 'upcoming' },
+      { label: 'Live launch', status: 'upcoming' },
+    ],
+  };
+}
+
+export async function getCampaignScheduler() {
+  await delay(200);
+  const ads = ensureAds();
+  const schedule = ads
+    .filter((ad) => ['submitted', 'approved', 'running', 'paused'].includes(ad.status))
+    .map((ad) => ({
+      id: ad.id,
+      name: ad.name,
+      timeline: ad.status === AD_STATUSES.RUNNING ? 'Running' : ad.status === AD_STATUSES.PAUSED ? 'Paused' : 'Upcoming',
+      startAt: ad.startAt,
+      endAt: ad.endAt,
+      dailyBudget: ad.dailyBudget,
+      remainingBudget: ad.remainingBudget,
+      timezone: ad.timezone || 'Asia/Kolkata',
+    }));
+  return { success: true, data: schedule };
+}
+
+export async function getAdReports() {
+  await delay(180);
+  const ads = ensureAds();
+  return {
+    success: true,
+    data: [
+      {
+        id: 'report-2026-01',
+        name: 'Campaign performance summary',
+        description: 'Weekly performance summary for all live and paused campaigns.',
+        format: 'PDF',
+        value: ads.reduce((sum, ad) => sum + (ad.revenue || 0), 0),
+      },
+      {
+        id: 'report-2026-02',
+        name: 'Budget allocation review',
+        description: 'Breakdown of budget vs spend across campaigns.',
+        format: 'XLSX',
+        value: ads.reduce((sum, ad) => sum + (ad.totalBudget || 0), 0),
+      },
+      {
+        id: 'report-2026-03',
+        name: 'Approval & review audit',
+        description: 'Detail of pending, approved, and rejected campaigns.',
+        format: 'CSV',
+        value: ads.filter((ad) => ad.status === 'submitted').length,
+      },
+    ],
   };
 }
 
@@ -416,41 +556,52 @@ export function emptyAdDraft(typeId = 'banner') {
     products: [],
     category: '',
     headline: '',
+    subHeadline: '',
     shortDescription: '',
+    description: '',
+    campaignId: '',
     offerText: '',
     coupon: '',
     cta: 'Shop Now',
     destinationUrl: '',
-    desktopBanner: '',
-    tabletBanner: '',
-    mobileBanner: '',
-    posterFile: '',
-    videoFile: '',
-    thumbnail: '',
-    qrEnabled: false,
+    landingPage: 'product_page',
+    businessSegments: ['b2c'],
+    coverageLevel: 'district',
+    coverageAreas: [],
     country: 'India',
     state: '',
+    district: '',
     city: '',
+    village: '',
     pincode: '',
     radius: 10,
     ageMin: 18,
     ageMax: 55,
     gender: 'all',
     languages: ['English', 'Hindi'],
-    customerTypes: ['new', 'repeat'],
+    occupations: [],
+    incomeBracket: '',
     interests: ['Grocery'],
-    placements: ['homepage_banner'],
-    placement: 'homepage_banner',
+    customerTypes: ['new', 'repeat'],
+    placements: ['homepage_hero'],
+    placement: 'homepage_hero',
     dailyBudget: 1000,
     weeklyBudget: 7000,
     monthlyBudget: 30000,
     totalBudget: 20000,
+    gstPercent: 18,
+    platformFeePercent: 10,
+    couponDiscount: 0,
+    taxPercent: 18,
+    finalAmount: 0,
     bidStrategy: 'auto',
     paymentMethod: 'wallet',
+    invoiceType: 'gst_invoice',
     startAt: new Date().toISOString().slice(0, 10),
     startTime: '09:00',
     endAt: new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10),
     endTime: '21:00',
+    durationDays: 15,
     recurring: 'none',
     timezone: 'Asia/Kolkata',
     abVariant: false,
@@ -486,12 +637,23 @@ export async function saveAd(payload = {}, { asDraft = false, submit = false } =
   const item = {
     id,
     name: payload.name || `${type.label} Campaign`,
+    campaignId: payload.campaignId || `CMP-${Date.now().toString().slice(-6)}`,
     typeId: type.id,
-    placement: payload.placement || payload.placements?.[0] || 'homepage_banner',
+    campaignType: payload.campaignType || type.id,
+    placement: payload.placement || payload.placements?.[0] || 'homepage_hero',
+    placements: payload.placements || [payload.placement || 'homepage_hero'],
+    landingPage: payload.landingPage || 'product_page',
     status,
-    objective: payload.objective || 'sales',
+    objective: payload.objective || 'promote_product',
     dailyBudget: Number(payload.dailyBudget) || 0,
+    weeklyBudget: Number(payload.weeklyBudget) || 0,
+    monthlyBudget: Number(payload.monthlyBudget) || 0,
     totalBudget: Number(payload.totalBudget) || 0,
+    gstPercent: Number(payload.gstPercent) || 18,
+    platformFeePercent: Number(payload.platformFeePercent) || 10,
+    couponDiscount: Number(payload.couponDiscount) || 0,
+    taxPercent: Number(payload.taxPercent) || 18,
+    finalAmount: Number(payload.finalAmount) || 0,
     spent: payload.spent || 0,
     impressions: payload.impressions || 0,
     clicks: payload.clicks || 0,
@@ -499,36 +661,49 @@ export async function saveAd(payload = {}, { asDraft = false, submit = false } =
     orders: payload.orders || 0,
     revenue: payload.revenue || 0,
     headline: payload.headline || '',
+    subHeadline: payload.subHeadline || '',
     description: payload.description || payload.shortDescription || '',
     offerText: payload.offerText || '',
     coupon: payload.coupon || '',
     cta: payload.cta || 'Shop Now',
     destinationUrl: payload.destinationUrl || '',
+    audience: {
+      country: payload.country || 'India',
+      state: payload.state || '',
+      district: payload.district || '',
+      city: payload.city || '',
+      village: payload.village || '',
+      pincode: payload.pincode || '',
+      radius: Number(payload.radius) || 10,
+      ageMin: Number(payload.ageMin) || 18,
+      ageMax: Number(payload.ageMax) || 55,
+      gender: payload.gender || 'all',
+      languages: payload.languages || ['English', 'Hindi'],
+      occupations: payload.occupations || [],
+      incomeBracket: payload.incomeBracket || '',
+      interests: payload.interests || [],
+      customerTypes: payload.customerTypes || [],
+      businessSegments: payload.businessSegments || ['b2c'],
+    },
+    coverage: {
+      level: payload.coverageLevel || 'district',
+      areas: payload.coverageAreas || [],
+    },
     startAt: payload.startAt || new Date().toISOString(),
     endAt: payload.endAt || daysFromNow(14),
     startTime: payload.startTime || '09:00',
     endTime: payload.endTime || '21:00',
-    priority: Number(payload.priority) || 3,
-    score: payload.score || 0,
-    products: payload.products || [],
-    audience: {
-      cities: payload.city ? [payload.city] : [],
-      customerTypes: payload.customerTypes || [],
-      interests: payload.interests || [],
-    },
+    durationDays: Number(payload.durationDays) || 15,
+    recurring: payload.recurring || 'none',
+    timezone: payload.timezone || 'Asia/Kolkata',
+    invoiceType: payload.invoiceType || 'gst_invoice',
     qrEnabled: !!payload.qrEnabled,
     bidStrategy: payload.bidStrategy || 'auto',
     paymentMethod: payload.paymentMethod || 'wallet',
-    recurring: payload.recurring || 'none',
-    timezone: payload.timezone || 'Asia/Kolkata',
-    creatives: {
-      desktop: payload.desktopBanner || '',
-      tablet: payload.tabletBanner || '',
-      mobile: payload.mobileBanner || '',
-      poster: payload.posterFile || '',
-      video: payload.videoFile || '',
-      thumbnail: payload.thumbnail || '',
-    },
+    mobile: payload.mobileBanner || '',
+    poster: payload.posterFile || '',
+    video: payload.videoFile || '',
+    thumbnail: payload.thumbnail || '',
     createdAt: payload.createdAt || new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     history: [

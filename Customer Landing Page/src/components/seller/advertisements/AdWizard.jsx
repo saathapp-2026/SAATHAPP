@@ -6,7 +6,15 @@ import { SELLER_Z } from '../../../config/seller/sellerZIndex';
 import {
   WIZARD_STEPS,
   OBJECTIVES,
+  CAMPAIGN_TYPES,
   PLACEMENTS,
+  LANDING_PAGES,
+  AUDIENCE_BUSINESS,
+  COVERAGE_LEVELS,
+  BUDGET_PLANS_DAILY,
+  BUDGET_PLANS_MONTHLY,
+  PAYMENT_METHODS,
+  SCHEDULE_DURATIONS,
   CATEGORIES,
   getAdType,
   formatINR,
@@ -21,6 +29,10 @@ import {
   getAiAdSuggestion,
   estimateReach,
 } from '../../../services/seller/sellerAdvertisementsService';
+
+const CTA_OPTIONS = ['Shop Now', 'Buy Now', 'Visit Store', 'Order Now', 'Book Service', 'Learn More', 'Contact Seller', 'Call Now'];
+const DEVICE_PREVIEWS = ['desktop', 'tablet', 'mobile'];
+const PREVIEW_PAGES = ['homepage', 'search', 'store', 'category'];
 
 export default function AdWizard({ open, onClose, onSaved, initialTypeId, editItem }) {
   const [draft, setDraft] = useState(() => emptyAdDraft(initialTypeId || 'banner'));
@@ -72,8 +84,22 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
     saveAdDraft(draft);
   }, [draft, dirty, open, editItem]);
 
-  const type = useMemo(() => getAdType(draft.typeId), [draft.typeId]);
+  const type = useMemo(() => getAdType(draft.campaignType || draft.typeId), [draft.campaignType, draft.typeId]);
   const estimate = useMemo(() => estimateReach(draft.dailyBudget), [draft.dailyBudget]);
+  const billingSummary = useMemo(() => {
+    const totalBudget = Number(draft.totalBudget) || 0;
+    const platformFee = Math.round(totalBudget * (Number(draft.platformFeePercent) || 0) / 100);
+    const discount = Number(draft.couponDiscount) || 0;
+    const taxable = Math.max(0, totalBudget + platformFee - discount);
+    const tax = Math.round(taxable * (Number(draft.gstPercent) || 0) / 100);
+    return {
+      totalBudget,
+      platformFee,
+      discount,
+      tax,
+      finalAmount: taxable + tax,
+    };
+  }, [draft.totalBudget, draft.platformFeePercent, draft.couponDiscount, draft.gstPercent]);
 
   const patch = (partial) => {
     setDraft((d) => ({ ...d, ...partial }));
@@ -82,15 +108,39 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
 
   const canNext = () => {
     if (draft.step === 1) return !!draft.name?.trim() && !!draft.objective;
-    if (draft.step === 2) {
+    if (draft.step === 2) return !!draft.campaignType;
+    if (draft.step === 3) {
+      if (draft.campaignType === 'video') return !!draft.videoFile;
+      if (
+        ['image', 'brand_banner', 'product_card', 'store_card', 'carousel', 'popup', 'splash_screen', 'notification_banner'].includes(
+          draft.campaignType
+        )
+      ) {
+        return !!draft.desktopBanner || !!draft.mobileBanner || !!draft.posterFile || !!draft.thumbnail || !!draft.videoFile;
+      }
+      return true;
+    }
+    if (draft.step === 4) return !!draft.headline?.trim() && !!draft.cta;
+    if (draft.step === 5) {
       if (draft.productMode === 'store') return true;
       if (draft.productMode === 'category') return !!draft.category;
       return (draft.products || []).length > 0;
     }
-    if (draft.step === 3) return !!draft.headline?.trim() || !!draft.cta;
-    if (draft.step === 5) return (draft.placements || []).length > 0;
-    if (draft.step === 6) return Number(draft.dailyBudget) > 0;
-    if (draft.step === 7) return !!draft.startAt && !!draft.endAt;
+    if (draft.step === 6) {
+      if (!draft.landingPage) return false;
+      if (['custom_url', 'external_website'].includes(draft.landingPage)) return !!draft.destinationUrl?.trim();
+      if (draft.landingPage === 'whatsapp') return !!draft.whatsappNumber?.trim();
+      if (draft.landingPage === 'phone_call') return !!draft.phoneNumber?.trim();
+      return true;
+    }
+    if (draft.step === 7) {
+      return !!draft.state || !!draft.city || !!draft.pincode || (draft.interests || []).length > 0 || (draft.customerTypes || []).length > 0;
+    }
+    if (draft.step === 8) return (draft.placements || []).length > 0;
+    if (draft.step === 9) return !!draft.coverageLevel;
+    if (draft.step === 10) return !!draft.startAt && !!draft.endAt;
+    if (draft.step === 11) return Number(draft.dailyBudget) > 0 && Number(draft.totalBudget) > 0;
+    if (draft.step === 13) return !!draft.paymentMethod && !!draft.invoiceType;
     return true;
   };
 
@@ -111,7 +161,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
   };
 
   const publish = async ({ asDraft = false, submit = false } = {}) => {
-    if (!asDraft && !canNext() && draft.step === 8) {
+    if (!asDraft && !canNext()) {
       toast.error('Complete required fields');
       return;
     }
@@ -121,6 +171,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
         ...draft,
         placement: draft.placements?.[0] || draft.placement,
         description: draft.shortDescription || draft.description,
+        finalAmount: billingSummary.finalAmount,
       };
       const res = await saveAd(payload, { asDraft, submit });
       if (res.success) {
@@ -158,7 +209,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
         <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur px-5 py-4">
           <div>
             <h2 id="ad-wizard-title" className="text-lg font-bold">{editItem ? 'Edit Advertisement' : 'Create Advertisement'}</h2>
-            <p className="text-xs text-slate-500 mt-0.5">{type.label} · Step {draft.step}/8 · Draft auto-saves</p>
+            <p className="text-xs text-slate-500 mt-0.5">{type.label} · Step {draft.step}/14 · Draft auto-saves</p>
           </div>
           <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close"><X size={18} /></button>
         </div>
@@ -195,6 +246,69 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           )}
 
           {draft.step === 2 && (
+            <div className="space-y-4">
+              <p className="text-sm text-slate-500">Choose a campaign format that matches your promotion and creative assets.</p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {CAMPAIGN_TYPES.map((t) => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    onClick={() => patch({ campaignType: t.id })}
+                    className={`rounded-2xl border p-4 text-left transition ${draft.campaignType === t.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200 dark:border-slate-700'}`}
+                  >
+                    <p className="text-sm font-semibold">{t.label}</p>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {draft.step === 3 && (
+            <div className="space-y-4">
+              <p className="text-sm text-slate-500">Upload the creative assets that will run for this campaign.</p>
+              {['image', 'brand_banner', 'product_card', 'store_card', 'carousel', 'popup', 'splash_screen', 'notification_banner'].includes(draft.campaignType) && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <label className="block text-xs font-medium">Desktop Creative
+                    <input type="file" accept="image/*" onChange={(e) => patch({ desktopBanner: e.target.files?.[0]?.name || '' })} className="mt-1 w-full text-sm" />
+                    {draft.desktopBanner ? <p className="mt-1 text-[11px] text-slate-500">{draft.desktopBanner}</p> : null}
+                  </label>
+                  <label className="block text-xs font-medium">Mobile Creative
+                    <input type="file" accept="image/*" onChange={(e) => patch({ mobileBanner: e.target.files?.[0]?.name || '' })} className="mt-1 w-full text-sm" />
+                    {draft.mobileBanner ? <p className="mt-1 text-[11px] text-slate-500">{draft.mobileBanner}</p> : null}
+                  </label>
+                  <label className="block text-xs font-medium">Tablet Creative
+                    <input type="file" accept="image/*" onChange={(e) => patch({ tabletBanner: e.target.files?.[0]?.name || '' })} className="mt-1 w-full text-sm" />
+                  </label>
+                </div>
+              )}
+              {draft.campaignType === 'video' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <label className="block text-xs font-medium">Video File
+                    <input type="file" accept="video/mp4" onChange={(e) => patch({ videoFile: e.target.files?.[0]?.name || '' })} className="mt-1 w-full text-sm" />
+                    {draft.videoFile ? <p className="mt-1 text-[11px] text-slate-500">{draft.videoFile}</p> : null}
+                  </label>
+                  <label className="block text-xs font-medium">Video Thumbnail
+                    <input type="file" accept="image/*" onChange={(e) => patch({ thumbnail: e.target.files?.[0]?.name || '' })} className="mt-1 w-full text-sm" />
+                    {draft.thumbnail ? <p className="mt-1 text-[11px] text-slate-500">{draft.thumbnail}</p> : null}
+                  </label>
+                </div>
+              )}
+              {draft.campaignType === 'poster' && (
+                <label className="block text-xs font-medium">Poster File
+                  <input type="file" accept="image/*" onChange={(e) => patch({ posterFile: e.target.files?.[0]?.name || '' })} className="mt-1 w-full text-sm" />
+                  {draft.posterFile ? <p className="mt-1 text-[11px] text-slate-500">{draft.posterFile}</p> : null}
+                </label>
+              )}
+              {draft.campaignType === 'gif' && (
+                <label className="block text-xs font-medium">GIF File
+                  <input type="file" accept="image/gif" onChange={(e) => patch({ desktopBanner: e.target.files?.[0]?.name || '' })} className="mt-1 w-full text-sm" />
+                  {draft.desktopBanner ? <p className="mt-1 text-[11px] text-slate-500">{draft.desktopBanner}</p> : null}
+                </label>
+              )}
+            </div>
+          )}
+
+          {draft.step === 5 && (
             <div className="space-y-3">
               <div className="flex flex-wrap gap-2">
                 {[
@@ -236,7 +350,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
             </div>
           )}
 
-          {draft.step === 3 && (
+          {draft.step === 4 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium sm:col-span-2">Headline
                 <div className="mt-1 flex gap-2">
@@ -306,7 +420,34 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
             </div>
           )}
 
-          {draft.step === 4 && (
+          {draft.step === 6 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label className="block text-xs font-medium sm:col-span-2">Landing Page *
+                <select value={draft.landingPage} onChange={(e) => patch({ landingPage: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                  {LANDING_PAGES.map((page) => (
+                    <option key={page.id} value={page.id}>{page.label}</option>
+                  ))}
+                </select>
+              </label>
+              {['custom_url', 'external_website'].includes(draft.landingPage) && (
+                <label className="block text-xs font-medium sm:col-span-2">Landing URL
+                  <input value={draft.destinationUrl} onChange={(e) => patch({ destinationUrl: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="https://example.com" />
+                </label>
+              )}
+              {draft.landingPage === 'whatsapp' && (
+                <label className="block text-xs font-medium sm:col-span-2">WhatsApp Number
+                  <input value={draft.whatsappNumber || ''} onChange={(e) => patch({ whatsappNumber: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="+91 90000 00000" />
+                </label>
+              )}
+              {draft.landingPage === 'phone_call' && (
+                <label className="block text-xs font-medium sm:col-span-2">Phone Number
+                  <input value={draft.phoneNumber || ''} onChange={(e) => patch({ phoneNumber: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="+91 90000 00000" />
+                </label>
+              )}
+            </div>
+          )}
+
+          {draft.step === 7 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium">Country
                 <input value={draft.country} onChange={(e) => patch({ country: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
@@ -372,7 +513,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
             </div>
           )}
 
-          {draft.step === 5 && (
+          {draft.step === 8 && (
             <div className="space-y-3">
               <div className="flex justify-end">
                 <button type="button" onClick={() => suggest('placements', () => ({ placements: ['homepage_banner', 'search'] }))} className="text-xs font-semibold text-emerald-600 inline-flex items-center gap-1"><Sparkles size={12} /> Suggest placements</button>
@@ -392,7 +533,22 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
             </div>
           )}
 
-          {draft.step === 6 && (
+          {draft.step === 9 && (
+            <div className="space-y-4">
+              <label className="block text-xs font-medium">Coverage Level
+                <select value={draft.coverageLevel} onChange={(e) => patch({ coverageLevel: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                  {COVERAGE_LEVELS.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
+                </select>
+              </label>
+              <label className="block text-xs font-medium">Coverage Areas
+                <input value={(draft.coverageAreas || []).join(', ')} onChange={(e) => patch({ coverageAreas: e.target.value.split(',').map((value) => value.trim()).filter(Boolean) })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="Mumbai, Pune, Thane" />
+                <p className="text-[11px] text-slate-500 mt-1">Add specific regions to refine your coverage.</p>
+              </label>
+              {draft.coverageLevel === 'india' && <p className="text-sm text-slate-500">Nationwide coverage selected. No location details required.</p>}
+            </div>
+          )}
+
+          {draft.step === 11 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium">Daily Budget
                 <div className="mt-1 flex gap-2">
@@ -415,14 +571,6 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
                   <option value="manual">Manual</option>
                 </select>
               </label>
-              <label className="block text-xs font-medium">Payment
-                <select value={draft.paymentMethod} onChange={(e) => patch({ paymentMethod: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
-                  <option value="wallet">Wallet</option>
-                  <option value="upi">UPI</option>
-                  <option value="card">Card</option>
-                  <option value="netbanking">Net Banking</option>
-                </select>
-              </label>
               <div className="sm:col-span-2 grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {[
                   ['Est. Reach', estimate.reach],
@@ -439,7 +587,57 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
             </div>
           )}
 
-          {draft.step === 7 && (
+          {draft.step === 13 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label className="block text-xs font-medium">Payment Method *
+                <select value={draft.paymentMethod} onChange={(e) => patch({ paymentMethod: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                  {PAYMENT_METHODS.map((method) => <option key={method.id} value={method.id}>{method.label}</option>)}
+                </select>
+              </label>
+              <label className="block text-xs font-medium">Invoice Type *
+                <select value={draft.invoiceType} onChange={(e) => patch({ invoiceType: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                  <option value="gst_invoice">GST Invoice</option>
+                  <option value="proforma_invoice">Proforma Invoice</option>
+                  <option value="corporate_invoice">Corporate Invoice</option>
+                </select>
+              </label>
+              <label className="block text-xs font-medium">Discount (₹)
+                <input type="number" value={draft.couponDiscount} onChange={(e) => patch({ couponDiscount: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+              </label>
+              <label className="block text-xs font-medium">Platform Fee (%)
+                <input type="number" min={0} value={draft.platformFeePercent} onChange={(e) => patch({ platformFeePercent: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+              </label>
+              <label className="block text-xs font-medium">Tax (%)
+                <input type="number" min={0} value={draft.gstPercent} onChange={(e) => patch({ gstPercent: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+              </label>
+              <div className="sm:col-span-2 rounded-2xl bg-slate-50 dark:bg-slate-800/50 p-4">
+                <div className="grid grid-cols-2 gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <div>
+                    <p className="text-[11px] uppercase text-slate-400">Total Budget</p>
+                    <p className="font-semibold">{formatINR(billingSummary.totalBudget)}</p>
+                  </div>
+                  <div>
+                    <p className="text-[11px] uppercase text-slate-400">Platform Fee</p>
+                    <p className="font-semibold">{formatINR(billingSummary.platformFee)}</p>
+                  </div>
+                  <div>
+                    <p className="text-[11px] uppercase text-slate-400">Discount</p>
+                    <p className="font-semibold">-{formatINR(billingSummary.discount)}</p>
+                  </div>
+                  <div>
+                    <p className="text-[11px] uppercase text-slate-400">Tax</p>
+                    <p className="font-semibold">{formatINR(billingSummary.tax)}</p>
+                  </div>
+                </div>
+                <div className="mt-4 rounded-2xl bg-white dark:bg-slate-900 p-4 shadow-sm border border-slate-200 dark:border-slate-800">
+                  <p className="text-[11px] uppercase text-slate-400">Final Amount</p>
+                  <p className="text-lg font-bold">{formatINR(billingSummary.finalAmount)}</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {draft.step === 10 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium">Start Date
                 <input type="date" value={String(draft.startAt).slice(0, 10)} onChange={(e) => patch({ startAt: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
@@ -474,7 +672,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
             </div>
           )}
 
-          {draft.step === 8 && (
+          {draft.step === 12 && (
             <div className="space-y-3">
               <div className="flex flex-wrap gap-2">
                 {['desktop', 'tablet', 'mobile'].map((d) => (
@@ -495,6 +693,32 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
               </div>
             </div>
           )}
+
+          {draft.step === 14 && (
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                  ['Objective', OBJECTIVES.find((o) => o.id === draft.objective)?.label || draft.objective],
+                  ['Campaign Type', CAMPAIGN_TYPES.find((t) => t.id === draft.campaignType)?.label || draft.campaignType],
+                  ['Landing', LANDING_PAGES.find((p) => p.id === draft.landingPage)?.label || draft.landingPage],
+                  ['Placement', draft.placement || (draft.placements || [])[0] || '—'],
+                  ['Schedule', `${draft.startAt} ${draft.startTime} → ${draft.endAt} ${draft.endTime}`],
+                  ['Budget', formatINR(draft.totalBudget)],
+                  ['Payment', PAYMENT_METHODS.find((m) => m.id === draft.paymentMethod)?.label || draft.paymentMethod],
+                  ['Invoice', draft.invoiceType?.replace(/_/g, ' ')],
+                ].map(([label, value]) => (
+                  <div key={label} className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 p-4">
+                    <p className="text-[10px] uppercase text-slate-400">{label}</p>
+                    <p className="mt-2 text-sm font-semibold text-slate-800 dark:text-slate-200">{value}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-2xl bg-slate-50 dark:bg-slate-800/50 p-4 text-sm text-slate-600 dark:text-slate-300">
+                <p className="font-semibold text-slate-700 dark:text-slate-100">Review before submission</p>
+                <p className="mt-2">Ensure the campaign objective, audience, placement, budget, and payment details are correct before sending the campaign for approval.</p>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-5 py-4">
@@ -503,7 +727,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           </button>
           <div className="flex gap-2">
             <button type="button" disabled={busy} onClick={() => publish({ asDraft: true })} className="rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm font-semibold">Save Draft</button>
-            {draft.step < 8 ? (
+            {draft.step < 14 ? (
               <button type="button" disabled={!canNext() || busy} onClick={() => { if (!canNext()) { toast.error('Complete required fields'); return; } patch({ step: draft.step + 1 }); }} className="inline-flex items-center gap-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 text-sm font-semibold disabled:opacity-40">
                 Continue <ChevronRight size={16} />
               </button>

@@ -38,38 +38,133 @@ export const AD_TYPES = [
 export const PRIMARY_AD_TYPES = ['text', 'banner', 'poster', 'sponsored', 'featured', 'offer'];
 
 export const OBJECTIVES = [
-  { id: 'sales', label: 'Increase Sales' },
-  { id: 'views', label: 'Product Views' },
-  { id: 'awareness', label: 'Brand Awareness' },
-  { id: 'store', label: 'Store Promotion' },
-  { id: 'launch', label: 'New Product Launch' },
+  { id: 'promote_product', label: 'Promote Product' },
+  { id: 'promote_store', label: 'Promote Store' },
+  { id: 'promote_brand', label: 'Promote Brand' },
+  { id: 'homepage_banner', label: 'Homepage Banner' },
+  { id: 'category_banner', label: 'Category Banner' },
+  { id: 'featured_listing', label: 'Featured Listing' },
+  { id: 'festival_campaign', label: 'Festival Campaign' },
+  { id: 'flash_sale', label: 'Flash Sale' },
+  { id: 'clearance_sale', label: 'Clearance Sale' },
+  { id: 'new_arrival', label: 'New Arrival' },
+  { id: 'sponsored_product', label: 'Sponsored Product' },
+  { id: 'sponsored_brand', label: 'Sponsored Brand' },
+  { id: 'sponsored_store', label: 'Sponsored Store' },
+  { id: 'search_top', label: 'Search Top Placement' },
+  { id: 'recommended_products', label: 'Recommended Products' },
+  { id: 'nearby_stores', label: 'Nearby Stores' },
+  { id: 'custom_campaign', label: 'Custom Campaign' },
+];
+
+export const CAMPAIGN_TYPES = [
+  { id: 'image', label: 'Image' },
+  { id: 'video', label: 'Video' },
+  { id: 'carousel', label: 'Carousel' },
+  { id: 'gif', label: 'GIF' },
+  { id: 'store_card', label: 'Store Card' },
+  { id: 'product_card', label: 'Product Card' },
+  { id: 'brand_banner', label: 'Brand Banner' },
+  { id: 'popup', label: 'Popup' },
+  { id: 'splash_screen', label: 'Splash Screen' },
+  { id: 'notification_banner', label: 'Notification Banner' },
 ];
 
 export const PLACEMENTS = [
-  { id: 'homepage_banner', label: 'Homepage Banner' },
+  { id: 'homepage_hero', label: 'Homepage Hero' },
   { id: 'homepage_slider', label: 'Homepage Slider' },
-  { id: 'homepage_popup', label: 'Homepage Popup' },
-  { id: 'category', label: 'Category Page' },
-  { id: 'search', label: 'Search Results' },
-  { id: 'pdp', label: 'Product Details Page' },
-  { id: 'recommended', label: 'Recommended Products' },
-  { id: 'offer_zone', label: 'Offer Zone' },
-  { id: 'festival', label: 'Festival Banner' },
-  { id: 'checkout', label: 'Checkout Page' },
-  { id: 'wallet', label: 'Wallet Page' },
-  { id: 'membership', label: 'Membership Page' },
-  { id: 'order_success', label: 'Order Success Page' },
+  { id: 'homepage_mid_banner', label: 'Homepage Mid Banner' },
+  { id: 'category_banner', label: 'Category Banner' },
+  { id: 'search_results', label: 'Search Results' },
+  { id: 'featured_products', label: 'Featured Products' },
+  { id: 'recommended_products', label: 'Recommended Products' },
+  { id: 'nearby_stores', label: 'Nearby Stores' },
+  { id: 'product_details', label: 'Product Details' },
+  { id: 'store_listing', label: 'Store Listing' },
+  { id: 'checkout_recommendation', label: 'Checkout Recommendation' },
+  { id: 'festival_banner', label: 'Festival Banner' },
+  { id: 'flash_sale', label: 'Flash Sale' },
+  { id: 'notification', label: 'Notification' },
+  { id: 'splash_screen', label: 'Splash Screen' },
+  { id: 'email', label: 'Email' },
+  { id: 'sms', label: 'SMS' },
+  { id: 'whatsapp', label: 'WhatsApp' },
+];
+
+export const LANDING_PAGES = [
+  { id: 'product_page', label: 'Product Page' },
+  { id: 'store_page', label: 'Store Page' },
+  { id: 'brand_page', label: 'Brand Page' },
+  { id: 'category_page', label: 'Category Page' },
+  { id: 'custom_url', label: 'Custom URL' },
+  { id: 'external_website', label: 'External Website' },
+  { id: 'whatsapp', label: 'WhatsApp' },
+  { id: 'phone_call', label: 'Phone Call' },
+];
+
+export const AUDIENCE_BUSINESS = [
+  { id: 'b2b', label: 'B2B' },
+  { id: 'b2c', label: 'B2C' },
+  { id: 'wholesalers', label: 'Wholesalers' },
+  { id: 'retailers', label: 'Retailers' },
+  { id: 'professionals', label: 'Professionals' },
+];
+
+export const COVERAGE_LEVELS = [
+  { id: 'village', label: 'Village' },
+  { id: 'multiple_villages', label: 'Multiple Villages' },
+  { id: 'panchayat', label: 'Panchayat' },
+  { id: 'block', label: 'Block' },
+  { id: 'district', label: 'District' },
+  { id: 'multiple_districts', label: 'Multiple Districts' },
+  { id: 'state', label: 'State' },
+  { id: 'multiple_states', label: 'Multiple States' },
+  { id: 'india', label: 'Entire India' },
+];
+
+export const BUDGET_PLANS_DAILY = [100, 250, 500, 1000, 2500, 5000, 10000];
+export const BUDGET_PLANS_MONTHLY = [5000, 10000, 25000, 50000, 100000, 250000, 500000];
+
+export const PAYMENT_METHODS = [
+  { id: 'upi', label: 'UPI' },
+  { id: 'credit_card', label: 'Credit Card' },
+  { id: 'debit_card', label: 'Debit Card' },
+  { id: 'net_banking', label: 'Net Banking' },
+  { id: 'wallet', label: 'Wallet' },
+  { id: 'saathpay', label: 'SaathPay' },
+  { id: 'razorpay', label: 'Razorpay' },
+  { id: 'phonepe', label: 'PhonePe' },
+  { id: 'google_pay', label: 'Google Pay' },
+  { id: 'paytm', label: 'Paytm' },
+  { id: 'corporate_invoice', label: 'Corporate Invoice' },
+];
+
+export const SCHEDULE_DURATIONS = [
+  { id: '1_day', label: '1 Day' },
+  { id: '3_days', label: '3 Days' },
+  { id: '7_days', label: '7 Days' },
+  { id: '15_days', label: '15 Days' },
+  { id: '30_days', label: '30 Days' },
+  { id: '60_days', label: '60 Days' },
+  { id: '90_days', label: '90 Days' },
+  { id: 'custom', label: 'Custom' },
 ];
 
 export const WIZARD_STEPS = [
-  { id: 1, label: 'Campaign' },
-  { id: 2, label: 'Products' },
-  { id: 3, label: 'Content' },
-  { id: 4, label: 'Audience' },
-  { id: 5, label: 'Placement' },
-  { id: 6, label: 'Budget' },
-  { id: 7, label: 'Duration' },
-  { id: 8, label: 'Preview' },
+  { id: 1, label: 'Objective' },
+  { id: 2, label: 'Campaign Type' },
+  { id: 3, label: 'Creative' },
+  { id: 4, label: 'Details' },
+  { id: 5, label: 'Products' },
+  { id: 6, label: 'Landing Page' },
+  { id: 7, label: 'Audience' },
+  { id: 8, label: 'Placement' },
+  { id: 9, label: 'Coverage' },
+  { id: 10, label: 'Schedule' },
+  { id: 11, label: 'Budget' },
+  { id: 12, label: 'Preview' },
+  { id: 13, label: 'Payment' },
+  { id: 14, label: 'Submit' },
 ];
 
 export const CATEGORIES = ['Grocery', 'Electronics', 'Fashion', 'Hardware', 'FMCG', 'Beauty', 'Home'];

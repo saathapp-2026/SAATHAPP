@@ -3,7 +3,7 @@ import {
   LayoutDashboard, Users, Store, Wrench, HardHat, Truck, Package, Tag,
   ShoppingCart, Warehouse, CreditCard, Wallet, Percent, Megaphone,
   Headphones, Bell, FileText, BarChart3, ClipboardList, UserCog,
-  CheckSquare, MessageSquare, Video, Handshake, ShieldAlert, Sparkles,
+  CheckSquare, Copy, MessageSquare, Video, Handshake, ShieldAlert, Sparkles,
   Activity, Plug, ToggleLeft, ScrollText, Settings as SettingsIcon,
   LogOut, Search, Sun, Moon, Globe, ChevronDown, Clock, Mail, Lock,
   Eye, EyeOff, BadgeCheck, ShieldCheck, ArrowUpRight, ArrowDownRight,
@@ -16,6 +16,7 @@ import {
   AreaChart, Area, LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from "recharts";
+import { generateReport } from "./utils/export/generateReport.js";
 
 /* ============================================================
    DESIGN TOKENS
@@ -647,11 +648,431 @@ function useCountUp(target, active, duration = 900) {
   return val;
 }
 
-const KPICard = ({ label, value, delta, up, icon: Icon, index = 0 }) => {
-  const numeric = typeof value === "string" ? parseFloat(value.replace(/[^\d.]/g, "")) : value;
-  const isPureNumber = typeof value === "string" && /^[\d,]+$/.test(value.replace(/[₹,%\s]/g, "")) === false ? false : true;
+const downloadCSV = (filename, headers, rows) => {
+  const escaped = rows.map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","));
+  const csv = [headers.join(","), ...escaped].join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.setAttribute("download", filename);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+};
+
+const safeNumber = (value) => {
+  if (typeof value === "number") return value;
+  const parsed = Number(String(value).replace(/[^0-9.-]/g, ""));
+  return Number.isFinite(parsed) ? parsed : 0;
+};
+
+const formatCurrency = (value) => {
+  const number = safeNumber(value);
+  return `₹${number.toLocaleString("en-IN")}`;
+};
+
+const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value).trim());
+const validatePhone = (value) => {
+  const digits = String(value).replace(/\D/g, "");
+  return /^(?:91)?[6-9]\d{9}$/.test(digits);
+};
+const validateGST = (value) => /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/.test(String(value).trim().toUpperCase());
+const validatePAN = (value) => /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(String(value).trim().toUpperCase());
+const validatePassword = (value) => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$/.test(String(value));
+const validateFile = (file) => {
+  if (!file) return false;
+  const allowed = ["image/png", "image/jpeg", "image/jpg", "image/webp", "application/pdf"];
+  return allowed.includes(file.type) && file.size <= 5 * 1024 * 1024;
+};
+
+const Modal = ({ title, children, open, onClose, footer }) => {
+  if (!open) return null;
   return (
-    <Card className={`p-5 sa-rise`} >
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/35 p-4">
+      <div className="w-full max-w-3xl rounded-[28px] bg-white shadow-2xl overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-slate-200">
+          <div>
+            <p className="sa-font-display text-lg font-bold text-slate-900">{title}</p>
+          </div>
+          <button onClick={onClose} className="text-slate-500 hover:text-slate-900 p-2 rounded-full">×</button>
+        </div>
+        <div className="max-h-[80vh] overflow-y-auto p-6">{children}</div>
+        {footer && <div className="border-t border-slate-200 px-6 py-4 bg-slate-50">{footer}</div>}
+      </div>
+    </div>
+  );
+};
+
+const ConfirmDialog = ({ open, title, message, confirmLabel = "Delete", cancelLabel = "Cancel", onCancel, onConfirm, loading }) => (
+  <Modal
+    title={title}
+    open={open}
+    onClose={onCancel}
+    footer={(
+      <div className="flex justify-end gap-3">
+        <button onClick={onCancel} className="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 bg-white">{cancelLabel}</button>
+        <button onClick={onConfirm} disabled={loading} className="px-4 py-2 rounded-xl bg-red-600 text-white hover:bg-red-700 disabled:opacity-60">
+          {loading ? "Deleting..." : confirmLabel}
+        </button>
+      </div>
+    )}
+  >
+    <div className="space-y-4 text-sm text-slate-600">
+      <p>{message}</p>
+    </div>
+  </Modal>
+);
+
+const ActionMenu = ({ actions, open, onClose }) => {
+  if (!open) return null;
+  return (
+    <div className="absolute right-0 top-full mt-2 w-56 rounded-2xl border border-slate-200 bg-white shadow-lg z-20">
+      <div className="p-2">
+        {actions.map((action) => (
+          <button
+            key={action.label}
+            type="button"
+            onClick={() => { action.onClick(); onClose?.(); }}
+            className={`w-full text-left rounded-xl px-3 py-2 text-sm flex items-center gap-2 ${action.destructive ? "text-rose-600 hover:bg-rose-50" : "text-slate-700 hover:bg-slate-100"}`}
+          >
+            {action.icon && <action.icon size={14} />}
+            <span>{action.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const buildReviewRows = (fields, values) => fields.map((field) => ({ label: field.label, value: String(values[field.name] ?? "-") }));
+
+const ViewDialog = ({ open, title, fields, values, onClose }) => {
+  if (!open) return null;
+  return (
+    <Modal
+      title={title}
+      open={open}
+      onClose={onClose}
+      footer={(
+        <div className="flex justify-end">
+          <button onClick={onClose} className="px-4 py-2 rounded-xl border border-slate-300 bg-white text-slate-700">Close</button>
+        </div>
+      )}
+    >
+      <div className="space-y-4">
+        {fields.map((field) => (
+          <div key={field.name} className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">
+            <p className="text-xs font-semibold text-slate-500 mb-1">{field.label}</p>
+            <p className="text-sm text-slate-900">{field.type === "file" ? (values[field.name]?.name ?? "No file") : String(values[field.name] ?? "—")}</p>
+          </div>
+        ))}
+      </div>
+    </Modal>
+  );
+};
+
+const EntityFormModal = ({ open, title, fields, values, onChange, onClose, onSave, loading, step, setStep, steps, validationErrors }) => {
+  if (!open) return null;
+  const currentStep = steps[step];
+  return (
+    <Modal
+      title={`${title} ${step === steps.length - 1 ? "Review" : ""}`}
+      open={open}
+      onClose={onClose}
+      footer={(
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <div className="flex gap-2 text-xs text-slate-500">Step {step + 1} of {steps.length}</div>
+          <div className="flex gap-3">
+            {step > 0 && <button type="button" onClick={() => setStep((s) => Math.max(0, s - 1))} className="px-4 py-2 rounded-xl border border-slate-300 bg-white text-slate-700">Back</button>}
+            <button type="button" onClick={step < steps.length - 1 ? () => setStep((s) => Math.min(steps.length - 1, s + 1)) : onSave} disabled={loading} className="px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-60">
+              {loading ? "Saving..." : step < steps.length - 1 ? "Next" : "Create"}
+            </button>
+          </div>
+        </div>
+      )}
+    >
+      <div className="space-y-5">
+        <div className="flex flex-wrap gap-2 text-xs text-slate-500">
+          {steps.map((stepInfo, i) => (
+            <div key={stepInfo.label} className={`rounded-full px-3 py-1 ${i === step ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}`}>{stepInfo.label}</div>
+          ))}
+        </div>
+        {currentStep.fields ? (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {currentStep.fields.map((field) => {
+              if (field.type === "textarea") {
+                return (
+                  <label key={field.name} className="space-y-2 text-sm text-slate-700">
+                    <span className="font-medium">{field.label}{field.required ? " *" : ""}</span>
+                    <textarea
+                      value={values[field.name] ?? ""}
+                      onChange={(e) => onChange(field.name, e.target.value)}
+                      rows={4}
+                      className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-emerald-300"
+                    />
+                    {validationErrors[field.name] && <span className="text-rose-600 text-xs">{validationErrors[field.name]}</span>}
+                  </label>
+                );
+              }
+              if (field.type === "select") {
+                return (
+                  <label key={field.name} className="space-y-2 text-sm text-slate-700">
+                    <span className="font-medium">{field.label}{field.required ? " *" : ""}</span>
+                    <select value={values[field.name] ?? field.default ?? ""} onChange={(e) => onChange(field.name, e.target.value)} className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-emerald-300">
+                      <option value="">Select</option>
+                      {field.options?.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+                    </select>
+                    {validationErrors[field.name] && <span className="text-rose-600 text-xs">{validationErrors[field.name]}</span>}
+                  </label>
+                );
+              }
+              if (field.type === "file") {
+                return (
+                  <label key={field.name} className="space-y-2 text-sm text-slate-700">
+                    <span className="font-medium">{field.label}{field.required ? " *" : ""}</span>
+                    <input type="file" accept={field.accept || "image/*"} onChange={(e) => onChange(field.name, e.target.files?.[0] ?? null)} className="w-full text-sm text-slate-600" />
+                    {values[field.name] && <p className="text-xs text-slate-500">Selected: {values[field.name].name || values[field.name]}</p>}
+                    {validationErrors[field.name] && <span className="text-rose-600 text-xs">{validationErrors[field.name]}</span>}
+                  </label>
+                );
+              }
+              return (
+                <label key={field.name} className="space-y-2 text-sm text-slate-700">
+                  <span className="font-medium">{field.label}{field.required ? " *" : ""}</span>
+                  <input
+                    type={field.type || "text"}
+                    value={values[field.name] ?? ""}
+                    onChange={(e) => onChange(field.name, e.target.value)}
+                    placeholder={field.placeholder || ""}
+                    className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-emerald-300"
+                  />
+                  {validationErrors[field.name] && <span className="text-rose-600 text-xs">{validationErrors[field.name]}</span>}
+                </label>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {(typeof currentStep.review === "function" ? currentStep.review(values) : currentStep.review)?.map((item) => (
+              <div key={item.label} className="flex justify-between rounded-2xl bg-slate-50 px-4 py-3 text-sm">
+                <span className="text-slate-600">{item.label}</span>
+                <span className="font-medium text-slate-900">{item.value}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </Modal>
+  );
+};
+
+const MODULE_FORMS = {
+  users: {
+    entity: "User",
+    fields: [
+      { name: "name", label: "Full Name", required: true, section: "basic" },
+      { name: "email", label: "Email", type: "email", required: true, section: "basic" },
+      { name: "phone", label: "Phone", type: "tel", required: true, section: "basic" },
+      { name: "city", label: "City", required: true, section: "basic" },
+      { name: "status", label: "Status", type: "select", options: ["Active", "Pending KYC", "Suspended"], default: "Pending KYC", section: "business" },
+      { name: "notes", label: "Notes", type: "textarea", section: "business" },
+    ],
+    toRow: (values) => [values.name, values.phone, values.city, "₹0", values.status || "Pending KYC", "Just now"],
+    fromRow: (row) => ({ name: row[0], phone: row[1], city: row[2], status: row[4], email: "" }),
+    duplicateSuffix: "copy",
+    rowActions: (rowObj, handlers) => [
+      { label: "View Profile", onClick: () => handlers.view(rowObj), icon: Eye },
+      { label: "Edit", onClick: () => handlers.edit(rowObj), icon: CheckSquare },
+      { label: "Duplicate", onClick: () => handlers.duplicate(rowObj), icon: Copy },
+      { label: rowObj.data[4] === "Active" ? "Suspend" : "Activate", onClick: () => handlers.toggleStatus(rowObj), icon: ShieldCheck, destructive: rowObj.data[4] !== "Active" },
+      { label: "Delete", onClick: () => handlers.delete(rowObj), destructive: true },
+    ],
+  },
+  sellers: {
+    entity: "Seller",
+    fields: [
+      { name: "store", label: "Store Name", required: true, section: "basic" },
+      { name: "owner", label: "Owner", required: true, section: "basic" },
+      { name: "gst", label: "GST Number", required: true, section: "business" },
+      { name: "commission", label: "Commission (%)", type: "text", required: true, section: "business" },
+      { name: "rating", label: "Rating", type: "text", required: true, section: "business" },
+      { name: "status", label: "Status", type: "select", options: ["Active", "Pending KYC", "Suspended"], default: "Pending KYC", section: "business" },
+    ],
+    toRow: (values) => [values.store, values.owner, values.gst, `${values.commission || "8"}%`, values.rating || "0", values.status || "Pending KYC"],
+    fromRow: (row) => ({ store: row[0], owner: row[1], gst: row[2], commission: String((row[3] || "").replace("%", "")), rating: row[4], status: row[5] }),
+    duplicateSuffix: "copy",
+    rowActions: (rowObj, handlers) => [
+      { label: "View", onClick: () => handlers.view(rowObj), icon: Eye },
+      { label: "Edit", onClick: () => handlers.edit(rowObj), icon: CheckSquare },
+      { label: rowObj.data[5] === "Active" ? "Suspend" : "Activate", onClick: () => handlers.toggleStatus(rowObj), icon: ShieldCheck, destructive: rowObj.data[5] !== "Active" },
+      { label: rowObj.data[5] === "Pending KYC" ? "Verify" : "Approve", onClick: () => handlers.verify(rowObj), icon: BadgeCheck },
+      { label: "Delete", onClick: () => handlers.delete(rowObj), destructive: true },
+    ],
+  },
+  delivery: {
+    entity: "Delivery Partner",
+    fields: [
+      { name: "name", label: "Partner Name", required: true, section: "basic" },
+      { name: "vehicle", label: "Vehicle", required: true, section: "basic" },
+      { name: "city", label: "City", required: true, section: "basic" },
+      { name: "orders", label: "Orders Today", type: "text", section: "business" },
+      { name: "rating", label: "Rating", type: "text", section: "business" },
+      { name: "status", label: "Status", type: "select", options: ["Online", "Offline"], default: "Online", section: "business" },
+    ],
+    toRow: (values) => [values.name, values.vehicle, values.city, values.orders || "0", values.rating || "0", values.status || "Online"],
+    fromRow: (row) => ({ name: row[0], vehicle: row[1], city: row[2], orders: row[3], rating: row[4], status: row[5] }),
+    duplicateSuffix: "copy",
+    rowActions: (rowObj, handlers) => [
+      { label: "View", onClick: () => handlers.view(rowObj), icon: Eye },
+      { label: "Edit", onClick: () => handlers.edit(rowObj), icon: CheckSquare },
+      { label: rowObj.data[5] === "Online" ? "Go Offline" : "Go Online", onClick: () => handlers.toggleStatus(rowObj), icon: ShieldCheck },
+      { label: "Complete Delivery", onClick: () => handlers.complete(rowObj), icon: CheckCircle2 },
+      { label: "Delete", onClick: () => handlers.delete(rowObj), destructive: true },
+    ],
+  },
+};
+
+const mergeSteps = (fields) => {
+  const sections = Array.from(new Set(fields.map((field) => field.section || "basic")));
+  return [
+    ...sections.map((section) => ({
+      label: section === "basic" ? "Basic Info" : section === "business" ? "Business Details" : section,
+      fields: fields.filter((field) => (field.section || "basic") === section),
+    })),
+    { label: "Review", review: (values) => buildReviewRows(fields, values) },
+  ];
+};
+
+const normalizeFieldName = (name) => String(name).toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+const createGenericFields = (columns) => columns.map((col) => {
+  const name = normalizeFieldName(col);
+  let type = "text";
+  if (/email/i.test(col)) type = "email";
+  else if (/phone|mobile|contact/i.test(col)) type = "tel";
+  else if (/amount|price|commission|discount|orders|stock|rating|available|percentage|payout/i.test(col)) type = "text";
+  else if (/status/i.test(col)) type = "select";
+  return {
+    name,
+    label: col,
+    type,
+    required: true,
+    section: /status/i.test(col) ? "business" : "basic",
+    options: /status/i.test(col) ? ["Active", "Pending", "Suspended", "Draft", "Online", "Offline", "Scheduled", "Resolved"] : undefined,
+  };
+});
+const valuesFromRow = (columns, row) => Object.fromEntries(columns.map((col, index) => [normalizeFieldName(col), row[index]]));
+const rowFromValues = (columns, values) => columns.map((col) => values[normalizeFieldName(col)] ?? "");
+
+const getReportDefinition = (reportId) => {
+  const orderRows = MODULES.orders.rows;
+  const sellerRows = MODULES.sellers.rows;
+  const deliveryRows = MODULES.delivery.rows;
+  const employeeRows = MODULES.hr.rows;
+  const inventoryRows = MODULES.inventory.rows;
+  const financeRows = MODULES.finance.rows;
+
+  const salesRows = revenueSeries.map((item) => [item.m, formatCurrency(item.revenue), item.orders.toLocaleString()]);
+  const revenueRows = revenueSeries.map((item) => [item.m, formatCurrency(item.revenue)]);
+
+  switch (reportId) {
+    case "Sales Report":
+      return {
+        title: reportId,
+        headers: ["Month", "Revenue", "Orders"],
+        rows: salesRows,
+        summary: [
+          { label: "Total Revenue", value: formatCurrency(revenueSeries.reduce((sum, item) => sum + item.revenue, 0)) },
+          { label: "Total Orders", value: revenueSeries.reduce((sum, item) => sum + item.orders, 0).toLocaleString() },
+          { label: "Average Order Value", value: formatCurrency(revenueSeries.reduce((sum, item) => sum + item.revenue, 0) / Math.max(1, revenueSeries.reduce((sum, item) => sum + item.orders, 0))) },
+        ],
+      };
+    case "Revenue Report":
+      return {
+        title: reportId,
+        headers: ["Month", "Revenue"],
+        rows: revenueRows,
+        summary: [
+          { label: "Total Revenue", value: formatCurrency(revenueSeries.reduce((sum, item) => sum + item.revenue, 0)) },
+          { label: "Average Monthly Revenue", value: formatCurrency(revenueSeries.reduce((sum, item) => sum + item.revenue, 0) / revenueSeries.length) },
+          { label: "Last Month Revenue", value: formatCurrency(revenueSeries[revenueSeries.length - 1].revenue) },
+        ],
+      };
+    case "Orders Report":
+      return {
+        title: reportId,
+        headers: MODULES.orders.columns,
+        rows: orderRows,
+        summary: [
+          { label: "Total Orders", value: orderRows.length.toString() },
+          { label: "Delivered Orders", value: orderRows.filter((row) => row[4] === "Delivered").length.toString() },
+          { label: "Pending Orders", value: orderRows.filter((row) => row[4] !== "Delivered").length.toString() },
+        ],
+      };
+    case "Seller Report":
+      return {
+        title: reportId,
+        headers: MODULES.sellers.columns,
+        rows: sellerRows,
+        summary: [
+          { label: "Total Sellers", value: sellerRows.length.toString() },
+          { label: "Active Sellers", value: sellerRows.filter((row) => row[5] === "Active").length.toString() },
+          { label: "Pending KYC", value: sellerRows.filter((row) => row[5] === "Pending KYC").length.toString() },
+        ],
+      };
+    case "Delivery Report":
+      return {
+        title: reportId,
+        headers: MODULES.delivery.columns,
+        rows: deliveryRows,
+        summary: [
+          { label: "Total Partners", value: deliveryRows.length.toString() },
+          { label: "Online", value: deliveryRows.filter((row) => row[5] === "Online").length.toString() },
+          { label: "Offline", value: deliveryRows.filter((row) => row[5] === "Offline").length.toString() },
+        ],
+      };
+    case "Employee Report":
+      return {
+        title: reportId,
+        headers: MODULES.hr.columns,
+        rows: employeeRows,
+        summary: [
+          { label: "Total Employees", value: employeeRows.length.toString() },
+          { label: "Active", value: employeeRows.filter((row) => row[4] === "Active").length.toString() },
+          { label: "Pending", value: employeeRows.filter((row) => row[4] !== "Active").length.toString() },
+        ],
+      };
+    case "Inventory Report":
+      return {
+        title: reportId,
+        headers: MODULES.inventory.columns,
+        rows: inventoryRows,
+        summary: [
+          { label: "Total Warehouses", value: inventoryRows.length.toString() },
+          { label: "Active Locations", value: inventoryRows.filter((row) => row[5] === "Active").length.toString() },
+          { label: "Low Stock Alerts", value: inventoryRows.filter((row) => row[4] !== "0" && Number(String(row[4]).replace(/[^0-9]/g, "")) < 500).length.toString() },
+        ],
+      };
+    case "Finance Report":
+      return {
+        title: reportId,
+        headers: MODULES.finance.columns,
+        rows: financeRows,
+        summary: [
+          { label: "Revenue Items", value: financeRows.length.toString() },
+          { label: "Active Entries", value: financeRows.filter((row) => row[4] === "Active").length.toString() },
+          { label: "Total Amount", value: formatCurrency(financeRows.reduce((sum, row) => sum + safeNumber(row[1]), 0)) },
+        ],
+      };
+    default:
+      return null;
+  }
+};
+
+const KPICard = ({ label, value, delta, up, icon: Icon, index = 0, onClick }) => {
+  const content = (
+    <Card className={`p-5 sa-rise ${onClick ? "group transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300" : ""}`}>
       <div style={{ animationDelay: `${index * 60}ms` }} className="flex items-start justify-between">
         <div>
           <p className="sa-font-body text-[13px] text-slate-500 font-medium">{label}</p>
@@ -671,6 +1092,13 @@ const KPICard = ({ label, value, delta, up, icon: Icon, index = 0 }) => {
       ) : <div className="mt-3 h-[17px]" />}
     </Card>
   );
+
+  if (!onClick) return content;
+  return (
+    <button type="button" onClick={onClick} className="w-full text-left">
+      {content}
+    </button>
+  );
 };
 
 const SectionHeader = ({ title, subtitle, action, onAction }) => (
@@ -688,69 +1116,606 @@ const SectionHeader = ({ title, subtitle, action, onAction }) => (
   </div>
 );
 
-const DataTable = ({ columns, rows, onToast }) => (
-  <Card className="overflow-hidden">
-    <div className="flex items-center justify-between px-5 py-4 border-b border-black/5">
-      <div className="flex items-center gap-2 flex-1 max-w-sm">
-        <Search size={15} className="text-slate-400" />
-        <input placeholder="Search records..." className="sa-font-body text-sm outline-none bg-transparent w-full placeholder:text-slate-400" />
+const DataTable = ({ columns, rows, onToast, rowActions, onDeleteRows }) => {
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(0);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [filterStatus, setFilterStatus] = useState("All");
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [hiddenRows, setHiddenRows] = useState([]);
+  const [menuRow, setMenuRow] = useState(null);
+  const rowsPerPage = 5;
+  const normalizedQuery = query.trim().toLowerCase();
+
+  const rowKey = useCallback((row, index) => (row[0] != null ? `${String(row[0])}-${index}` : `row-${index}`), []);
+  const normalizedRows = useMemo(() => rows.map((row, index) => ({ id: rowKey(row, index), data: row })), [rows, rowKey]);
+  const statusIndex = useMemo(() => columns.findIndex((c) => String(c).toLowerCase() === "status"), [columns]);
+
+  const filterableStatusOptions = useMemo(() => {
+    if (statusIndex < 0) return [];
+    return Array.from(new Set(rows.map((row) => row[statusIndex]).filter(Boolean))).sort();
+  }, [rows, statusIndex]);
+
+  const filteredRows = useMemo(() => normalizedRows.filter((rowObj) => {
+    if (hiddenRows.includes(rowObj.id)) return false;
+    if (filterStatus !== "All" && statusIndex >= 0 && rowObj.data[statusIndex] !== filterStatus) return false;
+    if (!normalizedQuery) return true;
+    return rowObj.data.some((cell) => String(cell).toLowerCase().includes(normalizedQuery));
+  }), [normalizedRows, hiddenRows, filterStatus, normalizedQuery, statusIndex]);
+
+  const pageCount = Math.max(1, Math.ceil(filteredRows.length / rowsPerPage));
+  const currentPage = Math.min(page, pageCount - 1);
+  const visibleRows = useMemo(
+    () => filteredRows.slice(currentPage * rowsPerPage, currentPage * rowsPerPage + rowsPerPage),
+    [filteredRows, currentPage]
+  );
+
+  const selectedVisibleRowIds = visibleRows.map((r) => r.id);
+  const allVisibleSelected = selectedVisibleRowIds.length > 0 && selectedVisibleRowIds.every((id) => selectedRows.includes(id));
+  const selectedCount = selectedRows.length;
+
+  const toggleRowSelection = (id) => setSelectedRows((prev) => prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]);
+  const toggleAllRows = () => {
+    if (allVisibleSelected) {
+      setSelectedRows((prev) => prev.filter((id) => !selectedVisibleRowIds.includes(id)));
+    } else {
+      setSelectedRows((prev) => Array.from(new Set([...prev, ...selectedVisibleRowIds])));
+    }
+  };
+
+  const exportRows = (rowsToExport, filename = "table-export.csv") => {
+    if (rowsToExport.length === 0) {
+      onToast?.("No rows selected for export.");
+      return;
+    }
+    downloadCSV(filename, columns, rowsToExport.map((item) => item.data));
+    onToast?.("Export completed.");
+  };
+
+  const deleteSelected = () => {
+    if (selectedRows.length === 0) {
+      onToast?.("Select rows to delete.");
+      return;
+    }
+    if (typeof onDeleteRows === "function") {
+      onDeleteRows(selectedRows);
+      setSelectedRows([]);
+      onToast?.(`${selectedCount} row${selectedCount === 1 ? "" : "s"} deleted.`);
+      return;
+    }
+    setHiddenRows((prev) => Array.from(new Set([...prev, ...selectedRows])));
+    setSelectedRows([]);
+    onToast?.(`${selectedCount} row${selectedCount === 1 ? "" : "s"} deleted.`);
+  };
+
+  return (
+    <Card className="overflow-hidden">
+      <div className="flex flex-col gap-3 px-5 py-4 border-b border-black/5">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2 flex-1 min-w-[220px] max-w-md">
+            <Search size={15} className="text-slate-400" />
+            <input
+              value={query}
+              onChange={(e) => { setQuery(e.target.value); setPage(0); }}
+              placeholder="Search records..."
+              className="sa-font-body text-sm outline-none bg-transparent w-full placeholder:text-slate-400"
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <button onClick={() => setFilterOpen((s) => !s)} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-black/10 text-xs font-medium text-slate-600 hover:bg-slate-50">
+              <Filter size={13} /> Filter
+            </button>
+            <button onClick={() => exportRows(visibleRows, "visible-records.csv")} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-black/10 text-xs font-medium text-slate-600 hover:bg-slate-50">
+              <Download size={13} /> Export visible
+            </button>
+          </div>
+        </div>
+        {filterOpen && statusIndex >= 0 && (
+          <div className="flex flex-wrap items-center gap-3 bg-slate-50 rounded-2xl px-4 py-3">
+            <div className="flex items-center gap-2 text-slate-600 text-xs font-medium">
+              <span>Status</span>
+              <select value={filterStatus} onChange={(e) => { setFilterStatus(e.target.value); setPage(0); }} className="rounded-lg border border-black/10 bg-white px-2.5 py-1 text-[12px] outline-none">
+                <option value="All">All</option>
+                {filterableStatusOptions.map((status) => <option key={status} value={status}>{status}</option>)}
+              </select>
+            </div>
+            <button type="button" onClick={() => { setFilterStatus("All"); setQuery(""); setPage(0); }} className="text-xs text-slate-600 underline underline-offset-2">Reset filters</button>
+          </div>
+        )}
       </div>
-      <div className="flex items-center gap-2">
-        <button onClick={() => onToast?.("Filters applied")} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-black/10 text-xs font-medium text-slate-600 hover:bg-slate-50">
-          <Filter size={13} /> Filter
-        </button>
-        <button onClick={() => onToast?.("Export started — check downloads shortly")} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-black/10 text-xs font-medium text-slate-600 hover:bg-slate-50">
-          <Download size={13} /> Export
-        </button>
-      </div>
-    </div>
-    <div className="overflow-x-auto sa-scrollbar">
-      <table className="w-full text-sm sa-font-body">
-        <thead>
-          <tr className="text-left text-slate-500 text-xs uppercase tracking-wide bg-slate-50/60">
-            {columns.map((c) => <th key={c} className="px-5 py-3 font-semibold whitespace-nowrap">{c}</th>)}
-            <th className="px-5 py-3"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r, i) => (
-            <tr key={i} className="border-t border-black/5 hover:bg-emerald-50/30 transition-colors">
-              {r.map((cell, j) => (
-                <td key={j} className="px-5 py-3.5 text-[#0B1420] whitespace-nowrap">
-                  {statusTone[cell] ? <Pill label={cell} /> : cell}
-                </td>
-              ))}
-              <td className="px-5 py-3.5 text-right">
-                <button onClick={() => onToast?.(`Opened ${r[0]}`)} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-400">
-                  <MoreHorizontal size={16} />
-                </button>
-              </td>
+      {selectedCount > 0 && (
+        <div className="px-5 py-3 border-b border-black/5 bg-slate-50 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-700">
+          <span>{selectedCount} selected</span>
+          <div className="flex items-center gap-2">
+            <button onClick={() => exportRows(filteredRows.filter((item) => selectedRows.includes(item.id)), "selected-rows.csv")} className="px-3 py-1 rounded-lg border border-black/10 bg-white text-xs font-medium hover:bg-slate-100">Export selected</button>
+            <button onClick={deleteSelected} className="px-3 py-1 rounded-lg border border-black/10 bg-white text-xs font-medium text-red-600 hover:bg-red-50">Delete selected</button>
+            <button onClick={() => setSelectedRows([])} className="px-3 py-1 rounded-lg border border-black/10 bg-white text-xs font-medium hover:bg-slate-100">Clear selection</button>
+          </div>
+        </div>
+      )}
+      <div className="overflow-x-auto sa-scrollbar">
+        <table className="w-full text-sm sa-font-body">
+          <thead>
+            <tr className="text-left text-slate-500 text-xs uppercase tracking-wide bg-slate-50/60">
+              <th className="px-5 py-3 font-semibold whitespace-nowrap">
+                <input type="checkbox" checked={allVisibleSelected} onChange={toggleAllRows} className="rounded text-emerald-600" />
+              </th>
+              {columns.map((c) => <th key={c} className="px-5 py-3 font-semibold whitespace-nowrap">{c}</th>)}
+              <th className="px-5 py-3"></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-    <div className="px-5 py-3 border-t border-black/5 flex items-center justify-between text-xs text-slate-500 sa-font-body">
-      <span>Showing {rows.length} of {(rows.length * 214).toLocaleString()} records</span>
-      <div className="flex items-center gap-1">
-        <button className="px-2.5 py-1 rounded-lg border border-black/10 hover:bg-slate-50">Prev</button>
-        <button className="px-2.5 py-1 rounded-lg border border-black/10 hover:bg-slate-50">Next</button>
+          </thead>
+          <tbody>
+            {visibleRows.length > 0 ? visibleRows.map((rowObj, i) => (
+              <tr key={rowObj.id} className="border-t border-black/5 hover:bg-emerald-50/30 transition-colors">
+                <td className="px-5 py-3.5">
+                  <input
+                    type="checkbox"
+                    checked={selectedRows.includes(rowObj.id)}
+                    onChange={() => toggleRowSelection(rowObj.id)}
+                    className="rounded text-emerald-600"
+                  />
+                </td>
+                {rowObj.data.map((cell, j) => (
+                  <td key={j} className="px-5 py-3.5 text-[#0B1420] whitespace-nowrap">
+                    {statusTone[cell] ? <Pill label={cell} /> : cell}
+                  </td>
+                ))}
+                <td className="px-5 py-3.5 text-right relative">
+                  <button onClick={() => setMenuRow((prev) => (prev === rowObj.id ? null : rowObj.id))} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-400">
+                    <MoreHorizontal size={16} />
+                  </button>
+                  {menuRow === rowObj.id && rowActions && (
+                    <ActionMenu
+                      open
+                      actions={rowActions(rowObj)}
+                      onClose={() => setMenuRow(null)}
+                    />
+                  )}
+                </td>
+              </tr>
+            )) : (
+              <tr>
+                <td colSpan={columns.length + 2} className="px-5 py-8 text-center text-slate-500 text-sm">No records match your search.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
+      <div className="px-5 py-3 border-t border-black/5 flex items-center justify-between text-xs text-slate-500 sa-font-body">
+        <span>{filteredRows.length === rows.length ? `Showing ${visibleRows.length} of ${rows.length.toLocaleString()} records` : `Showing ${visibleRows.length} of ${filteredRows.length.toLocaleString()} matching records`}</span>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={() => setPage((p) => Math.max(0, p - 1))}
+            disabled={currentPage === 0}
+            className={`px-2.5 py-1 rounded-lg border border-black/10 hover:bg-slate-50 ${currentPage === 0 ? "opacity-40 cursor-not-allowed" : ""}`}>
+            Prev
+          </button>
+          <button
+            onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
+            disabled={currentPage >= pageCount - 1}
+            className={`px-2.5 py-1 rounded-lg border border-black/10 hover:bg-slate-50 ${currentPage >= pageCount - 1 ? "opacity-40 cursor-not-allowed" : ""}`}>
+            Next
+          </button>
+        </div>
+      </div>
+    </Card>
+  );
+};
+
+const UsersPage = ({ onToast }) => {
+  const config = MODULES.users;
+  const [rows, setRows] = useState(config.rows);
+  const [nextInviteId, setNextInviteId] = useState(1);
+
+  const addUser = () => {
+    const newUser = [
+      `New User ${nextInviteId}`,
+      "+91 90000 00000",
+      "Bengaluru",
+      "₹0",
+      "Pending KYC",
+      "Just now",
+    ];
+    setRows((prev) => [newUser, ...prev]);
+    setNextInviteId((id) => id + 1);
+    onToast?.("Invitation sent. New user pending verification.");
+  };
+
+  const toggleUserStatus = (rowObj) => {
+    setRows((prev) => prev.map((row, index) => {
+      if (`${row[0]}-${index}` === rowObj.id) {
+        const current = row[4];
+        const next = current === "Active" ? "Suspended" : "Active";
+        return [...row.slice(0, 4), next, row[5]];
+      }
+      return row;
+    }));
+    onToast?.(`${rowObj.data[0]}'s status updated.`);
+  };
+
+  const deleteUser = (rowObj) => {
+    setRows((prev) => prev.filter((row, index) => `${row[0]}-${index}` !== rowObj.id));
+    onToast?.(`${rowObj.data[0]} removed from user list.`);
+  };
+
+  const viewProfile = (rowObj) => {
+    onToast?.(`${rowObj.data[0]} • ${rowObj.data[2]} • Wallet ${rowObj.data[3]} • ${rowObj.data[4]}`);
+  };
+
+  return (
+    <div className="sa-fade">
+      <SectionHeader title={config.title} subtitle={config.subtitle} action={config.primaryAction} onAction={addUser} />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+        {config.kpis.map((k, i) => <KPICard key={k.label} {...k} index={i} />)}
+      </div>
+      <DataTable
+        columns={config.columns}
+        rows={rows}
+        onToast={onToast}
+        onDeleteRows={(selectedIds) => {
+          setRows((prev) => prev.filter((row, index) => !selectedIds.includes(`${row[0]}-${index}`)));
+        }}
+        rowActions={(rowObj) => [
+          { label: "View", icon: Eye, onClick: () => viewProfile(rowObj) },
+          { label: rowObj.data[4] === "Active" ? "Suspend" : "Activate", icon: ShieldCheck, onClick: () => toggleUserStatus(rowObj) },
+          { label: "Delete", icon: X, onClick: () => deleteUser(rowObj) },
+        ]}
+      />
     </div>
-  </Card>
-);
+  );
+};
+
+const SellersPage = ({ onToast }) => {
+  const config = MODULES.sellers;
+  const [rows, setRows] = useState(config.rows);
+  const [nextSellerId, setNextSellerId] = useState(1);
+
+  const addSeller = () => {
+    const newSeller = [
+      `New Seller ${nextSellerId}`,
+      "Anjali Gupta",
+      "33ABCDE1234F1Z7",
+      "9%",
+      "4.2",
+      "Pending KYC",
+    ];
+    setRows((prev) => [newSeller, ...prev]);
+    setNextSellerId((id) => id + 1);
+    onToast?.("New seller application created.");
+  };
+
+  const toggleSellerStatus = (rowObj) => {
+    setRows((prev) => prev.map((row, index) => {
+      if (`${row[0]}-${index}` === rowObj.id) {
+        const current = row[5];
+        const next = current === "Active" ? "Suspended" : "Active";
+        return [...row.slice(0, 5), next];
+      }
+      return row;
+    }));
+    onToast?.(`${rowObj.data[0]}'s status updated.`);
+  };
+
+  const verifySeller = (rowObj) => {
+    setRows((prev) => prev.map((row, index) => {
+      if (`${row[0]}-${index}` === rowObj.id) {
+        return [...row.slice(0, 5), "Active"];
+      }
+      return row;
+    }));
+    onToast?.(`${rowObj.data[0]} verified successfully.`);
+  };
+
+  const deleteSeller = (rowObj) => {
+    setRows((prev) => prev.filter((row, index) => `${row[0]}-${index}` !== rowObj.id));
+    onToast?.(`${rowObj.data[0]} removed from seller registry.`);
+  };
+
+  const viewSeller = (rowObj) => {
+    onToast?.(`${rowObj.data[0]} • ${rowObj.data[1]} • ${rowObj.data[4]} rating • ${rowObj.data[5]}`);
+  };
+
+  return (
+    <div className="sa-fade">
+      <SectionHeader title={config.title} subtitle={config.subtitle} action={config.primaryAction} onAction={addSeller} />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+        {config.kpis.map((k, i) => <KPICard key={k.label} {...k} index={i} />)}
+      </div>
+      <DataTable
+        columns={config.columns}
+        rows={rows}
+        onToast={onToast}
+        onDeleteRows={(selectedIds) => {
+          setRows((prev) => prev.filter((row, index) => !selectedIds.includes(`${row[0]}-${index}`)));
+        }}
+        rowActions={(rowObj) => [
+          { label: "View", icon: Eye, onClick: () => viewSeller(rowObj) },
+          { label: rowObj.data[5] === "Active" ? "Suspend" : "Activate", icon: ShieldCheck, onClick: () => toggleSellerStatus(rowObj) },
+          { label: rowObj.data[5] === "Pending KYC" ? "Verify" : "Approve", icon: BadgeCheck, onClick: () => verifySeller(rowObj) },
+          { label: "Delete", icon: X, onClick: () => deleteSeller(rowObj) },
+        ]}
+      />
+    </div>
+  );
+};
+
+const DeliveryPage = ({ onToast }) => {
+  const config = MODULES.delivery;
+  const [rows, setRows] = useState(config.rows);
+  const [nextPartnerId, setNextPartnerId] = useState(1);
+
+  const addPartner = () => {
+    const newPartner = [
+      `New Partner ${nextPartnerId}`,
+      "Bike - KA09",
+      "Mysuru",
+      "0",
+      "5.0",
+      "Online",
+    ];
+    setRows((prev) => [newPartner, ...prev]);
+    setNextPartnerId((id) => id + 1);
+    onToast?.("New delivery partner onboarded.");
+  };
+
+  const togglePartnerStatus = (rowObj) => {
+    setRows((prev) => prev.map((row, index) => {
+      if (`${row[0]}-${index}` === rowObj.id) {
+        const current = row[5];
+        const next = current === "Online" ? "Offline" : "Online";
+        return [...row.slice(0, 5), next];
+      }
+      return row;
+    }));
+    onToast?.(`${rowObj.data[0]}'s availability updated.`);
+  };
+
+  const completeDelivery = (rowObj) => {
+    setRows((prev) => prev.map((row, index) => {
+      if (`${row[0]}-${index}` === rowObj.id) {
+        const currentOrders = Number(row[3]) || 0;
+        return [...row.slice(0, 3), String(currentOrders + 1), row[4], row[5]];
+      }
+      return row;
+    }));
+    onToast?.(`${rowObj.data[0]} completed a delivery.`);
+  };
+
+  const deletePartner = (rowObj) => {
+    setRows((prev) => prev.filter((row, index) => `${row[0]}-${index}` !== rowObj.id));
+    onToast?.(`${rowObj.data[0]} removed from delivery partners.`);
+  };
+
+  const viewPartner = (rowObj) => {
+    onToast?.(`${rowObj.data[0]} • ${rowObj.data[1]} • ${rowObj.data[3]} orders today • ${rowObj.data[5]}`);
+  };
+
+  return (
+    <div className="sa-fade">
+      <SectionHeader title={config.title} subtitle={config.subtitle} action={config.primaryAction} onAction={addPartner} />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+        {config.kpis.map((k, i) => <KPICard key={k.label} {...k} index={i} />)}
+      </div>
+      <DataTable
+        columns={config.columns}
+        rows={rows}
+        onToast={onToast}
+        onDeleteRows={(selectedIds) => {
+          setRows((prev) => prev.filter((row, index) => !selectedIds.includes(`${row[0]}-${index}`)));
+        }}
+        rowActions={(rowObj) => [
+          { label: "View", icon: Eye, onClick: () => viewPartner(rowObj) },
+          { label: rowObj.data[5] === "Online" ? "Offline" : "Online", icon: ShieldCheck, onClick: () => togglePartnerStatus(rowObj) },
+          { label: "Complete", icon: CheckCircle2, onClick: () => completeDelivery(rowObj) },
+          { label: "Delete", icon: X, onClick: () => deletePartner(rowObj) },
+        ]}
+      />
+    </div>
+  );
+};
 
 /* Generic module page driven by MODULES config */
 const ModulePage = ({ id, onToast }) => {
   const cfg = MODULES[id];
   if (!cfg) return null;
+  const formConfig = MODULE_FORMS[id] ?? {
+    entity: cfg.title.replace(/s$/i, ""),
+    fields: createGenericFields(cfg.columns),
+  };
+  const fields = formConfig.fields;
+  const [rows, setRows] = useState(cfg.rows);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [viewOpen, setViewOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [formValues, setFormValues] = useState(() => Object.fromEntries(fields.map((field) => [field.name, ""])));
+  const [viewValues, setViewValues] = useState({});
+  const [step, setStep] = useState(0);
+  const [validationErrors, setValidationErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const steps = useMemo(() => mergeSteps(fields), [fields]);
+  const statusIndex = useMemo(() => cfg.columns.findIndex((c) => /status/i.test(c)), [cfg.columns]);
+  const createEnabled = /add|new|create|invite|onboard|schedule|assign/i.test(cfg.primaryAction.toLowerCase());
+
+  const resetForm = (values = null) => {
+    setFormValues(values ?? Object.fromEntries(fields.map((field) => [field.name, ""])));
+    setValidationErrors({});
+    setStep(0);
+  };
+
+  const getRowValues = (row) => valuesFromRow(cfg.columns, row);
+  const getRowArray = (values) => rowFromValues(cfg.columns, values);
+
+  const openCreate = () => {
+    resetForm();
+    setSelectedRow(null);
+    setModalOpen(true);
+  };
+
+  const openEdit = (rowObj) => {
+    resetForm(getRowValues(rowObj.data));
+    setSelectedRow(rowObj);
+    setModalOpen(true);
+  };
+
+  const openDuplicate = (rowObj) => {
+    const values = getRowValues(rowObj.data);
+    const primaryField = fields[0]?.name;
+    if (primaryField && values[primaryField]) {
+      values[primaryField] = `${values[primaryField]} copy`;
+    }
+    resetForm(values);
+    setSelectedRow(null);
+    setModalOpen(true);
+  };
+
+  const openView = (rowObj) => {
+    setViewValues(getRowValues(rowObj.data));
+    setViewOpen(true);
+  };
+
+  const openDelete = (rowObj) => {
+    setSelectedRow(rowObj);
+    setDeleteOpen(true);
+  };
+
+  const toggleStatus = (rowObj) => {
+    if (statusIndex < 0) return;
+    setRows((prev) => prev.map((row, index) => {
+      if (`${row[0]}-${index}` !== rowObj.id) return row;
+      const current = String(row[statusIndex] || "");
+      const next = /active|online/i.test(current) ? "Suspended" : /offline|suspended|draft/i.test(current) ? "Active" : current === "Pending KYC" ? "Active" : "Active";
+      return [...row.slice(0, statusIndex), next, ...row.slice(statusIndex + 1)];
+    }));
+    onToast?.(`${rowObj.data[0]} status updated.`);
+  };
+
+  const validateForm = (values) => {
+    const errors = {};
+    fields.forEach((field) => {
+      const value = String(values[field.name] ?? "").trim();
+      if (field.required && !value) {
+        errors[field.name] = "Required field";
+        return;
+      }
+      if (value && field.type === "email" && !validateEmail(value)) {
+        errors[field.name] = "Enter a valid email.";
+      }
+      if (value && field.type === "tel" && !validatePhone(value)) {
+        errors[field.name] = "Enter a valid phone number.";
+      }
+      if (value && /gst/i.test(field.name) && !validateGST(value)) {
+        errors[field.name] = "Enter a valid GST number.";
+      }
+      if (value && /pan/i.test(field.name) && !validatePAN(value)) {
+        errors[field.name] = "Enter a valid PAN.";
+      }
+      if (value && /password/i.test(field.name) && !validatePassword(value)) {
+        errors[field.name] = "Password must be at least 8 chars and include a number and symbol.";
+      }
+    });
+    const uniqueField = fields[0]?.name;
+    if (uniqueField && String(values[uniqueField] ?? "").trim()) {
+      const normalized = String(values[uniqueField]).trim().toLowerCase();
+      const duplicate = rows.some((row, index) => {
+        const rowId = `${row[0]}-${index}`;
+        if (selectedRow && rowId === selectedRow.id) return false;
+        return String(getRowValues(row)[uniqueField] ?? "").trim().toLowerCase() === normalized;
+      });
+      if (duplicate) {
+        errors[uniqueField] = `${fields[0].label || "Item"} already exists.`;
+      }
+    }
+    return errors;
+  };
+
+  const saveEntity = () => {
+    const errors = validateForm(formValues);
+    if (Object.keys(errors).length) {
+      setValidationErrors(errors);
+      onToast?.("Validation failed.");
+      return;
+    }
+    setLoading(true);
+    setTimeout(() => {
+      const nextRow = getRowArray(formValues);
+      setRows((prev) => {
+        if (selectedRow) {
+          return prev.map((row, index) => (`${row[0]}-${index}` === selectedRow.id ? nextRow : row));
+        }
+        return [nextRow, ...prev];
+      });
+      setLoading(false);
+      setModalOpen(false);
+      onToast?.(`${formConfig.entity} ${selectedRow ? "updated" : "created"} successfully`);
+      setSelectedRow(null);
+    }, 500);
+  };
+
+  const removeSelectedRows = (selectedIds) => {
+    setRows((prev) => prev.filter((row, index) => !selectedIds.includes(`${row[0]}-${index}`)));
+  };
+
+  const handleFormChange = (name, value) => {
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const actions = (rowObj) => {
+    const status = statusIndex >= 0 ? String(rowObj.data[statusIndex] || "") : "";
+    const menu = [
+      { label: "View", icon: Eye, onClick: () => openView(rowObj) },
+      { label: "Edit", icon: CheckSquare, onClick: () => openEdit(rowObj) },
+      { label: "Duplicate", icon: Copy, onClick: () => openDuplicate(rowObj) },
+    ];
+    if (status) {
+      menu.push({
+        label: /active|online/i.test(status) ? "Deactivate" : "Activate",
+        icon: ShieldCheck,
+        onClick: () => toggleStatus(rowObj),
+      });
+    }
+    menu.push({ label: "Delete", icon: X, onClick: () => openDelete(rowObj), destructive: true });
+    return menu;
+  };
+
+  const modalTitle = selectedRow ? `Edit ${formConfig.entity}` : `Create ${formConfig.entity}`;
+
   return (
     <div className="sa-fade">
-      <SectionHeader title={cfg.title} subtitle={cfg.subtitle} action={cfg.primaryAction} onAction={() => onToast(`${cfg.primaryAction} — mock action`)} />
+      <SectionHeader title={cfg.title} subtitle={cfg.subtitle} action={cfg.primaryAction} onAction={createEnabled ? openCreate : () => onToast(`${cfg.primaryAction} — mock action`)} />
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
         {cfg.kpis.map((k, i) => <KPICard key={k.label} {...k} index={i} />)}
       </div>
-      <DataTable columns={cfg.columns} rows={cfg.rows} onToast={onToast} />
+      <DataTable columns={cfg.columns} rows={rows} onToast={onToast} onDeleteRows={removeSelectedRows} rowActions={actions} />
+      <EntityFormModal
+        open={modalOpen}
+        title={modalTitle}
+        fields={fields}
+        values={formValues}
+        onChange={handleFormChange}
+        onClose={() => setModalOpen(false)}
+        onSave={saveEntity}
+        loading={loading}
+        step={step}
+        setStep={setStep}
+        steps={steps}
+        validationErrors={validationErrors}
+      />
+      <ViewDialog open={viewOpen} title={`View ${formConfig.entity}`} fields={fields} values={viewValues} onClose={() => setViewOpen(false)} />
+      <ConfirmDialog
+        open={deleteOpen}
+        title={`Delete ${formConfig.entity}?`}
+        message={`This action cannot be undone. Are you sure you want to delete this ${formConfig.entity.toLowerCase()}?`}
+        onCancel={() => setDeleteOpen(false)}
+        onConfirm={() => {
+          if (!selectedRow) return;
+          setRows((prev) => prev.filter((row, index) => `${row[0]}-${index}` !== selectedRow.id));
+          setDeleteOpen(false);
+          onToast?.(`${formConfig.entity} deleted successfully`);
+          setSelectedRow(null);
+        }}
+      />
     </div>
   );
 };
@@ -779,17 +1744,39 @@ const quickLinks = [
 
 const DashboardPage = ({ onNavigate, onToast, mounted }) => {
   const kpis = [
-    { label: "Total Users", value: "1,25,430", delta: "+6.2%", up: true, icon: Users },
-    { label: "Total Sellers", value: "4,120", delta: "+3.4%", up: true, icon: Store },
-    { label: "Service Professionals", value: "3,208", delta: "+2.9%", up: true, icon: Wrench },
-    { label: "Delivery Partners", value: "2,318", delta: "+8.1%", up: true, icon: Truck },
-    { label: "Active Orders", value: "8,650", delta: "+4.6%", up: true, icon: ShoppingCart },
-    { label: "Revenue Today", value: "₹45.62L", delta: "+16.3%", up: true, icon: Wallet },
-    { label: "Revenue This Month", value: "₹3.98Cr", delta: "+9.4%", up: true, icon: TrendingUp },
-    { label: "Support Tickets", value: "312", delta: "-5.8%", up: true, icon: Headphones },
-    { label: "Low Stock Alerts", value: "312", delta: "+22", up: false, icon: AlertTriangle },
-    { label: "Fraud Alerts", value: "9", delta: "+2", up: false, icon: ShieldAlert },
+    { label: "Today's Revenue", value: "₹45.62L", delta: "+16.3%", up: true, icon: Wallet, module: "finance" },
+    { label: "Today's Orders", value: "8,650", delta: "+4.6%", up: true, icon: ShoppingCart, module: "orders" },
+    { label: "Pending Orders", value: "128", delta: "+2%", up: false, icon: AlertTriangle, module: "orders" },
+    { label: "Cancelled Orders", value: "184", delta: "-1.2%", up: true, icon: XCircle, module: "orders" },
+    { label: "Total Users", value: "1,25,430", delta: "+6.2%", up: true, icon: Users, module: "users" },
+    { label: "Online Users", value: "3,810", delta: "+7.1%", up: true, icon: Globe, module: "users" },
+    { label: "Total Sellers", value: "4,120", delta: "+3.4%", up: true, icon: Store, module: "sellers" },
+    { label: "Delivery Partners", value: "2,318", delta: "+8.1%", up: true, icon: Truck, module: "delivery" },
+    { label: "New Registrations", value: "2,884", delta: "+11.4%", up: true, icon: UserCog, module: "users" },
+    { label: "Open Complaints", value: "312", delta: "-18", up: true, icon: Headphones, module: "support" },
+    { label: "Warehouse Alerts", value: "18", delta: "+5", up: false, icon: Warehouse, module: "inventory" },
+    { label: "Low Stock", value: "1,204", delta: "-8%", up: true, icon: HardHat, module: "inventory" },
+    { label: "Server Status", value: "Operational", delta: "99.98%", up: true, icon: Server, module: "health" },
+    { label: "API Status", value: "Operational", delta: "99.95%", up: true, icon: Plug, module: "api" },
+    { label: "Payment Success", value: "99.2%", delta: "+0.3%", up: true, icon: CreditCard, module: "payments" },
+    { label: "Fraud Alerts", value: "9", delta: "+2", up: false, icon: ShieldAlert, module: "fraud" },
   ];
+
+  const exportReport = async () => {
+    const rows = kpis.map((item) => [item.label, item.value, item.delta]);
+    await generateReport({
+      reportId: "Dashboard Report",
+      title: "Dashboard Report",
+      headers: ["Metric", "Value", "Change"],
+      rows,
+      summary: [
+        { label: "Total KPIs", value: kpis.length.toString() },
+        { label: "Top Revenue", value: kpis.find((item) => item.label === "Today's Revenue")?.value || "N/A" },
+      ],
+      format: "csv",
+    });
+    onToast("Dashboard report downloaded");
+  };
 
   return (
     <div className="sa-fade">
@@ -810,7 +1797,7 @@ const DashboardPage = ({ onNavigate, onToast, mounted }) => {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 mb-6">
-        {kpis.map((k, i) => <KPICard key={k.label} {...k} index={i} />)}
+        {kpis.map((k, i) => <KPICard key={k.label} {...k} index={i} onClick={() => onNavigate(k.module)} />)}
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 mb-6">
@@ -1280,25 +2267,60 @@ const SettingsPage = ({ role, onToast }) => {
 /* ============================================================
    REUSABLE UI PRIMITIVES
 ============================================================ */
-const ReportsPage = ({ onToast }) => (
-  <div className="sa-fade">
-    <SectionHeader title="Reports" subtitle="Generate and export platform reports." />
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
-      {["Sales Report", "Revenue Report", "Orders Report", "Seller Report", "Delivery Report", "Employee Report", "Inventory Report", "Finance Report"].map((r) => (
-        <Card key={r} className="p-5">
-          <ClipboardList size={18} color={T.forest} />
-          <p className="sa-font-display font-semibold text-sm text-[#0B1420] mt-3">{r}</p>
-          <p className="sa-font-body text-xs text-slate-500 mt-1 mb-3">Auto-generated from live mock data</p>
-          <div className="flex gap-2">
-            {["PDF", "Excel", "CSV"].map((f) => (
-              <button key={f} onClick={() => onToast(`${r} exported as ${f}`)} className="text-[11px] font-semibold px-2.5 py-1 rounded-lg border border-black/10 hover:bg-slate-50 sa-font-body">{f}</button>
-            ))}
-          </div>
-        </Card>
-      ))}
+const ReportsPage = ({ onToast }) => {
+  const [loading, setLoading] = useState(null);
+  const reportIds = ["Sales Report", "Revenue Report", "Orders Report", "Seller Report", "Delivery Report", "Employee Report", "Inventory Report", "Finance Report"];
+  const formats = ["PDF", "Excel", "CSV"];
+
+  const handleExport = async (reportId, format) => {
+    const report = getReportDefinition(reportId);
+    if (!report) {
+      onToast("Unable to generate report.");
+      return;
+    }
+    const formatKey = format.toLowerCase();
+    setLoading(`${reportId}-${formatKey}`);
+    try {
+      await generateReport({ reportId, title: report.title, headers: report.headers, rows: report.rows, summary: report.summary, format: formatKey });
+      onToast("✓ Report downloaded successfully");
+    } catch (error) {
+      console.error(error);
+      onToast("Unable to generate report.");
+    } finally {
+      setLoading(null);
+    }
+  };
+
+  return (
+    <div className="sa-fade">
+      <SectionHeader title="Reports" subtitle="Generate and export platform reports." />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
+        {reportIds.map((r) => (
+          <Card key={r} className="p-5">
+            <ClipboardList size={18} color={T.forest} />
+            <p className="sa-font-display font-semibold text-sm text-[#0B1420] mt-3">{r}</p>
+            <p className="sa-font-body text-xs text-slate-500 mt-1 mb-3">Auto-generated from live mock data</p>
+            <div className="flex gap-2 flex-wrap">
+              {formats.map((f) => {
+                const key = `${r}-${f.toLowerCase()}`;
+                const isLoading = loading === key;
+                return (
+                  <button
+                    key={f}
+                    onClick={() => handleExport(r, f)}
+                    disabled={isLoading}
+                    className={`text-[11px] font-semibold px-2.5 py-1 rounded-lg border border-black/10 hover:bg-slate-50 sa-font-body ${isLoading ? "opacity-60 cursor-not-allowed" : ""}`}>
+                    {isLoading ? "Generating..." : f}
+                  </button>
+                );
+              })}
+            </div>
+          </Card>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /* ============================================================
    TOAST
@@ -1316,11 +2338,26 @@ const Toast = ({ toasts }) => (
 /* ============================================================
    LOGIN PAGE
 ============================================================ */
-const LoginPage = ({ onLogin }) => {
+const LoginPage = ({ onLogin, onToast }) => {
   const [showPw, setShowPw] = useState(false);
   const [otp, setOtp] = useState(false);
   const [twofa, setTwofa] = useState(true);
   const [captcha, setCaptcha] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
+
+  const handleLogin = () => {
+    if (!email.trim() || !password.trim()) {
+      onToast?.("Enter email and password to sign in.");
+      return;
+    }
+    if (!email.includes("@")) {
+      onToast?.("Enter a valid email address.");
+      return;
+    }
+    onLogin();
+  };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden sa-font-body" style={{ background: `radial-gradient(1200px 600px at 10% 10%, #E7F6EE, #F4F8F6 55%)` }}>
@@ -1346,7 +2383,7 @@ const LoginPage = ({ onLogin }) => {
               <label className="text-xs font-medium text-slate-600 mb-1.5 block">Company Email</label>
               <div className="flex items-center gap-2 border border-black/10 rounded-xl px-3.5 py-2.5 focus-within:border-emerald-300 bg-white">
                 <Mail size={16} className="text-slate-400" />
-                <input type="text" placeholder="you@saathapp.com" className="w-full outline-none text-sm bg-transparent" />
+                <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="you@saathapp.com" className="w-full outline-none text-sm bg-transparent" />
               </div>
             </div>
             <div>
@@ -1360,7 +2397,7 @@ const LoginPage = ({ onLogin }) => {
               <label className="text-xs font-medium text-slate-600 mb-1.5 block">Password</label>
               <div className="flex items-center gap-2 border border-black/10 rounded-xl px-3.5 py-2.5 focus-within:border-emerald-300 bg-white">
                 <Lock size={16} className="text-slate-400" />
-                <input type={showPw ? "text" : "password"} placeholder="••••••••••" className="w-full outline-none text-sm bg-transparent" />
+                <input value={password} onChange={(e) => setPassword(e.target.value)} type={showPw ? "text" : "password"} placeholder="••••••••••" className="w-full outline-none text-sm bg-transparent" />
                 <button type="button" onClick={() => setShowPw((s) => !s)} className="text-slate-400">
                   {showPw ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -1369,9 +2406,9 @@ const LoginPage = ({ onLogin }) => {
 
             <div className="flex items-center justify-between text-xs">
               <label className="flex items-center gap-2 text-slate-600">
-                <input type="checkbox" className="accent-emerald-600 rounded" /> Remember me
+                <input checked={remember} onChange={() => setRemember((s) => !s)} type="checkbox" className="accent-emerald-600 rounded" /> Remember me
               </label>
-              <button type="button" className="font-semibold" style={{ color: T.forest }}>Forgot password?</button>
+              <button type="button" onClick={() => onToast?.("Password reset instructions have been sent to your email.")} className="font-semibold" style={{ color: T.forest }}>Forgot password?</button>
             </div>
 
             <div className="rounded-xl border border-dashed border-black/10 p-3.5 space-y-2.5 bg-slate-50/60">
@@ -1384,7 +2421,7 @@ const LoginPage = ({ onLogin }) => {
               {otp && (
                 <div className="flex gap-2 pt-1">
                   {[0, 1, 2, 3].map((i) => <input key={i} maxLength={1} className="w-10 h-10 text-center border border-black/10 rounded-lg text-sm sa-font-display font-semibold" />)}
-                  <button type="button" className="text-xs font-semibold" style={{ color: T.forest }}>Send OTP</button>
+                  <button type="button" onClick={() => onToast?.("OTP sent to your registered admin number.")} className="text-xs font-semibold" style={{ color: T.forest }}>Send OTP</button>
                 </div>
               )}
               <button type="button" onClick={() => setTwofa((s) => !s)} className="flex items-center justify-between w-full text-xs font-medium text-slate-600 pt-1 border-t border-black/5">
@@ -1399,7 +2436,7 @@ const LoginPage = ({ onLogin }) => {
               </label>
             </div>
 
-            <button type="button" onClick={onLogin} className="w-full py-3 rounded-xl text-white text-sm font-semibold shadow-md hover:opacity-95 active:scale-[0.99] transition"
+            <button type="button" onClick={handleLogin} className="w-full py-3 rounded-xl text-white text-sm font-semibold shadow-md hover:opacity-95 active:scale-[0.99] transition"
               style={{ background: `linear-gradient(135deg, ${T.forest}, ${T.forestDeep})` }}>
               Sign in to Admin Panel
             </button>
@@ -1407,7 +2444,7 @@ const LoginPage = ({ onLogin }) => {
 
           <div className="flex items-center justify-between mt-5 pt-4 border-t border-black/5 text-[11px] text-slate-400">
             <span className="flex items-center gap-1"><ShieldCheck size={12} /> 256-bit encrypted session</span>
-            <button className="underline underline-offset-2">Login history</button>
+            <button type="button" onClick={() => onToast?.("Login history is available after signing in.")} className="underline underline-offset-2">Login history</button>
           </div>
         </Card>
         <p className="text-center text-[11px] text-slate-400 mt-5">This portal is for authorized SaathApp personnel only. Unauthorized access is prohibited & logged.</p>
@@ -1482,9 +2519,10 @@ const Sidebar = ({ active, onNavigate, allowedSet, collapsed, mobileOpen, setMob
 /* ============================================================
    TOPBAR
 ============================================================ */
-const Topbar = ({ title, role, setRole, onLogout, collapsed, setCollapsed, setMobileOpen, onToast }) => {
+const Topbar = ({ title, role, setRole, onLogout, collapsed, setCollapsed, setMobileOpen, onToast, onNavigate }) => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const [now, setNow] = useState(new Date());
   useEffect(() => { const t = setInterval(() => setNow(new Date()), 30000); return () => clearInterval(t); }, []);
 
@@ -1500,7 +2538,13 @@ const Topbar = ({ title, role, setRole, onLogout, collapsed, setCollapsed, setMo
 
         <div className="hidden md:flex items-center gap-2 bg-white rounded-xl border border-black/10 px-3.5 py-2 flex-1 max-w-md">
           <Search size={15} className="text-slate-400" />
-          <input placeholder="Search users, orders, sellers, settings..." className="outline-none text-sm w-full sa-font-body placeholder:text-slate-400" />
+          <input
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter") onToast?.(`Search: ${searchTerm.trim() || "..."}`); }}
+            placeholder="Search users, orders, sellers, settings..."
+            className="outline-none text-sm w-full sa-font-body placeholder:text-slate-400"
+          />
           <kbd className="text-[10px] text-slate-400 border border-black/10 rounded px-1.5 py-0.5">⌘K</kbd>
         </div>
 
@@ -1509,8 +2553,8 @@ const Topbar = ({ title, role, setRole, onLogout, collapsed, setCollapsed, setMo
             <Clock size={13} />
             {now.toLocaleDateString(undefined, { day: "2-digit", month: "short", year: "numeric" })} · {now.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" })}
           </div>
-          <button className="hidden sm:flex p-2 rounded-lg hover:bg-slate-100 text-slate-500"><Globe size={17} /></button>
-          <button className="hidden sm:flex p-2 rounded-lg hover:bg-slate-100 text-slate-500"><Sun size={17} /></button>
+          <button onClick={() => onToast?.("Language controls are available in the full platform.")} className="hidden sm:flex p-2 rounded-lg hover:bg-slate-100 text-slate-500"><Globe size={17} /></button>
+          <button onClick={() => onToast?.("Theme controls are available in the full platform.")} className="hidden sm:flex p-2 rounded-lg hover:bg-slate-100 text-slate-500"><Sun size={17} /></button>
 
           <div className="relative">
             <button onClick={() => { setNotifOpen((s) => !s); setProfileOpen(false); }} className="p-2 rounded-lg hover:bg-slate-100 text-slate-500 relative">
@@ -1564,8 +2608,8 @@ const Topbar = ({ title, role, setRole, onLogout, collapsed, setCollapsed, setMo
                     {ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
                   </select>
                 </div>
-                <button className="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 sa-font-body">Profile settings</button>
-                <button className="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 sa-font-body">Login history</button>
+                <button onClick={() => { onNavigate("settings"); setProfileOpen(false); }} className="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 sa-font-body">Profile settings</button>
+                <button onClick={() => { onNavigate("audit"); setProfileOpen(false); }} className="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 sa-font-body">Login history</button>
                 <button onClick={onLogout} className="w-full text-left px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 flex items-center gap-2 sa-font-body">
                   <LogOut size={14} /> Logout
                 </button>
@@ -1616,7 +2660,7 @@ export default function App() {
     return (
       <div className="w-full min-h-screen">
         <FontStyle />
-        <LoginPage onLogin={() => { setAuthed(true); pushToast("Welcome back, Admin"); }} />
+        <LoginPage onLogin={() => { setAuthed(true); pushToast("Welcome back, Admin"); }} onToast={pushToast} />
       </div>
     );
   }
@@ -1632,6 +2676,10 @@ export default function App() {
       case "ai": return <AIAssistantPage onToast={pushToast} />;
       case "health": return <SystemHealthPage />;
       case "settings": return <SettingsPage role={role} onToast={pushToast} />;
+      case "users":
+      case "sellers":
+      case "delivery":
+        return <ModulePage id={active} onToast={pushToast} />;
       default: return <ModulePage id={active} onToast={pushToast} />;
     }
   };
@@ -1642,7 +2690,7 @@ export default function App() {
       <div className="flex">
         <Sidebar active={active} onNavigate={navigate} allowedSet={allowedSet} collapsed={collapsed} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
         <div className="flex-1 min-w-0">
-          <Topbar title={activeLabel} role={role} setRole={setRole} onLogout={() => { setAuthed(false); }} collapsed={collapsed} setCollapsed={setCollapsed} setMobileOpen={setMobileOpen} onToast={pushToast} />
+          <Topbar title={activeLabel} role={role} setRole={setRole} onLogout={() => { setAuthed(false); }} collapsed={collapsed} setCollapsed={setCollapsed} setMobileOpen={setMobileOpen} onToast={pushToast} onNavigate={navigate} />
           <main className="p-4 lg:p-6 max-w-[1600px] mx-auto">
             {renderPage()}
           </main>

@@ -14,7 +14,7 @@ import HowItWorks from '../components/HowItWorks';
 import LiveStats from '../components/LiveStats';
 import Reviews from '../components/Reviews';
 import BecomePartner from '../components/BecomePartner';
-import DownloadApp from '../components/DownloadApp';
+
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
 import { Home as HomeIcon, Grid, Briefcase, ShoppingCart, User, HardHat } from 'lucide-react';
@@ -508,7 +508,7 @@ export default function Home({
           <BecomePartner onBecomePartnerSelect={onBecomePartnerSelect} />
         </div>
 
-        <DownloadApp />
+
       </main>
 
       <Footer />
