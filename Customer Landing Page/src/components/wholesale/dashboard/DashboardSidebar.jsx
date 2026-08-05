@@ -19,12 +19,14 @@ import {
   LogOut,
   ChevronRight,
   ShieldCheck,
+  User
 } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
 import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
 
 export const SIDEBAR_ITEMS = [
   { id: 'overview', label: 'Dashboard Overview', icon: LayoutDashboard, badge: null },
+  { id: 'profile', label: 'Wholesale Profile', icon: User, badge: 'Active' },
   { id: 'orders', label: 'Orders & Bulk Orders', icon: ShoppingBag, badge: '128' },
   { id: 'products', label: 'Products & Catalogue', icon: PackageCheck, badge: '2.4k' },
   { id: 'inventory', label: 'Inventory & Warehouses', icon: Warehouse, badge: '3' },
@@ -40,14 +42,18 @@ export const SIDEBAR_ITEMS = [
   { id: 'support', label: 'Help & Support 24/7', icon: HelpCircle, badge: null },
 ];
 
-export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboarding }) {
-  const { formData } = useWholesale();
+export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboarding, onLogout }) {
+  const { formData, addToast } = useWholesale();
 
   return (
-    <aside className="w-64 shrink-0 bg-slate-950 text-slate-300 border-r border-slate-800 flex flex-col h-screen sticky top-0 z-30">
+    <aside className="w-64 shrink-0 bg-slate-950 text-slate-300 border-r border-slate-800 flex flex-col h-screen sticky top-0 z-30 font-sans">
       {/* Header Profile Brand with Official SaathApp Logo */}
-      <div className="p-4 border-b border-slate-800 flex items-center gap-3">
-        <div className="h-10 w-10 rounded-2xl bg-white flex items-center justify-center p-1 shadow-lg overflow-hidden shrink-0 border border-emerald-500/30">
+      <div
+        onClick={() => onSelectTab('profile')}
+        className="p-4 border-b border-slate-800 flex items-center gap-3 cursor-pointer hover:bg-slate-900/60 transition group"
+        title="View Wholesale Enterprise Profile"
+      >
+        <div className="h-10 w-10 rounded-2xl bg-white flex items-center justify-center p-1 shadow-lg overflow-hidden shrink-0 border border-emerald-500/30 group-hover:scale-105 transition">
           <img src={saathAppLogo} alt="SaathApp Always With You" className="w-full h-full object-contain" />
         </div>
         <div className="overflow-hidden">
@@ -55,7 +61,7 @@ export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboa
             <span className="text-xs font-black uppercase tracking-wider text-emerald-400">SaathApp</span>
             <ShieldCheck size={13} className="text-emerald-400 shrink-0" />
           </div>
-          <h2 className="text-sm font-extrabold text-white truncate">{formData.businessName}</h2>
+          <h2 className="text-sm font-extrabold text-white truncate group-hover:text-emerald-400 transition">{formData.businessName || 'Apex Wholesale Ltd'}</h2>
         </div>
       </div>
 
@@ -95,7 +101,7 @@ export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboa
         })}
       </div>
 
-      {/* Footer Switch View */}
+      {/* Footer Switch View & Logout */}
       <div className="p-3 border-t border-slate-800 space-y-2">
         <button
           type="button"
@@ -104,6 +110,22 @@ export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboa
         >
           <span>Onboarding Progress</span>
           <ChevronRight size={14} className="text-emerald-400" />
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            if (onLogout) {
+              onLogout();
+            } else {
+              addToast?.('Logging out of Wholesale Enterprise Portal...', 'info');
+              window.location.reload();
+            }
+          }}
+          className="w-full flex items-center justify-center gap-2 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 border border-rose-500/40 p-2.5 text-xs font-extrabold text-rose-300 transition cursor-pointer active:scale-95 shadow-sm"
+        >
+          <LogOut size={15} />
+          <span>Logout / Exit Portal</span>
         </button>
       </div>
     </aside>

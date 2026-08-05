@@ -4,13 +4,16 @@ import DeliveryRiderTopNav from './DeliveryRiderTopNav';
 import RiderOverviewTab from './RiderOverviewTab';
 import RiderActiveDeliveriesTab from './RiderActiveDeliveriesTab';
 import RiderHistoryTab from './RiderHistoryTab';
+import RiderScheduledTab from './RiderScheduledTab';
 import RiderWalletTab from './RiderWalletTab';
 import RiderDocumentsTab from './RiderDocumentsTab';
 import RiderRatingsTab from './RiderRatingsTab';
 import RiderSupportTab from './RiderSupportTab';
+import RiderProfileTab from './RiderProfileTab';
 import DeliveryEquipmentStoreSection from '../welcome/DeliveryEquipmentStoreSection';
 import Step10_DeliveryTerms from '../onboarding/Step10_DeliveryTerms';
 import WholesaleToast from '../../wholesale/WholesaleToast';
+import { LogOut } from 'lucide-react';
 
 export default function DeliveryRiderDashboardLayout({
   activeTab: propActiveTab = 'overview',
@@ -21,6 +24,8 @@ export default function DeliveryRiderDashboardLayout({
 }) {
   const [localActiveTab, setLocalActiveTab] = useState(propActiveTab || 'overview');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [isSosTriggered, setIsSosTriggered] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const activeTab = propActiveTab || localActiveTab;
 
@@ -28,6 +33,15 @@ export default function DeliveryRiderDashboardLayout({
     setLocalActiveTab(tabId);
     if (propOnSelectTab) {
       propOnSelectTab(tabId);
+    }
+  };
+
+  const handleConfirmLogout = () => {
+    setIsLogoutModalOpen(false);
+    if (onBackToOnboarding) {
+      onBackToOnboarding();
+    } else {
+      window.location.reload();
     }
   };
 
@@ -39,6 +53,8 @@ export default function DeliveryRiderDashboardLayout({
           activeTab={activeTab}
           onSelectTab={handleSelectTab}
           onBackToOnboarding={onBackToOnboarding}
+          onTriggerSos={() => setIsSosTriggered(true)}
+          onLogout={() => setIsLogoutModalOpen(true)}
         />
       </div>
 
@@ -66,6 +82,14 @@ export default function DeliveryRiderDashboardLayout({
                 onBackToOnboarding();
                 setIsMobileSidebarOpen(false);
               }}
+              onTriggerSos={() => {
+                setIsSosTriggered(true);
+                setIsMobileSidebarOpen(false);
+              }}
+              onLogout={() => {
+                setIsLogoutModalOpen(true);
+                setIsMobileSidebarOpen(false);
+              }}
             />
           </div>
         </div>
@@ -79,13 +103,24 @@ export default function DeliveryRiderDashboardLayout({
           toggleDarkMode={toggleDarkMode}
           onOpenWithdrawModal={() => handleSelectTab('wallet')}
           onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+          onTriggerSos={() => setIsSosTriggered(true)}
+          onOpenSupportPage={() => handleSelectTab('support')}
+          onOpenProfilePage={() => handleSelectTab('profile')}
+          onLogout={() => setIsLogoutModalOpen(true)}
         />
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
-          {activeTab === 'overview' && (
+          {(activeTab === 'overview' || activeTab === 'bonuses' || activeTab === 'attendance' || activeTab === 'settings') && (
             <RiderOverviewTab
               onSelectTab={handleSelectTab}
               onOpenWithdrawModal={() => handleSelectTab('wallet')}
+            />
+          )}
+
+          {activeTab === 'profile' && (
+            <RiderProfileTab
+              onSelectTab={handleSelectTab}
+              onLogout={() => setIsLogoutModalOpen(true)}
             />
           )}
 
@@ -93,13 +128,15 @@ export default function DeliveryRiderDashboardLayout({
 
           {activeTab === 'history' && <RiderHistoryTab />}
 
+          {activeTab === 'scheduled' && <RiderScheduledTab />}
+
           {activeTab === 'wallet' && <RiderWalletTab />}
 
-          {activeTab === 'equipmentStore' && (
+          {(activeTab === 'equipmentStore' || activeTab === 'training') && (
             <DeliveryEquipmentStoreSection onStartRegistration={() => handleSelectTab('overview')} />
           )}
 
-          {activeTab === 'documents' && <RiderDocumentsTab />}
+          {(activeTab === 'documents' || activeTab === 'vehicle') && <RiderDocumentsTab />}
 
           {activeTab === 'ratings' && <RiderRatingsTab />}
 
@@ -110,6 +147,69 @@ export default function DeliveryRiderDashboardLayout({
           )}
         </main>
       </div>
+
+      {/* EMERGENCY SOS POPUP MODAL */}
+      {isSosTriggered && (
+        <div className="fixed inset-0 z-50 bg-rose-950/90 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-slate-900 border-2 border-rose-600 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-white text-xs sa-rise">
+            <div className="flex justify-between items-center border-b border-rose-900/60 pb-3">
+              <h3 className="text-base font-black text-rose-400 flex items-center gap-2">
+                ⚠️ EMERGENCY SOS ACTIVATED
+              </h3>
+              <button type="button" onClick={() => setIsSosTriggered(false)} className="text-slate-400 font-bold p-1">✕</button>
+            </div>
+
+            <p className="text-slate-300">
+              Your live GPS coordinates (Patna, Bihar) and active route data have been transmitted to SaathApp Emergency Dispatch &amp; local authorities.
+            </p>
+
+            <div className="grid grid-cols-2 gap-2 text-xs font-bold pt-2">
+              <button type="button" onClick={() => setIsSosTriggered(false)} className="py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-center font-black">
+                🚓 Call Police (112)
+              </button>
+              <button type="button" onClick={() => setIsSosTriggered(false)} className="py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-center font-black">
+                🚑 Call Ambulance (108)
+              </button>
+            </div>
+
+            <div className="pt-2 flex justify-end">
+              <button type="button" onClick={() => setIsSosTriggered(false)} className="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold">
+                Cancel Alarm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* LOGOUT CONFIRMATION POPUP MODAL */}
+      {isLogoutModalOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-4 text-xs sa-rise text-center">
+            <div className="w-16 h-16 rounded-full bg-rose-500/20 text-rose-500 mx-auto flex items-center justify-center font-black text-2xl">
+              <LogOut size={28} />
+            </div>
+            <h3 className="text-xl font-black text-slate-900 dark:text-white">Confirm Logout?</h3>
+            <p className="text-slate-500">Are you sure you want to log out of your SaathApp Rider Agent session?</p>
+
+            <div className="flex justify-end gap-2 pt-2">
+              <button
+                type="button"
+                onClick={() => setIsLogoutModalOpen(false)}
+                className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold cursor-pointer active:scale-95 transition"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmLogout}
+                className="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black cursor-pointer shadow active:scale-95 transition"
+              >
+                Confirm Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <WholesaleToast />
     </div>

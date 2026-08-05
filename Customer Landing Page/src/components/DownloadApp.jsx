@@ -1,8 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Smartphone, Download, CheckCircle, Star } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 export default function DownloadApp() {
+  const location = useLocation();
+
+  // Hide mobile app banner on Wholesale pages as mobile app is currently not available
+  const isWholesaleRoute = location.pathname.toLowerCase().includes('/wholesale') || 
+                           location.pathname.toLowerCase().includes('/wholesaler');
+
+  if (isWholesaleRoute) {
+    return null;
+  }
+
   return (
     <section className="py-16 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40 overflow-hidden relative">
       

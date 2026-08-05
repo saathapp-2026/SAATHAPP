@@ -15,7 +15,9 @@ import InvoicesTab from './InvoicesTab';
 import DocumentsTab from './DocumentsTab';
 import SettingsTab from './SettingsTab';
 import SupportTab from './SupportTab';
+import WholesaleProfileTab from './WholesaleProfileTab';
 import WholesaleToast from '../WholesaleToast';
+import { LogOut } from 'lucide-react';
 
 export default function DashboardLayout({
   activeTab,
@@ -27,6 +29,16 @@ export default function DashboardLayout({
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+  const handleConfirmLogout = () => {
+    setIsLogoutModalOpen(false);
+    if (onBackToOnboarding) {
+      onBackToOnboarding();
+    } else {
+      window.location.reload();
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col md:flex-row text-slate-900 dark:text-slate-100 font-sans">
@@ -36,6 +48,7 @@ export default function DashboardLayout({
           activeTab={activeTab}
           onSelectTab={onSelectTab}
           onBackToOnboarding={onBackToOnboarding}
+          onLogout={() => setIsLogoutModalOpen(true)}
         />
       </div>
 
@@ -63,6 +76,10 @@ export default function DashboardLayout({
                 onBackToOnboarding();
                 setIsMobileSidebarOpen(false);
               }}
+              onLogout={() => {
+                setIsLogoutModalOpen(true);
+                setIsMobileSidebarOpen(false);
+              }}
             />
           </div>
         </div>
@@ -83,6 +100,8 @@ export default function DashboardLayout({
             setIsWithdrawModalOpen(true);
           }}
           onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+          onOpenProfilePage={() => onSelectTab('profile')}
+          onLogout={() => setIsLogoutModalOpen(true)}
         />
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
@@ -97,6 +116,13 @@ export default function DashboardLayout({
                 onSelectTab('finance');
                 setIsWithdrawModalOpen(true);
               }}
+            />
+          )}
+
+          {activeTab === 'profile' && (
+            <WholesaleProfileTab
+              onSelectTab={onSelectTab}
+              onLogout={() => setIsLogoutModalOpen(true)}
             />
           )}
 
@@ -139,6 +165,36 @@ export default function DashboardLayout({
           {activeTab === 'support' && <SupportTab />}
         </main>
       </div>
+
+      {/* LOGOUT CONFIRMATION POPUP MODAL */}
+      {isLogoutModalOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-4 text-xs sa-rise text-center">
+            <div className="w-16 h-16 rounded-full bg-rose-500/20 text-rose-500 mx-auto flex items-center justify-center font-black text-2xl">
+              <LogOut size={28} />
+            </div>
+            <h3 className="text-xl font-black text-slate-900 dark:text-white">Confirm Logout?</h3>
+            <p className="text-slate-500">Are you sure you want to log out of your SaathApp Wholesale Enterprise session?</p>
+
+            <div className="flex justify-end gap-2 pt-2">
+              <button
+                type="button"
+                onClick={() => setIsLogoutModalOpen(false)}
+                className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold cursor-pointer active:scale-95 transition"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmLogout}
+                className="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black cursor-pointer shadow active:scale-95 transition"
+              >
+                Confirm Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <WholesaleToast />
     </div>
