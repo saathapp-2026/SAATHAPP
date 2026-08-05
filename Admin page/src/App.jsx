@@ -1743,6 +1743,8 @@ const quickLinks = [
 ];
 
 const DashboardPage = ({ onNavigate, onToast, mounted }) => {
+  const [isExporting, setIsExporting] = useState(false);
+
   const kpis = [
     { label: "Today's Revenue", value: "₹45.62L", delta: "+16.3%", up: true, icon: Wallet, module: "finance" },
     { label: "Today's Orders", value: "8,650", delta: "+4.6%", up: true, icon: ShoppingCart, module: "orders" },
@@ -1763,19 +1765,28 @@ const DashboardPage = ({ onNavigate, onToast, mounted }) => {
   ];
 
   const exportReport = async () => {
-    const rows = kpis.map((item) => [item.label, item.value, item.delta]);
-    await generateReport({
-      reportId: "Dashboard Report",
-      title: "Dashboard Report",
-      headers: ["Metric", "Value", "Change"],
-      rows,
-      summary: [
-        { label: "Total KPIs", value: kpis.length.toString() },
-        { label: "Top Revenue", value: kpis.find((item) => item.label === "Today's Revenue")?.value || "N/A" },
-      ],
-      format: "csv",
-    });
-    onToast("Dashboard report downloaded");
+    if (isExporting) return;
+    setIsExporting(true);
+    try {
+      const rows = kpis.map((item) => [item.label, item.value, item.delta]);
+      await generateReport({
+        reportId: "founder-dashboard-report",
+        title: "Founder Dashboard Report",
+        headers: ["Metric", "Value", "Change"],
+        rows,
+        summary: [
+          { label: "Total KPIs", value: kpis.length.toString() },
+          { label: "Top Revenue", value: kpis.find((item) => item.label === "Today's Revenue")?.value || "N/A" },
+        ],
+        format: "pdf",
+      });
+      onToast("Report downloaded successfully.");
+    } catch (error) {
+      console.error("Export report failed:", error);
+      onToast("Unable to generate report.");
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   return (
@@ -1786,8 +1797,9 @@ const DashboardPage = ({ onNavigate, onToast, mounted }) => {
           <p className="sa-font-body text-sm text-slate-500 mt-1">Here's what's happening across SaathApp today — 28 May 2026</p>
         </div>
         <div className="flex items-center gap-2">
-          <button onClick={() => onToast("Report generated")} className="sa-font-body inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 bg-white text-sm font-semibold text-slate-700 hover:bg-slate-50">
-            <Download size={15} /> Export report
+          <button onClick={exportReport} disabled={isExporting} className="sa-font-body inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 bg-white text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-60">
+            {isExporting ? <RefreshCw size={15} className="animate-spin" /> : <Download size={15} />}
+            {isExporting ? "Generating..." : "Export report"}
           </button>
           <button onClick={() => onNavigate("analytics")} className="sa-font-body inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-white text-sm font-semibold shadow-sm hover:opacity-90"
             style={{ background: `linear-gradient(135deg, ${T.forest}, ${T.forestMid})` }}>
