@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function PaymentsTab({ orders, transactions, walletBalance, setShowAddMoneyModal }) {
+export default function PaymentsTab({ orders, _transactions, walletBalance, setShowAddMoneyModal }) {
   const handleDownloadBill = (orderId) => {
     alert(`Downloading PDF Invoice for ${orderId}...`);
   };

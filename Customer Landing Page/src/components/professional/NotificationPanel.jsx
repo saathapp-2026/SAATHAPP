@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bell, CheckCircle2, XCircle, Star, Info, Wallet } from 'lucide-react';
+import { Bell, XCircle, Star, Info, Wallet } from 'lucide-react';
 
 export default function NotificationPanel({
   notifications,

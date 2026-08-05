@@ -1,9 +1,4 @@
-import {
-  LayoutDashboard, Package, ShoppingCart, Users, BarChart3, Wallet,
-  Settings, FileText, HelpCircle, Store, Crown, Boxes, Megaphone,
-  CreditCard, Receipt, FileBarChart, Ticket, Monitor, FolderOpen,
-  BadgeCheck, Gift, ShoppingBag,
-} from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingCart, Users, BarChart3, Wallet, Settings, HelpCircle, Store, Crown, Boxes, Megaphone, CreditCard, Receipt, FileBarChart, Ticket, Monitor, FolderOpen, BadgeCheck, Gift, ShoppingBag } from 'lucide-react';
 
 export const DASHBOARD_NAV_ITEMS = [
   { path: '/seller/dashboard', label: 'Dashboard', icon: LayoutDashboard, end: true },

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Clock, Calendar, Check, Coffee, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { Clock, Calendar, Check, Coffee, AlertTriangle } from 'lucide-react';
 
 export default function AvailabilityCard() {
   const [workingDays, setWorkingDays] = useState({

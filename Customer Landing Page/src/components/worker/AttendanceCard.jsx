@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Clock, Play, Square, Calendar, Info } from 'lucide-react';
+import { Play, Square, Calendar, Info } from 'lucide-react';
 
 export default function AttendanceCard({
   attendance,

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Star, MessageSquare, CornerDownRight, Check, Send } from 'lucide-react';
+import { Star, MessageSquare, CornerDownRight, Send } from 'lucide-react';
 
 export default function RatingCard() {
   const [reviews, setReviews] = useState([

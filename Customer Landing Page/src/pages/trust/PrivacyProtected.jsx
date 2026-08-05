@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {
-  ShieldCheck, ArrowLeft, EyeOff, UserCheck, Lock, Shield, CheckCircle2,
-  ChevronDown, ChevronUp, Mail, AlertTriangle, Key, Smartphone
-} from 'lucide-react';
+import { ShieldCheck, ArrowLeft, EyeOff, UserCheck, Lock, Shield, CheckCircle2, ChevronDown, ChevronUp, Mail } from 'lucide-react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 

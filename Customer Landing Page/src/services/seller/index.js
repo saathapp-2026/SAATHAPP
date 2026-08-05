@@ -6,6 +6,7 @@ export * from '../sellerNotificationService';
 export * from './sellerOrdersService';
 export * from './sellerProductsService';
 export * from './sellerCustomersService';
+export * from './sellerInvoicesService';
 export * from './sellerPaymentsService';
 export * from './sellerReportsService';
 export * from './sellerSupportService';

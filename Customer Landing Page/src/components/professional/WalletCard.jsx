@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Wallet, ShieldCheck, Download, AlertCircle, ArrowUpRight, Check } from 'lucide-react';
+import { Wallet, ShieldCheck, AlertCircle, ArrowUpRight } from 'lucide-react';
 
 export default function WalletCard() {
   const [balance, setBalance] = useState(8420);
-  const [pendingBalance, setPendingBalance] = useState(2100);
+  const [pendingBalance, _setPendingBalance] = useState(2100);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [errorMsg, setErrorMsg] = useState('');

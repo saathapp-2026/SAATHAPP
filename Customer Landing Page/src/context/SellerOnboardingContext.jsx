@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
 import {
   defaultOnboardingData,
   SELLER_STORAGE_KEYS,
@@ -9,30 +9,46 @@ import { calculateOnboardingFeeApi, verifyPayment, sellerVerification } from '..
 
 const OnboardingContext = createContext(null);
 
+function mergeOnboarding(stored, membership) {
+  const base = stored
+    ? {
+        ...defaultOnboardingData,
+        ...stored,
+        meta: { ...defaultOnboardingData.meta, ...(stored.meta || {}) },
+        membership: { ...defaultOnboardingData.membership, ...(membership || stored.membership || {}) },
+      }
+    : { ...defaultOnboardingData };
+  if (membership && !stored) {
+    base.membership = { ...base.membership, ...membership };
+  }
+  return base;
+}
+
 export function OnboardingProvider({ children, sellerId }) {
-  const [data, setData] = useState(() => {
-    const stored = getStoredOnboarding();
-    const membership = getStoredMembership();
-    const base = stored
-      ? {
-          ...defaultOnboardingData,
-          ...stored,
-          meta: { ...defaultOnboardingData.meta, ...(stored.meta || {}) },
-          membership: { ...defaultOnboardingData.membership, ...(membership || stored.membership || {}) },
-        }
-      : { ...defaultOnboardingData };
-    if (membership && !stored) {
-      base.membership = { ...base.membership, ...membership };
-    }
-    return base;
-  });
+  const [data, setData] = useState(() =>
+    mergeOnboarding(getStoredOnboarding(sellerId), getStoredMembership())
+  );
   const [saving, setSaving] = useState(false);
   const [feeLoading, setFeeLoading] = useState(false);
   const [feeError, setFeeError] = useState(null);
+  const skipNextPersist = useRef(false);
+  const sellerIdRef = useRef(sellerId);
+
+  // Reload onboarding whenever the authenticated seller changes
+  useEffect(() => {
+    if (sellerIdRef.current === sellerId) return;
+    sellerIdRef.current = sellerId;
+    skipNextPersist.current = true;
+    setData(mergeOnboarding(getStoredOnboarding(sellerId), getStoredMembership()));
+  }, [sellerId]);
 
   useEffect(() => {
-    saveOnboarding(data);
-  }, [data]);
+    if (skipNextPersist.current) {
+      skipNextPersist.current = false;
+      return;
+    }
+    saveOnboarding(data, sellerId);
+  }, [data, sellerId]);
 
   const updateSection = useCallback((section, values) => {
     setData((prev) => {
@@ -104,8 +120,12 @@ export function OnboardingProvider({ children, sellerId }) {
 
   const resetOnboarding = useCallback(() => {
     setData({ ...defaultOnboardingData });
-    localStorage.removeItem(SELLER_STORAGE_KEYS.onboarding);
-  }, []);
+    if (sellerId) {
+      localStorage.removeItem(`${SELLER_STORAGE_KEYS.onboarding}:${sellerId}`);
+    } else {
+      localStorage.removeItem(SELLER_STORAGE_KEYS.onboarding);
+    }
+  }, [sellerId]);
 
   return (
     <OnboardingContext.Provider
@@ -121,6 +141,7 @@ export function OnboardingProvider({ children, sellerId }) {
         saving,
         feeLoading,
         feeError,
+        sellerId,
       }}
     >
       {children}

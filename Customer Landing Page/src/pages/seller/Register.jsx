@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { User, Mail, Phone, Lock, Eye, EyeOff } from 'lucide-react';
-import { registerSeller, saveOnboarding } from '../../services/sellerAuthService';
+import { registerSeller, saveOnboarding, normalizeEmail } from '../../services/sellerAuthService';
 import { defaultOnboardingData } from '../../config/sellerOnboardingConfig';
 
 export default function SellerRegister() {
@@ -18,22 +18,33 @@ export default function SellerRegister() {
     e.preventDefault();
     setLoading(true);
     setError('');
-    const result = await registerSeller(form);
-    setLoading(false);
-    if (result.success) {
-      saveOnboarding({
-        ...defaultOnboardingData,
-        basicInfo: {
-          ...defaultOnboardingData.basicInfo,
-          fullName: form.fullName,
-          email: form.email,
-          mobile: form.mobile,
-        },
-        meta: { lastVisitedStep: '/seller/basic-information' },
+    try {
+      const result = await registerSeller({
+        ...form,
+        email: normalizeEmail(form.email),
       });
-      navigate('/seller/basic-information');
-    } else {
-      setError(result.message);
+      if (result.success) {
+        const onboarding = {
+          ...defaultOnboardingData,
+          basicInfo: {
+            ...defaultOnboardingData.basicInfo,
+            fullName: form.fullName,
+            email: normalizeEmail(form.email),
+            mobile: form.mobile,
+          },
+          status: 'onboarding',
+          meta: { lastVisitedStep: '/seller/basic-information' },
+        };
+        saveOnboarding(onboarding, result.seller.id);
+        navigate('/seller/basic-information', { replace: true });
+      } else {
+        setError(result.message);
+      }
+    } catch (err) {
+      console.error('[SellerAuth] Register error', err);
+      setError('Registration failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 

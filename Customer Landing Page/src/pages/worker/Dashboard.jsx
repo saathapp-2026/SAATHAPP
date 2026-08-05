@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Clock, Briefcase, Award, Star, Bell, ShieldCheck, MapPin, Calendar, Wallet,
-  Activity, User, Settings, LifeBuoy, Zap, Phone, Globe, ChevronDown, CheckCircle, Navigation, Play, Trash2, Info, LayoutDashboard, ClipboardCheck, DollarSign, AlertCircle
-} from 'lucide-react';
+import { Clock, Briefcase, Star, Bell, Calendar, Wallet, Activity, User, CheckCircle, LayoutDashboard, ClipboardCheck, DollarSign, AlertCircle } from 'lucide-react';
 
 // Import worker components
 import Sidebar from '../../components/worker/Sidebar';
@@ -17,26 +14,13 @@ import ReviewCard from '../../components/worker/ReviewCard';
 import NotificationPanel from '../../components/worker/NotificationPanel';
 import ProfileCard from '../../components/worker/ProfileCard';
 import CalendarWidget from '../../components/worker/CalendarWidget';
-import {
-  workerProfile,
-  workerJobs as initialWorkerJobs,
-  workerStats,
-  workerEarnings,
-  workerAttendance as initialAttendance,
-  workerPerformance,
-  workerReviews,
-  workerWallet,
-  workerDocuments,
-  workerNotifications as initialWorkerNotifications,
-  workerSupportFaqs,
-  workerTrainingVideos,
-} from '../../data/mockData';
+import { workerJobs as initialWorkerJobs, workerStats, workerEarnings, workerAttendance as initialAttendance, workerDocuments, workerNotifications as initialWorkerNotifications, workerSupportFaqs, workerTrainingVideos } from '../../data/mockData';
 
 export default function WorkerDashboardPage({
   darkMode,
   toggleDarkMode,
   onLogout,
-  onBack
+  _onBack
 }) {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isOnline, setIsOnline] = useState(true);
@@ -54,7 +38,7 @@ export default function WorkerDashboardPage({
   const [notifications, setNotifications] = useState(initialWorkerNotifications);
 
   // Support tickets state
-  const [supportTickets, setSupportTickets] = useState([
+  const [_supportTickets, setSupportTickets] = useState([
     { id: 'TCK-501', subject: 'Incentive calculation error on JOB-2810', status: 'closed', response: 'Incentive of ₹350 resolved.' },
     { id: 'TCK-608', subject: 'Late mark disputer for Jul 10 shift', status: 'open', response: 'Under operational review.' }
   ]);
@@ -92,7 +76,7 @@ export default function WorkerDashboardPage({
     setActiveTab('today_jobs'); // Go to live jobs tab
   };
 
-  const handleCompleteJob = (jobId, notes) => {
+  const handleCompleteJob = (jobId, _notes) => {
     setJobs(prev => prev.map(j => j.id === jobId ? { ...j, status: 'completed' } : j));
     setActiveLiveJob(null);
 

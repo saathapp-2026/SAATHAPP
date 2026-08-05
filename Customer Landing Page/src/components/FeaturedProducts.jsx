@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Heart, Eye, ShoppingCart, Info, Flame, Award, Leaf } from 'lucide-react';
+import { Star, Heart, Eye, ShoppingCart } from 'lucide-react';
 import { featuredProducts } from '../data/mockData';
 
 export default function FeaturedProducts({ 

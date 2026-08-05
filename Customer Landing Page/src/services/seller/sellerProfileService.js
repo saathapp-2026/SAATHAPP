@@ -5,7 +5,7 @@ import { getStoredOnboarding } from '../sellerAuthService';
 export async function getSellerProfile() {
   await delay();
   const auth = getStoredSellerAuth();
-  const onboarding = getStoredOnboarding();
+  const onboarding = getStoredOnboarding(auth?.seller?.id);
   return {
     success: true,
     data: {

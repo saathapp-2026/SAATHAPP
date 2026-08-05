@@ -25,6 +25,7 @@ import {
 } from '../../services/sellerMembershipService';
 import { getStoredSellerAuth } from '../../services/sellerAuthService';
 import DashboardBreadcrumbs from '../../components/seller/DashboardBreadcrumbs';
+import { ExportReportButton } from '../../components/seller/export';
 
 const PLAN_RANK = { free: 0, starter: 1, growth: 2, enterprise: 3 };
 
@@ -336,9 +337,12 @@ export default function Membership({ mode = 'onboarding' }) {
       ) : (
         <div className="space-y-6">
           <DashboardBreadcrumbs />
-          <div>
-            <h1 className="text-2xl font-bold">Seller Membership</h1>
-            <p className="text-slate-500 text-sm">Optional premium tools — upgrade, downgrade, or cancel anytime</p>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <h1 className="text-2xl font-bold">Seller Membership</h1>
+              <p className="text-slate-500 text-sm">Optional premium tools — upgrade, downgrade, or cancel anytime</p>
+            </div>
+            <ExportReportButton moduleKey="membership" />
           </div>
           <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6">
             {content}

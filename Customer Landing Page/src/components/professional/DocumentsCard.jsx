@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FileText, ShieldCheck, AlertCircle, UploadCloud, Check, HelpCircle, Loader2 } from 'lucide-react';
+import { FileText, ShieldCheck, AlertCircle, UploadCloud, Check, Loader2 } from 'lucide-react';
 
 export default function DocumentsCard() {
   const [documents, setDocuments] = useState([

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Package, Crown, ArrowUpRight } from 'lucide-react';
 import DashboardBreadcrumbs from '../../../components/seller/DashboardBreadcrumbs';
+import { ExportReportButton } from '../../../components/seller/export';
 import WelcomeKitTracking from '../../../components/seller/WelcomeKitTracking';
 import MembershipWelcomeKit from '../../../components/seller/MembershipWelcomeKit';
 import { useOnboarding } from '../../../context/SellerOnboardingContext';
@@ -19,14 +20,17 @@ export default function WelcomeKitPage() {
     <div className="space-y-6">
       <DashboardBreadcrumbs />
 
-      <div>
-        <h1 className="text-2xl font-bold flex items-center gap-2">
-          <Package className="text-amber-500" size={24} />
-          Welcome Business Kit
-        </h1>
-        <p className="text-slate-500 text-sm mt-0.5">
-          Complimentary kit included with Growth and Enterprise membership
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold flex items-center gap-2">
+            <Package className="text-amber-500" size={24} />
+            Welcome Business Kit
+          </h1>
+          <p className="text-slate-500 text-sm mt-0.5">
+            Complimentary kit included with Growth and Enterprise membership
+          </p>
+        </div>
+        <ExportReportButton moduleKey="welcome-kit" />
       </div>
 
       {!eligible ? (

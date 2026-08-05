@@ -1,8 +1,4 @@
-import { 
-  Wrench, Hammer, HardHat, ShieldCheck, ShoppingCart, Tractor, 
-  Car, Sparkles, Sofa, Smartphone, Home, Droplet, Flame, 
-  Newspaper, Users, Zap, Truck, CheckCircle, Brain, Heart, Star
-} from 'lucide-react';
+import { ShieldCheck, Users, Truck, Brain } from 'lucide-react';
 
 export const categories = [
   {

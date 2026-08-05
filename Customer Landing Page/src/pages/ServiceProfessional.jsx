@@ -2,32 +2,26 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import {
-  ArrowLeft, CheckCircle2, Award, Clock, Wallet, TrendingUp, UserCheck, BookOpen,
-  ShieldCheck, MapPin, Star, PhoneCall, HelpCircle, Plus, Minus,
-  ChevronDown, ChevronUp, Wrench, Sparkles, DollarSign, Calendar, Briefcase, ArrowRight,
-  Lock, UploadCloud, FileText, Camera, Check, Search, Shield, Zap, Info, Play, Hammer,
-  User, Clipboard, ThumbsUp, AlertCircle
-} from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Clock, Wallet, TrendingUp, UserCheck, BookOpen, ShieldCheck, MapPin, Plus, Minus, ChevronUp, Wrench, Sparkles, Briefcase, ArrowRight, Lock, UploadCloud, FileText, Check, Search, Shield, Zap, Info, Hammer, User, Clipboard, ThumbsUp } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export default function ServiceProfessionalPage({
-  cartItems,
+  _cartItems,
   cartCount,
-  cartTotal,
+  _cartTotal,
   location,
-  pincode,
-  selectedCategory,
-  searchQuery,
+  _pincode,
+  _selectedCategory,
+  _searchQuery,
   darkMode,
-  isCartOpen,
-  isVoiceModalOpen,
-  isImageModalOpen,
-  isLocationModalOpen,
-  isGpsLoading,
-  isListening,
-  isUploading,
+  _isCartOpen,
+  _isVoiceModalOpen,
+  _isImageModalOpen,
+  _isLocationModalOpen,
+  _isGpsLoading,
+  _isListening,
+  _isUploading,
   onCartClick,
   onLocationClick,
   onSearch,
@@ -44,9 +38,9 @@ export default function ServiceProfessionalPage({
   toggleDarkMode,
   onVoiceSearchClick,
   onImageSearchClick,
-  onDetectGPS,
-  onAddToCart,
-  onCategorySelect,
+  _onDetectGPS,
+  _onAddToCart,
+  _onCategorySelect,
   onBack
 }) {
   const navigate = useNavigate();
@@ -55,7 +49,7 @@ export default function ServiceProfessionalPage({
   const [journeyTab, setJourneyTab] = useState('joining'); // 'booking', 'professional', 'joining'
   const [faqOpen, setFaqOpen] = useState([false, false, false, false, false]);
   const [showApplyModal, setShowApplyModal] = useState(false);
-  const [applyFormSubmitted, setApplyFormSubmitted] = useState(false);
+  const [applyFormSubmitted, _setApplyFormSubmitted] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({

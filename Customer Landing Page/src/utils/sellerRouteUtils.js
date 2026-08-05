@@ -42,7 +42,21 @@ export function getResumeOnboardingPath(data) {
 }
 
 export function getApplicationStatus(data, seller) {
-  return data?.status || seller?.status || 'draft';
+  const fromData = data?.status;
+  const fromSeller = seller?.status;
+  // Never let a stale/default draft onboarding blob override an approved/submitted account
+  const rank = {
+    draft: 0,
+    onboarding: 1,
+    submitted: 2,
+    pending: 2,
+    approved: 3,
+  };
+  const dataRank = rank[fromData] ?? -1;
+  const sellerRank = rank[fromSeller] ?? -1;
+  if (sellerRank >= dataRank && fromSeller) return fromSeller;
+  if (fromData) return fromData;
+  return fromSeller || 'draft';
 }
 
 export function isApproved(data, seller) {

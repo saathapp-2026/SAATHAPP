@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Send, ShieldCheck, MapPin, Phone, Mail, Award, CheckCircle, Globe 
-} from 'lucide-react';
+import { Send, ShieldCheck, MapPin, Phone, Mail, Globe } from 'lucide-react';
 import SaathAppLogo from '../assets/saathapp-logo.jpeg';
 
 export default function Footer() {

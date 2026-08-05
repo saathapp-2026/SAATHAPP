@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserCircle2, Mail, Phone, MapPin } from 'lucide-react';
+import { UserCircle2, Mail, MapPin } from 'lucide-react';
 import SectionPage from './SectionPage';
 
 export default function EditProfile({ onBack }) {

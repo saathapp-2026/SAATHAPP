@@ -1,30 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  ArrowLeft, CheckCircle2, Award, Clock, Wallet, TrendingUp, UserCheck, BookOpen,
-  ShieldCheck, MapPin, Star, PhoneCall, HelpCircle, Plus, Minus,
-  ChevronDown, ChevronUp, Wrench, Sparkles, DollarSign, Calendar, Briefcase, ArrowRight,
-  Lock, UploadCloud, FileText, Camera, Check, Search, Shield, Zap, Info, Play, Hammer,
-  User, Clipboard, ThumbsUp, AlertCircle, HardHat
-} from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Award, Clock, Wallet, TrendingUp, BookOpen, ShieldCheck, ChevronUp, Wrench, Sparkles, ArrowRight, FileText, Camera, Shield, Zap, Info, Hammer, Clipboard, HardHat } from 'lucide-react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 export default function WorkerPortal({
-  cartItems,
+  _cartItems,
   cartCount,
-  cartTotal,
+  _cartTotal,
   location,
-  pincode,
+  _pincode,
   darkMode,
-  isCartOpen,
-  isVoiceModalOpen,
-  isImageModalOpen,
-  isLocationModalOpen,
-  isGpsLoading,
-  isListening,
-  isUploading,
+  _isCartOpen,
+  _isVoiceModalOpen,
+  _isImageModalOpen,
+  _isLocationModalOpen,
+  _isGpsLoading,
+  _isListening,
+  _isUploading,
   onCartClick,
   onLocationClick,
   onSearch,
@@ -41,13 +35,13 @@ export default function WorkerPortal({
   toggleDarkMode,
   onVoiceSearchClick,
   onImageSearchClick,
-  onDetectGPS,
-  onAddToCart,
-  onCategorySelect,
+  _onDetectGPS,
+  _onAddToCart,
+  _onCategorySelect,
   onBack
 }) {
   const navigate = useNavigate();
-  const [activeSubTab, setActiveSubTab] = useState('hero');
+  const [_activeSubTab, setActiveSubTab] = useState('hero');
   const [faqOpen, setFaqOpen] = useState([false, false, false, false, false]);
   const [showApplyModal, setShowApplyModal] = useState(false);
   const [applyFormSubmitted, setApplyFormSubmitted] = useState(false);
@@ -94,7 +88,7 @@ export default function WorkerPortal({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
+  const _scrollToSection = (sectionId) => {
     if (sectionRefs[sectionId]?.current) {
       const topOffset = sectionRefs[sectionId].current.offsetTop - 120;
       window.scrollTo({

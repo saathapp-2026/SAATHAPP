@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft, Camera, MapPin, Navigation } from 'lucide-react';
 
 const initialForm = {

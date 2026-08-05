@@ -14,13 +14,12 @@ import HowItWorks from '../components/HowItWorks';
 import LiveStats from '../components/LiveStats';
 import Reviews from '../components/Reviews';
 import BecomePartner from '../components/BecomePartner';
-import DownloadApp from '../components/DownloadApp';
+
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
-import { Home as HomeIcon, Grid, Briefcase, ShoppingCart, User, HardHat, Wrench } from 'lucide-react';
+import { Home as HomeIcon, Grid, Briefcase, ShoppingCart, User, HardHat } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { getStoredPartnerSession } from '../services/authService';
-
 
 export default function Home({
   cartItems,
@@ -32,13 +31,13 @@ export default function Home({
   searchQuery,
   darkMode,
   isCartOpen,
-  quickViewProduct,
-  isVoiceModalOpen,
-  isImageModalOpen,
-  isLocationModalOpen,
-  isGpsLoading,
-  isListening,
-  isUploading,
+  _quickViewProduct,
+  _isVoiceModalOpen,
+  _isImageModalOpen,
+  _isLocationModalOpen,
+  _isGpsLoading,
+  _isListening,
+  _isUploading,
   onCartClick,
   onLocationClick,
   onSearch,
@@ -56,35 +55,35 @@ export default function Home({
   onVoiceSearchClick,
   onImageSearchClick,
   onDetectGPS,
-  onAddToCart,
-  onQuickView,
-  onCategorySelect,
+  _onAddToCart,
+  _onQuickView,
+  _onCategorySelect,
   onBecomePartnerSelect,
   onShopSelect,
   onServiceBook,
-  onCheckout,
-  onCloseCart,
-  onCloseQuickView,
-  onCloseVoiceModal,
-  onCloseImageModal,
-  onCloseLocationModal,
+  _onCheckout,
+  _onCloseCart,
+  _onCloseQuickView,
+  _onCloseVoiceModal,
+  _onCloseImageModal,
+  _onCloseLocationModal,
   setSelectedCategory,
-  setCartItems,
-  getCartQuantity,
+  _setCartItems,
+  _getCartQuantity,
   handleAddToCart,
   setIsCartOpen,
   setQuickViewProduct,
-  setIsVoiceModalOpen,
-  setIsImageModalOpen,
-  setIsLocationModalOpen,
+  _setIsVoiceModalOpen,
+  _setIsImageModalOpen,
+  _setIsLocationModalOpen,
   setLocation,
-  setPincode,
-  setIsGpsLoading,
-  setIsListening,
-  setIsUploading,
-  handleGPSDetect,
-  handleVoiceSearch,
-  handleImageSearch,
+  _setPincode,
+  _setIsGpsLoading,
+  _setIsListening,
+  _setIsUploading,
+  _handleGPSDetect,
+  _handleVoiceSearch,
+  _handleImageSearch,
 }) {
   const navigate = useNavigate();
   const { t } = useLanguage();
@@ -509,7 +508,7 @@ export default function Home({
           <BecomePartner onBecomePartnerSelect={onBecomePartnerSelect} />
         </div>
 
-        <DownloadApp />
+
       </main>
 
       <Footer />
