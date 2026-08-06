@@ -32,6 +32,7 @@ import FaqPage from './pages/Faq';
 import LocationPage from './pages/LocationPage';
 import AddAddressPage from './pages/AddAddressPage';
 import ServiceProfessionalPage from './pages/ServiceProfessional';
+import FranchisePage from './pages/FranchisePage';
 import CustomerPortalPage from './pages/customer/CustomerPortal';
 import WorkerPortalPage from './pages/worker/WorkerPortal';
 import ProfessionalLoginPage from './pages/professional/Login';
@@ -365,6 +366,7 @@ export default function App() {
                         routerLocation.pathname.startsWith('/wholesale') || 
                         routerLocation.pathname === '/become-a-wholeseller' || 
                         routerLocation.pathname === '/become-delivery-partner' || 
+                        routerLocation.pathname === '/franchise' || 
                         partnerRoutes.includes(routerLocation.pathname) || 
                         trustRoutes.includes(routerLocation.pathname) ||
                         isSellerRoute;
@@ -395,6 +397,40 @@ export default function App() {
 
   if (routerLocation.pathname === '/delivery-partner-agreement') {
     return <DeliveryPartnerAgreementPage isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} />;
+  }
+
+  if (routerLocation.pathname === '/franchise') {
+    return (
+      <FranchisePage
+        cartCount={cartCount}
+        onCartClick={() => setIsCartOpen(true)}
+        location={location}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/');
+          setTimeout(() => {
+            document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }}
+        onLogin={() => {
+          setAuthView('login');
+          navigate('/login');
+        }}
+        onSignup={() => {
+          setAuthView('signup');
+          navigate('/signup');
+        }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={() => setDarkMode((v) => !v)}
+        onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
+        onImageSearchClick={() => setIsImageModalOpen(true)}
+        onBack={() => navigate('/')}
+      />
+    );
   }
 
   if (
@@ -886,7 +922,11 @@ export default function App() {
             navigate('/become-professional');
             return;
           }
-          if (role === 'Become a Service Worker' || role === 'Become Delivery Agent') {
+          if (role === 'Become Delivery Agent') {
+            navigate('/become-delivery-partner');
+            return;
+          }
+          if (role === 'Become a Service Worker') {
             navigate('/become-worker');
             return;
           }
@@ -896,6 +936,10 @@ export default function App() {
           }
           if (role.includes('Wholesale') || role.includes('Wholesaler')) {
             navigate('/wholesale');
+            return;
+          }
+          if (role === 'Become a Franchise' || role === 'Become a Franchise Partner' || role === 'Franchise') {
+            navigate('/franchise');
             return;
           }
           alert(`Partner application loading for: ${role}`);

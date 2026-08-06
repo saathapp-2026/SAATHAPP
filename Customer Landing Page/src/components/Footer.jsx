@@ -107,7 +107,15 @@ export default function Footer() {
             <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Business</h4>
             <ul className="space-y-3 text-xs font-semibold">
               <li><Link to="/seller" className="hover:text-white transition-colors">Become Seller</Link></li>
-              <li><a href="#" className="hover:text-white transition-colors">Become a Franchise Partner</a></li>
+              <li>
+                <Link
+                  to="/franchise"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Become a Franchise Partner
+                </Link>
+              </li>
               <li>
                 <Link
                   to="/wholesale"
@@ -135,7 +143,6 @@ export default function Footer() {
                   Become Delivery Partner
                 </Link>
               </li>
-              <li><a href="#" className="hover:text-white transition-colors">Franchise</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Advertise with Us</a></li>
             </ul>
           </div>

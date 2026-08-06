@@ -120,8 +120,8 @@ export default function DeliveryRiderTopNav({
           type="button"
           onClick={toggleOnlineShift}
           className={`flex items-center gap-2 rounded-2xl px-4 py-2 text-xs font-black transition-all duration-150 shadow-sm cursor-pointer active:scale-95 ${isOnline
-              ? 'bg-emerald-500 text-slate-950 hover:bg-emerald-400 ring-2 ring-emerald-500/20'
-              : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+            ? 'bg-emerald-500 text-slate-950 hover:bg-emerald-400 ring-2 ring-emerald-500/20'
+            : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
             }`}
         >
           <Power size={14} className={isOnline ? 'animate-pulse' : ''} />
@@ -243,8 +243,8 @@ export default function DeliveryRiderTopNav({
                         setNotificationsList(prev => prev.map(item => item.id === n.id ? { ...item, unread: false } : item));
                       }}
                       className={`p-3 rounded-2xl border transition cursor-pointer flex items-start gap-3 active:scale-[0.98] ${n.unread
-                          ? 'bg-amber-500/5 dark:bg-amber-500/10 border-amber-500/20'
-                          : 'bg-slate-50/50 dark:bg-slate-800/40 border-slate-100 dark:border-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800'
+                        ? 'bg-amber-500/5 dark:bg-amber-500/10 border-amber-500/20'
+                        : 'bg-slate-50/50 dark:bg-slate-800/40 border-slate-100 dark:border-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800'
                         }`}
                     >
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${n.color}`}>

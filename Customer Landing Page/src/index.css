@@ -71,6 +71,15 @@
   --color-danger-light: #EF5350;
   --color-danger-dark: #B71C1C;
 
+  --color-saath-green: #16a34a;
+  --color-saath-green-dark: #15803d;
+  --color-saath-green-mid: #22c55e;
+  --color-saath-green-light: #f0fdf4;
+  --color-saath-accent: #2563eb;
+  --color-saath-bg: #f8fafc;
+  --color-saath-border: #e2e8f0;
+  --color-saath-text2: #475569;
+
   --color-background: #F8FAFC;
 
   --border-radius-btn: 16px;
