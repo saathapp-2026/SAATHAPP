@@ -15,7 +15,7 @@ import {
   PartyPopper,
   BookOpen,
 } from 'lucide-react';
-import { AD_TYPES, PRIMARY_AD_TYPES } from '../../../config/seller/adConstants';
+import { AD_TYPES, PRIMARY_AD_TYPES } from '../../config/seller/adConstants';
 
 const ICONS = {
   text: Type,

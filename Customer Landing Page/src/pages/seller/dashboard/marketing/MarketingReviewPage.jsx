@@ -7,7 +7,7 @@ import {
   getAdReviewChecklist,
   getAdReviewTimeline,
   getAdReviewDetails,
-} from '../../../../services/seller/sellerAdvertisementsService';
+} from '../../../../services/advertisementsService';
 import { formatINR, getAdType } from '../../../../config/seller/adConstants';
 
 function statusBadge(status) {

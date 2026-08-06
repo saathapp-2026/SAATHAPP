@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Download, FileText, ArrowUpRight, Search } from 'lucide-react';
-import { getAdReports } from '../../../../services/seller/sellerAdvertisementsService';
+import { getAdReports } from '../../../../services/advertisementsService';
 import { formatINR } from '../../../../config/seller/adConstants';
 
 export default function MarketingReportsPage() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatINR } from '../../../config/seller/adConstants';
+import { formatINR } from '../../config/seller/adConstants';
 
 const RANGES = [
   { id: 'daily', label: 'Daily' },

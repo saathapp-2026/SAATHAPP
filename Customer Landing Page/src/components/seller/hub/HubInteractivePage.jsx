@@ -121,8 +121,7 @@ const MODULE_META = {
       { key: 'endAt', label: 'End Date', type: 'date' },
     ],
     links: [
-      { to: '/seller/dashboard/coupons', label: 'Coupons' },
-      { to: '/seller/dashboard/advertisements', label: 'Advertisements' },
+      { to: '/seller/dashboard/coupons', label: 'Coupons & Promos' },
     ],
   },
   analytics: {

@@ -21,7 +21,7 @@ import {
   formatCompact,
   getAdType,
   getPlacementLabel,
-} from '../../../config/seller/adConstants';
+} from '../../config/seller/adConstants';
 
 function ActionsMenu({ ad, onAction, loadingId }) {
   const [open, setOpen] = useState(false);

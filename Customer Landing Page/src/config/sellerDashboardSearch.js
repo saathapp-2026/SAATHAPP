@@ -10,7 +10,6 @@ export const DASHBOARD_SEARCH_INDEX = [
   { keywords: ['invoice', 'invoices', 'gst', 'billing'], path: '/seller/dashboard/invoices', label: 'Invoices' },
   { keywords: ['report', 'reports', 'profit', 'loss', 'p&l'], path: '/seller/dashboard/reports', label: 'Reports' },
   { keywords: ['coupon', 'coupons', 'discount', 'promo code'], path: '/seller/dashboard/coupons', label: 'Coupons' },
-  { keywords: ['advertisement', 'advertisements', 'ad', 'banner'], path: '/seller/dashboard/advertisements', label: 'Advertisements' },
   { keywords: ['onboarding', 'verification', 'kyc', 'fee'], path: '/seller/dashboard/onboarding', label: 'Onboarding' },
   { keywords: ['membership', 'plan', 'subscription', 'upgrade'], path: '/seller/dashboard/membership', label: 'Membership' },
   { keywords: ['welcome kit', 'welcomekit', 'kit'], path: '/seller/dashboard/welcome-kit', label: 'Welcome Kit' },

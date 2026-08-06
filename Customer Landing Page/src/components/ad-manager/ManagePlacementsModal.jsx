@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import toast from 'react-hot-toast';
-import SellerOverlay from '../SellerOverlay';
-import { SELLER_Z } from '../../../config/seller/sellerZIndex';
-import { PLACEMENTS } from '../../../config/seller/adConstants';
+import SellerOverlay from '../seller/SellerOverlay';
+import { SELLER_Z } from '../../config/seller/sellerZIndex';
+import { PLACEMENTS } from '../../config/seller/adConstants';
 
 export default function ManagePlacementsModal({ open, onClose, enabled = [], onSave }) {
   const [selected, setSelected] = useState(() => new Set(enabled.length ? enabled : PLACEMENTS.slice(0, 5).map((p) => p.id)));

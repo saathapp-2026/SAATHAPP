@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search, Filter, RotateCcw } from 'lucide-react';
-import { AD_TYPES, AD_STATUSES, PLACEMENTS, OBJECTIVES } from '../../../config/seller/adConstants';
+import { AD_TYPES, AD_STATUSES, PLACEMENTS, OBJECTIVES } from '../../config/seller/adConstants';
 
 export default function AdFilters({ search, onSearch, filters, onChange, onReset }) {
   return (

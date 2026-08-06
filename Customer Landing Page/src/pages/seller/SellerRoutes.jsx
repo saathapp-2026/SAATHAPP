@@ -46,7 +46,6 @@ const LazyProducts = lazy(() => import('./dashboard/ProductsPage'));
 const LazyInventory = lazy(() => import('./dashboard/InventoryPage'));
 const LazyCustomers = lazy(() => import('./dashboard/CustomersPage'));
 const LazyMarketing = lazy(() => import('./dashboard/MarketingPage'));
-const LazyMarketingCampaigns = lazy(() => import('./dashboard/marketing/MarketingCampaignsPage'));
 const LazyMarketingReview = lazy(() => import('./dashboard/marketing/MarketingReviewPage'));
 const LazyMarketingScheduler = lazy(() => import('./dashboard/marketing/MarketingSchedulerPage'));
 const LazyMarketingAnalytics = lazy(() => import('./dashboard/marketing/MarketingAnalyticsPage'));
@@ -59,7 +58,6 @@ const LazyPayments = lazy(() => import('./dashboard/PaymentsPage'));
 const LazyInvoices = lazy(() => import('./dashboard/InvoicesPage'));
 const LazyReports = lazy(() => import('./dashboard/ReportsPage'));
 const LazyCoupons = lazy(() => import('./dashboard/CouponsPage'));
-const LazyAdvertisements = lazy(() => import('./dashboard/AdvertisementsPage'));
 const LazyStoreSettings = lazy(() => import('./dashboard/StoreSettingsPage'));
 const LazyDocuments = lazy(() => import('./dashboard/DocumentsPage'));
 const LazySupport = lazy(() => import('./dashboard/SupportPage'));
@@ -278,8 +276,7 @@ export default function SellerRoutes() {
             <Route path="inventory" element={<SuspenseWrap><LazyInventory /></SuspenseWrap>} />
             <Route path="customers" element={<SuspenseWrap><LazyCustomers /></SuspenseWrap>} />
             <Route path="marketing" element={<SuspenseWrap><LazyMarketing /></SuspenseWrap>}>
-              <Route index element={<Navigate to="campaigns" replace />} />
-              <Route path="campaigns" element={<SuspenseWrap><LazyMarketingCampaigns /></SuspenseWrap>} />
+              <Route index element={<Navigate to="review" replace />} />
               <Route path="review" element={<SuspenseWrap><LazyMarketingReview /></SuspenseWrap>} />
               <Route path="scheduler" element={<SuspenseWrap><LazyMarketingScheduler /></SuspenseWrap>} />
               <Route path="analytics" element={<SuspenseWrap><LazyMarketingAnalytics /></SuspenseWrap>} />
@@ -293,7 +290,6 @@ export default function SellerRoutes() {
             <Route path="invoices" element={<SuspenseWrap><LazyInvoices /></SuspenseWrap>} />
             <Route path="reports" element={<SuspenseWrap><LazyReports /></SuspenseWrap>} />
             <Route path="coupons" element={<SuspenseWrap><LazyCoupons /></SuspenseWrap>} />
-            <Route path="advertisements" element={<SuspenseWrap><LazyAdvertisements /></SuspenseWrap>} />
             <Route path="onboarding" element={<SuspenseWrap><OnboardingDashboard /></SuspenseWrap>} />
             <Route path="membership" element={<SuspenseWrap><Membership mode="dashboard" /></SuspenseWrap>} />
             <Route path="welcome-kit" element={<SuspenseWrap><WelcomeKitPage /></SuspenseWrap>} />

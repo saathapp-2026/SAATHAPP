@@ -1,14 +1,14 @@
 import React from 'react';
 import { X } from 'lucide-react';
-import SellerOverlay from '../SellerOverlay';
-import { SELLER_Z } from '../../../config/seller/sellerZIndex';
+import SellerOverlay from '../seller/SellerOverlay';
+import { SELLER_Z } from '../../config/seller/sellerZIndex';
 import {
   STATUS_STYLES,
   formatINR,
   formatCompact,
   getAdType,
   getPlacementLabel,
-} from '../../../config/seller/adConstants';
+} from '../../config/seller/adConstants';
 
 export default function ViewAdModal({ open, onClose, ad, onEdit }) {
   if (!ad) return null;

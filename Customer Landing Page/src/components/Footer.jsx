@@ -143,7 +143,16 @@ export default function Footer() {
                   Become Delivery Partner
                 </Link>
               </li>
-              <li><a href="#" className="hover:text-white transition-colors">Advertise with Us</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Franchise</a></li>
+              <li>
+                <Link
+                  to="/advertise-with-us"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="hover:text-white transition-colors"
+                >
+                  Advertise with Us
+                </Link>
+              </li>
             </ul>
           </div>
 

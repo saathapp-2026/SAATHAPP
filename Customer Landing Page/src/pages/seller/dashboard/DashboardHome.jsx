@@ -51,7 +51,6 @@ const QUICK_LINKS = [
   { to: '/seller/dashboard/invoices', label: 'Invoices', icon: Receipt, color: 'text-rose-500' },
   { to: '/seller/dashboard/reports', label: 'Reports', icon: FileBarChart, color: 'text-amber-500' },
   { to: '/seller/dashboard/coupons', label: 'Coupons', icon: Ticket, color: 'text-pink-500' },
-  { to: '/seller/dashboard/advertisements', label: 'Ads', icon: Monitor, color: 'text-violet-500' },
   { to: '/seller/dashboard/documents', label: 'Documents', icon: FolderOpen, color: 'text-lime-500' },
   { to: '/seller/dashboard/settings', label: 'Settings', icon: Settings, color: 'text-slate-500' },
   { to: '/seller/dashboard/support', label: 'Support', icon: HelpCircle, color: 'text-red-500' },

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { BarChart3, TrendingUp, Globe2, Users, DollarSign } from 'lucide-react';
-import AdAnalytics from '../../../../components/seller/advertisements/AdAnalytics';
-import { getAdAnalytics } from '../../../../services/seller/sellerAdvertisementsService';
+import AdAnalytics from '../../../../components/ad-manager/AdAnalytics';
+import { getAdAnalytics } from '../../../../services/advertisementsService';
 import { formatINR } from '../../../../config/seller/adConstants';
 
 const METRICS = [

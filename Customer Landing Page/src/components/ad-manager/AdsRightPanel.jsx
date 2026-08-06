@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChevronRight, Plus, Copy, Pause, Wallet, BarChart3, Image as ImageIcon } from 'lucide-react';
-import { formatINR, formatCompact } from '../../../config/seller/adConstants';
+import { formatINR, formatCompact } from '../../config/seller/adConstants';
 
 export default function AdsRightPanel({
   totals = {},

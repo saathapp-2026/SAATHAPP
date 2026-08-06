@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Sparkles, X } from 'lucide-react';
 import toast from 'react-hot-toast';
-import SellerOverlay from '../SellerOverlay';
-import { SELLER_Z } from '../../../config/seller/sellerZIndex';
-import { getAiAdSuggestion } from '../../../services/seller/sellerAdvertisementsService';
+import SellerOverlay from '../seller/SellerOverlay';
+import { SELLER_Z } from '../../config/seller/sellerZIndex';
+import { getAiAdSuggestion } from '../../services/advertisementsService';
 
 const ACTIONS = [
   { id: 'headline', label: 'Generate Headlines' },

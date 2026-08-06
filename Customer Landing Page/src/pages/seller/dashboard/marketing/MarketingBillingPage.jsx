@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { CreditCard, FileText, Wallet, Clock3 } from 'lucide-react';
-import { getAdSummary } from '../../../../services/seller/sellerAdvertisementsService';
+import { getAdSummary } from '../../../../services/advertisementsService';
 import { formatINR } from '../../../../config/seller/adConstants';
 
 const BILLING_ITEMS = [

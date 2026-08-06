@@ -36,7 +36,6 @@ export const SELLER_DASHBOARD_ROUTES = {
   invoices: '/seller/dashboard/invoices',
   reports: '/seller/dashboard/reports',
   coupons: '/seller/dashboard/coupons',
-  advertisements: '/seller/dashboard/advertisements',
   onboarding: '/seller/dashboard/onboarding',
   membership: '/seller/dashboard/membership',
   welcomeKit: '/seller/dashboard/welcome-kit',

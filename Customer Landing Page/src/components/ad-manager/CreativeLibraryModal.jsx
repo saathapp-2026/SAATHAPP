@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { X, Library } from 'lucide-react';
-import SellerOverlay from '../SellerOverlay';
-import { SELLER_Z } from '../../../config/seller/sellerZIndex';
-import { getCreatives } from '../../../services/seller/sellerAdvertisementsService';
+import SellerOverlay from '../seller/SellerOverlay';
+import { SELLER_Z } from '../../config/seller/sellerZIndex';
+import { getCreatives } from '../../services/advertisementsService';
 
 export default function CreativeLibraryModal({ open, onClose }) {
   const [list, setList] = useState([]);

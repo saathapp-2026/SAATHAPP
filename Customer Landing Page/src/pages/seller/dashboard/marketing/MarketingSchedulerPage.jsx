@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { CalendarDays, Clock3, PauseCircle, PlayCircle, TrendingUp, MapPin } from 'lucide-react';
-import { getCampaignScheduler } from '../../../../services/seller/sellerAdvertisementsService';
+import { getCampaignScheduler } from '../../../../services/advertisementsService';
 import { formatINR } from '../../../../config/seller/adConstants';
 
 export default function MarketingSchedulerPage() {

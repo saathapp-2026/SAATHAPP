@@ -42,6 +42,8 @@ import ProfessionalPaymentSuccessPage from './pages/professional/PaymentSuccess'
 import ProfessionalReviewPage from './pages/professional/Review';
 import ProfessionalSubmittedPage from './pages/professional/Submitted';
 import ProfessionalTermsPage from './pages/professional/TermsAndConditions';
+import AdvertisementsPage from './pages/AdvertisementsPage';
+import CreateAdvertisementPage from './pages/CreateAdvertisementPage';
 import { ProfessionalOnboardingProvider } from './context/ProfessionalOnboardingContext';
 import WorkerLoginPage from './pages/worker/Login';
 import WorkerRegisterPage from './pages/worker/Register';
@@ -367,9 +369,19 @@ export default function App() {
                         routerLocation.pathname === '/become-a-wholeseller' || 
                         routerLocation.pathname === '/become-delivery-partner' || 
                         routerLocation.pathname === '/franchise' || 
+                        routerLocation.pathname === '/advertise-with-us' || 
+                        routerLocation.pathname === '/advertise/create' || 
                         partnerRoutes.includes(routerLocation.pathname) || 
                         trustRoutes.includes(routerLocation.pathname) ||
                         isSellerRoute;
+
+  if (routerLocation.pathname === '/advertise-with-us') {
+    return <AdvertisementsPage onBack={() => navigate('/')} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} cartCount={cartCount} />;
+  }
+
+  if (routerLocation.pathname === '/advertise/create') {
+    return <CreateAdvertisementPage onBack={() => navigate('/advertise-with-us')} user={user} />;
+  }
 
   if (isSellerRoute) {
     return <SellerRoutes />;

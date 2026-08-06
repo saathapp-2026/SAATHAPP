@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { X, ChevronLeft, ChevronRight, Sparkles, Search } from 'lucide-react';
 import toast from 'react-hot-toast';
-import SellerOverlay from '../SellerOverlay';
-import { SELLER_Z } from '../../../config/seller/sellerZIndex';
+import SellerOverlay from '../seller/SellerOverlay';
+import { SELLER_Z } from '../../config/seller/sellerZIndex';
 import {
   WIZARD_STEPS,
   OBJECTIVES,
@@ -18,7 +18,7 @@ import {
   CATEGORIES,
   getAdType,
   formatINR,
-} from '../../../config/seller/adConstants';
+} from '../../config/seller/adConstants';
 import {
   emptyAdDraft,
   loadAdDraft,
@@ -28,7 +28,7 @@ import {
   getAdProducts,
   getAiAdSuggestion,
   estimateReach,
-} from '../../../services/seller/sellerAdvertisementsService';
+} from '../../services/advertisementsService';
 
 const CTA_OPTIONS = ['Shop Now', 'Buy Now', 'Visit Store', 'Order Now', 'Book Service', 'Learn More', 'Contact Seller', 'Call Now'];
 const DEVICE_PREVIEWS = ['desktop', 'tablet', 'mobile'];

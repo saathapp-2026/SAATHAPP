@@ -4,7 +4,7 @@ import { _loadCustomersForExport, applyFilters } from './sellerCustomersService'
 import { _loadInvoicesForExport } from './sellerInvoicesService';
 import { _loadReportsForExport } from './sellerReportsService';
 import { _loadCouponsForExport } from './sellerCouponsService';
-import { _loadAdsForExport } from './sellerAdvertisementsService';
+import { _loadAdsForExport } from '../advertisementsService';
 import { _loadDocumentsForExport } from './sellerDocumentsService';
 import { _loadHubModuleForExport } from './sellerHubModulesService';
 

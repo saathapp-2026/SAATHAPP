@@ -1,4 +1,4 @@
-import { delay } from './_sellerServiceUtils';
+import { delay } from './seller/_sellerServiceUtils';
 import {
   AD_TYPES,
   AD_STATUSES,
@@ -7,7 +7,7 @@ import {
   getAdType,
   calcCtr,
   calcRoas,
-} from '../../config/seller/adConstants';
+} from '../config/seller/adConstants';
 
 const STORAGE_KEY = 'saathapp_seller_ads_v1';
 const DRAFT_KEY = 'saathapp_seller_ad_wizard_draft';
