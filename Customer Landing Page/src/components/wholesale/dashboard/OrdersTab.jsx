@@ -3,26 +3,32 @@ import { Search, Filter, Download, Eye, CheckCircle2, Truck, RefreshCw, XCircle,
 import { useWholesale } from '../../../context/WholesaleContext';
 import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
 
+import InvoicesTab from './InvoicesTab';
+
 export const ORDER_STATUS_TABS = [
   'All Orders',
   'New Orders',
+  'Pending',
   'Accepted',
-  'Packed',
+  'Processing',
+  'Ready for Dispatch',
   'Dispatched',
   'Delivered',
   'Cancelled',
-  'Returns',
-  'Refunds',
+  'Returned',
+  'Invoices',
 ];
 
 export const MOCK_FULL_ORDERS = [
   { id: 'ORD-9842', buyer: 'Ramesh Supermarket', category: 'FMCG & Personal Care', itemsCount: 45, amount: 125000, status: 'Delivered', date: '2026-08-03', warehouse: 'Delhi NCR Hub', payment: 'Escrow Released' },
   { id: 'ORD-9841', buyer: 'Shree Traders', category: 'Grocery & Staples', itemsCount: 120, amount: 95000, status: 'Accepted', date: '2026-08-03', warehouse: 'Delhi NCR Hub', payment: 'Held in Escrow' },
-  { id: 'ORD-9840', buyer: 'GreenMart Store', category: 'FMCG', itemsCount: 30, amount: 78500, status: 'Packed', date: '2026-08-02', warehouse: 'Mumbai Express', payment: 'Held in Escrow' },
+  { id: 'ORD-9840', buyer: 'GreenMart Store', category: 'FMCG', itemsCount: 30, amount: 78500, status: 'Processing', date: '2026-08-02', warehouse: 'Mumbai Express', payment: 'Held in Escrow' },
   { id: 'ORD-9839', buyer: 'Apna General Hub', category: 'Packaged Food', itemsCount: 85, amount: 45000, status: 'Cancelled', date: '2026-08-02', warehouse: 'Kolkata East', payment: 'Refunded' },
-  { id: 'ORD-9838', buyer: 'Kumar Enterprises', category: 'Electrical Goods', itemsCount: 210, amount: 110000, status: 'Returns', date: '2026-08-01', warehouse: 'Delhi NCR Hub', payment: 'Disputed' },
+  { id: 'ORD-9838', buyer: 'Kumar Enterprises', category: 'Electrical Goods', itemsCount: 210, amount: 110000, status: 'Returned', date: '2026-08-01', warehouse: 'Delhi NCR Hub', payment: 'Disputed' },
   { id: 'ORD-9837', buyer: 'Metro Retail Mart', category: 'Grocery & Staples', itemsCount: 340, amount: 245000, status: 'Dispatched', date: '2026-08-01', warehouse: 'Delhi NCR Hub', payment: 'Held in Escrow' },
   { id: 'ORD-9836', buyer: 'Super Saver Market', category: 'Beverages', itemsCount: 90, amount: 62000, status: 'New Orders', date: '2026-08-03', warehouse: 'Mumbai Express', payment: 'Pending Payment' },
+  { id: 'ORD-9835', buyer: 'Patna Wholesale Point', category: 'Building Materials', itemsCount: 50, amount: 180000, status: 'Pending', date: '2026-08-03', warehouse: 'Patna Central Depot', payment: 'Awaiting Escrow' },
+  { id: 'ORD-9834', buyer: 'Gaya Super Bazaar', category: 'FMCG & Personal Care', itemsCount: 110, amount: 89000, status: 'Ready for Dispatch', date: '2026-08-02', warehouse: 'Patna Central Depot', payment: 'Held in Escrow' },
 ];
 
 export default function OrdersTab() {
@@ -34,9 +40,20 @@ export default function OrdersTab() {
   const [previewModalData, setPreviewModalData] = useState(null);
 
   const filteredOrders = orders.filter((ord) => {
-    const matchesStatus =
-      activeStatusTab === 'All Orders' ||
-      ord.status.toLowerCase() === activeStatusTab.toLowerCase();
+    const tabLower = activeStatusTab.toLowerCase();
+    const ordLower = ord.status.toLowerCase();
+    let matchesStatus = activeStatusTab === 'All Orders';
+    if (!matchesStatus) {
+      if (tabLower === 'new orders') matchesStatus = ordLower === 'new orders' || ordLower === 'pending';
+      else if (tabLower === 'pending') matchesStatus = ordLower === 'pending' || ord.payment.toLowerCase().includes('pending') || ord.payment.toLowerCase().includes('awaiting');
+      else if (tabLower === 'accepted') matchesStatus = ordLower === 'accepted';
+      else if (tabLower === 'processing') matchesStatus = ordLower === 'processing' || ordLower === 'packed';
+      else if (tabLower === 'ready for dispatch') matchesStatus = ordLower === 'ready for dispatch' || ordLower === 'packed';
+      else if (tabLower === 'dispatched') matchesStatus = ordLower === 'dispatched';
+      else if (tabLower === 'delivered') matchesStatus = ordLower === 'delivered';
+      else if (tabLower === 'cancelled') matchesStatus = ordLower === 'cancelled';
+      else if (tabLower === 'returned') matchesStatus = ordLower === 'returned' || ordLower === 'returns';
+    }
     const matchesQuery =
       ord.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
       ord.buyer.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -192,16 +209,19 @@ export default function OrdersTab() {
       </div>
 
       {/* Status Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-slate-200 dark:border-slate-800">
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-slate-200 dark:border-slate-800 touch-pan-x">
         {ORDER_STATUS_TABS.map((tab) => (
           <button
             key={tab}
             type="button"
-            onClick={() => setActiveStatusTab(tab)}
-            className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition cursor-pointer ${
+            onClick={(e) => {
+              setActiveStatusTab(tab);
+              e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }}
+            className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
               activeStatusTab === tab
-                ? 'bg-[#00986C] text-white shadow-md'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                ? 'bg-[#00986C] text-white shadow-md font-black'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
             }`}
           >
             {tab}
@@ -209,17 +229,52 @@ export default function OrdersTab() {
         ))}
       </div>
 
-      {/* Search */}
-      <div className="relative">
-        <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search by Order ID, Buyer Store Name, or Category..."
-          className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 pl-10 pr-4 py-3 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 shadow-sm"
-        />
-      </div>
+      {/* Render Embedded InvoicesTab when 'Invoices' sub-tab is active */}
+      {activeStatusTab === 'Invoices' ? (
+        <InvoicesTab />
+      ) : (
+        <>
+          {/* Bulk Order Workflow Tracker (PDF 4.2 Spec) */}
+          <div className="bg-slate-900 text-white rounded-2xl p-3.5 border border-slate-800 space-y-2">
+            <div className="flex justify-between items-center text-xs">
+              <span className="text-emerald-400 font-extrabold uppercase tracking-wider text-[11px]">
+                📦 Wholesale Bulk Order Fulfillment Workflow
+              </span>
+              <span className="text-slate-400 text-[10px] font-mono font-bold">PDF Spec Standard</span>
+            </div>
+            <div className="flex items-center gap-1 overflow-x-auto py-1 text-[10px] font-black text-center scrollbar-none">
+              {[
+                'Buyer',
+                'Bulk Requirement',
+                'Quantity',
+                'Price / Negotiated Price',
+                'Order Confirmation',
+                'Processing',
+                'Dispatch',
+                'Delivery',
+                'Completed'
+              ].map((stepName, idx, arr) => (
+                <React.Fragment key={idx}>
+                  <div className="px-2.5 py-1 rounded-xl bg-slate-800 border border-slate-700 text-emerald-300 whitespace-nowrap">
+                    {idx + 1}. {stepName}
+                  </div>
+                  {idx < arr.length - 1 && <span className="text-slate-600 font-bold">→</span>}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+
+          {/* Search */}
+          <div className="relative">
+            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by Order ID, Buyer Store Name, or Category..."
+              className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 pl-10 pr-4 py-3 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 shadow-sm"
+            />
+          </div>
 
       {/* Orders Table */}
       <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden">
@@ -284,6 +339,8 @@ export default function OrdersTab() {
           </table>
         </div>
       </div>
+      </>
+      )}
 
       {/* Order Detail Modal */}
       {selectedOrder && (

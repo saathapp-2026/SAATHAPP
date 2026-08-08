@@ -6,9 +6,25 @@ import {
   QrCode, Printer, BadgeCheck, FileCheck2, Globe, Clock, Truck, Shield
 } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
+import DocumentsTab from './DocumentsTab';
+import SettingsTab from './SettingsTab';
+import BrandingHardwareStoreTab from './BrandingHardwareStoreTab';
 
-export default function WholesaleProfileTab({ onSelectTab, onLogout }) {
+export const PROFILE_SUB_TABS = [
+  'Wholesale Profile',
+  'Business Information',
+  'Business Settings',
+  'Onboarding',
+  'Documents',
+  'GST / Tax Details',
+  'Bank Details',
+  'Account Settings',
+  'Business Resources',
+];
+
+export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubTab = 'Wholesale Profile' }) {
   const { formData, dashboardData, addToast } = useWholesale();
+  const [activeSubTab, setActiveSubTab] = useState(initialSubTab);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isCertificateModalOpen, setIsCertificateModalOpen] = useState(false);
@@ -54,8 +70,113 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout }) {
   return (
     <div className="space-y-6 pb-28 sa-fade">
 
-      {/* ========================================================================= */}
-      {/* 1. TOP WHOLESALE PROFILE HERO BANNER                                     */}
+      {/* Header Title */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-black text-slate-900 dark:text-white">Profile &amp; Business Settings</h2>
+          <p className="text-xs text-slate-500">Manage wholesale enterprise profile, legal documents, GST/bank details, onboarding, and business settings.</p>
+        </div>
+      </div>
+
+      {/* Sub-Tabs Bar (PDF 4.8 Spec) */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-slate-200 dark:border-slate-800 touch-pan-x">
+        {PROFILE_SUB_TABS.map((tab) => (
+          <button
+            key={tab}
+            type="button"
+            onClick={(e) => {
+              setActiveSubTab(tab);
+              e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }}
+            className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
+              activeSubTab === tab
+                ? 'bg-emerald-600 text-white shadow-md font-black'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+            }`}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      {/* Render Sub-Tab Views */}
+      {activeSubTab === 'Documents' ? (
+        <DocumentsTab />
+      ) : activeSubTab === 'Business Settings' || activeSubTab === 'Account Settings' ? (
+        <SettingsTab />
+      ) : activeSubTab === 'Business Resources' ? (
+        <BrandingHardwareStoreTab />
+      ) : activeSubTab === 'Business Information' ? (
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4">
+          <h3 className="text-base font-black text-slate-900 dark:text-white">Registered Enterprise Information</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div>
+              <label className="block font-bold text-slate-400 uppercase mb-1">Company Legal Name</label>
+              <input type="text" readOnly value={profile.companyName} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 font-bold text-slate-900 dark:text-white" />
+            </div>
+            <div>
+              <label className="block font-bold text-slate-400 uppercase mb-1">Trade / Brand Name</label>
+              <input type="text" readOnly value={profile.tradeName} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 font-bold text-slate-900 dark:text-white" />
+            </div>
+            <div>
+              <label className="block font-bold text-slate-400 uppercase mb-1">GSTIN Identifier</label>
+              <input type="text" readOnly value={profile.gstin} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 font-mono font-bold text-emerald-500" />
+            </div>
+            <div>
+              <label className="block font-bold text-slate-400 uppercase mb-1">Trade License Number</label>
+              <input type="text" readOnly value={profile.tradeLicense} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 font-mono font-bold text-slate-900 dark:text-white" />
+            </div>
+          </div>
+        </div>
+      ) : activeSubTab === 'Onboarding' ? (
+        <div className="space-y-4">
+          <h3 className="text-base font-black text-slate-900 dark:text-white">B2B Partner Verification &amp; Onboarding Checklist</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              { title: 'GSTIN Registration Verification', status: 'Verified 🟢', detail: 'Verified via Govt GST Portal' },
+              { title: 'PAN Card Legal Identity', status: 'Verified 🟢', detail: 'Matches Enterprise Legal Entity' },
+              { title: 'Bank Account Penny Drop Audit', status: 'Verified 🟢', detail: 'HDFC Bank Account Verified' },
+              { title: 'Depot Physical Verification', status: 'Verified 🟢', detail: 'Patna Exhibition Road Hub Audited' },
+            ].map((step, idx) => (
+              <div key={idx} className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                <div className="flex justify-between items-center">
+                  <h4 className="font-extrabold text-slate-900 dark:text-white text-sm">{step.title}</h4>
+                  <span className="text-xs font-bold text-emerald-500">{step.status}</span>
+                </div>
+                <p className="text-xs text-slate-500">{step.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : activeSubTab === 'GST / Tax Details' ? (
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4">
+          <h3 className="text-base font-black text-slate-900 dark:text-white">GSTIN Compliance &amp; Tax Tier Setup</h3>
+          <div className="space-y-3 text-xs">
+            <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex justify-between items-center">
+              <div>
+                <span className="text-[10px] text-emerald-600 dark:text-emerald-400 uppercase font-black">Active GSTIN</span>
+                <strong className="text-sm font-mono font-black text-slate-900 dark:text-white block">{profile.gstin}</strong>
+              </div>
+              <span className="bg-emerald-600 text-white font-extrabold text-[10px] px-3 py-1 rounded-full">E-Invoice API Enabled</span>
+            </div>
+          </div>
+        </div>
+      ) : activeSubTab === 'Bank Details' ? (
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4">
+          <h3 className="text-base font-black text-slate-900 dark:text-white">Linked Bank Account for Daily Payouts</h3>
+          <div className="p-5 rounded-3xl bg-slate-900 text-white border border-slate-800 space-y-3 font-mono text-xs">
+            <div className="flex justify-between items-center border-b border-slate-800 pb-2">
+              <span className="text-emerald-400 font-extrabold">HDFC BANK LIMITED</span>
+              <span className="text-emerald-500 font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded-full">Penny Drop Verified</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-slate-300">
+              <div>Account Number: <strong className="text-white font-black">{profile.accountNo}</strong></div>
+              <div>IFSC Code: <strong className="text-white font-black">{profile.ifsc}</strong></div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <>
       {/* ========================================================================= */}
       <div className="rounded-3xl bg-slate-900 text-white p-6 sm:p-8 border border-slate-800 shadow-2xl space-y-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -344,7 +465,8 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout }) {
         </div>
 
       </div>
-
+      </>
+      )}
 
       {/* LOGOUT CONFIRMATION MODAL */}
       {isLogoutModalOpen && (

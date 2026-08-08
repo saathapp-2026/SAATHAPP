@@ -29,7 +29,6 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
     { label: 'Wallet Balance', val: `₹${dashboardData.kpis.walletBalance.toLocaleString('en-IN')}`, icon: Wallet, change: 'Payout ready', color: 'indigo' },
     { label: 'Active Buyers', val: dashboardData.kpis.activeBuyers, icon: Users, change: '+15% repeat', color: 'sky' },
     { label: 'Products Listed', val: dashboardData.kpis.productsListed, icon: PackageCheck, change: 'Across 4 cats', color: 'slate' },
-    { label: 'Store Rating', val: `${dashboardData.kpis.storeRating} / 5.0`, icon: Star, change: '350 Verified reviews', color: 'amber' },
     { label: 'Warehouse Count', val: `${dashboardData.kpis.warehouseCount} Active`, icon: Warehouse, change: 'Delhi, Mumbai, Kolkata', color: 'emerald' },
   ];
 

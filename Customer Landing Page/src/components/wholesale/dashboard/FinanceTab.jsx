@@ -47,6 +47,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
   });
 
   // Filter & Transaction History States (PDF Page 31 & 36)
+  const [activeFinanceTab, setActiveFinanceTab] = useState('Overview');
   const [txnFilter, setTxnFilter] = useState('All'); // All, Credits, Debits, Withdrawals, Refunds, Escrow, Failed, Pending
   const [dateFilter, setDateFilter] = useState('01 Aug - 31 Aug 2026');
   const [transactions, setTransactions] = useState([
@@ -546,202 +547,333 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
         </div>
       </div>
 
-      {/* 2. WALLET SUMMARY CARDS ROW (PDF Page 27 Exact Layout) */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Available Balance Card */}
-        <div className="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-950 to-emerald-950 p-6 text-white border border-emerald-500/30 shadow-xl space-y-4 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-black uppercase text-emerald-400 tracking-wider flex items-center gap-1.5">
-                <Wallet size={16} /> ESCROW WALLET BALANCE
-              </span>
-              <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-500/30">
-                Instant Settlement: Daily
-              </span>
-            </div>
+      {/* Sub-Tabs Bar (PDF 4.7 Spec) */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-slate-200 dark:border-slate-800 touch-pan-x">
+        {[
+          'Overview',
+          'Balance',
+          'Transactions',
+          'Pending Payouts',
+          'Settlements',
+          'Payout History'
+        ].map((tab) => (
+          <button
+            key={tab}
+            type="button"
+            onClick={(e) => {
+              setActiveFinanceTab(tab);
+              e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+              if (tab === 'Transactions') setTxnFilter('All');
+              else if (tab === 'Pending Payouts') setTxnFilter('Pending');
+              else if (tab === 'Settlements' || tab === 'Payout History') setTxnFilter('Withdrawals');
+              addToast?.(`Switching to ${tab} view`, 'info');
+            }}
+            className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
+              activeFinanceTab === tab
+                ? 'bg-emerald-600 text-white shadow-md font-black'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+            }`}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
 
-            <div className="mt-4">
-              <strong className="text-4xl font-black font-mono tracking-tight text-white block">₹8,75,000</strong>
-              <span className="text-xs text-slate-400 font-semibold block mt-1">Available Wallet Balance</span>
+      {/* Render Sub-Tab Views */}
+      {activeFinanceTab === 'Balance' ? (
+        <div className="space-y-6">
+          <h3 className="text-base font-black text-slate-900 dark:text-white">Escrow Balance &amp; Wallet Ledger Breakdown</h3>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="p-5 rounded-3xl bg-slate-900 text-white border border-slate-800 shadow-sm space-y-1">
+              <span className="text-xs text-emerald-400 font-bold uppercase">Available Withdrawable Balance</span>
+              <strong className="text-3xl font-black block font-mono text-emerald-400">₹8,50,000</strong>
+              <span className="text-[10px] text-slate-400">T+1 Daily Auto Settlement</span>
             </div>
-          </div>
-
-          <div className="grid grid-cols-3 gap-2 pt-3 border-t border-slate-800/80 text-xs">
-            <div>
-              <span className="text-[10px] text-slate-400 font-bold block">Withdrawable</span>
-              <strong className="text-emerald-400 font-mono font-black text-sm">₹8,50,000</strong>
+            <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
+              <span className="text-xs text-amber-500 font-bold uppercase">Escrow Held in Transit</span>
+              <strong className="text-3xl font-black text-amber-500 block font-mono">₹25,000</strong>
+              <span className="text-[10px] text-slate-400">Awaiting buyer delivery confirmation</span>
             </div>
-            <div>
-              <span className="text-[10px] text-slate-400 font-bold block">Pending</span>
-              <strong className="text-amber-400 font-mono font-black text-sm">₹25,000</strong>
+            <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
+              <span className="text-xs text-blue-500 font-bold uppercase">Lifetime Net Payouts</span>
+              <strong className="text-3xl font-black text-slate-900 dark:text-white block font-mono">₹48,20,000</strong>
+              <span className="text-[10px] text-slate-400">Transferred to HDFC Bank</span>
             </div>
-            <div>
-              <span className="text-[10px] text-slate-400 font-bold block">Last Payout</span>
-              <strong className="text-slate-200 font-mono font-bold text-xs">02 Aug 2026</strong>
+            <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1 flex flex-col justify-between">
+              <span className="text-xs text-slate-400 font-bold uppercase">Instant Payout Action</span>
+              <button
+                type="button"
+                onClick={() => setIsWithdrawModalOpen(true)}
+                className="w-full py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs cursor-pointer shadow"
+              >
+                Withdraw Funds Now
+              </button>
             </div>
           </div>
         </div>
+      ) : activeFinanceTab === 'Pending Payouts' ? (
+        <div className="space-y-4">
+          <h3 className="text-base font-black text-slate-900 dark:text-white">Pending Escrow Funds &amp; In-Transit Delivery Releases</h3>
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden text-xs">
+            <table className="w-full text-left">
+              <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
+                <tr>
+                  <th className="p-4">Escrow Ref</th>
+                  <th className="p-4">Order ID</th>
+                  <th className="p-4">Buyer Store</th>
+                  <th className="p-4">Held Amount</th>
+                  <th className="p-4">Expected Release Date</th>
+                  <th className="p-4 text-right">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold">
+                {[
+                  { ref: 'ESC-9941', ord: 'ORD-9841', buyer: 'Shree Traders', amt: '₹95,000', release: 'Today, 6:00 PM', status: 'Awaiting Delivery Ack' },
+                  { ref: 'ESC-9940', ord: 'ORD-9837', buyer: 'Metro Retail Mart', amt: '₹2,45,000', release: 'Tomorrow, 10:00 AM', status: 'In Transit Dispatch' },
+                ].map((item) => (
+                  <tr key={item.ref}>
+                    <td className="p-4 font-mono font-bold text-emerald-600 dark:text-emerald-400">{item.ref}</td>
+                    <td className="p-4 font-mono font-bold">{item.ord}</td>
+                    <td className="p-4 font-black">{item.buyer}</td>
+                    <td className="p-4 font-mono font-black text-slate-900 dark:text-white">{item.amt}</td>
+                    <td className="p-4 text-slate-400">{item.release}</td>
+                    <td className="p-4 text-right">
+                      <span className="bg-amber-500/10 text-amber-500 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">{item.status}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : activeFinanceTab === 'Settlements' || activeFinanceTab === 'Payout History' ? (
+        <div className="space-y-4">
+          <h3 className="text-base font-black text-slate-900 dark:text-white">Bank Payout Transfers &amp; T+1 Settlement Logs</h3>
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden text-xs">
+            <table className="w-full text-left">
+              <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
+                <tr>
+                  <th className="p-4">Payout Ref / UTR</th>
+                  <th className="p-4">Transfer Mode</th>
+                  <th className="p-4">Bank Account</th>
+                  <th className="p-4">Settled Amount</th>
+                  <th className="p-4">Date &amp; Time</th>
+                  <th className="p-4 text-right">Receipt</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold">
+                {[
+                  { utr: 'UTR-N084200192', mode: 'IMPS Instant', bank: 'HDFC XXXX1234', amt: '₹2,00,000', date: '01 Aug 2026, 04:00 PM', status: 'Success' },
+                  { utr: 'UTR-N084200185', mode: 'NEFT T+1 Auto', bank: 'HDFC XXXX1234', amt: '₹3,50,000', date: '28 Jul 2026, 09:30 AM', status: 'Success' },
+                ].map((s) => (
+                  <tr key={s.utr}>
+                    <td className="p-4 font-mono font-bold text-emerald-600 dark:text-emerald-400">{s.utr}</td>
+                    <td className="p-4 text-emerald-500 font-bold">{s.mode}</td>
+                    <td className="p-4 font-mono">{s.bank}</td>
+                    <td className="p-4 font-mono font-black text-slate-900 dark:text-white">{s.amt}</td>
+                    <td className="p-4 text-slate-400">{s.date}</td>
+                    <td className="p-4 text-right">
+                      <button
+                        type="button"
+                        onClick={() => addToast?.(`Downloaded Settlement Receipt ${s.utr}`, 'success')}
+                        className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white font-extrabold text-xs cursor-pointer shadow transition"
+                      >
+                        Download PDF
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {/* Default Overview Cards & Transactions */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-950 to-emerald-950 p-6 text-white border border-emerald-500/30 shadow-xl space-y-4 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black uppercase text-emerald-400 tracking-wider flex items-center gap-1.5">
+                    <Wallet size={16} /> ESCROW WALLET BALANCE
+                  </span>
+                  <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                    Instant Settlement: Daily
+                  </span>
+                </div>
 
-        {/* Linked Payout Bank Account Card (HDFC Emblem Page 27) */}
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between space-y-4">
-          <div>
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                {/* Official HDFC Bank Red/Blue Emblem */}
-                <div className="w-8 h-8 rounded-lg bg-blue-900 border-2 border-red-600 flex items-center justify-center font-black text-white text-[11px] shadow-sm">
-                  HDFC
+                <div className="mt-4">
+                  <strong className="text-4xl font-black font-mono tracking-tight text-white block">₹8,75,000</strong>
+                  <span className="text-xs text-slate-400 font-semibold block mt-1">Available Wallet Balance</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2 pt-3 border-t border-slate-800/80 text-xs">
+                <div>
+                  <span className="text-[10px] text-slate-400 font-bold block">Withdrawable</span>
+                  <strong className="text-emerald-400 font-mono font-black text-sm">₹8,50,000</strong>
                 </div>
                 <div>
-                  <h4 className="text-xs font-black text-slate-900 dark:text-white">Linked Payout Bank Account</h4>
-                  <span className="text-[10px] text-slate-500 font-bold">Primary Transfer Account</span>
+                  <span className="text-[10px] text-slate-400 font-bold block">Pending</span>
+                  <strong className="text-amber-400 font-mono font-black text-sm">₹25,000</strong>
+                </div>
+                <div>
+                  <span className="text-[10px] text-slate-400 font-bold block">Last Payout</span>
+                  <strong className="text-slate-200 font-mono font-bold text-xs">02 Aug 2026</strong>
                 </div>
               </div>
-              <span className="bg-emerald-50 dark:bg-emerald-950/40 text-[#00986C] text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-500/30 flex items-center gap-1">
-                <CheckCircle2 size={12} /> Penny Drop Verified
-              </span>
             </div>
 
-            <div className="space-y-1.5 text-xs font-semibold bg-slate-50 dark:bg-slate-950 p-3 rounded-2xl border border-slate-100 dark:border-slate-800">
-              <div className="flex justify-between"><span className="text-slate-400">Bank Name:</span> <strong className="text-slate-900 dark:text-white">HDFC Bank Ltd</strong></div>
-              <div className="flex justify-between"><span className="text-slate-400">Account No:</span> <strong className="text-slate-900 dark:text-white font-mono">5020 0049 1823 94</strong></div>
-              <div className="flex justify-between"><span className="text-slate-400">IFSC Code:</span> <strong className="text-slate-900 dark:text-white font-mono">HDFC0000240</strong></div>
-              <div className="flex justify-between"><span className="text-slate-400">Account Holder:</span> <strong className="text-slate-900 dark:text-white truncate max-w-[150px]">SaathApp Wholesale &amp; Distribution Pvt Ltd</strong></div>
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between space-y-4">
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-blue-900 border-2 border-red-600 flex items-center justify-center font-black text-white text-[11px] shadow-sm">
+                      HDFC
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-black text-slate-900 dark:text-white">Linked Payout Bank Account</h4>
+                      <span className="text-[10px] text-slate-500 font-bold">Primary Transfer Account</span>
+                    </div>
+                  </div>
+                  <span className="bg-emerald-50 dark:bg-emerald-950/40 text-[#00986C] text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-500/30 flex items-center gap-1">
+                    <CheckCircle2 size={12} /> Penny Drop Verified
+                  </span>
+                </div>
+
+                <div className="space-y-1.5 text-xs font-semibold bg-slate-50 dark:bg-slate-950 p-3 rounded-2xl border border-slate-100 dark:border-slate-800">
+                  <div className="flex justify-between"><span className="text-slate-400">Bank Name:</span> <strong className="text-slate-900 dark:text-white">HDFC Bank Ltd</strong></div>
+                  <div className="flex justify-between"><span className="text-slate-400">Account No:</span> <strong className="text-slate-900 dark:text-white font-mono">5020 0049 1823 94</strong></div>
+                  <div className="flex justify-between"><span className="text-slate-400">IFSC Code:</span> <strong className="text-slate-900 dark:text-white font-mono">HDFC0000240</strong></div>
+                  <div className="flex justify-between"><span className="text-slate-400">Account Holder:</span> <strong className="text-slate-900 dark:text-white truncate max-w-[150px]">SaathApp Wholesale &amp; Distribution Pvt Ltd</strong></div>
+                </div>
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsLinkedBanksModalOpen(true)}
+                  className="flex-1 py-2 rounded-xl border border-slate-300 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-extrabold text-slate-800 dark:text-slate-200 text-center transition cursor-pointer"
+                >
+                  Manage Banks
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsWithdrawModalOpen(true)}
+                  className="flex-1 py-2 rounded-xl bg-[#00986C] hover:bg-emerald-700 text-xs font-extrabold text-white text-center transition cursor-pointer shadow"
+                >
+                  Withdraw
+                </button>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between space-y-4">
+              <div>
+                <h4 className="text-xs font-black text-slate-900 dark:text-white mb-2">Quick Financial Actions &amp; Compliance</h4>
+                <p className="text-xs text-slate-500 leading-relaxed mb-4">
+                  Download GST tax invoices, manage tax credit reports, or adjust automatic withdrawal frequencies.
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsGstModalOpen(true)}
+                    className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-left hover:border-emerald-500 transition group"
+                  >
+                    <Receipt size={16} className="text-emerald-500 mb-1" />
+                    <span className="block font-black text-xs text-slate-900 dark:text-white">GST Tax Report</span>
+                    <span className="text-[10px] text-slate-400">Download GSTR-1</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsStatementModalOpen(true)}
+                    className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-left hover:border-emerald-500 transition group"
+                  >
+                    <Download size={16} className="text-blue-500 mb-1" />
+                    <span className="block font-black text-xs text-slate-900 dark:text-white">Account Statement</span>
+                    <span className="text-[10px] text-slate-400">Download CSV/PDF</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => setIsLinkedBanksModalOpen(true)}
-              className="flex-1 py-2 rounded-xl border border-slate-300 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-extrabold text-slate-800 dark:text-slate-200 text-center transition cursor-pointer"
-            >
-              Manage Banks
-            </button>
-            <button
-              type="button"
-              onClick={() => addToast?.('HDFC Bank set as primary payout account', 'success')}
-              className="flex-1 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-extrabold text-slate-800 dark:text-slate-200 text-center transition cursor-pointer"
-            >
-              Change Primary
-            </button>
-          </div>
-        </div>
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+              <div>
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Escrow Wallet Transaction History</h3>
+                <p className="text-xs text-slate-500">Real-time ledger of order escrow credits, bank withdrawals, and GST debits.</p>
+              </div>
 
-        {/* Payout Summary (Right Card Page 27) */}
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between space-y-3">
-          <div>
-            <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white mb-2">Payout Summary (This Month)</h4>
-            <div className="space-y-2 text-xs font-semibold">
-              <div className="flex justify-between p-2 rounded-xl bg-slate-50 dark:bg-slate-950">
-                <span className="text-slate-500">Total Credits</span>
-                <strong className="text-emerald-600 dark:text-emerald-400 font-mono">₹3,45,000</strong>
-              </div>
-              <div className="flex justify-between p-2 rounded-xl bg-slate-50 dark:bg-slate-950">
-                <span className="text-slate-500">Total Withdrawals</span>
-                <strong className="text-rose-500 font-mono">₹2,18,500</strong>
-              </div>
-              <div className="flex justify-between p-2 rounded-xl bg-slate-50 dark:bg-slate-950">
-                <span className="text-slate-500">Total Settlements</span>
-                <strong className="text-blue-500 font-mono">₹3,10,000</strong>
-              </div>
-              <div className="flex justify-between p-2 rounded-xl bg-slate-50 dark:bg-slate-950">
-                <span className="text-slate-500">Pending Settlement</span>
-                <strong className="text-amber-500 font-mono">₹25,000</strong>
+              <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                {['All', 'Credits', 'Debits', 'Withdrawals', 'Refunds'].map((f) => (
+                  <button
+                    key={f}
+                    type="button"
+                    onClick={() => setTxnFilter(f)}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${
+                      txnFilter === f
+                        ? 'bg-emerald-600 text-white shadow'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                    }`}
+                  >
+                    {f}
+                  </button>
+                ))}
               </div>
             </div>
-          </div>
 
-          <div className="flex justify-between items-center pt-2 border-t border-slate-100 dark:border-slate-800">
-            <span className="text-xs font-extrabold text-slate-700 dark:text-slate-300">Net Wallet Balance</span>
-            <strong className="text-lg font-black text-[#00986C] font-mono">₹8,75,000</strong>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase tracking-wider">
+                  <tr>
+                    <th className="p-3">Transaction ID</th>
+                    <th className="p-3">Description</th>
+                    <th className="p-3">Channel / Bank</th>
+                    <th className="p-3">Type</th>
+                    <th className="p-3">Amount</th>
+                    <th className="p-3">Date &amp; Time</th>
+                    <th className="p-3 text-right">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
+                  {transactions
+                    .filter((t) => txnFilter === 'All' || t.type.toLowerCase() === txnFilter.toLowerCase() || (txnFilter === 'Credits' && t.type === 'Credit') || (txnFilter === 'Debits' && t.type === 'Debit'))
+                    .map((t, idx) => (
+                      <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                        <td className="p-3 font-mono font-extrabold text-emerald-600 dark:text-emerald-400">{t.txn}</td>
+                        <td className="p-3 font-bold text-slate-900 dark:text-white">{t.desc}</td>
+                        <td className="p-3 text-slate-500">{t.channel}</td>
+                        <td className="p-3">
+                          <span
+                            className={`px-2.5 py-0.5 rounded-full text-[10px] font-black ${
+                              t.type === 'Credit'
+                                ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                                : t.type === 'Withdrawal'
+                                ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400'
+                                : 'bg-rose-500/10 text-rose-600 dark:text-rose-400'
+                            }`}
+                          >
+                            {t.type}
+                          </span>
+                        </td>
+                        <td className={`p-3 font-mono font-black ${t.amt.startsWith('+') ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-900 dark:text-white'}`}>
+                          {t.amt}
+                        </td>
+                        <td className="p-3 text-slate-400">{t.date}</td>
+                        <td className="p-3 text-right">
+                          <span className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">
+                            {t.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* 3. RECENT FINANCIAL TRANSACTIONS TABLE & TRANSACTION FILTERS (PDF Page 27 & 36) */}
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-          <div>
-            <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
-              <History size={18} className="text-[#00986C]" /> Recent Financial Transactions
-            </h3>
-            <p className="text-xs text-slate-500 mt-0.5">Real-time escrow releases, bank payouts, and GST debit ledger.</p>
-          </div>
-
-          {/* TRANSACTION FILTERS (PDF Page 36: Credits, Debits, Withdrawals, Refunds, Escrow, Failed, Pending) */}
-          <div className="flex flex-wrap items-center gap-1.5">
-            {['All', 'Credits', 'Debits', 'Withdrawals', 'Refunds', 'Escrow', 'Failed', 'Pending'].map((filter) => (
-              <button
-                key={filter}
-                type="button"
-                onClick={() => setTxnFilter(filter)}
-                className={`px-3 py-1.5 rounded-full text-xs font-extrabold transition cursor-pointer ${
-                  txnFilter === filter
-                    ? 'bg-[#00986C] text-white shadow-sm'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
-                }`}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* TRANSACTIONS TABLE */}
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 border-b border-slate-200 dark:border-slate-800 pb-2">
-              <tr>
-                <th className="pb-2.5">TXN ID</th>
-                <th className="pb-2.5">DESCRIPTION</th>
-                <th className="pb-2.5">CHANNEL / BANK</th>
-                <th className="pb-2.5">TYPE</th>
-                <th className="pb-2.5 text-right">AMOUNT</th>
-                <th className="pb-2.5">DATE &amp; TIME</th>
-                <th className="pb-2.5">STATUS</th>
-                <th className="pb-2.5 text-center">ACTION</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
-              {filteredTransactions.map((t, i) => (
-                <tr key={i} className="hover:bg-slate-50 dark:hover:bg-slate-950 transition">
-                  <td className="py-3 font-mono font-extrabold text-[#00986C]">{t.txn}</td>
-                  <td className="py-3 font-bold text-slate-900 dark:text-white max-w-[200px] truncate">{t.desc}</td>
-                  <td className="py-3 text-slate-500 font-bold">{t.channel}</td>
-                  <td className="py-3">
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold ${
-                      t.type === 'Credit' ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400' :
-                      t.type === 'Withdrawal' ? 'bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400' :
-                      'bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400'
-                    }`}>
-                      {t.type}
-                    </span>
-                  </td>
-                  <td className={`py-3 text-right font-mono font-black text-sm ${t.amt.startsWith('+') ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'}`}>
-                    {t.amt}
-                  </td>
-                  <td className="py-3 text-slate-500 text-[11px] font-bold">{t.date}</td>
-                  <td className="py-3">
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 flex items-center gap-1 w-fit">
-                      <CheckCircle2 size={12} /> {t.status}
-                    </span>
-                  </td>
-                  <td className="py-3 text-center">
-                    <button
-                      type="button"
-                      onClick={() => handleDownloadStatement('Receipt', 'pdf')}
-                      className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition"
-                      title="Download Receipt"
-                    >
-                      <Download size={14} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      )}
 
       {/* MODAL 1: WITHDRAW FUNDS TO BANK MODAL (PDF Pages 28-30) */}
       {modalWithdrawOpen && (
@@ -932,19 +1064,6 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
             </div>
 
             <div className="space-y-2">
-              {[
-                { bank: 'HDFC Bank', acc: '5020 0049 1823 94', status: 'Primary', verified: true },
-                { bank: 'ICICI Bank', acc: '0011 0501 5588', status: 'Secondary', verified: true },
-                { bank: 'Axis Bank', acc: '9180 2004 8877', status: 'Secondary', verified: true },
-              ].map((b, i) => (
-                <div key={i} className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex justify-between items-center">
-                  <div>
-                    <strong className="text-slate-900 dark:text-white font-bold block">{b.bank}</strong>
-                    <span className="font-mono text-[11px] text-slate-500">{b.acc}</span>
-                  </div>
-                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-black ${b.status === 'Primary' ? 'bg-emerald-500/20 text-[#00986C]' : 'bg-slate-200 text-slate-600'}`}>{b.status}</span>
-                </div>
-              ))}
             </div>
 
             <div className="pt-2 flex justify-end">

@@ -12,6 +12,7 @@ import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
 export default function AnalyticsTab() {
   const { addToast, formData } = useWholesale ? useWholesale() : { addToast: console.log, formData: {} };
 
+  const [activeAnalyticsTab, setActiveAnalyticsTab] = useState('Overview');
   const [dateRange, setDateRange] = useState('1 Aug – 31 Aug 2026');
   const [compareRange, setCompareRange] = useState('1 Jul – 31 Jul 2026');
   const [isExportDropdownOpen, setIsExportDropdownOpen] = useState(false);
@@ -492,342 +493,221 @@ export default function AnalyticsTab() {
 
   return (
     <div className="space-y-6 sa-fade">
-      {/* 1. EXACT REPORT HEADER WITH OFFICIAL SAATHAPP LOGO & PILL TOOLBAR */}
-      <div className="flex flex-col xl:flex-row xl:items-start justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
-        <div className="max-w-xl">
-          <div className="flex items-center gap-3">
-            <img src={saathAppLogo} alt="SaathApp Logo" className="h-9 object-contain shrink-0" />
-            <div>
-              <div className="flex items-center gap-2">
-                <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
-                  Analytics & Performance Reports
-                </h2>
-                <button
-                  type="button"
-                  onClick={() => handleOpenExportModal('pdf')}
-                  className="w-7 h-7 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-[#00986C] flex items-center justify-center border border-emerald-500/30 shrink-0 hover:scale-110 transition cursor-pointer"
-                  title="Report Export Settings"
-                >
-                  <Settings size={15} />
-                </button>
-              </div>
-              <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
-                In-depth insights into your wholesale order volumes, category performance, and buyer retention.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* TOOLBAR CONTROLS MATCHING SCREENSHOT LAYOUT */}
-        <div className="flex flex-col items-start xl:items-end gap-2">
-          {/* Top Row: Date Range, Compare With, Refresh, Schedule Report */}
-          <div className="flex flex-wrap items-end gap-2">
-            {/* DATE RANGE SELECTOR */}
-            <div className="flex flex-col text-left">
-              <span className="text-[9px] font-black tracking-wider text-slate-400 uppercase mb-1">DATE RANGE</span>
-              <div className="relative">
-                <select
-                  value={dateRange}
-                  onChange={(e) => {
-                    setDateRange(e.target.value);
-                    addToast?.(`Updated date range to ${e.target.value}`, 'info');
-                  }}
-                  className="rounded-full border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 focus:outline-none shadow-sm cursor-pointer pr-8"
-                >
-                  <option value="1 Aug – 31 Aug 2026">🗓 1 Aug – 31 Aug 2026</option>
-                  <option value="1 Jul – 31 Jul 2026">🗓 1 Jul – 31 Jul 2026</option>
-                  <option value="Q3 2026 (July – Sept)">🗓 Q3 2026 (July – Sept)</option>
-                  <option value="YTD 2026">🗓 YTD 2026</option>
-                </select>
-              </div>
-            </div>
-
-            {/* COMPARE WITH SELECTOR */}
-            <div className="flex flex-col text-left">
-              <span className="text-[9px] font-black tracking-wider text-slate-400 uppercase mb-1">COMPARE WITH</span>
-              <div className="relative">
-                <select
-                  value={compareRange}
-                  onChange={(e) => {
-                    setCompareRange(e.target.value);
-                    addToast?.(`Comparing with ${e.target.value}`, 'info');
-                  }}
-                  className="rounded-full border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 focus:outline-none shadow-sm cursor-pointer pr-8"
-                >
-                  <option value="1 Jul – 31 Jul 2026">1 Jul – 31 Jul 2026</option>
-                  <option value="Previous Quarter">Previous Quarter</option>
-                  <option value="Same Month Last Year">Same Month Last Year</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Refresh Pill Button */}
-            <button
-              type="button"
-              onClick={() => addToast?.('🔄 Analytics data refreshed successfully', 'success')}
-              className="px-4 py-2 rounded-full border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs font-extrabold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition shadow-sm cursor-pointer flex items-center gap-1.5"
-            >
-              <RefreshCw size={14} className="text-[#00986C]" /> Refresh
-            </button>
-
-            {/* Schedule Report Pill Button */}
-            <button
-              type="button"
-              onClick={() => setActiveModal('schedule')}
-              className="px-4 py-2 rounded-full border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs font-extrabold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition shadow-sm cursor-pointer flex items-center gap-1.5"
-            >
-              <Calendar size={14} className="text-[#00986C]" /> Schedule Report
-            </button>
-          </div>
-
-          {/* Bottom Row: Share Report & Export Report */}
-          <div className="flex items-center gap-2 mt-1">
-            {/* Share Report Pill Button */}
-            <button
-              type="button"
-              onClick={() => setActiveModal('share')}
-              className="px-4 py-2 rounded-full border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs font-extrabold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition shadow-sm cursor-pointer flex items-center gap-1.5"
-            >
-              <Share2 size={14} className="text-[#00986C]" /> Share Report
-            </button>
-
-            {/* PRIMARY GREEN EXPORT REPORT BUTTON WITH DROPDOWN */}
-            <div className="relative">
+      {/* 1. TOP HEADER & CONTROLS TOOLBAR */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+        {/* Title & Brand */}
+        <div className="flex items-center gap-3">
+          <img src={saathAppLogo} alt="SaathApp Logo" className="h-10 object-contain shrink-0" />
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+                Analytics &amp; Performance Reports
+              </h2>
               <button
                 type="button"
-                onClick={() => setIsExportDropdownOpen(!isExportDropdownOpen)}
-                className="inline-flex items-center gap-2 rounded-2xl bg-[#00986C] hover:bg-emerald-700 px-5 py-2 text-xs font-extrabold text-white shadow-lg transition hover:scale-[1.02] cursor-pointer"
+                onClick={() => handleOpenExportModal('pdf')}
+                className="w-7 h-7 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-[#00986C] flex items-center justify-center border border-emerald-500/30 shrink-0 hover:scale-110 transition cursor-pointer"
+                title="Report Export Settings"
               >
-                <Download size={15} /> Export Report <ChevronDown size={14} />
+                <Settings size={15} />
               </button>
-
-              {/* Export Dropdown Menu (PDF Page 23) */}
-              {isExportDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-30 text-xs font-bold space-y-1 sa-rise">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      generatePdfReport(reportConfig);
-                      setIsExportDropdownOpen(false);
-                      addToast?.('Generated PDF report with SaathApp Official Logo', 'success');
-                    }}
-                    className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
-                  >
-                    <FileText size={16} className="text-rose-500" /> Export as PDF
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      generateExcelReport(reportConfig);
-                      setIsExportDropdownOpen(false);
-                      addToast?.('Exported Excel report with 9 separate sheets', 'success');
-                    }}
-                    className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
-                  >
-                    <FileSpreadsheet size={16} className="text-emerald-500" /> Export as Excel (.xlsx)
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      generateExcelReport({ ...reportConfig, fileName: 'SaathApp_CSV_Export' });
-                      setIsExportDropdownOpen(false);
-                      addToast?.('Exported CSV dataset report', 'success');
-                    }}
-                    className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
-                  >
-                    <FileCode size={16} className="text-teal-500" /> Export as CSV (.csv)
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      generateWordReport(reportConfig);
-                      setIsExportDropdownOpen(false);
-                      addToast?.('Exported Word professional report (6 Sections)', 'success');
-                    }}
-                    className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
-                  >
-                    <FileText size={16} className="text-blue-600" /> Export as Word (.docx)
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      generatePptReport(reportConfig);
-                      setIsExportDropdownOpen(false);
-                      addToast?.('Generated PowerPoint presentation (9 Slides)', 'success');
-                    }}
-                    className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
-                  >
-                    <Presentation size={16} className="text-amber-500" /> Export as PowerPoint (.pptx)
-                  </button>
-                  <div className="border-t border-slate-200 dark:border-slate-800 pt-1" />
-                  <button
-                    type="button"
-                    onClick={() => {
-                      generatePdfReport(reportConfig);
-                      setIsExportDropdownOpen(false);
-                    }}
-                    className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-600 dark:text-slate-400"
-                  >
-                    <Printer size={16} /> Print Report
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      addToast?.('Report emailed to registered seller account', 'success');
-                      setIsExportDropdownOpen(false);
-                    }}
-                    className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-600 dark:text-slate-400"
-                  >
-                    <Mail size={16} /> Email Report
-                  </button>
-                </div>
-              )}
             </div>
+            <p className="text-xs text-slate-500 mt-0.5">
+              In-depth insights into your wholesale order volumes, category performance, and buyer retention.
+            </p>
           </div>
         </div>
-      </div>
 
-      {/* 2. KPI CARDS ROW (6 CARDS WITH CIRCLE ICON BADGES) */}
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
-        {[
-          { label: 'Total GMV', val: '₹28.4L', change: '28.5% vs Jul', isUp: true, icon: TrendingUp, bg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400' },
-          { label: 'Total Orders', val: '1,248', change: '16.3% vs Jul', isUp: true, icon: ShoppingBag, bg: 'bg-purple-50 text-purple-600 dark:bg-purple-950/40 dark:text-purple-400' },
-          { label: 'Active Buyers', val: '850', change: '18.2% vs Jul', isUp: true, icon: Users, bg: 'bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400' },
-          { label: 'Avg. Order Value', val: '₹3,450', change: '12.7% vs Jul', isUp: true, icon: DollarSign, bg: 'bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400' },
-          { label: 'Return Rate', val: '1.24%', change: '-0.35% vs Jul', isUp: false, icon: RotateCcw, bg: 'bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400' },
-          { label: 'Conversion Rate', val: '8.62%', change: '0.92% vs Jul', isUp: true, icon: Target, bg: 'bg-teal-50 text-teal-600 dark:bg-teal-950/40 dark:text-teal-400' },
-        ].map((kpi, i) => (
-          <div
-            key={i}
-            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm space-y-2 hover:shadow-md transition cursor-pointer"
-            onClick={() => addToast?.(`Filter active analytics by ${kpi.label}`, 'info')}
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold text-slate-500 block">{kpi.label}</span>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${kpi.bg}`}>
-                <kpi.icon size={16} />
-              </div>
-            </div>
-            <strong className="text-xl font-black text-slate-900 dark:text-white block font-mono">{kpi.val}</strong>
-            <span
-              className={`inline-flex items-center text-[10px] font-extrabold gap-0.5 ${
-                kpi.isUp ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'
-              }`}
+        {/* Toolbar Controls */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Date Range */}
+          <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <span className="text-[10px] font-black uppercase text-slate-400 pl-2">Range:</span>
+            <select
+              value={dateRange}
+              onChange={(e) => {
+                setDateRange(e.target.value);
+                addToast?.(`Updated date range to ${e.target.value}`, 'info');
+              }}
+              className="bg-white dark:bg-slate-900 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-800 dark:text-slate-200 border-0 focus:ring-0 cursor-pointer shadow-sm"
             >
-              {kpi.isUp ? <ArrowUpRight size={13} /> : <ArrowDownRight size={13} />} {kpi.change}
-            </span>
+              <option value="1 Aug – 31 Aug 2026">1 Aug – 31 Aug 2026</option>
+              <option value="1 Jul – 31 Jul 2026">1 Jul – 31 Jul 2026</option>
+              <option value="Q3 2026 (July – Sept)">Q3 2026 (July – Sept)</option>
+              <option value="YTD 2026">YTD 2026</option>
+            </select>
           </div>
-        ))}
+
+          {/* Compare With */}
+          <div className="hidden sm:flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <span className="text-[10px] font-black uppercase text-slate-400 pl-2">Compare:</span>
+            <select
+              value={compareRange}
+              onChange={(e) => {
+                setCompareRange(e.target.value);
+                addToast?.(`Comparing with ${e.target.value}`, 'info');
+              }}
+              className="bg-white dark:bg-slate-900 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-800 dark:text-slate-200 border-0 focus:ring-0 cursor-pointer shadow-sm"
+            >
+              <option value="1 Jul – 31 Jul 2026">1 Jul – 31 Jul 2026</option>
+              <option value="Previous Quarter">Previous Quarter</option>
+              <option value="Same Month Last Year">Same Month Last Year</option>
+            </select>
+          </div>
+
+          {/* Refresh Action */}
+          <button
+            type="button"
+            onClick={() => addToast?.('🔄 Analytics data refreshed successfully', 'success')}
+            className="p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer active:scale-95 shadow-sm"
+            title="Refresh Data"
+          >
+            <RefreshCw size={15} className="text-[#00986C]" />
+          </button>
+
+          {/* Schedule Action */}
+          <button
+            type="button"
+            onClick={() => setActiveModal('schedule')}
+            className="p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer active:scale-95 shadow-sm"
+            title="Schedule Automated Email Reports"
+          >
+            <Calendar size={15} className="text-[#00986C]" />
+          </button>
+
+          {/* Share Action */}
+          <button
+            type="button"
+            onClick={() => setActiveModal('share')}
+            className="p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer active:scale-95 shadow-sm"
+            title="Share Report"
+          >
+            <Share2 size={15} className="text-[#00986C]" />
+          </button>
+
+          {/* Primary Export Button */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setIsExportDropdownOpen(!isExportDropdownOpen)}
+              className="inline-flex items-center gap-2 rounded-2xl bg-[#00986C] hover:bg-emerald-700 px-4 py-2.5 text-xs font-black text-white shadow-md transition active:scale-95 cursor-pointer"
+            >
+              <Download size={15} /> Export <ChevronDown size={14} />
+            </button>
+
+            {/* Export Dropdown */}
+            {isExportDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-30 text-xs font-bold space-y-1 sa-rise">
+                <button
+                  type="button"
+                  onClick={() => {
+                    generatePdfReport(reportConfig);
+                    setIsExportDropdownOpen(false);
+                    addToast?.('Generated PDF report with SaathApp Official Logo', 'success');
+                  }}
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
+                >
+                  <FileText size={16} className="text-rose-500" /> Export as PDF (.pdf)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    generateExcelReport(reportConfig);
+                    setIsExportDropdownOpen(false);
+                    addToast?.('Exported Excel report with 9 separate sheets', 'success');
+                  }}
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
+                >
+                  <FileSpreadsheet size={16} className="text-emerald-500" /> Export as Excel (.xlsx)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    generateExcelReport({ ...reportConfig, fileName: 'SaathApp_CSV_Export' });
+                    setIsExportDropdownOpen(false);
+                    addToast?.('Exported CSV dataset report', 'success');
+                  }}
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
+                >
+                  <FileCode size={16} className="text-teal-500" /> Export as CSV (.csv)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    generateWordReport(reportConfig);
+                    setIsExportDropdownOpen(false);
+                    addToast?.('Exported Word professional report (6 Sections)', 'success');
+                  }}
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
+                >
+                  <FileText size={16} className="text-blue-600" /> Export as Word (.docx)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    generatePptReport(reportConfig);
+                    setIsExportDropdownOpen(false);
+                    addToast?.('Generated PowerPoint presentation (9 Slides)', 'success');
+                  }}
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
+                >
+                  <Presentation size={16} className="text-amber-500" /> Export as PowerPoint (.pptx)
+                </button>
+                <div className="border-t border-slate-200 dark:border-slate-800 pt-1" />
+                <button
+                  type="button"
+                  onClick={() => {
+                    generatePdfReport(reportConfig);
+                    setIsExportDropdownOpen(false);
+                  }}
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-600 dark:text-slate-400"
+                >
+                  <Printer size={16} /> Print Report
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    addToast?.('Report emailed to registered seller account', 'success');
+                    setIsExportDropdownOpen(false);
+                  }}
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-600 dark:text-slate-400"
+                >
+                  <Mail size={16} /> Email Report
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* 3. CHARTS ROW */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Left Chart: Quarterly Gross Merchandise Value (GMV) Area Chart */}
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-1.5">
-              Quarterly Gross Merchandise Value (GMV) <Info size={14} className="text-slate-400 cursor-pointer" title="Total wholesale volume quarterly breakdown" />
-            </h3>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1 text-slate-400">
-                <button type="button" onClick={() => generatePdfReport(reportConfig)} className="hover:text-slate-200 p-1" title="Download GMV Chart"><Download size={14} /></button>
-                <button type="button" onClick={() => addToast?.('Expanded GMV view', 'info')} className="hover:text-slate-200 p-1" title="Fullscreen"><Maximize2 size={14} /></button>
-                <button type="button" onClick={() => handleOpenExportModal('pdf')} className="hover:text-slate-200 p-1" title="Options"><MoreVertical size={14} /></button>
-              </div>
-              <span className="text-[11px] font-black text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
-                +28.5% YoY
-              </span>
-            </div>
-          </div>
-
-          {/* SVG AREA CHART WITH Y-AXIS GRID LINES */}
-          <div className="relative h-64 w-full pt-4">
-            <div className="absolute inset-0 flex flex-col justify-between text-[10px] font-mono text-slate-400 pointer-events-none pb-6">
-              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/60 pb-0.5"><span>₹60L</span></div>
-              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/60 pb-0.5"><span>₹45L</span></div>
-              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/60 pb-0.5"><span>₹30L</span></div>
-              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/60 pb-0.5"><span>₹15L</span></div>
-              <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-0.5"><span>₹0</span></div>
-            </div>
-
-            <svg className="w-full h-48 overflow-visible z-10 relative" viewBox="0 0 400 160">
-              <defs>
-                <linearGradient id="gmvGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#00986C" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="#00986C" stopOpacity="0.0" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M 40 100 L 140 75 L 240 50 L 340 20 L 340 160 L 40 160 Z"
-                fill="url(#gmvGradient)"
-              />
-              <path
-                d="M 40 100 L 140 75 L 240 50 L 340 20"
-                fill="none"
-                stroke="#00986C"
-                strokeWidth="3.5"
-                strokeLinecap="round"
-              />
-              <circle cx="40" cy="100" r="5" fill="#00986C" stroke="#ffffff" strokeWidth="2" />
-              <circle cx="140" cy="75" r="5" fill="#00986C" stroke="#ffffff" strokeWidth="2" />
-              <circle cx="240" cy="50" r="5" fill="#00986C" stroke="#ffffff" strokeWidth="2" />
-              <circle cx="340" cy="20" r="5" fill="#00986C" stroke="#ffffff" strokeWidth="2" />
-
-              <text x="40" y="88" fill="#00986C" fontSize="10" fontWeight="bold" textAnchor="middle">₹28.4L</text>
-              <text x="140" y="63" fill="#00986C" fontSize="10" fontWeight="bold" textAnchor="middle">₹34.2L</text>
-              <text x="240" y="38" fill="#00986C" fontSize="10" fontWeight="bold" textAnchor="middle">₹42.8L</text>
-              <text x="340" y="10" fill="#00986C" fontSize="10" fontWeight="bold" textAnchor="middle">₹50.0L</text>
-            </svg>
-
-            <div className="flex justify-between text-xs font-bold text-slate-600 dark:text-slate-400 px-6 pt-2">
-              <span>Q1 2026</span>
-              <span>Q2 2026</span>
-              <span>Q3 2026</span>
-              <span>Q4 (Est)</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Chart: Active Buyer Growth Bar Chart */}
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-1.5">
-              Active Buyer Growth <Info size={14} className="text-slate-400 cursor-pointer" title="Monthly active buyer acquisitions" />
-            </h3>
-            <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">
-              850 Verified Buyers
-            </span>
-          </div>
-
-          <div className="relative h-64 w-full pt-4">
-            <div className="absolute inset-0 flex flex-col justify-between text-[10px] font-mono text-slate-400 pointer-events-none pb-6">
-              <div className="flex justify-between border-b border-slate-100 dark:border-slate-800/60 pb-0.5"><span>1000</span></div>
-              <div className="flex justify-between border-b border-slate-100 dark:border-slate-800/60 pb-0.5"><span>750</span></div>
-              <div className="flex justify-between border-b border-slate-100 dark:border-slate-800/60 pb-0.5"><span>500</span></div>
-              <div className="flex justify-between border-b border-slate-100 dark:border-slate-800/60 pb-0.5"><span>250</span></div>
-              <div className="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-0.5"><span>0</span></div>
-            </div>
-
-            <div className="h-44 flex items-end justify-between gap-6 px-8 z-10 relative">
-              {[
-                { label: 'May', height: '45%', val: '450' },
-                { label: 'Jun', height: '58%', val: '580' },
-                { label: 'Jul', height: '72%', val: '720' },
-                { label: 'Aug', height: '85%', val: '850' },
-              ].map((b, i) => (
-                <div key={i} className="flex-1 flex flex-col items-center gap-2 h-full justify-end">
-                  <span className="text-xs font-mono font-extrabold text-emerald-600 dark:text-emerald-400">{b.val}</span>
-                  <div
-                    className="w-12 rounded-t-xl bg-[#00986C] shadow-md transition-all hover:bg-emerald-500 cursor-pointer"
-                    style={{ height: b.height }}
-                    onClick={() => addToast?.(`Verified buyers in ${b.label}: ${b.val}`, 'info')}
-                  />
-                  <span className="text-xs font-bold text-slate-600 dark:text-slate-400 mt-1">{b.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      {/* 2. DEDICATED SUB-TABS BAR */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-slate-200 dark:border-slate-800 touch-pan-x">
+        {[
+          'Overview',
+          'Sales',
+          'Orders',
+          'Products',
+          'Buyers',
+          'Revenue',
+          'Warehouse Performance'
+        ].map((tab) => (
+          <button
+            key={tab}
+            type="button"
+            onClick={(e) => {
+              setActiveAnalyticsTab(tab);
+              e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+              addToast?.(`Switching to ${tab} analytics view`, 'info');
+            }}
+            className={`shrink-0 rounded-xl px-4 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
+              activeAnalyticsTab === tab
+                ? 'bg-emerald-600 text-white shadow-md font-black'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+            }`}
+          >
+            {tab}
+          </button>
+        ))}
       </div>
 
       {/* 4. TABLES & DONUT CHART ROW (3 COLUMNS) */}

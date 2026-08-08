@@ -1167,8 +1167,11 @@ export default function RiderWalletTab() {
                   <button
                     key={cat}
                     type="button"
-                    onClick={() => setTxnFilter(cat)}
-                    className={`px-3 py-1.5 rounded-xl cursor-pointer active:scale-95 transition-all duration-150 shrink-0 touch-manipulation ${
+                    onClick={(e) => {
+                      setTxnFilter(cat);
+                      e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    }}
+                    className={`px-3 py-1.5 rounded-xl cursor-pointer active:scale-95 transition-all duration-150 shrink-0 touch-manipulation select-none ${
                       txnFilter === cat
                         ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
                         : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'

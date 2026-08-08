@@ -10,6 +10,8 @@ import RiderDocumentsTab from './RiderDocumentsTab';
 import RiderRatingsTab from './RiderRatingsTab';
 import RiderSupportTab from './RiderSupportTab';
 import RiderProfileTab from './RiderProfileTab';
+import RiderOrdersDeliveriesTab from './RiderOrdersDeliveriesTab';
+import RiderIncentivesTab from './RiderIncentivesTab';
 import DeliveryEquipmentStoreSection from '../welcome/DeliveryEquipmentStoreSection';
 import Step10_DeliveryTerms from '../onboarding/Step10_DeliveryTerms';
 import WholesaleToast from '../../wholesale/WholesaleToast';
@@ -101,7 +103,7 @@ export default function DeliveryRiderDashboardLayout({
           activeTab={activeTab}
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
-          onOpenWithdrawModal={() => handleSelectTab('wallet')}
+          onOpenWithdrawModal={() => handleSelectTab('earnings')}
           onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
           onTriggerSos={() => setIsSosTriggered(true)}
           onOpenSupportPage={() => handleSelectTab('support')}
@@ -110,37 +112,51 @@ export default function DeliveryRiderDashboardLayout({
         />
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
-          {(activeTab === 'overview' || activeTab === 'bonuses' || activeTab === 'attendance' || activeTab === 'settings') && (
+          {/* Module 1: Dashboard */}
+          {(activeTab === 'overview' || activeTab === 'dashboard' || activeTab === 'attendance') && (
             <RiderOverviewTab
               onSelectTab={handleSelectTab}
-              onOpenWithdrawModal={() => handleSelectTab('wallet')}
+              onOpenWithdrawModal={() => handleSelectTab('earnings')}
             />
           )}
 
-          {activeTab === 'profile' && (
+          {/* Module 2: Orders & Deliveries */}
+          {(activeTab === 'orders' || activeTab === 'activeDeliveries' || activeTab === 'history' || activeTab === 'scheduled') && (
+            <RiderOrdersDeliveriesTab
+              initialSubTab={
+                activeTab === 'history'
+                  ? 'completed'
+                  : activeTab === 'scheduled'
+                  ? 'scheduled'
+                  : 'live'
+              }
+            />
+          )}
+
+          {/* Module 3: Earnings & Wallet */}
+          {(activeTab === 'earnings' || activeTab === 'wallet') && <RiderWalletTab />}
+
+          {/* Module 4: Incentives & Bonuses */}
+          {(activeTab === 'incentives' || activeTab === 'bonuses') && <RiderIncentivesTab />}
+
+          {/* Module 5: Ratings & Performance */}
+          {activeTab === 'ratings' && <RiderRatingsTab />}
+
+          {/* Module 6: Vehicle & Documents */}
+          {(activeTab === 'vehicle' || activeTab === 'documents') && <RiderDocumentsTab />}
+
+          {/* Module 8: Profile & Settings */}
+          {(activeTab === 'profile' || activeTab === 'settings') && (
             <RiderProfileTab
               onSelectTab={handleSelectTab}
               onLogout={() => setIsLogoutModalOpen(true)}
             />
           )}
 
-          {activeTab === 'activeDeliveries' && <RiderActiveDeliveriesTab />}
-
-          {activeTab === 'history' && <RiderHistoryTab />}
-
-          {activeTab === 'scheduled' && <RiderScheduledTab />}
-
-          {activeTab === 'wallet' && <RiderWalletTab />}
-
-          {(activeTab === 'equipmentStore' || activeTab === 'training') && (
-            <DeliveryEquipmentStoreSection onStartRegistration={() => handleSelectTab('overview')} />
+          {/* Module 9: Support */}
+          {(activeTab === 'support' || activeTab === 'training' || activeTab === 'equipmentStore') && (
+            <RiderSupportTab initialSubTab={activeTab === 'training' || activeTab === 'equipmentStore' ? 'training' : 'help'} />
           )}
-
-          {(activeTab === 'documents' || activeTab === 'vehicle') && <RiderDocumentsTab />}
-
-          {activeTab === 'ratings' && <RiderRatingsTab />}
-
-          {activeTab === 'support' && <RiderSupportTab />}
 
           {activeTab === 'terms' && (
             <Step10_DeliveryTerms onNext={() => handleSelectTab('overview')} onPrev={() => handleSelectTab('overview')} onSelectStep={() => {}} />

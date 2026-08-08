@@ -21,19 +21,15 @@ import {
 import { useDelivery } from '../../../context/DeliveryContext';
 
 export const RIDER_SIDEBAR_ITEMS = [
-  { id: 'overview', label: 'Dashboard Overview', icon: LayoutDashboard, badge: 'Online' },
-  { id: 'profile', label: 'Rider Profile', icon: User, badge: 'Active' },
-  { id: 'activeDeliveries', label: 'Live Orders & Route', icon: Truck, badge: '1 Active' },
-  { id: 'history', label: 'Completed Deliveries', icon: History, badge: '342' },
-  { id: 'scheduled', label: 'Scheduled Deliveries', icon: Calendar, badge: '12' },
-  { id: 'wallet', label: 'Wallet & Payouts', icon: Wallet, badge: '₹2,450' },
-  { id: 'bonuses', label: 'Incentives & Bonus', icon: Award, badge: 'New' },
+  { id: 'overview', label: 'Dashboard', icon: LayoutDashboard, badge: 'Online' },
+  { id: 'orders', label: 'Orders & Deliveries', icon: Truck, badge: '1 Active' },
+  { id: 'earnings', label: 'Earnings & Wallet', icon: Wallet, badge: '₹2,450' },
+  { id: 'incentives', label: 'Incentives & Bonuses', icon: Award, badge: 'New' },
   { id: 'ratings', label: 'Ratings & Performance', icon: Star, badge: '4.9 ★' },
   { id: 'vehicle', label: 'Vehicle & Documents', icon: FileBadge2, badge: 'Verified' },
-  { id: 'attendance', label: 'Attendance & Shift', icon: UserCheck, badge: '04h 25m' },
-  { id: 'training', label: 'Rider Training & Rules', icon: BookOpen, badge: 'Kit' },
-  { id: 'support', label: 'Help & Support 24/7', icon: HelpCircle, badge: 'SOS' },
-  { id: 'settings', label: 'App Settings', icon: Settings, badge: null },
+  { id: 'attendance', label: 'Attendance & Shifts', icon: UserCheck, badge: '04h 25m' },
+  { id: 'profile', label: 'Profile & Settings', icon: User, badge: 'Active' },
+  { id: 'support', label: 'Support', icon: HelpCircle, badge: null },
 ];
 
 export default function DeliveryRiderSidebar({ activeTab, onSelectTab, onBackToOnboarding, onTriggerSos, onLogout }) {

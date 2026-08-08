@@ -25,21 +25,15 @@ import { useWholesale } from '../../../context/WholesaleContext';
 import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
 
 export const SIDEBAR_ITEMS = [
-  { id: 'overview', label: 'Dashboard Overview', icon: LayoutDashboard, badge: null },
-  { id: 'profile', label: 'Wholesale Profile', icon: User, badge: 'Active' },
+  { id: 'overview', label: 'Dashboard', icon: LayoutDashboard, badge: null },
   { id: 'orders', label: 'Orders & Bulk Orders', icon: ShoppingBag, badge: '128' },
   { id: 'products', label: 'Products & Catalogue', icon: PackageCheck, badge: '2.4k' },
-  { id: 'inventory', label: 'Inventory & Warehouses', icon: Warehouse, badge: '3' },
   { id: 'buyers', label: 'Buyers & Enquiries', icon: Users, badge: '850' },
-  { id: 'messages', label: 'Buyer Messages', icon: MessageSquare, badge: '5' },
   { id: 'marketing', label: 'Marketing & Offers', icon: Sparkles, badge: 'New' },
-  { id: 'brandingStore', label: 'Branding & POS Hardware', icon: Gift, badge: 'Kit' },
   { id: 'analytics', label: 'Analytics & Reports', icon: BarChart3, badge: null },
   { id: 'finance', label: 'Wallet & Payouts', icon: Wallet, badge: '₹8.7L' },
-  { id: 'invoices', label: 'Invoices & GST', icon: Receipt, badge: null },
-  { id: 'documents', label: 'Document Vault', icon: FileBadge2, badge: 'Verified' },
-  { id: 'settings', label: 'Business Settings', icon: Settings, badge: null },
-  { id: 'support', label: 'Help & Support 24/7', icon: HelpCircle, badge: null },
+  { id: 'profile', label: 'Profile & Business Settings', icon: User, badge: 'Active' },
+  { id: 'support', label: 'Support', icon: HelpCircle, badge: null },
 ];
 
 export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboarding, onLogout }) {

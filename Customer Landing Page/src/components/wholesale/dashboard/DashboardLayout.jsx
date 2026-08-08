@@ -105,7 +105,7 @@ export default function DashboardLayout({
         />
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
-          {activeTab === 'overview' && (
+          {(activeTab === 'overview' || activeTab === 'dashboard') && (
             <OverviewTab
               onSelectTab={onSelectTab}
               onOpenAddProduct={() => {
@@ -119,16 +119,9 @@ export default function DashboardLayout({
             />
           )}
 
-          {activeTab === 'profile' && (
-            <WholesaleProfileTab
-              onSelectTab={onSelectTab}
-              onLogout={() => setIsLogoutModalOpen(true)}
-            />
-          )}
+          {(activeTab === 'orders' || activeTab === 'invoices') && <OrdersTab />}
 
-          {activeTab === 'orders' && <OrdersTab />}
-
-          {activeTab === 'products' && (
+          {(activeTab === 'products' || activeTab === 'inventory') && (
             <ProductsTab
               isAddModalOpen={isAddProductModalOpen}
               onCloseAddModal={() => setIsAddProductModalOpen(false)}
@@ -136,19 +129,13 @@ export default function DashboardLayout({
             />
           )}
 
-          {activeTab === 'inventory' && <InventoryTab />}
-
-          {activeTab === 'buyers' && <BuyersTab onSelectTab={onSelectTab} />}
-
-          {activeTab === 'messages' && <MessagesTab />}
+          {(activeTab === 'buyers' || activeTab === 'messages') && <BuyersTab onSelectTab={onSelectTab} />}
 
           {activeTab === 'marketing' && <MarketingTab />}
 
-          {activeTab === 'brandingStore' && <BrandingHardwareStoreTab />}
-
           {activeTab === 'analytics' && <AnalyticsTab />}
 
-          {activeTab === 'finance' && (
+          {(activeTab === 'finance' || activeTab === 'wallet') && (
             <FinanceTab
               isWithdrawModalOpen={isWithdrawModalOpen}
               onCloseWithdrawModal={() => setIsWithdrawModalOpen(false)}
@@ -156,11 +143,21 @@ export default function DashboardLayout({
             />
           )}
 
-          {activeTab === 'invoices' && <InvoicesTab />}
-
-          {activeTab === 'documents' && <DocumentsTab />}
-
-          {activeTab === 'settings' && <SettingsTab />}
+          {(activeTab === 'profile' || activeTab === 'settings' || activeTab === 'documents' || activeTab === 'brandingStore') && (
+            <WholesaleProfileTab
+              onSelectTab={onSelectTab}
+              onLogout={() => setIsLogoutModalOpen(true)}
+              initialSubTab={
+                activeTab === 'documents'
+                  ? 'Documents'
+                  : activeTab === 'settings'
+                  ? 'Business Settings'
+                  : activeTab === 'brandingStore'
+                  ? 'Business Resources'
+                  : 'Wholesale Profile'
+              }
+            />
+          )}
 
           {activeTab === 'support' && <SupportTab />}
         </main>

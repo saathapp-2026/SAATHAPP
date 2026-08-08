@@ -1,0 +1,12 @@
+node_modules
+**/node_modules
+.git
+**/.git
+.vercel
+dist
+**/dist
+build
+**/build
+*.log
+.env*
+.DS_Store

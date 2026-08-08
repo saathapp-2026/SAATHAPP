@@ -6,7 +6,7 @@ import {
   TrendingUp, BarChart3, ChevronRight, HelpCircle, Layers, CheckSquare, Sparkles,
   Download, Eye, User, Lock, Send, DollarSign, Calendar, Mic, MicOff, Volume2, Plus,
   UploadCloud, Share2, MoreHorizontal, Shield, Activity, Wrench, Siren, Cross, Check,
-  Folder, Compass
+  Folder, Compass, Power
 } from 'lucide-react';
 import { useDelivery } from '../../../context/DeliveryContext';
 
@@ -235,14 +235,145 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
 
 
       {/* ========================================================================= */}
+      {/* 2.5 QUICK ACTIONS BAR (Dominant Real-Time Control Center)                  */}
+      {/* ========================================================================= */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-lg space-y-3">
+        <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2">
+          <h3 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
+            <Zap size={16} className="text-amber-500" /> Quick Actions
+          </h3>
+          <span className="text-[10px] font-bold text-slate-400">Rider Real-Time Controls</span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 text-xs font-extrabold">
+          {/* 1. Go Online / Offline */}
+          <button
+            type="button"
+            onClick={() => {
+              setShiftStatus(shiftStatus === 'OFFLINE' ? 'ACTIVE' : 'OFFLINE');
+              addToast?.(shiftStatus === 'OFFLINE' ? 'Status set to ONLINE' : 'Status set to OFFLINE', 'info');
+            }}
+            className={`p-3 rounded-2xl flex flex-col items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition text-center ${
+              shiftStatus === 'ACTIVE'
+                ? 'bg-emerald-500/15 text-emerald-500 border border-emerald-500/30'
+                : 'bg-slate-800 text-slate-300 border border-slate-700'
+            }`}
+          >
+            <Power size={18} />
+            <span className="text-[10px] leading-tight font-black">{shiftStatus === 'ACTIVE' ? 'Go Offline' : 'Go Online'}</span>
+          </button>
+
+          {/* 2. Start / Pause Break */}
+          <button
+            type="button"
+            onClick={() => {
+              setShiftStatus(shiftStatus === 'ON_BREAK' ? 'ACTIVE' : 'ON_BREAK');
+              addToast?.(shiftStatus === 'ON_BREAK' ? 'Break Ended! Shift Resumed' : 'Break Started! 15m timer', 'info');
+            }}
+            className="p-3 rounded-2xl bg-amber-500/15 text-amber-500 border border-amber-500/30 flex flex-col items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition text-center"
+          >
+            <Clock size={18} />
+            <span className="text-[10px] leading-tight font-black">{shiftStatus === 'ON_BREAK' ? 'Resume Shift' : 'Start Break'}</span>
+          </button>
+
+          {/* 3. End Shift */}
+          <button
+            type="button"
+            onClick={() => setActiveModal('endShift')}
+            className="p-3 rounded-2xl bg-rose-500/15 text-rose-500 border border-rose-500/30 flex flex-col items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition text-center"
+          >
+            <X size={18} />
+            <span className="text-[10px] leading-tight font-black">End Shift</span>
+          </button>
+
+          {/* 4. View Active Delivery */}
+          <button
+            type="button"
+            onClick={() => onSelectTab?.('orders')}
+            className="p-3 rounded-2xl bg-blue-500/15 text-blue-500 border border-blue-500/30 flex flex-col items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition text-center"
+          >
+            <Truck size={18} />
+            <span className="text-[10px] leading-tight font-black">Active Delivery</span>
+          </button>
+
+          {/* 5. Navigate */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveModal('nav');
+              addToast?.('🧭 Initiating Turn-by-Turn GPS Navigation...', 'info');
+            }}
+            className="p-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-md flex flex-col items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition text-center col-span-2 sm:col-span-1"
+          >
+            <Navigation size={18} />
+            <span className="text-[10px] leading-tight font-black">Navigate</span>
+          </button>
+        </div>
+      </div>
+
+      {/* ========================================================================= */}
       {/* 3. LIVE DELIVERY CARD & NAVIGATION SPLIT ROW (Pages 3-6 PDF)              */}
       {/* ========================================================================= */}
       {activeOrder ? (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
           {/* Left Column (2 Cols): Live Assigned Delivery Card */}
-          <div className="lg:col-span-2 rounded-3xl border border-amber-500/40 bg-white dark:bg-slate-900 p-5 sm:p-6 shadow-xl space-y-6">
-            
+          <div className="lg:col-span-2 rounded-3xl border border-amber-500/40 bg-white dark:bg-slate-900 p-5 sm:p-6 shadow-xl space-y-5">
+
+            {/* Compact Workflow Progress Bar Strip */}
+            <div className="bg-slate-950 text-white p-3 rounded-2xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs shadow-inner">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="bg-amber-500/20 text-amber-400 font-mono font-black text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                  Step {currentWorkflowStep} of 5
+                </span>
+                <span className="font-extrabold text-slate-200">
+                  Workflow: {currentWorkflowStep === 1 ? 'Dashboard' : currentWorkflowStep === 2 ? 'Active Delivery' : currentWorkflowStep === 3 ? 'Pickup Location' : currentWorkflowStep === 4 ? 'En-Route Delivery' : 'Delivered & Complete'}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1 overflow-x-auto py-0.5 scrollbar-none">
+                {[
+                  { step: 1, label: 'Dashboard' },
+                  { step: 2, label: 'Active' },
+                  { step: 3, label: 'Pickup' },
+                  { step: 4, label: 'Delivery' },
+                  { step: 5, label: 'Complete' },
+                ].map((s) => {
+                  const isActive = currentWorkflowStep === s.step;
+                  const isDone = currentWorkflowStep > s.step;
+                  return (
+                    <button
+                      key={s.step}
+                      type="button"
+                      onClick={(e) => {
+                        setCurrentWorkflowStep(s.step);
+                        e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                        addToast?.(`Workflow step set to Step ${s.step}: ${s.label}`, 'info');
+                      }}
+                      className={`px-2.5 py-1 rounded-xl text-[10px] font-extrabold transition flex items-center gap-1 whitespace-nowrap cursor-pointer ${
+                        isActive
+                          ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
+                          : isDone
+                          ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                          : 'bg-slate-800 text-slate-400'
+                      }`}
+                    >
+                      <span className="font-mono text-[9px]">{isDone ? '✓' : s.step}</span>
+                      <span className="hidden sm:inline">{s.label}</span>
+                    </button>
+                  );
+                })}
+
+                <button
+                  type="button"
+                  onClick={() => onSelectTab?.('orders')}
+                  className="text-amber-400 text-[10px] font-extrabold hover:underline ml-1.5 whitespace-nowrap cursor-pointer"
+                >
+                  Open Full Workflow &gt;
+                </button>
+              </div>
+            </div>
+
             {/* Header Row */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
               <div className="flex items-center gap-3">
