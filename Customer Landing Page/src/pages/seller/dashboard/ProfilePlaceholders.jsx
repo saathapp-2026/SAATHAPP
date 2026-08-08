@@ -1,83 +1,268 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import { User, Landmark, Settings, Upload, Save, Shield, Bell, Key, LogOut } from 'lucide-react';
+import { User, Landmark, Settings, Upload, Save, Shield, Bell, Key, LogOut, Edit2, X } from 'lucide-react';
 
 export function SellerProfilePlaceholder() {
+  const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
+  const fileInputRef = useRef(null);
+
+  const defaultProfile = {
     firstName: 'Rahul',
     lastName: 'Sharma',
     email: 'rahul.sharma@example.com',
     mobile: '9876543210',
-    gender: 'male',
+    profileImage: null
+  };
+
+  const [savedProfile, setSavedProfile] = useState(() => {
+    try {
+      const saved = localStorage.getItem('saathapp-seller-profile');
+      return saved ? JSON.parse(saved) : defaultProfile;
+    } catch {
+      return defaultProfile;
+    }
   });
+
+  const [editingProfile, setEditingProfile] = useState(savedProfile);
+
+  // Sync with cross-component updates if any
+  useEffect(() => {
+    const handleUpdate = (e) => {
+      if (e.detail) {
+        setSavedProfile(e.detail);
+        if (!isEditing) setEditingProfile(e.detail);
+      }
+    };
+    window.addEventListener('seller-profile-updated', handleUpdate);
+    return () => window.removeEventListener('seller-profile-updated', handleUpdate);
+  }, [isEditing]);
+
+  const handleEditClick = () => {
+    setEditingProfile(savedProfile);
+    setIsEditing(true);
+  };
+
+  const handleDiscard = () => {
+    setEditingProfile(savedProfile);
+    setIsEditing(false);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (!file.type.match('image.*')) {
+        toast.error('Please select an image file (JPG, PNG, GIF, WEBP)');
+        return;
+      }
+      if (file.size > 800 * 1024) {
+        toast.error('Image size must be less than 800KB');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEditingProfile(prev => ({ ...prev, profileImage: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleUploadClick = () => {
+    if (!isEditing) return;
+    fileInputRef.current?.click();
+  };
 
   const handleSave = (e) => {
     e.preventDefault();
+    if (!editingProfile.firstName.trim() || !editingProfile.lastName.trim()) {
+      toast.error('First and Last name are required');
+      return;
+    }
+    
+    // Basic email validation if changed
+    if (editingProfile.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(editingProfile.email)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+
     setLoading(true);
     setTimeout(() => {
+      setSavedProfile(editingProfile);
+      localStorage.setItem('saathapp-seller-profile', JSON.stringify(editingProfile));
+      window.dispatchEvent(new CustomEvent('seller-profile-updated', { detail: editingProfile }));
+      
       toast.success('Seller profile updated successfully');
       setLoading(false);
+      setIsEditing(false);
     }, 800);
   };
+
+  const getInitials = (first, last) => {
+    return `${(first || '').charAt(0)}${(last || '').charAt(0)}`.toUpperCase() || 'RS';
+  };
+
+  // Determine which profile object to display based on mode
+  const currentData = isEditing ? editingProfile : savedProfile;
 
   return (
     <div className="max-w-3xl">
       <Toaster position="top-right" />
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
-        <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
-          <User className="text-emerald-500" size={20} />
-          <div>
-            <h2 className="text-lg font-bold text-slate-900 dark:text-slate-50">Personal Information</h2>
-            <p className="text-sm text-slate-500">Update your personal details and public profile.</p>
+        <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <User className="text-emerald-500" size={20} />
+            <div>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-slate-50">Personal Information</h2>
+              <p className="text-sm text-slate-500">Update your personal details and public profile.</p>
+            </div>
           </div>
+          {!isEditing && (
+            <button 
+              onClick={handleEditClick}
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 transition-colors"
+            >
+              <Edit2 size={16} /> Edit Profile
+            </button>
+          )}
         </div>
         
         <form onSubmit={handleSave} className="p-6 space-y-6">
           <div className="flex items-center gap-6 pb-6 border-b border-slate-200 dark:border-slate-800">
-            <div className="h-20 w-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-2xl font-bold border-2 border-emerald-500 shadow-sm relative group overflow-hidden">
-              RS
-              <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                <Upload size={18} className="text-white" />
-              </div>
+            <div 
+              onClick={handleUploadClick}
+              className={`h-24 w-24 rounded-full flex items-center justify-center text-2xl font-bold shadow-sm relative overflow-hidden flex-shrink-0 transition-all ${
+                isEditing ? 'cursor-pointer ring-4 ring-emerald-500/20 hover:ring-emerald-500/40' : ''
+              } ${!currentData.profileImage ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400 border-2 border-emerald-500' : ''}`}
+            >
+              {currentData.profileImage ? (
+                <img src={currentData.profileImage} alt="Profile" className="h-full w-full object-cover" />
+              ) : (
+                getInitials(currentData.firstName, currentData.lastName)
+              )}
+              
+              {isEditing && (
+                <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                  <Upload size={20} className="text-white" />
+                </div>
+              )}
             </div>
+            
             <div>
-              <h3 className="font-semibold text-slate-900 dark:text-slate-50">Profile Photo</h3>
-              <p className="text-sm text-slate-500 mb-2">JPG, GIF or PNG. Max size of 800K</p>
-              <button type="button" className="text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:underline">
-                Upload New Photo
-              </button>
+              <h3 className="font-semibold text-slate-900 dark:text-slate-50 mb-1">Profile Photo</h3>
+              <p className="text-sm text-slate-500 mb-3">JPG, GIF, PNG or WEBP. Max size of 800K</p>
+              
+              <input 
+                type="file" 
+                ref={fileInputRef} 
+                onChange={handleImageChange} 
+                accept="image/png, image/jpeg, image/jpg, image/gif, image/webp" 
+                className="hidden" 
+              />
+              
+              {isEditing ? (
+                <div className="flex gap-3">
+                  <button 
+                    type="button" 
+                    onClick={handleUploadClick}
+                    className="text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1.5 focus:outline-none"
+                  >
+                    <Upload size={14} /> Upload New Photo
+                  </button>
+                  {editingProfile.profileImage && (
+                    <button 
+                      type="button" 
+                      onClick={() => setEditingProfile(prev => ({...prev, profileImage: null}))}
+                      className="text-sm font-medium text-rose-500 hover:underline flex items-center gap-1.5 focus:outline-none"
+                    >
+                      <X size={14} /> Remove
+                    </button>
+                  )}
+                </div>
+              ) : (
+                <span className="text-sm text-slate-400 italic">Click 'Edit Profile' to change</span>
+              )}
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">First Name</label>
-              <input type="text" required value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
+              <input 
+                type="text" 
+                required 
+                value={currentData.firstName} 
+                onChange={e => setEditingProfile({...editingProfile, firstName: e.target.value})} 
+                disabled={!isEditing}
+                className={`w-full rounded-lg px-3.5 py-2.5 text-sm outline-none transition-colors ${
+                  isEditing 
+                    ? 'border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500' 
+                    : 'border-transparent bg-slate-50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 cursor-default'
+                }`} 
+              />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Last Name</label>
-              <input type="text" required value={formData.lastName} onChange={e => setFormData({...formData, lastName: e.target.value})} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
+              <input 
+                type="text" 
+                required 
+                value={currentData.lastName} 
+                onChange={e => setEditingProfile({...editingProfile, lastName: e.target.value})} 
+                disabled={!isEditing}
+                className={`w-full rounded-lg px-3.5 py-2.5 text-sm outline-none transition-colors ${
+                  isEditing 
+                    ? 'border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500' 
+                    : 'border-transparent bg-slate-50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 cursor-default'
+                }`} 
+              />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Email Address</label>
-              <input type="email" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
+              <input 
+                type="email" 
+                required 
+                value={currentData.email} 
+                onChange={e => setEditingProfile({...editingProfile, email: e.target.value})} 
+                disabled={!isEditing}
+                className={`w-full rounded-lg px-3.5 py-2.5 text-sm outline-none transition-colors ${
+                  isEditing 
+                    ? 'border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500' 
+                    : 'border-transparent bg-slate-50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 cursor-default'
+                }`} 
+              />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Mobile Number</label>
-              <input type="tel" required value={formData.mobile} onChange={e => setFormData({...formData, mobile: e.target.value})} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 px-3.5 py-2.5 text-sm outline-none cursor-not-allowed text-slate-500" readOnly title="Mobile number cannot be changed directly" />
+              <input 
+                type="tel" 
+                required 
+                value={currentData.mobile} 
+                disabled
+                className="w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900/80 px-3.5 py-2.5 text-sm outline-none cursor-not-allowed text-slate-500 dark:text-slate-400" 
+                title="Mobile number cannot be changed directly" 
+              />
             </div>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-            <button type="button" className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700">
-              Discard Changes
-            </button>
-            <button type="submit" disabled={loading} className="px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 disabled:opacity-50 flex items-center gap-2 shadow-sm">
-              <Save size={16} />
-              {loading ? 'Saving...' : 'Save Profile'}
-            </button>
-          </div>
+          {isEditing && (
+            <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-200">
+              <button 
+                type="button" 
+                onClick={handleDiscard}
+                className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500"
+              >
+                Discard Changes
+              </button>
+              <button 
+                type="submit" 
+                disabled={loading} 
+                className="px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 disabled:opacity-50 flex items-center gap-2 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+              >
+                <Save size={16} />
+                {loading ? 'Saving...' : 'Save Profile'}
+              </button>
+            </div>
+          )}
         </form>
       </div>
     </div>

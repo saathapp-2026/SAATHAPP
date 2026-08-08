@@ -33,6 +33,23 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
   const langRef = useRef(null);
   const profileRef = useRef(null);
 
+  const [profileData, setProfileData] = useState(() => {
+    try {
+      const saved = localStorage.getItem('saathapp-seller-profile');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    const handleUpdate = (e) => {
+      if (e.detail) setProfileData(e.detail);
+    };
+    window.addEventListener('seller-profile-updated', handleUpdate);
+    return () => window.removeEventListener('seller-profile-updated', handleUpdate);
+  }, []);
+
   const darkMode = resolvedTheme === 'dark';
   const unread = getUnreadCount();
 
@@ -207,19 +224,27 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
               aria-label="Profile menu"
               aria-expanded={showProfile}
             >
-              <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-600 font-semibold text-sm" aria-hidden="true">
-                {(seller?.fullName || seller?.email || 'S')[0].toUpperCase()}
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold overflow-hidden shrink-0 bg-emerald-500/20 text-emerald-600" aria-hidden="true">
+                {profileData?.profileImage ? (
+                  <img src={profileData.profileImage} alt="Profile" className="w-full h-full object-cover" />
+                ) : (
+                  (profileData?.firstName || seller?.fullName || seller?.email || 'S')[0].toUpperCase()
+                )}
               </div>
               <span className="hidden md:block text-sm font-medium max-w-[120px] truncate">
-                {seller?.fullName || seller?.email}
+                {profileData?.firstName ? `${profileData.firstName} ${profileData.lastName || ''}` : (seller?.fullName || seller?.email)}
               </span>
               <ChevronDown size={14} className="hidden md:block text-slate-400" />
             </button>
             {showProfile && (
               <div className="absolute right-0 mt-1 w-56 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl py-1 z-50" role="menu">
                 <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800">
-                  <p className="text-sm font-semibold truncate">{seller?.fullName}</p>
-                  <p className="text-xs text-slate-500 truncate">{seller?.email}</p>
+                  <p className="text-sm font-semibold truncate">
+                    {profileData?.firstName ? `${profileData.firstName} ${profileData.lastName || ''}` : seller?.fullName}
+                  </p>
+                  <p className="text-xs text-slate-500 truncate">
+                    {profileData?.email || seller?.email}
+                  </p>
                 </div>
                 {profileLinks.map(({ label, icon: Icon, path }) => (
                   <button
