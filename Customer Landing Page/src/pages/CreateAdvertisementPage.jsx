@@ -88,7 +88,7 @@ export default function CreateAdvertisementPage({ user }) {
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans">
       <Toaster position="top-right" />
-      <WizardHeader user={user} onBack={() => navigate('/advertise-with-us')} />
+      <WizardHeader user={user} onBack={() => navigate('/advertise')} />
       
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <WizardProgressBar currentStep={currentStep} />
@@ -105,7 +105,7 @@ export default function CreateAdvertisementPage({ user }) {
               
               <div className="flex items-center justify-between pt-6 border-t border-slate-200">
                 <button 
-                  onClick={() => navigate('/advertise-with-us')}
+                  onClick={() => navigate('/advertise')}
                   className="px-6 py-3 text-slate-600 font-medium hover:bg-slate-100 rounded-lg transition-colors"
                 >
                   Cancel
@@ -198,7 +198,7 @@ export default function CreateAdvertisementPage({ user }) {
             </div>
             <h2 className="text-3xl font-black text-slate-900 mb-4">Advertisement submitted successfully!</h2>
             <p className="text-slate-500 mb-8 max-w-md mx-auto">Your advertisement request has been received. Our team will review it shortly.</p>
-            <button onClick={() => navigate('/advertise-with-us')} className="px-8 py-3 bg-[#15803D] text-white font-bold rounded-lg hover:bg-emerald-700">
+            <button onClick={() => navigate('/advertise')} className="px-8 py-3 bg-[#15803D] text-white font-bold rounded-lg hover:bg-emerald-700">
               Back to Advertise With Us
             </button>
           </div>

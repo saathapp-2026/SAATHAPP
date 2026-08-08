@@ -364,31 +364,31 @@ export default function App() {
                         routerLocation.pathname === '/faq' || 
                         routerLocation.pathname === '/login' || 
                         routerLocation.pathname === '/signup' || 
-                        routerLocation.pathname === '/help-center' || 
+                        routerLocation.pathname === '/help-support' || 
                         routerLocation.pathname.startsWith('/wholesale') || 
                         routerLocation.pathname === '/become-a-wholeseller' || 
                         routerLocation.pathname === '/become-delivery-partner' || 
                         routerLocation.pathname === '/franchise' || 
-                        routerLocation.pathname === '/advertise-with-us' || 
+                        routerLocation.pathname === '/advertise' || 
                         routerLocation.pathname === '/advertise/create' || 
                         partnerRoutes.includes(routerLocation.pathname) || 
                         trustRoutes.includes(routerLocation.pathname) ||
                         isSellerRoute;
 
-  if (routerLocation.pathname === '/advertise-with-us') {
+  if (routerLocation.pathname === '/advertise') {
     return <AdvertisementsPage onBack={() => navigate('/')} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} cartCount={cartCount} />;
   }
 
   if (routerLocation.pathname === '/advertise/create') {
-    return <CreateAdvertisementPage onBack={() => navigate('/advertise-with-us')} user={user} />;
+    return <CreateAdvertisementPage onBack={() => navigate('/advertise')} user={user} />;
   }
 
   if (isSellerRoute) {
     return <SellerRoutes />;
   }
 
-  if (routerLocation.pathname === '/help-center') {
-    return <HelpCenterPage />;
+  if (routerLocation.pathname === '/help-support') {
+    return <HelpSupportPage onBack={() => navigate('/')} />;
   }
 
   if (routerLocation.pathname === '/about') {
@@ -952,6 +952,10 @@ export default function App() {
           }
           if (role === 'Become a Franchise' || role === 'Become a Franchise Partner' || role === 'Franchise') {
             navigate('/franchise');
+            return;
+          }
+          if (role === 'Advertise With Us') {
+            navigate('/advertise');
             return;
           }
           alert(`Partner application loading for: ${role}`);

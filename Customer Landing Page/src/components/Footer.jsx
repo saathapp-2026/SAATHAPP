@@ -146,11 +146,11 @@ export default function Footer() {
               <li><a href="#" className="hover:text-white transition-colors">Franchise</a></li>
               <li>
                 <Link
-                  to="/advertise-with-us"
+                  to="/advertise"
                   onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
                   className="hover:text-white transition-colors"
                 >
-                  Advertise with Us
+                  Advertise With Us
                 </Link>
               </li>
             </ul>
@@ -162,11 +162,11 @@ export default function Footer() {
             <ul className="space-y-3 text-xs font-semibold">
               <li>
                 <Link
-                  to="/help-center"
+                  to="/help-support"
                   onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
                   className="hover:text-white transition-colors"
                 >
-                  Help Center
+                  Help & Support
                 </Link>
               </li>
               <li>
@@ -181,11 +181,11 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  to="/service-warranty-policy" 
+                  to="/service-warranty" 
                   onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
                   className="hover:text-white transition-colors"
                 >
-                  Service Warranty Policy
+                  Service Warranty
                 </Link>
               </li>
               <li>
