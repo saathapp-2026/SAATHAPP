@@ -351,7 +351,7 @@ export default function SellerRoutes() {
             <Route path="support" element={<SuspenseWrap><SupportLayout /></SuspenseWrap>}>
               <Route path="help-center" element={<SuspenseWrap><HelpCenter /></SuspenseWrap>} />
               <Route path="tickets" element={<SuspenseWrap><LazySupport /></SuspenseWrap>} />
-              <Route index element={<Navigate to="tickets" replace />} />
+              <Route index element={<Navigate to="help-center" replace />} />
             </Route>
           </Route>
 
