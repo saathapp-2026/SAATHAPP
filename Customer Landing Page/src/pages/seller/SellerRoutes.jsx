@@ -59,7 +59,8 @@ const LazyInvoices = lazy(() => import('./dashboard/InvoicesPage'));
 const LazyReports = lazy(() => import('./dashboard/ReportsPage'));
 const LazyCoupons = lazy(() => import('./dashboard/CouponsPage'));
 const LazyStoreSettings = lazy(() => import('./dashboard/StoreSettingsPage'));
-const LazyDocuments = lazy(() => import('./dashboard/DocumentsPage'));
+const SupportLayout = lazy(() => import('./dashboard/SupportLayout'));
+const HelpCenter = lazy(() => import('./dashboard/HelpCenter'));
 const LazySupport = lazy(() => import('./dashboard/SupportPage'));
 const ProfileSettingsLayout = lazy(() => import('./dashboard/ProfileSettingsLayout'));
 const ProductsLayout = lazy(() => import('./dashboard/ProductsLayout'));
@@ -346,7 +347,11 @@ export default function SellerRoutes() {
             <Route path="membership" element={<SuspenseWrap><Membership mode="dashboard" /></SuspenseWrap>} />
             <Route path="welcome-kit" element={<SuspenseWrap><WelcomeKitPage /></SuspenseWrap>} />
             <Route path="branding" element={<SuspenseWrap><BrandingStorePage /></SuspenseWrap>} />
-            <Route path="support" element={<SuspenseWrap><LazySupport /></SuspenseWrap>} />
+            <Route path="support" element={<SuspenseWrap><SupportLayout /></SuspenseWrap>}>
+              <Route path="help-center" element={<SuspenseWrap><HelpCenter /></SuspenseWrap>} />
+              <Route path="tickets" element={<SuspenseWrap><LazySupport /></SuspenseWrap>} />
+              <Route index element={<Navigate to="tickets" replace />} />
+            </Route>
           </Route>
 
           <Route path="/seller/*" element={<SellerErrorPage type="404" />} />
