@@ -59,6 +59,7 @@ const LazyInvoices = lazy(() => import('./dashboard/InvoicesPage'));
 const LazyReports = lazy(() => import('./dashboard/ReportsPage'));
 const LazyCoupons = lazy(() => import('./dashboard/CouponsPage'));
 const LazyStoreSettings = lazy(() => import('./dashboard/StoreSettingsPage'));
+const LazyDocuments = lazy(() => import('./dashboard/DocumentsPage'));
 const SupportLayout = lazy(() => import('./dashboard/SupportLayout'));
 const HelpCenter = lazy(() => import('./dashboard/HelpCenter'));
 const LazySupport = lazy(() => import('./dashboard/SupportPage'));
