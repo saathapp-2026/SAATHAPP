@@ -1,7 +1,44 @@
-import React from 'react';
-import { Search, Book, HelpCircle, FileText, ExternalLink, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Search, Book, HelpCircle, FileText, ExternalLink, ArrowRight, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
+function PolicyModal({ open, title, onClose }) {
+  if (!open) return null;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl w-full max-w-2xl shadow-xl overflow-hidden flex flex-col max-h-[80vh]">
+        <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
+          <h3 className="font-bold text-slate-900 dark:text-slate-50">{title}</h3>
+          <button onClick={onClose} className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+            <X size={18} />
+          </button>
+        </div>
+        <div className="p-6 overflow-y-auto">
+          <div className="prose prose-sm dark:prose-invert max-w-none">
+            <p>Welcome to the <strong>{title}</strong> document. As part of our SAATHAPP MVP, this is a placeholder document that outlines the standard guidelines and rules associated with this topic.</p>
+            <h4>1. General Guidelines</h4>
+            <p>Sellers are expected to maintain accurate stock levels, process orders within 24 hours, and respond to customer queries promptly. Any violation may result in temporary suspension of store privileges.</p>
+            <h4>2. Compliance</h4>
+            <p>All products listed must comply with local laws and platform regulations. Prohibited items will be removed immediately without prior notice.</p>
+            <h4>3. Payment & Settlement</h4>
+            <p>Platform fees are deducted automatically before settlements. Settlements occur bi-weekly and require a verified bank account.</p>
+            <p className="text-slate-500 mt-6 italic">Note: In the final production version, this section will contain the full legally binding text.</p>
+          </div>
+        </div>
+        <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex justify-end">
+          <button onClick={onClose} className="px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-medium hover:bg-slate-800 dark:hover:bg-slate-100">
+            Acknowledge & Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function HelpCenter() {
+  const navigate = useNavigate();
+  const [modalTitle, setModalTitle] = useState(null);
+
   const categories = [
     {
       title: 'Getting Started',
@@ -31,6 +68,8 @@ export default function HelpCenter() {
 
   return (
     <div className="space-y-8">
+      <PolicyModal open={!!modalTitle} title={modalTitle} onClose={() => setModalTitle(null)} />
+
       <div className="bg-emerald-600 rounded-2xl p-8 sm:p-12 text-center text-white shadow-sm relative overflow-hidden">
         <div className="relative z-10 max-w-2xl mx-auto space-y-6">
           <h2 className="text-2xl sm:text-3xl font-bold">How can we help you today?</h2>
@@ -50,14 +89,14 @@ export default function HelpCenter() {
         {categories.map((cat, i) => {
           const Icon = cat.icon;
           return (
-            <div key={i} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 hover:shadow-md transition-shadow cursor-pointer group">
+            <button key={i} onClick={() => setModalTitle(`${cat.title} Guides`)} className="text-left bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 hover:shadow-md transition-shadow cursor-pointer group focus:outline-none focus:ring-2 focus:ring-emerald-500">
               <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Icon size={24} />
               </div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-slate-50 mb-2">{cat.title}</h3>
               <p className="text-sm text-slate-500 mb-4">{cat.desc}</p>
               <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">{cat.articles} Articles</span>
-            </div>
+            </button>
           );
         })}
       </div>
@@ -89,9 +128,9 @@ export default function HelpCenter() {
                 'Shipping Guidelines'
               ].map((policy, i) => (
                 <li key={i}>
-                  <a href="#" className="text-sm text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-2">
+                  <button onClick={() => setModalTitle(policy)} className="text-sm text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-2 focus:outline-none">
                     <ExternalLink size={14} /> {policy}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -103,7 +142,7 @@ export default function HelpCenter() {
             </div>
             <h3 className="font-bold text-slate-900 dark:text-slate-50 mb-2">Still need help?</h3>
             <p className="text-sm text-slate-500 mb-4">Can't find the answer you're looking for? Create a support ticket.</p>
-            <button className="w-full py-2.5 px-4 text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 rounded-lg hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors">
+            <button onClick={() => navigate('/seller/dashboard/support/tickets')} className="w-full py-2.5 px-4 text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 rounded-lg hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500">
               Open Support Tickets
             </button>
           </div>
