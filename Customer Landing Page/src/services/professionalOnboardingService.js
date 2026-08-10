@@ -139,47 +139,41 @@ function buildBreakdown(factors, resolved) {
 
 export function calculateOnboardingFee(onboardingData) {
   const config = getProfessionalPricingConfig();
-  const { modifiers, factorWeights } = config;
-  const resolved = resolveFeeRange(onboardingData);
+  const locationTier = onboardingData.serviceLocation?.locationTier || 'village';
 
-  const factors = {
-    experience: getExperienceModifier(config, onboardingData.accountInfo?.experience),
-    serviceRadius: getModifierValue(modifiers, 'serviceRadius', onboardingData.serviceLocation?.serviceRadius),
-    entityType: getModifierValue(modifiers, 'entityType', onboardingData.accountInfo?.entityType || 'individual'),
-    staffCount: getModifierValue(modifiers, 'staffCount', onboardingData.accountInfo?.staffCount || '1'),
-    equipmentLevel: getModifierValue(modifiers, 'equipmentLevel', onboardingData.accountInfo?.equipmentLevel || 'none'),
-    verificationLevel: getModifierValue(modifiers, 'verificationLevel', onboardingData.documents?.verificationLevel || 'basic'),
-    businessScale: getModifierValue(modifiers, 'businessScale', onboardingData.accountInfo?.businessScale || 'solo'),
+  const fixedFeeMap = {
+    village: 750,
+    tier3: 1250,
+    tier2: 1850,
+    tier1: 2550,
+    metro: 3500
   };
 
-  let weightedScore = 0;
-  Object.keys(factorWeights).forEach((key) => {
-    weightedScore += (factors[key] || 0) * factorWeights[key];
-  });
-  weightedScore = Math.min(1, Math.max(0, weightedScore));
+  const fee = fixedFeeMap[locationTier] || 750;
+  
+  const tierLabel = config.locationTiers?.find((t) => t.id === locationTier)?.label || locationTier;
+  const category = onboardingData.accountInfo?.category || 'service';
+  const categoryLabel = config.categoryLabels?.[category] || category;
 
-  const fee = Math.round(resolved.min + (resolved.max - resolved.min) * weightedScore);
-  const clampedFee = Math.min(200000, Math.max(500, fee));
-  const renewalAmount = Math.round(clampedFee * (config.renewalPercentage / 100));
+  const breakdown = [
+    { label: 'Location Tier', value: tierLabel, type: 'info' },
+    { label: 'Fixed Onboarding Fee', value: `₹${fee.toLocaleString('en-IN')}`, type: 'info' }
+  ];
 
   return {
-    fee: clampedFee,
-    minFee: resolved.min,
-    maxFee: resolved.max,
-    locationTier: resolved.locationTier,
-    locationTierLabel: resolved.tierLabel,
-    category: resolved.categoryKey,
-    categoryLabel: resolved.categoryLabel,
-    groupLabel: resolved.groupLabel,
-    commissionMin: resolved.commissionMin,
-    commissionMax: resolved.commissionMax,
-    commissionDisplay: `${resolved.commissionMin}–${resolved.commissionMax}%`,
-    weightedScore,
-    factors,
-    breakdown: buildBreakdown(factors, resolved),
+    fee,
+    minFee: fee,
+    maxFee: fee,
+    locationTier,
+    locationTierLabel: tierLabel,
+    category,
+    categoryLabel,
+    weightedScore: 1,
+    factors: {},
+    breakdown,
     validityYears: config.validityYears,
     renewalPercentage: config.renewalPercentage,
-    renewalAmount,
+    renewalAmount: Math.round(fee * (config.renewalPercentage / 100)),
     currency: 'INR',
     calculatedAt: new Date().toISOString(),
   };
