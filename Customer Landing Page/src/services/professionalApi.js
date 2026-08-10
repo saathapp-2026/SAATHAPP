@@ -55,14 +55,18 @@ export async function createOnboardingPayment({ fee, onboardingData, partnerId }
     return res.json();
   } catch {
     await delay(800);
-    const paymentId = `PRO_PAY_${Date.now()}_${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+    const mockId = Math.random().toString(36).slice(2, 8).toUpperCase();
+    const paymentId = `mock_pay_${mockId}`;
     const payment = {
       paymentId,
       amount: fee,
       currency: 'INR',
-      status: 'created',
+      status: 'SUCCESS',
       gateway: 'razorpay',
-      orderId: `order_${paymentId}`,
+      orderId: `mock_order_${mockId}`,
+      transactionId: `MOCK_PROF_ONBOARD_${mockId}`,
+      paymentMode: 'MOCK / DEVELOPMENT',
+      environment: 'DEVELOPMENT',
       createdAt: new Date().toISOString(),
     };
     localStorage.setItem(PROFESSIONAL_STORAGE_KEYS.payment, JSON.stringify(payment));
