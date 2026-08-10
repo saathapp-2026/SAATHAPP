@@ -1,0 +1,10 @@
+{
+  "name": "saathapp-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix \"Customer Landing Page\" run dev",
+    "build": "npm --prefix \"Customer Landing Page\" run build",
+    "preview": "npm --prefix \"Customer Landing Page\" run preview"
+  }
+}

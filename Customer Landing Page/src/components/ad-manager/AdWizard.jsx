@@ -29,6 +29,7 @@ import {
   getAiAdSuggestion,
   estimateReach,
 } from '../../services/advertisementsService';
+import { calculateAdvertisingPrice } from '../../services/advertisingPricingEngine';
 
 const CTA_OPTIONS = ['Shop Now', 'Buy Now', 'Visit Store', 'Order Now', 'Book Service', 'Learn More', 'Contact Seller', 'Call Now'];
 const DEVICE_PREVIEWS = ['desktop', 'tablet', 'mobile'];
@@ -87,19 +88,33 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
   const type = useMemo(() => getAdType(draft.campaignType || draft.typeId), [draft.campaignType, draft.typeId]);
   const estimate = useMemo(() => estimateReach(draft.dailyBudget), [draft.dailyBudget]);
   const billingSummary = useMemo(() => {
-    const totalBudget = Number(draft.totalBudget) || 0;
+    const calc = calculateAdvertisingPrice({
+      adType: draft.campaignType || draft.typeId || 'banner',
+      category: draft.category || draft.businessCategory || 'medium_shop',
+      locationTier: draft.locationTier || draft.cityType,
+      targetCities: draft.targetCities || [],
+      locations: draft.locations || [],
+      radius: draft.radius || '10km',
+      durationDays: draft.duration === 'custom' ? 1 : (draft.duration || 30),
+    });
+
+    const totalBudget = calc.isContract ? 0 : (Number(draft.totalBudget) || calc.finalPrice);
     const platformFee = Math.round(totalBudget * (Number(draft.platformFeePercent) || 0) / 100);
     const discount = Number(draft.couponDiscount) || 0;
     const taxable = Math.max(0, totalBudget + platformFee - discount);
     const tax = Math.round(taxable * (Number(draft.gstPercent) || 0) / 100);
     return {
       totalBudget,
+      basePrice: calc.basePrice,
+      durationMultiplier: calc.durationMultiplier,
+      isContract: calc.isContract,
+      contractRanges: calc.contractRanges,
       platformFee,
       discount,
       tax,
       finalAmount: taxable + tax,
     };
-  }, [draft.totalBudget, draft.platformFeePercent, draft.couponDiscount, draft.gstPercent]);
+  }, [draft.campaignType, draft.typeId, draft.category, draft.businessCategory, draft.locationTier, draft.cityType, draft.radius, draft.duration, draft.totalBudget, draft.platformFeePercent, draft.couponDiscount, draft.gstPercent]);
 
   const patch = (partial) => {
     setDraft((d) => ({ ...d, ...partial }));

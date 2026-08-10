@@ -20,7 +20,7 @@ export default function DeliveryFeeTableSection({ onStartRegistration }) {
             Delivery Partner Onboarding Fee Structure
           </h2>
           <p className="text-base text-slate-300 font-medium leading-relaxed">
-            One-time onboarding fee for individuals joining the SAATHAPP Delivery Network. Payable only once and valid for 2 years from successful activation.
+            One-time onboarding fee for individuals joining the SAATHAPP Delivery Network. Payable only once upon registration.
           </p>
         </div>
 
@@ -31,15 +31,13 @@ export default function DeliveryFeeTableSection({ onStartRegistration }) {
               <span className="text-xs font-black uppercase tracking-widest text-amber-400 bg-amber-500/20 px-3 py-1 rounded-full">
                 One-Time Onboarding Fee
               </span>
-              <span className="text-xs font-extrabold text-slate-300">Valid for 2 Years</span>
             </div>
             <h3 className="text-2xl font-black text-white">Rider Account & Profile Setup</h3>
             <p className="text-xs text-slate-300 leading-relaxed font-medium">
-              Covers identity verification, background check, DL/RC audit, rider app activation, training materials, and 2-year valid account setup.
+              Covers identity verification, background check, DL/RC audit, rider app activation, training materials, and rider profile setup.
             </p>
             <div className="pt-2 text-xs space-y-2 text-slate-300">
-              <p>• <strong>Fee Range:</strong> ₹550 – ₹2,000 (Based on location tier & delivery category)</p>
-              <p>• <strong>Renewal:</strong> 50% of applicable onboarding fee after 2 years</p>
+              <p>• <strong>Fee Range:</strong> ₹500 – ₹2,500 (Fixed flat fee based on location category)</p>
               <p>• <strong>Earnings:</strong> Calculated based on completed order deliveries & payouts</p>
             </div>
           </div>
@@ -63,54 +61,38 @@ export default function DeliveryFeeTableSection({ onStartRegistration }) {
           </div>
         </div>
 
-        {/* Interactive Delivery Fee Matrix Calculator */}
+        {/* Fixed Delivery Fee Matrix Table */}
         <div className="mt-14 rounded-3xl border border-slate-800 bg-slate-950 p-6 sm:p-10 shadow-2xl">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6">
-            <div>
-              <h3 className="text-xl font-black text-white">Delivery Partner Fee Matrix by Location Tier</h3>
-              <p className="text-xs text-slate-400 mt-1">Select location classification to view exact onboarding fee breakdown.</p>
-            </div>
-
-            {/* Location Tier Tabs */}
-            <div className="flex flex-wrap gap-2">
-              {['Village', 'Tier 3 Town', 'Tier 2 City', 'Tier 1 Metro'].map((tier) => (
-                <button
-                  key={tier}
-                  type="button"
-                  onClick={() => setSelectedTier(tier)}
-                  className={`rounded-xl px-3.5 py-2 text-xs font-extrabold transition ${
-                    selectedTier === tier
-                      ? 'bg-amber-500 text-slate-950 shadow'
-                      : 'bg-slate-900 text-slate-400 hover:text-white'
-                  }`}
-                >
-                  {tier}
-                </button>
-              ))}
-            </div>
+          <div className="border-b border-slate-800 pb-6">
+            <h3 className="text-xl font-black text-white">Fixed Delivery Partner Onboarding Fee Table</h3>
+            <p className="text-xs text-slate-400 mt-1">Single one-time fee based strictly on service location category. No hidden or extra charges.</p>
           </div>
 
-          {/* Fee Table for Selected Tier */}
+          {/* Fee Table for All 5 Tiers */}
           <div className="mt-6 overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead className="bg-slate-900 text-slate-400 font-bold uppercase tracking-wider">
                 <tr>
-                  <th className="p-3.5">Delivery Category</th>
-                  <th className="p-3.5">One-Time Onboarding Fee</th>
-                  <th className="p-3.5">Renewal Fee (After 2 Yrs)</th>
-                  <th className="p-3.5 text-right">Validity</th>
+                  <th className="p-3.5">Location Category</th>
+                  <th className="p-3.5">Description / Coverage</th>
+                  <th className="p-3.5 text-right">Fixed One-Time Onboarding Fee</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800 font-semibold text-slate-300">
-                {Object.entries(DELIVERY_FEE_MATRIX[selectedTier] || {}).map(([cat, data], idx) => (
+                {[
+                  { tier: 'Village / Rural', desc: 'Gram Panchayat & Rural Tier', fee: '₹500' },
+                  { tier: 'Tier 3 City', desc: 'Town & Sub-district Hub', fee: '₹1,000' },
+                  { tier: 'Tier 2 City', desc: 'State Capital & Major City', fee: '₹1,500' },
+                  { tier: 'Tier 1 City', desc: 'Large Commercial City', fee: '₹2,000' },
+                  { tier: 'Metro City', desc: 'Metropolitan Metro Hub', fee: '₹2,500' },
+                ].map((row, idx) => (
                   <tr key={idx} className="hover:bg-slate-900/60 transition">
                     <td className="p-3.5 font-bold text-white flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-amber-400" />
-                      {cat}
+                      {row.tier}
                     </td>
-                    <td className="p-3.5 font-black text-amber-400">{data.range}</td>
-                    <td className="p-3.5 text-slate-400">50% of Fee</td>
-                    <td className="p-3.5 text-right text-slate-400">2 Years</td>
+                    <td className="p-3.5 text-slate-400">{row.desc}</td>
+                    <td className="p-3.5 text-right font-black text-amber-400 text-sm">{row.fee}</td>
                   </tr>
                 ))}
               </tbody>

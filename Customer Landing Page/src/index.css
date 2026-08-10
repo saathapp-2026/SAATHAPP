@@ -303,84 +303,22 @@
 /* ==========================================
    SAATHAPP GLOBAL THEME TRANSITIONS & DARK MODE OVERRIDES
    ========================================== */
-html, body, div, header, footer, nav, button, input, select, textarea, a, span, p, h1, h2, h3, h4, h5, h6 {
-  transition: background-color 250ms ease, border-color 250ms ease, color 250ms ease, box-shadow 250ms ease;
+body {
+  transition: background-color 250ms ease, color 250ms ease;
 }
 
 html.dark body {
-  background-color: #0F172A !important;
-  color: #FFFFFF !important;
+  background-color: #0F172A;
+  color: #FFFFFF;
 }
 
-html.dark div.bg-white,
-html.dark div.bg-slate-50,
-html.dark div.bg-slate-100\/50,
-html.dark div.bg-slate-50\/50,
-html.dark button.bg-white,
-html.dark select.bg-white,
-html.dark textarea.bg-white,
-html.dark input.bg-white {
-  background-color: #1E293B !important;
-  color: #FFFFFF !important;
-}
-
-html.dark header,
-html.dark header.bg-white,
-html.dark header.bg-slate-50,
-html.dark nav,
-html.dark nav.bg-white {
-  background-color: #111827 !important;
+html.dark header {
+  background-color: #111827;
 }
 
 html.dark footer {
-  background-color: #111827 !important;
-  color: #FFFFFF !important;
-}
-
-html.dark .text-slate-900,
-html.dark .text-slate-800,
-html.dark .text-slate-700,
-html.dark .text-slate-600,
-html.dark .text-slate-500,
-html.dark .text-slate-455,
-html.dark .text-slate-450,
-html.dark .text-slate-400 {
-  color: #CBD5E1 !important;
-}
-
-html.dark .text-slate-850,
-html.dark .text-slate-855 {
-  color: #FFFFFF !important;
-}
-
-html.dark .border,
-html.dark .border-slate-200,
-html.dark .border-slate-205,
-html.dark .border-slate-100,
-html.dark .border-slate-200\/70,
-html.dark .border-slate-200\/60,
-html.dark .border-slate-200\/50 {
-  border-color: #475569 !important;
-}
-
-html.dark input,
-html.dark select,
-html.dark textarea {
-  background-color: #334155 !important;
-  border-color: #475569 !important;
-  color: #FFFFFF !important;
-}
-
-html.dark input::placeholder {
-  color: rgba(203, 213, 225, 0.5) !important;
-}
-
-html.dark button.bg-\[\#6C3BFF\],
-html.dark button.btn-primary,
-html.dark button.bg-gradient-primary,
-html.dark a.bg-gradient-primary {
-  background: #16A34A !important;
-  background-color: #16A34A !important;
+  background-color: #111827;
+  color: #FFFFFF;
 }
 
 /* Shared SAAS Responsive Container for Help Center */
@@ -388,8 +326,4 @@ html.dark a.bg-gradient-primary {
   max-width: 1440px;
   width: min(1440px, calc(100% - 80px));
   margin-inline: auto;
-}
-
-html.dark svg {
-  color: currentColor !important;
 }

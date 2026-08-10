@@ -4,10 +4,11 @@ import { MapPin, Truck, ArrowRight, ArrowLeft, ShieldCheck } from 'lucide-react'
 import { useDelivery, calculateDeliveryOnboardingFee } from '../../../context/DeliveryContext';
 
 export const LOCATION_TIERS = [
-  { id: 'Village', label: 'Village Delivery Partner', desc: 'Gram Panchayat & Rural Tier' },
-  { id: 'Tier 3 Town', label: 'Tier 3 Town Delivery Partner', desc: 'Town & Sub-district Hub' },
-  { id: 'Tier 2 City', label: 'Tier 2 City Delivery Partner', desc: 'State capital / Major city' },
-  { id: 'Tier 1 Metro', label: 'Tier 1 Metro Delivery Partner', desc: 'Metropolitan hub' },
+  { id: 'Village / Rural', label: 'Village / Rural', desc: 'Gram Panchayat & Rural Tier (₹500)' },
+  { id: 'Tier 3 City', label: 'Tier 3 City', desc: 'Town & Sub-district Hub (₹1,000)' },
+  { id: 'Tier 2 City', label: 'Tier 2 City', desc: 'State Capital & Major City (₹1,500)' },
+  { id: 'Tier 1 City', label: 'Tier 1 City', desc: 'Large Commercial City (₹2,000)' },
+  { id: 'Metro City', label: 'Metro City', desc: 'Metropolitan Metro Hub (₹2,500)' },
 ];
 
 export const VEHICLE_OPTIONS = [
@@ -91,7 +92,7 @@ export default function Step4_RiderLocationVehicle({ onNext, onPrev }) {
             </div>
             <div className="text-right shrink-0">
               <span className="text-2xl font-black text-amber-400">₹{feeCalc.fee}</span>
-              <span className="block text-[10px] text-slate-400 font-semibold">Valid for 2 Years • No Monthly Fee</span>
+              <span className="block text-[10px] text-slate-400 font-semibold">Fixed Fee • No Monthly Fee</span>
             </div>
           </div>
 

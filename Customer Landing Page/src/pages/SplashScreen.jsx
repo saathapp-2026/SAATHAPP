@@ -9,10 +9,10 @@ export default function SplashScreen({ onFinish }) {
     const timer = window.setTimeout(() => {
       setIsVisible(false);
       window.setTimeout(() => onFinish?.(), 250);
-    }, 3000);
+    }, 2000);
 
     return () => window.clearTimeout(timer);
-  }, [onFinish]);
+  }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.25),_transparent_40%),linear-gradient(135deg,_#2563eb_0%,_#4f46e5_45%,_#7c3aed_100%)] text-white">

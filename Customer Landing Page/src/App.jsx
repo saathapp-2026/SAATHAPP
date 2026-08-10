@@ -87,7 +87,10 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [darkMode, setDarkMode] = useState(false);
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return !window.sessionStorage.getItem('saathapp-splash-shown');
+  });
   const [, setAuthView] = useState(initialAuthSession && isSessionValid(initialAuthSession) ? 'home' : 'login');
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(initialAuthSession && isSessionValid(initialAuthSession)));
   const [user, setUser] = useState(initialAuthSession?.user ?? null);
@@ -341,11 +344,23 @@ export default function App() {
   };
 
   if (showSplash) {
-    return <SplashScreen onFinish={() => setShowSplash(false)} />;
+    return <SplashScreen onFinish={() => {
+      setShowSplash(false);
+      if (typeof window !== 'undefined') {
+        window.sessionStorage.setItem('saathapp-splash-shown', 'true');
+      }
+    }} />;
   }
 
   if (!authReady) {
-    return null;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white font-sans">
+        <div className="flex flex-col items-center gap-3">
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-500"></div>
+          <span className="text-xs font-bold text-slate-400">Loading SaathApp...</span>
+        </div>
+      </div>
+    );
   }
 
   const trustRoutes = ['/verified-sellers', '/secure-online-payments', '/privacy-protected', '/customer-support'];
@@ -1078,5 +1093,121 @@ export default function App() {
     return <SettingsPage onBack={() => setActivePage('home')} />;
   }
 
-  return null;
+  // Fallback default: Render HomePage instead of returning null (prevents blank screen)
+  return (
+    <HomePage
+      cartItems={cartItems}
+      cartCount={cartCount}
+      cartTotal={cartTotal}
+      location={location}
+      pincode={pincode}
+      selectedCategory={selectedCategory}
+      searchQuery={searchQuery}
+      darkMode={darkMode}
+      isCartOpen={isCartOpen}
+      quickViewProduct={null}
+      isVoiceModalOpen={isVoiceModalOpen}
+      isImageModalOpen={isImageModalOpen}
+      isLocationModalOpen={isLocationModalOpen}
+      isGpsLoading={isGpsLoading}
+      isListening={isListening}
+      isUploading={isUploading}
+      onCartClick={() => setIsCartOpen(true)}
+      onLocationClick={() => setIsLocationModalOpen(true)}
+      isAuthenticated={isAuthenticated}
+      user={user}
+      onLogin={() => {
+        setAuthView('login');
+        setActivePage('login');
+      }}
+      onSignup={() => {
+        setAuthView('signup');
+        setActivePage('signup');
+      }}
+      onProfile={() => navigate('/profile')}
+      onCartPage={() => setActivePage('cart')}
+      onOrdersPage={() => setActivePage('orders')}
+      onWishlistPage={() => setActivePage('wishlist')}
+      onSettingsPage={() => setActivePage('settings')}
+      onSearch={(query) => {
+        setSearchQuery(query);
+        document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+      }}
+      toggleDarkMode={() => setDarkMode((value) => !value)}
+      onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
+      onImageSearchClick={() => setIsImageModalOpen(true)}
+      onDetectGPS={handleGPSDetect}
+      onAddToCart={handleAddToCart}
+      onQuickView={() => {}}
+      onCategorySelect={(category) => {
+        setSelectedCategory(category);
+        document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+      }}
+      onBecomePartnerSelect={(role) => {
+        if (role === 'Become a Service Professional') {
+          navigate('/become-professional');
+          return;
+        }
+        if (role === 'Become Delivery Agent') {
+          navigate('/become-delivery-partner');
+          return;
+        }
+        if (role === 'Become a Service Worker') {
+          navigate('/become-worker');
+          return;
+        }
+        if (role === 'Become a Seller') {
+          navigate('/seller');
+          return;
+        }
+        if (role.includes('Wholesale') || role.includes('Wholesaler')) {
+          navigate('/wholesale');
+          return;
+        }
+        if (role === 'Become a Franchise' || role === 'Become a Franchise Partner' || role === 'Franchise') {
+          navigate('/franchise');
+          return;
+        }
+        if (role === 'Advertise With Us') {
+          navigate('/advertise');
+          return;
+        }
+        alert(`Partner application loading for: ${role}`);
+      }}
+      onShopSelect={(shop) => {
+        alert(`Selected Store: ${shop.name}. Browsing inventory catalog in simulation.`);
+      }}
+      onServiceBook={(service) => {
+        alert(`Booking created for: ${service.name}. Starting scheduler flow.`);
+      }}
+      onCheckout={() => {
+        alert(`Checkout completed for total amount ₹${cartTotal}! Thank you for using SaathApp.`);
+        setCartItems([]);
+        setIsCartOpen(false);
+      }}
+      onCloseCart={() => setIsCartOpen(false)}
+      onCloseQuickView={() => {}}
+      onCloseVoiceModal={() => setIsVoiceModalOpen(false)}
+      onCloseImageModal={() => setIsImageModalOpen(false)}
+      onCloseLocationModal={() => setIsLocationModalOpen(false)}
+      setSelectedCategory={setSelectedCategory}
+      setCartItems={setCartItems}
+      getCartQuantity={getCartQuantity}
+      handleAddToCart={handleAddToCart}
+      setIsCartOpen={setIsCartOpen}
+      setQuickViewProduct={() => {}}
+      setIsVoiceModalOpen={setIsVoiceModalOpen}
+      setIsImageModalOpen={setIsImageModalOpen}
+      setIsLocationModalOpen={setIsLocationModalOpen}
+      setLocation={setLocation}
+      setPincode={setPincode}
+      setIsGpsLoading={setIsGpsLoading}
+      setIsListening={setIsListening}
+      setIsUploading={setIsUploading}
+      handleGPSDetect={handleGPSDetect}
+      handleVoiceSearch={handleVoiceSearch}
+      handleImageSearch={handleImageSearch}
+      onLogout={handleLogout}
+    />
+  );
 }

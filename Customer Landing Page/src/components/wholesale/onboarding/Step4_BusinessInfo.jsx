@@ -42,7 +42,12 @@ export const EMPLOYEE_RANGES = ['1-10', '11-50', '51-200', '200+'];
 
 export default function Step4_BusinessInfo({ onNext, onPrev }) {
   const { formData, updateFormData, addToast } = useWholesale();
-  const currentFeeData = calculateOnboardingFee(formData.cityType || 'Tier 2 City', formData.businessCategory || 'FMCG');
+  const capVal = formData.businessCapital ?? 2500000;
+  const currentFeeData = calculateOnboardingFee(
+    formData.cityType || 'Tier 2 City',
+    formData.businessCategory || 'FMCG',
+    capVal
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,7 +55,11 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
       addToast('Please enter your business name', 'error');
       return;
     }
-    addToast('Business details & location tier saved!', 'success');
+    if (Number(capVal) < 1000000) {
+      addToast('Wholesale / Supplier / Dealer onboarding requires a minimum business capital of ₹10,00,000.', 'error');
+      return;
+    }
+    addToast('Business details & capital eligibility verified!', 'success');
     onNext();
   };
 
@@ -170,11 +179,40 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
             </div>
             <div className="text-right shrink-0">
               <span className="text-lg font-black text-emerald-400">{currentFeeData.range}</span>
-              <span className="block text-[10px] text-slate-400 font-semibold">Valid for 2 Years • {currentFeeData.comm} Comm</span>
+              <span className="block text-[10px] text-slate-400 font-semibold">{currentFeeData.comm} Comm</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
+                Business Capital / Investment (INR) *
+              </label>
+              <div className="relative flex items-center">
+                <DollarSign size={18} className="absolute left-3.5 text-slate-400" />
+                <input
+                  type="number"
+                  min="0"
+                  step="50000"
+                  required
+                  value={formData.businessCapital ?? 2500000}
+                  onChange={(e) => updateFormData({ businessCapital: Number(e.target.value) })}
+                  className={`w-full rounded-2xl border bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3 text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 ${
+                    Number(formData.businessCapital ?? 2500000) < 1000000
+                      ? 'border-rose-500 text-rose-600 focus:ring-rose-500/20'
+                      : 'border-slate-300 dark:border-slate-700 focus:border-emerald-500 focus:ring-emerald-500/20'
+                  }`}
+                  placeholder="2500000"
+                />
+              </div>
+              <p className="mt-1.5 text-[11px] font-semibold text-slate-500">
+                Min required: <strong className="text-slate-900 dark:text-white">₹10,00,000 (10 Lakhs)</strong>.
+                {Number(formData.businessCapital ?? 2500000) < 1000000 && (
+                  <span className="block text-rose-500 font-extrabold mt-0.5">⚠️ Below minimum ₹10L eligibility threshold!</span>
+                )}
+              </p>
+            </div>
+
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
                 Brand Name (Optional)
@@ -187,6 +225,9 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
                 placeholder="e.g. SaathApp Prime"
               />
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
                 Years in Business *

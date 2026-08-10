@@ -7,7 +7,8 @@ export default function Step11_OnboardingFee({ onNext, onPrev }) {
   const { formData, updateFormData, addToast } = useWholesale();
   const feeCalc = calculateOnboardingFee(
     formData.cityType || 'Tier 2 City',
-    formData.businessCategory || 'FMCG'
+    formData.businessCategory || 'FMCG',
+    formData.businessCapital ?? 2500000
   );
 
   const [selectedMethod, setSelectedMethod] = useState('UPI');
@@ -84,7 +85,6 @@ export default function Step11_OnboardingFee({ onNext, onPrev }) {
             <span className="text-2xl font-black text-emerald-600 dark:text-emerald-400">
               ₹{feeCalc.fee.toLocaleString('en-IN')}
             </span>
-            <span className="block text-[10px] font-bold text-slate-400">Valid for 2 Years</span>
           </div>
         </div>
 
@@ -95,11 +95,55 @@ export default function Step11_OnboardingFee({ onNext, onPrev }) {
               <CheckCircle2 size={18} />
               <span>Onboarding Fee Paid & Verified (Ref: {formData.onboardingPaymentId})</span>
             </div>
-            <span className="text-[10px] font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 px-2.5 py-1 rounded-full">
-              Valid for 2 Years
-            </span>
           </div>
         )}
+
+        {/* Official Fee Matrix Table Inside Onboarding Flow */}
+        <div className="mt-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">
+              Official Wholesaler Onboarding Fee Matrix (Location Tier × Business Capital)
+            </h3>
+            <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+              Applied Rate: {feeCalc.applicableRate ?? feeCalc.rate}% | Fee: ₹{feeCalc.fee.toLocaleString('en-IN')} (Tier: {formData.cityType || 'Tier 2'}, Capital: ₹{(formData.businessCapital ?? 2500000).toLocaleString('en-IN')})
+            </span>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-slate-200 dark:bg-slate-900 text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider">
+                <tr>
+                  <th className="p-2.5">Location Tier</th>
+                  <th className="p-2.5">₹10L–25L Capital</th>
+                  <th className="p-2.5">₹25L–50L Capital</th>
+                  <th className="p-2.5">₹50L–₹1Cr Capital</th>
+                  <th className="p-2.5">₹1Cr–10Cr Capital</th>
+                  <th className="p-2.5 text-right">Above ₹10Cr Capital</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
+                {[
+                  { tier: 'Village / Rural', r10: '0.50%', r25: '0.30%', r50: '0.20%', r1cr: '0.10%', r10cr: '0.05%' },
+                  { tier: 'Tier 3 City', r10: '0.60%', r25: '0.40%', r50: '0.25%', r1cr: '0.12%', r10cr: '0.06%' },
+                  { tier: 'Tier 2 City', r10: '0.75%', r25: '0.50%', r50: '0.30%', r1cr: '0.15%', r10cr: '0.08%' },
+                  { tier: 'Tier 1 City', r10: '1.00%', r25: '0.60%', r50: '0.40%', r1cr: '0.20%', r10cr: '0.10%' },
+                  { tier: 'Metro City', r10: '1.00%', r25: '0.75%', r50: '0.50%', r1cr: '0.25%', r10cr: '0.10%' },
+                ].map((row, idx) => {
+                  const isCurrentRow = (formData.cityType || 'Village / Rural').toLowerCase().includes(row.tier.toLowerCase().split(' ')[0]);
+                  return (
+                    <tr key={idx} className={isCurrentRow ? 'bg-emerald-500/10 font-bold' : 'hover:bg-slate-100 dark:hover:bg-slate-900/50'}>
+                      <td className="p-2.5 font-bold text-slate-900 dark:text-white">{row.tier}</td>
+                      <td className="p-2.5">{row.r10}</td>
+                      <td className="p-2.5">{row.r25}</td>
+                      <td className="p-2.5">{row.r50}</td>
+                      <td className="p-2.5">{row.r1cr}</td>
+                      <td className="p-2.5 text-right">{row.r10cr}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Fee Breakdown */}
@@ -119,7 +163,7 @@ export default function Step11_OnboardingFee({ onNext, onPrev }) {
                   'Product Catalogue Approval',
                   'Technical Configuration',
                   'Compliance Review & Audit',
-                  '2 Years Account Activation',
+                  'Account Activation',
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2">
                     <CheckCircle2 size={14} className="text-emerald-500 shrink-0" />
@@ -136,7 +180,7 @@ export default function Step11_OnboardingFee({ onNext, onPrev }) {
                 <span>Important Registration Terms</span>
               </div>
               <p>
-                • <strong>Validity:</strong> 2 Years from activation. Renewal fee is 50% of the applicable fee after 2 years.
+                • <strong>Calculation:</strong> Fee = Capital × Location Tier Percentage / 100 (Min capital ₹10,00,000 required).
               </p>
               <p>
                 • <strong>Non-Refundable:</strong> Onboarding fee is strictly non-refundable once submitted for review.

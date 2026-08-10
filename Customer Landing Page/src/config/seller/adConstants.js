@@ -140,14 +140,21 @@ export const PAYMENT_METHODS = [
 ];
 
 export const SCHEDULE_DURATIONS = [
-  { id: '1_day', label: '1 Day' },
-  { id: '3_days', label: '3 Days' },
-  { id: '7_days', label: '7 Days' },
-  { id: '15_days', label: '15 Days' },
-  { id: '30_days', label: '30 Days' },
-  { id: '60_days', label: '60 Days' },
-  { id: '90_days', label: '90 Days' },
-  { id: 'custom', label: 'Custom' },
+  { id: '1_day', label: '1 Day', days: 1 },
+  { id: '3_days', label: '3 Days', days: 3 },
+  { id: '5_days', label: '5 Days', days: 5 },
+  { id: '7_days', label: '7 Days / 1 Week', days: 7 },
+  { id: '1_week', label: '1 Week', days: 7 },
+  { id: '2_weeks', label: '2 Weeks', days: 14 },
+  { id: '15_days', label: '15 Days', days: 15 },
+  { id: '30_days', label: '30 Days / 1 Month', days: 30 },
+  { id: '1_month', label: '1 Month', days: 30 },
+  { id: '60_days', label: '60 Days', days: 60 },
+  { id: '90_days', label: '90 Days / 3 Months', days: 90 },
+  { id: '3_months', label: '3 Months', days: 90 },
+  { id: '6_months', label: '6 Months', days: 180 },
+  { id: '1_year', label: '1 Year', days: 365 },
+  { id: 'custom', label: 'Custom', days: 1 },
 ];
 
 export const WIZARD_STEPS = [

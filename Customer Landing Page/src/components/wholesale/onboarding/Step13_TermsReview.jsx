@@ -22,7 +22,11 @@ export const WHOLESALER_LEGAL_TERMS = [
 
 export default function Step13_TermsReview({ onNext, onPrev, onSelectStep }) {
   const { formData, updateFormData, addToast } = useWholesale();
-  const feeCalc = calculateOnboardingFee(formData.cityType || 'Tier 2 City', formData.businessCategory || 'FMCG');
+  const feeCalc = calculateOnboardingFee(
+    formData.cityType || 'Tier 2 City',
+    formData.businessCategory || 'FMCG',
+    formData.businessCapital ?? 2500000
+  );
 
   const handleSubmitApplication = () => {
     if (!formData.acceptedTerms) {

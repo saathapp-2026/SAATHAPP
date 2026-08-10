@@ -1,71 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { calculateOnboardingFee as calcFeePricing, checkCapitalEligibility, LOCATION_FEE_RATES } from '../utils/wholesaleOnboardingPricing';
 
 const WholesaleContext = createContext();
 
-// Onboarding Fee Matrix based on PDF
-export const ONBOARDING_FEE_MATRIX = {
-  'Village': {
-    'Grocery': { fee: 15000, range: '₹5,000 – ₹25,000', comm: '0–8%' },
-    'Agriculture': { fee: 15000, range: '₹5,000 – ₹25,000', comm: '3–8%' },
-    'Furniture': { fee: 25000, range: '₹10,000 – ₹40,000', comm: '3–8%' },
-    'Mobile & Electronics': { fee: 35000, range: '₹15,000 – ₹50,000', comm: '3–8%' },
-    'Automobile': { fee: 45000, range: '₹20,000 – ₹75,000', comm: '3–8%' },
-    'Cosmetics': { fee: 25000, range: '₹10,000 – ₹40,000', comm: '3–8%' },
-    'Construction Materials': { fee: 60000, range: '₹25,000 – ₹1,00,000', comm: '3–8%' },
-    'Hardware': { fee: 45000, range: '₹20,000 – ₹75,000', comm: '3–8%' },
-    'FMCG': { fee: 25000, range: '₹10,000 – ₹40,000', comm: '3–8%' },
-    'Others': { fee: 20000, range: '₹10,000 – ₹40,000', comm: '3–8%' },
-  },
-  'Tier 3 Town': {
-    'Grocery': { fee: 45000, range: '₹20,000 – ₹75,000', comm: '0–8%' },
-    'Agriculture': { fee: 45000, range: '₹20,000 – ₹75,000', comm: '3–8%' },
-    'Electrical': { fee: 65000, range: '₹30,000 – ₹1,00,000', comm: '3–8%' },
-    'Hardware': { fee: 65000, range: '₹30,000 – ₹1,00,000', comm: '3–8%' },
-    'Furniture': { fee: 95000, range: '₹40,000 – ₹1,50,000', comm: '3–8%' },
-    'Mobile & Electronics': { fee: 125000, range: '₹50,000 – ₹2,00,000', comm: '3–8%' },
-    'Automobile': { fee: 160000, range: '₹75,000 – ₹2,50,000', comm: '3–8%' },
-    'Fashion': { fee: 75000, range: '₹30,000 – ₹1,25,000', comm: '3–8%' },
-    'Construction Materials': { fee: 125000, range: '₹50,000 – ₹2,00,000', comm: '3–8%' },
-    'Showroom / Distributor': { fee: 185000, range: '₹75,000 – ₹3,00,000', comm: '3–8%' },
-    'FMCG': { fee: 60000, range: '₹20,000 – ₹1,00,000', comm: '3–8%' },
-    'Others': { fee: 50000, range: '₹20,000 – ₹1,00,000', comm: '3–8%' },
-  },
-  'Tier 2 City': {
-    'Grocery': { fee: 100000, range: '₹50,000 – ₹1,50,000', comm: '3–8%' },
-    'Agriculture': { fee: 100000, range: '₹50,000 – ₹1,50,000', comm: '3–8%' },
-    'Electrical': { fee: 125000, range: '₹50,000 – ₹2,00,000', comm: '3–8%' },
-    'Hardware': { fee: 125000, range: '₹50,000 – ₹2,00,000', comm: '3–8%' },
-    'Construction Materials': { fee: 200000, range: '₹1,00,000 – ₹3,00,000', comm: '3–8%' },
-    'Furniture': { fee: 200000, range: '₹1,00,000 – ₹3,00,000', comm: '3–8%' },
-    'Restaurant Supplies': { fee: 200000, range: '₹1,00,000 – ₹3,00,000', comm: '3–8%' },
-    'Fashion': { fee: 160000, range: '₹75,000 – ₹2,50,000', comm: '3–8%' },
-    'Jewellery': { fee: 350000, range: '₹2,00,000 – ₹5,00,000', comm: '3–8%' },
-    'Automobile': { fee: 350000, range: '₹2,00,000 – ₹5,00,000', comm: '3–8%' },
-    'Hypermarket': { fee: 375000, range: '₹2,50,000 – ₹5,00,000', comm: '3–8%' },
-    'FMCG': { fee: 120000, range: '₹50,000 – ₹2,00,000', comm: '3–8%' },
-    'Others': { fee: 100000, range: '₹50,000 – ₹2,00,000', comm: '3–8%' },
-  },
-  'Tier 1 Metro': {
-    'Grocery': { fee: 200000, range: '₹1,00,000 – ₹3,00,000', comm: '3–8%' },
-    'Construction Materials': { fee: 200000, range: '₹1,00,000 – ₹3,00,000', comm: '3–8%' },
-    'Cosmetics': { fee: 200000, range: '₹1,00,000 – ₹3,00,000', comm: '3–8%' },
-    'Fashion': { fee: 275000, range: '₹1,50,000 – ₹4,00,000', comm: '3–8%' },
-    'Pharmacy': { fee: 350000, range: '₹2,00,000 – ₹5,00,000', comm: '3–8%' },
-    'Mobile & Electronics': { fee: 350000, range: '₹2,00,000 – ₹5,00,000', comm: '3–8%' },
-    'Restaurant Supplies': { fee: 350000, range: '₹2,00,000 – ₹5,00,000', comm: '3–8%' },
-    'Jewellery': { fee: 400000, range: '₹3,00,000 – ₹5,00,000', comm: '3–8%' },
-    'Furniture': { fee: 375000, range: '₹2,50,000 – ₹5,00,000', comm: '3–8%' },
-    'Automobile': { fee: 400000, range: '₹3,00,000 – ₹5,00,000', comm: '3–8%' },
-    'Hypermarket': { fee: 450000, range: '₹4,00,000 – ₹5,00,000', comm: '3–8%' },
-    'FMCG': { fee: 250000, range: '₹1,00,000 – ₹3,50,000', comm: '3–8%' },
-    'Others': { fee: 200000, range: '₹1,00,000 – ₹3,00,000', comm: '3–8%' },
-  },
-};
+export const ONBOARDING_FEE_MATRIX = LOCATION_FEE_RATES;
 
-export const calculateOnboardingFee = (cityType, category) => {
-  const tierData = ONBOARDING_FEE_MATRIX[cityType] || ONBOARDING_FEE_MATRIX['Tier 2 City'];
-  const catData = tierData[category] || tierData['FMCG'] || { fee: 75000, range: '₹50,000 – ₹2,00,000', comm: '3–8%' };
-  return catData;
+export const calculateOnboardingFee = (cityType = 'Tier 2 City', category = 'FMCG', businessCapital = 2500000) => {
+  return calcFeePricing({ cityType, businessCategory: category, businessCapital });
 };
 
 export const initialWholesaleForm = {
@@ -88,6 +29,7 @@ export const initialWholesaleForm = {
   businessType: 'Wholesaler',
   businessCategory: 'FMCG',
   cityType: 'Tier 2 City', // Options: 'Village', 'Tier 3 Town', 'Tier 2 City', 'Tier 1 Metro'
+  businessCapital: 2500000, // Minimum required: ₹10,00,000
   brandName: 'SaathApp Prime',
   yearsInBusiness: '8',
   companyDescription: 'Leading B2B distributor of FMCG, grocery, and household goods serving over 2,500+ verified retailers across North India.',

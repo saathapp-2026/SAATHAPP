@@ -31,15 +31,14 @@ export default function OnboardingFeeTableSection({ onStartRegistration }) {
               <span className="text-xs font-black uppercase tracking-widest text-emerald-400 bg-emerald-500/20 px-3 py-1 rounded-full">
                 1. Mandatory Registration
               </span>
-              <span className="text-xs font-extrabold text-slate-300">Valid for 2 Years</span>
             </div>
             <h3 className="text-2xl font-black text-white">One-Time Wholesaler Onboarding Fee</h3>
             <p className="text-xs text-slate-300 leading-relaxed font-medium">
-              Payable only once upon registration. Covers business verification, GST/PAN audit, warehouse inspection, digital store creation, and 2-year activation.
+              Payable only once upon registration. Covers business verification, GST/PAN audit, warehouse inspection, digital store creation, and account activation.
             </p>
             <div className="pt-2 text-xs space-y-2 text-slate-300">
-              <p>• <strong>Fee Range:</strong> ₹5,000 – ₹5,00,000 (Based on location tier & category scale)</p>
-              <p>• <strong>Renewal:</strong> 50% of applicable fee after 2 years</p>
+              <p>• <strong>Fee Formula:</strong> Capital × Location Tier Percentage / 100</p>
+              <p>• <strong>Minimum Capital:</strong> ₹10,00,000 required for eligibility</p>
               <p>• <strong>Commission:</strong> 0–8% or 3–8% based on business model</p>
             </div>
           </div>
@@ -67,52 +66,44 @@ export default function OnboardingFeeTableSection({ onStartRegistration }) {
         <div className="mt-14 rounded-3xl border border-slate-800 bg-slate-950 p-6 sm:p-10 shadow-2xl">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6">
             <div>
-              <h3 className="text-xl font-black text-white">Calculate Your Wholesaler Onboarding Fee</h3>
-              <p className="text-xs text-slate-400 mt-1">Select your location classification and category to view fee schedule.</p>
-            </div>
-
-            {/* Location Tier Selector Tabs */}
-            <div className="flex flex-wrap gap-2">
-              {['Village', 'Tier 3 Town', 'Tier 2 City', 'Tier 1 Metro'].map((tier) => (
-                <button
-                  key={tier}
-                  type="button"
-                  onClick={() => setSelectedTier(tier)}
-                  className={`rounded-xl px-3.5 py-2 text-xs font-extrabold transition ${
-                    selectedTier === tier
-                      ? 'bg-emerald-500 text-slate-950 shadow'
-                      : 'bg-slate-900 text-slate-400 hover:text-white'
-                  }`}
-                >
-                  {tier}
-                </button>
-              ))}
+              <h3 className="text-xl font-black text-white">Official Wholesaler Onboarding Fee Matrix</h3>
+              <p className="text-xs text-slate-400 mt-1">
+                Onboarding Fee = Business Capital × Applicable Percentage / 100 (Minimum required capital = ₹10,00,000)
+              </p>
             </div>
           </div>
 
-          {/* Fee Table for Selected Tier */}
+          {/* Fee Rate Matrix Table */}
           <div className="mt-6 overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead className="bg-slate-900 text-slate-400 font-bold uppercase tracking-wider">
                 <tr>
-                  <th className="p-3.5">Category</th>
-                  <th className="p-3.5">One-Time Onboarding Fee</th>
-                  <th className="p-3.5">Commission</th>
-                  <th className="p-3.5">Renewal Fee (After 2 Yrs)</th>
-                  <th className="p-3.5 text-right">Validity</th>
+                  <th className="p-3.5">Location Tier</th>
+                  <th className="p-3.5">₹10–25L Capital</th>
+                  <th className="p-3.5">₹25–50L Capital</th>
+                  <th className="p-3.5">₹50L–₹1Cr Capital</th>
+                  <th className="p-3.5">₹1–10Cr Capital</th>
+                  <th className="p-3.5 text-right">Above ₹10Cr Capital</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800 font-semibold text-slate-300">
-                {Object.entries(ONBOARDING_FEE_MATRIX[selectedTier] || {}).map(([cat, data], idx) => (
+                {[
+                  { tier: 'Village / Rural', r10: '0.50%', r25: '0.30%', r50: '0.20%', r1cr: '0.10%', r10cr: '0.05%' },
+                  { tier: 'Tier 3 City', r10: '0.60%', r25: '0.40%', r50: '0.25%', r1cr: '0.12%', r10cr: '0.06%' },
+                  { tier: 'Tier 2 City', r10: '0.75%', r25: '0.50%', r50: '0.30%', r1cr: '0.15%', r10cr: '0.08%' },
+                  { tier: 'Tier 1 City', r10: '1.00%', r25: '0.60%', r50: '0.40%', r1cr: '0.20%', r10cr: '0.10%' },
+                  { tier: 'Metro City', r10: '1.00%', r25: '0.75%', r50: '0.50%', r1cr: '0.25%', r10cr: '0.10%' },
+                ].map((row, idx) => (
                   <tr key={idx} className="hover:bg-slate-900/60 transition">
                     <td className="p-3.5 font-bold text-white flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                      {cat}
+                      {row.tier}
                     </td>
-                    <td className="p-3.5 font-black text-emerald-400">{data.range}</td>
-                    <td className="p-3.5 text-slate-300">{data.comm}</td>
-                    <td className="p-3.5 text-slate-400">50% of Fee</td>
-                    <td className="p-3.5 text-right text-slate-400">2 Years</td>
+                    <td className="p-3.5 font-black text-emerald-400">{row.r10}</td>
+                    <td className="p-3.5 text-emerald-300 font-bold">{row.r25}</td>
+                    <td className="p-3.5 text-slate-200 font-bold">{row.r50}</td>
+                    <td className="p-3.5 text-slate-300">{row.r1cr}</td>
+                    <td className="p-3.5 text-right font-black text-amber-400">{row.r10cr}</td>
                   </tr>
                 ))}
               </tbody>
@@ -121,7 +112,7 @@ export default function OnboardingFeeTableSection({ onStartRegistration }) {
 
           <div className="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-xs text-slate-400">
-              <span>Looking to register your wholesale business?</span>
+              <span>Applications with capital below ₹10,00,000 are not eligible for Wholesale / Supplier / Dealer partner onboarding.</span>
             </div>
             <button
               type="button"

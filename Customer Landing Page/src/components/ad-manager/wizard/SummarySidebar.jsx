@@ -1,6 +1,7 @@
 import React from 'react';
 import { Check, ShieldCheck, Phone, Mail, Clock, HeadphonesIcon, Copy } from 'lucide-react';
 import { formatINR } from '../../../config/seller/adConstants';
+import { calculateAdvertisingPrice } from '../../../services/advertisingPricingEngine';
 
 const BENEFITS = [
   'Unlimited Clicks',
@@ -12,22 +13,18 @@ const BENEFITS = [
 ];
 
 export default function SummarySidebar({ draft, reach }) {
-  // Mock pricing logic for the UI
-  const calculatePrice = () => {
-    let base = 100;
-    if (draft.typeId === 'homepage_banner') base = 500;
-    if (draft.typeId === 'search_top') base = 300;
-    
-    const days = draft.duration === 'custom' ? 1 : (draft.duration || 1);
-    const total = base * days;
-    
-    // Add some random variance based on selections to look dynamic
-    const locMultiplier = (draft.targetCities?.length || 1) * 0.2 + 1;
-    
-    return total * locMultiplier;
-  };
+  // Official pricing engine calculation
+  const calcResult = calculateAdvertisingPrice({
+    adType: draft.typeId || 'banner',
+    category: draft.category || draft.businessCategory || 'medium_shop',
+    locationTier: draft.locationTier || draft.cityType,
+    targetCities: draft.targetCities || [],
+    locations: draft.locations || [],
+    radius: draft.radius || '10km',
+    durationDays: draft.duration === 'custom' ? 1 : (draft.duration || 30),
+  });
 
-  const price = calculatePrice();
+  const price = calcResult.isContract ? 0 : calcResult.finalPrice;
   
   const formatDate = (dateStr) => {
     if (!dateStr) return '-';

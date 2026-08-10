@@ -16,7 +16,7 @@ export const DELIVERY_LEGAL_TERMS = [
   { id: 10, title: '10. Equipment & Merchandise', body: 'Delivery bags, uniforms, helmets, jackets, safety gear, and branding materials are optional and supplied upon request. Customized items are non-refundable once printed.' },
   { id: 11, title: '11. Equipment Rental Terms', body: 'Rented equipment requires a security deposit and rental charges, and must be returned in good working condition allowing for normal wear and tear.' },
   { id: 12, title: '12. Earnings & Platform Payouts', body: 'Delivery earnings are calculated according to completed orders and the applicable payout policy. Deductions may include platform service charges or taxes required by law.' },
-  { id: 13, title: '13. Validity & Renewal Terms', body: 'Delivery Partner onboarding is valid for 2 years from activation date. The renewal fee after 2 years is 50% of the applicable onboarding fee.' },
+  { id: 13, title: '13. Onboarding Terms', body: 'The Delivery Partner Onboarding Fee is a single one-time fixed charge based on service location category upon registration.' },
   { id: 14, title: '14. Account Suspension & Termination', body: 'Accounts may be suspended or terminated for fraud, customer complaints, repeated delivery failures, misconduct, theft, or unsafe driving.' },
   { id: 15, title: '15. Right to Modify Guidelines', body: 'SAATHAPP reserves the right to modify onboarding fees, operational policies, verification rules, equipment pricing, and platform guidelines at any time.' },
   { id: 16, title: '16. Acceptance of Terms & Agreement', body: 'By submitting this application and paying the onboarding fee, applicant confirms all information provided is accurate and agrees to comply with the SAATHAPP Delivery Partner Agreement.' },

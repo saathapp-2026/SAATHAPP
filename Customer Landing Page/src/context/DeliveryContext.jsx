@@ -2,54 +2,50 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const DeliveryContext = createContext();
 
-// Delivery Partner Onboarding Fee Matrix based on PDF Section 5
-export const DELIVERY_FEE_MATRIX = {
-  'Village': {
-    'Bicycle Delivery': { fee: 550, range: '₹550', comm: 'Standard Payout' },
-    'Walking Delivery': { fee: 550, range: '₹550', comm: 'Standard Payout' },
-    'Motorcycle Delivery': { fee: 750, range: '₹750', comm: 'Standard Payout' },
-    'Grocery Delivery': { fee: 750, range: '₹750', comm: 'Standard Payout' },
-    'Medicine Delivery': { fee: 750, range: '₹750', comm: 'Standard Payout' },
-    'Parcel Delivery': { fee: 850, range: '₹850', comm: 'Standard Payout' },
-    'Multi-Service Delivery': { fee: 1000, range: '₹1,000', comm: 'Standard Payout' },
-    'Others': { fee: 750, range: '₹750', comm: 'Standard Payout' },
-  },
-  'Tier 3 Town': {
-    'Bicycle Delivery': { fee: 650, range: '₹650', comm: 'Standard Payout' },
-    'Walking Delivery': { fee: 650, range: '₹650', comm: 'Standard Payout' },
-    'Motorcycle Delivery': { fee: 850, range: '₹850', comm: 'Standard Payout' },
-    'Grocery Delivery': { fee: 850, range: '₹850', comm: 'Standard Payout' },
-    'Medicine Delivery': { fee: 850, range: '₹850', comm: 'Standard Payout' },
-    'Parcel Delivery': { fee: 1000, range: '₹1,000', comm: 'Standard Payout' },
-    'Multi-Service Delivery': { fee: 1200, range: '₹1,200', comm: 'Standard Payout' },
-    'Others': { fee: 850, range: '₹850', comm: 'Standard Payout' },
-  },
-  'Tier 2 City': {
-    'Bicycle Delivery': { fee: 850, range: '₹850', comm: 'Standard Payout' },
-    'Walking Delivery': { fee: 850, range: '₹850', comm: 'Standard Payout' },
-    'Motorcycle Delivery': { fee: 1100, range: '₹1,100', comm: 'Standard Payout' },
-    'Grocery Delivery': { fee: 1100, range: '₹1,100', comm: 'Standard Payout' },
-    'Medicine Delivery': { fee: 1100, range: '₹1,100', comm: 'Standard Payout' },
-    'Parcel Delivery': { fee: 1300, range: '₹1,300', comm: 'Standard Payout' },
-    'Multi-Service Delivery': { fee: 1500, range: '₹1,500', comm: 'Standard Payout' },
-    'Others': { fee: 1100, range: '₹1,100', comm: 'Standard Payout' },
-  },
-  'Tier 1 Metro': {
-    'Bicycle Delivery': { fee: 1000, range: '₹1,000', comm: 'Standard Payout' },
-    'Walking Delivery': { fee: 1000, range: '₹1,000', comm: 'Standard Payout' },
-    'Motorcycle Delivery': { fee: 1500, range: '₹1,500', comm: 'Standard Payout' },
-    'Grocery Delivery': { fee: 1500, range: '₹1,500', comm: 'Standard Payout' },
-    'Medicine Delivery': { fee: 1500, range: '₹1,500', comm: 'Standard Payout' },
-    'Parcel Delivery': { fee: 1800, range: '₹1,800', comm: 'Standard Payout' },
-    'Multi-Service Delivery': { fee: 2000, range: '₹2,000', comm: 'Standard Payout' },
-    'Others': { fee: 1500, range: '₹1,500', comm: 'Standard Payout' },
-  },
+// Fixed Delivery Partner Onboarding Fees by Location Category
+export const FIXED_DELIVERY_LOCATION_FEES = {
+  'Village / Rural': 500,
+  'Village': 500,
+  'Rural': 500,
+
+  'Tier 3 City': 1000,
+  'Tier 3 Town': 1000,
+  'Tier 3': 1000,
+
+  'Tier 2 City': 1500,
+  'Tier 2': 1500,
+
+  'Tier 1 City': 2000,
+  'Tier 1': 2000,
+
+  'Metro City': 2500,
+  'Tier 1 Metro': 2500,
+  'Metro': 2500,
 };
 
-export const calculateDeliveryOnboardingFee = (locationTier, deliveryCategory) => {
-  const tierData = DELIVERY_FEE_MATRIX[locationTier] || DELIVERY_FEE_MATRIX['Tier 2 City'];
-  const catData = tierData[deliveryCategory] || tierData['Motorcycle Delivery'] || { fee: 1100, range: '₹1,100', comm: 'Standard Payout' };
-  return catData;
+export const normalizeDeliveryLocationTier = (tier) => {
+  if (!tier) return 'Tier 2 City';
+  const str = String(tier).toLowerCase();
+  if (str.includes('village') || str.includes('rural')) return 'Village / Rural';
+  if (str.includes('tier 3') || str.includes('tier3') || str.includes('town')) return 'Tier 3 City';
+  if (str.includes('metro')) return 'Metro City';
+  if (str.includes('tier 1') || str.includes('tier1')) return 'Tier 1 City';
+  if (str.includes('tier 2') || str.includes('tier2')) return 'Tier 2 City';
+  return 'Tier 2 City';
+};
+
+export const DELIVERY_FEE_MATRIX = FIXED_DELIVERY_LOCATION_FEES;
+
+export const calculateDeliveryOnboardingFee = (locationTier, _deliveryCategory) => {
+  const normTier = normalizeDeliveryLocationTier(locationTier);
+  const fee = FIXED_DELIVERY_LOCATION_FEES[normTier] || 1500;
+  return {
+    fee,
+    amount: fee,
+    range: `₹${fee.toLocaleString('en-IN')}`,
+    comm: 'Standard Payout',
+    locationTier: normTier,
+  };
 };
 
 export const initialDeliveryForm = {

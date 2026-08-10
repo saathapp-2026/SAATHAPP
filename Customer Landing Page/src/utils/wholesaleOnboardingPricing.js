@@ -1,96 +1,136 @@
-export const MIN_ONBOARDING_FEE = 500;
-export const MAX_ONBOARDING_FEE = 200000;
+export const MIN_REQUIRED_CAPITAL = 1000000; // ₹10,00,000
+export const MIN_ONBOARDING_FEE = 5000;
+export const MAX_ONBOARDING_FEE = 1500000;
 export const ONBOARDING_VALIDITY_YEARS = 2;
 
 export const CITY_TYPES = ['Village', 'Tier 3', 'Tier 2', 'Tier 1', 'Metro'];
 
-export const CITY_TYPE_MULTIPLIERS = {
-  Village: 1,
-  'Tier 3': 1.6,
-  'Tier 2': 2.8,
-  'Tier 1': 4.5,
-  Metro: 7,
+export const LOCATION_FEE_RATES = {
+  'Village': [
+    { max: 2500000, rate: 0.50 },        // ₹10L to < ₹25L: 0.50%
+    { max: 5000000, rate: 0.30 },        // ₹25L to < ₹50L: 0.30%
+    { max: 10000000, rate: 0.20 },       // ₹50L to < ₹1Cr: 0.20%
+    { max: 100000000, rate: 0.10 },      // ₹1Cr to <= ₹10Cr: 0.10%
+    { max: Infinity, rate: 0.05 },       // > ₹10Cr: 0.05%
+  ],
+  'Tier 3': [
+    { max: 2500000, rate: 0.60 },        // ₹10L to < ₹25L: 0.60%
+    { max: 5000000, rate: 0.40 },        // ₹25L to < ₹50L: 0.40%
+    { max: 10000000, rate: 0.25 },       // ₹50L to < ₹1Cr: 0.25%
+    { max: 100000000, rate: 0.12 },      // ₹1Cr to <= ₹10Cr: 0.12%
+    { max: Infinity, rate: 0.06 },       // > ₹10Cr: 0.06%
+  ],
+  'Tier 2': [
+    { max: 2500000, rate: 0.75 },        // ₹10L to < ₹25L: 0.75%
+    { max: 5000000, rate: 0.50 },        // ₹25L to < ₹50L: 0.50%
+    { max: 10000000, rate: 0.30 },       // ₹50L to < ₹1Cr: 0.30%
+    { max: 100000000, rate: 0.15 },      // ₹1Cr to <= ₹10Cr: 0.15%
+    { max: Infinity, rate: 0.08 },       // > ₹10Cr: 0.08%
+  ],
+  'Tier 1': [
+    { max: 2500000, rate: 1.00 },        // ₹10L to < ₹25L: 1.00%
+    { max: 5000000, rate: 0.60 },        // ₹25L to < ₹50L: 0.60%
+    { max: 10000000, rate: 0.40 },       // ₹50L to < ₹1Cr: 0.40%
+    { max: 100000000, rate: 0.20 },      // ₹1Cr to <= ₹10Cr: 0.20%
+    { max: Infinity, rate: 0.10 },       // > ₹10Cr: 0.10%
+  ],
+  'Metro': [
+    { max: 2500000, rate: 1.00 },        // ₹10L to < ₹25L: 1.00%
+    { max: 5000000, rate: 0.75 },        // ₹25L to < ₹50L: 0.75%
+    { max: 10000000, rate: 0.50 },       // ₹50L to < ₹1Cr: 0.50%
+    { max: 100000000, rate: 0.25 },      // ₹1Cr to <= ₹10Cr: 0.25%
+    { max: Infinity, rate: 0.10 },       // > ₹10Cr: 0.10%
+  ],
 };
 
-export const BUSINESS_TYPE_MULTIPLIERS = {
-  Manufacturer: 2.4,
-  Wholesaler: 2,
-  Distributor: 2.2,
-  Importer: 2.6,
-  Exporter: 2.5,
-  Supplier: 1.8,
-  Factory: 2.8,
-  'Brand Owner': 2.3,
-  Stockist: 1.7,
-};
+// Normalize city tier alias strings safely
+export function normalizeCityTier(cityType = 'Tier 2') {
+  if (!cityType) return 'Tier 2';
+  const str = String(cityType).toLowerCase();
+  if (str.includes('village') || str.includes('rural')) return 'Village';
+  if (str.includes('tier 3') || str.includes('tier3')) return 'Tier 3';
+  if (str.includes('tier 1') || str.includes('tier1')) return 'Tier 1';
+  if (str.includes('metro')) return 'Metro';
+  return 'Tier 2';
+}
 
-export const COVERAGE_MULTIPLIERS = {
-  Local: 1,
-  District: 1.4,
-  State: 2.2,
-  'Multi-State': 3.8,
-  'PAN India': 6,
-  International: 9,
-};
+export function checkCapitalEligibility(capital) {
+  const cap = Number(capital) || 0;
+  return {
+    isEligible: cap >= MIN_REQUIRED_CAPITAL,
+    capital: cap,
+    minRequired: MIN_REQUIRED_CAPITAL,
+    message: cap < MIN_REQUIRED_CAPITAL
+      ? `Wholesale / Supplier / Dealer onboarding requires a minimum business capital of ${formatInr(MIN_REQUIRED_CAPITAL)}.`
+      : 'Capital meets minimum requirement.',
+  };
+}
 
-export const CATEGORY_MULTIPLIERS = {
-  Grocery: 1.2,
-  FMCG: 1.4,
-  Hardware: 1.6,
-  Electrical: 1.8,
-  'Construction Materials': 2,
-  Furniture: 1.7,
-  Agriculture: 1.5,
-  Fashion: 1.6,
-  'Mobile & Electronics': 2.4,
-  Pharmacy: 3.2,
-  'Restaurant Supplies': 1.9,
-  'Industrial Equipment': 3,
-  Others: 1.3,
-};
+export function getApplicableFeeRate(cityType = 'Tier 2', capital = 2500000) {
+  const normCity = normalizeCityTier(cityType);
+  const cap = Number(capital) || 0;
+  const rates = LOCATION_FEE_RATES[normCity] || LOCATION_FEE_RATES['Tier 2'];
 
-export const PLAN_MULTIPLIERS = {
-  Free: 1,
-  Starter: 1.6,
-  Business: 2.8,
-  Enterprise: 5.5,
-};
+  for (const slab of rates) {
+    if (cap < slab.max || (slab.max === 100000000 && cap <= 100000000)) {
+      return slab.rate;
+    }
+  }
+  return rates[rates.length - 1].rate;
+}
 
-export function calculateOnboardingFee({
-  cityType = 'Tier 2',
-  businessType = 'Wholesaler',
-  serviceCoverageArea = 'District',
-  businessCategory = 'FMCG',
-  selectedPlan = 'Starter',
-} = {}) {
-  const cityMul = CITY_TYPE_MULTIPLIERS[cityType] ?? 1;
-  const businessMul = BUSINESS_TYPE_MULTIPLIERS[businessType] ?? 1.5;
-  const coverageMul = COVERAGE_MULTIPLIERS[serviceCoverageArea] ?? 1;
-  const categoryMul = CATEGORY_MULTIPLIERS[businessCategory] ?? 1.2;
-  const planMul = PLAN_MULTIPLIERS[selectedPlan] ?? 1;
+export function calculateOnboardingFee(params = {}) {
+  let cityType = 'Tier 2';
+  let capital = 2500000;
 
-  const raw =
-    MIN_ONBOARDING_FEE * cityMul * businessMul * coverageMul * categoryMul * planMul;
+  if (typeof params === 'string') {
+    cityType = params;
+    capital = arguments[2] || 2500000;
+  } else if (typeof params === 'object' && params !== null) {
+    cityType = params.cityType || params.locationTier || 'Tier 2';
+    capital = params.businessCapital ?? params.capital ?? 2500000;
+  }
 
-  const amount = Math.min(
-    MAX_ONBOARDING_FEE,
-    Math.max(MIN_ONBOARDING_FEE, Math.round(raw / 100) * 100)
-  );
+  const cap = Number(capital) || 0;
+  const eligibility = checkCapitalEligibility(cap);
+
+  if (!eligibility.isEligible) {
+    return {
+      fee: 0,
+      amount: 0,
+      percentage: 0,
+      rate: 0,
+      applicableRate: '0.00',
+      isEligible: false,
+      error: eligibility.message,
+      range: 'Not Eligible (Below ₹10L)',
+      comm: 'N/A',
+      breakdown: {
+        cityType,
+        capital: cap,
+        minRequired: MIN_REQUIRED_CAPITAL,
+        rate: 0,
+      },
+    };
+  }
+
+  const rate = getApplicableFeeRate(cityType, cap);
+  const calculatedFee = Math.round((cap * rate) / 100);
 
   return {
-    amount,
+    fee: calculatedFee,
+    amount: calculatedFee,
+    percentage: rate,
+    rate: rate,
+    applicableRate: rate.toFixed(2),
+    isEligible: true,
+    range: `${rate.toFixed(2)}% of Capital`,
+    comm: '3–8%',
     breakdown: {
-      baseFee: MIN_ONBOARDING_FEE,
       cityType,
-      cityMultiplier: cityMul,
-      businessType,
-      businessMultiplier: businessMul,
-      serviceCoverageArea,
-      coverageMultiplier: coverageMul,
-      businessCategory,
-      categoryMultiplier: categoryMul,
-      selectedPlan,
-      planMultiplier: planMul,
+      capital: cap,
+      rate,
+      calculatedFee,
     },
   };
 }
@@ -117,3 +157,4 @@ export function getValidityLabel(expiryDate) {
     year: 'numeric',
   })}`;
 }
+

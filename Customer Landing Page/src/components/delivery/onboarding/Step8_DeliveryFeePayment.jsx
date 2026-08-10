@@ -44,7 +44,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
         onboardingPaymentDate: new Date().toISOString().split('T')[0],
         onboardingValidityExpiry: '2 Years (Valid till August 2028)',
       });
-      addToast('One-Time Onboarding Fee Paid & Verified! Account Valid for 2 Years.', 'success');
+      addToast('One-Time Onboarding Fee Paid & Verified!', 'success');
       setTimeout(() => {
         onNext();
       }, 500);
@@ -84,7 +84,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
             <span className="text-2xl font-black text-amber-600 dark:text-amber-400">
               ₹{feeCalc.fee.toLocaleString('en-IN')}
             </span>
-            <span className="block text-[10px] font-bold text-slate-400">Valid for 2 Years • No Monthly Fee</span>
+            <span className="block text-[10px] font-bold text-slate-400">Fixed Fee • No Monthly Fee</span>
           </div>
         </div>
 
@@ -95,9 +95,6 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
               <CheckCircle2 size={18} />
               <span>Onboarding Fee Paid & Verified (Ref: {formData.onboardingPaymentId})</span>
             </div>
-            <span className="text-[10px] font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 px-2.5 py-1 rounded-full">
-              Valid for 2 Years
-            </span>
           </div>
         )}
 
@@ -118,7 +115,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
                   'Driver Profile & Rating Setup',
                   'Safety Training Materials Access',
                   'Rider Mobile App Activation',
-                  '2 Years Account Validity',
+                  'Account Activation',
                   'No Compulsory Monthly Subscriptions',
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2">
@@ -136,7 +133,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
                 <span>Important Delivery Terms</span>
               </div>
               <p>
-                • <strong>Validity:</strong> 2 Years from date of activation. Renewal fee after 2 years is 50% of applicable onboarding fee.
+                • <strong>Onboarding Fee:</strong> One-time fixed fee based on location category.
               </p>
               <p>
                 • <strong>Non-Refundable:</strong> Onboarding fee is strictly non-refundable once submitted for verification.

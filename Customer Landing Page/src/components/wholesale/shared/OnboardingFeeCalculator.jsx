@@ -135,11 +135,11 @@ export default function OnboardingFeeCalculator({
 
             <div className="mt-5 space-y-2 text-xs">
               {[
-                ['City', `${feeResult.breakdown.cityType} (×${feeResult.breakdown.cityMultiplier})`],
-                ['Business', `${feeResult.breakdown.businessType} (×${feeResult.breakdown.businessMultiplier})`],
-                ['Coverage', `${feeResult.breakdown.serviceCoverageArea} (×${feeResult.breakdown.coverageMultiplier})`],
-                ['Category', `${feeResult.breakdown.businessCategory} (×${feeResult.breakdown.categoryMultiplier})`],
-                ['Plan', `${feeResult.breakdown.selectedPlan} (×${feeResult.breakdown.planMultiplier})`],
+                ['Location Tier', `${feeResult.breakdown?.cityType || values.cityType || 'Tier 2'}`],
+                ['Business Capital', `${formatInr(feeResult.breakdown?.capital || values.businessCapital || 2500000)}`],
+                ['Fee Rate', `${feeResult.percentage ? `${feeResult.percentage.toFixed(2)}%` : 'N/A'}`],
+                ['Calculated Fee', `${formatInr(feeResult.fee || 0)}`],
+                ['Eligibility', `${feeResult.isEligible ? 'Eligible (>= ₹10L)' : 'Not Eligible (< ₹10L)'}`],
               ].map(([label, value]) => (
                 <div key={label} className="flex justify-between gap-2 border-b border-slate-200/60 dark:border-slate-700/60 pb-1.5">
                   <span className="text-slate-500 font-semibold">{label}</span>
