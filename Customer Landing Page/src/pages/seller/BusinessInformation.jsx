@@ -116,6 +116,18 @@ export default function BusinessInformation() {
               <option value="above_5Cr">Above ₹5 Cr</option>
             </select>
           </div>
+          <div>
+            <label className="block text-sm text-slate-400 mb-1.5">Estimated Investment (₹) *</label>
+            <input
+              type="number"
+              name="investment"
+              defaultValue={info.investment}
+              className={inputClass}
+              min="0"
+              placeholder="e.g. 50000"
+              required
+            />
+          </div>
         </div>
 
         <div>
