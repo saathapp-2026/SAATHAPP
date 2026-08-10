@@ -64,6 +64,7 @@ export const defaultOnboardingData = {
     storeSize: 'small',
     warehouseSize: 'none',
     annualTurnover: 'under_5L',
+    investment: '',
     services: [],
   },
   address: {

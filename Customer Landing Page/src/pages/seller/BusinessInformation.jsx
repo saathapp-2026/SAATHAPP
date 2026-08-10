@@ -28,6 +28,7 @@ export default function BusinessInformation() {
       storeSize: form.get('storeSize'),
       warehouseSize: form.get('warehouseSize'),
       annualTurnover: form.get('annualTurnover'),
+      investment: form.get('investment'),
       services,
     });
     navigate('/seller/address');
