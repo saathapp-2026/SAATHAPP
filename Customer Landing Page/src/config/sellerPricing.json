@@ -3,10 +3,11 @@
   "validityYears": 2,
   "renewalPercentage": 50,
   "locationTiers": [
-    { "id": "village", "label": "Village", "multiplier": 1 },
-    { "id": "tier3", "label": "Tier 3 Town", "multiplier": 1.5 },
+    { "id": "village", "label": "Village / Rural", "multiplier": 1 },
+    { "id": "tier3", "label": "Tier 3 City", "multiplier": 1.5 },
     { "id": "tier2", "label": "Tier 2 City", "multiplier": 2 },
-    { "id": "tier1", "label": "Tier 1 Metro", "multiplier": 3 }
+    { "id": "tier1", "label": "Tier 1 City", "multiplier": 3 },
+    { "id": "metro", "label": "Metro City", "multiplier": 4 }
   ],
   "baseCategoryFees": {
     "grocery": { "min": 500, "max": 3000 },
