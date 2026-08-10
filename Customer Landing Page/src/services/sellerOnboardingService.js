@@ -36,48 +36,62 @@ function buildBreakdown(factors, weights, range) {
 
 export function calculateOnboardingFee(onboardingData) {
   const config = getPricingConfig();
-  const { modifiers, factorWeights } = config;
-
+  
+  // Existing location mapping
   const locationTier = onboardingData.address?.locationTier || 'village';
   const category = onboardingData.businessInfo?.category || 'grocery';
-  const range = getCategoryFeeRange(locationTier, category);
+  
+  // Existing estimated business investment value
+  const investment = Number(onboardingData.businessInfo?.investment || onboardingData.investment || 0);
 
-  const services = onboardingData.businessInfo?.services || [];
-  const serviceCount = Math.min(services.length, modifiers.businessServices.maxServices);
-  const serviceModifier = serviceCount * modifiers.businessServices.perService;
+  let slabIndex = 0;
+  if (investment < 50000) slabIndex = 0;
+  else if (investment < 100000) slabIndex = 1;
+  else if (investment < 1000000) slabIndex = 2;
+  else if (investment < 5000000) slabIndex = 3;
+  else if (investment < 10000000) slabIndex = 4;
+  else if (investment <= 100000000) slabIndex = 5;
+  else slabIndex = 6;
 
-  const factors = {
-    deliveryRadius: getModifierValue(modifiers, 'deliveryRadius', onboardingData.delivery?.radius),
-    productCount: getModifierValue(modifiers, 'productCount', onboardingData.businessInfo?.productCount),
-    storeSize: getModifierValue(modifiers, 'storeSize', onboardingData.businessInfo?.storeSize),
-    warehouseSize: getModifierValue(modifiers, 'warehouseSize', onboardingData.businessInfo?.warehouseSize),
-    annualTurnover: getModifierValue(modifiers, 'annualTurnover', onboardingData.businessInfo?.annualTurnover),
-    verificationLevel: getModifierValue(modifiers, 'verificationLevel', onboardingData.documents?.verificationLevel || 'basic'),
-    businessServices: serviceModifier,
+  const rateMatrix = {
+    village: [0.05, 0.025, 0.01, 0.002, 0.001,  0.001,  0.001],
+    tier3:   [0.05, 0.025, 0.01, 0.004, 0.002,  0.0015, 0.001],
+    tier2:   [0.05, 0.025, 0.01, 0.005, 0.003,  0.0015, 0.001],
+    tier1:   [0.05, 0.025, 0.01, 0.005, 0.004,  0.002,  0.0015],
+    metro:   [0.05, 0.025, 0.01, 0.005, 0.005,  0.002,  0.0015],
   };
 
-  let weightedScore = 0;
-  Object.keys(factorWeights).forEach((key) => {
-    weightedScore += (factors[key] || 0) * factorWeights[key];
-  });
+  const rates = rateMatrix[locationTier] || rateMatrix.village;
+  const percentage = rates[slabIndex];
+  
+  const fee = Math.round(investment * percentage);
+  const minFee = fee;
+  const maxFee = fee;
 
-  weightedScore = Math.min(1, Math.max(0, weightedScore));
-  const fee = Math.round(range.min + (range.max - range.min) * weightedScore);
-
+  // We no longer use factors/breakdown to calculate the fee, but we retain 
+  // the data structure so we don't break existing UI or downstream code.
+  const tierLabel = config.locationTiers?.find((t) => t.id === locationTier)?.label || locationTier;
+  const categoryLabel = config.categoryLabels?.[category] || category;
   const validityYears = config.validityYears;
   const renewalAmount = Math.round(fee * (config.renewalPercentage / 100));
 
+  const breakdown = [
+    { label: 'Investment Amount', value: `₹${investment.toLocaleString('en-IN')}`, type: 'info' },
+    { label: 'Location Tier', value: tierLabel, type: 'info' },
+    { label: 'Applicable Rate', value: `${(percentage * 100).toFixed(2)}%`, type: 'factor' },
+  ];
+
   return {
     fee,
-    minFee: range.min,
-    maxFee: range.max,
+    minFee,
+    maxFee,
     locationTier,
-    locationTierLabel: range.tierLabel,
+    locationTierLabel: tierLabel,
     category,
-    categoryLabel: range.categoryLabel,
-    weightedScore,
-    factors,
-    breakdown: buildBreakdown(factors, factorWeights, range),
+    categoryLabel,
+    weightedScore: 1, // hardcoded as no longer applicable
+    factors: {}, // no longer applicable
+    breakdown,
     validityYears,
     renewalPercentage: config.renewalPercentage,
     renewalAmount,
