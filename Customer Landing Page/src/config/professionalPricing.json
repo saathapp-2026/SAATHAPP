@@ -7,11 +7,11 @@
   "locationTiers": [
     {
       "id": "village",
-      "label": "Village"
+      "label": "Village / Rural"
     },
     {
       "id": "tier3",
-      "label": "Tier 3 Town"
+      "label": "Tier 3 City"
     },
     {
       "id": "tier2",
@@ -19,7 +19,11 @@
     },
     {
       "id": "tier1",
-      "label": "Tier 1 Metro"
+      "label": "Tier 1 City"
+    },
+    {
+      "id": "metro",
+      "label": "Metro City"
     }
   ],
   "categoryGroups": {
