@@ -1,18 +1,30 @@
 import React from 'react';
-import { Check, ShieldCheck, Phone, Mail, Clock, HeadphonesIcon, Copy } from 'lucide-react';
+import { Check, ShieldCheck, Phone, Mail, Clock, HeadphonesIcon, Copy, Sparkles } from 'lucide-react';
 import { formatINR } from '../../../config/seller/adConstants';
-import { calculateAdvertisingPrice } from '../../../services/advertisingPricingEngine';
+import { calculateAdvertisingPrice, ADVERTISER_CATEGORIES } from '../../../services/advertisingPricingEngine';
 
 const BENEFITS = [
-  'Unlimited Clicks',
-  'Unlimited Impressions',
-  'No Hidden Charges',
-  'One Time Payment',
-  'Better Visibility',
-  'More Customers'
+  'Unlimited Clicks & Impressions',
+  'Location & Category Tier Rates',
+  'No Hidden Charges or Fees',
+  'Duration Multiplier Discounts',
+  'Targeted Local Reach',
+  'Real-Time Analytics & Performance'
 ];
 
-export default function SummarySidebar({ draft, reach }) {
+function getDurationLabel(days) {
+  const d = Number(days) || 5;
+  if (d === 5) return '5 Days';
+  if (d === 7) return '1 Week';
+  if (d === 14) return '2 Weeks';
+  if (d === 30) return '1 Month';
+  if (d === 90) return '3 Months';
+  if (d === 180) return '6 Months';
+  if (d === 365) return '1 Year';
+  return `${d} Days`;
+}
+
+export default function SummarySidebar({ draft, reach, updateDraft }) {
   // Official pricing engine calculation
   const calcResult = calculateAdvertisingPrice({
     adType: draft.typeId || 'banner',
@@ -21,11 +33,14 @@ export default function SummarySidebar({ draft, reach }) {
     targetCities: draft.targetCities || [],
     locations: draft.locations || [],
     radius: draft.radius || '10km',
-    durationDays: draft.duration === 'custom' ? 1 : (draft.duration || 30),
+    durationDays: draft.duration === 'custom' ? 1 : (draft.duration || 5),
+    customAdminQuote: draft.customAdminQuote,
   });
 
-  const price = calcResult.isContract ? 0 : calcResult.finalPrice;
-  
+  const categoryObj = ADVERTISER_CATEGORIES.find(c => c.id === (draft.category || draft.businessCategory)) || { label: 'Medium Shop' };
+  const price = calcResult.isContract ? (Number(draft.customAdminQuote) || 0) : calcResult.finalPrice;
+  const sellerDiscount = Number(calcResult.customerDiscountAmount || draft.customerDiscountAmount || 0);
+
   const formatDate = (dateStr) => {
     if (!dateStr) return '-';
     return new Date(dateStr).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
@@ -36,10 +51,29 @@ export default function SummarySidebar({ draft, reach }) {
       
       {/* Selected Plan Summary */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <div className="bg-slate-50/50 px-5 py-4 border-b border-slate-200">
-          <h3 className="font-bold text-[#15803D]">Selected Plan Summary</h3>
+        <div className="bg-slate-50/50 px-5 py-4 border-b border-slate-200 flex items-center justify-between">
+          <h3 className="font-bold text-[#15803D]">Dynamic Pricing Summary</h3>
+          <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md">Live Calculation</span>
         </div>
         <div className="p-5 space-y-4">
+          <div className="flex justify-between items-start">
+            <span className="text-sm text-slate-500">Advertiser Category</span>
+            <span className="text-sm font-bold text-slate-900 text-right">
+              {categoryObj.label}
+            </span>
+          </div>
+          <div className="flex justify-between items-start">
+            <span className="text-sm text-slate-500">Location Tier</span>
+            <span className="text-sm font-semibold text-slate-900 text-right">
+              <span className="bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-xs font-bold">{calcResult.normTier}</span>
+            </span>
+          </div>
+          {draft.locationType === 'radius' && (
+            <div className="flex justify-between items-start">
+              <span className="text-sm text-slate-500">Target Radius</span>
+              <span className="text-sm font-semibold text-slate-900 text-right">{draft.radius || '10km'}</span>
+            </div>
+          )}
           <div className="flex justify-between items-start">
             <span className="text-sm text-slate-500">Advertisement Type</span>
             <span className="text-sm font-semibold text-slate-900 text-right">
@@ -53,14 +87,16 @@ export default function SummarySidebar({ draft, reach }) {
             </span>
           </div>
           <div className="flex justify-between items-start">
-            <span className="text-sm text-slate-500">Targeted Location</span>
+            <span className="text-sm text-slate-500">Targeted Cities</span>
             <span className="text-sm font-semibold text-slate-900 text-right max-w-[200px] truncate">
               {draft.targetCities?.length > 0 ? draft.targetCities.join(', ') : 'All India'}
             </span>
           </div>
           <div className="flex justify-between items-start">
-            <span className="text-sm text-slate-500">Duration</span>
-            <span className="text-sm font-semibold text-slate-900 text-right">{draft.duration || 15} Days</span>
+            <span className="text-sm text-slate-500">Duration & Multiplier</span>
+            <span className="text-sm font-semibold text-slate-900 text-right">
+              {getDurationLabel(draft.duration || 5)} ({calcResult.durationMultiplier}x)
+            </span>
           </div>
           <div className="flex justify-between items-start">
             <span className="text-sm text-slate-500">Start Date</span>
@@ -82,22 +118,73 @@ export default function SummarySidebar({ draft, reach }) {
             </div>
           </div>
 
-          <div className="flex justify-between items-center pt-2">
-            <span className="text-sm text-slate-500">Plan</span>
-            <span className="text-sm font-semibold text-[#15803D]">
-              {draft.typeId ? draft.typeId.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Homepage Banner'} - {draft.duration || 15} Days
-            </span>
-          </div>
-          <div className="flex justify-between items-end pt-2">
-            <span className="text-sm font-bold text-slate-900">Price (Fixed)</span>
-            <span className="text-3xl font-black text-[#15803D] tracking-tight">{formatINR(price || 2999)}</span>
-          </div>
+          {!calcResult.isContract ? (
+            <>
+              <div className="flex justify-between items-center text-xs text-slate-500 pt-1">
+                <span>Base Price ({calcResult.normTier})</span>
+                <span className="font-semibold text-slate-700">{formatINR(calcResult.basePrice)}</span>
+              </div>
+              <div className="flex justify-between items-center text-xs text-slate-500">
+                <span>Multiplier</span>
+                <span className="font-semibold text-slate-700">{calcResult.durationMultiplier}x</span>
+              </div>
+              {calcResult.promotionFee != null && (
+                <div className="flex justify-between items-center text-xs text-slate-500">
+                  <span>SAATHAPP Promotion Fee</span>
+                  <span className="font-semibold text-emerald-700">{formatINR(calcResult.promotionFee)}</span>
+                </div>
+              )}
+              {sellerDiscount > 0 && (
+                <div className="flex justify-between items-center text-xs text-slate-500">
+                  <span>Customer Discount (Seller Funded)</span>
+                  <span className="font-semibold text-blue-700">{formatINR(sellerDiscount)}</span>
+                </div>
+              )}
+              <div className="flex justify-between items-end pt-2 border-t border-slate-100">
+                <span className="text-sm font-bold text-slate-900">Calculated SAATHAPP Fee</span>
+                <span className="text-3xl font-black text-[#15803D] tracking-tight">{formatINR(price)}</span>
+              </div>
+            </>
+          ) : (
+            <div className="pt-2 border-t border-slate-100 space-y-3">
+              <div className="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs space-y-1.5">
+                <p className="font-bold text-amber-900">National Brand / MNC Contract</p>
+                <p className="text-amber-800 font-medium">Negotiated annual sponsorship (Target ₹5L – ₹5Cr/yr)</p>
+                <div className="pt-1.5 text-[11px] text-amber-700 space-y-0.5 border-t border-amber-200/60">
+                  {NATIONAL_BRAND_CONTRACTS.map(c => (
+                    <div key={c.id} className="flex justify-between font-medium">
+                      <span>• {c.title}</span>
+                      <span className="font-bold">{c.range}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {updateDraft && (
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700">Enter Custom Admin Quote (₹)</label>
+                  <input
+                    type="number"
+                    placeholder="e.g. 500000"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white font-bold text-slate-900"
+                    value={draft.customAdminQuote || ''}
+                    onChange={(e) => updateDraft({ customAdminQuote: e.target.value })}
+                  />
+                </div>
+              )}
+
+              <div className="flex justify-between items-end pt-1">
+                <span className="text-xs font-bold text-slate-700">Contract Final Amount</span>
+                <span className="text-2xl font-black text-amber-700">{price > 0 ? formatINR(price) : 'Custom Quote'}</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Why Fixed Pricing? */}
+      {/* Why Dynamic Rate Cards? */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
-        <h3 className="font-bold text-[#15803D]">Why Fixed Pricing?</h3>
+        <h3 className="font-bold text-[#15803D]">Why Dynamic Rate Cards?</h3>
         <div className="grid grid-cols-1 gap-3">
           {BENEFITS.map(b => (
             <div key={b} className="flex items-center gap-2">

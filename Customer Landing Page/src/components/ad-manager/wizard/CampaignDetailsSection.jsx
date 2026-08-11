@@ -103,30 +103,55 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
             ))}
           </div>
 
-          <div className="bg-white p-5 rounded-xl border border-slate-200">
-            <label className="block text-sm font-bold text-slate-900 mb-3">Select Cities</label>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {(draft.targetCities || []).map(city => (
-                <div key={city} className="flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-md border border-slate-200 text-sm font-medium text-slate-700">
-                  {city}
-                  <button onClick={() => toggleCity(city)} className="text-slate-400 hover:text-slate-600">
-                    <X size={14} />
-                  </button>
-                </div>
-              ))}
+          <div className="bg-white p-5 rounded-xl border border-slate-200 space-y-4">
+            <div>
+              <label className="block text-sm font-bold text-slate-900 mb-3">Select Cities</label>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {(draft.targetCities || []).map(city => (
+                  <div key={city} className="flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-md border border-slate-200 text-sm font-medium text-slate-700">
+                    {city}
+                    <button onClick={() => toggleCity(city)} className="text-slate-400 hover:text-slate-600">
+                      <X size={14} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <select 
+                className="w-full p-0 border-none focus:outline-none focus:ring-0 text-slate-500 text-sm bg-transparent appearance-none cursor-pointer"
+                onChange={(e) => {
+                  if (e.target.value && !(draft.targetCities || []).includes(e.target.value)) {
+                    toggleCity(e.target.value);
+                  }
+                  e.target.value = "";
+                }}
+              >
+                <option value="">Search and select cities</option>
+                {CITIES.map(city => <option key={city} value={city}>{city}</option>)}
+              </select>
             </div>
-            <select 
-              className="w-full p-0 border-none focus:outline-none focus:ring-0 text-slate-500 text-sm bg-transparent appearance-none cursor-pointer"
-              onChange={(e) => {
-                if (e.target.value && !(draft.targetCities || []).includes(e.target.value)) {
-                  toggleCity(e.target.value);
-                }
-                e.target.value = "";
-              }}
-            >
-              <option value="">Search and select cities</option>
-              {CITIES.map(city => <option key={city} value={city}>{city}</option>)}
-            </select>
+
+            {draft.locationType === 'radius' && (
+              <div className="pt-3 border-t border-slate-100 space-y-2">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Target Radius (Km)</label>
+                <div className="flex flex-wrap gap-2">
+                  {['3km', '5km', '10km', '50km'].map((rad) => {
+                    const active = (draft.radius || '10km') === rad;
+                    return (
+                      <button
+                        key={rad}
+                        type="button"
+                        onClick={() => updateDraft({ radius: rad })}
+                        className={`px-3 py-1.5 text-xs font-bold rounded-lg border transition ${
+                          active ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
+                        }`}
+                      >
+                        {rad}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

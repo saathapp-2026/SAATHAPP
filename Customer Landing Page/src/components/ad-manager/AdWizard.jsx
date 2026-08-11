@@ -29,7 +29,12 @@ import {
   getAiAdSuggestion,
   estimateReach,
 } from '../../services/advertisementsService';
-import { calculateAdvertisingPrice } from '../../services/advertisingPricingEngine';
+import {
+  calculateAdvertisingPrice,
+  ADVERTISER_CATEGORIES,
+  SPONSORSHIP_AREAS,
+  NATIONAL_BRAND_CONTRACTS,
+} from '../../services/advertisingPricingEngine';
 
 const CTA_OPTIONS = ['Shop Now', 'Buy Now', 'Visit Store', 'Order Now', 'Book Service', 'Learn More', 'Contact Seller', 'Call Now'];
 const DEVICE_PREVIEWS = ['desktop', 'tablet', 'mobile'];
@@ -96,9 +101,12 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
       locations: draft.locations || [],
       radius: draft.radius || '10km',
       durationDays: draft.duration === 'custom' ? 1 : (draft.duration || 30),
+      customAdminQuote: draft.customAdminQuote,
     });
 
-    const totalBudget = calc.isContract ? 0 : (Number(draft.totalBudget) || calc.finalPrice);
+    const totalBudget = calc.isContract
+      ? (Number(draft.customAdminQuote) || 0)
+      : (Number(draft.totalBudget) || calc.finalPrice);
     const platformFee = Math.round(totalBudget * (Number(draft.platformFeePercent) || 0) / 100);
     const discount = Number(draft.couponDiscount) || 0;
     const taxable = Math.max(0, totalBudget + platformFee - discount);
@@ -109,12 +117,13 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
       durationMultiplier: calc.durationMultiplier,
       isContract: calc.isContract,
       contractRanges: calc.contractRanges,
+      sponsorshipAreas: calc.sponsorshipAreas,
       platformFee,
       discount,
       tax,
       finalAmount: taxable + tax,
     };
-  }, [draft.campaignType, draft.typeId, draft.category, draft.businessCategory, draft.locationTier, draft.cityType, draft.radius, draft.duration, draft.totalBudget, draft.platformFeePercent, draft.couponDiscount, draft.gstPercent]);
+  }, [draft.campaignType, draft.typeId, draft.category, draft.businessCategory, draft.locationTier, draft.cityType, draft.radius, draft.duration, draft.totalBudget, draft.platformFeePercent, draft.couponDiscount, draft.gstPercent, draft.customAdminQuote]);
 
   const patch = (partial) => {
     setDraft((d) => ({ ...d, ...partial }));
@@ -154,7 +163,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
     if (draft.step === 8) return (draft.placements || []).length > 0;
     if (draft.step === 9) return !!draft.coverageLevel;
     if (draft.step === 10) return !!draft.startAt && !!draft.endAt;
-    if (draft.step === 11) return Number(draft.dailyBudget) > 0 && Number(draft.totalBudget) > 0;
+    if (draft.step === 11) return billingSummary.isContract ? true : (Number(draft.dailyBudget) > 0 && Number(draft.totalBudget) > 0);
     if (draft.step === 13) return !!draft.paymentMethod && !!draft.invoiceType;
     return true;
   };
@@ -245,6 +254,11 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium sm:col-span-2">Campaign Name *
                 <input value={draft.name} onChange={(e) => patch({ name: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="Store Banner — Homepage" />
+              </label>
+              <label className="block text-xs font-medium sm:col-span-2">Advertiser Category *
+                <select value={draft.category || draft.businessCategory || 'medium_shop'} onChange={(e) => patch({ category: e.target.value, businessCategory: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                  {ADVERTISER_CATEGORIES.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
+                </select>
               </label>
               <label className="block text-xs font-medium">Objective *
                 <select value={draft.objective} onChange={(e) => patch({ objective: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
@@ -604,6 +618,23 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
 
           {draft.step === 13 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {billingSummary.isContract && (
+                <div className="sm:col-span-2 rounded-2xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 space-y-3">
+                  <p className="text-xs font-bold text-amber-800 dark:text-amber-300">National Brand / MNC Sponsorship Contract (Manual Admin Quote)</p>
+                  <p className="text-[11px] text-amber-700 dark:text-amber-400">Annual negotiated sponsorship rates do not use standard distance rate cards. Select target tier and enter custom admin quote below:</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    {NATIONAL_BRAND_CONTRACTS.map((c) => (
+                      <div key={c.id} className="rounded-lg bg-white dark:bg-slate-800 p-2 border border-slate-200 dark:border-slate-700">
+                        <p className="font-semibold">{c.title}</p>
+                        <p className="text-emerald-600 dark:text-emerald-400 font-bold">{c.range}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <label className="block text-xs font-medium pt-2">Admin Custom Negotiated Quote Amount (₹) *
+                    <input type="number" value={draft.customAdminQuote || ''} onChange={(e) => patch({ customAdminQuote: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm font-bold" placeholder="e.g. 2500000" />
+                  </label>
+                </div>
+              )}
               <label className="block text-xs font-medium">Payment Method *
                 <select value={draft.paymentMethod} onChange={(e) => patch({ paymentMethod: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
                   {PAYMENT_METHODS.map((method) => <option key={method.id} value={method.id}>{method.label}</option>)}

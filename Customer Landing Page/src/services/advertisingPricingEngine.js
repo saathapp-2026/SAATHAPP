@@ -246,6 +246,92 @@ export const NATIONAL_BRAND_CONTRACTS = [
   { id: 'strategic_mnc_partner', title: 'Strategic MNC Partnership', range: '₹2Cr – ₹5Cr' },
 ];
 
+export const SPONSORSHIP_AREAS = [
+  'Category Sponsorship',
+  'Product Sponsorship',
+  'Festival Campaign',
+  'Product Launch',
+  'Sponsored Search',
+  'Banner Inventory',
+  'Featured Products',
+  'Featured Brand',
+  'Coupon Campaign',
+  'Offer Campaign',
+  'Seller Network Promotion',
+  'B2B Network Promotion',
+  'Local-to-National Campaign',
+  'App-wide Promotional Campaign',
+];
+
+function normalizeCategoryKey(cat) {
+  if (!cat) return 'medium_shop';
+  const c = String(cat).toLowerCase().trim();
+  if (c === 'showroom' || c.includes('showroom')) return 'large_shop';
+  if (c === 'school_college' || c.includes('school') || c.includes('coaching')) return 'school_coaching';
+  if (c.includes('hospital') || c.includes('clinic')) return 'hospital_clinic';
+  if (c.includes('gym') || c.includes('fitness')) return 'gym_fitness';
+  if (c.includes('hotel')) return 'hotel';
+  if (c.includes('restaurant')) return 'restaurant';
+  if (c.includes('cinema') || c.includes('entertainment')) return 'cinema';
+  if (c.includes('park') || c.includes('recreation')) return 'park';
+  if (c.includes('micro') && c.includes('manufactur')) return 'micro_manufacturer';
+  if (c.includes('small') && c.includes('manufactur')) return 'small_manufacturer';
+  if (c.includes('medium') && c.includes('manufactur')) return 'medium_manufacturer';
+  if (c.includes('regional') && c.includes('brand')) return 'regional_brand';
+  return c;
+}
+
+function normalizeRadiusKey(rad) {
+  if (!rad) return '10km';
+  const str = String(rad).toLowerCase().replace(/\s*/g, '');
+  if (str === '3' || str === '3km') return '3km';
+  if (str === '5' || str === '5km') return '5km';
+  if (str === '10' || str === '10km') return '10km';
+  if (str === '50' || str === '50km') return '50km';
+  return '10km';
+}
+
+function resolveCategoryRateCard(catKey, normTier, radKey, primaryTable = null) {
+  // 1. Direct match in primary ad-type table
+  if (primaryTable && primaryTable[catKey]) {
+    return getTablePrice(primaryTable[catKey], normTier);
+  }
+
+  // 2. Distance-based rate card (Section 3) if defined for category (e.g. Mall)
+  if (DISTANCE_PRICING_TABLES[catKey]) {
+    const catTable = DISTANCE_PRICING_TABLES[catKey];
+    const radTable = catTable[radKey] || catTable['10km'] || Object.values(catTable)[0];
+    return getTablePrice(radTable, normTier);
+  }
+
+  // 3. Dedicated section rate cards (Sections 12, 13, 14, 15)
+  if (SCHOOL_COACHING_PRICING[catKey]) {
+    return getTablePrice(SCHOOL_COACHING_PRICING[catKey], normTier);
+  }
+  if (catKey === 'school_coaching' && SCHOOL_COACHING_PRICING.school_college) {
+    return getTablePrice(SCHOOL_COACHING_PRICING.school_college, normTier);
+  }
+
+  if (HOSPITAL_GYM_PRICING[catKey]) {
+    return getTablePrice(HOSPITAL_GYM_PRICING[catKey], normTier);
+  }
+
+  if (HOTEL_RESTAURANT_MALL_PRICING[catKey]) {
+    return getTablePrice(HOTEL_RESTAURANT_MALL_PRICING[catKey], normTier);
+  }
+
+  if (LOCAL_MANUFACTURER_PRICING[catKey]) {
+    return getTablePrice(LOCAL_MANUFACTURER_PRICING[catKey], normTier);
+  }
+
+  // 4. Default fallback to medium_shop in primary table or 1500
+  if (primaryTable && primaryTable.medium_shop) {
+    return getTablePrice(primaryTable.medium_shop, normTier);
+  }
+
+  return 1500;
+}
+
 /**
  * Main Calculation Sequence Engine (Step 7)
  */
@@ -258,6 +344,7 @@ export function calculateAdvertisingPrice(params = {}) {
     locations = [],
     radius = '10km',
     durationDays = 30,
+    customAdminQuote = null,
   } = params;
 
   const combinedCities = Array.isArray(targetCities) && targetCities.length > 0
@@ -266,18 +353,22 @@ export function calculateAdvertisingPrice(params = {}) {
 
   const normTier = resolveLocationTierFromCities(combinedCities, locationTier);
   const mult = getDurationMultiplier(durationDays);
-
+  const catKey = normalizeCategoryKey(category);
+  const radKey = normalizeRadiusKey(radius);
   const typeStr = String(adType).toLowerCase();
 
-  // 11. National Brand / MNC
-  if (category === 'national_brand') {
+  // 16. National Brand / MNC Contract (Manual Admin Quote)
+  if (catKey === 'national_brand') {
+    const adminPrice = customAdminQuote != null ? Number(customAdminQuote) : 0;
     return {
       normTier,
-      basePrice: 0,
+      basePrice: adminPrice,
       durationMultiplier: 1,
-      finalPrice: 0,
+      finalPrice: adminPrice,
       isContract: true,
       contractRanges: NATIONAL_BRAND_CONTRACTS,
+      sponsorshipAreas: SPONSORSHIP_AREAS,
+      note: 'Negotiated annual sponsorship contract — custom quote entered manually by admin.'
     };
   }
 
@@ -289,8 +380,7 @@ export function calculateAdvertisingPrice(params = {}) {
     typeStr.includes('sponsored') ||
     typeStr === 'text'
   ) {
-    const table = SPONSORED_SEARCH_PRICING[category] || SPONSORED_SEARCH_PRICING.medium_shop;
-    const base = getTablePrice(table, normTier);
+    const base = resolveCategoryRateCard(catKey, normTier, radKey, SPONSORED_SEARCH_PRICING);
     return {
       normTier,
       basePrice: base,
@@ -311,29 +401,14 @@ export function calculateAdvertisingPrice(params = {}) {
     typeStr === 'carousel' ||
     typeStr === 'gif'
   ) {
-    if (BANNER_AD_PRICING[category]) {
-      const table = BANNER_AD_PRICING[category];
-      const base = getTablePrice(table, normTier);
-      return {
-        normTier,
-        basePrice: base,
-        durationMultiplier: mult,
-        finalPrice: Math.round(base * mult),
-        isContract: false,
-      };
-    }
-    if (DISTANCE_PRICING_TABLES[category]) {
-      const catTable = DISTANCE_PRICING_TABLES[category];
-      const radTable = catTable[radius] || catTable['10km'] || Object.values(catTable)[0];
-      const base = getTablePrice(radTable, normTier);
-      return {
-        normTier,
-        basePrice: base,
-        durationMultiplier: mult,
-        finalPrice: Math.round(base * mult),
-        isContract: false,
-      };
-    }
+    const base = resolveCategoryRateCard(catKey, normTier, radKey, BANNER_AD_PRICING);
+    return {
+      normTier,
+      basePrice: base,
+      durationMultiplier: mult,
+      finalPrice: Math.round(base * mult),
+      isContract: false,
+    };
   }
 
   // 3. Featured Business / Featured Seller / Store Promotion Pricing
@@ -347,8 +422,7 @@ export function calculateAdvertisingPrice(params = {}) {
     typeStr.includes('nearby') ||
     typeStr.includes('promote_')
   ) {
-    const table = FEATURED_BUSINESS_PRICING[category] || FEATURED_BUSINESS_PRICING.medium_shop;
-    const base = getTablePrice(table, normTier);
+    const base = resolveCategoryRateCard(catKey, normTier, radKey, FEATURED_BUSINESS_PRICING);
     return {
       normTier,
       basePrice: base,
@@ -382,7 +456,7 @@ export function calculateAdvertisingPrice(params = {}) {
     };
   }
 
-  // 6. Coupon & Offer / Discount Campaign
+  // 6. Coupon & Offer / Discount Campaign (Section 10 & 11)
   if (
     typeStr === 'coupon' ||
     typeStr === 'offer' ||
@@ -393,22 +467,30 @@ export function calculateAdvertisingPrice(params = {}) {
     typeStr.includes('sale') ||
     typeStr.includes('launch') ||
     typeStr.includes('festival') ||
-    typeStr.includes('arrival')
+    typeStr.includes('arrival') ||
+    typeStr.includes('bogo') ||
+    typeStr.includes('flash') ||
+    typeStr.includes('clearance') ||
+    typeStr.includes('seasonal') ||
+    typeStr.includes('special')
   ) {
-    const table = COUPON_OFFER_PRICING[category] || COUPON_OFFER_PRICING.medium_shop;
-    const base = getTablePrice(table, normTier);
+    const base = resolveCategoryRateCard(catKey, normTier, radKey, COUPON_OFFER_PRICING);
+    const promoFee = Math.round(base * mult);
+    const customerDiscountAmount = Number(params.customerDiscountAmount || params.couponDiscountValue || 0);
     return {
       normTier,
       basePrice: base,
       durationMultiplier: mult,
-      finalPrice: Math.round(base * mult),
+      promotionFee: promoFee,
+      customerDiscountAmount, // Funded by seller/business; kept separate from SAATHAPP promo fee
+      finalPrice: promoFee, // SAATHAPP fee only
       isContract: false,
     };
   }
 
   // 7. Special Institutions (School/College/Coaching)
-  if (category === 'school_coaching') {
-    const table = SCHOOL_COACHING_PRICING.school_college;
+  if (catKey === 'school_coaching' || SCHOOL_COACHING_PRICING[catKey]) {
+    const table = SCHOOL_COACHING_PRICING[catKey] || SCHOOL_COACHING_PRICING.school_college;
     const base = getTablePrice(table, normTier);
     return {
       normTier,
@@ -420,7 +502,7 @@ export function calculateAdvertisingPrice(params = {}) {
   }
 
   // 8. Hospital / Gym
-  if (category === 'hospital_clinic') {
+  if (catKey === 'hospital_clinic') {
     const base = getTablePrice(HOSPITAL_GYM_PRICING.hospital_clinic, normTier);
     return {
       normTier,
@@ -431,7 +513,7 @@ export function calculateAdvertisingPrice(params = {}) {
     };
   }
 
-  if (category === 'gym_fitness') {
+  if (catKey === 'gym_fitness') {
     const base = getTablePrice(HOSPITAL_GYM_PRICING.gym_fitness, normTier);
     return {
       normTier,
@@ -443,8 +525,8 @@ export function calculateAdvertisingPrice(params = {}) {
   }
 
   // 9. Hotel / Restaurant / Cinema / Park / Mall
-  if (HOTEL_RESTAURANT_MALL_PRICING[category]) {
-    const table = HOTEL_RESTAURANT_MALL_PRICING[category];
+  if (HOTEL_RESTAURANT_MALL_PRICING[catKey]) {
+    const table = HOTEL_RESTAURANT_MALL_PRICING[catKey];
     const base = getTablePrice(table, normTier);
     return {
       normTier,
@@ -456,8 +538,8 @@ export function calculateAdvertisingPrice(params = {}) {
   }
 
   // 10. Local Manufacturer / MSME
-  if (LOCAL_MANUFACTURER_PRICING[category]) {
-    const table = LOCAL_MANUFACTURER_PRICING[category];
+  if (LOCAL_MANUFACTURER_PRICING[catKey]) {
+    const table = LOCAL_MANUFACTURER_PRICING[catKey];
     const base = getTablePrice(table, normTier);
     return {
       normTier,
@@ -469,9 +551,9 @@ export function calculateAdvertisingPrice(params = {}) {
   }
 
   // Default Distance Table Fallback
-  if (DISTANCE_PRICING_TABLES[category]) {
-    const catTable = DISTANCE_PRICING_TABLES[category];
-    const radTable = catTable[radius] || catTable['10km'] || Object.values(catTable)[0];
+  if (DISTANCE_PRICING_TABLES[catKey]) {
+    const catTable = DISTANCE_PRICING_TABLES[catKey];
+    const radTable = catTable[radKey] || catTable['10km'] || Object.values(catTable)[0];
     const base = getTablePrice(radTable, normTier);
     return {
       normTier,
@@ -491,3 +573,4 @@ export function calculateAdvertisingPrice(params = {}) {
     isContract: false,
   };
 }
+

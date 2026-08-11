@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Mic, Camera, ShoppingCart, Sun, Moon, Bell, ArrowRight, Sparkles, Flame, History, MapPin, ChevronDown } from 'lucide-react';
+import { Search, Mic, ShoppingCart, Sun, Moon, Bell, Sparkles, Flame, History, MapPin, ChevronDown } from 'lucide-react';
 import SaathAppLogo from '../assets/saathapp-logo.jpeg';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -140,7 +140,7 @@ export default function Header({
                   <Search size={18} className="dark:text-slate-500" />
                 </div>
 
-                {/* Voice & Image Search triggers */}
+                {/* Voice Search trigger */}
                 <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center gap-2">
                   <motion.button
                     type="button"
@@ -150,15 +150,6 @@ export default function Header({
                     title="Voice Search"
                   >
                     <Mic size={18} />
-                  </motion.button>
-                  <motion.button
-                    type="button"
-                    onClick={onImageSearchClick}
-                    whileHover={{ scale: 1.1, color: '#2E7D32' }}
-                    className="p-1.5 text-slate-400 hover:text-primary rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
-                    title="Image Search"
-                  >
-                    <Camera size={18} />
                   </motion.button>
                 </div>
               </div>
@@ -290,16 +281,7 @@ export default function Header({
               </motion.button>
             )}
 
-            {/* Partner Button (Urban Company / Meesho feel) */}
-            {!isAuthenticated && (
-              <motion.button 
-                whileHover={{ scale: 1.02 }}
-                className="hidden lg:flex items-center gap-1 px-3.5 py-2 text-xs font-bold text-primary dark:text-primary-light bg-primary/5 hover:bg-primary/10 border border-primary/20 dark:border-primary/10 rounded-btn transition-all"
-              >
-                <span>{t('become_partner')}</span>
-                <ArrowRight size={12} />
-              </motion.button>
-            )}
+
 
             {/* Zepto/Blinkit Style Cart Button */}
             <motion.button

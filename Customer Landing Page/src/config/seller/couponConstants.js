@@ -91,6 +91,18 @@ export const CAMPAIGN_TYPES = [
   { id: 'campaign_loyalty', label: 'Loyalty Campaign', group: 'campaign' },
 ];
 
+export const OFFER_CAMPAIGN_TYPES = [
+  { id: 'flash_sale', label: 'Flash Sale', group: 'offer' },
+  { id: 'festival_offer', label: 'Festival Offer', group: 'offer' },
+  { id: 'bogo', label: 'Buy 1 Get 1 (BOGO)', group: 'offer' },
+  { id: 'percentage_discount', label: 'Percentage Discount', group: 'offer' },
+  { id: 'flat_discount', label: 'Flat Discount', group: 'offer' },
+  { id: 'clearance_sale', label: 'Clearance Sale', group: 'offer' },
+  { id: 'seasonal_sale', label: 'Seasonal Sale', group: 'offer' },
+  { id: 'new_product_launch', label: 'New Product Launch', group: 'offer' },
+  { id: 'special_local_offer', label: 'Special Local Offer', group: 'offer' },
+];
+
 export const ALL_PROMO_TYPES = [
   ...COUPON_TYPES,
   ...AD_TYPES,
@@ -98,6 +110,7 @@ export const ALL_PROMO_TYPES = [
   ...POSTER_TYPES,
   ...SPONSORED_TYPES,
   ...CAMPAIGN_TYPES,
+  ...OFFER_CAMPAIGN_TYPES,
 ];
 
 export const CREATE_MENU = [

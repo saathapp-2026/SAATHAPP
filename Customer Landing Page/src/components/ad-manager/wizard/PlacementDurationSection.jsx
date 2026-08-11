@@ -13,12 +13,13 @@ const PLACEMENTS = [
 ];
 
 const DURATIONS = [
-  { value: 1, label: '1 Day' },
-  { value: 3, label: '3 Days' },
-  { value: 7, label: '7 Days' },
-  { value: 15, label: '15 Days' },
-  { value: 30, label: '30 Days' },
-  { value: 'custom', label: 'Custom' },
+  { value: 5, label: '5 Days (1x)' },
+  { value: 7, label: '1 Week (1.25x)' },
+  { value: 14, label: '2 Weeks (2x)' },
+  { value: 30, label: '1 Month (3.5x)' },
+  { value: 90, label: '3 Months (9x)' },
+  { value: 180, label: '6 Months (16x)' },
+  { value: 365, label: '1 Year (30x)' },
 ];
 
 export default function PlacementDurationSection({ draft, updateDraft }) {

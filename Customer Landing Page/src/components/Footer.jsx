@@ -143,7 +143,6 @@ export default function Footer() {
                   Become Delivery Partner
                 </Link>
               </li>
-              <li><a href="#" className="hover:text-white transition-colors">Franchise</a></li>
               <li>
                 <Link
                   to="/advertise"

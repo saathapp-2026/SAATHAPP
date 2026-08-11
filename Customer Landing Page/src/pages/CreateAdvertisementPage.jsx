@@ -20,8 +20,8 @@ export default function CreateAdvertisementPage({ user }) {
     // if (existing && Object.keys(existing).length > 2) return existing;
 
     const today = new Date();
-    const next15 = new Date();
-    next15.setDate(today.getDate() + 15);
+    const next5 = new Date();
+    next5.setDate(today.getDate() + 5);
 
     return {
       ...emptyAdDraft('homepage_banner'),
@@ -29,7 +29,7 @@ export default function CreateAdvertisementPage({ user }) {
       name: 'Diwali Mega Sale 2026',
       objective: 'Brand Awareness',
       startDate: today.toISOString().split('T')[0],
-      endDate: next15.toISOString().split('T')[0],
+      endDate: next5.toISOString().split('T')[0],
       locationType: 'city',
       targetCities: ['Patna', 'Nalanda', 'Biharsharif'],
       locations: ['Patna'],
@@ -38,7 +38,7 @@ export default function CreateAdvertisementPage({ user }) {
       audienceLanguage: 'All Languages',
       customerTypes: ['new', 'returning'],
       placements: ['homepage_banner', 'search_top', 'category'],
-      duration: 15,
+      duration: 5,
       adLink: 'https://saathapp.in/store/my-shop',
       description: 'Get up to 50% off on all electronics this festive season!'
     };
@@ -129,7 +129,7 @@ export default function CreateAdvertisementPage({ user }) {
 
             {/* Right Column - Sidebar */}
             <div className="w-full lg:w-[400px] shrink-0 sticky top-24 space-y-6">
-              <SummarySidebar draft={draft} reach={reach} />
+              <SummarySidebar draft={draft} reach={reach} updateDraft={updateDraft} />
             </div>
 
           </div>
