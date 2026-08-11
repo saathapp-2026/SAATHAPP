@@ -24,8 +24,24 @@ export default function Reviews() {
   const current = testimonials[activeIndex];
 
   return (
-    <section className="py-12 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 relative text-center">
+    <section className="py-12 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40 relative w-full">
+      {/* Arrow Navigation */}
+      <button
+        onClick={handlePrev}
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hidden sm:flex items-center justify-center transition-colors shadow-sm border border-slate-200 dark:border-slate-700 z-10"
+        title="Previous Review"
+      >
+        <ChevronLeft size={16} />
+      </button>
+      <button
+        onClick={handleNext}
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hidden sm:flex items-center justify-center transition-colors shadow-sm border border-slate-200 dark:border-slate-700 z-10"
+        title="Next Review"
+      >
+        <ChevronRight size={16} />
+      </button>
+
+      <div className="w-full px-4 sm:px-6 relative text-center">
         
         {/* Title */}
         <div className="mb-10">
@@ -110,21 +126,6 @@ export default function Reviews() {
           ))}
         </div>
 
-        {/* Arrow Navigation */}
-        <button
-          onClick={handlePrev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hidden sm:flex items-center justify-center transition-colors"
-          title="Previous Review"
-        >
-          <ChevronLeft size={16} />
-        </button>
-        <button
-          onClick={handleNext}
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hidden sm:flex items-center justify-center transition-colors"
-          title="Next Review"
-        >
-          <ChevronRight size={16} />
-        </button>
 
       </div>
     </section>

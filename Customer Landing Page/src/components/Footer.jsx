@@ -18,7 +18,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-slate-900 text-slate-400 pt-16 pb-8 border-t border-slate-800 text-left">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         
         {/* Top Segment: Newsletter & Logo */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-12 border-b border-slate-800 items-center">

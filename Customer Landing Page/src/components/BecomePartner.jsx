@@ -64,7 +64,7 @@ const partners = [
 export default function BecomePartner({ onBecomePartnerSelect }) {
   return (
     <section className="py-12 bg-slate-50 dark:bg-slate-950/40 border-b border-slate-100 dark:border-slate-800/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Title */}
         <div className="text-center max-w-xl mx-auto mb-10">

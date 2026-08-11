@@ -28,7 +28,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
 
   return (
     <section className="py-10 bg-slate-50 dark:bg-slate-950/40 border-b border-slate-100 dark:border-slate-800/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         
         {/* Section Header with Countdown Timer */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
