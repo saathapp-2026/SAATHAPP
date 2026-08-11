@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Mic, Camera, ShoppingCart, Sun, Moon, Bell, ArrowRight, Sparkles, Flame, History, MapPin, ChevronDown } from 'lucide-react';
+import { Search, Mic, Camera, ShoppingCart, Sun, Moon, Bell, ArrowRight, Sparkles, Flame, History, MapPin, ChevronDown, Menu, X, LogOut } from 'lucide-react';
 import SaathAppLogo from '../assets/saathapp-logo.jpeg';
 import { useLanguage } from '../context/LanguageContext';
+import { getCustomerMenu } from '../config/customerMenu';
 
 export default function Header({ 
   cartCount, 
@@ -29,6 +30,7 @@ export default function Header({
 }) {
   const { t } = useLanguage();
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isCustomerMenuOpen, setIsCustomerMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const searchRef = useRef(null);
@@ -77,8 +79,9 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+      <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 shadow-xs">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[72px] gap-4 py-1.5">
           
           {/* Logo & Mobile Menu Toggle */}
@@ -337,8 +340,8 @@ export default function Header({
               </motion.button>
             )}
 
-            {/* User Profile Avatar — direct navigation (no dropdown) */}
-            <div className="relative">
+            {/* User Profile Avatar & Hamburger Menu */}
+            <div className="flex items-center gap-2">
               <button
                 onClick={() => navigate('/profile')}
                 className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden cursor-pointer border border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-500 shrink-0"
@@ -350,11 +353,87 @@ export default function Header({
                   <span className="text-sm font-black">{(user?.name || 'U').charAt(0).toUpperCase()}</span>
                 )}
               </button>
+
+              <button
+                onClick={() => setIsCustomerMenuOpen(true)}
+                className="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors rounded-btn cursor-pointer"
+                title="Open customer dashboard menu"
+              >
+                <Menu size={20} />
+              </button>
             </div>
           </div>
 
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Customer Dashboard Navigation Drawer */}
+      <AnimatePresence>
+        {isCustomerMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsCustomerMenuOpen(false)}
+              className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50"
+            />
+            
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', bounce: 0, duration: 0.3 }}
+              className="fixed right-0 top-0 bottom-0 w-[280px] bg-white dark:bg-slate-900 shadow-2xl z-[60] flex flex-col border-l border-slate-200 dark:border-slate-800"
+            >
+              {/* Drawer Header (Removed "Dashboard Menu" text per request) */}
+              <div className="flex items-center justify-end p-5 border-b border-slate-100 dark:border-slate-800">
+                <button
+                  onClick={() => setIsCustomerMenuOpen(false)}
+                  className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 bg-slate-100 dark:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+                  aria-label="Close menu"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Drawer Navigation Items */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-1">
+                {getCustomerMenu(t).map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <button
+                      key={item.tab}
+                      onClick={() => {
+                        setIsCustomerMenuOpen(false);
+                        navigate('/customer/dashboard', { state: { activeTab: item.tab } });
+                      }}
+                      className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-left transition-all cursor-pointer text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/40 hover:text-[#6C3BFF] dark:hover:text-white"
+                    >
+                      <Icon size={16} />
+                      <span>{item.label}</span>
+                    </button>
+                  );
+                })}
+
+                <button
+                  onClick={() => {
+                    setIsCustomerMenuOpen(false);
+                    if (onLogout) onLogout();
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 mt-4 rounded-xl text-xs font-black uppercase tracking-wider text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-955/20 text-left transition-all cursor-pointer"
+                >
+                  <LogOut size={16} />
+                  <span>{t('logout')}</span>
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

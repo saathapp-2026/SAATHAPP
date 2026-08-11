@@ -51,7 +51,7 @@ export default function LiveStats() {
         <div className="absolute w-72 h-72 rounded-full bg-white/20 blur-3xl -bottom-10 -left-10" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Statistics Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">

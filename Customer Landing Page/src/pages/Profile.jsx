@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Bell, Heart, ShoppingBag, MapPin, Settings, Wallet, LogOut, Pencil, Globe, CreditCard, Gift, RefreshCw, Shield, HelpCircle, Info, ArrowRight, User, Trash2, CheckCircle2, KeyRound, Plus, Check, Moon, Sun, Laptop, Calendar, Search, Wrench, Star, ShoppingCart } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
+import { getCustomerMenu } from '../config/customerMenu';
 
 // Import customer dashboard sub-tabs
 import ServicesTab from '../components/customer/ServicesTab';
@@ -85,9 +87,28 @@ const initMockDB = (user) => {
 };
 
 export default function Profile({ user, onBack, onLogout }) {
+  const location = useLocation();
   const { theme, setTheme } = useTheme();
   const { language, changeLanguage, t } = useLanguage();
-  const [activeTab, setActiveTab] = useState(() => window.innerWidth < 768 ? 'menu' : 'dashboard');
+  
+  const [activeTab, setActiveTab] = useState(() => {
+    if (location.pathname === '/profile') return 'profile';
+    if (location.state?.activeTab) return location.state.activeTab;
+    return 'dashboard';
+  });
+
+  useEffect(() => {
+    if (location.pathname === '/profile') {
+      setActiveTab('profile');
+    } else if (location.pathname === '/customer/dashboard') {
+      if (location.state?.activeTab) {
+        setActiveTab(location.state.activeTab);
+      } else if (activeTab === 'profile') {
+        setActiveTab('dashboard');
+      }
+    }
+  }, [location.pathname, location.state]);
+
   const [profile, setProfile] = useState(null);
   const [walletBalance, setWalletBalance] = useState(0.00);
   const [orders, setOrders] = useState([]);
@@ -325,7 +346,7 @@ export default function Profile({ user, onBack, onLogout }) {
         <div className="flex flex-col md:flex-row gap-6 items-start">
           
           {/* LEFT SIDEBAR PANEL */}
-          <div className={`w-full md:w-[280px] space-y-6 shrink-0 sticky top-6 ${activeTab !== 'menu' ? 'hidden md:block' : ''}`}>
+          <div className="w-full md:w-[280px] space-y-6 shrink-0 sticky top-6">
             
             {/* Sidebar Profile Card */}
             <div className="bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 rounded-[18px] p-5 shadow-sm text-center">
@@ -352,66 +373,12 @@ export default function Profile({ user, onBack, onLogout }) {
               </button>
             </div>
 
-            {/* Sidebar Navigation */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 rounded-[18px] p-2.5 shadow-sm space-y-1">
-              {[
-                { tab: 'dashboard', label: t('dashboard'), icon: Laptop },
-                { tab: 'orders', label: t('orders'), icon: ShoppingBag },
-                { tab: 'services', label: 'Services', icon: Wrench },
-                { tab: 'bookings', label: t('bookings'), icon: Calendar },
-                { tab: 'wishlist', label: 'Wishlist', icon: Heart },
-                { tab: 'cart', label: 'Cart', icon: ShoppingCart },
-                { tab: 'addresses', label: t('saved_addresses'), icon: MapPin },
-                { tab: 'payments', label: 'Payments', icon: CreditCard },
-                { tab: 'wallet', label: t('wallet'), icon: Wallet },
-                { tab: 'reviews', label: 'Reviews', icon: Star },
-                { tab: 'support', label: t('customer_support'), icon: HelpCircle },
-                { tab: 'notifications', label: t('notifications'), icon: Bell },
-                { tab: 'profile', label: t('profile'), icon: User },
-                { tab: 'settings', label: t('settings'), icon: Settings },
-              ].map((item) => {
-                const Icon = item.icon;
-                const isActive = activeTab === item.tab;
-                return (
-                  <button
-                    key={item.tab}
-                    onClick={() => setActiveTab(item.tab)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-left transition-all cursor-pointer ${
-                      isActive
-                        ? 'bg-[#6C3BFF]/10 text-[#6C3BFF] dark:bg-[#6C3BFF]/25 dark:text-white'
-                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/40 hover:text-slate-900 dark:hover:text-white'
-                    }`}
-                  >
-                    <Icon size={16} />
-                    <span>{item.label}</span>
-                  </button>
-                );
-              })}
-              
-              <button
-                onClick={() => setShowLogoutConfirm(true)}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-955/20 text-left transition-all cursor-pointer"
-              >
-                <LogOut size={16} />
-                <span>{t('logout')}</span>
-              </button>
-            </div>
-
           </div>
 
           {/* RIGHT CONTENT DISPLAY WINDOW */}
-          <div className={`flex-1 w-full bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 rounded-[18px] p-6 sm:p-8 shadow-sm ${activeTab === 'menu' ? '' : 'hidden md:block'}`}>
+          <div className="flex-1 w-full bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 rounded-[18px] p-6 sm:p-8 shadow-sm">
             
-            {/* Mobile View Header & Navigation back button */}
-            {activeTab !== 'menu' && (
-              <button
-                onClick={() => setActiveTab('menu')}
-                className="md:hidden mb-4 inline-flex items-center gap-1.5 text-xs font-black uppercase text-[#6C3BFF] cursor-pointer"
-              >
-                <ArrowLeft size={12} />
-                <span>Account Menu</span>
-              </button>
-            )}
+
 
             {/* Premium Dashboard Header Segment */}
             <div className="hidden md:flex items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200/50 dark:border-slate-800">

@@ -24,8 +24,24 @@ export default function Advertisements() {
   const active = advertisements[currentIndex];
 
   return (
-    <section className="py-10 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-10 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40 relative w-full">
+      {/* Full-width Carousel Controls */}
+      <button
+        onClick={handlePrev}
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 dark:bg-slate-800/50 dark:hover:bg-slate-700 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300 dark:border-slate-600"
+        title="Previous ad"
+      >
+        <ChevronLeft size={16} />
+      </button>
+      <button
+        onClick={handleNext}
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 dark:bg-slate-800/50 dark:hover:bg-slate-700 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300 dark:border-slate-600"
+        title="Next ad"
+      >
+        <ChevronRight size={16} />
+      </button>
+
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         
         {/* Banner Frame */}
         <div className="relative rounded-card overflow-hidden shadow-soft border border-slate-200/50 dark:border-slate-800 min-h-[160px] sm:min-h-[180px] flex items-center">
@@ -93,21 +109,6 @@ export default function Advertisements() {
             ))}
           </div>
 
-          {/* Nav arrows */}
-          <button
-            onClick={handlePrev}
-            className="absolute left-3 w-8 h-8 rounded-full bg-black/15 hover:bg-black/35 text-white flex items-center justify-center backdrop-blur-sm z-20 transition-all"
-            title="Previous ad"
-          >
-            <ChevronLeft size={16} />
-          </button>
-          <button
-            onClick={handleNext}
-            className="absolute right-3 w-8 h-8 rounded-full bg-black/15 hover:bg-black/35 text-white flex items-center justify-center backdrop-blur-sm z-20 transition-all"
-            title="Next ad"
-          >
-            <ChevronRight size={16} />
-          </button>
         </div>
 
       </div>
