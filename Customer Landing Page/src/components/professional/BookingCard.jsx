@@ -5,10 +5,12 @@ import { User, MapPin, Calendar, Clock, ChevronDown, ChevronUp, CheckCircle, Nav
 export default function BookingCard({
   booking,
   onAccept,
+  onReject,
+  onReschedule,
   onNavigate,
   onStart,
   onComplete,
-  onCancel
+  onReportIssue
 }) {
   const [expanded, setExpanded] = useState(false);
   const [enteredOtp, setEnteredOtp] = useState('');
@@ -18,12 +20,16 @@ export default function BookingCard({
     switch (status) {
       case 'pending':
         return 'bg-amber-150/10 text-amber-600 dark:text-amber-500 border-amber-500/20';
-      case 'upcoming':
+      case 'confirmed':
+        return 'bg-emerald-150/10 text-emerald-600 dark:text-emerald-500 border-emerald-500/20';
+      case 'scheduled':
         return 'bg-blue-150/10 text-blue-600 dark:text-blue-500 border-blue-500/20';
+      case 'arrived':
+        return 'bg-indigo-150/10 text-indigo-600 dark:text-indigo-500 border-indigo-500/20';
       case 'in_progress':
         return 'bg-primary/10 text-primary border-primary/20 animate-pulse';
       case 'completed':
-        return 'bg-emerald-150/10 text-emerald-600 dark:text-emerald-500 border-emerald-500/20';
+        return 'bg-teal-150/10 text-teal-600 dark:text-teal-500 border-teal-500/20';
       case 'cancelled':
         return 'bg-rose-150/10 text-rose-600 dark:text-rose-500 border-rose-500/20';
       default:
@@ -118,7 +124,7 @@ export default function BookingCard({
           {booking.status === 'pending' && (
             <>
               <button
-                onClick={() => onCancel(booking.id)}
+                onClick={() => onReject(booking.id)}
                 className="px-3 py-1.5 rounded-btn border border-rose-200 hover:bg-rose-50 text-rose-500 text-[10px] font-extrabold uppercase cursor-pointer"
               >
                 Reject
@@ -132,10 +138,10 @@ export default function BookingCard({
             </>
           )}
 
-          {booking.status === 'upcoming' && (
+          {(booking.status === 'confirmed' || booking.status === 'scheduled') && (
             <>
               <button
-                onClick={() => alert('Reschedule requested.')}
+                onClick={() => onReschedule(booking.id)}
                 className="px-3 py-1.5 rounded-btn border border-amber-200 hover:bg-amber-50 text-amber-500 text-[10px] font-extrabold uppercase cursor-pointer mr-2"
               >
                 Reschedule
@@ -150,10 +156,20 @@ export default function BookingCard({
             </>
           )}
 
+          {booking.status === 'arrived' && (
+            <button
+              onClick={() => onStart(booking.id)}
+              className="px-4 py-1.5 rounded-btn bg-primary hover:bg-primary-dark text-white text-[10px] font-extrabold uppercase cursor-pointer shadow-sm flex items-center gap-1"
+            >
+              <Play size={10} />
+              <span>Start Service</span>
+            </button>
+          )}
+
           {booking.status === 'in_progress' && (
             <>
               <button
-                onClick={() => alert('Issue reported to support.')}
+                onClick={() => onReportIssue(booking.id)}
                 className="px-3 py-1.5 rounded-btn border border-rose-200 hover:bg-rose-50 text-rose-500 text-[10px] font-extrabold uppercase cursor-pointer mr-2"
               >
                 Report Issue
@@ -215,9 +231,9 @@ export default function BookingCard({
                 </div>
               </div>
 
-              {/* OTP starting interface for Travellers/Upcoming */}
-              {booking.status === 'upcoming' && (
-                <div className="p-4 bg-slate-50 dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800 rounded-xl space-y-3">
+              {/* OTP starting interface for Arrived */}
+              {booking.status === 'arrived' && (
+                <div className="p-4 bg-slate-50 dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800 rounded-xl space-y-3 mt-4">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-black uppercase text-slate-400 flex items-center gap-1">
                       <Play size={10} className="text-primary" />
@@ -241,7 +257,7 @@ export default function BookingCard({
                       type="submit"
                       className="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-black uppercase cursor-pointer"
                     >
-                      Start Service
+                      Verify & Start
                     </button>
                   </form>
                   {otpError && (

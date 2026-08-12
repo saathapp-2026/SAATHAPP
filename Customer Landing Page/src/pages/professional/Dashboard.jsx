@@ -48,7 +48,62 @@ export default function ProfessionalDashboardPage({
   const [isOnline, setIsOnline] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState([
+    {
+      id: 'BKG-7782',
+      customerName: 'Aarav Sharma',
+      customerPhone: '+91 98765 43210',
+      serviceName: 'Deep Cleaning (3 BHK)',
+      scopeDescription: 'Complete deep cleaning of empty 3 BHK including bathrooms and kitchen.',
+      date: '14 Aug 2026',
+      time: '09:00 AM',
+      address: 'Sector 14, Gurgaon',
+      distance: '3.2',
+      estimatedPrice: 2499,
+      amount: 2499,
+      status: 'pending',
+      paymentStatus: 'pending',
+      notes: 'Customer requested eco-friendly products if possible.',
+      otp: '4432',
+      rating: null
+    },
+    {
+      id: 'BKG-8091',
+      customerName: 'Priya Patel',
+      customerPhone: '+91 91234 56789',
+      serviceName: 'AC Servicing x2',
+      scopeDescription: 'Standard split AC wet servicing for 2 units.',
+      date: '15 Aug 2026',
+      time: '11:30 AM',
+      address: 'Andheri West, Mumbai',
+      distance: '5.1',
+      estimatedPrice: 998,
+      amount: 998,
+      status: 'scheduled',
+      paymentStatus: 'secured',
+      notes: 'Please call before arriving.',
+      otp: '8812',
+      rating: null
+    },
+    {
+      id: 'BKG-8102',
+      customerName: 'Rohan Gupta',
+      customerPhone: '+91 99887 76655',
+      serviceName: 'Plumbing - Leak Fix',
+      scopeDescription: 'Fix leaking pipe under kitchen sink.',
+      date: 'Today',
+      time: '02:00 PM',
+      address: 'Koramangala, Bangalore',
+      distance: '1.5',
+      estimatedPrice: 350,
+      amount: 350,
+      status: 'in_progress',
+      paymentStatus: 'secured',
+      notes: '',
+      otp: '1190',
+      rating: null
+    }
+  ]);
   const [bookingFilter, setBookingFilter] = useState('all');  const [notifications, setNotifications] = useState([]);
 
   const onboarding = getStoredProfessionalOnboarding();
@@ -115,49 +170,37 @@ export default function ProfessionalDashboardPage({
 
   // Booking handlers
   const handleAcceptJob = (bookingId) => {
-    setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'upcoming', paymentStatus: 'secured' } : b));
-    
-    // Add alert log
-    const newNotif = {
-      id: Date.now(),
-      title: 'Booking Accepted',
-      description: `You accepted booking ID ${bookingId}. Customer notified.`,
-      time: 'Just now',
-      type: 'system_info',
-      read: false
-    };
-    setNotifications(prev => [newNotif, ...prev]);
-    alert(`Job accepted! Navigate to client when scheduled.`);
+    setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'confirmed', paymentStatus: 'secured' } : b));
+    alert('Booking Confirmed! You can schedule the time with the customer if needed.');
+  };
+
+  const handleRejectJob = (bookingId) => {
+    setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'cancelled' } : b));
+    alert('Booking Rejected.');
+  };
+
+  const handleReschedule = (bookingId) => {
+    setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'scheduled' } : b));
+    alert('Booking Scheduled successfully.');
   };
 
   const handleNavigateGPS = (bookingId) => {
-    alert(`GPS navigation initialized for booking ${bookingId}.`);
-    setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'in_progress' } : b));
+    setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'arrived' } : b));
+    alert('Navigation initialized. Status set to Arrived.');
   };
 
   const handleStartService = (bookingId) => {
     setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'in_progress' } : b));
+    alert('Service Started!');
   };
 
   const handleCompleteService = (bookingId) => {
-    setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'completed', paymentStatus: 'released' } : b));
-    
-    // Add notification
-    const newNotif = {
-      id: Date.now(),
-      title: 'Job Completed & Settled',
-      description: `Earnings for booking ${bookingId} have been released to your wallet.`,
-      time: 'Just now',
-      type: 'payment_received',
-      read: false
-    };
-    setNotifications(prev => [newNotif, ...prev]);
-    alert(`Service completed. Escrow released to your available balance.`);
+    setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'completed', paymentStatus: 'released', rating: 5 } : b));
+    alert('Service Completed. Payment Released.');
   };
 
-  const handleCancelService = (bookingId) => {
-    setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'cancelled' } : b));
-    alert(`Booking declined/cancelled successfully.`);
+  const handleReportIssue = (bookingId) => {
+    alert(`Issue reported to support team for booking ${bookingId}.`);
   };
 
   // Notification handlers
@@ -382,10 +425,12 @@ export default function ProfessionalDashboardPage({
                               key={booking.id}
                               booking={booking}
                               onAccept={handleAcceptJob}
+                              onReject={handleRejectJob}
+                              onReschedule={handleReschedule}
                               onNavigate={handleNavigateGPS}
                               onStart={handleStartService}
                               onComplete={handleCompleteService}
-                              onCancel={handleCancelService}
+                              onReportIssue={handleReportIssue}
                             />
                           ))
                         )}
@@ -483,10 +528,12 @@ export default function ProfessionalDashboardPage({
                               key={booking.id}
                               booking={booking}
                               onAccept={handleAcceptJob}
+                              onReject={handleRejectJob}
+                              onReschedule={handleReschedule}
                               onNavigate={handleNavigateGPS}
                               onStart={handleStartService}
                               onComplete={handleCompleteService}
-                              onCancel={handleCancelService}
+                              onReportIssue={handleReportIssue}
                             />
                           ));
                         })()
