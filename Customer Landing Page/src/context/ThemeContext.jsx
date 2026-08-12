@@ -16,13 +16,16 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     const root = document.documentElement;
+    const body = document.body;
     
     const applyTheme = (themeMode) => {
       if (themeMode === 'dark') {
         root.classList.add('dark');
+        if (body) body.classList.add('dark');
         setResolvedTheme('dark');
       } else {
         root.classList.remove('dark');
+        if (body) body.classList.remove('dark');
         setResolvedTheme('light');
       }
     };

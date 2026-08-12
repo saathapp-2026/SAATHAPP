@@ -334,7 +334,7 @@ export default function Profile({ user, onBack, onLogout }) {
         {/* Navigation breadcrumb */}
         <button
           onClick={onBack}
-          className="mb-6 inline-flex items-center gap-2 text-xs font-black uppercase text-slate-450 hover:text-[#6C3BFF] transition-colors cursor-pointer"
+          className="mb-6 inline-flex items-center gap-2 text-xs font-black uppercase text-slate-700 dark:text-slate-300 hover:text-[#6C3BFF] dark:hover:text-[#8B5CF6] transition-colors cursor-pointer"
         >
           <ArrowLeft size={14} />
           <span>{t('return_to_homepage')}</span>
@@ -381,11 +381,11 @@ export default function Profile({ user, onBack, onLogout }) {
 
 
             {/* Premium Dashboard Header Segment */}
-            <div className="hidden md:flex items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200/50 dark:border-slate-800">
+            <div className="hidden md:flex items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200 dark:border-slate-800">
               {/* Welcome text */}
               <div className="space-y-0.5 text-left">
-                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">Customer Space</span>
-                <h2 className="text-base font-black text-slate-855 dark:text-white leading-none">
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400">Customer Space</span>
+                <h2 className="text-base font-black text-slate-900 dark:text-white leading-none">
                   {new Date().getHours() < 12 ? 'Good Morning' : new Date().getHours() < 17 ? 'Good Afternoon' : 'Good Evening'}, {profile?.name || 'Nikita'}
                 </h2>
               </div>
@@ -397,14 +397,14 @@ export default function Profile({ user, onBack, onLogout }) {
                   <input
                     type="text"
                     placeholder="Search dashboard..."
-                    className="w-48 xl:w-60 h-9 px-3 pl-8 text-xs bg-slate-50 dark:bg-slate-955/20 border border-slate-200 dark:border-slate-800 rounded-xl outline-none focus:border-[#6C3BFF]"
+                    className="w-48 xl:w-60 h-9 px-3 pl-8 text-xs bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-200 dark:border-slate-800 rounded-xl outline-none focus:border-[#6C3BFF]"
                   />
                   <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                 </div>
                 
                 {/* Language button dropdown */}
                 <div className="relative group">
-                  <button className="p-2 bg-slate-50 dark:bg-slate-955/20 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer">
+                  <button className="p-2 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer">
                     <Globe size={16} className="text-[#6C3BFF]" />
                   </button>
                   {/* Hover dropdown list */}
@@ -418,8 +418,8 @@ export default function Profile({ user, onBack, onLogout }) {
                       <button
                         key={lang.code}
                         onClick={() => changeLanguage(lang.code)}
-                        className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 ${
-                          language === lang.code ? 'text-[#6C3BFF] bg-[#6C3BFF]/5' : 'text-slate-700 dark:text-slate-300'
+                        className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 ${
+                          language === lang.code ? 'text-[#6C3BFF] bg-[#6C3BFF]/5' : 'text-slate-800 dark:text-slate-300'
                         }`}
                       >
                         {lang.label}
@@ -431,7 +431,7 @@ export default function Profile({ user, onBack, onLogout }) {
                 {/* Theme toggle button */}
                 <button
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  className="p-2 bg-slate-50 dark:bg-slate-955/20 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer"
+                  className="p-2 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer"
                 >
                   {theme === 'dark' ? <Sun size={16} className="text-amber-500" /> : <Moon size={16} className="text-[#6C3BFF]" />}
                 </button>
@@ -439,7 +439,7 @@ export default function Profile({ user, onBack, onLogout }) {
                 {/* Notification Bell */}
                 <button 
                   onClick={() => setActiveTab('notifications')}
-                  className="relative p-2 bg-slate-50 dark:bg-slate-955/20 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer"
+                  className="relative p-2 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer"
                 >
                   <Bell size={16} className="text-[#6C3BFF]" />
                   {notifications.some(n => !n.read) && (
@@ -470,35 +470,35 @@ export default function Profile({ user, onBack, onLogout }) {
                   <div className="space-y-6">
                     {/* Welcome message for mobile/tablet where the main header is hidden */}
                     <div className="md:hidden space-y-1">
-                      <h2 className="text-xl font-black text-slate-850 dark:text-white">Hello, {profile?.name}!</h2>
-                      <p className="text-xs text-slate-400 font-semibold">Welcome to your SaathApp Hub. Manage your services and payments.</p>
+                      <h2 className="text-xl font-black text-slate-900 dark:text-white">Hello, {profile?.name}!</h2>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Welcome to your SaathApp Hub. Manage your services and payments.</p>
                     </div>
 
                     {/* Statistics Cards */}
                     <div className="grid grid-cols-2 lg:grid-cols-5 gap-3.5">
-                      <div className="bg-[#6C3BFF]/5 dark:bg-slate-955/30 p-4.5 rounded-2xl border border-[#6C3BFF]/10 hover:shadow-soft transition-all text-left">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Orders</p>
-                        <p className="mt-1 text-2xl font-black text-slate-800 dark:text-white">{orders.length}</p>
+                      <div className="bg-[#6C3BFF]/5 dark:bg-slate-900/60 p-4.5 rounded-2xl border border-[#6C3BFF]/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
+                        <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Orders</p>
+                        <p className="mt-1 text-2xl font-black text-slate-900 dark:text-white">{orders.length}</p>
                       </div>
-                      <div className="bg-amber-500/5 dark:bg-slate-955/30 p-4.5 rounded-2xl border border-amber-500/10 hover:shadow-soft transition-all text-left">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Active Orders</p>
-                        <p className="mt-1 text-2xl font-black text-slate-800 dark:text-white">
+                      <div className="bg-amber-500/5 dark:bg-slate-900/60 p-4.5 rounded-2xl border border-amber-500/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
+                        <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Active Orders</p>
+                        <p className="mt-1 text-2xl font-black text-slate-900 dark:text-white">
                           {orders.filter(o => o.status === 'Pending' || o.status === 'In Transit').length}
                         </p>
                       </div>
-                      <div className="bg-emerald-500/5 dark:bg-slate-955/30 p-4.5 rounded-2xl border border-emerald-500/10 hover:shadow-soft transition-all text-left">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Completed Orders</p>
-                        <p className="mt-1 text-2xl font-black text-slate-800 dark:text-white">
+                      <div className="bg-emerald-500/5 dark:bg-slate-900/60 p-4.5 rounded-2xl border border-emerald-500/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
+                        <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Completed Orders</p>
+                        <p className="mt-1 text-2xl font-black text-slate-900 dark:text-white">
                           {orders.filter(o => o.status === 'Delivered').length}
                         </p>
                       </div>
-                      <div className="bg-blue-500/5 dark:bg-slate-955/30 p-4.5 rounded-2xl border border-blue-500/10 hover:shadow-soft transition-all text-left">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Wallet Balance</p>
-                        <p className="mt-1 text-2xl font-black text-slate-800 dark:text-white">₹{walletBalance.toFixed(2)}</p>
+                      <div className="bg-blue-500/5 dark:bg-slate-900/60 p-4.5 rounded-2xl border border-blue-500/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
+                        <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Wallet Balance</p>
+                        <p className="mt-1 text-2xl font-black text-slate-900 dark:text-white">₹{walletBalance.toFixed(2)}</p>
                       </div>
-                      <div className="bg-[#FF5A7A]/5 dark:bg-slate-955/30 p-4.5 rounded-2xl border border-[#FF5A7A]/10 hover:shadow-soft transition-all text-left">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Reward Points</p>
-                        <p className="mt-1 text-2xl font-black text-slate-800 dark:text-white">{rewards?.points || 0}</p>
+                      <div className="bg-[#FF5A7A]/5 dark:bg-slate-900/60 p-4.5 rounded-2xl border border-[#FF5A7A]/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
+                        <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Reward Points</p>
+                        <p className="mt-1 text-2xl font-black text-slate-900 dark:text-white">{rewards?.points || 0}</p>
                       </div>
                     </div>
 
@@ -509,25 +509,25 @@ export default function Profile({ user, onBack, onLogout }) {
                       <div className="space-y-6">
                         
                         {/* Recent Orders Preview */}
-                        <div className="bg-slate-50/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800 space-y-3">
+                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
-                            <h4 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Recent Orders</h4>
+                            <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Recent Orders</h4>
                             <button onClick={() => setActiveTab('orders')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">View All</button>
                           </div>
                           <div className="space-y-2">
                             {orders.slice(0, 2).map((order) => (
-                              <div key={order.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl text-xs">
+                              <div key={order.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs shadow-sm">
                                 <div className="flex items-center gap-2">
-                                  <span className="text-lg w-8 h-8 rounded-lg bg-slate-50 dark:bg-slate-950 flex items-center justify-center border border-slate-100 dark:border-slate-800">{order.thumbnail}</span>
+                                  <span className="text-lg w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-950 flex items-center justify-center border border-slate-200 dark:border-slate-800">{order.thumbnail}</span>
                                   <div>
-                                    <p className="font-bold text-slate-800 dark:text-slate-200 truncate max-w-[120px] sm:max-w-none">{order.items.join(', ')}</p>
-                                    <p className="text-[9px] text-slate-400 font-semibold">{order.date}</p>
+                                    <p className="font-bold text-slate-900 dark:text-slate-100 truncate max-w-[120px] sm:max-w-none">{order.items.join(', ')}</p>
+                                    <p className="text-[9px] text-slate-500 dark:text-slate-400 font-semibold">{order.date}</p>
                                   </div>
                                 </div>
                                 <span className={`px-2 py-0.5 rounded-full font-bold text-[8px] uppercase ${
-                                  order.status === 'Delivered' ? 'bg-emerald-500/10 text-emerald-500' :
-                                  order.status === 'In Transit' ? 'bg-blue-500/10 text-blue-500' :
-                                  order.status === 'Cancelled' ? 'bg-rose-500/10 text-rose-500' : 'bg-amber-500/10 text-amber-500'
+                                  order.status === 'Delivered' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' :
+                                  order.status === 'In Transit' ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400' :
+                                  order.status === 'Cancelled' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
                                 }`}>{order.status}</span>
                               </div>
                             ))}
@@ -535,35 +535,35 @@ export default function Profile({ user, onBack, onLogout }) {
                         </div>
 
                         {/* Upcoming Bookings Preview */}
-                        <div className="bg-slate-50/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800 space-y-3">
+                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
-                            <h4 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Upcoming Services</h4>
+                            <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Upcoming Services</h4>
                             <button onClick={() => setActiveTab('bookings')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">View Schedule</button>
                           </div>
                           <div className="space-y-2">
                             {bookings.filter(b => b.status === 'Scheduled' || b.status === 'In Progress').slice(0, 2).map((booking) => (
-                              <div key={booking.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl text-xs">
+                              <div key={booking.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs shadow-sm">
                                 <div className="space-y-0.5 text-left">
-                                  <p className="font-bold text-slate-800 dark:text-slate-200">{booking.service}</p>
-                                  <p className="text-[9px] text-slate-400 font-semibold">{booking.date} at {booking.time} • {booking.provider}</p>
+                                  <p className="font-bold text-slate-900 dark:text-slate-100">{booking.service}</p>
+                                  <p className="text-[9px] text-slate-500 dark:text-slate-400 font-semibold">{booking.date} at {booking.time} • {booking.provider}</p>
                                 </div>
-                                <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-bold text-[8px] uppercase">{booking.status}</span>
+                                <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 font-bold text-[8px] uppercase">{booking.status}</span>
                               </div>
                             ))}
                           </div>
                         </div>
 
                         {/* Saved Addresses Preview */}
-                        <div className="bg-slate-50/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800 space-y-3">
+                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
-                            <h4 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Saved Addresses</h4>
+                            <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Saved Addresses</h4>
                             <button onClick={() => setActiveTab('addresses')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">Manage</button>
                           </div>
                           <div className="space-y-2">
                             {addresses.slice(0, 2).map((addr) => (
-                              <div key={addr.id} className="p-3 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl text-xs text-left">
-                                <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-bold text-[8px] uppercase tracking-wider">{addr.type}</span>
-                                <p className="mt-1 text-slate-600 dark:text-slate-350 truncate">{addr.address}</p>
+                              <div key={addr.id} className="p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-left shadow-sm">
+                                <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-[8px] uppercase tracking-wider">{addr.type}</span>
+                                <p className="mt-1 text-slate-800 dark:text-slate-200 font-medium truncate">{addr.address}</p>
                               </div>
                             ))}
                           </div>
@@ -575,18 +575,18 @@ export default function Profile({ user, onBack, onLogout }) {
                       <div className="space-y-6">
                         
                         {/* Notifications Preview */}
-                        <div className="bg-slate-50/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800 space-y-3">
+                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
-                            <h4 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Recent Notifications</h4>
+                            <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Recent Notifications</h4>
                             <button onClick={() => setActiveTab('notifications')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">Read All</button>
                           </div>
                           <div className="space-y-2">
                             {notifications.slice(0, 2).map((notif) => (
-                              <div key={notif.id} className="flex gap-2.5 p-3 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl text-xs text-left">
+                              <div key={notif.id} className="flex gap-2.5 p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-left shadow-sm">
                                 <div className="w-1.5 h-1.5 bg-[#6C3BFF] rounded-full shrink-0 mt-1.5" />
                                 <div>
-                                  <p className="font-bold text-slate-800 dark:text-slate-200">{notif.title}</p>
-                                  <p className="text-[10px] text-slate-400 mt-0.5 leading-relaxed">{notif.message}</p>
+                                  <p className="font-bold text-slate-900 dark:text-slate-100">{notif.title}</p>
+                                  <p className="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed font-medium">{notif.message}</p>
                                 </div>
                               </div>
                             ))}
@@ -594,37 +594,37 @@ export default function Profile({ user, onBack, onLogout }) {
                         </div>
 
                         {/* Wallet & Rewards Summary */}
-                        <div className="bg-slate-50/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800 space-y-3">
-                          <h4 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Wallet Summary</h4>
+                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                          <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Wallet Summary</h4>
                           <div className="grid grid-cols-2 gap-3">
-                            <div className="bg-white dark:bg-slate-900 p-4 border border-slate-100 dark:border-slate-800 rounded-xl text-left">
-                              <p className="text-[9px] font-bold text-slate-400 uppercase">Available Cash</p>
-                              <p className="text-lg font-black text-slate-855 dark:text-white mt-0.5">₹{walletBalance.toFixed(2)}</p>
+                            <div className="bg-white dark:bg-slate-900 p-4 border border-slate-200 dark:border-slate-800 rounded-xl text-left shadow-sm">
+                              <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Available Cash</p>
+                              <p className="text-lg font-black text-slate-900 dark:text-white mt-0.5">₹{walletBalance.toFixed(2)}</p>
                               <button onClick={() => setShowAddMoneyModal(true)} className="mt-2 text-[9px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">Add cash</button>
                             </div>
-                            <div className="bg-white dark:bg-slate-900 p-4 border border-slate-100 dark:border-slate-800 rounded-xl text-left">
-                              <p className="text-[9px] font-bold text-slate-400 uppercase">Reward Points</p>
-                              <p className="text-lg font-black text-slate-855 dark:text-white mt-0.5">{(rewards?.points || 0)} pts</p>
+                            <div className="bg-white dark:bg-slate-900 p-4 border border-slate-200 dark:border-slate-800 rounded-xl text-left shadow-sm">
+                              <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Reward Points</p>
+                              <p className="text-lg font-black text-slate-900 dark:text-white mt-0.5">{(rewards?.points || 0)} pts</p>
                               <button onClick={() => setActiveTab('rewards')} className="mt-2 text-[9px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">Redeem</button>
                             </div>
                           </div>
                         </div>
 
                         {/* Support Tickets Preview */}
-                        <div className="bg-slate-50/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800 space-y-3">
+                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
-                            <h4 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Active Support Tickets</h4>
+                            <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Active Support Tickets</h4>
                             <button onClick={() => setActiveTab('support')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">New Ticket</button>
                           </div>
                           <div className="space-y-2">
                             {tickets.slice(0, 2).map((ticket) => (
-                              <div key={ticket.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl text-xs text-left">
+                              <div key={ticket.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-left shadow-sm">
                                 <div>
-                                  <p className="font-bold text-slate-800 dark:text-slate-200 truncate max-w-[150px] sm:max-w-none">{ticket.subject}</p>
-                                  <p className="text-[9px] text-slate-400 font-semibold mt-0.5">Category: {ticket.category} • Updated: {ticket.lastUpdated}</p>
+                                  <p className="font-bold text-slate-900 dark:text-slate-100 truncate max-w-[150px] sm:max-w-none">{ticket.subject}</p>
+                                  <p className="text-[9px] text-slate-500 dark:text-slate-400 font-semibold mt-0.5">Category: {ticket.category} • Updated: {ticket.lastUpdated}</p>
                                 </div>
                                 <span className={`px-2 py-0.5 rounded-full font-bold text-[8px] uppercase ${
-                                  ticket.status === 'Open' ? 'bg-amber-500/10 text-amber-500' : 'bg-slate-500/10 text-slate-500'
+                                  ticket.status === 'Open' ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
                                 }`}>{ticket.status}</span>
                               </div>
                             ))}
@@ -632,19 +632,19 @@ export default function Profile({ user, onBack, onLogout }) {
                         </div>
 
                         {/* Quick Actions Panel */}
-                        <div className="bg-slate-50/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800 space-y-3">
-                          <h4 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Quick Actions</h4>
+                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                          <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Quick Actions</h4>
                           <div className="grid grid-cols-2 gap-2 text-xs">
-                            <button onClick={() => setShowAddMoneyModal(true)} className="py-2.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-50 border border-slate-100 dark:border-slate-800 rounded-xl text-center font-bold text-slate-700 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
+                            <button onClick={() => setShowAddMoneyModal(true)} className="py-2.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
                               💰 Add Wallet Money
                             </button>
-                            <button onClick={() => { setEditingAddress(null); setNewAddressType('Home'); setNewAddressContent(''); setShowAddressModal(true); }} className="py-2.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-50 border border-slate-100 dark:border-slate-800 rounded-xl text-center font-bold text-slate-700 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
+                            <button onClick={() => { setEditingAddress(null); setNewAddressType('Home'); setNewAddressContent(''); setShowAddressModal(true); }} className="py-2.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
                               📍 Add New Address
                             </button>
-                            <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="py-2.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-50 border border-slate-100 dark:border-slate-800 rounded-xl text-center font-bold text-slate-700 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
+                            <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="py-2.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
                               🌓 Toggle Dark Theme
                             </button>
-                            <button onClick={() => setActiveTab('support')} className="py-2.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-50 border border-slate-100 dark:border-slate-800 rounded-xl text-center font-bold text-slate-700 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
+                            <button onClick={() => setActiveTab('support')} className="py-2.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
                               ✉️ Raise Help Ticket
                             </button>
                           </div>
@@ -662,32 +662,32 @@ export default function Profile({ user, onBack, onLogout }) {
                 {activeTab === 'orders' && (
                   <div className="space-y-6">
                     <div className="flex items-center justify-between">
-                      <h2 className="text-lg font-black text-slate-855 dark:text-white uppercase tracking-wider">My Orders</h2>
-                      <span className="text-xs text-slate-400 font-bold">{orders.length} total bookings</span>
+                      <h2 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-wider">My Orders</h2>
+                      <span className="text-xs text-slate-500 dark:text-slate-400 font-bold">{orders.length} total bookings</span>
                     </div>
 
                     <div className="space-y-4">
                       {orders.map((order) => (
-                        <div key={order.id} className="border border-slate-205 dark:border-slate-800 rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm text-xs">
+                        <div key={order.id} className="border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm text-xs">
                           {/* Top row */}
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 gap-2">
                             <div>
-                              <p className="font-mono text-slate-400">Order ID: <span className="font-bold text-slate-800 dark:text-white">{order.id}</span></p>
-                              <p className="text-[10px] text-slate-455 mt-0.5">Placed on {order.date}</p>
+                              <p className="font-mono text-slate-500 dark:text-slate-400">Order ID: <span className="font-bold text-slate-900 dark:text-white">{order.id}</span></p>
+                              <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 font-semibold">Placed on {order.date}</p>
                             </div>
                             <span className={`self-start sm:self-auto px-2.5 py-1 rounded-full font-bold text-[10px] uppercase tracking-wider ${
-                              order.status === 'Delivered' ? 'bg-emerald-500/10 text-emerald-500' :
-                              order.status === 'In Transit' ? 'bg-blue-500/10 text-blue-500' :
-                              order.status === 'Cancelled' ? 'bg-rose-500/10 text-rose-500' : 'bg-amber-500/10 text-amber-500'
+                              order.status === 'Delivered' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' :
+                              order.status === 'In Transit' ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400' :
+                              order.status === 'Cancelled' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
                             }`}>{order.status}</span>
                           </div>
 
                           {/* Body thumbnails */}
                           <div className="flex items-center gap-4">
-                            <span className="text-2xl w-12 h-12 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 flex items-center justify-center shrink-0">{order.thumbnail}</span>
+                            <span className="text-2xl w-12 h-12 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-center shrink-0">{order.thumbnail}</span>
                             <div className="space-y-1">
-                              <p className="font-black text-slate-800 dark:text-slate-255 text-sm leading-none">{order.items.join(', ')}</p>
-                              <p className="text-[10px] text-slate-400 font-semibold">Total Invoice Amount: ₹{order.total.toFixed(2)}</p>
+                              <p className="font-black text-slate-900 dark:text-slate-100 text-sm leading-none">{order.items.join(', ')}</p>
+                              <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">Total Invoice Amount: ₹{order.total.toFixed(2)}</p>
                             </div>
                           </div>
 
@@ -695,7 +695,7 @@ export default function Profile({ user, onBack, onLogout }) {
                           <div className="flex flex-wrap gap-2.5 pt-2 justify-end">
                             <button
                               onClick={() => alert(`Simulating invoice download for ${order.id}`)}
-                              className="px-4.5 py-2 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-300 font-black uppercase tracking-wider cursor-pointer"
+                              className="px-4.5 py-2 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-700 dark:text-slate-300 font-black uppercase tracking-wider cursor-pointer"
                             >
                               Download Invoice
                             </button>
@@ -718,43 +718,43 @@ export default function Profile({ user, onBack, onLogout }) {
                 {activeTab === 'bookings' && (
                   <div className="space-y-6">
                     <div className="flex items-center justify-between">
-                      <h2 className="text-lg font-black text-slate-855 dark:text-white uppercase tracking-wider">{t('bookings')}</h2>
-                      <span className="text-xs text-slate-400 font-bold">{bookings.length} active bookings</span>
+                      <h2 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-wider">{t('bookings')}</h2>
+                      <span className="text-xs text-slate-500 dark:text-slate-400 font-bold">{bookings.length} active bookings</span>
                     </div>
 
                     <div className="space-y-4">
                       {bookings.map((booking) => (
-                        <div key={booking.id} className="p-5 border border-slate-205 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/30 space-y-4">
+                        <div key={booking.id} className="p-5 border border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/30 space-y-4">
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/50 dark:border-slate-800/50 pb-3 text-xs">
                             <div>
                               <p className="font-black text-[#6C3BFF] dark:text-[#8B5CF6] uppercase">{booking.id}</p>
-                              <p className="text-[10px] text-slate-400 font-semibold mt-0.5">Scheduled for: {booking.date} at {booking.time}</p>
+                              <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold mt-0.5">Scheduled for: {booking.date} at {booking.time}</p>
                             </div>
                             <span className={`px-2.5 py-0.5 rounded-full font-bold text-[9px] uppercase ${
-                              booking.status === 'Completed' ? 'bg-emerald-500/10 text-emerald-500' :
-                              booking.status === 'In Progress' ? 'bg-blue-500/10 text-blue-500' : 'bg-amber-500/10 text-amber-500'
+                              booking.status === 'Completed' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' :
+                              booking.status === 'In Progress' ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
                             }`}>{booking.status}</span>
                           </div>
 
                           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs">
                             <div className="space-y-1 text-left">
-                              <p className="text-sm font-black text-slate-800 dark:text-white">{booking.service}</p>
-                              <p className="text-[11px] text-slate-400 font-semibold">Assigned Technician: {booking.provider}</p>
+                              <p className="text-sm font-black text-slate-900 dark:text-white">{booking.service}</p>
+                              <p className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold">Assigned Technician: {booking.provider}</p>
                             </div>
-                            <p className="font-extrabold text-slate-800 dark:text-slate-200">Price: ₹{booking.price}</p>
+                            <p className="font-extrabold text-slate-900 dark:text-slate-200">Price: ₹{booking.price}</p>
                           </div>
 
                           {booking.status === 'Scheduled' && (
                             <div className="flex items-center gap-2 pt-2 text-xs">
                               <button
                                 onClick={() => alert(`Cancel request sent for booking ${booking.id}`)}
-                                className="py-2 px-4 rounded-xl border border-red-205 hover:bg-red-50 text-red-500 transition-colors font-bold cursor-pointer"
+                                className="py-2 px-4 rounded-xl border border-red-200 dark:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-950/20 text-red-600 dark:text-red-400 transition-colors font-bold cursor-pointer"
                               >
                                 Cancel Booking
                               </button>
                               <button
                                 onClick={() => alert(`Reschedule dialog for booking ${booking.id}`)}
-                                className="py-2 px-4 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-55 dark:hover:bg-slate-800 transition-colors font-bold cursor-pointer"
+                                className="py-2 px-4 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-bold cursor-pointer"
                               >
                                 Reschedule
                               </button>
@@ -771,7 +771,7 @@ export default function Profile({ user, onBack, onLogout }) {
                    ========================================== */}
                 {activeTab === 'wallet' && (
                   <div className="space-y-6">
-                    <h2 className="text-lg font-black text-slate-855 dark:text-white uppercase tracking-wider">Wallet Dashboard</h2>
+                    <h2 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-wider">Wallet Dashboard</h2>
 
                     {/* Gradient Card balance */}
                     <div className="bg-gradient-to-br from-[#6C3BFF] to-[#FF5A7A] rounded-2xl p-6 text-white shadow-premium relative overflow-hidden">
@@ -801,12 +801,12 @@ export default function Profile({ user, onBack, onLogout }) {
                           <button
                             key={idx}
                             onClick={act.action}
-                            className="flex flex-col items-center gap-2 p-3 bg-slate-50 hover:bg-[#6C3BFF]/5 dark:bg-slate-955/20 dark:hover:bg-[#6C3BFF]/10 rounded-xl border border-slate-200/50 dark:border-slate-800 transition-colors cursor-pointer text-center"
+                            className="flex flex-col items-center gap-2 p-3 bg-slate-50 hover:bg-[#6C3BFF]/5 dark:bg-slate-900 dark:hover:bg-[#6C3BFF]/10 rounded-xl border border-slate-200 dark:border-slate-800 transition-colors cursor-pointer text-center"
                           >
                             <div className="w-8 h-8 rounded-lg bg-white dark:bg-slate-900 text-[#6C3BFF] shadow-sm flex items-center justify-center">
                               <Icon size={14} />
                             </div>
-                            <span className="font-black uppercase tracking-wider text-[10px] text-slate-700 dark:text-slate-355">{act.label}</span>
+                            <span className="font-black uppercase tracking-wider text-[10px] text-slate-700 dark:text-slate-300">{act.label}</span>
                           </button>
                         );
                       })}
@@ -814,30 +814,30 @@ export default function Profile({ user, onBack, onLogout }) {
 
                     {/* Transaction History list */}
                     <div className="space-y-3 pt-2">
-                      <h3 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Transaction History</h3>
+                      <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Transaction History</h3>
                       <div className="space-y-2">
                         {transactions.map((txn) => (
-                          <div key={txn.id} className="flex items-center justify-between p-4 border border-slate-100 dark:border-slate-800/80 rounded-xl text-xs gap-3">
+                          <div key={txn.id} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-800 rounded-xl text-xs gap-3 shadow-sm bg-white dark:bg-slate-900">
                             <div className="flex items-center gap-3">
                               <div className={`w-9 h-9 rounded-lg flex items-center justify-center font-bold ${
                                 txn.type === 'Credit'
-                                  ? 'bg-emerald-500/10 text-emerald-500'
-                                  : 'bg-rose-500/10 text-rose-500'
+                                  ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                                  : 'bg-rose-500/10 text-rose-600 dark:text-rose-400'
                               }`}>
                                 {txn.type === 'Credit' ? '+' : '-'}
                               </div>
                               <div>
-                                <p className="font-black text-slate-800 dark:text-slate-250 leading-none">{txn.desc}</p>
-                                <p className="text-[10px] text-slate-400 font-semibold mt-1">{txn.date} • {txn.method}</p>
+                                <p className="font-black text-slate-900 dark:text-slate-100 leading-none">{txn.desc}</p>
+                                <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold mt-1">{txn.date} • {txn.method}</p>
                               </div>
                             </div>
                             <div className="text-right space-y-1">
                               <p className={`font-black ${
-                                txn.type === 'Credit' ? 'text-emerald-500' : 'text-rose-500'
+                                txn.type === 'Credit' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'
                               }`}>
                                 {txn.type === 'Credit' ? '+' : '-'}₹{txn.amount}
                               </p>
-                              <span className="text-[9px] font-bold uppercase text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded-full">{txn.status}</span>
+                              <span className="text-[9px] font-bold uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-full">{txn.status}</span>
                             </div>
                           </div>
                         ))}
@@ -851,7 +851,7 @@ export default function Profile({ user, onBack, onLogout }) {
                    ========================================== */}
                 {activeTab === 'rewards' && (
                   <div className="space-y-6">
-                    <h2 className="text-lg font-black text-slate-855 dark:text-white uppercase tracking-wider">{t('rewards')}</h2>
+                    <h2 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-wider">{t('rewards')}</h2>
 
                     {/* Points Balance Card */}
                     <div className="bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl p-6 text-white shadow-premium relative overflow-hidden">
@@ -1625,8 +1625,10 @@ function ProfileForm({ profile, onSave }) {
     setIsEditing(false);
   };
 
+  const inputStyle = { WebkitTextFillColor: 'currentColor' };
+
   return (
-    <form onSubmit={handleSubmit} className="bg-slate-50 dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4 text-xs font-semibold">
+    <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4 text-xs font-semibold shadow-sm">
       
       {/* Photo Initial */}
       <div className="flex items-center gap-4">
@@ -1634,7 +1636,7 @@ function ProfileForm({ profile, onSave }) {
           <span>{name.charAt(0).toUpperCase()}</span>
         </div>
         <div>
-          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Profile Photo</p>
+          <p className="text-xs text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider">Profile Photo</p>
           <button type="button" onClick={() => alert('Mock: Uploader modal')} className="mt-1 text-[#6C3BFF] font-black uppercase text-[10px] hover:underline cursor-pointer">
             Upload New Photo
           </button>
@@ -1646,50 +1648,57 @@ function ProfileForm({ profile, onSave }) {
         
         {/* Full Name */}
         <div className="space-y-1.5">
-          <label className="font-bold text-slate-655 dark:text-slate-400 uppercase tracking-wide">Full Name</label>
+          <label className="block text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wide">Full Name</label>
           <input
             type="text"
             value={name}
+            readOnly={!isEditing}
             disabled={!isEditing}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-955 disabled:bg-slate-100 disabled:text-slate-455 dark:disabled:bg-slate-900"
+            style={inputStyle}
+            className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-slate-100 disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
           />
         </div>
 
         {/* Email */}
         <div className="space-y-1.5">
-          <label className="font-bold text-slate-655 dark:text-slate-400 uppercase tracking-wide">Email Address</label>
+          <label className="block text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wide">Email Address</label>
           <input
             type="email"
             value={email}
+            readOnly={!isEditing}
             disabled={!isEditing}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-955 disabled:bg-slate-100 disabled:text-slate-455 dark:disabled:bg-slate-900"
+            style={inputStyle}
+            className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-slate-100 disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
           />
         </div>
 
         {/* Mobile (Read Only) */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="font-bold text-slate-655 dark:text-slate-400 uppercase tracking-wide">Mobile Number</label>
-            <span className="text-[9px] font-bold text-slate-400 uppercase">Read Only</span>
+            <label className="block text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wide">Mobile Number</label>
+            <span className="text-[10px] font-black text-slate-700 dark:text-slate-300 uppercase bg-slate-200/90 dark:bg-slate-800/80 px-2 py-0.5 rounded-md tracking-wider">Read Only</span>
           </div>
           <input
             type="text"
             value={phone}
+            readOnly
             disabled
-            className="w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none bg-slate-100 text-slate-455 dark:bg-slate-900"
+            style={inputStyle}
+            className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-900 disabled:bg-slate-100 disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm"
           />
         </div>
 
         {/* Gender Selection */}
         <div className="space-y-1.5">
-          <label className="font-bold text-slate-655 dark:text-slate-400 uppercase tracking-wide">Gender</label>
+          <label className="block text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wide">Gender</label>
           <select
             value={gender}
             disabled={!isEditing}
             onChange={(e) => setGender(e.target.value)}
-            className="w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-955 disabled:bg-slate-100 disabled:text-slate-455 dark:disabled:bg-slate-900 font-semibold"
+            style={inputStyle}
+            className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-slate-100 disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
           >
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -1699,13 +1708,15 @@ function ProfileForm({ profile, onSave }) {
 
         {/* Date of Birth */}
         <div className="space-y-1.5">
-          <label className="font-bold text-slate-655 dark:text-slate-400 uppercase tracking-wide">Date of Birth</label>
+          <label className="block text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wide">Date of Birth</label>
           <input
             type="date"
             value={dob}
+            readOnly={!isEditing}
             disabled={!isEditing}
             onChange={(e) => setDob(e.target.value)}
-            className="w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-955 disabled:bg-slate-100 disabled:text-slate-455 dark:disabled:bg-slate-900 font-semibold"
+            style={inputStyle}
+            className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-slate-100 disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
           />
         </div>
 
@@ -1717,7 +1728,7 @@ function ProfileForm({ profile, onSave }) {
           <button
             type="button"
             onClick={() => setIsEditing(true)}
-            className="px-6 py-2.5 border border-slate-250 dark:border-slate-800 hover:bg-slate-100 rounded-xl font-bold uppercase tracking-wider cursor-pointer"
+            className="px-6 py-2.5 border border-slate-300 dark:border-slate-700 bg-white hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-900 dark:text-white rounded-xl font-black uppercase tracking-wider cursor-pointer shadow-sm transition-colors"
           >
             Edit Profile
           </button>
@@ -1732,13 +1743,13 @@ function ProfileForm({ profile, onSave }) {
                 setDob(profile.dob || '');
                 setIsEditing(false);
               }}
-              className="px-5 py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 rounded-xl font-bold uppercase tracking-wider cursor-pointer"
+              className="px-5 py-2.5 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-bold uppercase tracking-wider cursor-pointer transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-6 py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-bold uppercase tracking-wider cursor-pointer shadow-sm"
+              className="px-6 py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-black uppercase tracking-wider cursor-pointer shadow-sm"
             >
               Save Changes
             </button>

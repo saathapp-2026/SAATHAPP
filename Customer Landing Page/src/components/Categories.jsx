@@ -49,7 +49,7 @@ export default function Categories({ onCategorySelect, activeCategory }) {
         {/* Header Title with navigation arrows */}
         <div className="flex items-center justify-between mb-6">
           <div className="text-left">
-            <span className="text-xs font-extrabold text-primary tracking-wider uppercase block">Explore Categories</span>
+            <span className="text-xs font-extrabold text-primary dark:text-emerald-400 tracking-wider uppercase block">Explore Categories</span>
             <h2 className="text-2xl font-black text-slate-900 dark:text-white mt-1">What are you looking for?</h2>
           </div>
         </div>

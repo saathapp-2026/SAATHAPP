@@ -34,20 +34,20 @@ export default function WishlistTab({ wishlist, setWishlist, cart, setCart }) {
   return (
     <div className="space-y-6 text-left">
       <div>
-        <h2 className="text-lg font-black text-slate-855 dark:text-white uppercase tracking-wider">My Wishlist</h2>
+        <h2 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-wider">My Wishlist</h2>
         <p className="text-xs text-slate-400 font-semibold mt-0.5">Your pinned products and materials for future purchases.</p>
       </div>
 
       {wishlist.length === 0 ? (
-        <div className="p-8 text-center bg-slate-55 dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl space-y-2">
-          <span className="text-3xl block">❤️</span>
+        <div className="p-8 text-center bg-slate-50 dark:bg-slate-950/20 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-2">
+          <Heart size={32} className="mx-auto text-slate-400" />
           <p className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Your wishlist is empty</p>
-          <p className="text-xs text-slate-400 font-semibold">Explore local stores on the homepage to pin products here.</p>
+          <p className="text-[11px] text-slate-500 font-semibold">Save your favorite services or products to quickly access them later.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {wishlist.map((item) => (
-            <div key={item.id} className="p-4 bg-slate-50/50 dark:bg-slate-955/10 rounded-2xl border border-slate-205 dark:border-slate-800 flex items-center justify-between gap-4">
+            <div key={item.id} className="p-4 bg-slate-50/50 dark:bg-slate-950/10 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <span className="text-2xl w-12 h-12 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-center shadow-sm">
                   {item.image || '💡'}

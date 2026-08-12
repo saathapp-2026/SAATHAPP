@@ -213,7 +213,7 @@ export default function FeaturedProducts({
                         onClick={() => onAddToCart(product, 1)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="h-9 px-4 rounded-btn bg-primary/10 hover:bg-primary text-primary hover:text-white font-extrabold text-xs transition-colors flex items-center gap-1 border border-primary/20 hover:border-transparent"
+                        className="h-9 px-4 rounded-btn bg-primary/10 dark:bg-emerald-500/20 hover:bg-primary text-primary dark:text-emerald-400 hover:text-white font-extrabold text-xs transition-colors flex items-center gap-1 border border-primary/20 dark:border-emerald-500/30 hover:border-transparent"
                       >
                         <ShoppingCart size={13} />
                         <span>ADD</span>
