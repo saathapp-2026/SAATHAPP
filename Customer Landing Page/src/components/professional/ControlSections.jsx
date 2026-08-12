@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Crown, Package, ShieldCheck, Wrench, FileText, IndianRupee, CheckCircle2, AlertCircle, ClipboardList, MapPin, User, Clock, Settings, Phone, LifeBuoy, Briefcase, Star
+  Crown, Package, ShieldCheck, Wrench, FileText, IndianRupee, CheckCircle2, AlertCircle, ClipboardList, MapPin, User, Clock, Settings, Phone, LifeBuoy, Briefcase, Star, ScrollText
 } from 'lucide-react';
 import ProfileCard from './ProfileCard';
 import AvailabilityCard from './AvailabilityCard';
