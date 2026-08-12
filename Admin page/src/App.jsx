@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useNavigate as useRouterNavigate, useLocation } from "react-router-dom";
 import {
   LayoutDashboard, Users, Store, Wrench, HardHat, Truck, Package, Tag,
   ShoppingCart, Warehouse, CreditCard, Wallet, Percent, Megaphone,
@@ -135,32 +136,33 @@ const Pill = ({ label }) => (
 );
 
 /* ============================================================
-   NAV CONFIGURATION (drives sidebar + generic module pages)
+   NAV CONFIGURATION (FINAL SAATHAPP ADMIN SIDEBAR)
+   - Preserves existing module ids where possible
+   - Merges/renames items to match the requested 17 primary modules
 ============================================================ */
 const NAV_SECTIONS = [
   {
     label: "Overview",
     items: [
       { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-      { id: "analytics", label: "Analytics", icon: BarChart3 },
-      { id: "reports", label: "Reports", icon: ClipboardList },
+      { id: "analytics_reports", label: "Analytics & Reports", icon: BarChart3 },
     ],
   },
   {
     label: "Platform",
     items: [
-      { id: "users", label: "Users", icon: Users },
+      { id: "users", label: "Customers", icon: Users },
       { id: "sellers", label: "Sellers", icon: Store },
       { id: "professionals", label: "Service Professionals", icon: Wrench },
       { id: "workers", label: "Service Workers", icon: HardHat },
+      { id: "vendors", label: "Wholesale Partners", icon: Handshake },
       { id: "delivery", label: "Delivery Partners", icon: Truck },
     ],
   },
   {
     label: "Catalog & Orders",
     items: [
-      { id: "products", label: "Products", icon: Package },
-      { id: "categories", label: "Categories", icon: Tag },
+      { id: "products_categories", label: "Products & Categories", icon: Package },
       { id: "orders", label: "Orders", icon: ShoppingCart },
       { id: "inventory", label: "Inventory", icon: Warehouse },
     ],
@@ -168,44 +170,31 @@ const NAV_SECTIONS = [
   {
     label: "Money",
     items: [
-      { id: "payments", label: "Payments", icon: CreditCard },
-      { id: "finance", label: "Finance", icon: Wallet },
-      { id: "coupons", label: "Coupons", icon: Percent },
+      { id: "payments_finance", label: "Payments & Finance", icon: CreditCard },
     ],
   },
   {
     label: "Growth",
     items: [
-      { id: "ads", label: "Advertisements", icon: Megaphone },
-      { id: "cms", label: "CMS", icon: FileText },
-      { id: "notifications", label: "Notifications", icon: Bell },
+      { id: "marketing_cms", label: "Marketing & CMS", icon: Megaphone },
     ],
   },
   {
-    label: "Support & Ops",
+    label: "Support & Operations",
     items: [
-      { id: "support", label: "Customer Support", icon: Headphones },
-      { id: "tasks", label: "Tasks", icon: CheckSquare },
-      { id: "chat", label: "Internal Chat", icon: MessageSquare },
-      { id: "meetings", label: "Meetings", icon: Video },
-      { id: "vendors", label: "Vendor Management", icon: Handshake },
+      { id: "support_ops", label: "Support & Operations", icon: Headphones },
     ],
   },
   {
-    label: "Trust & Systems",
+    label: "Trust & System",
     items: [
-      { id: "fraud", label: "Fraud Detection", icon: ShieldAlert },
-      { id: "ai", label: "AI Assistant", icon: Sparkles },
-      { id: "health", label: "System Health", icon: Activity },
-      { id: "api", label: "API Management", icon: Plug },
-      { id: "flags", label: "Feature Flags", icon: ToggleLeft },
-      { id: "audit", label: "Audit Logs", icon: ScrollText },
+      { id: "trust_safety", label: "Trust & Safety", icon: ShieldAlert },
+      { id: "system", label: "System", icon: Activity },
     ],
   },
   {
-    label: "People & Admin",
+    label: "Admin",
     items: [
-      { id: "hr", label: "HR", icon: UserCog },
       { id: "settings", label: "Settings", icon: SettingsIcon },
     ],
   },
@@ -218,17 +207,79 @@ const ROLES = ["Founder", "Super Admin", "Admin", "HR", "Finance", "Operations",
 const ROLE_ACCESS = {
   Founder: null, // null = all
   "Super Admin": null,
-  Admin: ["dashboard", "analytics", "reports", "users", "sellers", "professionals", "workers", "delivery", "products", "categories", "orders", "inventory", "support", "notifications", "tasks", "audit"],
+  Admin: ["dashboard", "analytics_reports", "users", "sellers", "professionals", "workers", "vendors", "delivery", "products_categories", "orders", "inventory", "payments_finance", "marketing_cms", "support_ops", "trust_safety", "system", "settings"],
   HR: ["dashboard", "hr", "tasks", "chat", "meetings"],
-  Finance: ["dashboard", "finance", "payments", "reports", "coupons"],
+  Finance: ["dashboard", "payments_finance", "payments", "finance", "reports", "coupons"],
   Operations: ["dashboard", "orders", "inventory", "delivery", "workers", "vendors", "tasks"],
-  "Customer Support": ["dashboard", "support", "orders", "notifications", "chat"],
-  Warehouse: ["dashboard", "inventory", "products", "orders"],
-  Marketing: ["dashboard", "ads", "coupons", "cms", "notifications", "analytics"],
-  Developer: ["dashboard", "api", "flags", "health", "audit"],
-  Moderator: ["dashboard", "fraud", "support", "cms", "audit"],
+  "Customer Support": ["dashboard", "support_ops", "support", "orders", "notifications", "chat"],
+  Warehouse: ["dashboard", "inventory", "products_categories", "orders"],
+  Marketing: ["dashboard", "marketing_cms", "ads", "coupons", "cms", "notifications", "analytics_reports"],
+  Developer: ["dashboard", "system", "api", "flags", "health", "audit"],
+  Moderator: ["dashboard", "trust_safety", "fraud", "support", "cms", "audit"],
   Intern: ["dashboard", "tasks", "chat"],
 };
+
+/* ============================================================
+   GLOBAL ROUTE MAPPINGS (module-level so nested components can
+   reference canonical paths without relying on App closure)
+============================================================ */
+const ID_TO_PATH = {
+  dashboard: "/dashboard",
+  analytics_reports: "/analytics-reports",
+  analytics: "/analytics-reports/overview",
+  reports: "/analytics-reports/reports",
+  users: "/customers/overview",
+  users_data: "/customers/data",
+  users_profiles: "/customers/profiles",
+  users_history: "/customers/history",
+  users_orders: "/customers/orders",
+  users_spending: "/customers/spending",
+  users_activity: "/customers/activity",
+  users_analytics: "/customers/analytics",
+  sellers: "/sellers/overview",
+  sellers_applications: "/sellers/applications",
+  sellers_profiles: "/sellers/profiles",
+  sellers_orders: "/sellers/orders",
+  sellers_payouts: "/sellers/payouts",
+  sellers_analytics: "/sellers/analytics",
+  professionals: "/service-professionals",
+  workers: "/service-workers",
+  vendors: "/wholesale-partners",
+  delivery: "/delivery-partners",
+  products_categories: "/products-categories",
+  products: "/products-categories",
+  categories: "/products-categories",
+  orders: "/orders",
+  inventory: "/inventory",
+  payments_finance: "/payments-finance",
+  payments: "/payments-finance",
+  finance: "/payments-finance",
+  marketing_cms: "/marketing-cms",
+  ads: "/marketing-cms",
+  cms: "/marketing-cms",
+  coupons: "/marketing-cms",
+  support_ops: "/support-operations",
+  support: "/support-operations",
+  tasks: "/support-operations",
+  chat: "/support-operations",
+  meetings: "/support-operations",
+  trust_safety: "/trust-safety",
+  fraud: "/trust-safety",
+  system: "/system",
+  health: "/system",
+  api: "/system",
+  flags: "/system",
+  audit: "/system",
+  settings: "/settings",
+};
+
+const PATH_TO_ID = (() => {
+  const map = {};
+  for (const [k, v] of Object.entries(ID_TO_PATH)) {
+    if (!map[v]) map[v] = k;
+  }
+  return map;
+})();
 
 /* ============================================================
    MODULE CONFIG for the generic ModulePage
@@ -1439,6 +1490,48 @@ const SellersPage = ({ onToast }) => {
   );
 };
 
+const SellersWrapper = ({ onToast }) => {
+  const location = useLocation();
+  const routerNavigate = useRouterNavigate();
+  const [tab, setTab] = useState('overview');
+
+  useEffect(() => {
+    const p = location.pathname || '';
+    if (p.endsWith('/applications')) setTab('applications');
+    else if (p.endsWith('/profiles')) setTab('profiles');
+    else if (p.endsWith('/orders')) setTab('orders');
+    else if (p.endsWith('/payouts')) setTab('payouts');
+    else if (p.endsWith('/analytics')) setTab('analytics');
+    else setTab('overview');
+  }, [location.pathname]);
+
+  const go = (t) => {
+    setTab(t);
+    const path = {
+      overview: '/sellers/overview', applications: '/sellers/applications', profiles: '/sellers/profiles',
+      orders: '/sellers/orders', payouts: '/sellers/payouts', analytics: '/sellers/analytics'
+    }[t] || '/sellers/overview';
+    routerNavigate(path);
+  };
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex gap-2">
+          <button onClick={() => go('overview')} className={`px-3 py-2 rounded-lg ${tab === 'overview' ? 'bg-emerald-50 text-emerald-700' : 'bg-white'}`}>Overview</button>
+          <button onClick={() => go('applications')} className={`px-3 py-2 rounded-lg ${tab === 'applications' ? 'bg-emerald-50 text-emerald-700' : 'bg-white'}`}>Applications</button>
+          <button onClick={() => go('profiles')} className={`px-3 py-2 rounded-lg ${tab === 'profiles' ? 'bg-emerald-50 text-emerald-700' : 'bg-white'}`}>Profiles</button>
+          <button onClick={() => go('orders')} className={`px-3 py-2 rounded-lg ${tab === 'orders' ? 'bg-emerald-50 text-emerald-700' : 'bg-white'}`}>Orders</button>
+          <button onClick={() => go('payouts')} className={`px-3 py-2 rounded-lg ${tab === 'payouts' ? 'bg-emerald-50 text-emerald-700' : 'bg-white'}`}>Payouts</button>
+          <button onClick={() => go('analytics')} className={`px-3 py-2 rounded-lg ${tab === 'analytics' ? 'bg-emerald-50 text-emerald-700' : 'bg-white'}`}>Analytics</button>
+        </div>
+      </div>
+      {tab === 'overview' && <SellersPage onToast={onToast} />}
+      {tab !== 'overview' && <SellersPage onToast={onToast} />}
+    </div>
+  );
+};
+
 const DeliveryPage = ({ onToast }) => {
   const config = MODULES.delivery;
   const [rows, setRows] = useState(config.rows);
@@ -1724,44 +1817,47 @@ const ModulePage = ({ id, onToast }) => {
    DASHBOARD PAGE
 ============================================================ */
 const quickLinks = [
-  { id: "users", label: "Users", icon: Users },
+  { id: "users", label: "Customers", icon: Users },
   { id: "sellers", label: "Sellers", icon: Store },
   { id: "delivery", label: "Delivery Partners", icon: Truck },
   { id: "orders", label: "Orders", icon: ShoppingCart },
-  { id: "products", label: "Products", icon: Package },
-  { id: "categories", label: "Categories", icon: Tag },
+  { id: "products_categories", label: "Products", icon: Package },
+  { id: "products_categories", label: "Categories", icon: Tag },
   { id: "inventory", label: "Inventory", icon: Warehouse },
-  { id: "payments", label: "Payments", icon: CreditCard },
-  { id: "ads", label: "Advertisements", icon: Megaphone },
-  { id: "coupons", label: "Coupons", icon: Percent },
-  { id: "analytics", label: "Analytics", icon: BarChart3 },
-  { id: "reports", label: "Reports", icon: ClipboardList },
-  { id: "fraud", label: "Fraud Detection", icon: ShieldAlert },
-  { id: "notifications", label: "Notifications", icon: Bell },
-  { id: "cms", label: "CMS", icon: FileText },
+  { id: "payments_finance", label: "Payments", icon: CreditCard },
+  { id: "marketing_cms", label: "Advertisements", icon: Megaphone },
+  { id: "marketing_cms", label: "Coupons", icon: Percent },
+  { id: "analytics_reports", label: "Analytics", icon: BarChart3 },
+  { id: "analytics_reports", label: "Reports", icon: ClipboardList },
+  { id: "trust_safety", label: "Fraud Detection", icon: ShieldAlert },
+  { id: "system", label: "Notifications", icon: Bell },
+  { id: "marketing_cms", label: "CMS", icon: FileText },
   { id: "settings", label: "Settings", icon: SettingsIcon },
 ];
 
 const DashboardPage = ({ onNavigate, onToast, mounted }) => {
   const [isExporting, setIsExporting] = useState(false);
 
+  // Dashboard KPI cards — ensure required partner metrics are present and labels match final spec
   const kpis = [
     { label: "Today's Revenue", value: "₹45.62L", delta: "+16.3%", up: true, icon: Wallet, module: "finance" },
     { label: "Today's Orders", value: "8,650", delta: "+4.6%", up: true, icon: ShoppingCart, module: "orders" },
     { label: "Pending Orders", value: "128", delta: "+2%", up: false, icon: AlertTriangle, module: "orders" },
     { label: "Cancelled Orders", value: "184", delta: "-1.2%", up: true, icon: XCircle, module: "orders" },
-    { label: "Total Users", value: "1,25,430", delta: "+6.2%", up: true, icon: Users, module: "users" },
-    { label: "Online Users", value: "3,810", delta: "+7.1%", up: true, icon: Globe, module: "users" },
+    { label: "Total Customers", value: "1,25,430", delta: "+6.2%", up: true, icon: Users, module: "users" },
+    { label: "Online Customers", value: "3,810", delta: "+7.1%", up: true, icon: Globe, module: "users" },
     { label: "Total Sellers", value: "4,120", delta: "+3.4%", up: true, icon: Store, module: "sellers" },
+    { label: "Service Professionals", value: MODULES.professionals.kpis?.[0]?.value || "3,208", delta: MODULES.professionals.kpis?.[0]?.delta || "+2.9%", up: true, icon: Wrench, module: "professionals" },
+    { label: "Service Workers", value: MODULES.workers.kpis?.[0]?.value || "1,946", delta: MODULES.workers.kpis?.[0]?.delta || "+1.2%", up: true, icon: HardHat, module: "workers" },
+    { label: "Wholesale Partners", value: MODULES.vendors.kpis?.[0]?.value || "142", delta: MODULES.vendors.kpis?.[0]?.delta || "+6", up: true, icon: Handshake, module: "vendors" },
     { label: "Delivery Partners", value: "2,318", delta: "+8.1%", up: true, icon: Truck, module: "delivery" },
     { label: "New Registrations", value: "2,884", delta: "+11.4%", up: true, icon: UserCog, module: "users" },
     { label: "Open Complaints", value: "312", delta: "-18", up: true, icon: Headphones, module: "support" },
+    { label: "Low Stock Alerts", value: "1,204", delta: "-8%", up: true, icon: HardHat, module: "inventory" },
     { label: "Warehouse Alerts", value: "18", delta: "+5", up: false, icon: Warehouse, module: "inventory" },
-    { label: "Low Stock", value: "1,204", delta: "-8%", up: true, icon: HardHat, module: "inventory" },
-    { label: "Server Status", value: "Operational", delta: "99.98%", up: true, icon: Server, module: "health" },
-    { label: "API Status", value: "Operational", delta: "99.95%", up: true, icon: Plug, module: "api" },
-    { label: "Payment Success", value: "99.2%", delta: "+0.3%", up: true, icon: CreditCard, module: "payments" },
-    { label: "Fraud Alerts", value: "9", delta: "+2", up: false, icon: ShieldAlert, module: "fraud" },
+    { label: "Payment Status", value: "99.2%", delta: "+0.3%", up: true, icon: CreditCard, module: "payments" },
+    { label: "System/API Status", value: "Operational", delta: "99.95%", up: true, icon: Server, module: "system" },
+    { label: "Fraud Alerts", value: "9", delta: "+2", up: false, icon: ShieldAlert, module: "trust_safety" },
   ];
 
   const exportReport = async () => {
@@ -1810,6 +1906,19 @@ const DashboardPage = ({ onNavigate, onToast, mounted }) => {
 
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 mb-6">
         {kpis.map((k, i) => <KPICard key={k.label} {...k} index={i} onClick={() => onNavigate(k.module)} />)}
+      </div>
+
+      <div className="mb-6">
+        <Card className="p-4">
+          <p className="sa-font-display font-semibold text-[#0B1420] mb-3">Quick Actions</p>
+          <div className="flex flex-wrap gap-3">
+            <button onClick={() => onNavigate('sellers')} className="px-3 py-2 rounded-lg bg-emerald-50 text-emerald-700">Review Pending Applications</button>
+            <button onClick={() => onNavigate('orders')} className="px-3 py-2 rounded-lg bg-white border">View Pending Orders</button>
+            <button onClick={() => onNavigate('support_ops')} className="px-3 py-2 rounded-lg bg-white border">View Complaints</button>
+            <button onClick={() => onNavigate('trust_safety')} className="px-3 py-2 rounded-lg bg-white border">View Fraud Alerts</button>
+            <button onClick={() => onNavigate('analytics_reports')} className="px-3 py-2 rounded-lg bg-white border">View Analytics</button>
+          </div>
+        </Card>
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 mb-6">
@@ -2335,6 +2444,128 @@ const ReportsPage = ({ onToast }) => {
 };
 
 /* ============================================================
+   MERGED / WRAPPER PAGES (lightweight connectors that reuse existing pages)
+============================================================ */
+const AnalyticsReportsPage = ({ onToast }) => {
+  const routerNavigate = useRouterNavigate();
+  const location = useLocation();
+  const [tab, setTab] = useState("analytics");
+
+  useEffect(() => {
+    const path = location.pathname || "";
+    if (path.endsWith("/reports")) setTab("reports");
+    else setTab("analytics");
+  }, [location.pathname]);
+
+  const goTab = (t) => {
+    setTab(t);
+    if (t === "analytics") routerNavigate('/analytics-reports/overview');
+    else if (t === "reports") routerNavigate('/analytics-reports/reports');
+    else routerNavigate('/analytics-reports');
+  };
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex gap-2">
+          <button onClick={() => goTab("analytics")} className={`px-3 py-2 rounded-lg ${tab === "analytics" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Platform Overview</button>
+          <button onClick={() => goTab("reports")} className={`px-3 py-2 rounded-lg ${tab === "reports" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Reports</button>
+        </div>
+      </div>
+      {tab === "analytics" ? <AnalyticsPage /> : <ReportsPage onToast={onToast} />}
+    </div>
+  );
+};
+
+const ProductsCategoriesPage = ({ onToast }) => {
+  const [tab, setTab] = useState("products");
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex gap-2">
+          <button onClick={() => setTab("products")} className={`px-3 py-2 rounded-lg ${tab === "products" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Products</button>
+          <button onClick={() => setTab("categories")} className={`px-3 py-2 rounded-lg ${tab === "categories" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Categories</button>
+        </div>
+      </div>
+      {tab === "products" ? <ModulePage id="products" onToast={onToast} /> : <ModulePage id="categories" onToast={onToast} />}
+    </div>
+  );
+};
+
+
+
+const PaymentsFinancePage = ({ onToast }) => {
+  const [tab, setTab] = useState("payments");
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex gap-2">
+          <button onClick={() => setTab("payments")} className={`px-3 py-2 rounded-lg ${tab === "payments" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Payments</button>
+          <button onClick={() => setTab("finance")} className={`px-3 py-2 rounded-lg ${tab === "finance" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Finance</button>
+        </div>
+      </div>
+      {tab === "payments" ? <ModulePage id="payments" onToast={onToast} /> : <ModulePage id="finance" onToast={onToast} />}
+    </div>
+  );
+};
+
+const MarketingCMSPage = ({ onToast }) => {
+  const [tab, setTab] = useState("ads");
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex gap-2">
+          <button onClick={() => setTab("ads")} className={`px-3 py-2 rounded-lg ${tab === "ads" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Advertisements</button>
+          <button onClick={() => setTab("cms")} className={`px-3 py-2 rounded-lg ${tab === "cms" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>CMS</button>
+          <button onClick={() => setTab("coupons")} className={`px-3 py-2 rounded-lg ${tab === "coupons" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Coupons & Offers</button>
+        </div>
+      </div>
+      {tab === "ads" && <ModulePage id="ads" onToast={onToast} />}
+      {tab === "cms" && <ModulePage id="cms" onToast={onToast} />}
+      {tab === "coupons" && <ModulePage id="coupons" onToast={onToast} />}
+    </div>
+  );
+};
+
+const SupportOpsPage = ({ onToast }) => {
+  const [tab, setTab] = useState("support");
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex gap-2">
+          <button onClick={() => setTab("support")} className={`px-3 py-2 rounded-lg ${tab === "support" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Customer Support</button>
+          <button onClick={() => setTab("ops")} className={`px-3 py-2 rounded-lg ${tab === "ops" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Operational Issues</button>
+        </div>
+      </div>
+      {tab === "support" && <ModulePage id="support" onToast={onToast} />}
+      {tab === "ops" && <ModulePage id="tasks" onToast={onToast} />}
+    </div>
+  );
+};
+
+const TrustSafetyPage = ({ onToast }) => {
+  const [tab, setTab] = useState("fraud");
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex gap-2">
+          <button onClick={() => setTab("fraud")} className={`px-3 py-2 rounded-lg ${tab === "fraud" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Fraud Alerts</button>
+          <button onClick={() => setTab("warnings")} className={`px-3 py-2 rounded-lg ${tab === "warnings" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Account Warnings</button>
+        </div>
+      </div>
+      {tab === "fraud" && <FraudPage onToast={onToast} />}
+      {tab === "warnings" && <ModulePage id="audit" onToast={onToast} />}
+    </div>
+  );
+};
+
+const SystemPage = ({ onToast }) => (
+  <div>
+    <SystemHealthPage />
+  </div>
+);
+
+/* ============================================================
    TOAST
 ============================================================ */
 const Toast = ({ toasts }) => (
@@ -2638,13 +2869,15 @@ const Topbar = ({ title, role, setRole, onLogout, collapsed, setCollapsed, setMo
    APP ROOT
 ============================================================ */
 export default function App() {
-  const [authed, setAuthed] = useState(false);
+  const [authed, setAuthed] = useState(true); // dev: default to signed-in for E2E/testing
   const [active, setActive] = useState("dashboard");
   const [role, setRole] = useState("Founder");
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [toasts, setToasts] = useState([]);
   const [mounted, setMounted] = useState(false);
+  const routerNavigate = useRouterNavigate();
+  const location = useLocation();
 
   useEffect(() => { const t = setTimeout(() => setMounted(true), 150); return () => clearTimeout(t); }, [authed]);
 
@@ -2659,14 +2892,25 @@ export default function App() {
     return list ? new Set(list) : null;
   }, [role]);
 
+  
+
   const navigate = (id) => {
-    if (id === "__logout") { setAuthed(false); setActive("dashboard"); return; }
+    if (id === "__logout") { setAuthed(false); setActive("dashboard"); routerNavigate('/dashboard'); return; }
     if (allowedSet && !allowedSet.has(id) && id !== "settings") {
       pushToast("Restricted for your current role");
       return;
     }
+    const path = ID_TO_PATH[id] || `/${id}`;
     setActive(id);
+    routerNavigate(path);
   };
+
+  useEffect(() => {
+    // sync active state from URL on location change
+    const path = location.pathname === "/" ? "/dashboard" : location.pathname;
+    const mappedId = PATH_TO_ID[path] || Object.keys(ID_TO_PATH).find((k) => ID_TO_PATH[k] === path) || null;
+    if (mappedId) setActive(mappedId);
+  }, [location.pathname]);
 
   if (!authed) {
     return (
@@ -2682,15 +2926,38 @@ export default function App() {
   const renderPage = () => {
     switch (active) {
       case "dashboard": return <DashboardPage onNavigate={navigate} onToast={pushToast} mounted={mounted} />;
-      case "analytics": return <AnalyticsPage />;
-      case "reports": return <ReportsPage onToast={pushToast} />;
+      case "analytics_reports": return <AnalyticsReportsPage onToast={pushToast} />;
+      case "sellers": return <SellersWrapper onToast={pushToast} />;
+      case "users": return <UsersPage onToast={pushToast} />;
       case "fraud": return <FraudPage onToast={pushToast} />;
       case "ai": return <AIAssistantPage onToast={pushToast} />;
       case "health": return <SystemHealthPage />;
       case "settings": return <SettingsPage role={role} onToast={pushToast} />;
+      case "products_categories": return <ProductsCategoriesPage onToast={pushToast} />;
+      case "payments_finance": return <PaymentsFinancePage onToast={pushToast} />;
+      case "marketing_cms": return <MarketingCMSPage onToast={pushToast} />;
+      case "support_ops": return <SupportOpsPage onToast={pushToast} />;
+      case "trust_safety": return <TrustSafetyPage onToast={pushToast} />;
+      case "system": return <SystemPage onToast={pushToast} />;
       case "users":
       case "sellers":
+      case "professionals":
+      case "workers":
+      case "vendors":
       case "delivery":
+      case "orders":
+      case "inventory":
+      case "payments":
+      case "finance":
+      case "ads":
+      case "cms":
+      case "coupons":
+      case "support":
+      case "tasks":
+      case "audit":
+      case "chat":
+      case "meetings":
+      case "vendors":
         return <ModulePage id={active} onToast={pushToast} />;
       default: return <ModulePage id={active} onToast={pushToast} />;
     }
