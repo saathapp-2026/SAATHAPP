@@ -23,7 +23,7 @@ import { getStoredProfessionalMembership, saveProfessionalMembership } from '../
 import { getWelcomeKitEligibilityStatus } from '../../config/professional/welcomeKitConfig';
 import { getStoredPartnerSession } from '../../services/authService';
 import { getProfessionalPricingConfig } from '../../config/professionalOnboardingConfig';
-import { MembershipSection, DocumentsSection, EquipmentSection, ProfileSettingsSection, HelpSupportModule } from '../../components/professional/ControlSections';
+import { ProfessionalProfileSection, MembershipSection, DocumentsSection, EquipmentSection, ProfileSettingsSection, HelpSupportModule } from '../../components/professional/ControlSections';
 
 const EMPTY_STATS = {
   totalEarnings: 0,
