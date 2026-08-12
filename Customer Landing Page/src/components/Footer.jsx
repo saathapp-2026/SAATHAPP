@@ -17,11 +17,11 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-slate-900 text-slate-400 pt-16 pb-8 border-t border-slate-800 text-left">
+    <footer className="bg-slate-900 text-slate-400 pt-4 pb-8 border-t border-slate-800 text-left">
       <div className="w-full px-4 sm:px-6 lg:px-8">
 
         {/* Main Segment: Logo Block (Left) + Links Grid Columns (Right) in Same Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 py-12 border-b border-slate-800">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 pt-4 pb-10 border-b border-slate-800">
 
           {/* Logo Brand info (Left side) */}
           <div className="lg:col-span-3 flex flex-col justify-between h-full space-y-4">
