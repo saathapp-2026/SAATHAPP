@@ -79,7 +79,8 @@ export default function BookingCard({
         {/* Amount & Time highlights */}
         <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-1">
           <div className="flex items-center text-slate-800 dark:text-white">
-            <span className="text-sm font-black">₹{booking.amount}</span>
+            <span className="text-[10px] text-slate-400 mr-2">Est. ₹{booking.estimatedPrice || booking.amount}</span>
+            <span className="text-sm font-black">Final ₹{booking.amount}</span>
           </div>
           <span className="text-[10px] font-bold text-slate-400 uppercase">Settlement Rate</span>
         </div>
@@ -132,23 +133,39 @@ export default function BookingCard({
           )}
 
           {booking.status === 'upcoming' && (
-            <button
-              onClick={() => onNavigate(booking.id)}
-              className="px-4 py-1.5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white text-[10px] font-extrabold uppercase cursor-pointer shadow-sm flex items-center gap-1"
-            >
-              <Navigation size={10} />
-              <span>Travel GPS</span>
-            </button>
+            <>
+              <button
+                onClick={() => alert('Reschedule requested.')}
+                className="px-3 py-1.5 rounded-btn border border-amber-200 hover:bg-amber-50 text-amber-500 text-[10px] font-extrabold uppercase cursor-pointer mr-2"
+              >
+                Reschedule
+              </button>
+              <button
+                onClick={() => onNavigate(booking.id)}
+                className="px-4 py-1.5 rounded-btn bg-brand-600 hover:bg-brand-700 text-white text-[10px] font-extrabold uppercase cursor-pointer shadow-sm flex items-center gap-1"
+              >
+                <Navigation size={10} />
+                <span>Travel GPS</span>
+              </button>
+            </>
           )}
 
           {booking.status === 'in_progress' && (
-            <button
-              onClick={() => onComplete(booking.id)}
-              className="px-4 py-1.5 rounded-btn bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-extrabold uppercase cursor-pointer shadow-sm flex items-center gap-1"
-            >
-              <CheckCircle size={10} />
-              <span>Complete Job</span>
-            </button>
+            <>
+              <button
+                onClick={() => alert('Issue reported to support.')}
+                className="px-3 py-1.5 rounded-btn border border-rose-200 hover:bg-rose-50 text-rose-500 text-[10px] font-extrabold uppercase cursor-pointer mr-2"
+              >
+                Report Issue
+              </button>
+              <button
+                onClick={() => onComplete(booking.id)}
+                className="px-4 py-1.5 rounded-btn bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-extrabold uppercase cursor-pointer shadow-sm flex items-center gap-1"
+              >
+                <CheckCircle size={10} />
+                <span>Complete Job</span>
+              </button>
+            </>
           )}
         </div>
       </div>
@@ -167,6 +184,15 @@ export default function BookingCard({
                 <div className="space-y-1.5">
                   <span className="text-[10px] font-black uppercase text-slate-400 block">Service Scope</span>
                   <p className="font-semibold text-slate-800 dark:text-slate-205">{booking.scopeDescription}</p>
+                  
+                  {/* Notes & Attachments */}
+                  <div className="pt-2">
+                    <span className="text-[10px] font-black uppercase text-slate-400 block">Notes & Attachments</span>
+                    <p className="text-xs text-slate-500 mt-1">{booking.notes || 'No additional notes provided by customer.'}</p>
+                    <div className="flex gap-2 mt-2">
+                      <button className="px-2 py-1 text-[9px] border border-slate-200 dark:border-slate-700 rounded-md bg-slate-50 dark:bg-slate-800 text-slate-500">View Photo 1</button>
+                    </div>
+                  </div>
                 </div>
                 
                 <div className="space-y-1.5">
@@ -179,6 +205,12 @@ export default function BookingCard({
                     >
                       Call User
                     </a>
+                    <button
+                      onClick={() => alert('Chat interface opened.')}
+                      className="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-500 font-extrabold text-[10px] transition-colors cursor-pointer"
+                    >
+                      Chat
+                    </button>
                   </div>
                 </div>
               </div>

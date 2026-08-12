@@ -23,7 +23,7 @@ import { getStoredProfessionalMembership, saveProfessionalMembership } from '../
 import { getWelcomeKitEligibilityStatus } from '../../config/professional/welcomeKitConfig';
 import { getStoredPartnerSession } from '../../services/authService';
 import { getProfessionalPricingConfig } from '../../config/professionalOnboardingConfig';
-import { ProfessionalProfileSection, MembershipSection, WelcomeKitSection, OnboardingInfoSection, VerificationSection, FeeSummarySection, CommissionSection, EquipmentSection, BusinessServicesSection, TermsCardSection } from '../../components/professional/ControlSections';
+import { MembershipSection, DocumentsSection, BusinessModuleSection, ProfileSettingsSection, HelpSupportModule } from '../../components/professional/ControlSections';
 
 const EMPTY_STATS = {
   totalEarnings: 0,
@@ -49,8 +49,7 @@ export default function ProfessionalDashboardPage({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [bookings, setBookings] = useState([]);
-
-  const [notifications, setNotifications] = useState([]);
+  const [bookingFilter, setBookingFilter] = useState('all');  const [notifications, setNotifications] = useState([]);
 
   const onboarding = getStoredProfessionalOnboarding();
   const session = getStoredPartnerSession();
@@ -262,7 +261,26 @@ export default function ProfessionalDashboardPage({
                       </div>
                     </div>
 
-                    {/* STATS COUNTER GRID */}
+                    {/* PROFESSIONAL STATUS */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-2">
+                      <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-3 sm:p-4 flex items-center justify-between">
+                        <div>
+                          <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Duty Status</p>
+                          <p className={`text-sm font-bold mt-1 ${isOnline ? 'text-emerald-500' : 'text-slate-500'}`}>{isOnline ? 'ONLINE' : 'OFFLINE'}</p>
+                        </div>
+                        <div className={`w-3 h-3 rounded-full ${isOnline ? 'bg-emerald-500' : 'bg-slate-400'}`}></div>
+                      </div>
+                      <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-3 sm:p-4">
+                        <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Current Service Zone</p>
+                        <p className="text-sm font-bold mt-1 truncate">{serviceCity}</p>
+                      </div>
+                      <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-3 sm:p-4">
+                        <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Availability</p>
+                        <p className="text-sm font-bold mt-1">Available Today</p>
+                      </div>
+                    </div>
+
+                    {/* STATS COUNTER GRID (Dashboard Overview) */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                       <StatCard title="Today's Jobs" value={bookings.filter(b => !['completed', 'cancelled'].includes(b.status)).length} icon={Briefcase} progress={0} progressColor="bg-primary" colorClass="text-primary bg-primary/10" />
                       <StatCard title="Completed Jobs" value={bookings.filter(b => b.status === 'completed').length} icon={CheckCircle} progress={0} progressColor="bg-emerald-500" colorClass="text-emerald-500 bg-emerald-500/10" />
@@ -271,10 +289,32 @@ export default function ProfessionalDashboardPage({
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-                      <StatCard title="Total Earnings" value={`₹${EMPTY_STATS.totalEarnings.toLocaleString('en-IN')}`} icon={Wallet} progress={0} progressColor="bg-blue-500" colorClass="text-blue-500 bg-blue-500/10" />
+                      <StatCard title="Today's Earnings" value={`₹${EMPTY_STATS.totalEarnings.toLocaleString('en-IN')}`} icon={Wallet} progress={0} progressColor="bg-blue-500" colorClass="text-blue-500 bg-blue-500/10" />
                       <StatCard title="Monthly Earnings" value={`₹${EMPTY_STATS.monthlyEarnings.toLocaleString('en-IN')}`} icon={Wallet} progress={0} progressColor="bg-indigo-500" colorClass="text-indigo-500 bg-indigo-500/10" />
-                      <StatCard title="Avg Rating" value={`${EMPTY_STATS.averageRating} ★`} icon={Star} progress={0} progressColor="bg-amber-500" colorClass="text-amber-500 bg-amber-500/10" />
+                      <StatCard title="Average Rating" value={`${EMPTY_STATS.averageRating} ★`} icon={Star} progress={0} progressColor="bg-amber-500" colorClass="text-amber-500 bg-amber-500/10" />
                       <StatCard title="Repeat Customers" value={EMPTY_STATS.repeatCustomers} icon={Award} progress={0} progressColor="bg-emerald-500" colorClass="text-emerald-500 bg-emerald-500/10" />
+                    </div>
+
+                    {/* EARNINGS OVERVIEW */}
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex flex-col md:flex-row gap-6 justify-between items-center text-left">
+                      <div>
+                        <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Earnings Overview</h3>
+                        <p className="text-[10px] text-slate-450 mt-1">Summary of your financial settlements</p>
+                      </div>
+                      <div className="flex flex-wrap gap-4 sm:gap-8 justify-between w-full md:w-auto">
+                        <div>
+                          <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Today's Earnings</p>
+                          <p className="text-xl font-bold text-slate-800 dark:text-white mt-1">₹{EMPTY_STATS.totalEarnings.toLocaleString('en-IN')}</p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Monthly Earnings</p>
+                          <p className="text-xl font-bold text-slate-800 dark:text-white mt-1">₹{EMPTY_STATS.monthlyEarnings.toLocaleString('en-IN')}</p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Total Settled Earnings</p>
+                          <p className="text-xl font-bold text-emerald-600 mt-1">₹0</p>
+                        </div>
+                      </div>
                     </div>
 
                     {/* CHARTS CONTAINER */}
@@ -285,6 +325,7 @@ export default function ProfessionalDashboardPage({
                       isOnline={isOnline}
                       setIsOnline={setIsOnline}
                       setActiveTab={setActiveTab}
+                      setBookingFilter={setBookingFilter}
                     />
 
                     <div className="grid lg:grid-cols-2 gap-6">
@@ -294,6 +335,22 @@ export default function ProfessionalDashboardPage({
                         professionLabel={professionLabel}
                       />
                       <div className="space-y-6">
+                        {/* DASHBOARD RATING */}
+                        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft text-left flex items-center justify-between">
+                          <div>
+                            <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Average Rating</p>
+                            <div className="flex items-center gap-2 mt-1">
+                              <Star className="text-amber-500" size={20} fill="currentColor" />
+                              <p className="text-xl font-bold text-slate-800 dark:text-white">{EMPTY_STATS.averageRating}.0</p>
+                            </div>
+                          </div>
+                          <button
+                            onClick={() => setActiveTab('reviews')}
+                            className="px-4 py-2 bg-slate-50 hover:bg-slate-100 dark:bg-slate-950 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs font-bold uppercase rounded-xl cursor-pointer"
+                          >
+                            View Reviews
+                          </button>
+                        </div>
                         <WelcomeKitSection
                           membership={membership}
                           applicationStatus={onboarding?.status}
@@ -314,7 +371,7 @@ export default function ProfessionalDashboardPage({
                       {/* Right: Active Bookings cards */}
                       <div className="lg:col-span-2 space-y-4">
                         <div className="flex items-center justify-between">
-                          <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Upcoming Assignments</h3>
+                          <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Active / Upcoming Bookings</h3>
                           <button
                             onClick={() => setActiveTab('bookings')}
                             className="text-xs text-primary font-bold hover:underline cursor-pointer"
@@ -324,7 +381,7 @@ export default function ProfessionalDashboardPage({
                         </div>
 
                         {bookings.filter(b => b.status !== 'completed' && b.status !== 'cancelled').length === 0 ? (
-                          <p className="text-sm text-slate-400 py-8 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-xl">No upcoming assignments yet.</p>
+                          <p className="text-sm text-slate-400 py-8 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-xl">No active or upcoming bookings yet.</p>
                         ) : (
                           bookings.filter(b => b.status !== 'completed' && b.status !== 'cancelled').map((booking) => (
                             <BookingCard
@@ -397,36 +454,51 @@ export default function ProfessionalDashboardPage({
                 {/* 2. BOOKINGS TAB VIEW */}
                 {activeTab === 'bookings' && (
                   <div className="space-y-4 text-left">
-                    <div className="pb-3 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                      <div>
-                        <h2 className="text-lg font-black text-slate-855 dark:text-white uppercase tracking-wider">Bookings Register</h2>
-                        <p className="text-[11px] text-slate-400">View and manage your job orders</p>
+                    <div className="pb-3 border-b border-slate-200 dark:border-slate-800">
+                      <h2 className="text-lg font-black text-slate-855 dark:text-white uppercase tracking-wider">Bookings Register</h2>
+                      <p className="text-[11px] text-slate-400">View and manage your job orders</p>
+                      
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        {['all', 'pending', 'accepted', 'upcoming', 'in_progress', 'completed', 'cancelled', 'calendar'].map((filter) => (
+                          <button
+                            key={filter}
+                            onClick={() => setBookingFilter(filter)}
+                            className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase transition-colors cursor-pointer ${
+                              bookingFilter === filter
+                                ? 'bg-primary text-white'
+                                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                            }`}
+                          >
+                            {filter.replace('_', ' ')}
+                          </button>
+                        ))}
                       </div>
                     </div>
 
                     <div className="space-y-4">
-                      {bookings.length === 0 ? (
-                        <p className="text-sm text-slate-400 py-8 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-xl">No bookings yet. New jobs will appear here.</p>
+                      {bookingFilter === 'calendar' ? (
+                        <CalendarWidget />
                       ) : (
-                        bookings.map((booking) => (
-                          <BookingCard
-                            key={booking.id}
-                            booking={booking}
-                            onAccept={handleAcceptJob}
-                            onNavigate={handleNavigateGPS}
-                            onStart={handleStartService}
-                            onComplete={handleCompleteService}
-                            onCancel={handleCancelService}
-                          />
-                        ))
+                        (() => {
+                          const filtered = bookings.filter(b => bookingFilter === 'all' ? true : b.status === bookingFilter);
+                          if (filtered.length === 0) {
+                            return <p className="text-sm text-slate-400 py-8 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-xl">No bookings found for this category.</p>;
+                          }
+                          return filtered.map((booking) => (
+                            <BookingCard
+                              key={booking.id}
+                              booking={booking}
+                              onAccept={handleAcceptJob}
+                              onNavigate={handleNavigateGPS}
+                              onStart={handleStartService}
+                              onComplete={handleCompleteService}
+                              onCancel={handleCancelService}
+                            />
+                          ));
+                        })()
                       )}
                     </div>
                   </div>
-                )}
-
-                {/* 3. CALENDAR TAB VIEW */}
-                {activeTab === 'calendar' && (
-                  <CalendarWidget />
                 )}
 
                 {/* 4. CUSTOMERS TAB VIEW */}
@@ -453,71 +525,17 @@ export default function ProfessionalDashboardPage({
                   />
                 )}
 
-                {/* 8. SERVICE RADIUS MAP VIEW */}
-                {activeTab === 'service_area' && (
-                  <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left space-y-6">
-                    <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800/40">
-                      <div>
-                        <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Service Radius Radius Map</h3>
-                        <p className="text-[10px] text-slate-450 mt-0.5">Define your geographical service coverage coordinates</p>
-                      </div>
-                      <button
-                        onClick={() => alert('Update service radius from your onboarding profile when editing is available.')}
-                        className="px-3.5 py-1.5 bg-primary text-white text-xs font-black uppercase rounded-xl cursor-pointer"
-                      >
-                        Adjust Radius
-                      </button>
-                    </div>
-
-                    {/* Service area from onboarding */}
-                    <div className="h-96 w-full rounded-card border border-slate-200 dark:border-slate-800 relative bg-slate-100 dark:bg-slate-950 overflow-hidden shadow-inner flex flex-col items-center justify-center gap-3 p-6 text-center">
-                      <MapPin className="text-primary" size={32} />
-                      <p className="text-sm font-bold text-slate-800 dark:text-slate-200">Service Location</p>
-                      <p className="text-xs text-slate-500">{serviceCity}</p>
-                      <p className="text-xs font-semibold text-primary">Radius: {serviceRadiusLabel}</p>
-                      <p className="text-[10px] text-slate-400 max-w-sm">Live map integration will use your registered service location. Coverage is based on the radius selected during onboarding.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-semibold pt-4">
-                      <div className="p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-xl">
-                        <span className="text-[9px] font-black uppercase text-slate-450 block">Current City</span>
-                        <p className="font-bold text-slate-800 dark:text-slate-200 mt-1">{serviceCity}</p>
-                      </div>
-                      <div className="p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-xl">
-                        <span className="text-[9px] font-black uppercase text-slate-450 block">Registered Radius</span>
-                        <p className="font-bold text-slate-800 dark:text-slate-200 mt-1">{serviceRadiusLabel}</p>
-                      </div>
-                      <div className="p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-xl">
-                        <span className="text-[9px] font-black uppercase text-slate-450 block">Location Tier</span>
-                        <p className="font-bold text-primary mt-1 capitalize">{onboarding?.serviceLocation?.locationTier || 'Not set'}</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* 9. AVAILABILITY VIEW */}
-                {activeTab === 'availability' && (
-                  <AvailabilityCard />
-                )}
-
-                {/* 10. DOCUMENTS UPLOADS */}
-                {activeTab === 'documents' && (
-                  <div className="space-y-6">
-                    <OnboardingInfoSection onboarding={onboarding} professionLabel={professionLabel} />
-                    <DocumentsCard />
-                  </div>
-                )}
-
-                {/* 11. PROFILE VIEW */}
+                {/* 8. PROFILE SETTINGS VIEW */}
                 {activeTab === 'profile' && (
-                  <div className="space-y-6">
-                    <ProfessionalProfileSection
-                      onboarding={onboarding}
-                      session={session}
-                      professionLabel={professionLabel}
-                    />
-                    <ProfileCard />
-                  </div>
+                  <ProfileSettingsSection
+                    onboarding={onboarding}
+                    session={session}
+                    professionLabel={professionLabel}
+                    serviceCity={serviceCity}
+                    serviceRadiusLabel={serviceRadiusLabel}
+                    darkMode={darkMode}
+                    toggleDarkMode={toggleDarkMode}
+                  />
                 )}
 
                 {activeTab === 'membership' && (
@@ -532,197 +550,28 @@ export default function ProfessionalDashboardPage({
                   />
                 )}
 
-                {activeTab === 'welcome_kit' && (
-                  <WelcomeKitSection
+                {activeTab === 'documents' && (
+                  <DocumentsSection
+                    onboarding={onboarding}
                     membership={membership}
-                    applicationStatus={onboarding?.status}
                     setActiveTab={setActiveTab}
                   />
                 )}
 
-                {activeTab === 'verification' && (
-                  <VerificationSection onboarding={onboarding} />
-                )}
-
-                {activeTab === 'onboarding_info' && (
-                  <OnboardingInfoSection onboarding={onboarding} professionLabel={professionLabel} />
-                )}
-
-                {activeTab === 'fee_summary' && (
-                  <div className="space-y-6">
-                    <FeeSummarySection onboarding={onboarding} />
-                    <CommissionSection onboarding={onboarding} />
-                  </div>
-                )}
-
-                {activeTab === 'equipment' && (
-                  <EquipmentSection />
-                )}
-
-                {activeTab === 'business_services' && (
-                  <BusinessServicesSection />
-                )}
-
-                {activeTab === 'terms' && (
-                  <TermsCardSection />
-                )}
-
                 {/* 12. HELP & SUPPORT PANEL */}
                 {activeTab === 'support' && (
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-left">
-                    
-                    {/* Left Col: Raise Ticket */}
-                    <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft text-left flex flex-col justify-between">
-                      <div className="space-y-4 w-full">
-                        <div>
-                          <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Partner Support Helpdesk</h3>
-                          <p className="text-[10px] text-slate-450 mt-0.5">Submit support queries directly to our operations panel</p>
-                        </div>
-
-                        <form onSubmit={handleRaiseTicket} className="space-y-3.5">
-                          <div className="space-y-1">
-                            <label className="field-label">Subject details</label>
-                            <input
-                              type="text"
-                              required
-                              value={ticketSubject}
-                              onChange={(e) => setTicketSubject(e.target.value)}
-                              placeholder="e.g. Booking payout inquiry"
-                              className="input-field dark:bg-slate-850 dark:border-slate-800 dark:text-white"
-                            />
-                          </div>
-
-                          <button
-                            type="submit"
-                            className="btn-primary w-full cursor-pointer text-xs"
-                          >
-                            Submit Support Ticket
-                          </button>
-                        </form>
-                      </div>
-
-                      {/* Ticket History */}
-                      <div className="mt-8 pt-4 border-t border-slate-100 dark:border-slate-800/40 w-full text-left">
-                        <h4 className="text-xs font-black text-slate-450 dark:text-slate-500 uppercase tracking-wider mb-4">Raised Tickets History</h4>
-                        <div className="space-y-3">
-                          {supportTickets.map(tck => (
-                            <div key={tck.id} className="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800 rounded-xl">
-                              <div className="flex items-center justify-between">
-                                <span className="text-xs font-black text-slate-800 dark:text-slate-200">{tck.id}</span>
-                                <span className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase ${
-                                  tck.status === 'open' ? 'bg-blue-50 text-blue-600 border border-blue-200/50' : 'bg-slate-100 text-slate-550 border border-slate-200/60'
-                                }`}>
-                                  {tck.status}
-                                </span>
-                              </div>
-                              <p className="text-xs text-slate-600 dark:text-slate-400 font-semibold mt-1">{tck.subject}</p>
-                              <div className="mt-2 text-[10px] text-primary flex items-start gap-1 font-semibold leading-relaxed border-t border-slate-100 dark:border-slate-850/80 pt-1.5">
-                                <span>↳</span>
-                                <span>{tck.response}</span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right Col: FAQs & Hotline */}
-                    <div className="space-y-6">
-                      
-                      {/* Hotline contact */}
-                      <div className="bg-gradient-to-tr from-brand-600 to-emerald-700 text-white rounded-card p-6 shadow-soft flex flex-col justify-between h-40">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-black uppercase text-white/80">Support Hotline</span>
-                          <Phone size={18} className="text-white/60" />
-                        </div>
-                        <div className="space-y-1">
-                          <h4 className="text-lg font-black leading-none">1800 123 456</h4>
-                          <p className="text-[10px] text-white/70 font-semibold">Toll-free active 24/7 for partners</p>
-                        </div>
-                        <a
-                          href="tel:1800123456"
-                          className="w-full py-1.5 bg-white text-slate-900 text-center font-extrabold text-[10px] uppercase rounded-btn block hover:bg-slate-100 shadow-sm"
-                        >
-                          Call Helpline Now
-                        </a>
-                      </div>
-
-                      {/* FAQs Card */}
-                      <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft text-left">
-                        <h4 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Partner FAQs</h4>
-                        <div className="space-y-3.5 text-xs text-slate-600 dark:text-slate-400">
-                          {SUPPORT_FAQS.map((faq, i) => (
-                            <div key={i}>
-                              <span className="font-black text-slate-800 dark:text-slate-300 block">{faq.q}</span>
-                              <p className="mt-1 font-medium leading-relaxed">{faq.a}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
+                  <HelpSupportModule
+                    onboarding={onboarding}
+                    professionLabel={professionLabel}
+                    ticketSubject={ticketSubject}
+                    setTicketSubject={setTicketSubject}
+                    handleRaiseTicket={handleRaiseTicket}
+                    supportTickets={supportTickets}
+                    SUPPORT_FAQS={SUPPORT_FAQS}
+                  />
                 )}
 
-                {/* 13. SETTINGS & PREFERENCES */}
-                {activeTab === 'settings' && (
-                  <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left space-y-6 max-w-2xl">
-                    <div className="pb-4 border-b border-slate-100 dark:border-slate-800/40">
-                      <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">System Preferences</h3>
-                      <p className="text-[10px] text-slate-450 mt-0.5">Customize notification modes, system language, and security rules</p>
-                    </div>
 
-                    <div className="space-y-5">
-                      
-                      {/* Theme Toggle */}
-                      <div className="flex items-center justify-between p-3.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50/50 dark:bg-slate-950/20">
-                        <div className="space-y-0.5">
-                          <span className="text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wider block">Dark Visual Mode</span>
-                          <p className="text-[10px] text-slate-450">Toggles background dark theme across dashboard layouts.</p>
-                        </div>
-                        <button
-                          onClick={toggleDarkMode}
-                          className={`w-10 h-6 rounded-full p-1 cursor-pointer transition-colors duration-300 flex items-center ${
-                            darkMode ? 'bg-primary' : 'bg-slate-300 dark:bg-slate-800'
-                          }`}
-                        >
-                          <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
-                            darkMode ? 'translate-x-4' : 'translate-x-0'
-                          }`} />
-                        </button>
-                      </div>
-
-                      {/* Notification settings */}
-                      <div className="flex items-center justify-between p-3.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50/50 dark:bg-slate-950/20">
-                        <div className="space-y-0.5">
-                          <span className="text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wider block">SMS Notifications</span>
-                          <p className="text-[10px] text-slate-450">Receive booking updates via standard mobile SMS alerts.</p>
-                        </div>
-                        <button
-                          onClick={() => alert('Preferences toggled.')}
-                          className="w-10 h-6 rounded-full p-1 cursor-pointer bg-primary flex items-center"
-                        >
-                          <div className="w-4 h-4 bg-white rounded-full shadow-md translate-x-4" />
-                        </button>
-                      </div>
-
-                      {/* Account deletion warning */}
-                      <div className="p-4 border border-rose-200/50 bg-rose-50/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-8">
-                        <div className="space-y-1">
-                          <span className="text-xs font-black text-rose-650 uppercase tracking-wider block">Delete Account Directory</span>
-                          <p className="text-[10px] text-slate-450 max-w-sm leading-normal">Warning: Deleting your partner profile is permanent and wipes wallet history, profile ratings, and verified credentials.</p>
-                        </div>
-                        <button
-                          onClick={() => alert('Account deletion cannot be triggered in simulator mode.')}
-                          className="px-4 py-2 rounded-btn bg-danger hover:bg-danger-dark text-white text-[10px] font-extrabold uppercase cursor-pointer transition-all shrink-0"
-                        >
-                          Delete Account
-                        </button>
-                      </div>
-
-                    </div>
-                  </div>
-                )}
 
               </motion.div>
             </AnimatePresence>

@@ -1,13 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  Wifi, WifiOff, Clock, PlusCircle, DollarSign, Calendar, FileText, Gift, Crown, ScrollText, Package, Wrench
+  Wifi, WifiOff, FileText, PlusCircle, Wrench, Calendar, Wallet, Crown, FileCheck
 } from 'lucide-react';
 
 export default function QuickActions({
   isOnline,
   setIsOnline,
-  setActiveTab
+  setActiveTab,
+  setBookingFilter
 }) {
   const actions = [
     {
@@ -15,6 +16,12 @@ export default function QuickActions({
       icon: isOnline ? WifiOff : Wifi,
       color: isOnline ? 'bg-rose-50 text-rose-500 hover:bg-rose-100 border-rose-200/50' : 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100 border-emerald-200/50',
       action: () => setIsOnline(!isOnline)
+    },
+    {
+      label: 'View Bookings',
+      icon: FileCheck,
+      color: 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border-indigo-200/50',
+      action: () => setActiveTab('bookings')
     },
     {
       label: 'Edit Profile',
@@ -29,53 +36,32 @@ export default function QuickActions({
       action: () => setActiveTab('documents')
     },
     {
-      label: 'Upgrade Membership',
-      icon: Crown,
-      color: 'bg-amber-50 text-amber-600 hover:bg-amber-100 border-amber-200/50',
-      action: () => setActiveTab('membership')
-    },
-    {
-      label: 'Welcome Kit',
-      icon: Package,
-      color: 'bg-pink-50 text-pink-600 hover:bg-pink-100 border-pink-200/50',
-      action: () => setActiveTab('welcome_kit')
-    },
-    {
       label: 'Manage Equipment',
       icon: Wrench,
       color: 'bg-purple-50 text-purple-600 hover:bg-purple-100 border-purple-200/50',
-      action: () => setActiveTab('equipment')
-    },
-    {
-      label: 'View Terms',
-      icon: ScrollText,
-      color: 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border-indigo-200/50',
-      action: () => setActiveTab('terms')
-    },
-    {
-      label: 'Renew Onboarding',
-      icon: DollarSign,
-      color: 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100 border-emerald-200/50',
-      action: () => setActiveTab('fee_summary')
-    },
-    {
-      label: 'Set Hours',
-      icon: Clock,
-      color: 'bg-amber-50 text-amber-600 hover:bg-amber-100 border-amber-200/50',
-      action: () => setActiveTab('availability')
+      action: () => setActiveTab('business')
     },
     {
       label: 'View Calendar',
       icon: Calendar,
       color: 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border-indigo-200/50',
-      action: () => setActiveTab('calendar')
+      action: () => {
+        setActiveTab('bookings');
+        if (setBookingFilter) setBookingFilter('calendar');
+      }
     },
     {
-      label: 'Download Certificate',
-      icon: Gift,
-      color: 'bg-rose-50 text-rose-500 hover:bg-rose-100 border-rose-200/50',
-      action: () => alert('Certificate download available after verification & activation.')
+      label: 'View Earnings',
+      icon: Wallet,
+      color: 'bg-amber-50 text-amber-600 hover:bg-amber-100 border-amber-200/50',
+      action: () => setActiveTab('wallet')
     },
+    {
+      label: 'Upgrade Membership',
+      icon: Crown,
+      color: 'bg-amber-50 text-amber-600 hover:bg-amber-100 border-amber-200/50',
+      action: () => setActiveTab('membership')
+    }
   ];
 
   return (
