@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  Wifi, WifiOff, FileText, PlusCircle, Wrench, Calendar, Wallet, Crown, FileCheck
+  Wifi, WifiOff, FileText, PlusCircle, Wrench, Calendar, Wallet, Crown, FileCheck, Star
 } from 'lucide-react';
 
 export default function QuickActions({
@@ -61,6 +61,15 @@ export default function QuickActions({
       icon: Crown,
       color: 'bg-amber-50 text-amber-600 hover:bg-amber-100 border-amber-200/50',
       action: () => setActiveTab('membership')
+    },
+    {
+      label: 'View Reviews',
+      icon: Star,
+      color: 'bg-blue-50 text-blue-600 hover:bg-blue-100 border-blue-200/50',
+      action: () => {
+        setActiveTab('profile');
+        if (setBookingFilter) setBookingFilter('reviews'); // Note: Subtabs for profile aren't exposed directly via prop yet, but setting activeTab to profile achieves the primary navigation.
+      }
     }
   ];
 

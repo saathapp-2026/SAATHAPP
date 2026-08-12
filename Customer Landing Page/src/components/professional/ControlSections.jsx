@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Crown, Package, ShieldCheck, Wrench, FileText, IndianRupee, CheckCircle2, AlertCircle, ClipboardList, MapPin, User, Clock, Settings, Phone, LifeBuoy
+  Crown, Package, ShieldCheck, Wrench, FileText, IndianRupee, CheckCircle2, AlertCircle, ClipboardList, MapPin, User, Clock, Settings, Phone, LifeBuoy, Briefcase, Star
 } from 'lucide-react';
 import ProfileCard from './ProfileCard';
 import AvailabilityCard from './AvailabilityCard';
@@ -215,6 +215,17 @@ export function MembershipSection({ membership, renewalDate, onMembershipChange,
                 <button onClick={() => setMembershipTab('upgrade')} className="mt-4 text-[10px] font-black uppercase text-primary hover:underline cursor-pointer">Upgrade to unlock →</button>
               </div>
             )}
+
+            {current.planId === 'growth' && (
+              <div className="p-4 border border-blue-200 bg-blue-50/50 dark:bg-blue-900/10 rounded-xl mt-4 md:col-span-2">
+                <div className="flex items-center gap-2 mb-2">
+                  <Package size={16} className="text-blue-600" />
+                  <p className="text-xs font-black uppercase tracking-wider text-blue-600">Welcome Kit Status</p>
+                </div>
+                <p className="text-sm font-bold text-blue-800 dark:text-blue-200">Eligible</p>
+                <p className="text-xs text-blue-600/80 mt-1">Your Professional Welcome Kit (T-Shirts, ID Card, Toolkit) will be shipped soon.</p>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -316,7 +327,9 @@ export function ProfileSettingsSection({
             { id: 'personal', label: 'Personal Details', icon: User },
             { id: 'service_area', label: 'Service Area', icon: MapPin },
             { id: 'availability', label: 'Availability Hours', icon: Clock },
-            { id: 'preferences', label: 'Preferences', icon: Settings }
+            { id: 'preferences', label: 'Preferences', icon: Settings },
+            { id: 'business', label: 'Business Services', icon: Briefcase },
+            { id: 'reviews', label: 'Reviews & Ratings', icon: Star }
           ].map((tab) => {
             const Icon = tab.icon;
             return (
@@ -464,6 +477,23 @@ export function ProfileSettingsSection({
           </div>
         </div>
       )}
+
+      {activeSubTab === 'business' && (
+        <BusinessServicesSection />
+      )}
+
+      {activeSubTab === 'reviews' && (
+        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft text-left">
+          <div className="flex items-center gap-2 mb-4">
+            <Star size={18} className="text-amber-500 fill-amber-500" />
+            <h3 className="text-sm font-black uppercase tracking-wider">Reviews & Ratings</h3>
+          </div>
+          <p className="text-xs text-slate-500">Your average rating is 4.8 out of 5 based on 124 reviews.</p>
+          <div className="mt-4 p-4 border border-slate-100 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-900/50">
+            <p className="text-xs text-slate-400 italic">Review system integration pending backend connectivity.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -600,8 +630,8 @@ export function DocumentsSection({ onboarding, membership, setActiveTab }) {
           {[
             { id: 'identity', label: 'Identity Verification' },
             { id: 'licenses', label: 'Professional Licenses' },
-            { id: 'welcome_kit', label: 'Welcome Kit Status' },
-            { id: 'terms', label: 'Agreements & Terms' }
+            { id: 'onboarding', label: 'Onboarding Info' },
+            { id: 'terms', label: 'Terms & Policies' }
           ].map((tab) => (
             <button
               key={tab.id}
@@ -680,31 +710,10 @@ export function DocumentsSection({ onboarding, membership, setActiveTab }) {
         </div>
       )}
 
-      {docTab === 'welcome_kit' && (
-        <div className={`${cardClass} space-y-4`}>
-          <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800/80 pb-3">
-            <Package size={18} className="text-primary" />
-            <h3 className="text-sm font-black uppercase tracking-wider">{kit.title} Status</h3>
-          </div>
-          <p className={`text-sm font-bold ${status.eligible ? 'text-emerald-600' : 'text-amber-600'}`}>Current Status: {kitLabel}</p>
-          <p className="text-xs text-slate-500">{kit.description}</p>
-          {planOk ? (
-            <ul className="grid sm:grid-cols-2 gap-2 mt-2">
-              {kit.items.map((item) => (
-                <li key={item.id} className="text-xs text-slate-700 dark:text-slate-300 flex items-center gap-2 bg-slate-50 dark:bg-slate-900/50 p-2 rounded-lg border border-slate-100 dark:border-slate-800">
-                  <CheckCircle2 size={14} className="text-primary" /> {item.name}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/50 text-xs text-amber-800 dark:text-amber-200">
-              Upgrade to Growth or Enterprise to receive your Professional Welcome Kit (T-Shirts, ID Card, Toolkit).
-              <button type="button" onClick={() => setActiveTab?.('membership')} className="mt-2 block w-full py-2 rounded-lg bg-amber-200 text-amber-900 font-black uppercase cursor-pointer hover:bg-amber-300 text-[10px]">
-                Upgrade Membership Now
-              </button>
-            </div>
-          )}
-        </div>
+
+
+      {docTab === 'onboarding' && (
+        <OnboardingInfoSection onboarding={onboarding} professionLabel="Professional" />
       )}
 
       {docTab === 'terms' && (
@@ -743,7 +752,7 @@ export function HelpSupportModule({
   onboarding, professionLabel,
   ticketSubject, setTicketSubject, handleRaiseTicket, supportTickets, SUPPORT_FAQS
 }) {
-  const [supportTab, setSupportTab] = React.useState('onboarding');
+  const [supportTab, setSupportTab] = React.useState('tickets');
 
   return (
     <div className="space-y-6 text-left">
@@ -753,7 +762,6 @@ export function HelpSupportModule({
         
         <div className="flex flex-wrap gap-2 mt-4">
           {[
-            { id: 'onboarding', label: 'Onboarding Status', icon: ClipboardList },
             { id: 'tickets', label: 'Raise a Ticket', icon: FileText },
             { id: 'hotline', label: 'Contact Helpline', icon: Phone },
             { id: 'faq', label: 'Partner FAQs', icon: LifeBuoy }
@@ -776,12 +784,6 @@ export function HelpSupportModule({
           })}
         </div>
       </div>
-
-      {supportTab === 'onboarding' && (
-        <div className="max-w-4xl">
-          <OnboardingInfoSection onboarding={onboarding} professionLabel={professionLabel} />
-        </div>
-      )}
 
       {supportTab === 'tickets' && (
         <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft text-left flex flex-col justify-between max-w-3xl">

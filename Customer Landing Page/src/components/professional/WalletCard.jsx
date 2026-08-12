@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Wallet, ShieldCheck, AlertCircle, ArrowUpRight, Building, Edit3, Calendar } from 'lucide-react';
+import { FeeSummarySection } from './ControlSections';
 
-export default function WalletCard() {
-  const [activeTab, setActiveTab] = useState('total');
+export default function WalletCard({ onboarding }) {
+  const [activeTab, setActiveTab] = useState('overview');
   
   const [balance, setBalance] = useState(8420);
   const [pendingBalance, _setPendingBalance] = useState(2100);
@@ -68,6 +69,7 @@ export default function WalletCard() {
       case 'today': return { label: "Today's Earnings", amount: 1560, jobs: 1, pending: 850 };
       case 'this_week': return { label: "This Week's Earnings", amount: 4210, jobs: 3, pending: 1200 };
       case 'this_month': return { label: "This Month's Earnings", amount: 18450, jobs: 12, pending: 2100 };
+      case 'overview':
       case 'total':
       default: return { label: "Total Lifetime Settled", amount: 195000, jobs: 178, pending: 2100 };
     }
@@ -85,12 +87,14 @@ export default function WalletCard() {
         
         <div className="flex flex-wrap gap-2 mt-4">
           {[
-            { id: 'today', label: 'Today' },
-            { id: 'this_week', label: 'This Week' },
-            { id: 'this_month', label: 'This Month' },
-            { id: 'total', label: 'Total' },
-            { id: 'payout_history', label: 'Payout History' },
-            { id: 'bank_details', label: 'Bank Details' }
+            { id: 'overview', label: 'Overview' },
+            { id: 'today', label: "Today's Earnings" },
+            { id: 'this_week', label: 'Weekly Earnings' },
+            { id: 'this_month', label: 'Monthly Earnings' },
+            { id: 'transactions', label: 'Transactions' },
+            { id: 'fees', label: 'Fees & Charges' },
+            { id: 'payout_history', label: 'Settlements' },
+            { id: 'statements', label: 'Statements' }
           ].map((tab) => (
             <button
               key={tab.id}
@@ -107,40 +111,19 @@ export default function WalletCard() {
         </div>
       </div>
 
-      {activeTab === 'bank_details' ? (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft max-w-lg">
-          <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-100 dark:border-slate-800/50">
-            <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider flex items-center gap-2">
-              <Building size={16} /> Bank Details
-            </h3>
-            <button className="text-primary hover:text-primary-dark font-bold text-xs uppercase flex items-center gap-1">
-              <Edit3 size={12}/> Edit
-            </button>
-          </div>
-          
-          <div className="space-y-4">
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Account Holder</p>
-              <p className="font-bold text-slate-800 dark:text-slate-200 text-sm mt-1">Rajesh Kumar</p>
-            </div>
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Bank Name</p>
-              <p className="font-bold text-slate-800 dark:text-slate-200 text-sm mt-1">HDFC Bank</p>
-            </div>
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Account Number</p>
-              <p className="font-bold text-slate-800 dark:text-slate-200 text-sm mt-1">XXXX XXXX 5678</p>
-            </div>
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">IFSC Code</p>
-              <p className="font-bold text-slate-800 dark:text-slate-200 text-sm mt-1">HDFC0001234</p>
-            </div>
-            <p className="text-[10px] text-slate-400 font-semibold bg-slate-50 dark:bg-slate-800 p-3 rounded-lg mt-4 border border-slate-100 dark:border-slate-700">
-              Payouts are automatically routed to this account every Friday. Instant withdrawals are subject to a 1% fee.
-            </p>
-          </div>
+      {activeTab === 'fees' && (
+        <div className="mt-4">
+          <FeeSummarySection onboarding={onboarding} />
         </div>
-      ) : activeTab === 'payout_history' ? (
+      )}
+
+      {activeTab === 'statements' && (
+        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex items-center justify-center h-48 mt-4">
+          <p className="text-sm font-bold text-slate-500">No statements available for this period.</p>
+        </div>
+      )}
+
+      {activeTab === 'payout_history' ? (
         <div className="grid grid-cols-1 gap-6">
           <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft hover:shadow-premium transition-all">
             <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Payout History</h3>

@@ -23,7 +23,7 @@ import { getStoredProfessionalMembership, saveProfessionalMembership } from '../
 import { getWelcomeKitEligibilityStatus } from '../../config/professional/welcomeKitConfig';
 import { getStoredPartnerSession } from '../../services/authService';
 import { getProfessionalPricingConfig } from '../../config/professionalOnboardingConfig';
-import { MembershipSection, DocumentsSection, BusinessModuleSection, ProfileSettingsSection, HelpSupportModule } from '../../components/professional/ControlSections';
+import { MembershipSection, DocumentsSection, EquipmentSection, ProfileSettingsSection, HelpSupportModule } from '../../components/professional/ControlSections';
 
 const EMPTY_STATS = {
   totalEarnings: 0,
@@ -508,7 +508,7 @@ export default function ProfessionalDashboardPage({
 
                 {/* 5. WALLET & PAYOUTS TAB VIEW */}
                 {activeTab === 'wallet' && (
-                  <WalletCard />
+                  <WalletCard onboarding={onboarding} />
                 )}
 
                 {/* 6. REVIEWS TAB VIEW */}
@@ -556,6 +556,10 @@ export default function ProfessionalDashboardPage({
                     membership={membership}
                     setActiveTab={setActiveTab}
                   />
+                )}
+
+                {activeTab === 'business' && (
+                  <EquipmentSection />
                 )}
 
                 {/* 12. HELP & SUPPORT PANEL */}
