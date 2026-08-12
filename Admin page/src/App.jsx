@@ -238,6 +238,7 @@ const ID_TO_PATH = {
   users_analytics: "/customers/analytics",
   sellers: "/sellers/overview",
   sellers_applications: "/sellers/applications",
+  sellers_pending: "/sellers/pending",
   sellers_profiles: "/sellers/profiles",
   sellers_orders: "/sellers/orders",
   sellers_payouts: "/sellers/payouts",
@@ -247,30 +248,40 @@ const ID_TO_PATH = {
   vendors: "/wholesale-partners",
   delivery: "/delivery-partners",
   products_categories: "/products-categories",
-  products: "/products-categories",
-  categories: "/products-categories",
+  products: "/products-categories/products",
+  categories: "/products-categories/categories",
   orders: "/orders",
+  orders_new: "/orders/new",
   inventory: "/inventory",
   payments_finance: "/payments-finance",
-  payments: "/payments-finance",
-  finance: "/payments-finance",
+  payments: "/payments-finance/payments",
+  finance: "/payments-finance/finance",
   marketing_cms: "/marketing-cms",
-  ads: "/marketing-cms",
-  cms: "/marketing-cms",
-  coupons: "/marketing-cms",
+  ads: "/marketing-cms/ads",
+  cms: "/marketing-cms/cms",
+  coupons: "/marketing-cms/coupons",
   support_ops: "/support-operations",
-  support: "/support-operations",
-  tasks: "/support-operations",
-  chat: "/support-operations",
-  meetings: "/support-operations",
+  support: "/support-operations/support",
+  support_complaints: "/support-operations/complaints",
+  tasks: "/support-operations/tasks",
+  chat: "/support-operations/chat",
+  meetings: "/support-operations/meetings",
   trust_safety: "/trust-safety",
-  fraud: "/trust-safety",
+  trust_fraud: "/trust-safety/fraud",
+  fraud: "/trust-safety/fraud",
   system: "/system",
-  health: "/system",
-  api: "/system",
-  flags: "/system",
-  audit: "/system",
-  settings: "/settings",
+  health: "/system/health",
+  api: "/system/api",
+  flags: "/system/flags",
+  audit: "/system/audit",
+  settings: "/settings/platform",
+  settings_profile: "/settings/profile",
+  settings_general: "/settings/general",
+  settings_payment: "/settings/payment",
+  settings_delivery: "/settings/delivery",
+  settings_notification: "/settings/notification",
+  settings_roles: "/settings/roles",
+  settings_security: "/settings/security",
 };
 
 const PATH_TO_ID = (() => {
@@ -281,13 +292,33 @@ const PATH_TO_ID = (() => {
   return map;
 })();
 
+const ROUTE_PREFIX_TO_MODULE = {
+  "/dashboard": "dashboard",
+  "/analytics-reports": "analytics_reports",
+  "/customers": "users",
+  "/sellers": "sellers",
+  "/service-professionals": "professionals",
+  "/service-workers": "workers",
+  "/wholesale-partners": "vendors",
+  "/delivery-partners": "delivery",
+  "/products-categories": "products_categories",
+  "/orders": "orders",
+  "/inventory": "inventory",
+  "/payments-finance": "payments_finance",
+  "/marketing-cms": "marketing_cms",
+  "/support-operations": "support_ops",
+  "/trust-safety": "trust_safety",
+  "/system": "system",
+  "/settings": "settings"
+};
+
 /* ============================================================
    MODULE CONFIG for the generic ModulePage
    (title, kpis, table columns/rows, primary action)
 ============================================================ */
 const MODULES = {
   users: {
-    title: "Users", subtitle: "Manage every customer registered on SaathApp.",
+    title: "Customers", subtitle: "Manage every customer registered on SaathApp.",
     primaryAction: "Invite user",
     kpis: [
       { label: "Total Users", value: "1,25,430", delta: "+6.2%", up: true },
@@ -403,20 +434,31 @@ const MODULES = {
     ],
   },
   orders: {
-    title: "Orders", subtitle: "Full lifecycle tracking with admin intervention tools.",
-    primaryAction: "Export orders",
+    title: "Orders", subtitle: "Live order tracking, modifications and cancellations.",
+    primaryAction: "Create Order",
     kpis: [
-      { label: "Active Orders", value: "8,650", delta: "+4.6%", up: true },
-      { label: "Delivered Today", value: "6,120", delta: "+9.1%", up: true },
-      { label: "Cancelled", value: "184", delta: "-1.2%", up: true },
-      { label: "Refunded", value: "76", delta: "+3", up: false },
+      { label: "Orders Today", value: "8,204", delta: "+15%", up: true },
+      { label: "Pending", value: "312", delta: "-40", up: true },
+      { label: "Delivered", value: "6,912", delta: "+12%", up: true },
+      { label: "Returns", value: "45", delta: "-5", up: true },
     ],
-    columns: ["Order ID", "Customer", "City", "Amount", "Status"],
-    rows: recentOrders.map((o) => [o.id, o.customer, o.city, o.amount, o.status]),
+    columns: ["Order ID", "Customer", "Amount", "City", "Date", "Status"],
+    rows: [
+      ["ORD-99120", "Ravi Kumar", "₹420", "Mysuru", "Today", "Delivered"],
+      ["ORD-99121", "Aisha Fernandes", "₹1,280", "Mumbai", "Today", "Processing"],
+    ],
+  },
+  orders_details: {
+    title: "Order Details", subtitle: "Deep-dive view into line items, timelines, and payment traces.",
+    primaryAction: "Export Details",
+    kpis: [{ label: "Line Items", value: "4", delta: "0", up: true }],
+    columns: ["Item", "SKU", "Qty", "Price", "Fulfillment Status"],
+    rows: [
+      ["Copper Wire 2.5mm", "CW-25", "2", "₹3,798", "Packed"],
+      ["Organic Toor Dal", "GRO-01", "1", "₹186", "Shipped"],
+    ],
   },
   inventory: {
-    title: "Inventory", subtitle: "Warehouse stock, damage, returns and transfers.",
-    primaryAction: "New transfer",
     kpis: [
       { label: "Warehouses", value: "18", delta: "+1", up: true },
       { label: "Available Stock", value: "4.2L units", delta: "+1.8%", up: true },
@@ -574,6 +616,279 @@ const MODULES = {
       ["Warehouse audit - WH-04", "Ops Team", "Inventory", "High", "Resolved"],
     ],
   },
+  analytics_reports: {
+    title: "Analytics Overview", subtitle: "Platform-wide analytical datasets and raw exports.",
+    primaryAction: "Export Data",
+    kpis: [{ label: "Datasets", value: "45", delta: "+2", up: true }],
+    columns: ["Dataset", "Category", "Last Updated", "Size", "Status"],
+    rows: [
+      ["Sales History Q3", "Revenue", "2 hours ago", "45 MB", "Active"],
+      ["User Demographics", "Users", "Yesterday", "1.2 GB", "Active"],
+      ["Fraud Patterns", "Trust & Safety", "1 hour ago", "800 MB", "Processing"],
+    ],
+  },
+  analytics_sales: {
+    title: "Sales Analytics", subtitle: "Granular breakdown of platform sales volume.",
+    primaryAction: "Export Sales",
+    kpis: [{ label: "Total Sales", value: "₹4.2Cr", delta: "+12%", up: true }],
+    columns: ["Date", "Category", "Gross Sales", "Net Sales", "Trend"],
+    rows: [
+      ["Today", "Electronics", "₹12L", "₹10L", "Up"],
+      ["Yesterday", "Fashion", "₹8L", "₹7L", "Down"],
+    ],
+  },
+  analytics_orders: {
+    title: "Order Analytics", subtitle: "Order volume, fulfillment rates, and drops.",
+    primaryAction: "Export Orders",
+    kpis: [{ label: "Fulfillment Rate", value: "98.2%", delta: "+0.5%", up: true }],
+    columns: ["Region", "Total Orders", "Fulfilled", "Cancelled", "Avg Time"],
+    rows: [
+      ["North", "12,400", "12,100", "300", "1.2 Days"],
+      ["South", "15,200", "15,000", "200", "1.1 Days"],
+    ],
+  },
+  analytics_customers: {
+    title: "Customer Analytics", subtitle: "Retention, acquisition, and cohort analysis.",
+    primaryAction: "View Cohorts",
+    kpis: [{ label: "Retention", value: "64%", delta: "+2%", up: true }],
+    columns: ["Cohort", "Users", "Active", "Churned", "LTV"],
+    rows: [
+      ["Jan 2026", "45,000", "32,000", "13,000", "₹1,200"],
+      ["Feb 2026", "52,000", "41,000", "11,000", "₹1,150"],
+    ],
+  },
+  analytics_sellers: {
+    title: "Seller Analytics", subtitle: "Seller performance and GMV contribution.",
+    primaryAction: "Export Sellers",
+    kpis: [{ label: "Avg Seller GMV", value: "₹4.5L", delta: "+5%", up: true }],
+    columns: ["Seller Tier", "Total Sellers", "Total GMV", "Avg Rating", "Top Category"],
+    rows: [
+      ["Platinum", "120", "₹2.1Cr", "4.8", "Electronics"],
+      ["Gold", "850", "₹5.4Cr", "4.5", "Fashion"],
+    ],
+  },
+  analytics_professionals: {
+    title: "Service Pro Analytics", subtitle: "Booking volume and rating distributions.",
+    primaryAction: "Export Pros",
+    kpis: [{ label: "Completion Rate", value: "94%", delta: "+1%", up: true }],
+    columns: ["Service Type", "Bookings", "Completed", "Avg Rating", "Revenue"],
+    rows: [
+      ["Plumbing", "4,500", "4,300", "4.6", "₹45L"],
+      ["Electrician", "3,200", "3,100", "4.7", "₹32L"],
+    ],
+  },
+  analytics_workers: {
+    title: "Service Worker Analytics", subtitle: "Task completion and shift analytics.",
+    primaryAction: "Export Workers",
+    kpis: [{ label: "Active Workers", value: "8,400", delta: "+120", up: true }],
+    columns: ["Region", "Workers", "Tasks Assigned", "Completed", "Avg Hours"],
+    rows: [
+      ["Delhi NCR", "2,400", "12,000", "11,500", "8.2"],
+      ["Mumbai", "3,100", "15,000", "14,200", "8.5"],
+    ],
+  },
+  analytics_wholesale: {
+    title: "Wholesale Analytics", subtitle: "B2B order volume and bulk pricing trends.",
+    primaryAction: "Export Wholesale",
+    kpis: [{ label: "B2B Volume", value: "₹8.5Cr", delta: "+15%", up: true }],
+    columns: ["Vendor", "Total Orders", "Bulk Volume", "Avg Discount", "Status"],
+    rows: [
+      ["MegaMart", "45", "₹1.2Cr", "15%", "Active"],
+      ["RetailPro", "32", "₹85L", "12%", "Active"],
+    ],
+  },
+  analytics_delivery: {
+    title: "Delivery Analytics", subtitle: "Delivery times, costs, and partner performance.",
+    primaryAction: "Export Logistics",
+    kpis: [{ label: "Avg Delivery Time", value: "42 mins", delta: "-3 mins", up: true }],
+    columns: ["Partner", "Deliveries", "On-Time", "Delayed", "Cost/Order"],
+    rows: [
+      ["ExpressLogistics", "125,000", "98%", "2%", "₹42"],
+      ["CityRunners", "85,000", "95%", "5%", "₹38"],
+    ],
+  },
+  analytics_marketing: {
+    title: "Marketing Analytics", subtitle: "Campaign ROI, CAC, and conversion rates.",
+    primaryAction: "Export Marketing",
+    kpis: [{ label: "Blended CAC", value: "₹145", delta: "-₹12", up: true }],
+    columns: ["Campaign", "Spend", "Impressions", "Conversions", "ROI"],
+    rows: [
+      ["Diwali Blast", "₹5L", "2.1M", "45,000", "3.2x"],
+      ["Summer Sale", "₹3L", "1.5M", "28,000", "2.8x"],
+    ],
+  },
+  analytics_finance: {
+    title: "Financial Analytics", subtitle: "Cash flow, margins, and settlement times.",
+    primaryAction: "Export Financials",
+    kpis: [{ label: "Gross Margin", value: "24.5%", delta: "+1.2%", up: true }],
+    columns: ["Category", "Revenue", "COGS", "Gross Margin", "Net Margin"],
+    rows: [
+      ["Marketplace", "₹12Cr", "₹9Cr", "25%", "12%"],
+      ["Services", "₹4Cr", "₹2.5Cr", "37%", "18%"],
+    ],
+  },
+  fraud: {
+    title: "Fraud Alerts", subtitle: "Real-time monitoring of suspicious activity.",
+    primaryAction: "Review Alerts",
+    kpis: [{ label: "New Alerts", value: "24", delta: "+5", up: false }, { label: "Critical", value: "3", delta: "-1", up: true }],
+    columns: ["Alert ID", "Partner", "Type", "Risk Level", "Status"],
+    rows: [
+      ["FA-991", "Store A", "Fake Reviews", "High", "Open"],
+      ["FA-992", "User B", "Stolen Card", "Critical", "Investigating"],
+    ],
+  },
+  risk: {
+    title: "Risk Monitoring", subtitle: "Continuous risk assessment for partners.",
+    primaryAction: "Run Scan",
+    kpis: [{ label: "High Risk", value: "12", delta: "-2", up: true }, { label: "Avg Score", value: "85/100", delta: "+1", up: true }],
+    columns: ["Partner", "Risk Score", "Risk Level", "Last Review", "Status"],
+    rows: [
+      ["Vendor X", "92", "High", "Today", "Flagged"],
+      ["Seller Y", "45", "Low", "Yesterday", "Clear"],
+    ],
+  },
+  warnings: {
+    title: "Account Warnings", subtitle: "Policy violations and issued warnings.",
+    primaryAction: "Issue Warning",
+    kpis: [{ label: "Active Warnings", value: "45", delta: "+12", up: false }],
+    columns: ["Account", "Reason", "Severity", "Issued", "Status"],
+    rows: [
+      ["Seller Z", "Late Shipments", "Medium", "2 days ago", "Active"],
+    ],
+  },
+  suspensions: {
+    title: "Suspensions", subtitle: "Temporarily or permanently suspended accounts.",
+    primaryAction: "Review Suspensions",
+    kpis: [{ label: "Suspended", value: "8", delta: "-1", up: true }],
+    columns: ["Account", "Reason", "End Date", "Admin", "Status"],
+    rows: [
+      ["Store B", "Counterfeit", "Permanent", "Admin 1", "Suspended"],
+    ],
+  },
+  abuse: {
+    title: "Abuse Reports", subtitle: "User-submitted reports of abusive behavior.",
+    primaryAction: "Review Reports",
+    kpis: [{ label: "Pending", value: "15", delta: "+2", up: false }],
+    columns: ["Report ID", "Account", "Reason", "Severity", "Status"],
+    rows: [
+      ["AR-101", "User C", "Harassment", "High", "Open"],
+    ],
+  },
+  incidents: {
+    title: "Safety Incidents", subtitle: "Critical safety incidents requiring immediate action.",
+    primaryAction: "Log Incident",
+    kpis: [{ label: "Open Incidents", value: "2", delta: "0", up: true }],
+    columns: ["Incident ID", "Type", "Severity", "Date", "Status"],
+    rows: [
+      ["SI-05", "Physical altercation", "Critical", "Today", "Investigating"],
+    ],
+  },
+  health: {
+    title: "System Health", subtitle: "Overall platform and infrastructure status.",
+    primaryAction: "Run Diagnostics",
+    kpis: [{ label: "Uptime", value: "99.99%", delta: "0", up: true }, { label: "DB Latency", value: "45ms", delta: "-5ms", up: true }],
+    columns: ["Service", "Status", "Latency", "Last Check", "Action"],
+    rows: [
+      ["Main Database", "Operational", "45ms", "1m ago", "View"],
+      ["Payment Gateway", "Operational", "120ms", "1m ago", "View"],
+      ["Search Service", "Degraded", "850ms", "1m ago", "Restart"],
+    ],
+  },
+  promotions: {
+    title: "Promotions", subtitle: "Active promotional campaigns and discounts.",
+    primaryAction: "Create Promo",
+    kpis: [{ label: "Active", value: "14", delta: "+2", up: true }],
+    columns: ["Promo Code", "Type", "Usage", "Expiry", "Status"],
+    rows: [
+      ["SUMMER26", "Percentage", "12,400", "Next Month", "Active"],
+      ["WELCOME", "Fixed", "45,000", "Never", "Active"],
+    ],
+  },
+  campaigns: {
+    title: "Marketing Campaigns", subtitle: "Omnichannel marketing campaigns.",
+    primaryAction: "New Campaign",
+    kpis: [{ label: "Running", value: "5", delta: "+1", up: true }, { label: "Spend", value: "₹1.2L", delta: "-10%", up: true }],
+    columns: ["Campaign", "Channel", "Budget", "Spend", "Status"],
+    rows: [
+      ["Diwali Blast", "Email/SMS", "₹50k", "₹12k", "Active"],
+      ["Re-engagement", "Push", "₹10k", "₹4k", "Active"],
+    ],
+  },
+  settings_profile: {
+    title: "Admin Profile", subtitle: "Manage your personal admin account settings.",
+    primaryAction: "Edit Profile",
+    kpis: [],
+    columns: ["Property", "Value", "Visibility", "Last Updated", "Action"],
+    rows: [
+      ["Name", "Admin User", "Private", "Today", "Edit"],
+      ["Email", "admin@saathapp.com", "Private", "1 month ago", "Edit"],
+      ["Phone", "+91 99999 99999", "Private", "1 month ago", "Edit"],
+    ],
+  },
+  settings_general: {
+    title: "General Settings", subtitle: "Platform-wide configuration and details.",
+    primaryAction: "Save Changes",
+    kpis: [],
+    columns: ["Setting", "Value", "Category", "Modified By", "Status"],
+    rows: [
+      ["Platform Name", "SaathApp", "Branding", "System", "Active"],
+      ["Support Email", "support@saathapp.com", "Contact", "Admin", "Active"],
+    ],
+  },
+  settings_payment: {
+    title: "Payment Settings", subtitle: "Configure gateways, COD, and settlements.",
+    primaryAction: "Add Gateway",
+    kpis: [],
+    columns: ["Method", "Provider", "Status", "Fee", "Action"],
+    rows: [
+      ["UPI", "Razorpay", "Active", "0%", "Configure"],
+      ["Credit Card", "Stripe", "Active", "2%", "Configure"],
+      ["COD", "Internal", "Active", "₹50", "Configure"],
+    ],
+  },
+  settings_delivery: {
+    title: "Delivery Settings", subtitle: "Zones, fees, and partner configurations.",
+    primaryAction: "Add Zone",
+    kpis: [],
+    columns: ["Zone", "Base Fee", "Per Km", "Status", "Action"],
+    rows: [
+      ["Tier 1 Cities", "₹40", "₹10", "Active", "Edit"],
+      ["Tier 2 Cities", "₹50", "₹12", "Active", "Edit"],
+    ],
+  },
+  settings_notification: {
+    title: "Notification Settings", subtitle: "Manage SMS, Email, and Push alerts.",
+    primaryAction: "Save Preferences",
+    kpis: [],
+    columns: ["Event", "Email", "SMS", "Push", "Status"],
+    rows: [
+      ["Order Placed", "Yes", "Yes", "Yes", "Active"],
+      ["Payment Failed", "Yes", "Yes", "No", "Active"],
+      ["New Seller Signup", "Yes", "No", "No", "Active"],
+    ],
+  },
+  settings_roles: {
+    title: "Roles & Permissions", subtitle: "Manage RBAC access levels for staff.",
+    primaryAction: "Create Role",
+    kpis: [],
+    columns: ["Role", "Users", "Permissions", "Created", "Action"],
+    rows: [
+      ["Super Admin", "2", "All Access", "System", "View"],
+      ["Support Agent", "45", "Limited", "Admin", "Edit"],
+      ["Finance Manager", "8", "Finance Only", "Admin", "Edit"],
+    ],
+  },
+  settings_security: {
+    title: "Security Settings", subtitle: "2FA, sessions, and access logs.",
+    primaryAction: "Review Logs",
+    kpis: [],
+    columns: ["Feature", "Status", "Last Audit", "Risk Level", "Action"],
+    rows: [
+      ["Two-Factor Auth (2FA)", "Enforced", "Today", "Low", "Configure"],
+      ["Session Timeout", "30 mins", "Yesterday", "Low", "Configure"],
+      ["IP Whitelisting", "Disabled", "1 month ago", "High", "Configure"],
+    ],
+  },
   chat: {
     title: "Internal Chat", subtitle: "Team communication across departments.",
     primaryAction: "New channel",
@@ -607,7 +922,7 @@ const MODULES = {
     ],
   },
   vendors: {
-    title: "Vendor Management", subtitle: "External vendors, contracts and payments.",
+    title: "Wholesale Partners", subtitle: "External vendors, contracts and payments.",
     primaryAction: "Add vendor",
     kpis: [
       { label: "Active Vendors", value: "142", delta: "+6", up: true },
@@ -1353,10 +1668,162 @@ const DataTable = ({ columns, rows, onToast, rowActions, onDeleteRows }) => {
   );
 };
 
+// --- WRAPPERS ---
+const GenericWrapper = ({ basePath, tabs, defaultTab, title, onToast }) => {
+  const location = useLocation();
+  const routerNavigate = useRouterNavigate();
+  const [tab, setTab] = useState(defaultTab || Object.keys(tabs)[0]);
+
+  useEffect(() => {
+    const p = location.pathname || '';
+    let found = false;
+    for (const key of Object.keys(tabs)) {
+      if (p.endsWith('/' + key)) {
+        setTab(key);
+        found = true;
+        break;
+      }
+    }
+    if (!found) setTab(defaultTab || Object.keys(tabs)[0]);
+  }, [location.pathname]);
+
+  const go = (t) => {
+    setTab(t);
+    routerNavigate(`${basePath}/${t}`);
+  };
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex gap-2 flex-wrap">
+          {Object.entries(tabs).map(([k, v]) => (
+            <button key={k} onClick={() => go(k)} className={`px-3 py-2 rounded-lg text-sm font-medium ${tab === k ? "bg-emerald-50 text-emerald-700" : "bg-white text-slate-600 hover:bg-slate-50"}`}>
+              {v.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <ModulePage id={tabs[tab].id} statusFilter={tabs[tab].label} onToast={onToast} />
+    </div>
+  );
+};
+
+const ProfessionalsWrapper = ({ onToast }) => (
+  <GenericWrapper basePath="/service-professionals" defaultTab="all" onToast={onToast} tabs={{
+    all: { label: "All", id: "professionals" },
+    pending: { label: "Pending Verification", id: "professionals" },
+    approved: { label: "Approved", id: "professionals" },
+    rejected: { label: "Rejected", id: "professionals" },
+    warning: { label: "Warning", id: "professionals" },
+    suspended: { label: "Suspended", id: "professionals" },
+    terminated: { label: "Terminated", id: "professionals" },
+    deactivated: { label: "Deactivated", id: "professionals" },
+  }} />
+);
+
+const WorkersWrapper = ({ onToast }) => (
+  <GenericWrapper basePath="/service-workers" defaultTab="all" onToast={onToast} tabs={{
+    all: { label: "All Workers", id: "workers" },
+    pending: { label: "Pending", id: "workers" },
+    approved: { label: "Approved", id: "workers" },
+    rejected: { label: "Rejected", id: "workers" },
+    warning: { label: "Warning", id: "workers" },
+    suspended: { label: "Suspended", id: "workers" },
+    terminated: { label: "Terminated", id: "workers" },
+    deactivated: { label: "Deactivated", id: "workers" },
+  }} />
+);
+
+const VendorsWrapper = ({ onToast }) => (
+  <GenericWrapper basePath="/wholesale-partners" defaultTab="all" onToast={onToast} tabs={{
+    all: { label: "All Partners", id: "vendors" },
+    pending: { label: "Pending Verification", id: "vendors" },
+    approved: { label: "Approved", id: "vendors" },
+    rejected: { label: "Rejected", id: "vendors" },
+    warning: { label: "Warning", id: "vendors" },
+    suspended: { label: "Suspended", id: "vendors" },
+    terminated: { label: "Terminated", id: "vendors" },
+    deactivated: { label: "Deactivated", id: "vendors" },
+  }} />
+);
+
+const DeliveryWrapper = ({ onToast }) => (
+  <GenericWrapper basePath="/delivery-partners" defaultTab="all" onToast={onToast} tabs={{
+    all: { label: "All Partners", id: "delivery" },
+    pending: { label: "Pending Verification", id: "delivery" },
+    active: { label: "Approved / Active", id: "delivery" },
+    online: { label: "Online", id: "delivery" },
+    offline: { label: "Offline", id: "delivery" },
+    warning: { label: "Warning", id: "delivery" },
+    suspended: { label: "Suspended", id: "delivery" },
+    terminated: { label: "Terminated", id: "delivery" },
+    deactivated: { label: "Deactivated", id: "delivery" },
+  }} />
+);
+
+const OrdersWrapper = ({ onToast }) => (
+  <GenericWrapper basePath="/orders" defaultTab="all" onToast={onToast} tabs={{
+    all: { label: "All Orders", id: "orders" },
+    new: { label: "New", id: "orders" },
+    processing: { label: "Processing", id: "orders" },
+    out: { label: "Out for Delivery", id: "orders" },
+    delivered: { label: "Delivered", id: "orders" },
+    cancelled: { label: "Cancelled", id: "orders" },
+    returned: { label: "Returned", id: "orders" },
+    failed: { label: "Failed", id: "orders" },
+    details: { label: "Order Details", id: "orders_details" },
+  }} />
+);
+
+const InventoryWrapper = ({ onToast }) => (
+  <GenericWrapper basePath="/inventory" defaultTab="overview" onToast={onToast} tabs={{
+    overview: { label: "Stock Overview", id: "inventory" },
+    low: { label: "Low Stock", id: "inventory_low" },
+    out: { label: "Out of Stock", id: "inventory_out" },
+    warehouse: { label: "Warehouse Stock", id: "inventory_warehouse" },
+    movement: { label: "Stock Movement", id: "inventory_movement" },
+    alerts: { label: "Inventory Alerts", id: "inventory_alerts" },
+  }} />
+);
+
 const UsersPage = ({ onToast }) => {
   const config = MODULES.users;
+  const location = useLocation();
+  const routerNavigate = useRouterNavigate();
+  const [tab, setTab] = useState("all");
   const [rows, setRows] = useState(config.rows);
   const [nextInviteId, setNextInviteId] = useState(1);
+  
+  const tabs = {
+    all: { label: "All Customers" },
+    pending: { label: "Pending KYC" },
+    active: { label: "Active" },
+    suspended: { label: "Suspended" },
+  };
+
+  useEffect(() => {
+    const p = location.pathname || '';
+    let found = false;
+    for (const key of Object.keys(tabs)) {
+      if (p.endsWith('/' + key)) {
+        setTab(key);
+        found = true;
+        break;
+      }
+    }
+    if (!found) setTab("all");
+  }, [location.pathname]);
+
+  const goTab = (t) => {
+    setTab(t);
+    routerNavigate(`/customers/${t}`);
+  };
+
+  const filteredRows = useMemo(() => {
+    if (tab === "all") return rows;
+    const filterText = tabs[tab]?.label || "";
+    return rows.filter(r => r[4] === filterText || (tab === "pending" && r[4] === "Pending KYC"));
+  }, [rows, tab]);
 
   const addUser = () => {
     const newUser = [
@@ -1396,12 +1863,19 @@ const UsersPage = ({ onToast }) => {
   return (
     <div className="sa-fade">
       <SectionHeader title={config.title} subtitle={config.subtitle} action={config.primaryAction} onAction={addUser} />
+      <div className="flex items-center gap-2 mb-4">
+        {Object.entries(tabs).map(([k, v]) => (
+          <button key={k} onClick={() => goTab(k)} className={`px-3 py-2 rounded-lg text-sm font-medium ${tab === k ? "bg-emerald-50 text-emerald-700" : "bg-white text-slate-600 hover:bg-slate-50"}`}>
+            {v.label}
+          </button>
+        ))}
+      </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
         {config.kpis.map((k, i) => <KPICard key={k.label} {...k} index={i} />)}
       </div>
       <DataTable
         columns={config.columns}
-        rows={rows}
+        rows={filteredRows}
         onToast={onToast}
         onDeleteRows={(selectedIds) => {
           setRows((prev) => prev.filter((row, index) => !selectedIds.includes(`${row[0]}-${index}`)));
@@ -1490,47 +1964,67 @@ const SellersPage = ({ onToast }) => {
   );
 };
 
-const SellersWrapper = ({ onToast }) => {
+const SettingsPage = ({ role, onToast }) => {
+  const tabs = {
+    profile: { label: "Admin Profile", id: "settings_profile" },
+    general: { label: "General Settings", id: "settings_general" },
+    platform: { label: "Platform Settings", id: "platform" },
+    payment: { label: "Payment Settings", id: "settings_payment" },
+    delivery: { label: "Delivery Settings", id: "settings_delivery" },
+    notification: { label: "Notification Settings", id: "settings_notification" },
+    roles: { label: "Roles & Permissions", id: "settings_roles" },
+    security: { label: "Security", id: "settings_security" },
+  };
   const location = useLocation();
   const routerNavigate = useRouterNavigate();
-  const [tab, setTab] = useState('overview');
+  const [tab, setTab] = useState("platform");
 
   useEffect(() => {
     const p = location.pathname || '';
-    if (p.endsWith('/applications')) setTab('applications');
-    else if (p.endsWith('/profiles')) setTab('profiles');
-    else if (p.endsWith('/orders')) setTab('orders');
-    else if (p.endsWith('/payouts')) setTab('payouts');
-    else if (p.endsWith('/analytics')) setTab('analytics');
-    else setTab('overview');
+    let found = false;
+    for (const key of Object.keys(tabs)) {
+      if (p.endsWith('/' + key)) {
+        setTab(key);
+        found = true;
+        break;
+      }
+    }
+    if (!found) setTab("platform");
   }, [location.pathname]);
 
   const go = (t) => {
     setTab(t);
-    const path = {
-      overview: '/sellers/overview', applications: '/sellers/applications', profiles: '/sellers/profiles',
-      orders: '/sellers/orders', payouts: '/sellers/payouts', analytics: '/sellers/analytics'
-    }[t] || '/sellers/overview';
-    routerNavigate(path);
+    routerNavigate(`/settings/${t}`);
   };
 
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <div className="flex gap-2">
-          <button onClick={() => go('overview')} className={`px-3 py-2 rounded-lg ${tab === 'overview' ? 'bg-emerald-50 text-emerald-700' : 'bg-white'}`}>Overview</button>
-          <button onClick={() => go('applications')} className={`px-3 py-2 rounded-lg ${tab === 'applications' ? 'bg-emerald-50 text-emerald-700' : 'bg-white'}`}>Applications</button>
-          <button onClick={() => go('profiles')} className={`px-3 py-2 rounded-lg ${tab === 'profiles' ? 'bg-emerald-50 text-emerald-700' : 'bg-white'}`}>Profiles</button>
-          <button onClick={() => go('orders')} className={`px-3 py-2 rounded-lg ${tab === 'orders' ? 'bg-emerald-50 text-emerald-700' : 'bg-white'}`}>Orders</button>
-          <button onClick={() => go('payouts')} className={`px-3 py-2 rounded-lg ${tab === 'payouts' ? 'bg-emerald-50 text-emerald-700' : 'bg-white'}`}>Payouts</button>
-          <button onClick={() => go('analytics')} className={`px-3 py-2 rounded-lg ${tab === 'analytics' ? 'bg-emerald-50 text-emerald-700' : 'bg-white'}`}>Analytics</button>
+        <div className="flex gap-2 flex-wrap">
+          {Object.entries(tabs).map(([k, v]) => (
+            <button key={k} onClick={() => go(k)} className={`px-3 py-2 rounded-lg text-sm font-medium ${tab === k ? "bg-emerald-50 text-emerald-700" : "bg-white text-slate-600 hover:bg-slate-50"}`}>
+              {v.label}
+            </button>
+          ))}
         </div>
       </div>
-      {tab === 'overview' && <SellersPage onToast={onToast} />}
-      {tab !== 'overview' && <SellersPage onToast={onToast} />}
+      {tab === "platform" ? <SettingsContent role={role} onToast={onToast} /> : <ModulePage id={tabs[tab].id} onToast={onToast} />}
     </div>
   );
 };
+
+const SellersWrapper = ({ onToast }) => (
+  <GenericWrapper basePath="/sellers" defaultTab="all" onToast={onToast} tabs={{
+    all: { label: "All Sellers", id: "sellers" },
+    pending: { label: "Pending Approval", id: "sellers" },
+    approved: { label: "Approved", id: "sellers" },
+    rejected: { label: "Rejected", id: "sellers" },
+    warning: { label: "Warning", id: "sellers" },
+    suspended: { label: "Suspended", id: "sellers" },
+    terminated: { label: "Terminated", id: "sellers" },
+    deactivated: { label: "Deactivated", id: "sellers" },
+  }} />
+);
 
 const DeliveryPage = ({ onToast }) => {
   const config = MODULES.delivery;
@@ -1608,7 +2102,7 @@ const DeliveryPage = ({ onToast }) => {
 };
 
 /* Generic module page driven by MODULES config */
-const ModulePage = ({ id, onToast }) => {
+const ModulePage = ({ id, statusFilter, onToast }) => {
   const cfg = MODULES[id];
   if (!cfg) return null;
   const formConfig = MODULE_FORMS[id] ?? {
@@ -1630,6 +2124,22 @@ const ModulePage = ({ id, onToast }) => {
   const steps = useMemo(() => mergeSteps(fields), [fields]);
   const statusIndex = useMemo(() => cfg.columns.findIndex((c) => /status/i.test(c)), [cfg.columns]);
   const createEnabled = /add|new|create|invite|onboard|schedule|assign/i.test(cfg.primaryAction.toLowerCase());
+
+  useEffect(() => {
+    let r = cfg.rows;
+    if (statusFilter && statusFilter !== "All" && !statusFilter.startsWith("All ")) {
+      if (statusIndex >= 0) {
+        r = cfg.rows.map((row, i) => {
+          const newRow = [...row];
+          const shortStatus = statusFilter.split(" ")[0];
+          newRow[0] = newRow[0] + ` - ${shortStatus}`;
+          newRow[statusIndex] = shortStatus;
+          return newRow;
+        });
+      }
+    }
+    setRows(r);
+  }, [id, statusFilter, cfg, statusIndex]);
 
   const resetForm = (values = null) => {
     setFormValues(values ?? Object.fromEntries(fields.map((field) => [field.name, ""])));
@@ -1912,11 +2422,11 @@ const DashboardPage = ({ onNavigate, onToast, mounted }) => {
         <Card className="p-4">
           <p className="sa-font-display font-semibold text-[#0B1420] mb-3">Quick Actions</p>
           <div className="flex flex-wrap gap-3">
-            <button onClick={() => onNavigate('sellers')} className="px-3 py-2 rounded-lg bg-emerald-50 text-emerald-700">Review Pending Applications</button>
-            <button onClick={() => onNavigate('orders')} className="px-3 py-2 rounded-lg bg-white border">View Pending Orders</button>
-            <button onClick={() => onNavigate('support_ops')} className="px-3 py-2 rounded-lg bg-white border">View Complaints</button>
-            <button onClick={() => onNavigate('trust_safety')} className="px-3 py-2 rounded-lg bg-white border">View Fraud Alerts</button>
-            <button onClick={() => onNavigate('analytics_reports')} className="px-3 py-2 rounded-lg bg-white border">View Analytics</button>
+            <button onClick={() => onNavigate('sellers_pending')} className="px-3 py-2 rounded-lg bg-emerald-50 text-emerald-700">Review Pending Applications</button>
+            <button onClick={() => onNavigate('orders_new')} className="px-3 py-2 rounded-lg bg-white border">View Pending Orders</button>
+            <button onClick={() => onNavigate('support_complaints')} className="px-3 py-2 rounded-lg bg-white border">View Complaints</button>
+            <button onClick={() => onNavigate('trust_fraud')} className="px-3 py-2 rounded-lg bg-white border">View Fraud Alerts</button>
+            <button onClick={() => onNavigate('analytics')} className="px-3 py-2 rounded-lg bg-white border">View Analytics</button>
           </div>
         </Card>
       </div>
@@ -2081,7 +2591,7 @@ const DashboardPage = ({ onNavigate, onToast, mounted }) => {
         <p className="sa-font-display font-semibold text-[#0B1420] mb-4">Quick Access</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
           {quickLinks.map((q) => (
-            <button key={q.id} onClick={() => onNavigate(q.id)}
+            <button key={q.label} onClick={() => onNavigate(q.id)}
               className="group flex flex-col items-center justify-center gap-2 rounded-xl border border-black/5 bg-white/60 hover:bg-emerald-50/60 hover:border-emerald-200 py-4 transition-all">
               <div className="w-9 h-9 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style={{ background: `${T.forest}14` }}>
                 <q.icon size={17} color={T.forest} />
@@ -2311,7 +2821,7 @@ const SystemHealthPage = () => (
 /* ============================================================
    SETTINGS (Founder-only)
 ============================================================ */
-const SettingsPage = ({ role, onToast }) => {
+const SettingsContent = ({ role, onToast }) => {
   const allowed = role === "Founder" || role === "Super Admin";
   const [values, setValues] = useState({ commission: 8, tax: 18, delivery: 40, platformFee: 2, referral: 50, maintenance: false });
   if (!allowed) {
@@ -2449,120 +2959,123 @@ const ReportsPage = ({ onToast }) => {
 const AnalyticsReportsPage = ({ onToast }) => {
   const routerNavigate = useRouterNavigate();
   const location = useLocation();
-  const [tab, setTab] = useState("analytics");
+  const [tab, setTab] = useState("overview");
 
   useEffect(() => {
     const path = location.pathname || "";
-    if (path.endsWith("/reports")) setTab("reports");
-    else setTab("analytics");
+    const segments = path.split('/');
+    const last = segments[segments.length - 1];
+    const validTabs = ["overview", "sales", "orders", "customers", "sellers", "professionals", "workers", "wholesale", "delivery", "revenue", "reports"];
+    if (validTabs.includes(last)) setTab(last);
+    else setTab("overview");
   }, [location.pathname]);
 
   const goTab = (t) => {
     setTab(t);
-    if (t === "analytics") routerNavigate('/analytics-reports/overview');
-    else if (t === "reports") routerNavigate('/analytics-reports/reports');
-    else routerNavigate('/analytics-reports');
+    routerNavigate(`/analytics-reports/${t}`);
   };
 
+  const tabs = [
+    { id: "overview", label: "Platform Overview" },
+    { id: "sales", label: "Sales Analytics" },
+    { id: "orders", label: "Order Analytics" },
+    { id: "customers", label: "Customer Analytics" },
+    { id: "sellers", label: "Seller Analytics" },
+    { id: "professionals", label: "Service Professional Analytics" },
+    { id: "workers", label: "Service Worker Analytics" },
+    { id: "wholesale", label: "Wholesale Analytics" },
+    { id: "delivery", label: "Delivery Analytics" },
+    { id: "marketing", label: "Marketing Analytics" },
+    { id: "finance", label: "Financial Analytics" },
+    { id: "reports", label: "Reports" },
+  ];
+
   return (
     <div>
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 overflow-x-auto no-scrollbar py-2">
         <div className="flex gap-2">
-          <button onClick={() => goTab("analytics")} className={`px-3 py-2 rounded-lg ${tab === "analytics" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Platform Overview</button>
-          <button onClick={() => goTab("reports")} className={`px-3 py-2 rounded-lg ${tab === "reports" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Reports</button>
+          {tabs.map((t) => (
+            <button key={t.id} onClick={() => goTab(t.id)} className={`px-3 py-2 whitespace-nowrap rounded-lg text-sm font-medium ${tab === t.id ? "bg-emerald-50 text-emerald-700" : "bg-white text-slate-600 hover:bg-slate-50"}`}>
+              {t.label}
+            </button>
+          ))}
         </div>
       </div>
-      {tab === "analytics" ? <AnalyticsPage /> : <ReportsPage onToast={onToast} />}
+      {tab === "overview" ? <AnalyticsPage /> : tab === "reports" ? <ReportsPage onToast={onToast} /> : <ModulePage id={`analytics_${tab}`} onToast={onToast} />}
     </div>
   );
 };
 
-const ProductsCategoriesPage = ({ onToast }) => {
-  const [tab, setTab] = useState("products");
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex gap-2">
-          <button onClick={() => setTab("products")} className={`px-3 py-2 rounded-lg ${tab === "products" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Products</button>
-          <button onClick={() => setTab("categories")} className={`px-3 py-2 rounded-lg ${tab === "categories" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Categories</button>
-        </div>
-      </div>
-      {tab === "products" ? <ModulePage id="products" onToast={onToast} /> : <ModulePage id="categories" onToast={onToast} />}
-    </div>
-  );
-};
+const ProductsCategoriesPage = ({ onToast }) => (
+  <GenericWrapper basePath="/products-categories" defaultTab="products" onToast={onToast} tabs={{
+    products: { label: "All Products", id: "products" },
+    pending: { label: "Pending Products", id: "products" },
+    approved: { label: "Approved Products", id: "products" },
+    rejected: { label: "Rejected Products", id: "products" },
+    categories: { label: "Categories", id: "categories" },
+    subcategories: { label: "Subcategories", id: "categories" },
+    moderation: { label: "Product Moderation", id: "products" },
+  }} />
+);
 
+const PaymentsFinancePage = ({ onToast }) => (
+  <GenericWrapper basePath="/payments-finance" defaultTab="transactions" onToast={onToast} tabs={{
+    transactions: { label: "Payment Transactions", id: "payments" },
+    cod: { label: "COD", id: "payments" },
+    online: { label: "Online Payments", id: "payments" },
+    refunds: { label: "Refunds", id: "payments" },
+    seller: { label: "Seller Settlements", id: "finance" },
+    partner: { label: "Partner Settlements", id: "finance" },
+    revenue: { label: "Platform Revenue", id: "finance" },
+    fees: { label: "Fees / Commission", id: "finance" },
+    reports: { label: "Financial Reports", id: "finance" },
+  }} />
+);
 
+const MarketingCMSPage = ({ onToast }) => (
+  <GenericWrapper basePath="/marketing-cms" defaultTab="ads" onToast={onToast} tabs={{
+    ads: { label: "Advertisements", id: "ads" },
+    coupons: { label: "Coupons & Offers", id: "coupons" },
+    banners: { label: "Banners", id: "cms" },
+    homepage: { label: "Homepage Content", id: "cms" },
+    promotions: { label: "Promotions", id: "promotions" },
+    campaigns: { label: "Campaigns", id: "campaigns" },
+  }} />
+);
 
-const PaymentsFinancePage = ({ onToast }) => {
-  const [tab, setTab] = useState("payments");
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex gap-2">
-          <button onClick={() => setTab("payments")} className={`px-3 py-2 rounded-lg ${tab === "payments" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Payments</button>
-          <button onClick={() => setTab("finance")} className={`px-3 py-2 rounded-lg ${tab === "finance" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Finance</button>
-        </div>
-      </div>
-      {tab === "payments" ? <ModulePage id="payments" onToast={onToast} /> : <ModulePage id="finance" onToast={onToast} />}
-    </div>
-  );
-};
+const SupportOpsPage = ({ onToast }) => (
+  <GenericWrapper basePath="/support-operations" defaultTab="customer" onToast={onToast} tabs={{
+    customer: { label: "Customer Support", id: "support" },
+    partner: { label: "Partner Support", id: "support" },
+    complaints: { label: "Complaints", id: "support" },
+    disputes: { label: "Disputes", id: "support" },
+    issues: { label: "Operational Issues", id: "tasks" },
+    tasks: { label: "Tasks", id: "tasks" },
+    chat: { label: "Internal Chat", id: "chat" },
+    meetings: { label: "Meetings", id: "meetings" },
+    vendors: { label: "Vendor Management", id: "vendors" },
+  }} />
+);
 
-const MarketingCMSPage = ({ onToast }) => {
-  const [tab, setTab] = useState("ads");
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex gap-2">
-          <button onClick={() => setTab("ads")} className={`px-3 py-2 rounded-lg ${tab === "ads" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Advertisements</button>
-          <button onClick={() => setTab("cms")} className={`px-3 py-2 rounded-lg ${tab === "cms" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>CMS</button>
-          <button onClick={() => setTab("coupons")} className={`px-3 py-2 rounded-lg ${tab === "coupons" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Coupons & Offers</button>
-        </div>
-      </div>
-      {tab === "ads" && <ModulePage id="ads" onToast={onToast} />}
-      {tab === "cms" && <ModulePage id="cms" onToast={onToast} />}
-      {tab === "coupons" && <ModulePage id="coupons" onToast={onToast} />}
-    </div>
-  );
-};
-
-const SupportOpsPage = ({ onToast }) => {
-  const [tab, setTab] = useState("support");
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex gap-2">
-          <button onClick={() => setTab("support")} className={`px-3 py-2 rounded-lg ${tab === "support" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Customer Support</button>
-          <button onClick={() => setTab("ops")} className={`px-3 py-2 rounded-lg ${tab === "ops" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Operational Issues</button>
-        </div>
-      </div>
-      {tab === "support" && <ModulePage id="support" onToast={onToast} />}
-      {tab === "ops" && <ModulePage id="tasks" onToast={onToast} />}
-    </div>
-  );
-};
-
-const TrustSafetyPage = ({ onToast }) => {
-  const [tab, setTab] = useState("fraud");
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex gap-2">
-          <button onClick={() => setTab("fraud")} className={`px-3 py-2 rounded-lg ${tab === "fraud" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Fraud Alerts</button>
-          <button onClick={() => setTab("warnings")} className={`px-3 py-2 rounded-lg ${tab === "warnings" ? "bg-emerald-50 text-emerald-700" : "bg-white"}`}>Account Warnings</button>
-        </div>
-      </div>
-      {tab === "fraud" && <FraudPage onToast={onToast} />}
-      {tab === "warnings" && <ModulePage id="audit" onToast={onToast} />}
-    </div>
-  );
-};
+const TrustSafetyPage = ({ onToast }) => (
+  <GenericWrapper basePath="/trust-safety" defaultTab="fraud" onToast={onToast} tabs={{
+    fraud: { label: "Fraud Alerts", id: "fraud" },
+    risk: { label: "Risk Monitoring", id: "risk" },
+    warnings: { label: "Account Warnings", id: "warnings" },
+    suspensions: { label: "Suspensions", id: "suspensions" },
+    abuse: { label: "Abuse Reports", id: "abuse" },
+    incidents: { label: "Safety Incidents", id: "incidents" },
+  }} />
+);
 
 const SystemPage = ({ onToast }) => (
-  <div>
-    <SystemHealthPage />
-  </div>
+  <GenericWrapper basePath="/system" defaultTab="health" onToast={onToast} tabs={{
+    health: { label: "System Health", id: "health" },
+    api: { label: "API Status", id: "api" },
+    notifications: { label: "Notifications", id: "notifications" },
+    audit: { label: "Audit Logs", id: "audit" },
+    features: { label: "Feature Controls", id: "flags" },
+  }} />
 );
 
 /* ============================================================
@@ -2906,10 +3419,15 @@ export default function App() {
   };
 
   useEffect(() => {
-    // sync active state from URL on location change
     const path = location.pathname === "/" ? "/dashboard" : location.pathname;
-    const mappedId = PATH_TO_ID[path] || Object.keys(ID_TO_PATH).find((k) => ID_TO_PATH[k] === path) || null;
-    if (mappedId) setActive(mappedId);
+    let mappedId = "dashboard";
+    for (const [prefix, id] of Object.entries(ROUTE_PREFIX_TO_MODULE)) {
+      if (path === prefix || path.startsWith(prefix + "/")) {
+        mappedId = id;
+        break;
+      }
+    }
+    setActive(mappedId);
   }, [location.pathname]);
 
   if (!authed) {
@@ -2927,38 +3445,21 @@ export default function App() {
     switch (active) {
       case "dashboard": return <DashboardPage onNavigate={navigate} onToast={pushToast} mounted={mounted} />;
       case "analytics_reports": return <AnalyticsReportsPage onToast={pushToast} />;
-      case "sellers": return <SellersWrapper onToast={pushToast} />;
       case "users": return <UsersPage onToast={pushToast} />;
-      case "fraud": return <FraudPage onToast={pushToast} />;
-      case "ai": return <AIAssistantPage onToast={pushToast} />;
-      case "health": return <SystemHealthPage />;
-      case "settings": return <SettingsPage role={role} onToast={pushToast} />;
+      case "sellers": return <SellersWrapper onToast={pushToast} />;
+      case "professionals": return <ProfessionalsWrapper onToast={pushToast} />;
+      case "workers": return <WorkersWrapper onToast={pushToast} />;
+      case "vendors": return <VendorsWrapper onToast={pushToast} />;
+      case "delivery": return <DeliveryWrapper onToast={pushToast} />;
       case "products_categories": return <ProductsCategoriesPage onToast={pushToast} />;
+      case "orders": return <OrdersWrapper onToast={pushToast} />;
+      case "inventory": return <InventoryWrapper onToast={pushToast} />;
       case "payments_finance": return <PaymentsFinancePage onToast={pushToast} />;
       case "marketing_cms": return <MarketingCMSPage onToast={pushToast} />;
       case "support_ops": return <SupportOpsPage onToast={pushToast} />;
       case "trust_safety": return <TrustSafetyPage onToast={pushToast} />;
       case "system": return <SystemPage onToast={pushToast} />;
-      case "users":
-      case "sellers":
-      case "professionals":
-      case "workers":
-      case "vendors":
-      case "delivery":
-      case "orders":
-      case "inventory":
-      case "payments":
-      case "finance":
-      case "ads":
-      case "cms":
-      case "coupons":
-      case "support":
-      case "tasks":
-      case "audit":
-      case "chat":
-      case "meetings":
-      case "vendors":
-        return <ModulePage id={active} onToast={pushToast} />;
+      case "settings": return <SettingsPage role={role} onToast={pushToast} />;
       default: return <ModulePage id={active} onToast={pushToast} />;
     }
   };
