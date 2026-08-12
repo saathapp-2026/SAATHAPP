@@ -351,12 +351,6 @@ export default function ProfessionalDashboardPage({
                             View Reviews
                           </button>
                         </div>
-                        <WelcomeKitSection
-                          membership={membership}
-                          applicationStatus={onboarding?.status}
-                          setActiveTab={setActiveTab}
-                        />
-                        <TermsCardSection />
                       </div>
                     </div>
 
