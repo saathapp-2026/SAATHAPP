@@ -10,9 +10,7 @@ import NearbyShops from '../components/NearbyShops';
 import ServiceSection from '../components/ServiceSection';
 import Advertisements from '../components/Advertisements';
 import WhySaathApp from '../components/WhySaathApp';
-import HowItWorks from '../components/HowItWorks';
 import LiveStats from '../components/LiveStats';
-import Reviews from '../components/Reviews';
 import BecomePartner from '../components/BecomePartner';
 
 import Footer from '../components/Footer';
@@ -156,10 +154,7 @@ export default function Home({
 
         <Advertisements />
         <WhySaathApp />
-        <HowItWorks />
         <LiveStats />
-        <Reviews />
-
 
         <div id="partner-section">
           <BecomePartner onBecomePartnerSelect={onBecomePartnerSelect} />
