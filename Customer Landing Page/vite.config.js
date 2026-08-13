@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'pwa-192x192.png', 'pwa-512x512.png'],
+      includeAssets: ['saathapp-favicon.jpeg', 'pwa-192x192.png', 'pwa-512x512.png'],
       manifest: {
         name: 'Saathapp',
         short_name: 'Saathapp',
@@ -38,10 +38,6 @@ export default defineConfig({
       },
       workbox: {
         maximumFileSizeToCacheInBytes: 5000000 // 5 MB
-      },
-      devOptions: {
-        enabled: true,
-        type: 'module',
       }
     })
   ],

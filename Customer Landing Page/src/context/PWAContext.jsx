@@ -9,6 +9,30 @@ export function PWAProvider({ children }) {
   const [showIOSPrompt, setShowIOSPrompt] = useState(false);
 
   useEffect(() => {
+    if (import.meta.env.DEV) {
+      console.log('[PWA] Development mode');
+      console.log('[PWA] Service Worker disabled');
+      
+      // Cleanup stale service workers
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (let registration of registrations) {
+            registration.unregister();
+            console.log('[PWA] Development mode: Unregistered stale service worker.');
+          }
+        });
+      }
+      // Cleanup old caches
+      if ('caches' in window) {
+        caches.keys().then((keyList) => {
+          return Promise.all(keyList.map((key) => {
+            console.log(`[PWA] Development mode: Cleared cache ${key}`);
+            return caches.delete(key);
+          }));
+        });
+      }
+    }
+
     // Check if app is installed
     const mediaQuery = window.matchMedia('(display-mode: standalone)');
     setIsInstalled(mediaQuery.matches || window.navigator.standalone === true);
@@ -21,6 +45,9 @@ export function PWAProvider({ children }) {
     // Listen for install prompt
     const handleBeforeInstallPrompt = (e) => {
       e.preventDefault();
+      if (import.meta.env.DEV) {
+        console.log('[PWA] beforeinstallprompt received');
+      }
       setInstallPromptEvent(e);
     };
 
@@ -40,19 +67,21 @@ export function PWAProvider({ children }) {
 
   const installApp = async () => {
     if (isIOS && !isInstalled) {
+      if (import.meta.env.DEV) console.log('[PWA] iOS installation fallback');
       setShowIOSPrompt(true);
       return;
     }
 
-    if (!installPromptEvent) {
-      return;
-    }
-
-    installPromptEvent.prompt();
-    const { outcome } = await installPromptEvent.userChoice;
-    
-    if (outcome === 'accepted') {
-      setInstallPromptEvent(null);
+    if (installPromptEvent) {
+      installPromptEvent.prompt();
+      const { outcome } = await installPromptEvent.userChoice;
+      
+      if (outcome === 'accepted') {
+        setInstallPromptEvent(null);
+      }
+    } else {
+      // Graceful fallback when beforeinstallprompt is missing but user clicked install
+      alert('To install this app, please use your browser\'s "Add to Home Screen" or "Install" option from the menu.');
     }
   };
 
@@ -63,7 +92,7 @@ export function PWAProvider({ children }) {
   return (
     <PWAContext.Provider value={{ 
       isInstalled, 
-      canInstall: !!installPromptEvent || (isIOS && !isInstalled),
+      canInstall: !isInstalled, // Do not hide just because beforeinstallprompt is missing
       installApp,
       showIOSPrompt,
       closeIOSPrompt
