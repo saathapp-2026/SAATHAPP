@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Mic, ShoppingCart, Sun, Moon, Bell, Sparkles, Flame, History, MapPin, ChevronDown, Menu, X, LogOut } from 'lucide-react';
+import { Search, Mic, ShoppingCart, Sun, Moon, Bell, Sparkles, Flame, History, MapPin, ChevronDown, Menu, X, LogOut, Download } from 'lucide-react';
+import { usePWA } from '../context/PWAContext';
 import SaathAppLogo from '../assets/saathapp-logo.jpeg';
 import { useLanguage } from '../context/LanguageContext';
 import { getCustomerMenu } from '../config/customerMenu';
@@ -29,6 +30,7 @@ export default function Header({
   onImageSearchClick
 }) {
   const { t } = useLanguage();
+  const { canInstall, isInstalled, installApp } = usePWA();
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isCustomerMenuOpen, setIsCustomerMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -263,6 +265,18 @@ export default function Header({
                 <Bell size={20} />
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-danger rounded-full" />
               </button>
+
+              {/* Install App Button */}
+              {canInstall && !isInstalled && (
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  onClick={installApp}
+                  className="hidden md:flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white rounded-btn transition-colors"
+                >
+                  <Download size={14} />
+                  <span>Install App</span>
+                </motion.button>
+              )}
 
               {!isAuthenticated && (
                 <motion.button

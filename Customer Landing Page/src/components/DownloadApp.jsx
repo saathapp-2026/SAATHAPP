@@ -1,10 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Smartphone, Download, CheckCircle, Star } from 'lucide-react';
+import { Phone, Smartphone, Download, CheckCircle, Star, Check } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+import { usePWA } from '../context/PWAContext';
 
 export default function DownloadApp() {
   const location = useLocation();
+  const { canInstall, isInstalled, installApp } = usePWA();
 
   // Hide mobile app banner on Wholesale pages as mobile app is currently not available
   const isWholesaleRoute = location.pathname.toLowerCase().includes('/wholesale') || 
@@ -64,72 +66,34 @@ export default function DownloadApp() {
               </div>
             </div>
 
-            {/* Downloader App Store Blocks & QR */}
+            {/* Downloader Action */}
             <div className="flex flex-wrap items-center gap-6 pt-4">
-              
-              {/* Stores Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3">
+              {isInstalled ? (
+                <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 text-white py-3 px-6 rounded-btn shadow-lg">
+                  <Check size={20} className="text-secondary" />
+                  <span className="font-bold">App Installed</span>
+                </div>
+              ) : (
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="flex items-center gap-3 bg-slate-900 hover:bg-slate-950 text-white py-2.5 px-5 rounded-btn border border-white/10 transition-colors shadow-lg cursor-pointer"
+                  onClick={installApp}
+                  disabled={!canInstall}
+                  className={`flex items-center gap-3 py-3 px-8 rounded-btn border border-white/10 transition-colors shadow-lg cursor-pointer ${
+                    canInstall 
+                      ? 'bg-slate-900 hover:bg-slate-950 text-white' 
+                      : 'bg-slate-900/50 text-white/50 cursor-not-allowed'
+                  }`}
                 >
-                  {/* Custom Play Store SVG Mark */}
-                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                    <path d="M5,3.23C5.18,3.05 5.5,3 5.83,3.17L18.82,10.67C19.46,11.04 19.46,11.96 18.82,12.33L5.83,19.83C5.5,20 5.18,19.95 5,19.77V3.23M17.06,11.5L5.75,4.95V18.05L17.06,11.5Z" />
-                  </svg>
+                  <Download size={22} className={canInstall ? 'text-secondary' : 'text-slate-500'} />
                   <div className="text-left leading-none">
-                    <span className="text-[9px] text-white/50 block font-bold uppercase tracking-wider">Get it on</span>
-                    <span className="text-sm font-extrabold block mt-0.5">Google Play</span>
+                    <span className="text-[10px] text-white/70 block font-bold uppercase tracking-wider">
+                      {canInstall ? 'Fast & Lightweight' : 'Not Supported'}
+                    </span>
+                    <span className="text-base font-extrabold block mt-0.5">Install App</span>
                   </div>
                 </motion.button>
-
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="flex items-center gap-3 bg-slate-900 hover:bg-slate-950 text-white py-2.5 px-5 rounded-btn border border-white/10 transition-colors shadow-lg cursor-pointer"
-                >
-                  {/* Custom Apple Store SVG Mark */}
-                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                    <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,22C14.32,22.05 13.89,21.24 12.37,21.24C10.84,21.24 10.37,22 9.09,22.05C7.81,22.1 6.8,20.77 5.96,19.58C4.26,17.15 2.96,12.67 4.7,9.65C5.57,8.14 7.13,7.18 8.83,7.15C10.13,7.13 11.37,8 12.17,8C12.97,8 14.47,7.1 16.03,7.26C16.69,7.29 18.55,7.53 19.74,9.27C19.64,9.33 17.84,10.38 17.86,12.5C17.89,15.03 20.06,15.89 20.1,15.9C20.08,15.96 19.74,17.13 18.71,19.5M15.97,4.86C16.63,4.07 17.07,2.97 16.95,1.87C16,1.91 14.9,2.47 14.25,3.23C13.69,3.87 13.2,4.98 13.35,6.05C14.4,6.13 15.42,5.53 15.97,4.86Z" />
-                  </svg>
-                  <div className="text-left leading-none">
-                    <span className="text-[9px] text-white/50 block font-bold uppercase tracking-wider">Download on the</span>
-                    <span className="text-sm font-extrabold block mt-0.5">App Store</span>
-                  </div>
-                </motion.button>
-              </div>
-
-              {/* QR Divider */}
-              <div className="hidden sm:block h-10 w-px bg-white/20" />
-
-              {/* Simulated QR Code */}
-              <div className="hidden sm:flex items-center gap-3 bg-white/10 backdrop-blur-md p-2 rounded-card border border-white/10">
-                <div className="w-16 h-16 bg-white p-1 rounded-lg">
-                  {/* Simulated QR SVG */}
-                  <svg className="w-full h-full text-slate-900" viewBox="0 0 100 100">
-                    <rect x="0" y="0" width="25" height="25" fill="currentColor" />
-                    <rect x="5" y="5" width="15" height="15" fill="white" />
-                    <rect x="75" y="0" width="25" height="25" fill="currentColor" />
-                    <rect x="80" y="5" width="15" height="15" fill="white" />
-                    <rect x="0" y="75" width="25" height="25" fill="currentColor" />
-                    <rect x="5" y="80" width="15" height="15" fill="white" />
-                    {/* Random QR pixels */}
-                    <rect x="35" y="10" width="10" height="10" fill="currentColor" />
-                    <rect x="55" y="10" width="10" height="20" fill="currentColor" />
-                    <rect x="10" y="45" width="20" height="10" fill="currentColor" />
-                    <rect x="40" y="40" width="20" height="20" fill="currentColor" />
-                    <rect x="70" y="45" width="15" height="15" fill="currentColor" />
-                    <rect x="45" y="75" width="10" height="15" fill="currentColor" />
-                    <rect x="75" y="75" width="15" height="15" fill="currentColor" />
-                  </svg>
-                </div>
-                <div className="text-left text-xs font-bold leading-tight">
-                  <span className="block text-secondary">Scan to Download</span>
-                  <span className="text-white/60 block mt-0.5">iOS & Android</span>
-                </div>
-              </div>
-
+              )}
             </div>
           </div>
 

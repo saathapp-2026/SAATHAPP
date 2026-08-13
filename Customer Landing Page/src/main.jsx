@@ -7,6 +7,8 @@ import App from './App.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 import { ThemeProvider } from './context/ThemeContext.jsx';
 import { LanguageProvider } from './context/LanguageContext.jsx';
+import { PWAProvider } from './context/PWAContext.jsx';
+import PWAInstallModal from './components/PWAInstallModal.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -14,7 +16,10 @@ createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <ThemeProvider>
           <LanguageProvider>
-            <App />
+            <PWAProvider>
+              <App />
+              <PWAInstallModal />
+            </PWAProvider>
           </LanguageProvider>
         </ThemeProvider>
       </BrowserRouter>
