@@ -9,7 +9,6 @@ import FeaturedProducts from '../components/FeaturedProducts';
 import NearbyShops from '../components/NearbyShops';
 import ServiceSection from '../components/ServiceSection';
 import Advertisements from '../components/Advertisements';
-import WhySaathApp from '../components/WhySaathApp';
 import LiveStats from '../components/LiveStats';
 import BecomePartner from '../components/BecomePartner';
 
@@ -153,7 +152,6 @@ export default function Home({
         </div>
 
         <Advertisements />
-        <WhySaathApp />
         <LiveStats />
 
         <div id="partner-section">

@@ -506,36 +506,6 @@ export const testimonials = [
   }
 ];
 
-export const whySaathAppFeatures = [
-  {
-    title: 'Verified Sellers',
-    description: '100% genuine local stores, farmers, and certified contractors audited by our teams.',
-    icon: Users,
-    color: 'text-green-600',
-    bg: 'bg-green-50'
-  },
-  {
-    title: 'Instant Delivery',
-    description: 'Groceries in 10 mins, hardware and cement in 60 mins, services booked within minutes.',
-    icon: Truck,
-    color: 'text-amber-500',
-    bg: 'bg-amber-50'
-  },
-  {
-    title: 'Secure Payments',
-    description: 'UPI, Cards, NetBanking, and Cash on Delivery (COD) with secure online and COD payments for services.',
-    icon: ShieldCheck,
-    color: 'text-blue-600',
-    bg: 'bg-blue-50'
-  },
-  {
-    title: 'AI Recommendations',
-    description: 'Smart recommendations for products and services based on weather, seasons, and local demand.',
-    icon: Brain,
-    color: 'text-purple-600',
-    bg: 'bg-purple-50'
-  }
-];
 
 export const howItWorksSteps = [
   {
