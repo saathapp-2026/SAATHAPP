@@ -4,13 +4,7 @@ import { Link } from 'react-router-dom';
 import logoUrl from '../../../assets/saathapp-logo.jpeg';
 
 const NAV_ITEMS = [
-  { label: 'Dashboard', path: '/seller/dashboard' },
-  { label: 'Orders', path: '/seller/orders' },
-  { label: 'Products', path: '/seller/products' },
-  { label: 'Customers', path: '/seller/customers' },
-  { label: 'Marketing', path: '/seller/marketing', active: true },
-  { label: 'Finance', path: '/seller/finance' },
-  { label: 'Reports', path: '/seller/reports' },
+  { label: 'Marketing', path: '/seller/marketing', active: true }
 ];
 
 export default function WizardHeader({ user, onBack }) {
