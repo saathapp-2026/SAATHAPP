@@ -1,7 +1,7 @@
 import React from 'react';
 import { Check, ShieldCheck, Phone, Mail, Clock, HeadphonesIcon, Copy, Sparkles } from 'lucide-react';
 import { formatINR } from '../../../config/seller/adConstants';
-import { calculateAdvertisingPrice, ADVERTISER_CATEGORIES } from '../../../services/advertisingPricingEngine';
+import { calculateAdvertisingPrice, ADVERTISER_CATEGORIES, NATIONAL_BRAND_CONTRACTS } from '../../../services/advertisingPricingEngine';
 
 const BENEFITS = [
   'Unlimited Clicks & Impressions',
