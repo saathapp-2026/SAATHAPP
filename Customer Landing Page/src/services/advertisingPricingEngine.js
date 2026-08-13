@@ -159,6 +159,7 @@ export const SPONSORED_SEARCH_PRICING = {
   large_shop: { Village: 2500, 'Tier 3': 3500, 'Tier 2': 5000, 'Tier 1': 7500, Metro: 10000 },
   wholesale: { Village: 2000, 'Tier 3': 3000, 'Tier 2': 4000, 'Tier 1': 5000, Metro: 7500 },
   msme: { Village: 5000, 'Tier 3': 7500, 'Tier 2': 10000, 'Tier 1': 15000, Metro: 20000 },
+  national_brand: { Village: 10000, 'Tier 3': 15000, 'Tier 2': 20000, 'Tier 1': 30000, Metro: 40000 },
 };
 
 // 6. BANNER ADVERTISING PRICING TABLE
@@ -169,6 +170,7 @@ export const BANNER_AD_PRICING = {
   large_shop: { Village: 5000, 'Tier 3': 7500, 'Tier 2': 10000, 'Tier 1': 15000, Metro: 25000 },
   wholesale: { Village: 5000, 'Tier 3': 7500, 'Tier 2': 10000, 'Tier 1': 15000, Metro: 20000 },
   msme: { Village: 10000, 'Tier 3': 15000, 'Tier 2': 20000, 'Tier 1': 30000, Metro: 50000 },
+  national_brand: { Village: 20000, 'Tier 3': 30000, 'Tier 2': 40000, 'Tier 1': 60000, Metro: 100000 },
 };
 
 // 7. FEATURED BUSINESS / FEATURED SELLER TABLE
@@ -178,6 +180,7 @@ export const FEATURED_BUSINESS_PRICING = {
   medium_shop: { Village: 1000, 'Tier 3': 1500, 'Tier 2': 2000, 'Tier 1': 3000, Metro: 5000 },
   large_shop: { Village: 2500, 'Tier 3': 3500, 'Tier 2': 5000, 'Tier 1': 7500, Metro: 10000 },
   wholesale: { Village: 2000, 'Tier 3': 3000, 'Tier 2': 5000, 'Tier 1': 7500, Metro: 10000 },
+  national_brand: { Village: 5000, 'Tier 3': 7500, 'Tier 2': 10000, 'Tier 1': 15000, Metro: 25000 },
 };
 
 // 8. POSTER ADVERTISING TABLE
@@ -206,6 +209,7 @@ export const COUPON_OFFER_PRICING = {
   large_shop: { Village: 2500, 'Tier 3': 3500, 'Tier 2': 5000, 'Tier 1': 7500, Metro: 10000 },
   wholesale: { Village: 2000, 'Tier 3': 3000, 'Tier 2': 5000, 'Tier 1': 7500, Metro: 10000 },
   msme: { Village: 5000, 'Tier 3': 7500, 'Tier 2': 10000, 'Tier 1': 15000, Metro: 20000 },
+  national_brand: { Village: 10000, 'Tier 3': 15000, 'Tier 2': 20000, 'Tier 1': 30000, Metro: 40000 },
 };
 
 // 12. SCHOOL / COLLEGE / COACHING PRICING TABLE
@@ -235,16 +239,8 @@ export const LOCAL_MANUFACTURER_PRICING = {
   small_manufacturer: { Village: 5000, 'Tier 3': 7500, 'Tier 2': 10000, 'Tier 1': 15000, Metro: 25000 },
   medium_manufacturer: { Village: 10000, 'Tier 3': 15000, 'Tier 2': 25000, 'Tier 1': 40000, Metro: 60000 },
   regional_brand: { Village: 25000, 'Tier 3': 40000, 'Tier 2': 60000, 'Tier 1': 100000, Metro: 150000 },
+  national_brand: { Village: 50000, 'Tier 3': 75000, 'Tier 2': 120000, 'Tier 1': 200000, Metro: 300000 },
 };
-
-// 16. NATIONAL BRAND / MNC SPONSORSHIP TARGET RANGES
-export const NATIONAL_BRAND_CONTRACTS = [
-  { id: 'local_brand_partner', title: 'Local Brand Partnership', range: '₹5L – ₹25L' },
-  { id: 'regional_brand_partner', title: 'Regional Brand Partnership', range: '₹25L – ₹75L' },
-  { id: 'national_brand_campaign', title: 'National Brand Campaign', range: '₹50L – ₹2Cr' },
-  { id: 'major_brand_partner', title: 'Major Brand Partnership', range: '₹1Cr – ₹3Cr' },
-  { id: 'strategic_mnc_partner', title: 'Strategic MNC Partnership', range: '₹2Cr – ₹5Cr' },
-];
 
 export const SPONSORSHIP_AREAS = [
   'Category Sponsorship',
@@ -278,6 +274,7 @@ function normalizeCategoryKey(cat) {
   if (c.includes('small') && c.includes('manufactur')) return 'small_manufacturer';
   if (c.includes('medium') && c.includes('manufactur')) return 'medium_manufacturer';
   if (c.includes('regional') && c.includes('brand')) return 'regional_brand';
+  if (c.includes('national') && c.includes('brand')) return 'national_brand';
   return c;
 }
 
@@ -357,20 +354,7 @@ export function calculateAdvertisingPrice(params = {}) {
   const radKey = normalizeRadiusKey(radius);
   const typeStr = String(adType).toLowerCase();
 
-  // 16. National Brand / MNC Contract (Manual Admin Quote)
-  if (catKey === 'national_brand') {
-    const adminPrice = customAdminQuote != null ? Number(customAdminQuote) : 0;
-    return {
-      normTier,
-      basePrice: adminPrice,
-      durationMultiplier: 1,
-      finalPrice: adminPrice,
-      isContract: true,
-      contractRanges: NATIONAL_BRAND_CONTRACTS,
-      sponsorshipAreas: SPONSORSHIP_AREAS,
-      note: 'Negotiated annual sponsorship contract — custom quote entered manually by admin.'
-    };
-  }
+
 
   // 1. Sponsored Search Pricing
   if (

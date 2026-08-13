@@ -1,7 +1,7 @@
 import React from 'react';
 import { Check, ShieldCheck, Phone, Mail, Clock, HeadphonesIcon, Copy, Sparkles } from 'lucide-react';
 import { formatINR } from '../../../config/seller/adConstants';
-import { calculateAdvertisingPrice, ADVERTISER_CATEGORIES, NATIONAL_BRAND_CONTRACTS } from '../../../services/advertisingPricingEngine';
+import { calculateAdvertisingPrice, ADVERTISER_CATEGORIES } from '../../../services/advertisingPricingEngine';
 
 const BENEFITS = [
   'Unlimited Clicks & Impressions',
@@ -118,8 +118,6 @@ export default function SummarySidebar({ draft, reach, updateDraft }) {
             </div>
           </div>
 
-          {!calcResult.isContract ? (
-            <>
               <div className="flex justify-between items-center text-xs text-slate-500 pt-1">
                 <span>Base Price ({calcResult.normTier})</span>
                 <span className="font-semibold text-slate-700">{formatINR(calcResult.basePrice)}</span>
@@ -144,41 +142,6 @@ export default function SummarySidebar({ draft, reach, updateDraft }) {
                 <span className="text-sm font-bold text-slate-900">Calculated SAATHAPP Fee</span>
                 <span className="text-3xl font-black text-[#15803D] tracking-tight">{formatINR(price)}</span>
               </div>
-            </>
-          ) : (
-            <div className="pt-2 border-t border-slate-100 space-y-3">
-              <div className="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs space-y-1.5">
-                <p className="font-bold text-amber-900">National Brand / MNC Contract</p>
-                <p className="text-amber-800 font-medium">Negotiated annual sponsorship (Target ₹5L – ₹5Cr/yr)</p>
-                <div className="pt-1.5 text-[11px] text-amber-700 space-y-0.5 border-t border-amber-200/60">
-                  {NATIONAL_BRAND_CONTRACTS.map(c => (
-                    <div key={c.id} className="flex justify-between font-medium">
-                      <span>• {c.title}</span>
-                      <span className="font-bold">{c.range}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {updateDraft && (
-                <div className="space-y-1">
-                  <label className="text-xs font-bold text-slate-700">Enter Custom Admin Quote (₹)</label>
-                  <input
-                    type="number"
-                    placeholder="e.g. 500000"
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white font-bold text-slate-900"
-                    value={draft.customAdminQuote || ''}
-                    onChange={(e) => updateDraft({ customAdminQuote: e.target.value })}
-                  />
-                </div>
-              )}
-
-              <div className="flex justify-between items-end pt-1">
-                <span className="text-xs font-bold text-slate-700">Contract Final Amount</span>
-                <span className="text-2xl font-black text-amber-700">{price > 0 ? formatINR(price) : 'Custom Quote'}</span>
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
