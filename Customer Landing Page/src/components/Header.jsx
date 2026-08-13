@@ -271,10 +271,11 @@ export default function Header({
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   onClick={installApp}
-                  className="hidden md:flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white rounded-btn transition-colors"
+                  className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white rounded-btn transition-colors"
                 >
                   <Download size={14} />
-                  <span>Install App</span>
+                  <span className="hidden sm:inline">Install App</span>
+                  <span className="sm:hidden">Install</span>
                 </motion.button>
               )}
 
