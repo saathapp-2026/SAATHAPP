@@ -561,10 +561,10 @@ export const howItWorksSteps = [
 ];
 
 export const liveStats = [
-  { value: 10000, label: 'Products Available', prefix: '', suffix: '+' },
-  { value: 500, label: 'Verified Local Stores', prefix: '', suffix: '+' },
-  { value: 5000, label: 'Successful Orders Today', prefix: '', suffix: '+' },
-  { value: 300, label: 'Active Saathi Partners', prefix: '', suffix: '+' }
+  { value: 0, label: 'Products Available', prefix: '', suffix: '' },
+  { value: 0, label: 'Verified Local Stores', prefix: '', suffix: '' },
+  { value: 0, label: 'Successful Orders Today', prefix: '', suffix: '' },
+  { value: 0, label: 'Active Saathi Partners', prefix: '', suffix: '' }
 ];
 
 // ─── Worker Dashboard Mock Data ───────────────────────────────────────────
