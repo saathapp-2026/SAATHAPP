@@ -10,6 +10,7 @@ import {
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import toast from 'react-hot-toast';
+import saathFranchiseLogoImg from '../assets/saath-franchise-logo.png';
 
 export default function FranchisePage({
   cartCount = 0,
@@ -405,33 +406,43 @@ Website: www.saathappnova.co.in
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
           
           <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
-            <span className="font-display text-xl sm:text-2xl font-black tracking-tight text-saath-green flex items-center gap-1 sm:gap-1.5 cursor-pointer active:scale-95 transition-transform" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              <Building2 className="w-5 h-5 sm:w-7 sm:h-7 text-saath-green-mid" />
-              saath<span className="text-saath-accent">Franchise</span>
-            </span>
-            <span className="hidden xs:inline-block text-[8px] sm:text-[9px] font-extrabold uppercase bg-saath-green-light text-saath-green px-1.5 sm:px-2 py-0.5 rounded-full tracking-wider border border-saath-green/20">
+            <div
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="cursor-pointer active:scale-95 transition-transform flex items-center"
+              title="saathFranchise - Grow Together. Succeed Together."
+            >
+              <img 
+                src={saathFranchiseLogoImg} 
+                alt="saathFranchise Logo" 
+                className="h-12 sm:h-16 md:h-18 lg:h-20 w-auto object-contain max-w-[240px] sm:max-w-[300px] md:max-w-[360px] dark:bg-white/95 dark:px-2.5 dark:py-1.5 dark:rounded-xl dark:shadow-xs transition-all"
+                onError={(e) => {
+                  e.target.src = '/images/saath-franchise-logo.png';
+                }}
+              />
+            </div>
+            <span className="hidden md:inline-block text-[8px] sm:text-[9px] font-extrabold uppercase bg-saath-green-light text-saath-green-dark px-2 py-0.5 rounded-full tracking-wider border border-saath-green/30">
               Partner Hub
             </span>
           </div>
 
           {/* Desktop & Mobile Scrollable Nav Links */}
           <nav className="flex items-center space-x-3 sm:space-x-6 overflow-x-auto scrollbar-none max-w-full py-1">
-            <button onClick={() => scrollToSection('why-saath')} className="text-xs sm:text-sm font-semibold text-saath-text2 hover:text-saath-green whitespace-nowrap transition-colors cursor-pointer active:scale-95">
+            <button onClick={() => scrollToSection('why-saath')} className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-saath-green whitespace-nowrap transition-colors cursor-pointer active:scale-95">
               Why SaathApp
             </button>
-            <button onClick={() => scrollToSection('models')} className="text-xs sm:text-sm font-semibold text-saath-text2 hover:text-saath-green whitespace-nowrap transition-colors cursor-pointer active:scale-95">
+            <button onClick={() => scrollToSection('models')} className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-saath-green whitespace-nowrap transition-colors cursor-pointer active:scale-95">
               Franchise Models
             </button>
-            <button onClick={() => scrollToSection('investment')} className="text-xs sm:text-sm font-semibold text-saath-text2 hover:text-saath-green whitespace-nowrap transition-colors cursor-pointer active:scale-95">
+            <button onClick={() => scrollToSection('investment')} className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-saath-green whitespace-nowrap transition-colors cursor-pointer active:scale-95">
               Investment & Returns
             </button>
-            <button onClick={() => scrollToSection('expansion')} className="text-xs sm:text-sm font-semibold text-saath-text2 hover:text-saath-green whitespace-nowrap transition-colors cursor-pointer active:scale-95">
+            <button onClick={() => scrollToSection('expansion')} className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-saath-green whitespace-nowrap transition-colors cursor-pointer active:scale-95">
               Roadmap
             </button>
-            <button onClick={() => scrollToSection('faq')} className="text-xs sm:text-sm font-semibold text-saath-text2 hover:text-saath-green whitespace-nowrap transition-colors cursor-pointer active:scale-95">
+            <button onClick={() => scrollToSection('faq')} className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-saath-green whitespace-nowrap transition-colors cursor-pointer active:scale-95">
               FAQ
             </button>
-            <button onClick={() => scrollToSection('contact')} className="text-xs sm:text-sm font-semibold text-saath-text2 hover:text-saath-green whitespace-nowrap transition-colors cursor-pointer active:scale-95">
+            <button onClick={() => scrollToSection('contact')} className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-saath-green whitespace-nowrap transition-colors cursor-pointer active:scale-95">
               Contact Us
             </button>
           </nav>
@@ -465,13 +476,13 @@ Website: www.saathappnova.co.in
             <div className="flex flex-wrap items-center gap-3">
               <button 
                 onClick={() => navigate('/')}
-                className="inline-flex items-center gap-1.5 text-slate-500 hover:text-saath-green font-bold text-xs sm:text-sm group transition-colors cursor-pointer active:scale-95"
+                className="inline-flex items-center gap-1.5 text-slate-700 dark:text-slate-200 hover:text-saath-green font-bold text-xs sm:text-sm group transition-colors cursor-pointer active:scale-95"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 <span>Back to Home</span>
               </button>
-              <div className="inline-flex items-center gap-2 bg-saath-green-light border border-saath-green/20 px-3 py-1 rounded-full text-saath-green font-semibold text-xs tracking-wide uppercase">
-                <Award className="w-4 h-4 text-saath-green" />
+              <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/30 px-3 py-1 rounded-full text-emerald-800 dark:text-emerald-300 font-extrabold text-xs tracking-wide uppercase">
+                <Award className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 Regional Partnership Opportunity 2026
               </div>
             </div>
@@ -480,7 +491,7 @@ Website: www.saathappnova.co.in
               Own a <span className="text-saath-green">SaathApp</span> Franchise in Your City
             </h1>
 
-            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg md:text-xl font-medium leading-relaxed max-w-xl">
+            <p className="text-slate-800 dark:text-slate-100 text-base sm:text-lg md:text-xl font-semibold leading-relaxed max-w-xl">
               Build the future of hyperlocal commerce, services, and deliveries in your district with SaathApp. Join India's fastest-growing digital ecosystem.
             </p>
 
@@ -494,7 +505,7 @@ Website: www.saathappnova.co.in
               </button>
               <button 
                 onClick={handleDownloadBrochure}
-                className="w-full sm:w-auto bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/80 border-2 border-slate-200 dark:border-slate-700 hover:border-saath-green/60 text-slate-800 dark:text-slate-100 font-extrabold text-xs xs:text-sm sm:text-base text-center px-5 xs:px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap shadow-sm group hover:shadow-md"
+                className="w-full sm:w-auto bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/80 border-2 border-slate-300 dark:border-slate-600 hover:border-saath-green/60 text-slate-900 dark:text-white font-extrabold text-xs xs:text-sm sm:text-base text-center px-5 xs:px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap shadow-sm group hover:shadow-md"
               >
                 <Download className="w-4 h-4 sm:w-5 sm:h-5 text-saath-green group-hover:translate-y-0.5 transition-transform shrink-0" /> 
                 <span>Download Brochure</span>
@@ -503,7 +514,7 @@ Website: www.saathappnova.co.in
 
             {/* Recognized Ecosystem Strip */}
             <div className="pt-6 sm:pt-8 border-t border-slate-200/80 dark:border-slate-800">
-              <p className="text-slate-400 font-bold text-[10px] sm:text-xs uppercase tracking-widest mb-3">
+              <p className="text-slate-700 dark:text-slate-200 font-extrabold text-[10px] sm:text-xs uppercase tracking-widest mb-3">
                 Recognized & Trusted Ecosystem (Click for info)
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
@@ -511,32 +522,32 @@ Website: www.saathappnova.co.in
                   onClick={() => setSelectedTrustBadge({ title: 'Startup India Recognized', org: 'Government of India', desc: 'Officially recognized under the Department for Promotion of Industry and Internal Trade (DPIIT) startup ecosystem.' })}
                   className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-saath-green rounded-xl px-3 py-2.5 flex flex-col items-center justify-center text-center shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
-                  <span className="text-slate-800 dark:text-slate-100 font-black text-xs">Startup India</span>
-                  <span className="text-[10px] font-semibold text-saath-green">Recognized</span>
+                  <span className="text-slate-900 dark:text-white font-black text-xs">Startup India</span>
+                  <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400">Recognized</span>
                 </button>
 
                 <button 
                   onClick={() => setSelectedTrustBadge({ title: 'DPIIT Approved Organization', org: 'Ministry of Commerce & Industry', desc: 'Audited and verified entity compliant with national digital marketplace & hyperlocal trade standards.' })}
                   className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-saath-accent rounded-xl px-3 py-2.5 flex flex-col items-center justify-center text-center shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
-                  <span className="text-slate-800 dark:text-slate-100 font-black text-xs">DPIIT</span>
-                  <span className="text-[10px] font-semibold text-saath-accent font-bold">Approved Org</span>
+                  <span className="text-slate-900 dark:text-white font-black text-xs">DPIIT</span>
+                  <span className="text-[10px] font-bold text-blue-700 dark:text-blue-400">Approved Org</span>
                 </button>
 
                 <button 
                   onClick={() => setSelectedTrustBadge({ title: 'MSME Registered Enterprise', org: 'Ministry of Micro, Small & Medium Enterprises', desc: 'Registered enterprise focused on boosting regional employment and Tier-2 & Tier-3 retail growth.' })}
                   className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-slate-400 rounded-xl px-3 py-2.5 flex flex-col items-center justify-center text-center shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
-                  <span className="text-slate-800 dark:text-slate-100 font-black text-xs">MSME</span>
-                  <span className="text-[10px] font-semibold text-slate-400">Registered</span>
+                  <span className="text-slate-900 dark:text-white font-black text-xs">MSME</span>
+                  <span className="text-[10px] font-extrabold text-amber-700 dark:text-amber-400">Registered</span>
                 </button>
 
                 <button 
                   onClick={() => setSelectedTrustBadge({ title: '100% Made In India', org: 'SaathApp Tech Bharat Initiative', desc: 'Dedicated to empowering local Kiranas, regional farmers, and native Indian logistics networks.' })}
                   className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-saath-green rounded-xl px-3 py-2.5 flex flex-col items-center justify-center text-center shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
-                  <span className="text-slate-800 dark:text-slate-100 font-black text-xs">Made In India</span>
-                  <span className="text-[10px] font-semibold text-saath-green">100% Bharat Focus</span>
+                  <span className="text-slate-900 dark:text-white font-black text-xs">Made In India</span>
+                  <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400">100% Bharat Focus</span>
                 </button>
               </div>
             </div>
@@ -564,11 +575,11 @@ Website: www.saathappnova.co.in
       <section id="why-saath" className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-white dark:bg-slate-900 border-t border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3 sm:space-y-4">
-            <span className="text-saath-green font-bold text-xs uppercase tracking-widest">Why Partner With Us?</span>
+            <span className="text-saath-green font-extrabold text-xs uppercase tracking-widest">Why Partner With Us?</span>
             <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
               The SaathApp Advantage
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 font-semibold text-sm sm:text-lg">
+            <p className="text-slate-800 dark:text-slate-200 font-semibold text-sm sm:text-lg">
               We connect local stores, service professionals, and delivery agents onto one robust digital grid, maximizing efficiency and regional revenue.
             </p>
           </div>
@@ -599,20 +610,20 @@ Website: www.saathappnova.co.in
                       <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl ${card.bg} border flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                         <Icon className={`w-6 h-6 sm:w-7 sm:h-7 ${card.color}`} />
                       </div>
-                      <span className="text-[10px] font-extrabold uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-2.5 py-1 rounded-full border border-slate-200/60 dark:border-slate-700">
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700">
                         {card.tag}
                       </span>
                     </div>
                     
                     <div>
                       <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mb-2 group-hover:text-saath-green transition-colors">{card.title}</h3>
-                      <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed font-medium">
+                      <p className="text-slate-800 dark:text-slate-200 text-xs sm:text-sm leading-relaxed font-semibold">
                         {card.desc}
                       </p>
                     </div>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-black text-slate-500 group-hover:text-saath-green transition-colors">
+                  <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-black text-slate-700 dark:text-slate-300 group-hover:text-saath-green transition-colors">
                     <span>Explore Models</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -629,11 +640,11 @@ Website: www.saathappnova.co.in
         <div className="max-w-7xl mx-auto">
           
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3 sm:space-y-4">
-            <span className="text-saath-green font-bold text-xs uppercase tracking-widest">Select Your Path</span>
+            <span className="text-saath-green font-extrabold text-xs uppercase tracking-widest">Select Your Path</span>
             <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
               Franchise Partnership Models
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 font-semibold text-sm sm:text-lg">
+            <p className="text-slate-800 dark:text-slate-200 font-semibold text-sm sm:text-lg">
               Explore 9 diverse, highly optimized franchise models spanning retail, logistics, agriculture, and localized operational agencies.
             </p>
 
@@ -649,10 +660,10 @@ Website: www.saathappnova.co.in
                 <button
                   key={tab.id}
                   onClick={() => setSelectedModelTab(tab.id)}
-                  className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
+                  className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl font-extrabold text-xs sm:text-sm transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
                     selectedModelTab === tab.id
                       ? 'bg-saath-green text-white shadow-md shadow-saath-green/20'
-                      : 'bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
+                      : 'bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-600'
                   }`}
                 >
                   {tab.label}
@@ -677,38 +688,38 @@ Website: www.saathappnova.co.in
                   {/* Top Header */}
                   <div className="p-5 sm:p-8 pb-4 border-b border-slate-100 dark:border-slate-800">
                     <div className="flex items-center justify-between mb-3 sm:mb-4">
-                      <span className="bg-saath-green-light text-saath-green border border-saath-green/10 text-[10px] font-black uppercase tracking-wider px-2.5 sm:px-3 py-1 rounded-full">
+                      <span className="bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 text-[10px] font-black uppercase tracking-wider px-2.5 sm:px-3 py-1 rounded-full">
                         {item.tag}
                       </span>
-                      <span className="text-slate-400 text-xs font-bold font-mono">{item.id}</span>
+                      <span className="text-slate-500 dark:text-slate-400 text-xs font-bold font-mono">{item.id}</span>
                     </div>
                     <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed font-semibold">
+                    <p className="text-slate-800 dark:text-slate-200 text-xs sm:text-sm leading-relaxed font-semibold">
                       {item.description}
                     </p>
                   </div>
 
                   {/* Body Content */}
                   <div className="p-5 sm:p-8 pt-4 space-y-4 flex-grow">
-                    <div className="grid grid-cols-2 gap-3 sm:gap-4 bg-slate-50 dark:bg-slate-800/50 p-3.5 sm:p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4 bg-slate-50 dark:bg-slate-800/50 p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
                       <div>
-                        <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Est. Investment</span>
+                        <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-700 dark:text-slate-200 uppercase tracking-widest block">Est. Investment</span>
                         <span className="text-sm sm:text-base font-black text-slate-900 dark:text-white">{item.investment}</span>
                       </div>
                       <div>
-                        <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Space Req.</span>
+                        <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-700 dark:text-slate-200 uppercase tracking-widest block">Space Req.</span>
                         <span className="text-sm sm:text-base font-black text-slate-900 dark:text-white">{item.space}</span>
                       </div>
                     </div>
 
                     <div className="space-y-3 pt-1">
                       <div>
-                        <h4 className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Core Services:</h4>
+                        <h4 className="text-[10px] sm:text-[11px] font-extrabold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2">Core Services:</h4>
                         <ul className="grid grid-cols-2 gap-x-2 gap-y-1">
                           {item.services.map((srv, idx) => (
-                            <li key={idx} className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                            <li key={idx} className="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
                               <span className="w-1.5 h-1.5 rounded-full bg-saath-accent shrink-0" />
                               <span className="truncate">{srv}</span>
                             </li>
@@ -717,14 +728,15 @@ Website: www.saathappnova.co.in
                       </div>
 
                       <div>
-                        <h4 className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Key Benefits:</h4>
-                        <div className="flex flex-wrap gap-1.5">
+                        <h4 className="text-[10px] sm:text-[11px] font-extrabold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2">Key Benefits:</h4>
+                        <ul className="space-y-1">
                           {item.benefits.map((bnf, idx) => (
-                            <span key={idx} className="bg-saath-green-light/50 dark:bg-saath-green/10 text-saath-green border border-saath-green/10 text-[9px] font-black rounded-lg px-2 py-0.5">
-                              ✓ {bnf}
-                            </span>
+                            <li key={idx} className="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-saath-green shrink-0" />
+                              <span>{bnf}</span>
+                            </li>
                           ))}
-                        </div>
+                        </ul>
                       </div>
                     </div>
                   </div>
@@ -732,8 +744,8 @@ Website: www.saathappnova.co.in
                   {/* Card Footer: Opens Model Detail Specification Modal */}
                   <div className="bg-slate-50/50 dark:bg-slate-800/30 p-5 sm:p-8 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
                     <div className="text-left">
-                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Ideal Partner:</span>
-                      <span className="text-xs font-black text-slate-700 dark:text-slate-300 line-clamp-1">{item.partner}</span>
+                      <span className="text-[9px] font-extrabold text-slate-700 dark:text-slate-200 uppercase tracking-wider block">Ideal Partner:</span>
+                      <span className="text-xs font-black text-slate-900 dark:text-white line-clamp-1">{item.partner}</span>
                     </div>
                     <button 
                       onClick={() => setSelectedModelDetail(item)}
@@ -756,11 +768,11 @@ Website: www.saathappnova.co.in
         <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
-            <span className="text-saath-green font-bold text-xs uppercase tracking-widest">Investment Transparency</span>
+            <span className="text-saath-green font-extrabold text-xs uppercase tracking-widest">Investment Transparency</span>
             <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
               Investment & Estimated Returns
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 font-semibold text-sm sm:text-lg">
+            <p className="text-slate-800 dark:text-slate-200 font-semibold text-sm sm:text-lg">
               Below are transparent financial metrics. Select a franchise model to calculate setup, timelines, and projected earnings details.
             </p>
           </div>
@@ -772,20 +784,20 @@ Website: www.saathappnova.co.in
             <div className="lg:col-span-7 bg-saath-bg dark:bg-slate-800/40 rounded-3xl p-5 sm:p-8 border border-slate-200/60 dark:border-slate-800 space-y-4 sm:space-y-6 text-left">
               <div className="flex items-center justify-between">
                 <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white">Franchise Financial Grid</h3>
-                <span className="text-xs font-bold text-slate-400">Setup & ROI Metrics</span>
+                <span className="text-xs font-bold text-slate-600 dark:text-slate-300">Setup & ROI Metrics</span>
               </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[500px]">
                   <thead>
-                    <tr className="border-b border-slate-200 dark:border-slate-700 text-[11px] sm:text-xs font-extrabold uppercase text-slate-400">
+                    <tr className="border-b border-slate-200 dark:border-slate-700 text-[11px] sm:text-xs font-extrabold uppercase text-slate-700 dark:text-slate-200">
                       <th className="py-3 px-2">Franchise Model</th>
                       <th className="py-3 px-2">Est. Capital</th>
                       <th className="py-3 px-2">Setup Time</th>
                       <th className="py-3 px-2">Est. ROI</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800 text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
+                  <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800 text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">
                     {[
                       { name: 'SAATH Mart Franchise', cap: '₹2L - ₹10L', time: '15 - 20 Days', roi: '12 - 18 Months' },
                       { name: 'SAATH Fresh Franchise', cap: '₹1.5L - ₹8L', time: '10 - 15 Days', roi: '10 - 16 Months' },
@@ -805,7 +817,7 @@ Website: www.saathappnova.co.in
                         }`}
                       >
                         <td className="py-3 px-2 flex items-center gap-2">
-                          <span className={`w-2 h-2 rounded-full ${calculatorModel === row.name ? 'bg-saath-green' : 'bg-slate-300'}`} />
+                          <span className={`w-2 h-2 rounded-full ${calculatorModel === row.name ? 'bg-saath-green' : 'bg-slate-400'}`} />
                           {row.name}
                         </td>
                         <td className="py-3 px-2">{row.cap}</td>
@@ -816,7 +828,7 @@ Website: www.saathappnova.co.in
                   </tbody>
                 </table>
               </div>
-              <p className="text-xs text-slate-400 font-medium">
+              <p className="text-xs text-slate-700 dark:text-slate-300 font-semibold">
                 Capital figures represent initial setup, license fees, and stock components. Click any model to calculate live metrics.
               </p>
             </div>
@@ -826,12 +838,12 @@ Website: www.saathappnova.co.in
               <div className="space-y-1">
                 <span className="text-[10px] font-black text-saath-green uppercase tracking-widest">Estimator</span>
                 <h3 className="text-xl sm:text-2xl font-black tracking-tight">Returns Calculator</h3>
-                <p className="text-xs text-slate-400 font-medium">Select a model to estimate projected local performance metrics.</p>
+                <p className="text-xs text-slate-300 font-medium">Select a model to estimate projected local performance metrics.</p>
               </div>
 
               {/* Selector */}
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Choose Model</label>
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-300">Choose Model</label>
                 <div className="relative">
                   <select 
                     value={calculatorModel}
@@ -849,19 +861,19 @@ Website: www.saathappnova.co.in
               {/* Live Calculator Outputs */}
               <div className="grid grid-cols-2 gap-3 sm:gap-4 bg-slate-800/50 p-4 rounded-2xl border border-slate-700/60">
                 <div>
-                  <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Capital Required:</span>
+                  <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-300 uppercase tracking-widest block">Capital Required:</span>
                   <span className="text-base sm:text-lg font-black text-saath-green">{selectedCalc.capital}</span>
                 </div>
                 <div>
-                  <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Est. Setup Timeline:</span>
+                  <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-300 uppercase tracking-widest block">Est. Setup Timeline:</span>
                   <span className="text-base sm:text-lg font-black text-white">{selectedCalc.setupTime}</span>
                 </div>
                 <div>
-                  <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Target ROI Range:</span>
+                  <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-300 uppercase tracking-widest block">Target ROI Range:</span>
                   <span className="text-base sm:text-lg font-black text-white">{selectedCalc.roiRange}</span>
                 </div>
                 <div>
-                  <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Projected Margin Split:</span>
+                  <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-300 uppercase tracking-widest block">Projected Margin Split:</span>
                   <span className="text-base sm:text-lg font-black text-saath-accent">{selectedCalc.marginSplit}</span>
                 </div>
               </div>
@@ -870,11 +882,11 @@ Website: www.saathappnova.co.in
               <div className="bg-saath-green/10 border border-saath-green/20 p-4 rounded-2xl flex items-center justify-between">
                 <div>
                   <span className="text-[9px] sm:text-[10px] font-extrabold uppercase text-saath-green tracking-wider block">Model Financial Framework</span>
-                  <span className="text-xl sm:text-2xl font-black text-white">{selectedCalc.profitPotential} <span className="text-xs font-normal text-slate-400">/ month</span></span>
+                  <span className="text-xl sm:text-2xl font-black text-white">{selectedCalc.profitPotential} <span className="text-xs font-semibold text-slate-300">/ month</span></span>
                 </div>
                 <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-saath-green shrink-0" />
               </div>
-              <p className="text-[11px] text-slate-400 font-medium leading-relaxed">
+              <p className="text-[11px] text-slate-300 font-medium leading-relaxed">
                 Estimated average territory operating net profit potential after launching store networks.
               </p>
 
@@ -1222,13 +1234,13 @@ Website: www.saathappnova.co.in
           {/* Phase Details Card */}
           <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-12 border border-slate-200/60 dark:border-slate-800 shadow-xl max-w-4xl mx-auto text-left space-y-6 sm:space-y-8">
             <div className="space-y-2">
-              <span className="bg-saath-green-light text-saath-green border border-saath-green/20 px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider">
+              <span className="bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider">
                 Active phase
               </span>
               <h3 className="text-xl sm:text-3xl font-black text-slate-900 dark:text-white">
                 {roadmapPhases[activePhase].title}
               </h3>
-              <p className="text-slate-600 dark:text-slate-400 font-medium text-sm sm:text-lg leading-relaxed">
+              <p className="text-slate-800 dark:text-slate-200 font-semibold text-sm sm:text-lg leading-relaxed">
                 {roadmapPhases[activePhase].desc}
               </p>
             </div>
@@ -1237,7 +1249,7 @@ Website: www.saathappnova.co.in
               {roadmapPhases[activePhase].stats.map((st, i) => (
                 <div key={i} className="bg-saath-bg dark:bg-slate-800/40 p-4 sm:p-6 rounded-2xl border border-slate-100 dark:border-slate-800 text-center">
                   <span className="text-xl sm:text-3xl font-black text-saath-green block mb-1">{st.val}</span>
-                  <span className="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{st.label}</span>
+                  <span className="text-[10px] sm:text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider">{st.label}</span>
                 </div>
               ))}
             </div>
@@ -1250,9 +1262,9 @@ Website: www.saathappnova.co.in
       <section className="py-12 sm:py-16 px-4 sm:px-6 md:px-12 bg-white dark:bg-slate-900 border-t border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-5xl mx-auto bg-slate-900 text-white rounded-3xl p-6 sm:p-12 space-y-5 sm:space-y-6 text-center shadow-2xl relative overflow-hidden">
           <div className="space-y-2 sm:space-y-3">
-            <span className="text-saath-green font-bold text-xs uppercase tracking-widest">Partner Success Stories</span>
+            <span className="text-saath-green font-extrabold text-xs uppercase tracking-widest">Partner Success Stories</span>
             <h2 className="font-display text-2xl sm:text-4xl font-black">Early Partner Testimonials</h2>
-            <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto font-medium leading-relaxed">
+            <p className="text-slate-200 text-xs sm:text-sm max-w-xl mx-auto font-medium leading-relaxed">
               Read how early regional agents and store operators have established operations.
             </p>
           </div>
@@ -1260,13 +1272,13 @@ Website: www.saathappnova.co.in
           <div className="bg-slate-800/60 border border-slate-700 p-5 sm:p-8 rounded-2xl max-w-2xl mx-auto space-y-3 text-center">
             <span className="text-3xl sm:text-4xl block">👤</span>
             <h3 className="text-base sm:text-lg font-bold text-white">Partner Success Logs Coming Soon</h3>
-            <p className="text-xs text-slate-400 font-medium leading-relaxed">
+            <p className="text-xs text-slate-300 font-medium leading-relaxed">
               As regional district agent agreements are finalized and launch operations complete onboarding, verified partner logs and interview cases will be featured in this panel.
             </p>
           </div>
 
           <div className="pt-2">
-            <span className="text-xs text-slate-400 font-semibold block mb-2">Active Partner?</span>
+            <span className="text-xs text-slate-300 font-semibold block mb-2">Active Partner?</span>
             <button 
               onClick={() => scrollToSection('contact')}
               className="text-xs font-bold text-saath-green hover:underline active:scale-95 cursor-pointer"
@@ -1282,11 +1294,11 @@ Website: www.saathappnova.co.in
         <div className="max-w-4xl mx-auto space-y-10 sm:space-y-12">
           
           <div className="text-center space-y-3 sm:space-y-4">
-            <span className="text-saath-green font-bold text-xs uppercase tracking-widest">Got Questions?</span>
+            <span className="text-saath-green font-extrabold text-xs uppercase tracking-widest">Got Questions?</span>
             <h2 className="font-display text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
               Frequently Asked Questions
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 font-semibold text-xs sm:text-base">
+            <p className="text-slate-800 dark:text-slate-200 font-semibold text-xs sm:text-base">
               Here are direct answers to common queries regarding SaathApp franchise operational structures.
             </p>
           </div>

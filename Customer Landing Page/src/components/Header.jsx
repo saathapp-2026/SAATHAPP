@@ -83,10 +83,219 @@ export default function Header({
   return (
     <>
       <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 shadow-xs">
-        <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[72px] gap-4 py-1.5">
+        <div className="w-full px-3 sm:px-6 lg:px-8">
 
-            {/* Logo & Mobile Menu Toggle */}
+          {/* ========================================================= */}
+          {/* MOBILE HEADER (Blinkit / Swiggy / Zomato style for < sm) */}
+          {/* ========================================================= */}
+          <div className="flex flex-col gap-2 py-2 sm:hidden">
+            {/* Mobile Row 1: Logo (Left) + Primary Actions: Cart, Profile, Hamburger Menu (Right) */}
+            <div className="flex items-center justify-between">
+              <Link
+                to="/"
+                onClick={(event) => {
+                  if (window.location.pathname === '/') {
+                    event.preventDefault();
+                    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+                  }
+                }}
+                aria-label="Go to Home"
+              >
+                <div className="h-7 w-24 cursor-pointer">
+                  <img
+                    src={SaathAppLogo}
+                    alt="SaathApp Logo"
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+              </Link>
+
+              {/* Mobile Right Action Icons */}
+              <div className="flex items-center gap-2">
+                {/* Cart Button */}
+                <motion.button
+                  onClick={onCartClick}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label={t('my_cart') || 'Cart'}
+                  title={t('my_cart') || 'Cart'}
+                  className="relative p-1.5 rounded-btn bg-gradient-primary text-white shadow-sm flex items-center justify-center"
+                >
+                  <ShoppingCart size={17} />
+                  <AnimatePresence>
+                    {cartCount > 0 && (
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                        className="absolute -top-1.5 -right-1.5 bg-secondary-dark text-white border border-primary font-bold text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-xs"
+                      >
+                        {cartCount}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
+
+                {/* Profile Icon */}
+                <button
+                  onClick={() => navigate('/profile')}
+                  className="w-7 h-7 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden border border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 shrink-0"
+                  title="Open profile"
+                >
+                  {user?.photo ? (
+                    <img src={user.photo} alt={user.name || 'Profile'} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-xs font-black">{(user?.name || 'U').charAt(0).toUpperCase()}</span>
+                  )}
+                </button>
+
+                {/* Hamburger Menu Toggle */}
+                <button
+                  onClick={() => setIsCustomerMenuOpen(true)}
+                  className="p-1.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors rounded-btn cursor-pointer"
+                  title="Open menu"
+                >
+                  <Menu size={18} />
+                </button>
+              </div>
+            </div>
+
+            {/* Mobile Row 2: Deliver To (Single Compact Line) */}
+            <button
+              type="button"
+              onClick={() => navigate('/location')}
+              className="flex items-center gap-1.5 text-slate-700 dark:text-slate-200 text-xs font-semibold py-0.5 hover:opacity-80 text-left cursor-pointer"
+            >
+              <MapPin size={14} className="text-primary shrink-0" />
+              <span className="text-slate-400 font-bold uppercase text-[9px] tracking-wider shrink-0">Deliver to:</span>
+              <span className="truncate text-xs font-bold text-slate-800 dark:text-slate-100 max-w-[200px]">
+                {location || 'Select Location...'}
+              </span>
+              <ChevronDown size={13} className="text-slate-400 shrink-0" />
+            </button>
+
+            {/* Mobile Row 3: Full-width Search Bar */}
+            <div ref={searchRef} className="relative z-40 w-full">
+              <form onSubmit={handleSearchSubmit} className="relative flex items-center">
+                <div className="relative w-full">
+                  <input
+                    type="text"
+                    placeholder={t('search') + '...'}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => setIsSearchFocused(true)}
+                    className="w-full h-9 pl-9 pr-9 rounded-btn border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-xs text-xs"
+                  />
+
+                  {/* Search Icon */}
+                  <div className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-400">
+                    <Search size={15} />
+                  </div>
+
+                  {/* Voice Search trigger */}
+                  <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+                    <motion.button
+                      type="button"
+                      onClick={onVoiceSearchClick}
+                      whileHover={{ scale: 1.1, color: '#1565C0' }}
+                      className="p-1 text-slate-400 hover:text-accent rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+                      title="Voice Search"
+                    >
+                      <Mic size={15} />
+                    </motion.button>
+                  </div>
+                </div>
+              </form>
+
+              {/* Suggestions Dropdown */}
+              <AnimatePresence>
+                {isSearchFocused && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute left-0 right-0 mt-2 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 rounded-card shadow-premium overflow-hidden z-50 text-left"
+                  >
+                    {searchQuery.trim() === '' ? (
+                      <div className="p-4">
+                        <div className="mb-3">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-2">
+                            <History size={12} /> Recent Searches
+                          </span>
+                          <div className="flex flex-wrap gap-1.5">
+                            {recentSearches.map((term, i) => (
+                              <button
+                                key={i}
+                                onClick={() => {
+                                  setSearchQuery(term);
+                                  onSearch(term);
+                                  setIsSearchFocused(false);
+                                }}
+                                className="text-[11px] font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 py-1 px-2.5 rounded-full transition-colors"
+                              >
+                                {term}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div>
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-2">
+                            <Flame size={12} className="text-amber-500" /> Popular Searches
+                          </span>
+                          <div className="flex flex-wrap gap-1.5">
+                            {popularSearches.map((term, i) => (
+                              <button
+                                key={i}
+                                onClick={() => {
+                                  setSearchQuery(term);
+                                  onSearch(term);
+                                  setIsSearchFocused(false);
+                                }}
+                                className="text-[11px] font-medium text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 py-1 px-2.5 rounded-full flex items-center gap-1 transition-all"
+                              >
+                                <Sparkles size={10} className="text-amber-500" />
+                                {term}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="py-2 max-h-64 overflow-y-auto">
+                        {suggestions.length > 0 ? (
+                          suggestions.map((suggestion, i) => (
+                            <button
+                              key={i}
+                              onClick={() => {
+                                setSearchQuery(suggestion);
+                                onSearch(suggestion);
+                                setIsSearchFocused(false);
+                              }}
+                              className="w-full px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 flex items-center gap-2.5 transition-colors border-b border-slate-100/50 dark:border-slate-900/50 last:border-b-0"
+                            >
+                              <Search size={13} className="text-slate-400 shrink-0" />
+                              <span>{suggestion}</span>
+                            </button>
+                          ))
+                        ) : (
+                          <div className="px-4 py-2.5 text-xs text-slate-400 italic">
+                            No direct match. Press Enter to search "{searchQuery}"
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* ========================================================= */}
+          {/* DESKTOP & TABLET HEADER (Preserved 100% for sm: and above) */}
+          {/* ========================================================= */}
+          <div className="hidden sm:flex items-center justify-between h-[72px] gap-4 py-1.5">
+            {/* Logo */}
             <div className="flex items-center gap-3 shrink-0">
               <Link
                 to="/"
@@ -112,23 +321,24 @@ export default function Header({
               </Link>
             </div>
 
+            {/* Deliver To */}
             <button
               type="button"
               onClick={() => navigate('/location')}
-              className="hidden md:flex items-center gap-2 rounded-btn border border-slate-200/70 bg-slate-100/90 px-3 py-2 text-slate-700 shadow-xs transition hover:shadow-sm dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-200 cursor-pointer"
+              className="flex items-center gap-2 rounded-btn border border-slate-200/70 bg-slate-100/90 px-3 py-2 text-slate-700 shadow-xs transition hover:shadow-sm dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-200 cursor-pointer shrink-0"
             >
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary dark:text-primary-light">
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary dark:text-primary-light shrink-0">
                 <MapPin size={15} />
               </div>
               <div className="text-left">
                 <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-400">Deliver to</div>
-                <div className="max-w-[200px] truncate text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100">{location || 'Select Location...'}</div>
+                <div className="max-w-[150px] md:max-w-[200px] truncate text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100">{location || 'Select Location...'}</div>
               </div>
-              <ChevronDown size={14} className="text-slate-400 dark:text-slate-400" />
+              <ChevronDown size={14} className="text-slate-400 dark:text-slate-400 shrink-0" />
             </button>
 
-            {/* Amazon style Search Bar */}
-            <div ref={searchRef} className="flex-1 max-w-xl relative z-40">
+            {/* Desktop Search Bar */}
+            <div ref={searchRef} className="flex-1 max-w-[380px] md:max-w-[400px] relative z-40">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
                 <div className="relative w-full">
                   <input
@@ -137,7 +347,7 @@ export default function Header({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="w-full h-11 sm:h-12 pl-11 pr-24 rounded-btn border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm"
+                    className="w-full h-11 pl-10 pr-10 rounded-btn border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
                   />
 
                   {/* Search Icon */}
@@ -160,7 +370,7 @@ export default function Header({
                 </div>
               </form>
 
-              {/* Suggestions Dropdown (Glassmorphic Amazon Style) */}
+              {/* Suggestions Dropdown */}
               <AnimatePresence>
                 {isSearchFocused && (
                   <motion.div
@@ -170,10 +380,8 @@ export default function Header({
                     transition={{ duration: 0.15 }}
                     className="absolute left-0 right-0 mt-2 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 rounded-card shadow-premium overflow-hidden z-50 text-left"
                   >
-                    {/* Empty state: popular & recent */}
                     {searchQuery.trim() === '' ? (
-                      <div className="p-4 sm:p-5">
-                        {/* Recent searches */}
+                      <div className="p-5">
                         <div className="mb-4">
                           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
                             <History size={13} /> Recent Searches
@@ -195,7 +403,6 @@ export default function Header({
                           </div>
                         </div>
 
-                        {/* Popular searches */}
                         <div>
                           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
                             <Flame size={13} className="text-amber-500" /> Popular Searches
@@ -219,7 +426,6 @@ export default function Header({
                         </div>
                       </div>
                     ) : (
-                      // Live match results
                       <div className="py-2.5 max-h-80 overflow-y-auto">
                         {suggestions.length > 0 ? (
                           suggestions.map((suggestion, i) => (
@@ -248,20 +454,18 @@ export default function Header({
               </AnimatePresence>
             </div>
 
-            {/* Right Header Navigation Actions */}
-            <div className="flex items-center gap-2 sm:gap-3">
-              {/* Theme Toggle */}
+            {/* Desktop Actions */}
+            <div className="flex items-center gap-2.5 shrink-0">
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={toggleDarkMode}
-                className="p-2 rounded-btn text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors"
+                className="p-2 rounded-btn text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors shrink-0"
                 title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
               >
                 {darkMode ? <Sun size={20} className="text-amber-400" /> : <Moon size={20} />}
               </motion.button>
 
-              {/* Notification bell */}
-              <button className="relative p-2 rounded-btn text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors hidden sm:block">
+              <button className="relative p-2 rounded-btn text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors shrink-0">
                 <Bell size={20} />
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-danger rounded-full" />
               </button>
@@ -283,7 +487,7 @@ export default function Header({
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   onClick={onLogin}
-                  className="hidden sm:flex items-center gap-1 px-3.5 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 bg-white/80 hover:bg-slate-100 dark:bg-slate-900/70 dark:hover:bg-slate-800 border border-slate-200/70 dark:border-slate-700/70 rounded-btn transition-all"
+                  className="hidden md:flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 bg-white/80 hover:bg-slate-100 dark:bg-slate-900/70 dark:hover:bg-slate-800 border border-slate-200/70 dark:border-slate-700/70 rounded-btn transition-all"
                 >
                   <span>{t('login')}</span>
                 </motion.button>
@@ -293,20 +497,19 @@ export default function Header({
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   onClick={onSignup}
-                  className="hidden sm:flex items-center gap-1 px-3.5 py-2 text-xs font-bold text-white bg-gradient-primary hover:bg-gradient-primary/95 rounded-btn shadow-glow-primary transition-all"
+                  className="hidden md:flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-white bg-gradient-primary hover:bg-gradient-primary/95 rounded-btn shadow-glow-primary transition-all"
                 >
                   <span>{t('signup')}</span>
                 </motion.button>
               )}
 
-              {/* Zepto/Blinkit Style Cart Button (Icon Only) */}
               <motion.button
                 onClick={onCartClick}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={t('my_cart') || 'Cart'}
                 title={t('my_cart') || 'Cart'}
-                className="relative p-2 rounded-btn bg-gradient-primary hover:bg-gradient-primary/95 text-white shadow-glow-primary transition-all select-none flex items-center justify-center"
+                className="relative p-2 rounded-btn bg-gradient-primary hover:bg-gradient-primary/95 text-white shadow-glow-primary transition-all select-none flex items-center justify-center shrink-0"
               >
                 <ShoppingCart size={20} />
                 <AnimatePresence>
@@ -323,30 +526,26 @@ export default function Header({
                 </AnimatePresence>
               </motion.button>
 
-              {/* User Profile Avatar & Hamburger Menu */}
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => navigate('/profile')}
-                  className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden cursor-pointer border border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-500 shrink-0"
-                  title="Open profile"
-                >
-                  {user?.photo ? (
-                    <img src={user.photo} alt={user.name || 'Profile'} className="w-full h-full object-cover" />
-                  ) : (
-                    <span className="text-sm font-black">{(user?.name || 'U').charAt(0).toUpperCase()}</span>
-                  )}
-                </button>
+              <button
+                onClick={() => navigate('/profile')}
+                className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden cursor-pointer border border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-500 shrink-0"
+                title="Open profile"
+              >
+                {user?.photo ? (
+                  <img src={user.photo} alt={user.name || 'Profile'} className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-sm font-black">{(user?.name || 'U').charAt(0).toUpperCase()}</span>
+                )}
+              </button>
 
-                <button
-                  onClick={() => setIsCustomerMenuOpen(true)}
-                  className="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors rounded-btn cursor-pointer"
-                  title="Open customer dashboard menu"
-                >
-                  <Menu size={20} />
-                </button>
-              </div>
+              <button
+                onClick={() => setIsCustomerMenuOpen(true)}
+                className="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors rounded-btn cursor-pointer shrink-0"
+                title="Open customer dashboard menu"
+              >
+                <Menu size={20} />
+              </button>
             </div>
-
           </div>
         </div>
       </header>
@@ -372,8 +571,26 @@ export default function Header({
               transition={{ type: 'spring', bounce: 0, duration: 0.3 }}
               className="fixed right-0 top-0 bottom-0 w-[280px] bg-white dark:bg-slate-900 shadow-2xl z-[60] flex flex-col border-l border-slate-200 dark:border-slate-800"
             >
-              {/* Drawer Header (Removed "Dashboard Menu" text per request) */}
-              <div className="flex items-center justify-end p-5 border-b border-slate-100 dark:border-slate-800">
+              {/* Drawer Header with Quick Utilities */}
+              <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
+                <div className="flex items-center gap-2">
+                  {/* Theme Toggle */}
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
+                    onClick={toggleDarkMode}
+                    className="p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-xs cursor-pointer"
+                    title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                  >
+                    {darkMode ? <Sun size={17} className="text-amber-400" /> : <Moon size={17} />}
+                  </motion.button>
+
+                  {/* Notification Bell */}
+                  <button className="relative p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-xs cursor-pointer">
+                    <Bell size={17} />
+                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-danger rounded-full" />
+                  </button>
+                </div>
+
                 <button
                   onClick={() => setIsCustomerMenuOpen(false)}
                   className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 bg-slate-100 dark:bg-slate-800 rounded-lg transition-colors cursor-pointer"

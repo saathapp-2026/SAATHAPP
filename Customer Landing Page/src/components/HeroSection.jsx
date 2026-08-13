@@ -105,7 +105,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
   const IconComponent = current.icon;
 
   return (
-    <section className="relative w-full overflow-hidden bg-slate-950 min-h-[500px] md:min-h-[550px] lg:min-h-[600px] flex items-center">
+    <section className="relative w-full overflow-hidden bg-slate-950 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] lg:min-h-[370px] flex items-center">
       
       {/* Background shape particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-10 opacity-30">
@@ -118,21 +118,21 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-1/4 left-[10%] text-white/10 hidden md:block"
         >
-          <Zap size={44} />
+          <Zap size={32} />
         </motion.div>
         <motion.div 
           animate={{ y: [0, 20, 0], rotate: [0, -360, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           className="absolute bottom-1/4 left-[40%] text-white/10 hidden md:block"
         >
-          <Tractor size={50} />
+          <Tractor size={36} />
         </motion.div>
         <motion.div 
           animate={{ y: [0, -25, 0], rotate: [0, 180, 0] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-1/3 right-[15%] text-white/10 hidden md:block"
         >
-          <ShoppingCart size={40} />
+          <ShoppingCart size={30} />
         </motion.div>
       </div>
 
@@ -147,23 +147,23 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
             animate="center"
             exit="exit"
             transition={{ x: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.3 } }}
-            className={`w-full h-full bg-gradient-to-r ${current.color} text-white flex items-center py-16 md:py-20 lg:py-24`}
+            className={`w-full h-full bg-gradient-to-r ${current.color} text-white flex items-center py-6 sm:py-8 lg:py-10`}
           >
-            <div className="w-full px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="w-full px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-center py-1">
               
               {/* Left Side: Slide Text Information */}
-              <div className="lg:col-span-7 text-left space-y-6 z-20">
+              <div className="lg:col-span-7 text-left space-y-2.5 sm:space-y-3 lg:space-y-4 z-20">
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full bg-white/15 backdrop-blur-md border border-white/15 text-xs font-bold text-secondary tracking-wide shadow-sm"
+                  className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full bg-white/15 backdrop-blur-md border border-white/15 text-[11px] sm:text-xs font-bold text-secondary tracking-wide shadow-sm"
                 >
-                  <Sparkles size={12} className="text-secondary" />
+                  <Sparkles size={11} className="text-secondary" />
                   <span>{current.badge}</span>
                 </motion.div>
 
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight">
                   <motion.span
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -176,7 +176,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="bg-gradient-to-r from-secondary via-secondary-light to-amber-200 bg-clip-text text-transparent drop-shadow-sm block mt-1"
+                    className="bg-gradient-to-r from-secondary via-secondary-light to-amber-200 bg-clip-text text-transparent drop-shadow-sm block mt-0.5"
                   >
                     {current.highlight}
                   </motion.span>
@@ -186,7 +186,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="text-base sm:text-lg text-white/80 max-w-xl font-normal leading-relaxed"
+                  className="text-xs sm:text-sm md:text-base text-white/80 max-w-lg font-normal leading-snug"
                 >
                   {current.description}
                 </motion.p>
@@ -196,7 +196,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
-                  className="flex flex-wrap gap-4 pt-3"
+                  className="flex flex-wrap gap-2.5 sm:gap-3 pt-1 sm:pt-2"
                 >
                   {/* Shop now/Book service depending on active slide */}
                   <motion.button
@@ -209,9 +209,9 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                     }}
                     whileHover={{ scale: 1.03, boxShadow: '0 10px 20px -5px rgba(255, 193, 7, 0.4)' }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-7 py-3.5 rounded-btn bg-secondary text-slate-900 font-extrabold text-sm flex items-center gap-2 hover:bg-secondary-dark transition-all shadow-lg"
+                    className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-btn bg-secondary text-slate-900 font-extrabold text-xs sm:text-sm flex items-center gap-1.5 hover:bg-secondary-dark transition-all shadow-md"
                   >
-                    <IconComponent size={16} />
+                    <IconComponent size={14} />
                     <span>{current.primaryCta}</span>
                   </motion.button>
 
@@ -226,21 +226,21 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                     }}
                     whileHover={{ scale: 1.03, background: 'rgba(255,255,255,0.2)' }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-7 py-3.5 rounded-btn bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-sm flex items-center gap-2 backdrop-blur-sm transition-all"
+                    className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-btn bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-xs sm:text-sm flex items-center gap-1.5 backdrop-blur-sm transition-all"
                   >
                     <span>{current.secondaryCta}</span>
-                    <ArrowRight size={14} />
+                    <ArrowRight size={13} />
                   </motion.button>
                 </motion.div>
               </div>
 
               {/* Right Side: Slide Graphic Presentation */}
-              <div className="lg:col-span-5 relative flex justify-center z-20 mt-8 lg:mt-0">
+              <div className="lg:col-span-5 relative flex justify-center z-20 mt-4 lg:mt-0">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
-                  className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-card overflow-hidden border-4 border-white/10 shadow-2xl bg-slate-900"
+                  className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-card overflow-hidden border-2 sm:border-4 border-white/10 shadow-xl bg-slate-900"
                 >
                   {/* Image with gradient mask overlay */}
                   <img
@@ -253,16 +253,16 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
 
                 {/* Floating Micro Badge on image */}
                 <motion.div
-                  animate={{ y: [0, -10, 0] }}
+                  animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -bottom-4 -left-4 sm:-left-8 p-3.5 rounded-card shadow-premium border border-white/20 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-slate-800 dark:text-slate-100 flex items-center gap-3"
+                  className="absolute -bottom-2 -left-2 sm:-left-4 p-2 sm:p-2.5 rounded-card shadow-premium border border-white/20 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-slate-800 dark:text-slate-100 flex items-center gap-2"
                 >
-                  <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-primary dark:text-emerald-400 font-bold text-sm">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary dark:text-emerald-400 font-bold text-xs">
                     ✓
                   </div>
                   <div className="text-left">
-                    <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 block uppercase tracking-wide">Saath Assured</span>
-                    <span className="text-xs font-bold text-slate-900 dark:text-white">100% Quality Guarantee</span>
+                    <span className="text-[9px] sm:text-[10px] font-bold text-slate-500 dark:text-slate-400 block uppercase tracking-wide">Saath Assured</span>
+                    <span className="text-[10px] sm:text-xs font-bold text-slate-900 dark:text-white">100% Quality Guarantee</span>
                   </div>
                 </motion.div>
               </div>
@@ -272,7 +272,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
         </AnimatePresence>
 
         {/* Carousel indicators */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-30">
+        <div className="absolute bottom-2.5 sm:bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-30">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -280,8 +280,8 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                 setDirection(index > currentSlide ? 1 : -1);
                 setCurrentSlide(index);
               }}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'w-8 bg-secondary' : 'w-2 bg-white/40 hover:bg-white/60'
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                index === currentSlide ? 'w-6 bg-secondary' : 'w-1.5 bg-white/40 hover:bg-white/60'
               }`}
               title={`Go to slide ${index + 1}`}
             />
@@ -291,17 +291,17 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
         {/* Arrow Navigation */}
         <button
           onClick={handlePrev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/20 hover:bg-black/45 text-white border border-white/10 hidden md:flex items-center justify-center backdrop-blur-sm z-30 transition-all"
+          className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/20 hover:bg-black/45 text-white border border-white/10 hidden md:flex items-center justify-center backdrop-blur-sm z-30 transition-all"
           title="Previous slide"
         >
-          <ChevronLeft size={20} />
+          <ChevronLeft size={16} />
         </button>
         <button
           onClick={handleNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/20 hover:bg-black/45 text-white border border-white/10 hidden md:flex items-center justify-center backdrop-blur-sm z-30 transition-all"
+          className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/20 hover:bg-black/45 text-white border border-white/10 hidden md:flex items-center justify-center backdrop-blur-sm z-30 transition-all"
           title="Next slide"
         >
-          <ChevronRight size={20} />
+          <ChevronRight size={16} />
         </button>
       </div>
 

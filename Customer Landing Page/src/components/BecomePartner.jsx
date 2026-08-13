@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Store, Truck, Briefcase, Award, ArrowRight, Megaphone, Warehouse } from 'lucide-react';
+import { Store, Truck, Briefcase, Award, ArrowRight, Warehouse } from 'lucide-react';
 
 const partners = [
   {
@@ -44,14 +44,6 @@ const partners = [
     shadow: 'hover-glow-blue'
   },
   {
-    title: 'Advertise With Us',
-    description: 'Promote your brand, store, or services to thousands of local customers across the SaathApp hyperlocal network.',
-    cta: 'Start Advertising',
-    icon: Megaphone,
-    gradient: 'from-teal-600 to-cyan-700',
-    shadow: 'hover-glow-green'
-  },
-  {
     title: 'Become a Wholesaler (Sale in Bulk)',
     description: 'Supply products in bulk to retailers and businesses. Expand your reach with SaathApp wholesale marketplace.',
     cta: 'Register Wholesale',
@@ -76,7 +68,7 @@ export default function BecomePartner({ onBecomePartnerSelect }) {
         </div>
 
         {/* Partners Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 xl:gap-3.5">
           {partners.map((partner, index) => {
             const Icon = partner.icon;
 
@@ -87,21 +79,21 @@ export default function BecomePartner({ onBecomePartnerSelect }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                whileHover={{ y: -5 }}
-                className={`bg-white dark:bg-slate-900 rounded-card p-6 border border-slate-200/60 dark:border-slate-800/50 shadow-soft hover:shadow-premium text-left flex flex-col justify-between h-[230px] sm:h-[240px] transition-all ${partner.shadow}`}
+                whileHover={{ y: -4 }}
+                className={`bg-white dark:bg-slate-900 rounded-card p-3 sm:p-3.5 border border-slate-200/60 dark:border-slate-800/50 shadow-soft hover:shadow-premium text-left flex flex-col justify-between h-[210px] sm:h-[220px] lg:h-[215px] xl:h-[210px] transition-all ${partner.shadow}`}
               >
                 
                 {/* Header: Title and Icon */}
-                <div className="space-y-3">
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-r ${partner.gradient} text-white flex items-center justify-center shadow-sm`}>
-                    <Icon size={20} />
+                <div className="space-y-2">
+                  <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${partner.gradient} text-white flex items-center justify-center shadow-sm shrink-0`}>
+                    <Icon size={16} />
                   </div>
                   
                   <div className="space-y-1">
-                    <h3 className="text-sm font-black text-slate-800 dark:text-slate-100">
+                    <h3 className="text-[12px] xl:text-xs font-black text-slate-800 dark:text-slate-100 leading-tight min-h-[30px] flex items-center">
                       {partner.title}
                     </h3>
-                    <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed line-clamp-3">
+                    <p className="text-[10px] xl:text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-snug line-clamp-3">
                       {partner.description}
                     </p>
                   </div>
@@ -112,10 +104,10 @@ export default function BecomePartner({ onBecomePartnerSelect }) {
                   onClick={() => onBecomePartnerSelect(partner.title)}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full py-2.5 rounded-btn text-white font-extrabold text-[11px] flex items-center justify-center gap-1.5 bg-gradient-to-r ${partner.gradient} transition-colors cursor-pointer shadow-sm`}
+                  className={`w-full py-1.5 px-2 rounded-btn text-white font-extrabold text-[10px] xl:text-[11px] flex items-center justify-center gap-1 bg-gradient-to-r ${partner.gradient} transition-colors cursor-pointer shadow-sm mt-2`}
                 >
-                  <span>{partner.cta}</span>
-                  <ArrowRight size={12} />
+                  <span className="truncate">{partner.cta}</span>
+                  <ArrowRight size={11} className="shrink-0" />
                 </motion.button>
 
               </motion.div>
