@@ -6,9 +6,10 @@ import {
 import {
   getStoredProfessionalOnboarding,
   saveProfessionalOnboarding,
+  clearProfessionalOnboarding,
 } from '../services/professionalOnboardingService';
 import { calculateOnboardingFeeApi, verifyPayment, professionalVerification } from '../services/professionalApi';
-import { updatePartnerStatus, getStoredPartners } from '../services/authService';
+import { updatePartnerStatus, getStoredPartners, getStoredPartnerSession } from '../services/authService';
 import {
   getStoredProfessionalMembership,
   saveProfessionalMembership,
@@ -19,7 +20,9 @@ const ProfessionalOnboardingContext = createContext(null);
 
 export function ProfessionalOnboardingProvider({ children }) {
   const [data, setData] = useState(() => {
-    const stored = getStoredProfessionalOnboarding();
+    const session = getStoredPartnerSession();
+    const partnerId = session?.user?.id;
+    const stored = getStoredProfessionalOnboarding(partnerId);
     const membership = getStoredProfessionalMembership();
     const base = stored
       ? {
@@ -33,6 +36,20 @@ export function ProfessionalOnboardingProvider({ children }) {
           meta: { ...defaultProfessionalOnboardingData.meta, ...(stored.meta || {}) },
         }
       : { ...defaultProfessionalOnboardingData };
+    
+    // Auto-populate some info if session exists but no stored onboarding data
+    if (!stored && session?.user && session.user.role === 'professional') {
+      base.accountInfo = {
+        ...base.accountInfo,
+        name: session.user.name || '',
+        phone: session.user.phone || '',
+        email: session.user.email || '',
+        category: session.user.category || 'electrician',
+        experience: session.user.experience || '1-3 Years',
+      };
+      base.meta = { ...base.meta, partnerId: session.user.id };
+    }
+
     if (membership && !stored?.membership) {
       base.membership = { ...base.membership, ...membership };
     }
@@ -43,7 +60,10 @@ export function ProfessionalOnboardingProvider({ children }) {
   const [feeError, setFeeError] = useState(null);
 
   useEffect(() => {
-    saveProfessionalOnboarding(data);
+    const partnerId = data.meta?.partnerId;
+    if (partnerId) {
+      saveProfessionalOnboarding(partnerId, data);
+    }
   }, [data]);
 
   const updateSection = useCallback((section, values) => {
@@ -134,10 +154,13 @@ export function ProfessionalOnboardingProvider({ children }) {
 
   const resetOnboarding = useCallback(() => {
     setData({ ...defaultProfessionalOnboardingData });
-    localStorage.removeItem(PROFESSIONAL_STORAGE_KEYS.onboarding);
+    const partnerId = data.meta?.partnerId;
+    if (partnerId) {
+      clearProfessionalOnboarding(partnerId);
+    }
     localStorage.removeItem(PROFESSIONAL_STORAGE_KEYS.payment);
     localStorage.removeItem(PROFESSIONAL_STORAGE_KEYS.membership);
-  }, []);
+  }, [data.meta?.partnerId]);
 
   return (
     <ProfessionalOnboardingContext.Provider

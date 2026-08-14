@@ -232,7 +232,15 @@ export function clearPartnerSession() {
 export async function registerPartner(partners, partnerData) {
   const normalizedEmail = partnerData.email.trim().toLowerCase();
   const normalizedPhone = partnerData.phone.replace(/\D/g, '');
-  const existing = partners.find((entry) => entry.email?.toLowerCase() === normalizedEmail || entry.phone?.replace(/\D/g, '') === normalizedPhone);
+  
+  const existing = partners.find((entry) => {
+    const entryEmail = entry.email?.toLowerCase();
+    const entryPhone = entry.phone?.replace(/\D/g, '');
+    const emailMatch = entryEmail === normalizedEmail;
+    const phoneMatch = normalizedPhone !== '' && entryPhone === normalizedPhone;
+    return (emailMatch || phoneMatch) && entry.role === partnerData.role;
+  });
+
   if (existing) {
     return { success: false, message: 'An account with this email or phone already exists.' };
   }
@@ -264,7 +272,11 @@ export async function authenticatePartner(partners, { identifier, password, role
     const entryEmail = entry.email?.toLowerCase();
     const entryPhone = entry.phone?.replace(/\D/g, '');
     const matchesRole = entry.role === role;
-    return matchesRole && (entryEmail === normalizedIdentifier || entryPhone === normalizedPhone);
+    
+    const emailMatch = entryEmail === normalizedIdentifier;
+    const phoneMatch = normalizedPhone !== '' && entryPhone === normalizedPhone;
+    
+    return matchesRole && (emailMatch || phoneMatch);
   });
 
   if (!existing) {
