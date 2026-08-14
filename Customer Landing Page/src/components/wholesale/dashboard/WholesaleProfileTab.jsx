@@ -29,12 +29,12 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isCertificateModalOpen, setIsCertificateModalOpen] = useState(false);
   const [isAvatarUploadModalOpen, setIsAvatarUploadModalOpen] = useState(false);
-  const [currentAvatar, setCurrentAvatar] = useState(formData.profilePhotoUrl || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80');
-  const [selectedPresetAvatar, setSelectedPresetAvatar] = useState(formData.profilePhotoUrl || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80');
+  const [currentAvatar, setCurrentAvatar] = useState(formData.profilePhotoUrl || '');
+  const [selectedPresetAvatar, setSelectedPresetAvatar] = useState(formData.profilePhotoUrl || '');
 
   const [profile, setProfile] = useState({
-    businessName: formData.businessName || 'Apex Wholesale & Logistics Pvt Ltd',
-    legalName: 'Apex Wholesale & Bulk Distributors Private Limited',
+    businessName: formData.businessName || '',
+    legalName: formData.businessName || '',
     gstin: formData.gstin || '10AAACA12341Z5',
     pan: 'AAACA1234A',
     entityType: 'Private Limited Company',
@@ -675,12 +675,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
               <div className="pt-2">
                 <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-2">Or Select Preset Business Avatar:</span>
                 <div className="flex justify-center items-center gap-3">
-                  {[
-                    'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80',
-                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
-                    'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80',
-                    'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80'
-                  ].map((url, idx) => (
+                  {[].map((url, idx) => (
                     <button
                       key={idx}
                       type="button"

@@ -21,7 +21,7 @@ export const MOCK_TRANSFER_PRODUCTS = [
     batchNumber: 'BATCH-2026-08A',
     mfgDate: '2026-01-10',
     expiryDate: '2027-01-10',
-    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=300&q=80',
+    image: '',
     isExpired: false,
   },
   {
@@ -37,7 +37,7 @@ export const MOCK_TRANSFER_PRODUCTS = [
     batchNumber: 'BATCH-2026-07F',
     mfgDate: '2026-02-01',
     expiryDate: '2028-02-01',
-    image: 'https://images.unsplash.com/photo-1589927986076-2557539168f6?auto=format&fit=crop&w=300&q=80',
+    image: '',
     isExpired: false,
   },
   {
@@ -53,7 +53,7 @@ export const MOCK_TRANSFER_PRODUCTS = [
     batchNumber: 'BATCH-2026-05K',
     mfgDate: '2025-05-15',
     expiryDate: '2026-05-15',
-    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=300&q=80',
+    image: '',
     isExpired: true,
   },
 ];

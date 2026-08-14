@@ -36,7 +36,7 @@ export default function RiderActiveDeliveriesTab() {
     customerName: 'Anil Kumar',
     customerMobile: '+91 98234 56789',
     customerAltMobile: '+91 98123 45678',
-    customerAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
+    customerAvatar: '',
     floorFlat: 'Flat 402, Royal Residence',
     landmark: 'Near Boring Road Chauraha, Opposite SBI Bank',
     deliveryNotes: 'Ring doorbell twice. Leave parcel with building security guard if gate is locked.',
@@ -244,14 +244,12 @@ export default function RiderActiveDeliveriesTab() {
             </button>
 
             <div className="flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-slate-800">
-              <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100"
-                alt="Vikram Singh"
-                className="w-8 h-8 rounded-full object-cover ring-2 ring-amber-500/30"
-              />
+              <div className="w-8 h-8 rounded-full bg-amber-500 text-slate-900 flex items-center justify-center font-black text-xs ring-2 ring-amber-500/30 shrink-0">
+                <span>{(formData.fullName || 'Rider').charAt(0).toUpperCase()}</span>
+              </div>
               <div className="text-left hidden sm:block">
-                <span className="text-xs font-black text-slate-900 dark:text-white block leading-tight">Vikram Singh</span>
-                <span className="text-[9px] text-slate-400 font-mono font-bold block">ID: RIDER1024</span>
+                <span className="text-xs font-black text-slate-900 dark:text-white block leading-tight">{formData.fullName || 'Rider'}</span>
+                <span className="text-[9px] text-slate-400 font-mono font-bold block">Rider Partner</span>
               </div>
             </div>
           </div>

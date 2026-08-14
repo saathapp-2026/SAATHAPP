@@ -6,15 +6,10 @@ export default function Payment({ onBack }) {
   return (
     <SectionPage title="Payment Methods" subtitle="Manage UPI, cards, and wallet payments." icon={CreditCard} onBack={onBack}>
       <div className="space-y-3">
-        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-          <div className="font-semibold text-slate-800">UPI • nikita@okhdfc</div>
-          <div className="mt-1 text-sm text-slate-600">Primary payment method for orders</div>
+        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-500 font-medium">
+          No saved payment methods yet. Add a payment method for faster checkout.
         </div>
-        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-          <div className="font-semibold text-slate-800">Debit Card • 4521</div>
-          <div className="mt-1 text-sm text-slate-600">Saved for quick checkout</div>
-        </div>
-        <button className="flex items-center gap-2 rounded-2xl border border-dashed border-slate-300 px-4 py-3 text-sm font-semibold text-slate-700">
+        <button onClick={() => alert('Add payment method sheet')} className="flex items-center gap-2 rounded-2xl border border-dashed border-slate-300 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors w-full justify-center cursor-pointer">
           <PlusCircle size={16} /> Add New Payment Method
         </button>
       </div>

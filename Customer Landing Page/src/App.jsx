@@ -115,18 +115,13 @@ export default function App() {
     if (storedSession && isSessionValid(storedSession)) {
       setUser(storedSession.user);
       setIsAuthenticated(true);
-      setAuthView('home');
-      setActivePage('home');
     } else {
       clearAuthSession();
       setUser(null);
       setIsAuthenticated(false);
-      setAuthView('login');
-      setActivePage('login');
-      setErrorMessage('Your session has expired. Please log in again.');
     }
     setAuthReady(true);
-  }, []);
+  }, [routerLocation.pathname]);
 
   useEffect(() => {
     if (!authReady) return;
@@ -1013,7 +1008,14 @@ export default function App() {
     );
   }
 
-  if (!isAuthenticated && !isPublicRoute) {
+  const currentSession = getStoredAuthSession();
+  const hasValidSession = Boolean(currentSession && isSessionValid(currentSession) && isAuthenticated && user);
+
+  const isProtectedPath = routerLocation.pathname === '/profile' || routerLocation.pathname === '/customer/dashboard';
+  const protectedActivePages = ['edit-profile', 'wallet', 'rewards', 'addresses', 'notifications', 'payment', 'cart', 'orders', 'wishlist', 'settings'];
+  const isProtectedActivePage = protectedActivePages.includes(activePage);
+
+  if ((isProtectedPath || isProtectedActivePage || !isPublicRoute) && !hasValidSession) {
     return <LoginPage onLogin={handleLogin} onSignup={() => navigate('/signup')} onForgotPassword={() => navigate('/login')} onOtpLogin={() => navigate('/login')} error={errorMessage} />;
   }
 

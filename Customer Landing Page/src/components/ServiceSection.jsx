@@ -34,7 +34,12 @@ export default function ServiceSection({ onBookService }) {
 
         {/* Services Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
+          {services.length === 0 ? (
+            <div className="col-span-full py-10 text-center text-sm font-semibold text-slate-400">
+              No services listed at the moment.
+            </div>
+          ) : (
+            services.map((service, index) => (
             <motion.div
               key={service.id}
               initial={{ opacity: 0, y: 20 }}
@@ -110,7 +115,8 @@ export default function ServiceSection({ onBookService }) {
               </div>
 
             </motion.div>
-          ))}
+          ))
+          )}
         </div>
 
       </div>

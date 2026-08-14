@@ -87,15 +87,13 @@ export default function DashboardTopNav({
               onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
               className="flex items-center gap-2 cursor-pointer active:scale-95 transition hover:opacity-90 rounded-2xl p-1"
             >
-              <img
-                src={formData.profilePhotoUrl || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80'}
-                alt="Owner Avatar"
-                className="h-8 w-8 rounded-full object-cover ring-2 ring-emerald-500/30 shrink-0"
-              />
-              <div className="hidden lg:block text-left leading-tight">
-                <strong className="block text-xs font-extrabold text-slate-900 dark:text-white truncate max-w-[120px]">
-                  {formData.fullName || 'Rajesh Sharma'}
-                </strong>
+            <div className="h-8 w-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-extrabold text-xs ring-2 ring-emerald-500/30 shrink-0">
+              <span>{(formData.fullName || 'W').charAt(0).toUpperCase()}</span>
+            </div>
+            <div className="hidden lg:block text-left leading-tight">
+              <strong className="block text-xs font-extrabold text-slate-900 dark:text-white truncate max-w-[120px]">
+                {formData.fullName || 'Wholesale Partner'}
+              </strong>
                 <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
                   Verified Partner ▼
                 </span>

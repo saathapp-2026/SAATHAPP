@@ -347,7 +347,7 @@ const MODULES = {
     columns: ["Store", "Owner", "GST", "Commission", "Rating", "Status"],
     rows: [
       ["Green Basket", "Suresh Patil", "29ABCDE1234F1Z5", "8%", "4.7", "Active"],
-      ["UrbanCraft Store", "Nikita Rao", "27PQRSX9988H1Z1", "10%", "4.3", "Pending KYC"],
+      ["UrbanCraft Store", "Partner Owner", "27PQRSX9988H1Z1", "10%", "4.3", "Pending KYC"],
       ["QuickFix Hardware", "Farhan Ali", "07LMNOQ2211K1Z9", "7%", "4.8", "Active"],
       ["Sunrise Foods", "Lakshmi N.", "33ZXCVB4432J1Z7", "9%", "4.1", "Suspended"],
     ],

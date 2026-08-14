@@ -17,72 +17,46 @@ import ReviewsTab from '../components/customer/ReviewsTab';
 // 1. LOCAL STORAGE MOCK DATABASE INITIALIZER
 // ==========================================
 const initMockDB = (user) => {
-  if (!localStorage.getItem('saath_profile')) {
+  const currentProfile = JSON.parse(localStorage.getItem('saath_profile') || '{}');
+  if (!localStorage.getItem('saath_profile') || (user && user.email && currentProfile.email !== user.email)) {
     localStorage.setItem('saath_profile', JSON.stringify({
-      name: user?.name || 'Nikita Sharma',
-      email: user?.email || 'demo@saathapp.com',
-      phone: user?.phone || '+91 9128842027',
-      gender: 'Female',
-      dob: '1998-05-15',
+      name: user?.name || 'User',
+      email: user?.email || '',
+      phone: user?.phone || '',
+      gender: '',
+      dob: '',
       emailVerified: true,
       mobileVerified: true,
       twoFactor: false,
-      lastLogin: 'Today, 02:10 PM'
+      lastLogin: new Date().toISOString()
     }));
   }
   if (!localStorage.getItem('saath_wallet_balance')) {
-    localStorage.setItem('saath_wallet_balance', '450.00');
+    localStorage.setItem('saath_wallet_balance', '0.00');
   }
   if (!localStorage.getItem('saath_addresses')) {
-    localStorage.setItem('saath_addresses', JSON.stringify([
-      { id: 1, type: 'Home', address: 'Bhatahar, Tharthari, Nalanda, Bihar – 801307, India', isDefault: true },
-      { id: 2, type: 'Work', address: '5th Floor, Block C, Tech Park, Sector 62, Noida, UP – 201301', isDefault: false }
-    ]));
+    localStorage.setItem('saath_addresses', JSON.stringify([]));
   }
   if (!localStorage.getItem('saath_orders')) {
-    localStorage.setItem('saath_orders', JSON.stringify([
-      { id: 'ORD-8942', status: 'Delivered', date: 'July 25, 2026', total: 1249.00, items: ['Tomato 1kg', 'Ghee 500g'], thumbnail: '🍅' },
-      { id: 'ORD-7711', status: 'In Transit', date: 'July 26, 2026', total: 350.00, items: ['AC Servicing'], thumbnail: '⚙️' },
-      { id: 'ORD-3012', status: 'Pending', date: 'July 26, 2026', total: 5500.00, items: ['Ultratech Cement x10'], thumbnail: '🧱' },
-      { id: 'ORD-1209', status: 'Cancelled', date: 'July 20, 2026', total: 180.00, items: ['Cables'], thumbnail: '🔌' }
-    ]));
+    localStorage.setItem('saath_orders', JSON.stringify([]));
   }
   if (!localStorage.getItem('saath_transactions')) {
-    localStorage.setItem('saath_transactions', JSON.stringify([
-      { id: 'TXN-902', type: 'Credit', amount: 500, date: 'July 25, 2026', desc: 'Added money via UPI', method: 'UPI', status: 'Success' },
-      { id: 'TXN-884', type: 'Debit', amount: 1249, date: 'July 25, 2026', desc: 'Order Payment ORD-8942', method: 'Saath Wallet', status: 'Success' },
-      { id: 'TXN-712', type: 'Credit', amount: 200, date: 'July 22, 2026', desc: 'Redeemed Voucher VCH-882', method: 'Voucher', status: 'Success' }
-    ]));
+    localStorage.setItem('saath_transactions', JSON.stringify([]));
   }
   if (!localStorage.getItem('saath_bookings')) {
-    localStorage.setItem('saath_bookings', JSON.stringify([
-      { id: 'BKG-5521', service: 'AC Deep Cleaning', date: 'July 27, 2026', time: '10:00 AM', status: 'Scheduled', provider: 'Suresh Kumar', price: 699 },
-      { id: 'BKG-4410', service: 'Kitchen Sink Plumbing', date: 'July 26, 2026', time: '03:00 PM', status: 'In Progress', provider: 'Ram Prasad', price: 299 },
-      { id: 'BKG-1102', service: 'Living Room Painting', date: 'July 15, 2026', time: '09:00 AM', status: 'Completed', provider: 'Vijay Painters', price: 4500 }
-    ]));
+    localStorage.setItem('saath_bookings', JSON.stringify([]));
   }
   if (!localStorage.getItem('saath_rewards')) {
     localStorage.setItem('saath_rewards', JSON.stringify({
-      points: 750,
-      history: [
-        { id: 'REW-91', desc: 'Bonus points on registration', points: 200, date: 'July 10, 2026', type: 'Credit' },
-        { id: 'REW-92', desc: 'Completed Order ORD-8942 reward', points: 150, date: 'July 25, 2026', type: 'Credit' },
-        { id: 'REW-93', desc: 'Referral reward from Nikita', points: 400, date: 'July 26, 2026', type: 'Credit' }
-      ]
+      points: 0,
+      history: []
     }));
   }
   if (!localStorage.getItem('saath_notifications')) {
-    localStorage.setItem('saath_notifications', JSON.stringify([
-      { id: 1, title: 'Booking Confirmed!', message: 'Your AC Deep Cleaning has been scheduled with Suresh Kumar.', time: '10 mins ago', read: false },
-      { id: 2, title: 'Wallet Credited', message: '₹500.00 was successfully added via UPI.', time: '2 hours ago', read: true },
-      { id: 3, title: 'Welcome to SaathApp!', message: 'Explore local stores, professional technicians, and agricultural resources near you.', time: '2 days ago', read: true }
-    ]));
+    localStorage.setItem('saath_notifications', JSON.stringify([]));
   }
   if (!localStorage.getItem('saath_tickets')) {
-    localStorage.setItem('saath_tickets', JSON.stringify([
-      { id: 'TCK-229', subject: 'Refund delay for cancelled order', category: 'Refunds', status: 'Open', lastUpdated: 'July 26, 2026' },
-      { id: 'TCK-104', subject: 'Address mismatch during geolocation selection', category: 'Saved Addresses', status: 'Closed', lastUpdated: 'July 22, 2026' }
-    ]));
+    localStorage.setItem('saath_tickets', JSON.stringify([]));
   }
 };
 
@@ -178,21 +152,13 @@ export default function Profile({ user, onBack, onLogout }) {
     
     // Initialize custom states
     if (!localStorage.getItem('saath_wishlist')) {
-      localStorage.setItem('saath_wishlist', JSON.stringify([
-        { id: 'w-1', name: 'Syska LED Bulb 9W', price: 120, image: '💡', desc: 'Energy efficient LED bulb with 2 years warranty.' },
-        { id: 'w-2', name: 'Cumi Grinding Wheel', price: 450, image: '⚙️', desc: 'Premium wheel for angle grinders.' }
-      ]));
+      localStorage.setItem('saath_wishlist', JSON.stringify([]));
     }
     if (!localStorage.getItem('saath_cart')) {
-      localStorage.setItem('saath_cart', JSON.stringify([
-        { id: 'c-1', name: 'Premium Copper Wire 90m', price: 1599, count: 1, image: '🔌' },
-        { id: 'c-2', name: 'Tap Connector Brass', price: 180, count: 2, image: '🚰' }
-      ]));
+      localStorage.setItem('saath_cart', JSON.stringify([]));
     }
     if (!localStorage.getItem('saath_user_reviews')) {
-      localStorage.setItem('saath_user_reviews', JSON.stringify([
-        { id: 'rev-1', serviceName: 'Living Room Painting', rating: 5, date: 'July 15, 2026', text: 'Excellent job by Vijay Painters! Very neat work.' }
-      ]));
+      localStorage.setItem('saath_user_reviews', JSON.stringify([]));
     }
     setWishlist(JSON.parse(localStorage.getItem('saath_wishlist') || '[]'));
     setCart(JSON.parse(localStorage.getItem('saath_cart') || '[]'));
@@ -386,7 +352,7 @@ export default function Profile({ user, onBack, onLogout }) {
               <div className="space-y-0.5 text-left">
                 <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400">Customer Space</span>
                 <h2 className="text-base font-black text-slate-900 dark:text-white leading-none">
-                  {new Date().getHours() < 12 ? 'Good Morning' : new Date().getHours() < 17 ? 'Good Afternoon' : 'Good Evening'}, {profile?.name || 'Nikita'}
+                  {new Date().getHours() < 12 ? 'Good Morning' : new Date().getHours() < 17 ? 'Good Afternoon' : 'Good Evening'}, {profile?.name || 'User'}
                 </h2>
               </div>
               

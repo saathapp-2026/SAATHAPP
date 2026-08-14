@@ -48,11 +48,11 @@ export const INITIAL_FORM_STATE = {
   newTagInput: '',
 
   // Step 2: Images & Media
-  mainImage: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=600&q=80',
+  mainImage: '',
   galleryImages: [
-    'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=400&q=80',
-    'https://images.unsplash.com/photo-1589927986076-2557539168f6?auto=format&fit=crop&w=400&q=80',
-    'https://images.unsplash.com/photo-1608686207856-001b95cf60ca?auto=format&fit=crop&w=400&q=80',
+    null,
+    null,
+    null,
     null,
     null,
   ],
@@ -151,7 +151,7 @@ export const INITIAL_FORM_STATE = {
   metaTitle: 'Buy Fortune Sunflower Oil 15L Tin Wholesale Price | SaathApp',
   metaDescription: 'Get bulk rates on Fortune Sunflower Oil 15L Tin. Direct manufacturer supply, fast delivery, MOQ 10 Tins. GST invoice included.',
   searchKeywords: ['Fortune oil', '15L tin', 'wholesale edible oil', 'sunflower oil bulk'],
-  ogImage: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=600&q=80',
+  ogImage: '',
 
   // Step 9: Visibility
   status: 'Active',
