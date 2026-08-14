@@ -6,19 +6,13 @@ import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
 export default function InvoicesTab() {
   const { addToast, formData } = useWholesale ? useWholesale() : { addToast: console.log, formData: {} };
 
-  const [invoices, setInvoices] = useState([
-    { inv: 'INV-2026-8841', orderId: 'ORD-9842', buyer: 'Ramesh Supermarket', category: 'FMCG & Personal Care', amount: 125000, gstAmount: 22500, date: '2026-08-03' },
-    { inv: 'INV-2026-8840', orderId: 'ORD-9841', buyer: 'Shree Traders', category: 'Grocery & Staples', amount: 95000, gstAmount: 17100, date: '2026-08-03' },
-    { inv: 'INV-2026-8839', orderId: 'ORD-9840', buyer: 'GreenMart Store', category: 'FMCG', amount: 78500, gstAmount: 14130, date: '2026-08-02' },
-    { inv: 'INV-2026-8838', orderId: 'ORD-9839', buyer: 'Apna General Hub', category: 'Packaged Food', amount: 45000, gstAmount: 8100, date: '2026-08-02' },
-    { inv: 'INV-2026-8837', orderId: 'ORD-9838', buyer: 'Kumar Enterprises', category: 'Electrical Goods', amount: 110000, gstAmount: 19800, date: '2026-08-01' },
-  ]);
+  const [invoices, setInvoices] = useState([]);
 
   const [previewModalData, setPreviewModalData] = useState(null); // { title, headers, rows }
 
   // DOWNLOAD INDIVIDUAL INVOICE IN PDF, WORD, OR EXCEL FORMAT
   const handleDownloadInvoiceFormat = (invObj, fmt) => {
-    const seller = formData?.businessName || "SaathApp Wholesale & Distribution Pvt Ltd";
+    const seller = formData?.businessName || "Wholesale Partner";
     const dateStr = new Date().toLocaleDateString('en-IN');
     const totalVal = invObj.amount + invObj.gstAmount;
 
@@ -27,7 +21,7 @@ export default function InvoicesTab() {
       csv += `=======================================================\r\n`;
       csv += `SAATHAPP WHOLESALE TAX INVOICE - ${invObj.inv}\r\n`;
       csv += `Seller: ${seller} | Date: ${dateStr}\r\n`;
-      csv += `GSTIN: 07AAACS1234F1Z5 | PAN: AAACS1234F\r\n`;
+      csv += `GSTIN: ${formData?.gstin || "—"} | PAN: ${formData?.pan || "—"}\r\n`;
       csv += `=======================================================\r\n\r\n`;
 
       csv += `Invoice No,Order Ref,Buyer Enterprise,Category,Taxable Value,GST Tax (18%),Total Invoice Value,Date\r\n`;

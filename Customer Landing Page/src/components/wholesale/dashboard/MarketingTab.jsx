@@ -59,10 +59,7 @@ export default function MarketingTab() {
         <div className="space-y-4">
           <h3 className="text-sm font-black text-slate-900 dark:text-white">Active Wholesale Offers &amp; B2B Coupons</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
-              { code: 'BULK50', desc: 'Flat ₹5,000 Off on orders above ₹1,00,000', valid: '31 Aug 2026', badge: 'Active' },
-              { code: 'FMCG10', desc: 'Extra 10% Off on FMCG Bulk Cases', valid: '15 Aug 2026', badge: 'Active' },
-            ].map((o) => (
+            {[].map((o) => (
               <div key={o.code} className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="font-mono font-black text-sm text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-xl">{o.code}</span>
@@ -73,6 +70,11 @@ export default function MarketingTab() {
               </div>
             ))}
           </div>
+          {[].length === 0 && (
+            <div className="p-8 text-center text-xs text-slate-400 font-medium bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+              No active offers or coupons created. Click "+ Create New Campaign" to launch a promotion.
+            </div>
+          )}
         </div>
       ) : activeSubTab === 'Promotions' ? (
         <div className="space-y-4">
@@ -108,10 +110,7 @@ export default function MarketingTab() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold">
-                {[
-                  { name: 'August Wholesale Stockist Offer', ch: 'WhatsApp', rec: '850 Buyers', rate: '68.4%', status: 'Sent' },
-                  { name: 'Festive Season MOQ Alert', ch: 'Email', rec: '1,240 Buyers', rate: '42.1%', status: 'Scheduled' },
-                ].map((c) => (
+                {[].map((c) => (
                   <tr key={c.name}>
                     <td className="p-4 font-black">{c.name}</td>
                     <td className="p-4 text-emerald-500 font-bold">{c.ch}</td>

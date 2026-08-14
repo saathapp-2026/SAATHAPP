@@ -65,11 +65,10 @@ export default function Step4_RiderLocationVehicle({ onNext, onPrev }) {
                   <div
                     key={tier.id}
                     onClick={() => updateFormData({ locationTier: tier.id })}
-                    className={`cursor-pointer rounded-2xl border p-4 transition ${
-                      isSelected
+                    className={`cursor-pointer rounded-2xl border p-4 transition ${isSelected
                         ? 'border-amber-500 bg-amber-500/10 text-slate-900 dark:text-white shadow-md ring-2 ring-amber-500/30'
                         : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-slate-300'
-                    }`}
+                      }`}
                   >
                     <MapPin size={18} className={isSelected ? 'text-amber-500' : 'text-slate-400'} />
                     <h3 className="mt-2 text-xs font-extrabold text-slate-900 dark:text-white">{tier.label}</h3>

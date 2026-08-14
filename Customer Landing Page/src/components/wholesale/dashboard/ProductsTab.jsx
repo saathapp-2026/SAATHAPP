@@ -15,13 +15,7 @@ export const PRODUCT_SUB_TABS = [
   'Warehouses',
 ];
 
-export const MOCK_PRODUCTS = [
-  { id: 'SKU-FORT-15L-1006', name: 'Fortune Sunflower Oil 15L Tin', category: 'FMCG & Personal Care', price: 1850, moq: 10, stock: 450, brand: 'Fortune', status: 'Active' },
-  { id: 'SKU-TATA-1KG-1002', name: 'Tata Salt 1kg Pack (Case of 24)', category: 'Grocery & Staples', price: 620, moq: 20, stock: 18, brand: 'Tata', status: 'Low Stock' },
-  { id: 'SKU-ULTRA-50KG-1003', name: 'Cement 50kg PPC Bag (50 Bags/Pallet)', category: 'Construction & Paint', price: 340, moq: 50, stock: 1250, brand: 'UltraTech', status: 'Active' },
-  { id: 'SKU-GATE-25KG-1004', name: 'Basmati Rice 25kg Bulk Bag', category: 'Grocery & Staples', price: 2100, moq: 15, stock: 820, brand: 'India Gate', status: 'Active' },
-  { id: 'SKU-HAVE-6A-1005', name: 'Havells Modular Switch 6A (Box 20)', category: 'Electrical & Appliances', price: 890, moq: 5, stock: 0, brand: 'Havells', status: 'Out of Stock' },
-];
+export const MOCK_PRODUCTS = [];
 
 export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAddModal }) {
   const { addToast } = useWholesale ? useWholesale() : { addToast: console.log };
@@ -121,10 +115,10 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
           <h3 className="text-sm font-black text-slate-900 dark:text-white">Wholesale Product Categories</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { title: 'FMCG & Personal Care', skus: 840, value: '₹14.2L', icon: '🧴' },
-              { title: 'Grocery & Staples', skus: 1250, value: '₹22.5L', icon: '🌾' },
-              { title: 'Construction & Materials', skus: 420, value: '₹31.0L', icon: '🧱' },
-              { title: 'Electrical & Lighting', skus: 380, value: '₹9.8L', icon: '💡' },
+              { title: 'FMCG & Personal Care', skus: 0, value: '₹0', icon: '🧴' },
+              { title: 'Grocery & Staples', skus: 0, value: '₹0', icon: '🌾' },
+              { title: 'Construction & Materials', skus: 0, value: '₹0', icon: '🧱' },
+              { title: 'Electrical & Lighting', skus: 0, value: '₹0', icon: '💡' },
             ].map((c) => (
               <div key={c.title} className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
                 <span className="text-3xl">{c.icon}</span>

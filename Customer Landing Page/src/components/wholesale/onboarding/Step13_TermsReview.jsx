@@ -151,7 +151,7 @@ export default function Step13_TermsReview({ onNext, onPrev, onSelectStep }) {
                   value={formData.signatureName || formData.fullName}
                   onChange={(e) => updateFormData({ signatureName: e.target.value })}
                   className="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1.5 text-xs font-bold font-mono text-emerald-600 dark:text-emerald-400"
-                  placeholder="Rakesh Kumar"
+                  placeholder="Enter full name"
                 />
               </div>
             </div>

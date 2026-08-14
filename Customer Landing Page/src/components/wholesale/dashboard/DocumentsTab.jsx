@@ -7,20 +7,20 @@ export default function DocumentsTab() {
 
   // Initial Documents Repository State matching screenshot Page 40 of PDF
   const [docList, setDocList] = useState({
-    aadhaar: { title: 'AADHAAR', fileName: 'Aadhaar_Card_Rakesh.pdf', status: 'Verified' },
-    pan: { title: 'PAN', fileName: 'PAN_AAACS1234F.pdf', status: 'Verified' },
-    gst: { title: 'GST', fileName: 'GSTIN_07AAACS1234F1Z5.pdf', status: 'Verified' },
-    tradeLicense: { title: 'TRADE LICENSE', fileName: 'Trade_License_2026.pdf', status: 'Verified' },
-    msme: { title: 'MSME', fileName: 'MSME_Udyam_Reg.pdf', status: 'Verified' },
+    aadhaar: { title: 'AADHAAR', fileName: '', status: 'Pending' },
+    pan: { title: 'PAN', fileName: '', status: 'Pending' },
+    gst: { title: 'GST', fileName: '', status: 'Pending' },
+    tradeLicense: { title: 'TRADE LICENSE', fileName: '', status: 'Pending' },
+    msme: { title: 'MSME', fileName: '', status: 'Optional' },
     iec: { title: 'IEC', fileName: '', status: 'Optional' },
-    fssai: { title: 'FSSAI', fileName: 'FSSAI_Lic_11223344556677.pdf', status: 'Verified' },
+    fssai: { title: 'FSSAI', fileName: '', status: 'Optional' },
     drugLicense: { title: 'DRUG LICENSE', fileName: '', status: 'Not Applicable' },
     factoryLicense: { title: 'FACTORY LICENSE', fileName: '', status: 'Optional' },
-    companyRegistration: { title: 'COMPANY REGISTRATION', fileName: 'COI_SaathApp_Wholesale.pdf', status: 'Verified' },
-    warehousePhotos: { title: 'WAREHOUSE PHOTOS', fileName: 'warehouse_front_view.jpg', status: 'Uploaded' },
+    companyRegistration: { title: 'COMPANY REGISTRATION', fileName: '', status: 'Pending' },
+    warehousePhotos: { title: 'WAREHOUSE PHOTOS', fileName: '', status: 'Optional' },
     factoryPhotos: { title: 'FACTORY PHOTOS', fileName: '', status: 'Optional' },
-    businessLogo: { title: 'BUSINESS LOGO', fileName: 'logo_saathapp_brand.png', status: 'Uploaded' },
-    ownerSelfie: { title: 'OWNER SELFIE', fileName: 'owner_live_photo.jpg', status: 'Verified' },
+    businessLogo: { title: 'BUSINESS LOGO', fileName: '', status: 'Optional' },
+    ownerSelfie: { title: 'OWNER SELFIE', fileName: '', status: 'Pending' },
   });
 
   const handleFileUpload = (docKey, e) => {

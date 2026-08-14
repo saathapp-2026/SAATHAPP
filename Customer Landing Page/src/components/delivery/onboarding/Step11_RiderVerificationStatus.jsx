@@ -80,20 +80,18 @@ export default function Step11_RiderVerificationStatus({ onGoToDashboard }) {
             return (
               <div
                 key={stage.id}
-                className={`flex items-start gap-4 p-4 rounded-2xl border transition ${
-                  stage.id === 'Approved' && isApproved
+                className={`flex items-start gap-4 p-4 rounded-2xl border transition ${stage.id === 'Approved' && isApproved
                     ? 'border-amber-500 bg-amber-500/10 dark:bg-amber-950/30'
                     : isCompleted
-                    ? 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950'
-                    : 'border-slate-200/60 dark:border-slate-800/60 opacity-60'
-                }`}
+                      ? 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950'
+                      : 'border-slate-200/60 dark:border-slate-800/60 opacity-60'
+                  }`}
               >
                 <div
-                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-xs font-bold ${
-                    isCompleted
+                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-xs font-bold ${isCompleted
                       ? 'bg-amber-500 text-slate-950 font-black'
                       : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
-                  }`}
+                    }`}
                 >
                   {isCompleted ? <CheckCircle2 size={20} /> : idx + 1}
                 </div>
@@ -102,11 +100,10 @@ export default function Step11_RiderVerificationStatus({ onGoToDashboard }) {
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">{stage.title}</h3>
                     <span
-                      className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
-                        isCompleted
+                      className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${isCompleted
                           ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400'
                           : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
-                      }`}
+                        }`}
                     >
                       {isCompleted ? 'Verified' : 'Pending'}
                     </span>

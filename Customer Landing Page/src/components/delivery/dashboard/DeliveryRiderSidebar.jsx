@@ -22,12 +22,12 @@ import { useDelivery } from '../../../context/DeliveryContext';
 
 export const RIDER_SIDEBAR_ITEMS = [
   { id: 'overview', label: 'Dashboard', icon: LayoutDashboard, badge: 'Online' },
-  { id: 'orders', label: 'Orders & Deliveries', icon: Truck, badge: '1 Active' },
-  { id: 'earnings', label: 'Earnings & Wallet', icon: Wallet, badge: '₹2,450' },
+  { id: 'orders', label: 'Orders & Deliveries', icon: Truck, badge: null },
+  { id: 'earnings', label: 'Earnings & Wallet', icon: Wallet, badge: '₹0' },
   { id: 'incentives', label: 'Incentives & Bonuses', icon: Award, badge: 'New' },
-  { id: 'ratings', label: 'Ratings & Performance', icon: Star, badge: '4.9 ★' },
+  { id: 'ratings', label: 'Ratings & Performance', icon: Star, badge: '0 ★' },
   { id: 'vehicle', label: 'Vehicle & Documents', icon: FileBadge2, badge: 'Verified' },
-  { id: 'attendance', label: 'Attendance & Shifts', icon: UserCheck, badge: '04h 25m' },
+  { id: 'attendance', label: 'Attendance & Shifts', icon: UserCheck, badge: null },
   { id: 'profile', label: 'Profile & Settings', icon: User, badge: 'Active' },
   { id: 'support', label: 'Support', icon: HelpCircle, badge: null },
 ];
@@ -51,7 +51,7 @@ export default function DeliveryRiderSidebar({ activeTab, onSelectTab, onBackToO
             <span className="text-[11px] font-black uppercase tracking-wider text-amber-400">RIDER APP</span>
             <ShieldCheck size={14} className="text-amber-400 shrink-0" />
           </div>
-          <h2 className="text-sm font-black text-white truncate mt-0.5 group-hover:text-amber-400 transition">{formData.fullName || 'Vikram Singh'}</h2>
+          <h2 className="text-sm font-black text-white truncate mt-0.5 group-hover:text-amber-400 transition">{formData.fullName || 'Rider'}</h2>
         </div>
       </div>
 
@@ -65,11 +65,10 @@ export default function DeliveryRiderSidebar({ activeTab, onSelectTab, onBackToO
               key={item.id}
               type="button"
               onClick={() => onSelectTab(item.id)}
-              className={`w-full flex items-center justify-between rounded-2xl px-3.5 py-3 text-xs font-bold transition-all duration-150 cursor-pointer active:scale-95 ${
-                isActive
+              className={`w-full flex items-center justify-between rounded-2xl px-3.5 py-3 text-xs font-bold transition-all duration-150 cursor-pointer active:scale-95 ${isActive
                   ? 'bg-amber-500 text-slate-950 shadow-lg font-black'
                   : 'text-slate-400 hover:text-white hover:bg-slate-900/80'
-              }`}
+                }`}
             >
               <div className="flex items-center gap-3 truncate">
                 <Icon size={18} className={isActive ? 'text-slate-950' : 'text-slate-400'} />
@@ -78,11 +77,10 @@ export default function DeliveryRiderSidebar({ activeTab, onSelectTab, onBackToO
 
               {item.badge && (
                 <div
-                  className={`shrink-0 text-center transition ${
-                    isActive
+                  className={`shrink-0 text-center transition ${isActive
                       ? 'bg-slate-950 text-amber-400 font-mono text-[10px] font-black px-2.5 py-1 rounded-xl shadow'
                       : 'bg-slate-800/90 text-slate-300 font-mono text-[10px] font-bold px-2 py-0.5 rounded-full'
-                  }`}
+                    }`}
                 >
                   {item.badge}
                 </div>

@@ -21,7 +21,7 @@ export default function AnalyticsTab() {
   // Active Modals State
   const [activeModal, setActiveModal] = useState(null); // 'schedule', 'share', 'categories', 'products', 'states', 'aiInsights'
   const [isCopied, setIsCopied] = useState(false);
-  const [scheduleEmail, setScheduleEmail] = useState('rakesh.kumar@saathapp.com');
+  const [scheduleEmail, setScheduleEmail] = useState(formData?.email || '');
   const [scheduleFrequency, setScheduleFrequency] = useState('weekly');
 
   // Report Settings Modal State (PDF Page 25)
@@ -34,7 +34,7 @@ export default function AnalyticsTab() {
     includeLogo: true,
     includeWatermark: true,
     orientation: 'portrait',
-    fileName: 'Analytics_Report_Aug_2026',
+    fileName: 'Analytics_Report',
   });
 
   const handleOpenExportModal = (formatType) => {
@@ -55,7 +55,7 @@ export default function AnalyticsTab() {
       return;
     }
 
-    const sellerName = formData?.businessName || "Rakesh Kumar (Verified Partner)";
+    const sellerName = formData?.businessName || formData?.fullName || "Wholesale Partner";
     const dateStr = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 
     const htmlContent = `
@@ -699,11 +699,10 @@ export default function AnalyticsTab() {
               e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
               addToast?.(`Switching to ${tab} analytics view`, 'info');
             }}
-            className={`shrink-0 rounded-xl px-4 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
-              activeAnalyticsTab === tab
+            className={`shrink-0 rounded-xl px-4 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${activeAnalyticsTab === tab
                 ? 'bg-emerald-600 text-white shadow-md font-black'
                 : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
-            }`}
+              }`}
           >
             {tab}
           </button>
@@ -779,13 +778,7 @@ export default function AnalyticsTab() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
-                  {[
-                    { title: 'Tata Salt 1kg Pack (Case of 24)', orders: 120, gmv: '₹1.45L', img: '' },
-                    { title: 'Fortune Sunflower Oil 15L Tin', orders: 98, gmv: '₹1.28L', img: '' },
-                    { title: 'Cement 50kg PPC Bag', orders: 85, gmv: '₹1.05L', img: '' },
-                    { title: 'Havells Modular Switch 6A', orders: 72, gmv: '₹0.86L', img: '' },
-                    { title: 'Basmati Rice 25kg Bag', orders: 65, gmv: '₹0.74L', img: '' },
-                  ].map((p, i) => (
+                  {[].map((p, i) => (
                     <tr key={i} className="hover:bg-slate-50 dark:hover:bg-slate-950 transition cursor-pointer" onClick={() => addToast?.(`Product: ${p.title} (${p.gmv})`, 'info')}>
                       <td className="py-2.5 font-extrabold text-slate-900 dark:text-white flex items-center gap-2 truncate max-w-[150px]">
                         <img src={p.img} alt={p.title} className="w-7 h-7 rounded-lg object-cover border border-slate-200 shrink-0" />
@@ -912,11 +905,10 @@ export default function AnalyticsTab() {
                     key={fmt}
                     type="button"
                     onClick={() => setReportConfig((p) => ({ ...p, format: fmt }))}
-                    className={`py-2 rounded-xl font-black uppercase text-center border transition ${
-                      reportConfig.format === fmt
+                    className={`py-2 rounded-xl font-black uppercase text-center border transition ${reportConfig.format === fmt
                         ? 'bg-emerald-500/20 border-emerald-500 text-emerald-600 dark:text-emerald-400 shadow-sm'
                         : 'bg-slate-100 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
-                    }`}
+                      }`}
                   >
                     {fmt}
                   </button>

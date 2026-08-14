@@ -98,7 +98,7 @@ export default function Step3_OwnerInfo({ onNext, onPrev }) {
                   value={formData.fullName}
                   onChange={(e) => updateFormData({ fullName: e.target.value })}
                   className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                  placeholder="Rakesh Kumar"
+                  placeholder="Enter full name"
                 />
               </div>
             </div>
@@ -133,7 +133,7 @@ export default function Step3_OwnerInfo({ onNext, onPrev }) {
                   value={formData.ownerMobile}
                   onChange={(e) => updateFormData({ ownerMobile: e.target.value.replace(/\D/g, '') })}
                   className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                  placeholder="9128842027"
+                  placeholder="Enter 10-digit mobile number"
                 />
               </div>
             </div>
@@ -150,7 +150,7 @@ export default function Step3_OwnerInfo({ onNext, onPrev }) {
                   value={formData.ownerEmail}
                   onChange={(e) => updateFormData({ ownerEmail: e.target.value })}
                   className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                  placeholder="rakesh@company.com"
+                  placeholder="Enter official email address"
                 />
               </div>
             </div>

@@ -111,14 +111,14 @@ export default function HeroSection({ onStartRegistration }) {
           >
             <div className="absolute -inset-4 rounded-[32px] bg-gradient-to-br from-[#0A8F3D]/30 to-emerald-400/10 blur-2xl" />
             <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-3 shadow-2xl backdrop-blur-sm">
-              <img
-                src={WholesalerHeroImg}
-                alt="Wholesale business partners managing bulk orders on SaathApp"
-                className="w-full rounded-[20px] object-cover aspect-[4/3]"
-                loading="eager"
-              />
+              <div className="w-full rounded-[20px] bg-slate-800/80 border border-slate-700/60 aspect-[4/3] flex flex-col items-center justify-center text-slate-400 gap-3">
+                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
+                  <Sparkles size={32} />
+                </div>
+                <span className="text-xs font-semibold text-slate-300">Wholesale Network Platform</span>
+              </div>
               <div className="absolute bottom-6 left-6 right-6 rounded-2xl border border-white/10 bg-slate-950/70 p-4 backdrop-blur-md">
-                <p className="text-xs font-bold uppercase tracking-wider text-emerald-300">Trusted by 2,500+ partners</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-emerald-300">Verified Wholesale Network</p>
                 <p className="mt-1 text-sm font-semibold text-white">Enterprise-grade wholesale infrastructure</p>
               </div>
             </div>

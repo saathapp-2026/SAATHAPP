@@ -54,21 +54,19 @@ export default function RiderOrdersDeliveriesTab({ initialSubTab = 'live' }) {
                   e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
                   addToast?.(`Switched view to ${tab.label}`, 'info');
                 }}
-                className={`flex items-center gap-2 px-3.5 py-2.5 rounded-2xl text-xs font-extrabold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
-                  isActive
+                className={`flex items-center gap-2 px-3.5 py-2.5 rounded-2xl text-xs font-extrabold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${isActive
                     ? 'bg-amber-500 text-slate-950 shadow-md font-black'
                     : 'bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800'
-                }`}
+                  }`}
               >
                 <Icon size={15} />
                 <span>{tab.label}</span>
                 {tab.count && (
                   <span
-                    className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${
-                      isActive
+                    className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${isActive
                         ? 'bg-slate-950 text-amber-400'
                         : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
-                    }`}
+                      }`}
                   >
                     {tab.count}
                   </span>

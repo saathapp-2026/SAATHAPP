@@ -73,11 +73,10 @@ export default function Step9_RiderEquipmentOnboarding({ onNext, onPrev }) {
                 <div
                   key={item.id}
                   onClick={() => toggleItem(item.name)}
-                  className={`cursor-pointer rounded-2xl border p-5 transition flex flex-col justify-between ${
-                    isSelected
+                  className={`cursor-pointer rounded-2xl border p-5 transition flex flex-col justify-between ${isSelected
                       ? 'border-amber-500 bg-amber-500/10 text-slate-900 dark:text-white shadow-md ring-2 ring-amber-500/30'
                       : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-slate-300'
-                  }`}
+                    }`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-3">
@@ -85,9 +84,8 @@ export default function Step9_RiderEquipmentOnboarding({ onNext, onPrev }) {
                         <Icon size={20} />
                       </div>
                       <div
-                        className={`h-5 w-5 rounded-full flex items-center justify-center text-xs font-bold transition ${
-                          isSelected ? 'bg-amber-500 text-slate-950 font-black' : 'border border-slate-300 dark:border-slate-700'
-                        }`}
+                        className={`h-5 w-5 rounded-full flex items-center justify-center text-xs font-bold transition ${isSelected ? 'bg-amber-500 text-slate-950 font-black' : 'border border-slate-300 dark:border-slate-700'
+                          }`}
                       >
                         {isSelected && <Check size={12} strokeWidth={3} />}
                       </div>

@@ -9,7 +9,7 @@ export const VERIFICATION_STAGES = [
   { id: 'GST Verification', title: 'GSTIN Verification', desc: 'Active GST registration verified with GST portal.' },
   { id: 'Business Verification', title: 'Business Profile Audit', desc: 'Company details and business category audited.' },
   { id: 'Warehouse Verification', title: 'Warehouse Location Check', desc: 'Fulfillment address and storage space verified.' },
-  { id: 'Bank Verification', title: 'Bank Account & Penny Drop', desc: 'Penny drop test successful on HDFC account.' },
+  { id: 'Bank Verification', title: 'Bank Account & Penny Drop', desc: 'Penny drop test verification on registered account.' },
   { id: 'Approved', title: 'Wholesale Partner Approved', desc: 'Account activated! Wholesale dashboard unlocked.' },
 ];
 
@@ -45,7 +45,7 @@ export default function Step14_VerificationStatus({ onGoToDashboard }) {
               Wholesaler Application Tracker
             </h2>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400 font-medium">
-              Ref ID: <strong className="font-mono text-emerald-600 dark:text-emerald-400">SAATH-WHL-2026-8492</strong> • Verification Timeline: <strong className="text-white">3–30 Business Days</strong>
+              Ref ID: <strong className="font-mono text-emerald-600 dark:text-emerald-400">{formData.applicationId || 'SAATH-WHL-PENDING'}</strong> • Verification Timeline: <strong className="text-white">3–30 Business Days</strong>
             </p>
           </div>
 

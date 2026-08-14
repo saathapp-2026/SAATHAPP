@@ -85,24 +85,24 @@ export default function DeliveryAgentLandingPage() {
     <div className="min-h-screen bg-slate-50 text-slate-800">
       <Header
         cartCount={0}
-        onCartClick={() => {}}
+        onCartClick={() => { }}
         location="Bhatahar, Nalanda"
-        onLocationClick={() => {}}
-        onSearch={() => {}}
-        onLogin={() => {}}
-        onSignup={() => {}}
-        onProfile={() => {}}
+        onLocationClick={() => { }}
+        onSearch={() => { }}
+        onLogin={() => { }}
+        onSignup={() => { }}
+        onProfile={() => { }}
         user={null}
         isAuthenticated={false}
-        onCartPage={() => {}}
-        onOrdersPage={() => {}}
-        onWishlistPage={() => {}}
-        onSettingsPage={() => {}}
-        onLogout={() => {}}
+        onCartPage={() => { }}
+        onOrdersPage={() => { }}
+        onWishlistPage={() => { }}
+        onSettingsPage={() => { }}
+        onLogout={() => { }}
         darkMode={false}
-        toggleDarkMode={() => {}}
-        onVoiceSearchClick={() => {}}
-        onImageSearchClick={() => {}}
+        toggleDarkMode={() => { }}
+        onVoiceSearchClick={() => { }}
+        onImageSearchClick={() => { }}
       />
 
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">

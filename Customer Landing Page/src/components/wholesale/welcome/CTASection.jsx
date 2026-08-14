@@ -73,18 +73,16 @@ export default function CTASection({ onStartRegistration }) {
                 </div>
                 <div className="flex items-center gap-2.5 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-800/50 px-4 py-3">
                   <Phone size={16} className="text-[#0A8F3D] shrink-0" />
-                  <span className="font-semibold text-slate-700 dark:text-slate-300">+91 9128842027</span>
+                  <span className="font-semibold text-slate-700 dark:text-slate-300">+91 1800-SAATHAPP</span>
                 </div>
               </div>
             </div>
 
-            <div className="relative min-h-[280px] lg:min-h-full">
-              <img
-                src={WarehouseCtaImg}
-                alt="SaathApp wholesale warehouse and logistics network"
-                className="absolute inset-0 h-full w-full object-cover"
-                loading="lazy"
-              />
+            <div className="relative min-h-[280px] lg:min-h-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center p-8 text-center">
+              <div className="flex flex-col items-center gap-2 text-slate-400">
+                <Building2 size={36} className="text-emerald-500/60" />
+                <span className="text-xs font-semibold">Wholesale Logistics Network</span>
+              </div>
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white via-white/20 to-transparent dark:from-slate-900 dark:via-slate-900/40" />
             </div>
           </div>

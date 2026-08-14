@@ -25,17 +25,17 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
 
   // Withdraw Flow States (PDF Pages 28-30)
   const [withdrawStep, setWithdrawStep] = useState(1); // 1: Form, 2: OTP, 3: Processing, 4: Success
-  const [selectedBank, setSelectedBank] = useState('HDFC XXXX1234');
-  const [withdrawAmount, setWithdrawAmount] = useState('50000');
+  const [selectedBank, setSelectedBank] = useState('Primary Linked Account');
+  const [withdrawAmount, setWithdrawAmount] = useState('0');
   const [settlementType, setSettlementType] = useState('Instant');
-  const [withdrawRemarks, setWithdrawRemarks] = useState('Monthly seller payout request');
+  const [withdrawRemarks, setWithdrawRemarks] = useState('');
   const [otpValue, setOtpValue] = useState('');
 
   // GST Report Modal States (PDF Pages 32-35)
   const [gstReportType, setGstReportType] = useState('GSTR-1');
   const [gstDateRange, setGstDateRange] = useState('This Month');
   const [gstFormat, setGstFormat] = useState('pdf'); // pdf, excel, csv, zip, json
-  const [gstFileName, setGstFileName] = useState('GST_Report_Aug_2026');
+  const [gstFileName, setGstFileName] = useState('GST_Report');
   const [gstConfig, setGstConfig] = useState({
     summary: true,
     invoiceList: true,
@@ -49,14 +49,8 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
   // Filter & Transaction History States (PDF Page 31 & 36)
   const [activeFinanceTab, setActiveFinanceTab] = useState('Overview');
   const [txnFilter, setTxnFilter] = useState('All'); // All, Credits, Debits, Withdrawals, Refunds, Escrow, Failed, Pending
-  const [dateFilter, setDateFilter] = useState('01 Aug - 31 Aug 2026');
-  const [transactions, setTransactions] = useState([
-    { txn: 'TXN-90412', desc: 'Escrow Release for ORD-9842', channel: 'HDFC Bank', type: 'Credit', amt: '+₹1,25,000', date: 'Today, 10:30 AM', status: 'Completed' },
-    { txn: 'TXN-90411', desc: 'Bank Withdrawal to HDFC Account', channel: 'HDFC XXXX1234', type: 'Withdrawal', amt: '-₹2,00,000', date: 'Yesterday, 04:00 PM', status: 'Completed' },
-    { txn: 'TXN-90410', desc: 'Escrow Release for ORD-9836', channel: 'Escrow Wallet', type: 'Credit', amt: '+₹62,000', date: '01 Aug 2026', status: 'Completed' },
-    { txn: 'TXN-90409', desc: 'Refund for Return ORD-9821', channel: 'Buyer Refund', type: 'Refund', amt: '-₹18,500', date: '31 Jul 2026', status: 'Completed' },
-    { txn: 'TXN-90408', desc: 'GST Payment - July 2026', channel: 'Govt GST Portal', type: 'Debit', amt: '-₹8,450', date: '31 Jul 2026', status: 'Completed' },
-  ]);
+  const [dateFilter, setDateFilter] = useState('Current Period');
+  const [transactions, setTransactions] = useState([]);
 
   const modalWithdrawOpen = Boolean(externalWithdrawOpen || isWithdrawModalOpen);
 
@@ -74,8 +68,8 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
       addToast?.('Please enter a valid withdrawal amount', 'error');
       return;
     }
-    if (numAmt > 850000) {
-      addToast?.('Withdrawal amount exceeds withdrawable balance of ₹8,50,000', 'error');
+    if (numAmt > (dashboardData?.kpis?.walletBalance || 0)) {
+      addToast?.('Withdrawal amount exceeds available wallet balance', 'error');
       return;
     }
     setWithdrawStep(2);
@@ -109,7 +103,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
 
   // ROBUST REPORT DOWNLOAD ENGINE (FIXES CORRUPTED FILE ERRORS FOR PDF, EXCEL, CSV, JSON, ZIP)
   const handleDownloadGstReport = () => {
-    const seller = formData?.businessName || "SaathApp Wholesale & Distribution Pvt Ltd";
+    const seller = formData?.businessName || "Wholesale Partner";
     const dateStr = new Date().toLocaleDateString('en-IN');
 
     if (gstFormat === 'csv' || gstFormat === 'excel') {
@@ -117,19 +111,15 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
       csv += `=======================================================\r\n`;
       csv += `SAATHAPP WHOLESALE GST TAX REPORT (${gstReportType})\r\n`;
       csv += `Seller: ${seller} | Date Range: ${gstDateRange} | Generated: ${dateStr}\r\n`;
-      csv += `GSTIN: 07AAACS1234F1Z5 | PAN: AAACS1234F\r\n`;
+      csv += `GSTIN: ${formData?.gstin || 'Not added yet'} | PAN: ${formData?.pan || 'Not added yet'}\r\n`;
       csv += `=======================================================\r\n\r\n`;
 
       csv += `Invoice No,Order Ref,Buyer Enterprise,Taxable Value,CGST (9%),SGST (9%),IGST (18%),Total Invoice Value\r\n`;
-      csv += `INV-2026-8841,ORD-9842,Ramesh Supermarket,₹125000,₹11250,₹11250,₹0,₹147500\r\n`;
-      csv += `INV-2026-8840,ORD-9841,Shree Traders,₹95000,₹8550,₹8550,₹0,₹112100\r\n`;
-      csv += `INV-2026-8839,ORD-9840,GreenMart Store,₹78500,₹7065,₹7065,₹0,₹92630\r\n`;
-      csv += `INV-2026-8838,ORD-9839,Apna General Hub,₹45000,₹0,₹0,₹8100,₹53100\r\n`;
-      csv += `INV-2026-8837,ORD-9838,Kumar Enterprises,₹110000,₹9900,₹9900,₹0,₹129800\r\n\r\n`;
+      csv += `—, —, No recorded transactions, ₹0, ₹0, ₹0, ₹0, ₹0\r\n\r\n`;
 
       csv += `=== GST TAX SUMMARY ===\r\n`;
       csv += `Tax Type,Taxable Value,CGST,SGST,IGST,Grand Total\r\n`;
-      csv += `Outward B2B Supplies,₹453500,₹36765,₹36765,₹8100,₹535130\r\n`;
+      csv += `Outward B2B Supplies,₹0,₹0,₹0,₹0,₹0\r\n`;
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
@@ -246,18 +236,14 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
             </tr>
           </thead>
           <tbody>
-            <tr><td>INV-2026-8841</td><td>ORD-9842</td><td>Ramesh Supermarket</td><td class="text-right">₹1,25,000</td><td class="text-right">₹11,250</td><td class="text-right">₹11,250</td><td class="text-right">₹0</td><td class="text-right">₹1,47,500</td></tr>
-            <tr><td>INV-2026-8840</td><td>ORD-9841</td><td>Shree Traders</td><td class="text-right">₹95,000</td><td class="text-right">₹8,550</td><td class="text-right">₹8,550</td><td class="text-right">₹0</td><td class="text-right">₹1,12,100</td></tr>
-            <tr><td>INV-2026-8839</td><td>ORD-9840</td><td>GreenMart Store</td><td class="text-right">₹78,500</td><td class="text-right">₹7,065</td><td class="text-right">₹7,065</td><td class="text-right">₹0</td><td class="text-right">₹92,630</td></tr>
-            <tr><td>INV-2026-8838</td><td>ORD-9839</td><td>Apna General Hub</td><td class="text-right">₹45,000</td><td class="text-right">₹0</td><td class="text-right">₹0</td><td class="text-right">₹8,100</td><td class="text-right">₹53,100</td></tr>
-            <tr><td>INV-2026-8837</td><td>ORD-9838</td><td>Kumar Enterprises</td><td class="text-right">₹1,10,000</td><td class="text-right">₹9,900</td><td class="text-right">₹9,900</td><td class="text-right">₹0</td><td class="text-right">₹1,29,800</td></tr>
+            <tr><td colspan="3">No recorded transactions</td><td class="text-right">₹0</td><td class="text-right">₹0</td><td class="text-right">₹0</td><td class="text-right">₹0</td><td class="text-right">₹0</td></tr>
             <tr class="total-row">
               <td colspan="3">Grand Total Summary</td>
-              <td class="text-right">₹4,53,500</td>
-              <td class="text-right">₹36,765</td>
-              <td class="text-right">₹36,765</td>
-              <td class="text-right">₹8,100</td>
-              <td class="text-right" style="color:#00986C;">₹5,35,130</td>
+              <td class="text-right">₹0</td>
+              <td class="text-right">₹0</td>
+              <td class="text-right">₹0</td>
+              <td class="text-right">₹0</td>
+              <td class="text-right" style="color:#00986C;">₹0</td>
             </tr>
           </tbody>
         </table>
@@ -568,11 +554,10 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
               else if (tab === 'Settlements' || tab === 'Payout History') setTxnFilter('Withdrawals');
               addToast?.(`Switching to ${tab} view`, 'info');
             }}
-            className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
-              activeFinanceTab === tab
+            className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${activeFinanceTab === tab
                 ? 'bg-emerald-600 text-white shadow-md font-black'
                 : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
-            }`}
+              }`}
           >
             {tab}
           </button>
@@ -586,18 +571,18 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="p-5 rounded-3xl bg-slate-900 text-white border border-slate-800 shadow-sm space-y-1">
               <span className="text-xs text-emerald-400 font-bold uppercase">Available Withdrawable Balance</span>
-              <strong className="text-3xl font-black block font-mono text-emerald-400">₹8,50,000</strong>
+              <strong className="text-3xl font-black block font-mono text-emerald-400">₹0</strong>
               <span className="text-[10px] text-slate-400">T+1 Daily Auto Settlement</span>
             </div>
             <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
               <span className="text-xs text-amber-500 font-bold uppercase">Escrow Held in Transit</span>
-              <strong className="text-3xl font-black text-amber-500 block font-mono">₹25,000</strong>
+              <strong className="text-3xl font-black text-amber-500 block font-mono">₹0</strong>
               <span className="text-[10px] text-slate-400">Awaiting buyer delivery confirmation</span>
             </div>
             <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
               <span className="text-xs text-blue-500 font-bold uppercase">Lifetime Net Payouts</span>
-              <strong className="text-3xl font-black text-slate-900 dark:text-white block font-mono">₹48,20,000</strong>
-              <span className="text-[10px] text-slate-400">Transferred to HDFC Bank</span>
+              <strong className="text-3xl font-black text-slate-900 dark:text-white block font-mono">₹0</strong>
+              <span className="text-[10px] text-slate-400">Transferred to Linked Account</span>
             </div>
             <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1 flex flex-col justify-between">
               <span className="text-xs text-slate-400 font-bold uppercase">Instant Payout Action</span>
@@ -627,10 +612,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold">
-                {[
-                  { ref: 'ESC-9941', ord: 'ORD-9841', buyer: 'Shree Traders', amt: '₹95,000', release: 'Today, 6:00 PM', status: 'Awaiting Delivery Ack' },
-                  { ref: 'ESC-9940', ord: 'ORD-9837', buyer: 'Metro Retail Mart', amt: '₹2,45,000', release: 'Tomorrow, 10:00 AM', status: 'In Transit Dispatch' },
-                ].map((item) => (
+                {[].map((item) => (
                   <tr key={item.ref}>
                     <td className="p-4 font-mono font-bold text-emerald-600 dark:text-emerald-400">{item.ref}</td>
                     <td className="p-4 font-mono font-bold">{item.ord}</td>
@@ -644,6 +626,11 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                 ))}
               </tbody>
             </table>
+            {[].length === 0 && (
+              <div className="p-8 text-center text-xs text-slate-400 font-medium">
+                No pending escrow payouts found.
+              </div>
+            )}
           </div>
         </div>
       ) : activeFinanceTab === 'Settlements' || activeFinanceTab === 'Payout History' ? (
@@ -662,10 +649,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold">
-                {[
-                  { utr: 'UTR-N084200192', mode: 'IMPS Instant', bank: 'HDFC XXXX1234', amt: '₹2,00,000', date: '01 Aug 2026, 04:00 PM', status: 'Success' },
-                  { utr: 'UTR-N084200185', mode: 'NEFT T+1 Auto', bank: 'HDFC XXXX1234', amt: '₹3,50,000', date: '28 Jul 2026, 09:30 AM', status: 'Success' },
-                ].map((s) => (
+                {[].map((s) => (
                   <tr key={s.utr}>
                     <td className="p-4 font-mono font-bold text-emerald-600 dark:text-emerald-400">{s.utr}</td>
                     <td className="p-4 text-emerald-500 font-bold">{s.mode}</td>
@@ -685,6 +669,11 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                 ))}
               </tbody>
             </table>
+            {[].length === 0 && (
+              <div className="p-8 text-center text-xs text-slate-400 font-medium">
+                No bank payout settlements recorded yet.
+              </div>
+            )}
           </div>
         </div>
       ) : (
@@ -703,7 +692,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                 </div>
 
                 <div className="mt-4">
-                  <strong className="text-4xl font-black font-mono tracking-tight text-white block">₹8,75,000</strong>
+                  <strong className="text-4xl font-black font-mono tracking-tight text-white block">₹{dashboardData.kpis.walletBalance.toLocaleString('en-IN')}</strong>
                   <span className="text-xs text-slate-400 font-semibold block mt-1">Available Wallet Balance</span>
                 </div>
               </div>
@@ -711,15 +700,15 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
               <div className="grid grid-cols-3 gap-2 pt-3 border-t border-slate-800/80 text-xs">
                 <div>
                   <span className="text-[10px] text-slate-400 font-bold block">Withdrawable</span>
-                  <strong className="text-emerald-400 font-mono font-black text-sm">₹8,50,000</strong>
+                  <strong className="text-emerald-400 font-mono font-black text-sm">₹0</strong>
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-400 font-bold block">Pending</span>
-                  <strong className="text-amber-400 font-mono font-black text-sm">₹25,000</strong>
+                  <strong className="text-amber-400 font-mono font-black text-sm">₹0</strong>
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-400 font-bold block">Last Payout</span>
-                  <strong className="text-slate-200 font-mono font-bold text-xs">02 Aug 2026</strong>
+                  <strong className="text-slate-200 font-mono font-bold text-xs">No payouts yet</strong>
                 </div>
               </div>
             </div>
@@ -728,24 +717,24 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-blue-900 border-2 border-red-600 flex items-center justify-center font-black text-white text-[11px] shadow-sm">
-                      HDFC
+                    <div className="w-8 h-8 rounded-lg bg-emerald-900/40 border border-emerald-500/30 flex items-center justify-center font-black text-[#00986C] text-[11px] shadow-sm">
+                      BANK
                     </div>
                     <div>
                       <h4 className="text-xs font-black text-slate-900 dark:text-white">Linked Payout Bank Account</h4>
                       <span className="text-[10px] text-slate-500 font-bold">Primary Transfer Account</span>
                     </div>
                   </div>
-                  <span className="bg-emerald-50 dark:bg-emerald-950/40 text-[#00986C] text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-500/30 flex items-center gap-1">
-                    <CheckCircle2 size={12} /> Penny Drop Verified
+                  <span className="bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-slate-200 dark:border-slate-700 flex items-center gap-1">
+                    Not Verified
                   </span>
                 </div>
 
                 <div className="space-y-1.5 text-xs font-semibold bg-slate-50 dark:bg-slate-950 p-3 rounded-2xl border border-slate-100 dark:border-slate-800">
-                  <div className="flex justify-between"><span className="text-slate-400">Bank Name:</span> <strong className="text-slate-900 dark:text-white">HDFC Bank Ltd</strong></div>
-                  <div className="flex justify-between"><span className="text-slate-400">Account No:</span> <strong className="text-slate-900 dark:text-white font-mono">5020 0049 1823 94</strong></div>
-                  <div className="flex justify-between"><span className="text-slate-400">IFSC Code:</span> <strong className="text-slate-900 dark:text-white font-mono">HDFC0000240</strong></div>
-                  <div className="flex justify-between"><span className="text-slate-400">Account Holder:</span> <strong className="text-slate-900 dark:text-white truncate max-w-[150px]">SaathApp Wholesale &amp; Distribution Pvt Ltd</strong></div>
+                  <div className="flex justify-between"><span className="text-slate-400">Bank Name:</span> <strong className="text-slate-900 dark:text-white">{formData.bankName || 'Not added yet'}</strong></div>
+                  <div className="flex justify-between"><span className="text-slate-400">Account No:</span> <strong className="text-slate-900 dark:text-white font-mono">{formData.accountNo || 'Not added yet'}</strong></div>
+                  <div className="flex justify-between"><span className="text-slate-400">IFSC Code:</span> <strong className="text-slate-900 dark:text-white font-mono">{formData.ifscCode || 'Not added yet'}</strong></div>
+                  <div className="flex justify-between"><span className="text-slate-400">Account Holder:</span> <strong className="text-slate-900 dark:text-white truncate max-w-[150px]">{formData.businessName || formData.fullName || 'Not added yet'}</strong></div>
                 </div>
               </div>
 
@@ -811,11 +800,10 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                     key={f}
                     type="button"
                     onClick={() => setTxnFilter(f)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${
-                      txnFilter === f
+                    className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${txnFilter === f
                         ? 'bg-emerald-600 text-white shadow'
                         : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
-                    }`}
+                      }`}
                   >
                     {f}
                   </button>
@@ -846,13 +834,12 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                         <td className="p-3 text-slate-500">{t.channel}</td>
                         <td className="p-3">
                           <span
-                            className={`px-2.5 py-0.5 rounded-full text-[10px] font-black ${
-                              t.type === 'Credit'
+                            className={`px-2.5 py-0.5 rounded-full text-[10px] font-black ${t.type === 'Credit'
                                 ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
                                 : t.type === 'Withdrawal'
-                                ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400'
-                                : 'bg-rose-500/10 text-rose-600 dark:text-rose-400'
-                            }`}
+                                  ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400'
+                                  : 'bg-rose-500/10 text-rose-600 dark:text-rose-400'
+                              }`}
                           >
                             {t.type}
                           </span>
@@ -870,6 +857,11 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                     ))}
                 </tbody>
               </table>
+              {transactions.length === 0 && (
+                <div className="p-8 text-center text-xs text-slate-400 font-medium">
+                  No transactions yet
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -889,17 +881,17 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
             {withdrawStep === 1 && (
               <form onSubmit={handleWithdrawSubmit} className="space-y-4">
                 <div className="grid grid-cols-3 gap-2 bg-slate-50 dark:bg-slate-950 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 text-center">
-                  <div><span className="text-[10px] text-slate-400 font-bold block uppercase">Available</span><strong className="text-slate-900 dark:text-white font-mono font-black">₹8,75,000</strong></div>
-                  <div><span className="text-[10px] text-slate-400 font-bold block uppercase">Withdrawable</span><strong className="text-[#00986C] font-mono font-black">₹8,50,000</strong></div>
-                  <div><span className="text-[10px] text-slate-400 font-bold block uppercase">Pending</span><strong className="text-amber-500 font-mono font-black">₹25,000</strong></div>
+                  <div><span className="text-[10px] text-slate-400 font-bold block uppercase">Available</span><strong className="text-slate-900 dark:text-white font-mono font-black">₹0</strong></div>
+                  <div><span className="text-[10px] text-slate-400 font-bold block uppercase">Withdrawable</span><strong className="text-[#00986C] font-mono font-black">₹0</strong></div>
+                  <div><span className="text-[10px] text-slate-400 font-bold block uppercase">Pending</span><strong className="text-amber-500 font-mono font-black">₹0</strong></div>
                 </div>
 
                 <div>
                   <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">Select Bank Account</label>
                   <select value={selectedBank} onChange={(e) => setSelectedBank(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white">
-                    <option value="HDFC XXXX1234">HDFC XXXX1234 (Primary Payout)</option>
-                    <option value="ICICI XXXX5588">ICICI XXXX5588</option>
-                    <option value="Axis XXXX8877">Axis XXXX8877</option>
+                    <option value="Primary Account">{formData.bankName || 'Registered Account'} (Primary Payout)</option>
+                    <option value="Secondary Account">Secondary Bank Account</option>
+                    <option value="Other Account">Other Account</option>
                   </select>
                 </div>
 

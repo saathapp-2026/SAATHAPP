@@ -18,10 +18,7 @@ export default function BuyersTab({ onSelectTab }) {
   const [selectedBuyerChat, setSelectedBuyerChat] = useState(null);
   const [selectedBuyerProfile, setSelectedBuyerProfile] = useState(null);
   const [chatMessage, setChatMessage] = useState('');
-  const [messages, setMessages] = useState([
-    { sender: 'buyer', text: 'Hi Rakesh, we want to place a bulk order of 200 tins of Fortune Oil next week. What is the best price tier?' },
-    { sender: 'you', text: 'Hello! For 200+ units we offer 18% off list price + free door delivery to your Gurgaon warehouse.' },
-  ]);
+  const [messages, setMessages] = useState([]);
 
   const handleSendChat = (e) => {
     e.preventDefault();
@@ -89,11 +86,7 @@ export default function BuyersTab({ onSelectTab }) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold">
-                {[
-                  { rfq: 'RFQ-8841', buyer: 'Ramesh Supermarket', category: 'Fortune Sunflower Oil 15L', qty: '100 Tins', target: '₹1,800/tin', date: 'Today' },
-                  { rfq: 'RFQ-8840', buyer: 'Shree Traders', category: 'Tata Salt 1kg Case', qty: '50 Cases', target: '₹600/case', date: 'Yesterday' },
-                  { rfq: 'RFQ-8839', buyer: 'Patna Wholesale Point', category: 'Cement 50kg PPC Bag', qty: '500 Bags', target: '₹330/bag', date: '02 Aug 2026' },
-                ].map((q) => (
+                {[].map((q) => (
                   <tr key={q.rfq}>
                     <td className="p-4 font-mono font-bold text-emerald-600 dark:text-emerald-400">{q.rfq}</td>
                     <td className="p-4 font-black">{q.buyer}</td>
@@ -114,6 +107,11 @@ export default function BuyersTab({ onSelectTab }) {
                 ))}
               </tbody>
             </table>
+            {[].length === 0 && (
+              <div className="p-8 text-center text-xs text-slate-400 font-medium">
+                No active buyer RFQs or price enquiries found.
+              </div>
+            )}
           </div>
         </div>
       ) : activeSubTab === 'Quotations' ? (
@@ -132,11 +130,7 @@ export default function BuyersTab({ onSelectTab }) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold">
-                {[
-                  { ref: 'Q-9841', buyer: 'Ramesh Supermarket', amount: '₹1,85,000', valid: '10 Aug 2026', status: 'Accepted by Buyer' },
-                  { ref: 'Q-9840', buyer: 'Metro Retail Mart', amount: '₹3,40,000', valid: '12 Aug 2026', status: 'Under Negotiation' },
-                  { ref: 'Q-9839', buyer: 'Apna General Hub', amount: '₹62,000', valid: '08 Aug 2026', status: 'Pending Buyer Confirmation' },
-                ].map((quote) => (
+                {[].map((quote) => (
                   <tr key={quote.ref}>
                     <td className="p-4 font-mono font-bold text-emerald-600 dark:text-emerald-400">{quote.ref}</td>
                     <td className="p-4 font-black">{quote.buyer}</td>
@@ -281,22 +275,22 @@ export default function BuyersTab({ onSelectTab }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
                 <span className="text-[10px] font-bold text-slate-400 uppercase block">Contact Person</span>
-                <strong className="text-slate-900 dark:text-white block font-extrabold">Rajesh Sharma (Procurement Mgr)</strong>
-                <span className="text-[11px] text-emerald-500 font-mono block font-bold">📞 +91 98765 43210</span>
-                <span className="text-[11px] text-slate-500 block">✉️ procurement@{selectedBuyerProfile.name.toLowerCase().replace(/\s+/g, '')}.com</span>
+                <strong className="text-slate-900 dark:text-white block font-extrabold">{selectedBuyerProfile.contactPerson || 'Authorized Representative'}</strong>
+                <span className="text-[11px] text-emerald-500 font-mono block font-bold">📞 {selectedBuyerProfile.phone || '—'}</span>
+                <span className="text-[11px] text-slate-500 block">✉️ {selectedBuyerProfile.email || '—'}</span>
               </div>
 
               <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
                 <span className="text-[10px] font-bold text-slate-400 uppercase block">GST &amp; Verification</span>
-                <strong className="text-slate-900 dark:text-white block font-mono font-extrabold">07AAACR9842F1Z9</strong>
+                <strong className="text-slate-900 dark:text-white block font-mono font-extrabold">{selectedBuyerProfile.gstin || '—'}</strong>
                 <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold block">✓ Verified Active GSTIN</span>
-                <span className="text-[11px] text-slate-500 block">Trade Credit: ₹5,00,000 Approved</span>
+                <span className="text-[11px] text-slate-500 block">Trade Credit: ₹0</span>
               </div>
             </div>
 
             <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
               <span className="text-[10px] font-bold text-slate-400 uppercase block">Registered Business Address</span>
-              <p className="text-slate-800 dark:text-slate-200 font-medium">Plot 42, Wholesale Commercial Complex, Main Road, {selectedBuyerProfile.city}, India</p>
+              <p className="text-slate-800 dark:text-slate-200 font-medium">{selectedBuyerProfile.address || selectedBuyerProfile.city || '—'}</p>
             </div>
 
             <div className="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-500/30 flex justify-between items-center text-xs">

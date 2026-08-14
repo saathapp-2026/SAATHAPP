@@ -160,11 +160,10 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
                     key={method.id}
                     type="button"
                     onClick={() => setSelectedMethod(method.id)}
-                    className={`w-full flex items-center justify-between p-3 rounded-xl border text-left font-bold transition ${
-                      selectedMethod === method.id
+                    className={`w-full flex items-center justify-between p-3 rounded-xl border text-left font-bold transition ${selectedMethod === method.id
                         ? 'border-amber-500 bg-amber-500/10 text-amber-600 dark:text-amber-400 ring-1 ring-amber-500'
                         : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center gap-2">
                       <method.icon size={16} />
@@ -186,11 +185,10 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
               <button
                 type="button"
                 onClick={handleOpenGateway}
-                className={`w-full flex items-center justify-center gap-2 rounded-2xl py-3.5 text-xs font-black transition shadow-lg ${
-                  isPaid
+                className={`w-full flex items-center justify-center gap-2 rounded-2xl py-3.5 text-xs font-black transition shadow-lg ${isPaid
                     ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-500/20'
                     : 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-amber-500/20 hover:scale-[1.02]'
-                }`}
+                  }`}
               >
                 {isPaid ? (
                   <>
@@ -221,11 +219,10 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
           <button
             type="button"
             onClick={handleProceedNext}
-            className={`inline-flex items-center gap-2 rounded-2xl px-8 py-3.5 text-sm font-extrabold text-white transition ${
-              isPaid
+            className={`inline-flex items-center gap-2 rounded-2xl px-8 py-3.5 text-sm font-extrabold text-white transition ${isPaid
                 ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-lg hover:scale-105'
                 : 'bg-slate-800 hover:bg-slate-700'
-            }`}
+              }`}
           >
             Next: Optional Equipment
             <ArrowRight size={16} />

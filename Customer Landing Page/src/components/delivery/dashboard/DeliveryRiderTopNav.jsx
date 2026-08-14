@@ -64,22 +64,22 @@ export default function DeliveryRiderTopNav({
         >
           <Power size={14} className={isOnline ? 'animate-pulse' : ''} />
           <span>{isOnline ? 'ONLINE (ON SHIFT)' : 'OFFLINE (ON BREAK)'}</span>
-          <span className="text-[10px] opacity-80 font-normal hidden sm:inline">• Since 09:15 AM (04h 25m)</span>
+          <span className="text-[10px] opacity-80 font-normal hidden sm:inline">• Since --:-- (0h 0m)</span>
         </button>
 
         {/* Telemetry Pills (Page 1 of PDF) */}
         <div className="hidden lg:flex items-center gap-3 text-xs font-semibold text-slate-600 dark:text-slate-400 border-l border-slate-200 dark:border-slate-800 pl-3">
           <div className="flex items-center gap-1">
             <MapPin size={14} className="text-amber-500" />
-            <span>Patna, Bihar</span>
+            <span>—</span>
           </div>
           <div className="flex items-center gap-1">
             <CloudSun size={14} className="text-amber-400" />
-            <span>28°C • Clear</span>
+            <span>—</span>
           </div>
           <div className="flex items-center gap-1">
             <Signal size={14} className="text-emerald-500" />
-            <span>GPS: Strong</span>
+            <span>GPS Active</span>
           </div>
           <div className="flex items-center gap-1">
             <span className="text-[10px] font-extrabold bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-700 dark:text-slate-300">4G</span>

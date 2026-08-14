@@ -99,11 +99,10 @@ export default function RiderIncentivesTab() {
                   e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
                   addToast?.(`Viewing ${tab.label}`, 'info');
                 }}
-                className={`flex items-center gap-2 px-3.5 py-2.5 rounded-2xl text-xs font-extrabold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
-                  isActive
+                className={`flex items-center gap-2 px-3.5 py-2.5 rounded-2xl text-xs font-extrabold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${isActive
                     ? 'bg-amber-500 text-slate-950 shadow-md font-black'
                     : 'bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800'
-                }`}
+                  }`}
               >
                 <Icon size={15} />
                 <span>{tab.label}</span>
@@ -132,70 +131,70 @@ export default function RiderIncentivesTab() {
             return true;
           })
           .map((item) => {
-          const pct = Math.min(100, Math.round((item.completed / item.target) * 100));
-          const isDone = item.completed >= item.target;
+            const pct = Math.min(100, Math.round((item.completed / item.target) * 100));
+            const isDone = item.completed >= item.target;
 
-          return (
-            <div
-              key={item.id}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-4 flex flex-col justify-between relative overflow-hidden group hover:border-amber-500/50 transition"
-            >
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
-                    {item.type}
+            return (
+              <div
+                key={item.id}
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-4 flex flex-col justify-between relative overflow-hidden group hover:border-amber-500/50 transition"
+              >
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                      {item.type}
+                    </span>
+                    <span className="text-[10px] font-black uppercase text-amber-500 font-mono bg-amber-500/10 px-2.5 py-1 rounded-full">
+                      {item.badge}
+                    </span>
+                  </div>
+
+                  <div>
+                    <h3 className="text-base font-black text-slate-900 dark:text-white group-hover:text-amber-400 transition">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 font-medium mt-0.5">{item.condition}</p>
+                  </div>
+
+                  {/* Reward Banner Logic Display (e.g. "Complete 20 deliveries → ₹500 Bonus") */}
+                  <div className="bg-gradient-to-r from-slate-900 to-slate-950 text-white rounded-2xl p-3.5 border border-slate-800 flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-xs font-bold">
+                      <Gift size={16} className="text-amber-400 shrink-0" />
+                      <span>Target Reward</span>
+                    </div>
+                    <strong className="text-lg font-black text-amber-400 font-mono">{item.reward}</strong>
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div className="space-y-1.5 pt-1">
+                    <div className="flex justify-between text-xs font-bold">
+                      <span className="text-slate-500">Progress ({item.completed} / {item.target})</span>
+                      <span className={isDone ? 'text-emerald-500 font-mono font-black' : 'text-amber-500 font-mono font-black'}>{pct}%</span>
+                    </div>
+                    <div className="h-3 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-slate-800">
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${isDone ? 'bg-emerald-500' : 'bg-gradient-to-r ' + item.color}`}
+                        style={{ width: `${pct}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center">
+                  <span className="text-[11px] font-semibold text-slate-500">
+                    {isDone ? '✓ Milestone Unlocked & Credited to Wallet' : `${item.target - item.completed} deliveries remaining to claim bonus`}
                   </span>
-                  <span className="text-[10px] font-black uppercase text-amber-500 font-mono bg-amber-500/10 px-2.5 py-1 rounded-full">
-                    {item.badge}
-                  </span>
-                </div>
-
-                <div>
-                  <h3 className="text-base font-black text-slate-900 dark:text-white group-hover:text-amber-400 transition">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-slate-500 font-medium mt-0.5">{item.condition}</p>
-                </div>
-
-                {/* Reward Banner Logic Display (e.g. "Complete 20 deliveries → ₹500 Bonus") */}
-                <div className="bg-gradient-to-r from-slate-900 to-slate-950 text-white rounded-2xl p-3.5 border border-slate-800 flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs font-bold">
-                    <Gift size={16} className="text-amber-400 shrink-0" />
-                    <span>Target Reward</span>
-                  </div>
-                  <strong className="text-lg font-black text-amber-400 font-mono">{item.reward}</strong>
-                </div>
-
-                {/* Progress Bar */}
-                <div className="space-y-1.5 pt-1">
-                  <div className="flex justify-between text-xs font-bold">
-                    <span className="text-slate-500">Progress ({item.completed} / {item.target})</span>
-                    <span className={isDone ? 'text-emerald-500 font-mono font-black' : 'text-amber-500 font-mono font-black'}>{pct}%</span>
-                  </div>
-                  <div className="h-3 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-slate-800">
-                    <div
-                      className={`h-full rounded-full transition-all duration-500 ${isDone ? 'bg-emerald-500' : 'bg-gradient-to-r ' + item.color}`}
-                      style={{ width: `${pct}%` }}
-                    />
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => addToast?.(`Claiming details for ${item.title}`, 'info')}
+                    className="px-3.5 py-1.5 rounded-xl bg-slate-900 dark:bg-slate-800 text-amber-400 font-black text-xs hover:bg-slate-800 transition cursor-pointer active:scale-95"
+                  >
+                    {isDone ? 'View Credit' : 'Track Status'}
+                  </button>
                 </div>
               </div>
-
-              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center">
-                <span className="text-[11px] font-semibold text-slate-500">
-                  {isDone ? '✓ Milestone Unlocked & Credited to Wallet' : `${item.target - item.completed} deliveries remaining to claim bonus`}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => addToast?.(`Claiming details for ${item.title}`, 'info')}
-                  className="px-3.5 py-1.5 rounded-xl bg-slate-900 dark:bg-slate-800 text-amber-400 font-black text-xs hover:bg-slate-800 transition cursor-pointer active:scale-95"
-                >
-                  {isDone ? 'View Credit' : 'Track Status'}
-                </button>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </div>
   );

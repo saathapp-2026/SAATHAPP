@@ -122,11 +122,10 @@ export default function Step11_SubscriptionPlans({ onNext, onPrev }) {
                 <div
                   key={plan.id}
                   onClick={() => updateFormData({ selectedPlan: plan.id })}
-                  className={`relative cursor-pointer rounded-2xl border p-5 transition flex flex-col justify-between ${
-                    isSelected
+                  className={`relative cursor-pointer rounded-2xl border p-5 transition flex flex-col justify-between ${isSelected
                       ? 'border-emerald-500 bg-emerald-500/10 dark:bg-emerald-950/30 text-slate-900 dark:text-white shadow-xl ring-2 ring-emerald-500'
                       : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-slate-300'
-                  }`}
+                    }`}
                 >
                   {plan.popular && (
                     <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-emerald-500 text-slate-950 px-3 py-0.5 text-[10px] font-black uppercase tracking-wider shadow">
@@ -156,11 +155,10 @@ export default function Step11_SubscriptionPlans({ onNext, onPrev }) {
                   <div className="mt-5 pt-3 border-t border-slate-200 dark:border-slate-800 text-center">
                     <button
                       type="button"
-                      className={`w-full rounded-xl py-2 text-xs font-extrabold transition ${
-                        isSelected
+                      className={`w-full rounded-xl py-2 text-xs font-extrabold transition ${isSelected
                           ? 'bg-emerald-600 text-white'
                           : 'bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200'
-                      }`}
+                        }`}
                     >
                       {isSelected ? 'Selected Plan' : 'Select Plan'}
                     </button>

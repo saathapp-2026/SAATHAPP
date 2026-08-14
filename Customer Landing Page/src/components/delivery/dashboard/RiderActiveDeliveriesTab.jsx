@@ -182,7 +182,7 @@ export default function RiderActiveDeliveriesTab() {
       {/* TOP RIDER STATUS BAR (Exact match to top row in user image) */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-3.5 sm:p-4 shadow-sm">
         <div className="flex items-center justify-between gap-3 flex-wrap">
-          
+
           {/* Left Status Indicators */}
           <div className="flex items-center gap-3 sm:gap-4 flex-wrap text-xs">
             {/* Shift Badge */}
@@ -399,9 +399,8 @@ export default function RiderActiveDeliveriesTab() {
                     }}
                     className="flex flex-col items-center gap-1 cursor-pointer group"
                   >
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center font-black transition ${
-                      s.done ? 'bg-amber-500 text-slate-950 shadow-md ring-2 ring-amber-500/30' : 'bg-slate-200 dark:bg-slate-800 text-slate-400'
-                    }`}>
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center font-black transition ${s.done ? 'bg-amber-500 text-slate-950 shadow-md ring-2 ring-amber-500/30' : 'bg-slate-200 dark:bg-slate-800 text-slate-400'
+                      }`}>
                       {s.done ? '✓' : s.step}
                     </div>
                     <span className={`text-[10px] leading-tight font-bold ${s.done ? 'text-amber-600 dark:text-amber-400' : 'text-slate-400'}`}>
@@ -826,14 +825,14 @@ export default function RiderActiveDeliveriesTab() {
               <span className="text-xs font-black uppercase text-slate-900 dark:text-white block">
                 TODAY'S EARNINGS BREAKUP
               </span>
-              <div className="space-y-1.5 text-xs font-semibold">
-                <div className="flex justify-between"><span className="text-slate-500">Base Fare</span><strong className="font-mono text-slate-900 dark:text-white">₹950</strong></div>
-                <div className="flex justify-between"><span className="text-slate-500">Incentive</span><strong className="font-mono text-emerald-500">₹300</strong></div>
-                <div className="flex justify-between"><span className="text-slate-500">Peak Bonus</span><strong className="font-mono text-amber-500">₹150</strong></div>
-                <div className="flex justify-between"><span className="text-slate-500">Fuel Allowance</span><strong className="font-mono text-blue-500">₹50</strong></div>
+              <div className="space-y-1 text-xs font-semibold">
+                <div className="flex justify-between"><span className="text-slate-500">Base Fare</span><strong className="font-mono text-slate-900 dark:text-white">₹0</strong></div>
+                <div className="flex justify-between"><span className="text-slate-500">Incentive</span><strong className="font-mono text-emerald-500">₹0</strong></div>
+                <div className="flex justify-between"><span className="text-slate-500">Peak Bonus</span><strong className="font-mono text-amber-500">₹0</strong></div>
+                <div className="flex justify-between"><span className="text-slate-500">Fuel Allowance</span><strong className="font-mono text-blue-500">₹0</strong></div>
                 <div className="flex justify-between pt-2 border-t border-slate-200 dark:border-slate-800 font-extrabold text-sm">
                   <span className="text-slate-900 dark:text-white">Total Earnings</span>
-                  <strong className="font-mono text-amber-500">₹1,450</strong>
+                  <strong className="font-mono text-amber-500">₹0</strong>
                 </div>
               </div>
             </div>
@@ -924,7 +923,7 @@ export default function RiderActiveDeliveriesTab() {
       {/* STICKY BOTTOM ACTION BAR (Positioned inside page area only, starting after sidebar) */}
       <div className="fixed bottom-0 left-0 md:left-64 right-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 p-2.5 sm:p-3 shadow-2xl">
         <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
-          
+
           {/* Button 1: Navigate */}
           <button
             type="button"
@@ -1168,11 +1167,10 @@ export default function RiderActiveDeliveriesTab() {
                   key={reason}
                   type="button"
                   onClick={() => setSelectedIssue(reason)}
-                  className={`p-2.5 rounded-xl border text-left cursor-pointer transition ${
-                    selectedIssue === reason
-                      ? 'bg-rose-500/10 border-rose-500 text-rose-500 font-bold'
-                      : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
-                  }`}
+                  className={`p-2.5 rounded-xl border text-left cursor-pointer transition ${selectedIssue === reason
+                    ? 'bg-rose-500/10 border-rose-500 text-rose-500 font-bold'
+                    : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
+                    }`}
                 >
                   {reason}
                 </button>

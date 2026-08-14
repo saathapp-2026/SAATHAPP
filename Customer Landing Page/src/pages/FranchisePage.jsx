@@ -150,19 +150,19 @@ FRANCHISE OPPORTUNITY OVERVIEW:
 - 24/7 Field Operations & Helpdesk Support
 
 PARTNERSHIP MODELS:
-1. SAATH Mart Franchise (Est. Investment: ₹2L - ₹10L | Space: 200 - 500 Sq.Ft.)
-2. SAATH Fresh Franchise (Est. Investment: ₹1.5L - ₹8L | Space: 250 - 400 Sq.Ft.)
-3. SAATH Electrical Franchise (Est. Investment: ₹2L - ₹12L | Space: 250 - 400 Sq.Ft.)
-4. SAATH Hardware Franchise (Est. Investment: ₹2L - ₹10L | Space: 300 - 500 Sq.Ft.)
-5. SAATH Agriculture Franchise (Est. Investment: ₹1L - ₹6L | Space: 250 - 400 Sq.Ft.)
-6. SAATH Warehouse Franchise (Est. Investment: ₹10L - ₹50L | Space: 2000 Sq.Ft.+)
-7. SAATH City Agent Franchise (Est. Investment: ₹50K - ₹2L | Office Space)
-8. SAATH District Agent Franchise (Est. Investment: ₹2L - ₹10L | Office Space)
-9. SAATH Farmers Center Franchise (Est. Investment: ₹1L - ₹5L | Space: 250 - 400 Sq.Ft.)
+1. SAATH Mart Franchise (Est. Investment: — | Space: 200 - 500 Sq.Ft.)
+2. SAATH Fresh Franchise (Est. Investment: — | Space: 250 - 400 Sq.Ft.)
+3. SAATH Electrical Franchise (Est. Investment: — | Space: 250 - 400 Sq.Ft.)
+4. SAATH Hardware Franchise (Est. Investment: — | Space: 300 - 500 Sq.Ft.)
+5. SAATH Agriculture Franchise (Est. Investment: — | Space: 250 - 400 Sq.Ft.)
+6. SAATH Warehouse Franchise (Est. Investment: — | Space: 2000 Sq.Ft.+)
+7. SAATH City Agent Franchise (Est. Investment: — | Office Space)
+8. SAATH District Agent Franchise (Est. Investment: — | Office Space)
+9. SAATH Farmers Center Franchise (Est. Investment: — | Space: 250 - 400 Sq.Ft.)
 
 CONTACT US:
-Corporate Office: Bhatahar, Tharthari, Nalanda, Bihar – 801307
-Helpline: +91 91288 42027 | Email: support@saathapp.in
+Corporate Office: SaathApp Corporate Hub
+Helpline: +91 1800-SAATHAPP | Email: support@saathapp.in
 Website: www.saathappnova.co.in
 ===========================================================`;
 
@@ -216,7 +216,7 @@ Website: www.saathappnova.co.in
       title: 'SAATH Mart Franchise',
       description: 'Local retail store operating under the SAATH brand for daily household needs.',
       tag: 'Retail Outlet',
-      investment: '₹2L - ₹10L',
+      investment: '—',
       space: '200 - 500 Sq.Ft.',
       services: ['Grocery', 'FMCG Products', 'Packaged Foods', 'Household Essentials'],
       benefits: ['SAATH Branding', 'Marketing Support', 'Inventory Assistance', 'App Integration'],
@@ -228,7 +228,7 @@ Website: www.saathappnova.co.in
       title: 'SAATH Fresh Franchise',
       description: 'Fresh fruits, vegetables, dairy, and farm products retail outlet.',
       tag: 'Retail Outlet',
-      investment: '₹1.5L - ₹8L',
+      investment: '—',
       space: '250 - 400 Sq.Ft.',
       services: ['Fresh Fruits & Veggies', 'Dairy Products', 'Farm Fresh Products', 'Seasonal Produce'],
       benefits: ['Farmer Network Access', 'Fresh Supply Chain', 'Daily Inventory Support', 'App Orders'],
@@ -240,7 +240,7 @@ Website: www.saathappnova.co.in
       title: 'SAATH Electrical Franchise',
       description: 'Electrical product and service center.',
       tag: 'Retail Outlet',
-      investment: '₹2L - ₹12L',
+      investment: '—',
       space: '250 - 400 Sq.Ft.',
       services: ['Electrical Items', 'Fans & Lights', 'Wiring Products', 'Electrical Services'],
       benefits: ['B2B Supply Support', 'Contractor Network', 'Online Orders'],
@@ -252,7 +252,7 @@ Website: www.saathappnova.co.in
       title: 'SAATH Hardware Franchise',
       description: 'Hardware and construction support center.',
       tag: 'Retail Outlet',
-      investment: '₹2L - ₹10L',
+      investment: '—',
       space: '300 - 500 Sq.Ft.',
       services: ['Hardware Products', 'Tools & Fasteners', 'Plumbing Materials', 'Construction Accessories'],
       benefits: ['Contractor Connections', 'Bulk Orders', 'App Integration'],
@@ -264,7 +264,7 @@ Website: www.saathappnova.co.in
       title: 'SAATH Agriculture Franchise',
       description: 'Agriculture support and farm-input center.',
       tag: 'Agri Hub',
-      investment: '₹1L - ₹6L',
+      investment: '—',
       space: '250 - 400 Sq.Ft.',
       services: ['Seeds & Fertilizers', 'Farm Tools', 'Irrigation Products', 'Agricultural Consultation'],
       benefits: ['Farmer Network Access', 'Seasonal Support', 'Direct Procurement Opportunities'],
@@ -276,7 +276,7 @@ Website: www.saathappnova.co.in
       title: 'SAATH Warehouse Franchise',
       description: 'Regional storage and distribution center.',
       tag: 'Logistics Hub',
-      investment: '₹10L - ₹50L',
+      investment: '—',
       space: '2000 Sq.Ft.+',
       services: ['Inventory Storage', 'Order Processing', 'Same-Day Delivery', 'Last Mile Fulfillment'],
       benefits: ['Multi-category Storage', 'Logistics Network', 'Inventory Management System'],
@@ -288,7 +288,7 @@ Website: www.saathappnova.co.in
       title: 'SAATH City Agent Franchise',
       description: 'City-level operations and partner management.',
       tag: 'Territory Agency',
-      investment: '₹50K - ₹2L',
+      investment: '—',
       space: 'Office Space',
       services: ['Seller Onboarding', 'Service Professional Onboarding', 'Delivery Partner Management', 'Customer Support'],
       benefits: ['Exclusive Territory Rights', 'Operational Commissions', 'Volume Incentives'],
@@ -300,7 +300,7 @@ Website: www.saathappnova.co.in
       title: 'SAATH District Agent Franchise',
       description: 'District-level operational management.',
       tag: 'Territory Agency',
-      investment: '₹2L - ₹10L',
+      investment: '—',
       space: 'Office Space',
       services: ['Manage City Agents', 'District Expansion', 'Franchise Monitoring', 'Business Development'],
       benefits: ['District Revenue Share', 'Corporate Lead Access', 'Regional Marketing Support'],
@@ -312,7 +312,7 @@ Website: www.saathappnova.co.in
       title: 'SAATH Farmers Center Franchise',
       description: 'Farmer support and procurement center.',
       tag: 'Agri Hub',
-      investment: '₹1L - ₹5L',
+      investment: '—',
       space: '250 - 400 Sq.Ft.',
       services: ['Farmer Registration', 'Produce Collection', 'Farm Support', 'Market Linkage'],
       benefits: ['Direct Farmer Network', 'Procurement Commissions', 'Rural Development Support'],
@@ -326,15 +326,15 @@ Website: www.saathappnova.co.in
 
   // Financial Calculator Metrics
   const calculatorData = {
-    'SAATH Mart Franchise': { capital: '₹2L - ₹10L', setupTime: '15 - 20 Days', roiRange: '12 - 18 Months', marginSplit: '15-20%', profitPotential: '₹2,10,000' },
-    'SAATH Fresh Franchise': { capital: '₹1.5L - ₹8L', setupTime: '10 - 15 Days', roiRange: '10 - 16 Months', marginSplit: '18-25%', profitPotential: '₹1,85,000' },
-    'SAATH Electrical Franchise': { capital: '₹2L - ₹12L', setupTime: '15 - 20 Days', roiRange: '12 - 18 Months', marginSplit: '15-22%', profitPotential: '₹2,40,000' },
-    'SAATH Hardware Franchise': { capital: '₹2L - ₹10L', setupTime: '15 - 20 Days', roiRange: '12 - 18 Months', marginSplit: '14-20%', profitPotential: '₹2,25,000' },
-    'SAATH Agriculture Franchise': { capital: '₹1L - ₹6L', setupTime: '10 - 15 Days', roiRange: '10 - 16 Months', marginSplit: '12-18%', profitPotential: '₹1,60,000' },
-    'SAATH Warehouse Franchise': { capital: '₹10L - ₹50L', setupTime: '30 - 45 Days', roiRange: '16 - 24 Months', marginSplit: '20-30%', profitPotential: '₹4,50,000' },
-    'SAATH City Agent Franchise': { capital: '₹50K - ₹2L', setupTime: '7 - 10 Days', roiRange: '6 - 12 Months', marginSplit: '10-15%', profitPotential: '₹1,20,000' },
-    'SAATH District Agent Franchise': { capital: '₹2L - ₹10L', setupTime: '15 - 25 Days', roiRange: '10 - 15 Months', marginSplit: '12-18%', profitPotential: '₹3,20,000' },
-    'SAATH Farmers Center Franchise': { capital: '₹1L - ₹5L', setupTime: '10 - 15 Days', roiRange: '8 - 14 Months', marginSplit: '10-16%', profitPotential: '₹1,40,000' }
+    'SAATH Mart Franchise': { capital: '—', setupTime: '—', roiRange: '—', marginSplit: 'Variable', profitPotential: '₹0' },
+    'SAATH Fresh Franchise': { capital: '—', setupTime: '—', roiRange: '—', marginSplit: 'Variable', profitPotential: '₹0' },
+    'SAATH Electrical Franchise': { capital: '—', setupTime: '—', roiRange: '—', marginSplit: 'Variable', profitPotential: '₹0' },
+    'SAATH Hardware Franchise': { capital: '—', setupTime: '—', roiRange: '—', marginSplit: 'Variable', profitPotential: '₹0' },
+    'SAATH Agriculture Franchise': { capital: '—', setupTime: '—', roiRange: '—', marginSplit: 'Variable', profitPotential: '₹0' },
+    'SAATH Warehouse Franchise': { capital: '—', setupTime: '—', roiRange: '—', marginSplit: 'Variable', profitPotential: '₹0' },
+    'SAATH City Agent Franchise': { capital: '—', setupTime: '—', roiRange: '—', marginSplit: 'Variable', profitPotential: '₹0' },
+    'SAATH District Agent Franchise': { capital: '—', setupTime: '—', roiRange: '—', marginSplit: 'Variable', profitPotential: '₹0' },
+    'SAATH Farmers Center Franchise': { capital: '—', setupTime: '—', roiRange: '—', marginSplit: 'Variable', profitPotential: '₹0' }
   };
 
   const selectedCalc = calculatorData[calculatorModel] || calculatorData['SAATH Mart Franchise'];
@@ -345,27 +345,27 @@ Website: www.saathappnova.co.in
       title: 'Nalanda & Suburbs: Local Launchpad',
       desc: 'Establish core operations center and pilot outlets. नालंदा serves as our central logistics base, validating local market workflows.',
       stats: [
-        { label: 'Saath Mart Outlets', val: '10+ Stores' },
-        { label: 'Onboarded Merchants', val: '200+ Kiranas' },
-        { label: 'Local Jobs Created', val: '50+ Saathi' }
+        { label: 'Saath Mart Outlets', val: '0 Stores' },
+        { label: 'Onboarded Merchants', val: '0 Kiranas' },
+        { label: 'Local Jobs Created', val: '0 Saathi' }
       ]
     },
     2: {
       title: 'Bihar Regional Expansion',
       desc: 'Expand territory footprint across Patna, Gaya, Muzaffarpur, and Bhagalpur districts connecting Tier 2 & Tier 3 logistics nodes.',
       stats: [
-        { label: 'Saath Mart Outlets', val: '50+ Stores' },
-        { label: 'Onboarded Merchants', val: '1,500+ Kiranas' },
-        { label: 'Local Jobs Created', val: '350+ Saathi' }
+        { label: 'Saath Mart Outlets', val: '0 Stores' },
+        { label: 'Onboarded Merchants', val: '0 Kiranas' },
+        { label: 'Local Jobs Created', val: '0 Saathi' }
       ]
     },
     3: {
       title: 'National Hyperlocal Grid',
       desc: 'Roll out full district agent model nationwide spanning Uttar Pradesh, Jharkhand, Madhya Pradesh, and Eastern India hub networks.',
       stats: [
-        { label: 'Saath Mart Outlets', val: '500+ Stores' },
-        { label: 'Onboarded Merchants', val: '20,000+ Kiranas' },
-        { label: 'Local Jobs Created', val: '5,000+ Saathi' }
+        { label: 'Saath Mart Outlets', val: '0 Stores' },
+        { label: 'Onboarded Merchants', val: '0 Kiranas' },
+        { label: 'Local Jobs Created', val: '0 Saathi' }
       ]
     }
   };
@@ -556,16 +556,10 @@ Website: www.saathappnova.co.in
           {/* Right Image / Hero Graphic */}
           <div className="lg:col-span-6 flex justify-center relative">
             <div className="absolute inset-0 bg-gradient-to-tr from-saath-green/10 to-transparent rounded-3xl filter blur-2xl pointer-events-none" />
-            <div className="relative border border-slate-200/60 dark:border-slate-800 bg-white/70 dark:bg-slate-800/70 p-3 sm:p-4 rounded-3xl shadow-2xl shadow-slate-300/40 dark:shadow-none max-w-full">
-              <img 
-                src="/images/franchise.jpg" 
-                alt="SaathApp Franchise Hyperlocal Ecosystem illustration"
-                className="rounded-2xl w-full h-auto object-cover max-w-lg lg:max-w-full hover:scale-[1.01] transition-transform duration-500 cursor-pointer"
-                onClick={handleDownloadBrochure}
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-              />
+            <div className="relative border border-slate-200/60 dark:border-slate-800 bg-slate-100 dark:bg-slate-800 p-8 rounded-3xl shadow-2xl shadow-slate-300/40 dark:shadow-none max-w-full w-full min-h-[320px] flex flex-col items-center justify-center text-center cursor-pointer group" onClick={handleDownloadBrochure}>
+              <Building2 size={48} className="text-saath-green mb-3 group-hover:scale-110 transition-transform" />
+              <h4 className="text-sm font-black text-slate-900 dark:text-white">SaathApp Franchise Network</h4>
+              <p className="text-xs text-slate-500 font-semibold mt-1">Hyperlocal Ecosystem & Territory Distribution</p>
             </div>
           </div>
         </div>
@@ -799,12 +793,12 @@ Website: www.saathappnova.co.in
                   </thead>
                   <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800 text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">
                     {[
-                      { name: 'SAATH Mart Franchise', cap: '₹2L - ₹10L', time: '15 - 20 Days', roi: '12 - 18 Months' },
-                      { name: 'SAATH Fresh Franchise', cap: '₹1.5L - ₹8L', time: '10 - 15 Days', roi: '10 - 16 Months' },
-                      { name: 'SAATH Electrical Franchise', cap: '₹2L - ₹12L', time: '15 - 20 Days', roi: '12 - 18 Months' },
-                      { name: 'SAATH Hardware Franchise', cap: '₹2L - ₹10L', time: '15 - 20 Days', roi: '12 - 18 Months' },
-                      { name: 'SAATH Agriculture Franchise', cap: '₹1L - ₹6L', time: '10 - 15 Days', roi: '10 - 16 Months' },
-                      { name: 'SAATH Warehouse Franchise', cap: '₹10L - ₹50L', time: '30 - 45 Days', roi: '16 - 24 Months' }
+                      { name: 'SAATH Mart Franchise', cap: '—', time: '—', roi: '—' },
+                      { name: 'SAATH Fresh Franchise', cap: '—', time: '—', roi: '—' },
+                      { name: 'SAATH Electrical Franchise', cap: '—', time: '—', roi: '—' },
+                      { name: 'SAATH Hardware Franchise', cap: '—', time: '—', roi: '—' },
+                      { name: 'SAATH Agriculture Franchise', cap: '—', time: '—', roi: '—' },
+                      { name: 'SAATH Warehouse Franchise', cap: '—', time: '—', roi: '—' }
                     ].map((row, i) => (
                       <tr 
                         key={i} 
@@ -1044,12 +1038,12 @@ Website: www.saathappnova.co.in
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 text-left">
             {[
-              { emoji: '🛒', name: 'Product Marketplace', margin: '3% - 15% Comm.', desc: 'Earn a transaction commission on all groceries, farm goods, hardware, and home supplies sold via the SaathApp network in your district.' },
-              { emoji: '⚡', name: 'Local Services', margin: '15% - 25% Share', desc: 'Retain booking fee splits from assignment of verified home professionals like plumbers, carpenters, technicians, and local medical assistants.' },
-              { emoji: '🛵', name: 'Delivery Operations', margin: '₹10 - ₹35 / Delivery', desc: 'Capture delivery base fare margins as your assigned delivery saathis process routing deliveries for regional stores and online orders.' },
-              { emoji: '📢', name: 'Local Advertising', margin: '50% Ad Split', desc: 'Promote local stores on the SaathApp app feed or run regional marketing banners. Retain regional advertising splits.' },
-              { emoji: '📈', name: 'Franchise Expansion', margin: 'Up to 20% Fee Share', desc: 'District Agents receive sub-licensing shares when local city agent franchises onboarding inside their territories finalize operations.' },
-              { emoji: '🤝', name: 'Business Partnerships', margin: 'B2B Margin Splits', desc: 'Secure bulk business distribution agreements (FPOs, farmer inputs, seeds supply, hardware orders) and collect operational commissions.' }
+              { emoji: '🛒', name: 'Product Marketplace', margin: 'Sales Commission', desc: 'Earn a transaction commission on all groceries, farm goods, hardware, and home supplies sold via the SaathApp network in your district.' },
+              { emoji: '⚡', name: 'Local Services', margin: 'Service Share', desc: 'Retain booking fee splits from assignment of verified home professionals like plumbers, carpenters, technicians, and local medical assistants.' },
+              { emoji: '🛵', name: 'Delivery Operations', margin: 'Delivery Share', desc: 'Capture delivery base fare margins as your assigned delivery saathis process routing deliveries for regional stores and online orders.' },
+              { emoji: '📢', name: 'Local Advertising', margin: 'Ad Revenue Share', desc: 'Promote local stores on the SaathApp app feed or run regional marketing banners. Retain regional advertising splits.' },
+              { emoji: '📈', name: 'Franchise Expansion', margin: 'Expansion Share', desc: 'District Agents receive sub-licensing shares when local city agent franchises onboarding inside their territories finalize operations.' },
+              { emoji: '🤝', name: 'Business Partnerships', margin: 'B2B Margins', desc: 'Secure bulk business distribution agreements (FPOs, farmer inputs, seeds supply, hardware orders) and collect operational commissions.' }
             ].map((rev, i) => (
               <div key={i} className="bg-saath-bg dark:bg-slate-800/40 p-6 sm:p-8 rounded-2xl border border-slate-100 dark:border-slate-800 space-y-4 flex flex-col justify-between">
                 <div className="space-y-3">
@@ -1356,8 +1350,8 @@ Website: www.saathappnova.co.in
                     </div>
                     <div>
                       <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider block">WhatsApp Business Help</span>
-                      <a href="https://wa.me/919128842027" target="_blank" rel="noopener noreferrer" className="text-base sm:text-lg font-black text-slate-900 dark:text-white hover:text-saath-green">
-                        +91 91288 42027
+                      <a href="https://wa.me/91180072284277" target="_blank" rel="noopener noreferrer" className="text-base sm:text-lg font-black text-slate-900 dark:text-white hover:text-saath-green">
+                        +91 1800-SAATHAPP
                       </a>
                     </div>
                   </div>
@@ -1416,7 +1410,7 @@ Website: www.saathappnova.co.in
                       type="tel" 
                       name="phone"
                       required
-                      placeholder="+91 98765 43210"
+                      placeholder="Enter 10-digit mobile number"
                       value={formData.phone}
                       onChange={handleFormChange}
                       className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
@@ -1433,7 +1427,7 @@ Website: www.saathappnova.co.in
                       type="email" 
                       name="email"
                       required
-                      placeholder="you@domain.com"
+                      placeholder="Enter email address"
                       value={formData.email}
                       onChange={handleFormChange}
                       className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
@@ -1732,7 +1726,7 @@ Website: www.saathappnova.co.in
                     <input 
                       type="tel"
                       required
-                      placeholder="+91 98765 43210"
+                      placeholder="Enter 10-digit mobile number"
                       value={scheduleData.phone}
                       onChange={(e) => setScheduleData(prev => ({ ...prev, phone: e.target.value }))}
                       className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"

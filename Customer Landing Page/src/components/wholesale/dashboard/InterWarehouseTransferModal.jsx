@@ -114,40 +114,37 @@ export const ALL_STATUS_NODES = [
 ];
 
 export const INITIAL_TRANSFER_STATE = {
-  transferId: 'TRN-2026-000231',
-  createdBy: 'Rakesh Kumar',
-  createdDate: '04 Aug 2026',
-  selectedProductId: 'PROD-1001',
-  fromWhCode: 'WH-DEL-01',
-  toWhCode: 'WH-MUM-02',
-  quantity: 50,
+  transferId: 'TRN-PENDING',
+  createdBy: '',
+  createdDate: '',
+  selectedProductId: '',
+  fromWhCode: '',
+  toWhCode: '',
+  quantity: 0,
   transferType: 'Stock Transfer',
-  transferDate: '2026-08-04',
-  expectedPickupDate: '2026-08-05',
-  expectedDeliveryDate: '2026-08-07',
+  transferDate: '',
+  expectedPickupDate: '',
+  expectedDeliveryDate: '',
   actualDeliveryDate: '',
   transportType: 'Partner Logistics',
-  vehicleNumber: 'MH-02-EQ-8891',
-  driverName: 'Suresh Kumar',
-  driverMobile: '+91 98765 43210',
-  trackingNumber: 'TRK-SAATH-88921',
+  vehicleNumber: '',
+  driverName: '',
+  driverMobile: '',
+  trackingNumber: '',
   courierName: 'SaathApp Cold Chain Express',
-  lrNumber: 'LR-99281-B2B',
-  shippingCost: 350,
-  insurance: 'Covered under HDFC ERGO Cargo Policy',
-  reason: 'Regular stock transfer for increased demand in Mumbai.',
-  attachments: [
-    { name: 'Transfer_Challan_TRN231.pdf', size: '1.2 MB', type: 'Challan' },
-    { name: 'Eway_Bill_992182.pdf', size: '840 KB', type: 'E-way Bill' },
-  ],
-  statusStepIndex: 5,
-  approvedBy: 'Auto Approved',
+  lrNumber: '',
+  shippingCost: 0,
+  insurance: '',
+  reason: '',
+  attachments: [],
+  statusStepIndex: 0,
+  approvedBy: 'Pending',
   receivedStatus: 'Pending',
 
-  managerApproved: true,
-  supervisorApproved: true,
-  warehouseApproved: true,
-  hqApproved: true,
+  managerApproved: false,
+  supervisorApproved: false,
+  warehouseApproved: false,
+  hqApproved: false,
 
   notifySeller: true,
   notifyManager: true,
@@ -162,34 +159,8 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
   const [activeSection, setActiveSection] = useState(1);
   const [formData, setFormData] = useState(INITIAL_TRANSFER_STATE);
 
-  const [historyList, setHistoryList] = useState([
-    {
-      id: 'TRN-2026-000190',
-      date: '2026-07-28',
-      from: 'Delhi NCR Hub',
-      to: 'Mumbai Express Depot',
-      qty: 100,
-      status: 'Completed',
-      approvedBy: 'Rakesh Kumar',
-      remarks: 'Stock rebalancing',
-    },
-    {
-      id: 'TRN-2026-000185',
-      date: '2026-07-20',
-      from: 'Bengaluru Tech Park Hub',
-      to: 'Hyderabad Distribution Center',
-      qty: 500,
-      status: 'Completed',
-      approvedBy: 'Anish Kumar',
-      remarks: 'Emergency demand order',
-    },
-  ]);
-
-  const [auditLog, setAuditLog] = useState([
-    { action: 'Transfer Created', user: 'Rakesh Kumar', role: 'Seller Admin', time: '2026-08-04 10:15:22', ip: '157.34.192.11' },
-    { action: 'Supervisor Approved', user: 'Vikram Mehta', role: 'Warehouse Manager', time: '2026-08-04 10:20:05', ip: '157.34.192.14' },
-    { action: 'Dispatch Picked Up', user: 'Suresh Kumar', role: 'Driver', time: '2026-08-04 10:45:00', ip: '157.34.192.88' },
-  ]);
+  const [historyList, setHistoryList] = useState([]);
+  const [auditLog, setAuditLog] = useState([]);
 
   if (!isOpen) return null;
 
@@ -321,11 +292,10 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
               key={tab.id}
               type="button"
               onClick={() => setActiveSection(tab.id)}
-              className={`py-3 px-4 border-b-2 font-extrabold transition flex items-center gap-1.5 ${
-                activeSection === tab.id
+              className={`py-3 px-4 border-b-2 font-extrabold transition flex items-center gap-1.5 ${activeSection === tab.id
                   ? 'border-emerald-600 text-emerald-600 dark:text-emerald-400 bg-white dark:bg-slate-900 rounded-t-2xl shadow-sm'
                   : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
-              }`}
+                }`}
             >
               <span>{tab.label}</span>
             </button>
@@ -701,7 +671,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                       type="text"
                       value={formData.driverMobile}
                       onChange={(e) => handleFieldChange('driverMobile', e.target.value)}
-                      placeholder="+91 98765 43210"
+                      placeholder="Enter 10-digit mobile number"
                       className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-mono"
                     />
                   </div>
@@ -969,13 +939,12 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                     return (
                       <div
                         key={nodeName}
-                        className={`p-2 rounded-xl border flex flex-col items-center justify-center space-y-1 transition ${
-                          isCurrent
+                        className={`p-2 rounded-xl border flex flex-col items-center justify-center space-y-1 transition ${isCurrent
                             ? 'bg-emerald-600 text-white border-emerald-500 font-extrabold shadow-md scale-105'
                             : isDone
-                            ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30'
-                            : 'bg-white dark:bg-slate-900 text-slate-400 border-slate-200 dark:border-slate-800'
-                        }`}
+                              ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30'
+                              : 'bg-white dark:bg-slate-900 text-slate-400 border-slate-200 dark:border-slate-800'
+                          }`}
                       >
                         <div className="w-4 h-4 rounded-full flex items-center justify-center font-black text-[9px] bg-slate-950/20">
                           {isDone ? '✓' : idx + 1}

@@ -35,26 +35,26 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
   const [profile, setProfile] = useState({
     businessName: formData.businessName || '',
     legalName: formData.businessName || '',
-    gstin: formData.gstin || '10AAACA12341Z5',
-    pan: 'AAACA1234A',
-    entityType: 'Private Limited Company',
-    registeredAddress: formData.warehouseAddress || 'Plot #84, Industrial Area, Phase-2, Patna - 800013, Bihar',
-    ownerName: formData.fullName || 'Rajesh Sharma',
-    ownerPhone: formData.phone || '+91 98350 11223',
-    altPhone: '+91 98123 45678',
-    email: formData.email || 'rajesh@apexwholesale.in',
-    website: 'https://apexwholesale.in',
-    bankName: 'HDFC Bank Ltd',
-    accountNo: '**** **** 8942',
-    ifscCode: 'HDFC0001234',
-    branch: 'Main Branch, Exhibition Road, Patna',
+    gstin: formData.gstin || '',
+    pan: formData.pan || '',
+    entityType: formData.businessType || 'Enterprise',
+    registeredAddress: formData.warehouseAddress || '',
+    ownerName: formData.fullName || '',
+    ownerPhone: formData.phone || '',
+    altPhone: '',
+    email: formData.email || '',
+    website: '',
+    bankName: formData.bankName || '',
+    accountNo: formData.accountNo || '',
+    ifscCode: formData.ifscCode || '',
+    branch: '',
     settlementCycle: 'T+1 Daily Auto Settlement',
-    warehouseCapacity: '25,000 Sq. Ft.',
-    moq: '₹5,000 Minimum Bulk Order',
-    rating: 4.8,
-    totalOrders: '1,420 Bulk Shipments',
-    activeDistricts: '12 Districts (Patna, Gaya, Muzaffarpur, Bhagalpur+)',
-    joinDate: '15 Jan 2024'
+    warehouseCapacity: '—',
+    moq: '—',
+    rating: 0,
+    totalOrders: '0 Shipments',
+    activeDistricts: '—',
+    joinDate: '—'
   });
 
   const handleConfirmLogout = () => {
@@ -135,8 +135,8 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
             {[
               { title: 'GSTIN Registration Verification', status: 'Verified 🟢', detail: 'Verified via Govt GST Portal' },
               { title: 'PAN Card Legal Identity', status: 'Verified 🟢', detail: 'Matches Enterprise Legal Entity' },
-              { title: 'Bank Account Penny Drop Audit', status: 'Verified 🟢', detail: 'HDFC Bank Account Verified' },
-              { title: 'Depot Physical Verification', status: 'Verified 🟢', detail: 'Patna Exhibition Road Hub Audited' },
+              { title: 'Bank Account Penny Drop Audit', status: 'Verified 🟢', detail: 'Registered Bank Account Verified' },
+              { title: 'Depot Physical Verification', status: 'Verified 🟢', detail: 'Warehouse Location Audited' },
             ].map((step, idx) => (
               <div key={idx} className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
                 <div className="flex justify-between items-center">

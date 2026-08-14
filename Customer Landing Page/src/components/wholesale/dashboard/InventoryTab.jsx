@@ -7,11 +7,7 @@ export default function InventoryTab() {
   const { formData, addToast } = useWholesale ? useWholesale() : { formData: {}, addToast: console.log };
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
 
-  const warehousesList = formData?.additionalWarehouses || [
-    { name: 'Delhi NCR Logistics Hub', city: 'Gurugram', area: '45,000 sq ft', manager: 'Rajesh Sharma' },
-    { name: 'Mumbai Express Depot', city: 'Mumbai', area: '32,000 sq ft', manager: 'Vikram Mehta' },
-    { name: 'Bengaluru Tech Park Hub', city: 'Bengaluru', area: '28,000 sq ft', manager: 'Anish Kumar' },
-  ];
+  const warehousesList = formData?.additionalWarehouses || [];
 
   return (
     <div className="space-y-6">
@@ -76,12 +72,7 @@ export default function InventoryTab() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
-              {[
-                { batch: 'BATCH-2026-08A', item: 'Fortune Sunflower Oil 15L', wh: 'Delhi NCR Hub', stock: 450, mfg: '2026-01-10', exp: '2027-01-10', status: 'Compliant' },
-                { batch: 'BATCH-2026-07F', item: 'Tata Salt 1kg Pack', wh: 'Delhi NCR Hub', stock: 18, mfg: '2026-02-01', exp: '2028-02-01', status: 'Low Stock' },
-                { batch: 'BATCH-2026-05K', item: 'Cement 50kg PPC Bag', wh: 'Kolkata East', stock: 1250, mfg: '2026-05-15', exp: '2026-11-15', status: 'Compliant' },
-                { batch: 'BATCH-2026-03M', item: 'Basmati Rice 25kg', wh: 'Mumbai Express', stock: 820, mfg: '2026-03-20', exp: '2027-03-20', status: 'Compliant' },
-              ].map((row, i) => (
+              {[].map((row, i) => (
                 <tr key={i} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
                   <td className="p-3 font-mono font-bold text-emerald-600 dark:text-emerald-400">{row.batch}</td>
                   <td className="p-3 font-extrabold text-slate-900 dark:text-white">{row.item}</td>

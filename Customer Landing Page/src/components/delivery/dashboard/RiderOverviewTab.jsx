@@ -14,44 +14,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
   const { formData, dashboardData, addToast } = useDelivery();
 
   // Active Order State matching PDF Pages 3-5
-  const [activeOrder, setActiveOrder] = useState({
-    id: 'DEL-98420',
-    type: 'Grocery & Medicine Delivery',
-    priority: 'HIGH PRIORITY',
-    pickupBeforeTime: '09:30 AM',
-    deliveryDeadline: '10:15 AM',
-    orderValue: 680,
-    codAmount: 120,
-    paymentMode: 'COD',
-    packageWeight: '3.2 kg',
-    itemsCount: 6,
-    distanceKm: '3.2 KM',
-    eta: '12 min',
-    storeName: 'SaathApp Express Hub',
-    storeAddress: 'Shop #12, Central Plaza, Patna - 800001',
-    storeManager: 'Rajesh Sharma',
-    storeMobile: '+91 98350 11223',
-    storeOtp: '8942',
-    pickupInstructions: 'Collect order parcel from Counter #3 behind main billing desk.',
-    parkingInstructions: 'Park two-wheeler in Basement Level 1, Gate #2 (Free Delivery Parking).',
-    customerName: 'Anil Kumar',
-    customerMobile: '+91 98234 56789',
-    customerAltMobile: '+91 98123 45678',
-    customerAvatar: '',
-    floorFlat: 'Floor 4, Flat 402, Royal Residence',
-    landmark: 'Near Boring Road Chauraha, Opposite SBI Bank',
-    deliveryNotes: 'Ring doorbell twice. Leave parcel with building security guard if gate is locked.',
-    dropAddress: 'Royal Residence, Boring Road, Patna - 800001',
-    deliveryPayout: 120,
-    itemsList: [
-      { name: 'Fresh Organic Milk (1L)', qty: '2 Pkts', weight: '1.0 kg' },
-      { name: 'Multigrain Whole Wheat Bread', qty: '1 Pkt', weight: '0.4 kg' },
-      { name: 'Paracetamol 650mg Tablets', qty: '1 Strip', weight: '0.1 kg' },
-      { name: 'Basmati Rice Premium (1kg)', qty: '1 Pkt', weight: '1.0 kg' },
-      { name: 'Fresh Farm Eggs (6 Pcs)', qty: '1 Tray', weight: '0.5 kg', fragile: true },
-      { name: 'Cold Press Fruit Juice', qty: '1 Bottle', weight: '0.2 kg', tempSensitive: true }
-    ]
-  });
+  const [activeOrder, setActiveOrder] = useState(null);
 
   // Workflow Step State (Page 5 PDF)
   const [currentWorkflowStep, setCurrentWorkflowStep] = useState(4);
@@ -140,13 +103,13 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                 <span className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full">
                   • ONLINE (ON SHIFT)
                 </span>
-                <span className="text-slate-400 text-xs font-mono">Shift: 09:15 AM – 09:15 PM</span>
+                <span className="text-slate-400 text-xs font-mono">Shift: --:-- – --:--</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-black text-white mt-0.5">
-                Welcome back, {formData.fullName || 'Vikram Singh'}!
+                Welcome back, {formData.fullName || 'Rider'}!
               </h2>
               <p className="text-xs text-slate-300">
-                Registered vehicle: <strong className="text-amber-400 font-mono">Motorcycle / Scooter (BR-01-AB-9842)</strong> • Active Zone: <strong className="text-emerald-400">Patna Central</strong>
+                Registered vehicle: <strong className="text-amber-400 font-mono">{formData.vehicleType || 'Not specified'} ({formData.vehicleNumber || '—'})</strong> • Active Zone: <strong className="text-emerald-400">{formData.city || '—'}</strong>
               </p>
             </div>
           </div>
@@ -158,11 +121,10 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                 setShiftStatus(shiftStatus === 'ON_BREAK' ? 'ACTIVE' : 'ON_BREAK');
                 addToast?.(shiftStatus === 'ON_BREAK' ? 'Shift Resumed!' : 'Break Started (15m timer)', 'info');
               }}
-              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition cursor-pointer active:scale-95 touch-manipulation select-none ${
-                shiftStatus === 'ON_BREAK'
-                  ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
-                  : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700'
-              }`}
+              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition cursor-pointer active:scale-95 touch-manipulation select-none ${shiftStatus === 'ON_BREAK'
+                ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700'
+                }`}
             >
               {shiftStatus === 'ON_BREAK' ? 'Resume Shift' : 'Pause / Start Break'}
             </button>
@@ -180,21 +142,21 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
               onClick={onOpenWithdrawModal || (() => onSelectTab?.('wallet'))}
               className="px-5 py-2 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-lg transition hover:scale-105 cursor-pointer active:scale-95 touch-manipulation flex items-center gap-1.5 select-none"
             >
-              <Wallet size={15} /> Withdraw Wallet ₹{dashboardData.kpis.walletBalance.toLocaleString('en-IN')}
+              <Wallet size={15} /> Withdraw Wallet ₹{(dashboardData?.kpis?.walletBalance || 0).toLocaleString('en-IN')}
             </button>
           </div>
         </div>
 
         {/* Telemetry Metrics Row (Page 2 PDF) */}
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 pt-3 border-t border-slate-800 text-[11px]">
-          <div onClick={() => addToast?.('Shift Start Time: 09:15 AM', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Shift Start</span><strong className="text-white font-mono">09:15 AM</strong></div>
-          <div onClick={() => addToast?.('Shift End Time: 09:15 PM', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Shift End</span><strong className="text-white font-mono">09:15 PM</strong></div>
-          <div onClick={() => addToast?.('Total Working Hours: 04h 25m', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Working Hours</span><strong className="text-emerald-400 font-mono">04h 25m</strong></div>
-          <div onClick={() => addToast?.('Break Time Used: 15m (15m remaining)', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Break Time</span><strong className="text-amber-400 font-mono">15m</strong></div>
-          <div onClick={() => addToast?.('Active Zone: Patna South (High Demand)', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Active Zone</span><strong className="text-white">Patna South</strong></div>
-          <div onClick={() => addToast?.('Assigned Hub: SaathApp Express Hub #12', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Assigned Hub</span><strong className="text-white truncate block max-w-[100px]">Express Hub #12</strong></div>
-          <div onClick={() => addToast?.('Fuel Status: 75% Good (Allowance ₹50/day)', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Fuel Status</span><strong className="text-emerald-400">75% Good</strong></div>
-          <div onClick={() => addToast?.('Vehicle Inspection: Passed & Certified', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Vehicle Health</span><strong className="text-emerald-400">Inspected</strong></div>
+          <div onClick={() => addToast?.('Shift Start Time: --:--', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Shift Start</span><strong className="text-white font-mono">--:--</strong></div>
+          <div onClick={() => addToast?.('Shift End Time: --:--', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Shift End</span><strong className="text-white font-mono">--:--</strong></div>
+          <div onClick={() => addToast?.('Total Working Hours: 0h 0m', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Working Hours</span><strong className="text-emerald-400 font-mono">0h 0m</strong></div>
+          <div onClick={() => addToast?.('Break Time Used: 0m', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Break Time</span><strong className="text-amber-400 font-mono">0m</strong></div>
+          <div onClick={() => addToast?.('Active Zone: —', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Active Zone</span><strong className="text-white">—</strong></div>
+          <div onClick={() => addToast?.('Assigned Hub: —', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Assigned Hub</span><strong className="text-white truncate block max-w-[100px]">—</strong></div>
+          <div onClick={() => addToast?.('Fuel Status: —', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Fuel Status</span><strong className="text-emerald-400">—</strong></div>
+          <div onClick={() => addToast?.('Vehicle Inspection: —', 'info')} className="cursor-pointer active:scale-95 transition hover:bg-slate-800/50 p-1 rounded-xl"><span className="text-slate-500 block">Vehicle Health</span><strong className="text-emerald-400">—</strong></div>
         </div>
       </div>
 
@@ -204,20 +166,20 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
       {/* ========================================================================= */}
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
         {[
-          { label: 'Pending Deliveries', val: '1 Order', color: 'text-amber-500', icon: Clock },
-          { label: 'Completed Today', val: '14 Orders', color: 'text-emerald-500', icon: CheckCircle2 },
+          { label: 'Pending Deliveries', val: `${dashboardData?.kpis?.pendingDeliveries || 0} Orders`, color: 'text-amber-500', icon: Clock },
+          { label: 'Completed Today', val: `${dashboardData?.kpis?.todayCompleted || 0} Orders`, color: 'text-emerald-500', icon: CheckCircle2 },
           { label: 'Cancelled Orders', val: '0', color: 'text-slate-400', icon: X },
-          { label: 'Earnings Today', val: '₹1,450', color: 'text-amber-500', icon: Wallet },
-          { label: 'Weekly Earnings', val: '₹8,900', color: 'text-emerald-500', icon: Wallet },
-          { label: 'Monthly Earnings', val: '₹38,450', color: 'text-purple-500', icon: Wallet },
-          { label: 'Distance Travelled', val: '128 KM', color: 'text-blue-500', icon: Navigation },
-          { label: 'Avg Delivery Time', val: '18 min', color: 'text-teal-500', icon: Clock },
-          { label: 'Customer Rating', val: '4.9 ★', color: 'text-amber-400', icon: Star },
-          { label: 'Bonus Earned', val: '₹350', color: 'text-emerald-500', icon: Award },
-          { label: 'Incentive Progress', val: '70%', color: 'text-emerald-500', icon: Zap },
-          { label: 'Fuel Allowance', val: '₹50', color: 'text-amber-500', icon: DollarSign },
-          { label: 'Cash Collection', val: '₹120', color: 'text-slate-700 dark:text-slate-300', icon: Wallet },
-          { label: 'COD Pending', val: '₹120', color: 'text-rose-500', icon: AlertCircle },
+          { label: 'Earnings Today', val: `₹${dashboardData?.kpis?.todayEarnings || 0}`, color: 'text-amber-500', icon: Wallet },
+          { label: 'Weekly Earnings', val: `₹${dashboardData?.kpis?.weeklyEarnings || 0}`, color: 'text-emerald-500', icon: Wallet },
+          { label: 'Monthly Earnings', val: `₹${dashboardData?.kpis?.monthlyEarnings || 0}`, color: 'text-purple-500', icon: Wallet },
+          { label: 'Distance Travelled', val: '0 KM', color: 'text-blue-500', icon: Navigation },
+          { label: 'Avg Delivery Time', val: '0 min', color: 'text-teal-500', icon: Clock },
+          { label: 'Customer Rating', val: `${dashboardData?.kpis?.riderRating || 0} ★`, color: 'text-amber-400', icon: Star },
+          { label: 'Bonus Earned', val: '₹0', color: 'text-emerald-500', icon: Award },
+          { label: 'Incentive Progress', val: '0%', color: 'text-emerald-500', icon: Zap },
+          { label: 'Fuel Allowance', val: '₹0', color: 'text-amber-500', icon: DollarSign },
+          { label: 'Cash Collection', val: '₹0', color: 'text-slate-700 dark:text-slate-300', icon: Wallet },
+          { label: 'COD Pending', val: '₹0', color: 'text-rose-500', icon: AlertCircle },
         ].map((kpi, idx) => (
           <div
             key={idx}
@@ -253,11 +215,10 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
               setShiftStatus(shiftStatus === 'OFFLINE' ? 'ACTIVE' : 'OFFLINE');
               addToast?.(shiftStatus === 'OFFLINE' ? 'Status set to ONLINE' : 'Status set to OFFLINE', 'info');
             }}
-            className={`p-3 rounded-2xl flex flex-col items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition text-center ${
-              shiftStatus === 'ACTIVE'
-                ? 'bg-emerald-500/15 text-emerald-500 border border-emerald-500/30'
-                : 'bg-slate-800 text-slate-300 border border-slate-700'
-            }`}
+            className={`p-3 rounded-2xl flex flex-col items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition text-center ${shiftStatus === 'ACTIVE'
+              ? 'bg-emerald-500/15 text-emerald-500 border border-emerald-500/30'
+              : 'bg-slate-800 text-slate-300 border border-slate-700'
+              }`}
           >
             <Power size={18} />
             <span className="text-[10px] leading-tight font-black">{shiftStatus === 'ACTIVE' ? 'Go Offline' : 'Go Online'}</span>
@@ -350,13 +311,12 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                         e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
                         addToast?.(`Workflow step set to Step ${s.step}: ${s.label}`, 'info');
                       }}
-                      className={`px-2.5 py-1 rounded-xl text-[10px] font-extrabold transition flex items-center gap-1 whitespace-nowrap cursor-pointer ${
-                        isActive
-                          ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
-                          : isDone
+                      className={`px-2.5 py-1 rounded-xl text-[10px] font-extrabold transition flex items-center gap-1 whitespace-nowrap cursor-pointer ${isActive
+                        ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
+                        : isDone
                           ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
                           : 'bg-slate-800 text-slate-400'
-                      }`}
+                        }`}
                     >
                       <span className="font-mono text-[9px]">{isDone ? '✓' : s.step}</span>
                       <span className="hidden sm:inline">{s.label}</span>
@@ -447,7 +407,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                     </span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">{activeOrder.storeAddress}</p>
-                  
+
                   <div className="flex items-center gap-3 text-xs pt-1 flex-wrap">
                     <span className="text-slate-700 dark:text-slate-300 font-bold">
                       👤 Contact: <strong className="text-slate-900 dark:text-white">{activeOrder.storeManager}</strong>
@@ -708,7 +668,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
           {/* Right Column (1 Col): Wallet Balance, Today's Earnings, Current Shift, Today's Incentive Progress */}
           <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xl space-y-4 h-fit">
             <div className="space-y-4">
-              
+
               {/* 1. WALLET BALANCE CARD (Shown on Page 1 Screenshot) */}
               <div className="p-4 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-slate-950 space-y-3 shadow-lg">
                 <div className="flex justify-between items-center">
@@ -743,11 +703,11 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                   </button>
                 </div>
                 <div className="space-y-1.5 text-xs font-semibold">
-                  <div className="flex justify-between"><span className="text-slate-500">Base Fare</span><strong className="font-mono text-slate-900 dark:text-white">₹950</strong></div>
-                  <div className="flex justify-between"><span className="text-slate-500">Incentive</span><strong className="font-mono text-emerald-500">₹300</strong></div>
-                  <div className="flex justify-between"><span className="text-slate-500">Peak Bonus</span><strong className="font-mono text-amber-500">₹150</strong></div>
-                  <div className="flex justify-between"><span className="text-slate-500">Fuel Allowance</span><strong className="font-mono text-blue-500">₹50</strong></div>
-                  <div className="flex justify-between pt-1 border-t border-slate-200 dark:border-slate-800 font-extrabold text-sm"><span className="text-slate-900 dark:text-white">Total Earnings</span><strong className="font-mono text-amber-500">₹1,450</strong></div>
+                  <div className="flex justify-between"><span className="text-slate-500">Base Fare</span><strong className="font-mono text-slate-900 dark:text-white">₹0</strong></div>
+                  <div className="flex justify-between"><span className="text-slate-500">Incentive</span><strong className="font-mono text-emerald-500">₹0</strong></div>
+                  <div className="flex justify-between"><span className="text-slate-500">Peak Bonus</span><strong className="font-mono text-amber-500">₹0</strong></div>
+                  <div className="flex justify-between"><span className="text-slate-500">Fuel Allowance</span><strong className="font-mono text-blue-500">₹0</strong></div>
+                  <div className="flex justify-between pt-1 border-t border-slate-200 dark:border-slate-800 font-extrabold text-sm"><span className="text-slate-900 dark:text-white">Total Earnings</span><strong className="font-mono text-amber-500">₹0</strong></div>
                 </div>
               </div>
 
@@ -895,50 +855,11 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
           <button
             type="button"
             onClick={() => {
-              setActiveOrder({
-                id: 'DEL-98421',
-                type: 'Express Medicine & Grocery',
-                priority: 'HIGH PRIORITY',
-                pickupBeforeTime: '10:00 AM',
-                deliveryDeadline: '10:45 AM',
-                orderValue: 850,
-                codAmount: 250,
-                paymentMode: 'COD',
-                packageWeight: '2.5 kg',
-                itemsCount: 4,
-                distanceKm: '2.8 KM',
-                eta: '10 min',
-                storeName: 'SaathApp Express Hub #12',
-                storeAddress: 'Shop #12, Central Plaza, Patna - 800001',
-                storeManager: 'Rajesh Sharma',
-                storeMobile: '+91 98350 11223',
-                storeOtp: '8942',
-                pickupInstructions: 'Collect order parcel from Counter #3 behind main billing desk.',
-                parkingInstructions: 'Park two-wheeler in Basement Level 1, Gate #2 (Free Delivery Parking).',
-                customerName: 'Anil Kumar',
-                customerMobile: '+91 98234 56789',
-                customerAltMobile: '+91 98123 45678',
-                customerAvatar: '',
-                floorFlat: 'Floor 4, Flat 402, Royal Residence',
-                landmark: 'Near Boring Road Chauraha, Opposite SBI Bank',
-                deliveryNotes: 'Ring doorbell twice. Leave parcel with building security guard if gate is locked.',
-                dropAddress: 'Royal Residence, Boring Road, Patna - 800001',
-                deliveryPayout: 140,
-                itemsList: [
-                  { name: 'Fresh Organic Milk (1L)', qty: '2 Pkts', weight: '1.0 kg' },
-                  { name: 'Multigrain Whole Wheat Bread', qty: '1 Pkt', weight: '0.4 kg' },
-                  { name: 'Paracetamol 650mg Tablets', qty: '1 Strip', weight: '0.1 kg' },
-                  { name: 'Basmati Rice Premium (1kg)', qty: '1 Pkt', weight: '1.0 kg' }
-                ]
-              });
-              setIsOtpVerified(false);
-              setOtpValue(['4', '8', '2', '0']);
-              setCurrentWorkflowStep(4);
-              addToast?.('⚡ New Dispatch Order DEL-98421 Accepted!', 'success');
+              addToast?.('No new dispatch orders available at this moment. Stay online to receive incoming requests.', 'info');
             }}
             className="px-6 py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-lg cursor-pointer active:scale-95 transition touch-manipulation select-none"
           >
-            ⚡ Accept New Express Dispatch Order
+            ⚡ Check For New Dispatch Orders
           </button>
         </div>
       )}
@@ -1138,9 +1059,9 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
               ✓
             </div>
             <h3 className="text-xl font-black text-slate-900 dark:text-white">Delivery Completed!</h3>
-            <p className="text-slate-500">Order DEL-98420 has been verified &amp; delivered successfully.</p>
+            <p className="text-slate-500">Order has been verified &amp; delivered successfully.</p>
             <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-2xl border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-black text-base font-mono">
-              + ₹120 Added to Wallet
+              + ₹0 Added to Wallet
             </div>
             <button
               type="button"
@@ -1214,11 +1135,10 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
             <div className="space-y-2 max-h-60 overflow-y-auto p-3 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800">
               {chatDetails.messages.map((m, idx) => (
                 <div key={idx} className={`flex flex-col ${m.sender === 'You' ? 'items-end' : 'items-start'}`}>
-                  <div className={`p-2.5 rounded-2xl max-w-[80%] text-xs font-medium ${
-                    m.sender === 'You'
-                      ? 'bg-blue-600 text-white rounded-br-none'
-                      : 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-bl-none shadow-sm'
-                  }`}>
+                  <div className={`p-2.5 rounded-2xl max-w-[80%] text-xs font-medium ${m.sender === 'You'
+                    ? 'bg-blue-600 text-white rounded-br-none'
+                    : 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-bl-none shadow-sm'
+                    }`}>
                     <span className="text-[9px] opacity-75 font-bold block mb-0.5">{m.sender}</span>
                     {m.text}
                   </div>
@@ -1574,11 +1494,10 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                   key={iss}
                   type="button"
                   onClick={() => setSelectedIssue(iss)}
-                  className={`p-3 rounded-2xl border text-left cursor-pointer transition active:scale-95 ${
-                    selectedIssue === iss
-                      ? 'bg-rose-500/10 border-rose-500 text-rose-600 dark:text-rose-400 font-black'
-                      : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200'
-                  }`}
+                  className={`p-3 rounded-2xl border text-left cursor-pointer transition active:scale-95 ${selectedIssue === iss
+                    ? 'bg-rose-500/10 border-rose-500 text-rose-600 dark:text-rose-400 font-black'
+                    : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200'
+                    }`}
                 >
                   {iss}
                 </button>
@@ -1683,7 +1602,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
               ⏹
             </div>
             <h3 className="text-xl font-black text-slate-900 dark:text-white">End Shift Today?</h3>
-            <p className="text-slate-500">You have worked <strong className="text-slate-900 dark:text-white">04h 25m</strong> and completed <strong className="text-emerald-500">14 orders</strong> (Earned ₹1,450).</p>
+            <p className="text-slate-500">You have worked <strong className="text-slate-900 dark:text-white">0h 0m</strong> and completed <strong className="text-emerald-500">0 orders</strong> (Earned ₹0).</p>
 
             <div className="flex justify-end gap-2 pt-2">
               <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold cursor-pointer active:scale-95 transition">

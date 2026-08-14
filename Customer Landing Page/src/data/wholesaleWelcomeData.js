@@ -143,10 +143,10 @@ export const wholesaleSteps = [
 ];
 
 export const wholesaleStats = [
-  { label: 'Active Buyers', value: 50000, suffix: '+' },
-  { label: 'Wholesale Partners', value: 2500, suffix: '+' },
-  { label: 'Orders Processed', value: 100000, suffix: '+' },
-  { label: 'Cities Covered', value: 120, suffix: '+' },
+  { label: 'Active Buyers', value: 0, suffix: '' },
+  { label: 'Wholesale Partners', value: 0, suffix: '' },
+  { label: 'Orders Processed', value: 0, suffix: '' },
+  { label: 'Cities Covered', value: 0, suffix: '' },
 ];
 
 export const whyChooseSaathApp = [

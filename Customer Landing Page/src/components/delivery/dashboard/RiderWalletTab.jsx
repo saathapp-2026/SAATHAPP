@@ -563,11 +563,11 @@ export default function RiderWalletTab() {
             </div>
             <div>
               <span className="text-[10px] text-slate-500 dark:text-slate-400 font-extrabold block leading-tight">Today's Earnings</span>
-              <strong className="text-lg font-black text-slate-900 dark:text-white font-mono mt-0.5 block tracking-tight">₹1,450</strong>
+              <strong className="text-lg font-black text-slate-900 dark:text-white font-mono mt-0.5 block tracking-tight">₹0</strong>
             </div>
           </div>
           <span className="text-[10px] font-extrabold text-emerald-600 dark:text-emerald-400 block">
-            +12% from yesterday
+            ₹0 today
           </span>
         </button>
 
@@ -583,11 +583,11 @@ export default function RiderWalletTab() {
             </div>
             <div>
               <span className="text-[10px] text-slate-500 dark:text-slate-400 font-extrabold block leading-tight">This Month Earnings</span>
-              <strong className="text-lg font-black text-slate-900 dark:text-white font-mono mt-0.5 block tracking-tight">₹38,450</strong>
+              <strong className="text-lg font-black text-slate-900 dark:text-white font-mono mt-0.5 block tracking-tight">₹0</strong>
             </div>
           </div>
           <span className="text-[10px] font-extrabold text-emerald-600 dark:text-emerald-400 block">
-            +32% from last month
+            ₹0 this month
           </span>
         </button>
 
@@ -603,11 +603,11 @@ export default function RiderWalletTab() {
             </div>
             <div>
               <span className="text-[10px] text-slate-500 dark:text-slate-400 font-extrabold block leading-tight">This Week Earnings</span>
-              <strong className="text-lg font-black text-slate-900 dark:text-white font-mono mt-0.5 block tracking-tight">₹8,900</strong>
+              <strong className="text-lg font-black text-slate-900 dark:text-white font-mono mt-0.5 block tracking-tight">₹0</strong>
             </div>
           </div>
           <span className="text-[10px] font-extrabold text-emerald-600 dark:text-emerald-400 block">
-            +18% from last week
+            ₹0 this week
           </span>
         </button>
 
@@ -951,7 +951,7 @@ export default function RiderWalletTab() {
 
               {/* Center Donut Label */}
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
-                <span className="text-xl font-black text-slate-900 dark:text-white font-mono tracking-tight">₹38,450</span>
+                <span className="text-xl font-black text-slate-900 dark:text-white font-mono tracking-tight">₹0</span>
                 <span className="text-[11px] font-extrabold text-slate-400">Total</span>
               </div>
             </div>
@@ -1030,11 +1030,10 @@ export default function RiderWalletTab() {
                     key={t}
                     type="button"
                     onClick={() => setTrendType(`${t} Trend`)}
-                    className={`px-2 py-0.5 rounded-lg cursor-pointer transition-all duration-150 touch-manipulation ${
-                      trendType.startsWith(t)
-                        ? 'bg-amber-500 text-slate-950 font-black shadow-xs'
-                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                    }`}
+                    className={`px-2 py-0.5 rounded-lg cursor-pointer transition-all duration-150 touch-manipulation ${trendType.startsWith(t)
+                      ? 'bg-amber-500 text-slate-950 font-black shadow-xs'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                      }`}
                   >
                     {t}
                   </button>
@@ -1152,7 +1151,7 @@ export default function RiderWalletTab() {
 
         {/* 1. Transaction History Table */}
         <div id="recent-transactions-section" className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden space-y-4 p-5 scroll-mt-24">
-          
+
           {/* Table Header & Top Controls */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
             <div className="flex items-center gap-2">
@@ -1171,11 +1170,10 @@ export default function RiderWalletTab() {
                       setTxnFilter(cat);
                       e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
                     }}
-                    className={`px-3 py-1.5 rounded-xl cursor-pointer active:scale-95 transition-all duration-150 shrink-0 touch-manipulation select-none ${
-                      txnFilter === cat
-                        ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
-                    }`}
+                    className={`px-3 py-1.5 rounded-xl cursor-pointer active:scale-95 transition-all duration-150 shrink-0 touch-manipulation select-none ${txnFilter === cat
+                      ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                      }`}
                   >
                     {cat}
                   </button>
@@ -1454,19 +1452,19 @@ export default function RiderWalletTab() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs pt-1">
             <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
               <span className="text-[10px] font-extrabold text-slate-400 block uppercase">Today's Earnings</span>
-              <strong className="text-lg font-black font-mono text-white mt-0.5 block">₹1,450</strong>
+              <strong className="text-lg font-black font-mono text-white mt-0.5 block">₹0</strong>
             </div>
             <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
               <span className="text-[10px] font-extrabold text-slate-400 block uppercase">Weekly Earnings</span>
-              <strong className="text-lg font-black font-mono text-white mt-0.5 block">₹8,900</strong>
+              <strong className="text-lg font-black font-mono text-white mt-0.5 block">₹0</strong>
             </div>
             <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
               <span className="text-[10px] font-extrabold text-slate-400 block uppercase">Monthly Earnings</span>
-              <strong className="text-lg font-black font-mono text-white mt-0.5 block">₹38,450</strong>
+              <strong className="text-lg font-black font-mono text-white mt-0.5 block">₹0</strong>
             </div>
             <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
               <span className="text-[10px] font-extrabold text-slate-400 block uppercase">Expected Payout</span>
-              <strong className="text-lg font-black font-mono text-amber-400 mt-0.5 block">₹12,300</strong>
+              <strong className="text-lg font-black font-mono text-amber-400 mt-0.5 block">₹0</strong>
             </div>
           </div>
 
@@ -1708,11 +1706,10 @@ export default function RiderWalletTab() {
                     key={amt}
                     type="button"
                     onClick={() => setWithdrawAmount(amt)}
-                    className={`py-2 rounded-xl font-mono font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation ${
-                      withdrawAmount === amt
-                        ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
-                    }`}
+                    className={`py-2 rounded-xl font-mono font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation ${withdrawAmount === amt
+                      ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
+                      }`}
                   >
                     {amt === '2450' ? 'Max' : `₹${amt}`}
                   </button>
@@ -1864,9 +1861,8 @@ export default function RiderWalletTab() {
                 <button
                   type="button"
                   onClick={() => setAutoPayoutEnabled(!autoPayoutEnabled)}
-                  className={`px-3 py-1 rounded-full font-black text-[10px] cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation ${
-                    autoPayoutEnabled ? 'bg-emerald-500 text-slate-950' : 'bg-slate-700 text-slate-300'
-                  }`}
+                  className={`px-3 py-1 rounded-full font-black text-[10px] cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation ${autoPayoutEnabled ? 'bg-emerald-500 text-slate-950' : 'bg-slate-700 text-slate-300'
+                    }`}
                 >
                   {autoPayoutEnabled ? 'ENABLED ✓' : 'DISABLED'}
                 </button>
@@ -2089,11 +2085,10 @@ export default function RiderWalletTab() {
             <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
               {chatMessages.map((msg, idx) => (
                 <div key={idx} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[85%] p-3 rounded-2xl text-xs font-semibold leading-relaxed ${
-                    msg.sender === 'user'
-                      ? 'bg-amber-500 text-slate-950 rounded-br-none font-bold'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-none'
-                  }`}>
+                  <div className={`max-w-[85%] p-3 rounded-2xl text-xs font-semibold leading-relaxed ${msg.sender === 'user'
+                    ? 'bg-amber-500 text-slate-950 rounded-br-none font-bold'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-none'
+                    }`}>
                     {msg.text}
                   </div>
                 </div>

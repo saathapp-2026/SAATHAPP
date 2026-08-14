@@ -94,7 +94,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
                   value={formData.businessName}
                   onChange={(e) => updateFormData({ businessName: e.target.value })}
                   className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                  placeholder="e.g. SaathApp Wholesale & Distribution Pvt Ltd"
+                  placeholder="Enter registered business name"
                 />
               </div>
             </div>
@@ -202,7 +202,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
                       ? 'border-rose-500 text-rose-600 focus:ring-rose-500/20'
                       : 'border-slate-300 dark:border-slate-700 focus:border-emerald-500 focus:ring-emerald-500/20'
                   }`}
-                  placeholder="2500000"
+                  placeholder="Enter business capital (e.g. 2500000)"
                 />
               </div>
               <p className="mt-1.5 text-[11px] font-semibold text-slate-500">
@@ -222,7 +222,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
                 value={formData.brandName}
                 onChange={(e) => updateFormData({ brandName: e.target.value })}
                 className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                placeholder="e.g. SaathApp Prime"
+                placeholder="Enter brand name (if any)"
               />
             </div>
           </div>
@@ -239,7 +239,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
                 value={formData.yearsInBusiness}
                 onChange={(e) => updateFormData({ yearsInBusiness: e.target.value })}
                 className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                placeholder="8"
+                placeholder="Enter years in business"
               />
             </div>
             <div>

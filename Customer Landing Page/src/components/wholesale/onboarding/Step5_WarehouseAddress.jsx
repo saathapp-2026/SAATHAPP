@@ -25,17 +25,24 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
 
   const handleDetectGps = () => {
     setIsGpsLoading(true);
-    setTimeout(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setIsGpsLoading(false);
+          updateFormData({
+            gpsLocation: { lat: pos.coords.latitude, lng: pos.coords.longitude, address: 'Detected Location' },
+          });
+          addToast('GPS location detected successfully!', 'success');
+        },
+        () => {
+          setIsGpsLoading(false);
+          addToast('Location access denied or unavailable.', 'error');
+        }
+      );
+    } else {
       setIsGpsLoading(false);
-      updateFormData({
-        gpsLocation: { lat: 28.5562, lng: 77.2023, address: 'Green Park Main, New Delhi' },
-        state: 'Delhi',
-        district: 'South Delhi',
-        city: 'New Delhi',
-        pincode: '110016',
-      });
-      addToast('GPS location detected successfully: New Delhi, 110016', 'success');
-    }, 1200);
+      addToast('Geolocation not supported by browser.', 'error');
+    }
   };
 
   const handleToggleSameAsRegistered = (e) => {
@@ -49,9 +56,9 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
   const handleAddWarehouse = () => {
     const newWh = {
       name: `Warehouse #${formData.additionalWarehouses.length + 1}`,
-      city: formData.city || 'New Delhi',
-      area: '15,000 sq ft',
-      manager: formData.fullName || 'Manager',
+      city: formData.city || '—',
+      area: '—',
+      manager: formData.fullName || '—',
     };
     updateFormData({
       additionalWarehouses: [...formData.additionalWarehouses, newWh],
@@ -139,7 +146,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
                 value={formData.district}
                 onChange={(e) => updateFormData({ district: e.target.value })}
                 className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                placeholder="South Delhi"
+                placeholder="Enter district"
               />
             </div>
 
@@ -153,7 +160,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
                 value={formData.city}
                 onChange={(e) => updateFormData({ city: e.target.value })}
                 className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                placeholder="New Delhi"
+                placeholder="Enter city"
               />
             </div>
 
@@ -168,7 +175,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
                 value={formData.pincode}
                 onChange={(e) => updateFormData({ pincode: e.target.value.replace(/\D/g, '') })}
                 className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                placeholder="110016"
+                placeholder="Enter 6-digit pincode"
               />
             </div>
           </div>

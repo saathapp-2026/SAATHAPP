@@ -21,15 +21,15 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
   const { formData, dashboardData, addToast } = useWholesale();
 
   const kpis = [
-    { label: 'Total Orders', val: dashboardData.kpis.totalOrders, icon: ShoppingBag, change: '+18% vs last mo', color: 'emerald' },
-    { label: 'Bulk Orders', val: '356', icon: PackageCheck, change: '+22% high vol', color: 'blue' },
+    { label: 'Total Orders', val: dashboardData.kpis.totalOrders, icon: ShoppingBag, change: '0 vs last mo', color: 'emerald' },
+    { label: 'Bulk Orders', val: dashboardData.kpis.totalOrders, icon: PackageCheck, change: '0 high vol', color: 'blue' },
     { label: 'Pending Orders', val: dashboardData.kpis.pendingOrders, icon: Clock, change: 'Requires dispatch', color: 'amber' },
-    { label: 'Completed Orders', val: dashboardData.kpis.completedOrders, icon: CheckCircle2, change: '98.4% SLA match', color: 'teal' },
-    { label: 'Monthly Revenue', val: `₹${dashboardData.kpis.monthlyRevenue.toLocaleString('en-IN')}`, icon: DollarSign, change: '+24% YoY growth', color: 'emerald' },
+    { label: 'Completed Orders', val: dashboardData.kpis.completedOrders, icon: CheckCircle2, change: '0 SLA match', color: 'teal' },
+    { label: 'Monthly Revenue', val: `₹${dashboardData.kpis.monthlyRevenue.toLocaleString('en-IN')}`, icon: DollarSign, change: '₹0 YoY growth', color: 'emerald' },
     { label: 'Wallet Balance', val: `₹${dashboardData.kpis.walletBalance.toLocaleString('en-IN')}`, icon: Wallet, change: 'Payout ready', color: 'indigo' },
-    { label: 'Active Buyers', val: dashboardData.kpis.activeBuyers, icon: Users, change: '+15% repeat', color: 'sky' },
-    { label: 'Products Listed', val: dashboardData.kpis.productsListed, icon: PackageCheck, change: 'Across 4 cats', color: 'slate' },
-    { label: 'Warehouse Count', val: `${dashboardData.kpis.warehouseCount} Active`, icon: Warehouse, change: 'Delhi, Mumbai, Kolkata', color: 'emerald' },
+    { label: 'Active Buyers', val: dashboardData.kpis.activeBuyers, icon: Users, change: '0 repeat', color: 'sky' },
+    { label: 'Products Listed', val: dashboardData.kpis.productsListed, icon: PackageCheck, change: 'Across categories', color: 'slate' },
+    { label: 'Warehouse Count', val: `${dashboardData.kpis.warehouseCount} Active`, icon: Warehouse, change: 'Registered Hubs', color: 'emerald' },
   ];
 
   return (
@@ -40,9 +40,9 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
           <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-bold text-emerald-300 mb-2">
             <TrendingUp size={14} /> Active Enterprise Partner
           </div>
-          <h2 className="text-2xl font-black">Welcome back, {formData.fullName}!</h2>
+          <h2 className="text-2xl font-black">Welcome back, {formData.fullName || 'Partner'}!</h2>
           <p className="text-xs text-slate-300 mt-1 max-w-xl">
-            Managing <strong className="text-emerald-400">{formData.businessName}</strong>. You have <strong>128 pending bulk orders</strong> across {formData.numberOfWarehouses} warehouse hubs today.
+            Managing <strong className="text-emerald-400">{formData.businessName || 'Wholesale Business'}</strong>. You have <strong>{dashboardData.kpis.pendingOrders} pending bulk orders</strong> across {formData.numberOfWarehouses || 0} warehouse hubs today.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -113,10 +113,10 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
 
             <div className="h-44 flex items-end justify-between gap-6 px-6 z-10 relative">
               {[
-                { month: 'May', height: '55%', rev: '₹8.2L' },
-                { month: 'Jun', height: '70%', rev: '₹9.8L' },
-                { month: 'Jul', height: '85%', rev: '₹11.4L' },
-                { month: 'Aug', height: '96%', rev: '₹12.45L' },
+                { month: 'May', height: '0%', rev: '₹0' },
+                { month: 'Jun', height: '0%', rev: '₹0' },
+                { month: 'Jul', height: '0%', rev: '₹0' },
+                { month: 'Aug', height: '0%', rev: '₹0' },
               ].map((bar, i) => (
                 <div key={i} className="flex-1 flex flex-col items-center justify-end h-full gap-2 group cursor-pointer" onClick={() => addToast?.(`Revenue for ${bar.month}: ${bar.rev}`, 'info')}>
                   <span className="text-xs font-mono font-black text-[#00986C] group-hover:scale-110 transition">
@@ -201,7 +201,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
         </div>
 
         {/* Warehouse Stock Alerts Card */}
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between space-y-4">
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
@@ -213,24 +213,26 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
             </div>
 
             <div className="space-y-3">
-              {[
-                { title: 'Cement 50kg PPC Bag', warehouse: 'Delhi NCR Hub', stock: '18 Units', alert: 'Low Stock', statusColor: 'bg-amber-50 text-amber-600 border-amber-200' },
-                { title: 'Basmati Rice 25kg Bag', warehouse: 'Mumbai Express Depot', stock: '0 Units', alert: 'Out of Stock', statusColor: 'bg-rose-50 text-rose-600 border-rose-200' },
-                { title: 'Havells Modular Switch 6A', warehouse: 'Kolkata East Depot', stock: '25 Units', alert: 'Reorder Soon', statusColor: 'bg-amber-50 text-amber-600 border-amber-200' },
-              ].map((item, idx) => (
-                <div key={idx} className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex justify-between items-center cursor-pointer" onClick={() => onSelectTab('inventory')}>
-                  <div>
-                    <strong className="text-slate-900 dark:text-white font-extrabold text-xs block truncate max-w-[150px]">{item.title}</strong>
-                    <span className="text-[10px] text-slate-500 font-bold">{item.warehouse}</span>
+              {(dashboardData.inventorySummary || []).length > 0 ? (
+                dashboardData.inventorySummary.map((item, idx) => (
+                  <div key={idx} className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex justify-between items-center cursor-pointer" onClick={() => onSelectTab('inventory')}>
+                    <div>
+                      <strong className="text-slate-900 dark:text-white font-extrabold text-xs block truncate max-w-[150px]">{item.name}</strong>
+                      <span className="text-[10px] text-slate-500 font-bold">{item.warehouse}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-black border bg-amber-50 text-amber-600 border-amber-200">
+                        {item.status}
+                      </span>
+                      <span className="block font-mono text-[10px] text-slate-400 font-bold mt-0.5">{item.stock} {item.unit}</span>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-black border ${item.statusColor}`}>
-                      {item.alert}
-                    </span>
-                    <span className="block font-mono text-[10px] text-slate-400 font-bold mt-0.5">{item.stock}</span>
-                  </div>
+                ))
+              ) : (
+                <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-dashed border-slate-200 dark:border-slate-800 text-center text-xs text-slate-400 font-medium">
+                  No stock alerts or low inventory items found.
                 </div>
-              ))}
+              )}
             </div>
           </div>
 

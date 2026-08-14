@@ -93,10 +93,7 @@ export default function SupportTab() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold">
-                {[
-                  { id: 'T-9842', sub: 'Bulk order dispatch delay enquiry', mgr: 'Vikram Singh (B2B Lead)', date: 'Today, 11:20 AM', status: 'In Progress' },
-                  { id: 'T-9820', sub: 'GST e-Way bill API integration support', mgr: 'Neha Sharma (Tax Desk)', date: '28 Jul 2026', status: 'Resolved' },
-                ].map((t) => (
+                {[].map((t) => (
                   <tr key={t.id}>
                     <td className="p-4 font-mono font-bold text-emerald-600 dark:text-emerald-400">{t.id}</td>
                     <td className="p-4 font-black">{t.sub}</td>
@@ -111,6 +108,11 @@ export default function SupportTab() {
                 ))}
               </tbody>
             </table>
+            {[].length === 0 && (
+              <div className="p-8 text-center text-xs text-slate-400 font-medium">
+                No active support tickets. Submit a ticket using the "Create Ticket" tab.
+              </div>
+            )}
           </div>
         </div>
       ) : (
@@ -124,7 +126,7 @@ export default function SupportTab() {
                 </div>
                 <div>
                   <h3 className="text-xs font-extrabold uppercase text-slate-400">Dedicated B2B Support Line</h3>
-                  <p className="text-base font-black text-slate-900 dark:text-white mt-0.5">+91 9128842027</p>
+                  <p className="text-base font-black text-slate-900 dark:text-white mt-0.5">+91 1800-SAATHAPP</p>
                   <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">Mon - Sat (9 AM - 8 PM)</span>
                 </div>
               </div>

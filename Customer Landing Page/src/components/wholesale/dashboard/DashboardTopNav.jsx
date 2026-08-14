@@ -107,7 +107,7 @@ export default function DashboardTopNav({
                     🏢
                   </div>
                   <div className="overflow-hidden">
-                    <h4 className="font-black text-slate-900 dark:text-white text-xs truncate">{formData.businessName || 'Apex Wholesale Ltd'}</h4>
+                    <h4 className="font-black text-slate-900 dark:text-white text-xs truncate">{formData.businessName || 'Wholesale Partner'}</h4>
                     <span className="text-[10px] text-emerald-500 font-bold">Platinum Supplier 🏆</span>
                   </div>
                 </div>

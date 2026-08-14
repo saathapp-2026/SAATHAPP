@@ -18,28 +18,28 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
 
   const [profileData, setProfileData] = useState({
     fullName: formData.fullName || 'Rider',
-    riderId: 'SAATH-RIDER-0000',
-    phone: formData.mobileNumber || '',
-    altPhone: '',
-    email: formData.email || '',
-    joinDate: '',
-    address: 'House #42, Boring Road, Patna - 800001, Bihar',
-    emergencyContactName: 'Sunita Singh (Wife)',
-    emergencyContactPhone: '+91 98765 43210',
-    bloodGroup: 'O+ Positive',
-    vehicleType: 'Motorcycle / Scooter',
-    vehicleModel: 'Honda Shine 125cc (Black)',
-    vehicleRegNo: 'BR-01-AB-9842',
-    fuelStatus: '75% Good (Allowance ₹50/day)',
-    bankName: 'State Bank of India (SBI)',
-    accountNo: '**** **** 4820',
-    ifscCode: 'SBIN0001234',
-    upiId: 'vikram.singh@sbi',
-    customerRating: 4.9,
-    totalDeliveries: 342,
-    onTimeRate: '98.5%',
-    acceptanceRate: '99.2%',
-    tier: 'Gold Fleet Captain 🏆'
+    riderId: formData.riderId || 'SAATH-RIDER-0000',
+    phone: formData.mobileNumber || '—',
+    altPhone: '—',
+    email: formData.email || '—',
+    joinDate: formData.submissionDate || '—',
+    address: formData.address || 'Not added yet',
+    emergencyContactName: formData.emergencyContactName || 'Not added yet',
+    emergencyContactPhone: formData.emergencyContact || '—',
+    bloodGroup: formData.bloodGroup || '—',
+    vehicleType: formData.vehicleType || 'Not specified',
+    vehicleModel: formData.vehicleModel || '—',
+    vehicleRegNo: formData.vehicleNumber || '—',
+    fuelStatus: '—',
+    bankName: formData.bankName || 'Not added yet',
+    accountNo: formData.accountNumber ? `**** **** ${formData.accountNumber.slice(-4)}` : '—',
+    ifscCode: formData.ifscCode || '—',
+    upiId: formData.upiId || '—',
+    customerRating: dashboardData?.kpis?.riderRating || 0,
+    totalDeliveries: dashboardData?.kpis?.totalDeliveries || 0,
+    onTimeRate: dashboardData?.kpis?.onTimeRate || '0%',
+    acceptanceRate: dashboardData?.kpis?.acceptanceRate || '0%',
+    tier: 'Rider Partner'
   });
 
   const handleConfirmLogout = () => {
@@ -613,11 +613,10 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
                       key={idx}
                       type="button"
                       onClick={() => setSelectedPresetAvatar(url)}
-                      className={`w-12 h-12 rounded-full p-0.5 transition cursor-pointer active:scale-95 ${
-                        selectedPresetAvatar === url
+                      className={`w-12 h-12 rounded-full p-0.5 transition cursor-pointer active:scale-95 ${selectedPresetAvatar === url
                           ? 'ring-4 ring-amber-500 scale-110'
                           : 'opacity-60 hover:opacity-100'
-                      }`}
+                        }`}
                     >
                       <img src={url} alt={`Preset ${idx + 1}`} className="w-full h-full object-cover rounded-full" />
                     </button>

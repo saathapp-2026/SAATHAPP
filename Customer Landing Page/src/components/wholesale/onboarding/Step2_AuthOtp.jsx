@@ -87,7 +87,7 @@ export default function Step2_AuthOtp({ onNext, onPrev }) {
                     value={formData.mobileNumber}
                     onChange={(e) => updateFormData({ mobileNumber: e.target.value.replace(/\D/g, '') })}
                     className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-14 pr-24 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                    placeholder="9876543210"
+                    placeholder="Enter 10-digit mobile number"
                   />
                   <button
                     type="button"

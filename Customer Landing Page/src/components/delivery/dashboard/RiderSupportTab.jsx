@@ -140,11 +140,10 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
                   setActiveSubTab(tab.id);
                   addToast?.(`Switched to ${tab.label}`, 'info');
                 }}
-                className={`flex items-center gap-2 px-3.5 py-2.5 rounded-2xl text-xs font-extrabold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 ${
-                  isActive
-                    ? 'bg-amber-500 text-slate-950 shadow-md font-black'
-                    : 'bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800'
-                }`}
+                className={`flex items-center gap-2 px-3.5 py-2.5 rounded-2xl text-xs font-extrabold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 ${isActive
+                  ? 'bg-amber-500 text-slate-950 shadow-md font-black'
+                  : 'bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800'
+                  }`}
               >
                 <Icon size={15} />
                 <span>{tab.label}</span>
@@ -406,7 +405,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
           </div>
 
           {/* Embedded Optional Equipment Store Section */}
-          <DeliveryEquipmentStoreSection onStartRegistration={() => {}} />
+          <DeliveryEquipmentStoreSection onStartRegistration={() => { }} />
         </div>
       )}
     </div>

@@ -19,17 +19,7 @@ export const ORDER_STATUS_TABS = [
   'Invoices',
 ];
 
-export const MOCK_FULL_ORDERS = [
-  { id: 'ORD-9842', buyer: 'Ramesh Supermarket', category: 'FMCG & Personal Care', itemsCount: 45, amount: 125000, status: 'Delivered', date: '2026-08-03', warehouse: 'Delhi NCR Hub', payment: 'Escrow Released' },
-  { id: 'ORD-9841', buyer: 'Shree Traders', category: 'Grocery & Staples', itemsCount: 120, amount: 95000, status: 'Accepted', date: '2026-08-03', warehouse: 'Delhi NCR Hub', payment: 'Held in Escrow' },
-  { id: 'ORD-9840', buyer: 'GreenMart Store', category: 'FMCG', itemsCount: 30, amount: 78500, status: 'Processing', date: '2026-08-02', warehouse: 'Mumbai Express', payment: 'Held in Escrow' },
-  { id: 'ORD-9839', buyer: 'Apna General Hub', category: 'Packaged Food', itemsCount: 85, amount: 45000, status: 'Cancelled', date: '2026-08-02', warehouse: 'Kolkata East', payment: 'Refunded' },
-  { id: 'ORD-9838', buyer: 'Kumar Enterprises', category: 'Electrical Goods', itemsCount: 210, amount: 110000, status: 'Returned', date: '2026-08-01', warehouse: 'Delhi NCR Hub', payment: 'Disputed' },
-  { id: 'ORD-9837', buyer: 'Metro Retail Mart', category: 'Grocery & Staples', itemsCount: 340, amount: 245000, status: 'Dispatched', date: '2026-08-01', warehouse: 'Delhi NCR Hub', payment: 'Held in Escrow' },
-  { id: 'ORD-9836', buyer: 'Super Saver Market', category: 'Beverages', itemsCount: 90, amount: 62000, status: 'New Orders', date: '2026-08-03', warehouse: 'Mumbai Express', payment: 'Pending Payment' },
-  { id: 'ORD-9835', buyer: 'Patna Wholesale Point', category: 'Building Materials', itemsCount: 50, amount: 180000, status: 'Pending', date: '2026-08-03', warehouse: 'Patna Central Depot', payment: 'Awaiting Escrow' },
-  { id: 'ORD-9834', buyer: 'Gaya Super Bazaar', category: 'FMCG & Personal Care', itemsCount: 110, amount: 89000, status: 'Ready for Dispatch', date: '2026-08-02', warehouse: 'Patna Central Depot', payment: 'Held in Escrow' },
-];
+export const MOCK_FULL_ORDERS = [];
 
 export default function OrdersTab() {
   const { addToast, formData } = useWholesale ? useWholesale() : { addToast: console.log, formData: {} };

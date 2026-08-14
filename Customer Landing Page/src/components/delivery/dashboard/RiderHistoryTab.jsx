@@ -748,9 +748,9 @@ export default function RiderHistoryTab() {
           className="p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Today's Earnings</span>
-          <strong className="text-xl font-black text-amber-500 font-mono mt-1 block">₹1,450</strong>
+          <strong className="text-xl font-black text-amber-500 font-mono mt-1 block">₹0</strong>
           <span className="text-[10px] font-bold text-emerald-500 flex items-center gap-0.5 mt-1">
-            <ArrowUpRight size={10} /> +₹120 vs yesterday
+            <ArrowUpRight size={10} /> ₹0 today
           </span>
         </button>
 
@@ -850,15 +850,15 @@ export default function RiderHistoryTab() {
           </div>
 
           <div className="space-y-2 text-xs font-semibold">
-            <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Base Fare</span><strong className="font-mono text-slate-900 dark:text-white">₹950</strong></div>
-            <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Distance Incentive</span><strong className="font-mono text-slate-900 dark:text-white">₹300</strong></div>
-            <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Peak Bonus</span><strong className="font-mono text-emerald-500">₹150</strong></div>
-            <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Fuel Allowance</span><strong className="font-mono text-slate-900 dark:text-white">₹50</strong></div>
-            <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Tips</span><strong className="font-mono text-amber-400">₹200</strong></div>
-            <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Other Adjustments</span><strong className="font-mono text-rose-500">-₹50</strong></div>
+            <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Base Fare</span><strong className="font-mono text-slate-900 dark:text-white">₹0</strong></div>
+            <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Distance Fare</span><strong className="font-mono text-slate-900 dark:text-white">₹0</strong></div>
+            <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Peak Bonus</span><strong className="font-mono text-emerald-500">₹0</strong></div>
+            <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Fuel Allowance</span><strong className="font-mono text-slate-900 dark:text-white">₹0</strong></div>
+            <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Tips</span><strong className="font-mono text-amber-400">₹0</strong></div>
+            <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Other Adjustments</span><strong className="font-mono text-slate-500">₹0</strong></div>
             <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex justify-between text-sm font-black">
               <span className="text-slate-900 dark:text-white">Total Net Earnings</span>
-              <strong className="font-mono text-amber-500 text-base">₹1,450</strong>
+              <strong className="font-mono text-amber-500 text-base">₹0</strong>
             </div>
           </div>
         </div>
@@ -1067,7 +1067,7 @@ export default function RiderHistoryTab() {
       {/* 3 & 4. PAGE 27 EXACT HORIZONTAL FILTER BAR (6 Labeled Boxes + Buttons)    */}
       {/* ========================================================================= */}
       <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        
+
         {/* Search Bar Top */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="relative w-full sm:w-96">
@@ -1215,11 +1215,10 @@ export default function RiderHistoryTab() {
           <button
             type="button"
             onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-            className={`h-full min-h-[48px] rounded-2xl text-xs font-black flex items-center justify-center gap-2 cursor-pointer border transition px-3 active:scale-95 transition-all duration-150 ${
-              showAdvancedFilters
-                ? 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 border-slate-900'
-                : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800'
-            }`}
+            className={`h-full min-h-[48px] rounded-2xl text-xs font-black flex items-center justify-center gap-2 cursor-pointer border transition px-3 active:scale-95 transition-all duration-150 ${showAdvancedFilters
+              ? 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 border-slate-900'
+              : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800'
+              }`}
           >
             <Filter size={15} /> More Filters
           </button>
@@ -1429,9 +1428,8 @@ export default function RiderHistoryTab() {
                   return (
                     <tr
                       key={order.id}
-                      className={`hover:bg-slate-50 dark:hover:bg-slate-800/40 transition ${
-                        isSelected ? 'bg-amber-500/10 dark:bg-amber-500/10' : ''
-                      }`}
+                      className={`hover:bg-slate-50 dark:hover:bg-slate-800/40 transition ${isSelected ? 'bg-amber-500/10 dark:bg-amber-500/10' : ''
+                        }`}
                     >
                       <td className="p-4 text-center">
                         <button type="button" onClick={() => handleToggleRow(order.id)} className="cursor-pointer text-slate-400 hover:text-amber-500 active:scale-95 transition">
@@ -1453,15 +1451,14 @@ export default function RiderHistoryTab() {
                       {/* Delivery Type */}
                       <td className="p-4">
                         <span
-                          className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase ${
-                            order.deliveryType === 'Grocery'
-                              ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
-                              : order.deliveryType === 'Medicine'
+                          className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase ${order.deliveryType === 'Grocery'
+                            ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                            : order.deliveryType === 'Medicine'
                               ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20'
                               : order.deliveryType === 'Food'
-                              ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
-                              : 'bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20'
-                          }`}
+                                ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
+                                : 'bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20'
+                            }`}
                         >
                           {order.deliveryType}
                         </span>
@@ -1635,11 +1632,10 @@ export default function RiderHistoryTab() {
                   key={pg}
                   type="button"
                   onClick={() => setCurrentPage(pg)}
-                  className={`px-3 py-1 rounded-xl font-extrabold cursor-pointer active:scale-95 transition-all duration-150 ${
-                    currentPage === pg
-                      ? 'bg-amber-500 text-slate-950 shadow-sm'
-                      : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
-                  }`}
+                  className={`px-3 py-1 rounded-xl font-extrabold cursor-pointer active:scale-95 transition-all duration-150 ${currentPage === pg
+                    ? 'bg-amber-500 text-slate-950 shadow-sm'
+                    : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
+                    }`}
                 >
                   {pg}
                 </button>
@@ -1836,7 +1832,7 @@ export default function RiderHistoryTab() {
           <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Weekly Earnings</span>
-              <span className="text-[10px] font-extrabold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded-full">₹8,900 Total</span>
+              <span className="text-[10px] font-extrabold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded-full">₹0 Total</span>
             </div>
 
             <div className="h-36 flex items-end justify-between gap-4 pt-4 pb-1 px-3">
@@ -2011,7 +2007,7 @@ export default function RiderHistoryTab() {
             <DollarSign size={18} className="text-emerald-500 shrink-0" />
             <div>
               <strong className="block text-xs">Payment Credited</strong>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400">₹1,450 credited to wallet today</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400">₹0 credited to wallet today</span>
             </div>
           </button>
 
