@@ -1,10 +1,6 @@
 const NOTIFICATIONS_KEY = 'saathapp-seller-notifications';
 
-const DEFAULT_NOTIFICATIONS = [
-  { id: 'n1', title: 'New order received', body: 'Order #SA-1042 — ₹1,250', time: '2m ago', read: false, createdAt: Date.now() - 120000 },
-  { id: 'n2', title: 'Product approved', body: 'Organic Mangoes is now live', time: '1h ago', read: false, createdAt: Date.now() - 3600000 },
-  { id: 'n3', title: 'Payment settled', body: '₹8,420 credited to wallet', time: '3h ago', read: true, createdAt: Date.now() - 10800000 },
-];
+const DEFAULT_NOTIFICATIONS = [];
 
 export function getNotifications() {
   try {

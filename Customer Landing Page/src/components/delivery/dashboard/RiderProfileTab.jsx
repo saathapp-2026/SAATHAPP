@@ -13,16 +13,16 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isIdCardModalOpen, setIsIdCardModalOpen] = useState(false);
   const [isAvatarUploadModalOpen, setIsAvatarUploadModalOpen] = useState(false);
-  const [currentAvatar, setCurrentAvatar] = useState('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80');
-  const [selectedPresetAvatar, setSelectedPresetAvatar] = useState('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80');
+  const [currentAvatar, setCurrentAvatar] = useState(formData.profilePhotoUrl || '');
+  const [selectedPresetAvatar, setSelectedPresetAvatar] = useState(formData.profilePhotoUrl || '');
 
   const [profileData, setProfileData] = useState({
-    fullName: formData.fullName || 'Vikram Singh',
-    riderId: 'SAATH-RIDER-9842',
-    phone: '+91 98350 11223',
-    altPhone: '+91 98123 45678',
-    email: 'vikram.singh@saathapp.com',
-    joinDate: '12 Jan 2024',
+    fullName: formData.fullName || 'Rider',
+    riderId: 'SAATH-RIDER-0000',
+    phone: formData.mobileNumber || '',
+    altPhone: '',
+    email: formData.email || '',
+    joinDate: '',
     address: 'House #42, Boring Road, Patna - 800001, Bihar',
     emergencyContactName: 'Sunita Singh (Wife)',
     emergencyContactPhone: '+91 98765 43210',
@@ -479,12 +479,8 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
 
               {/* Photo & Basic Details */}
               <div className="flex items-center gap-4 text-left pt-1">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-300 p-1 shadow-md shrink-0">
-                  <img
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
-                    alt="Rider"
-                    className="w-full h-full object-cover rounded-xl"
-                  />
+                <div className="w-20 h-20 rounded-2xl bg-amber-500 text-slate-900 flex items-center justify-center font-black text-2xl shadow-md shrink-0">
+                  <span>{(profileData.fullName || 'R').charAt(0).toUpperCase()}</span>
                 </div>
 
                 <div className="space-y-0.5 overflow-hidden">
@@ -612,12 +608,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
               <div className="pt-2">
                 <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-2">Or Select Verified Rider Preset Avatar:</span>
                 <div className="flex justify-center items-center gap-3">
-                  {[
-                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
-                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
-                    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80',
-                    'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80'
-                  ].map((url, idx) => (
+                  {[].map((url, idx) => (
                     <button
                       key={idx}
                       type="button"

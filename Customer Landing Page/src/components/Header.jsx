@@ -39,12 +39,10 @@ export default function Header({
   const navigate = useNavigate();
 
   const popularSearches = [
-    'Electrician', 'Tomato 1kg', 'Ultratech Cement', 'AC Servicing', 'Cables', 'Ghee'
+    'Electrician', 'Plumber', 'Electricals', 'Hardware', 'AC Servicing', 'Groceries'
   ];
 
-  const recentSearches = [
-    'Fresh milk', 'Screwdriver set', 'Plumber'
-  ];
+  const recentSearches = [];
 
   // Simulated live suggestion generator
   useEffect(() => {
@@ -53,9 +51,8 @@ export default function Header({
       return;
     }
     const terms = [
-      'Alphonso Mangoes', 'AC Repair Service', 'Amul Cow Ghee 1L', 'Asian Paints Distemper',
-      'Agriculture NPK Fertilizer', 'Amul Butter', 'Anchor Electrical Switched',
-      'Cables Heavy Duty', 'Cement Bags 50kg', 'Electrician Fitting', 'Emergency Plumber'
+      'Electrician', 'Plumbing Service', 'Hardware Tools', 'AC Servicing',
+      'Painting Service', 'Grocery Store', 'Electrical Parts'
     ];
     const filtered = terms.filter(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
     setSuggestions(filtered);

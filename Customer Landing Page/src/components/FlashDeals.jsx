@@ -54,7 +54,12 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
 
         {/* Horizontal Slider Layout */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
-          {flashDeals.map((deal) => {
+          {flashDeals.length === 0 ? (
+            <div className="col-span-full py-10 text-center text-sm font-semibold text-slate-400">
+              No active flash deals at the moment.
+            </div>
+          ) : (
+            flashDeals.map((deal) => {
             const qty = getCartQuantity(deal.id);
             const isLowStock = deal.stockLeft <= 5;
             const stockPct = (deal.stockLeft / deal.totalStock) * 100;
@@ -176,7 +181,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
 
               </motion.div>
             );
-          })}
+          }))}
         </div>
 
       </div>

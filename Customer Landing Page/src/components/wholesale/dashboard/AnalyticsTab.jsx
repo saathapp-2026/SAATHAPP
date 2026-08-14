@@ -780,11 +780,11 @@ export default function AnalyticsTab() {
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
                   {[
-                    { title: 'Tata Salt 1kg Pack (Case of 24)', orders: 120, gmv: '₹1.45L', img: 'https://images.unsplash.com/photo-1589927986076-2557539168f6?auto=format&fit=crop&w=80&q=80' },
-                    { title: 'Fortune Sunflower Oil 15L Tin', orders: 98, gmv: '₹1.28L', img: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=80&q=80' },
-                    { title: 'Cement 50kg PPC Bag', orders: 85, gmv: '₹1.05L', img: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=80&q=80' },
-                    { title: 'Havells Modular Switch 6A', orders: 72, gmv: '₹0.86L', img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=80&q=80' },
-                    { title: 'Basmati Rice 25kg Bag', orders: 65, gmv: '₹0.74L', img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=80&q=80' },
+                    { title: 'Tata Salt 1kg Pack (Case of 24)', orders: 120, gmv: '₹1.45L', img: '' },
+                    { title: 'Fortune Sunflower Oil 15L Tin', orders: 98, gmv: '₹1.28L', img: '' },
+                    { title: 'Cement 50kg PPC Bag', orders: 85, gmv: '₹1.05L', img: '' },
+                    { title: 'Havells Modular Switch 6A', orders: 72, gmv: '₹0.86L', img: '' },
+                    { title: 'Basmati Rice 25kg Bag', orders: 65, gmv: '₹0.74L', img: '' },
                   ].map((p, i) => (
                     <tr key={i} className="hover:bg-slate-50 dark:hover:bg-slate-950 transition cursor-pointer" onClick={() => addToast?.(`Product: ${p.title} (${p.gmv})`, 'info')}>
                       <td className="py-2.5 font-extrabold text-slate-900 dark:text-white flex items-center gap-2 truncate max-w-[150px]">

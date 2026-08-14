@@ -94,7 +94,7 @@ export default function FeaturedProducts({
         {/* Products Grid Layout */}
         {filteredProducts.length === 0 ? (
           <div className="rounded-card border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm font-medium text-slate-500 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-400">
-            No items matched your search. Try a different keyword like “grocery”, “electric”, or “cement”.
+            No products available at the moment.
           </div>
         ) : (
           <motion.div 

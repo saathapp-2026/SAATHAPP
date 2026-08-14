@@ -26,13 +26,13 @@ import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
 
 export const SIDEBAR_ITEMS = [
   { id: 'overview', label: 'Dashboard', icon: LayoutDashboard, badge: null },
-  { id: 'orders', label: 'Orders & Bulk Orders', icon: ShoppingBag, badge: '128' },
-  { id: 'products', label: 'Products & Catalogue', icon: PackageCheck, badge: '2.4k' },
-  { id: 'buyers', label: 'Buyers & Enquiries', icon: Users, badge: '850' },
-  { id: 'marketing', label: 'Marketing & Offers', icon: Sparkles, badge: 'New' },
+  { id: 'orders', label: 'Orders & Bulk Orders', icon: ShoppingBag, badge: null },
+  { id: 'products', label: 'Products & Catalogue', icon: PackageCheck, badge: null },
+  { id: 'buyers', label: 'Buyers & Enquiries', icon: Users, badge: null },
+  { id: 'marketing', label: 'Marketing & Offers', icon: Sparkles, badge: null },
   { id: 'analytics', label: 'Analytics & Reports', icon: BarChart3, badge: null },
-  { id: 'finance', label: 'Wallet & Payouts', icon: Wallet, badge: '₹8.7L' },
-  { id: 'profile', label: 'Profile & Business Settings', icon: User, badge: 'Active' },
+  { id: 'finance', label: 'Wallet & Payouts', icon: Wallet, badge: null },
+  { id: 'profile', label: 'Profile & Business Settings', icon: User, badge: null },
   { id: 'support', label: 'Support', icon: HelpCircle, badge: null },
 ];
 
@@ -55,7 +55,7 @@ export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboa
             <span className="text-xs font-black uppercase tracking-wider text-emerald-400">SaathApp</span>
             <ShieldCheck size={13} className="text-emerald-400 shrink-0" />
           </div>
-          <h2 className="text-sm font-extrabold text-white truncate group-hover:text-emerald-400 transition">{formData.businessName || 'Apex Wholesale Ltd'}</h2>
+          <h2 className="text-sm font-extrabold text-white truncate group-hover:text-emerald-400 transition">{formData.businessName || 'Wholesale Partner'}</h2>
         </div>
       </div>
 

@@ -22,69 +22,7 @@ export default function DeliveryRiderTopNav({
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
-  // --- 18. Notifications List (Section 18 PDF Specifications) ---
-  const [notificationsList, setNotificationsList] = useState([
-    {
-      id: 1,
-      category: 'New Order',
-      title: 'New Order Assigned 📦',
-      desc: 'Express Grocery & Medicine order DEL-98420 assigned to you from SaathHub #12 (Pickup in 10 mins).',
-      time: '2 mins ago',
-      unread: true,
-      icon: Package,
-      color: 'text-blue-600 bg-blue-100 dark:bg-blue-950/60'
-    },
-    {
-      id: 2,
-      category: 'Payment Received',
-      title: 'Payment Received 💰',
-      desc: '₹1,450.00 credited to your wallet balance for 14 orders completed today.',
-      time: '10 mins ago',
-      unread: true,
-      icon: Wallet,
-      color: 'text-emerald-600 bg-emerald-100 dark:bg-emerald-950/60'
-    },
-    {
-      id: 3,
-      category: 'Bonus Earned',
-      title: 'Bonus Earned 🏆',
-      desc: '₹350.00 Daily Target & Peak Hour Bonus unlocked and added to wallet!',
-      time: '45 mins ago',
-      unread: true,
-      icon: Award,
-      color: 'text-amber-600 bg-amber-100 dark:bg-amber-950/60'
-    },
-    {
-      id: 4,
-      category: 'Low Rating',
-      title: 'Low Rating Alert ⭐',
-      desc: 'Customer gave 3-star rating on order DEL-98102. Note: Ensure fragile parcel items are handled carefully.',
-      time: '2 hours ago',
-      unread: false,
-      icon: Star,
-      color: 'text-rose-600 bg-rose-100 dark:bg-rose-950/60'
-    },
-    {
-      id: 5,
-      category: 'Vehicle Reminder',
-      title: 'Vehicle Service Reminder 🛠️',
-      desc: 'Motorcycle engine oil change & brake fluid inspection due in 10 days (Patna Authorized Workshop).',
-      time: 'Yesterday',
-      unread: false,
-      icon: Wrench,
-      color: 'text-sky-600 bg-sky-100 dark:bg-sky-950/60'
-    },
-    {
-      id: 6,
-      category: 'Document Expiry',
-      title: 'Document Expiry Notice 📄',
-      desc: 'Vehicle Insurance Policy BR-98420 expires on 15 Nov 2026. Renew early to maintain active shift status.',
-      time: '2 days ago',
-      unread: false,
-      icon: FileText,
-      color: 'text-purple-600 bg-purple-100 dark:bg-purple-950/60'
-    }
-  ]);
+  const [notificationsList, setNotificationsList] = useState([]);
 
   const toggleOnlineShift = () => {
     const nextStatus = !isOnline;
@@ -297,12 +235,12 @@ export default function DeliveryRiderTopNav({
             onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
             className="flex items-center gap-2 cursor-pointer active:scale-95 transition hover:opacity-90 rounded-2xl p-1"
           >
-            <div className="w-8 h-8 rounded-full bg-slate-800 text-amber-400 flex items-center justify-center font-black text-xs ring-2 ring-amber-500/40 overflow-hidden shrink-0">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Avatar" className="w-full h-full object-cover" />
+            <div className="w-8 h-8 rounded-full bg-amber-500 text-slate-900 flex items-center justify-center font-black text-xs ring-2 ring-amber-500/40 overflow-hidden shrink-0">
+              <span>{(formData.fullName || 'Rider').charAt(0).toUpperCase()}</span>
             </div>
             <div className="hidden md:block text-left text-xs leading-tight">
-              <strong className="block text-slate-900 dark:text-white font-extrabold">{formData.fullName || 'Vikram Singh'}</strong>
-              <span className="text-[10px] text-amber-600 dark:text-amber-400 font-mono font-bold">ID: RIDER1024 ▼</span>
+              <strong className="block text-slate-900 dark:text-white font-extrabold">{formData.fullName || 'Rider'}</strong>
+              <span className="text-[10px] text-amber-600 dark:text-amber-400 font-mono font-bold">Rider Partner ▼</span>
             </div>
           </button>
 
@@ -313,7 +251,7 @@ export default function DeliveryRiderTopNav({
                   👤
                 </div>
                 <div className="overflow-hidden">
-                  <h4 className="font-black text-slate-900 dark:text-white text-xs truncate">{formData.fullName || 'Vikram Singh'}</h4>
+                  <h4 className="font-black text-slate-900 dark:text-white text-xs truncate">{formData.fullName || 'Rider'}</h4>
                   <span className="text-[10px] text-emerald-500 font-bold">Gold Fleet Captain 🏆</span>
                 </div>
               </div>

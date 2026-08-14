@@ -133,12 +133,8 @@ export default function Topbar({
             onBlur={() => setTimeout(() => setProfileDropdown(false), 200)}
             className="flex items-center gap-1.5 cursor-pointer focus:outline-none"
           >
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100">
-              <img 
-                src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=100&h=100&q=80" 
-                alt="Rahul Kumar" 
-                className="w-full h-full object-cover"
-              />
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700 bg-[#6C3BFF] text-white flex items-center justify-center font-bold text-xs">
+              <span>P</span>
             </div>
             <ChevronDown size={12} className="text-slate-400" />
           </button>
@@ -152,8 +148,8 @@ export default function Topbar({
                 className="absolute right-0 mt-1.5 w-48 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-xl shadow-premium py-1 text-left z-55"
               >
                 <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800/60">
-                  <p className="text-xs font-black text-slate-800 dark:text-slate-200">Rahul Kumar</p>
-                  <p className="text-[10px] text-slate-450 truncate">rahulkumar@saathapp.com</p>
+                  <p className="text-xs font-black text-slate-800 dark:text-slate-200">Professional Account</p>
+                  <p className="text-[10px] text-slate-450 truncate">saathapp partner</p>
                 </div>
                 <button
                   onClick={() => alert('Edit profile settings via the profile tab.')}

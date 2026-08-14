@@ -563,7 +563,7 @@ Website: www.saathappnova.co.in
                 className="rounded-2xl w-full h-auto object-cover max-w-lg lg:max-w-full hover:scale-[1.01] transition-transform duration-500 cursor-pointer"
                 onClick={handleDownloadBrochure}
                 onError={(e) => {
-                  e.target.src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80';
+                  e.target.style.display = 'none';
                 }}
               />
             </div>

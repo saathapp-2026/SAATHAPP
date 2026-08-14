@@ -55,11 +55,7 @@ export default function JobsCard({
     setTimeout(() => {
       setUploadedPhotos(prev => ({ 
         ...prev, 
-        [slot]: slot === 'before' 
-          ? 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=100&h=100&q=80' 
-          : slot === 'during'
-            ? 'https://images.unsplash.com/photo-1621905252507-b354bc25edac?auto=format&fit=crop&w=100&h=100&q=80'
-            : 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=100&h=100&q=80'
+        [slot]: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100%" height="100%" fill="%23e2e8f0"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2364748b" font-size="10">Proof Photo</text></svg>'
       }));
       setPhotoUploading(prev => ({ ...prev, [slot]: false }));
     }, 1500);

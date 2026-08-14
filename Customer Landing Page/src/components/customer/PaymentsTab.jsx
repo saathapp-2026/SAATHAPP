@@ -31,27 +31,13 @@ export default function PaymentsTab({ orders, _transactions, walletBalance, setS
           </div>
 
           <h3 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider pt-2">Saved Cards</h3>
-          <div className="p-4 bg-slate-50 dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <span className="text-xl">💳</span>
-              <div>
-                <p className="text-xs font-black text-slate-800 dark:text-white">State Bank of India</p>
-                <p className="text-[10px] text-slate-450 font-semibold font-mono mt-0.5">Visa Card •••• 4492</p>
-              </div>
-            </div>
-            <span className="text-[10px] text-slate-400 font-bold uppercase">Expires 09/29</span>
+          <div className="p-4 bg-slate-50 dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl text-center text-xs text-slate-400 font-semibold">
+            No saved cards.
           </div>
 
           <h3 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider pt-2">Saved UPI IDs</h3>
-          <div className="p-4 bg-slate-50 dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <span className="text-xl">📱</span>
-              <div>
-                <p className="text-xs font-black text-slate-800 dark:text-white">Google Pay UPI</p>
-                <p className="text-[10px] text-slate-455 font-semibold font-mono mt-0.5">nikita@okaxis</p>
-              </div>
-            </div>
-            <span className="text-[9px] bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded-full font-bold uppercase">Primary</span>
+          <div className="p-4 bg-slate-50 dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl text-center text-xs text-slate-400 font-semibold">
+            No saved UPI IDs.
           </div>
         </div>
 
@@ -71,9 +57,9 @@ export default function PaymentsTab({ orders, _transactions, walletBalance, setS
                   </div>
                   <button
                     onClick={() => handleDownloadBill(ord.id)}
-                    className="px-3 py-1.5 border border-slate-200 dark:border-slate-850 hover:bg-slate-50 rounded-lg font-bold text-[10px] uppercase tracking-wider cursor-pointer"
+                    className="px-3 py-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-black rounded-lg text-[10px] uppercase cursor-pointer"
                   >
-                    Download Bill
+                    Download PDF
                   </button>
                 </div>
               ))}

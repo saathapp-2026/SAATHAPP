@@ -50,107 +50,86 @@ export const calculateDeliveryOnboardingFee = (locationTier, _deliveryCategory) 
 
 export const initialDeliveryForm = {
   // Step 2: Auth
-  mobileNumber: '9128842027',
-  otp: '123456',
-  isOtpVerified: true,
+  mobileNumber: '',
+  otp: '',
+  isOtpVerified: false,
 
   // Step 3: Rider Profile
-  fullName: 'Vikram Singh',
-  profilePhotoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=250',
+  fullName: '',
+  profilePhotoUrl: '',
   gender: 'Male',
-  dob: '1998-05-14',
-  email: 'vikram.delivery@saathapp.in',
-  emergencyContact: '9876543210',
+  dob: '',
+  email: '',
+  emergencyContact: '',
 
   // Step 4: Location Tier & Vehicle Selection
   locationTier: 'Tier 2 City', // 'Village', 'Tier 3 Town', 'Tier 2 City', 'Tier 1 Metro'
-  city: 'Patna',
-  state: 'Bihar',
-  pincode: '800001',
+  city: '',
+  state: '',
+  pincode: '',
   vehicleType: 'Motorcycle / Scooter', // 'Walking', 'Bicycle', 'Electric Bicycle', 'Motorcycle / Scooter', 'Electric Scooter', 'Three-Wheeler', 'Small Commercial Vehicle'
-  vehicleNumber: 'BR-01-AB-9842',
+  vehicleNumber: '',
 
   // Step 5: Delivery Categories Covered & Service Radius
   deliveryCategories: ['Grocery Delivery', 'Food Delivery', 'Medicine Delivery', 'Parcel Delivery'],
   deliveryTypeMode: 'Multi-Service Delivery',
   preferredWorkingMode: 'Full-Time', // 'Full-Time', 'Part-Time', 'Weekend Rider'
-  serviceRadiusKm: '10 km',
+  serviceRadiusKm: '5 km',
 
   // Step 6: Document Vault Uploads
   documents: {
-    aadhaar: { status: 'Verified', fileName: 'Aadhaar_Vikram.pdf', date: '2026-08-01' },
-    pan: { status: 'Verified', fileName: 'PAN_VIKPS9842.pdf', date: '2026-08-01' },
-    drivingLicence: { status: 'Verified', fileName: 'DL_BR01201984210.pdf', date: '2026-08-01' },
-    rcBook: { status: 'Verified', fileName: 'RC_BR01AB9842.pdf', date: '2026-08-01' },
-    vehicleInsurance: { status: 'Verified', fileName: 'Insurance_Motor_2026.pdf', date: '2026-08-01' },
-    pucCertificate: { status: 'Verified', fileName: 'PUC_Valid_2026.pdf', date: '2026-08-01' },
-    riderSelfie: { status: 'Verified', fileName: 'rider_selfie.jpg', date: '2026-08-01' },
-    bankPassbook: { status: 'Verified', fileName: 'Passbook_SBI.pdf', date: '2026-08-01' },
+    aadhaar: { status: 'Pending', fileName: null, date: null },
+    pan: { status: 'Pending', fileName: null, date: null },
+    drivingLicence: { status: 'Pending', fileName: null, date: null },
+    rcBook: { status: 'Pending', fileName: null, date: null },
+    vehicleInsurance: { status: 'Pending', fileName: null, date: null },
+    pucCertificate: { status: 'Optional', fileName: null, date: null },
+    riderSelfie: { status: 'Pending', fileName: null, date: null },
+    bankPassbook: { status: 'Pending', fileName: null, date: null },
   },
 
   // Step 7: Bank & Payout
-  accountHolderName: 'Vikram Singh',
-  bankName: 'State Bank of India',
-  accountNumber: '38920194820',
-  ifscCode: 'SBIN0001234',
-  upiId: 'vikram.rider@sbi',
+  accountHolderName: '',
+  bankName: '',
+  accountNumber: '',
+  ifscCode: '',
+  upiId: '',
   payoutFrequency: 'Daily Payout',
 
   // Step 8: Mandatory One-Time Onboarding Fee
-  onboardingFeeAmount: 1100,
-  onboardingPaymentCompleted: true,
-  onboardingPaymentMethod: 'UPI / QR',
-  onboardingPaymentId: 'PAY-RIDER-984201',
-  onboardingPaymentDate: '2026-08-03',
-  onboardingValidityExpiry: '2028-08-03 (Valid for 2 Years)',
+  onboardingFeeAmount: 0,
+  onboardingPaymentCompleted: false,
+  onboardingPaymentMethod: '',
+  onboardingPaymentId: '',
+  onboardingPaymentDate: '',
+  onboardingValidityExpiry: '',
 
   // Step 9: Equipment & Merchandise Store (Optional)
-  orderedEquipment: ['Branded Delivery T-Shirt', 'Reflective Safety Vest', 'ISI Certified Helmet'],
+  orderedEquipment: [],
 
   // Step 10: Legal Terms
-  acceptedTerms: true,
-  digitalSignature: 'Vikram Singh',
+  acceptedTerms: false,
+  digitalSignature: '',
 
   // Step 11: Verification Status
-  applicationStatus: 'Approved', // 'Pending', 'Document Verification', 'DL Check', 'RC Check', 'Bank Verification', 'Approved'
-  submissionDate: '2026-08-03',
+  applicationStatus: 'Pending', // 'Pending', 'Document Verification', 'DL Check', 'RC Check', 'Bank Verification', 'Approved'
+  submissionDate: '',
 };
 
 export const initialDeliveryDashboardData = {
   kpis: {
-    todayEarnings: 1450,
-    weeklyEarnings: 8900,
-    totalDeliveries: 342,
-    todayCompleted: 14,
-    walletBalance: 2450,
-    riderRating: 4.9,
-    acceptanceRate: '98%',
-    onTimeRate: '99%',
+    todayEarnings: 0,
+    weeklyEarnings: 0,
+    totalDeliveries: 0,
+    todayCompleted: 0,
+    walletBalance: 0,
+    riderRating: 0,
+    acceptanceRate: '0%',
+    onTimeRate: '0%',
   },
-  activeOrder: {
-    id: 'DEL-98420',
-    type: 'Grocery & Medicine Delivery',
-    storeName: 'SaathApp Express Hub',
-    pickupAddress: 'Shop #12, Central Plaza, Patna - 800001',
-    customerName: 'Anil Kumar',
-    dropAddress: 'Flat 402, Royal Residency, Boring Road, Patna',
-    distanceKm: '3.2 km',
-    payout: 120,
-    otp: '4820',
-    status: 'In Transit',
-  },
-  recentDeliveries: [
-    { id: 'DEL-98419', store: 'Freshmart Grocery', amount: 85, status: 'Delivered', time: '10:45 AM', customer: 'Sujata Devi' },
-    { id: 'DEL-98418', store: 'MedPlus Pharmacy', amount: 110, status: 'Delivered', time: '09:30 AM', customer: 'Rajesh Verma' },
-    { id: 'DEL-98417', store: 'Bakehouse Cafe', amount: 95, status: 'Delivered', time: 'Yesterday, 08:15 PM', customer: 'Pooja Sharma' },
-  ],
-  completedHistory: [
-    { id: 'DEL-98419', type: 'Grocery Delivery', customer: 'Sujata Devi', distance: '2.4 km', payout: '₹85' },
-    { id: 'DEL-98418', type: 'Medicine Delivery', customer: 'Rajesh Verma', distance: '4.1 km', payout: '₹110' },
-    { id: 'DEL-98417', type: 'Bakery & Food', customer: 'Pooja Sharma', distance: '1.8 km', payout: '₹95' },
-    { id: 'DEL-98416', type: 'Parcel Delivery', customer: 'Amitabh Kumar', distance: '5.2 km', payout: '₹140' },
-    { id: 'DEL-98415', type: 'Milk & Dairy', customer: 'Sunita Roy', distance: '1.2 km', payout: '₹60' },
-  ],
+  activeOrder: null,
+  recentDeliveries: [],
+  completedHistory: [],
 };
 
 export function DeliveryProvider({ children }) {

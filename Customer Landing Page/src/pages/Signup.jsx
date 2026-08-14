@@ -83,7 +83,7 @@ export default function Signup({ onLogin, onSignup }) {
               Full name
               <div className="mt-2 flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3">
                 <User size={16} className="text-slate-400" />
-                <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-transparent outline-none" placeholder="Nikita Sharma" />
+                <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-transparent outline-none" placeholder="Full Name" />
               </div>
             </label>
 

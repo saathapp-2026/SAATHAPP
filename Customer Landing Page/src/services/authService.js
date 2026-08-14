@@ -2,9 +2,9 @@ const USERS_STORAGE_KEY = 'saathapp-users';
 const AUTH_SESSION_STORAGE_KEY = 'saathapp-auth-session';
 const AUTH_SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 30;
 const DEMO_USER = {
-  id: 'demo-user',
-  name: 'Nikita Sharma',
-  phone: '+919999999999',
+  id: 'guest-user',
+  name: 'User',
+  phone: '9999999999',
   email: 'demo@saathapp.com',
   passwordHash: null,
   createdAt: new Date().toISOString(),
@@ -19,7 +19,7 @@ function encodeHex(bytes) {
 export function getStoredAuthSession() {
   if (typeof window === 'undefined') return null;
   try {
-    const stored = window.localStorage.getItem(AUTH_SESSION_STORAGE_KEY);
+    const stored = window.sessionStorage.getItem(AUTH_SESSION_STORAGE_KEY);
     if (!stored) return null;
     const parsed = JSON.parse(stored);
     return parsed && isSessionValid(parsed) ? parsed : null;
@@ -36,12 +36,14 @@ export function saveAuthSession(user) {
     token: `saathapp-session-${user.id}-${Date.now()}`,
     expiresAt: Date.now() + AUTH_SESSION_TTL_MS,
   };
-  window.localStorage.setItem(AUTH_SESSION_STORAGE_KEY, JSON.stringify(session));
+  window.sessionStorage.setItem(AUTH_SESSION_STORAGE_KEY, JSON.stringify(session));
 }
 
 export function clearAuthSession() {
   if (typeof window === 'undefined') return;
+  window.sessionStorage.removeItem(AUTH_SESSION_STORAGE_KEY);
   window.localStorage.removeItem(AUTH_SESSION_STORAGE_KEY);
+  window.localStorage.removeItem('saath_profile');
 }
 
 export function isSessionValid(session) {
