@@ -48,62 +48,7 @@ export default function ProfessionalDashboardPage({
   const [isOnline, setIsOnline] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const [bookings, setBookings] = useState([
-    {
-      id: 'BKG-7782',
-      customerName: 'Aarav Sharma',
-      customerPhone: '+91 98765 43210',
-      serviceName: 'Deep Cleaning (3 BHK)',
-      scopeDescription: 'Complete deep cleaning of empty 3 BHK including bathrooms and kitchen.',
-      date: '14 Aug 2026',
-      time: '09:00 AM',
-      address: 'Sector 14, Gurgaon',
-      distance: '3.2',
-      estimatedPrice: 2499,
-      amount: 2499,
-      status: 'pending',
-      paymentStatus: 'pending',
-      notes: 'Customer requested eco-friendly products if possible.',
-      otp: '4432',
-      rating: null
-    },
-    {
-      id: 'BKG-8091',
-      customerName: 'Priya Patel',
-      customerPhone: '+91 91234 56789',
-      serviceName: 'AC Servicing x2',
-      scopeDescription: 'Standard split AC wet servicing for 2 units.',
-      date: '15 Aug 2026',
-      time: '11:30 AM',
-      address: 'Andheri West, Mumbai',
-      distance: '5.1',
-      estimatedPrice: 998,
-      amount: 998,
-      status: 'scheduled',
-      paymentStatus: 'secured',
-      notes: 'Please call before arriving.',
-      otp: '8812',
-      rating: null
-    },
-    {
-      id: 'BKG-8102',
-      customerName: 'Rohan Gupta',
-      customerPhone: '+91 99887 76655',
-      serviceName: 'Plumbing - Leak Fix',
-      scopeDescription: 'Fix leaking pipe under kitchen sink.',
-      date: 'Today',
-      time: '02:00 PM',
-      address: 'Koramangala, Bangalore',
-      distance: '1.5',
-      estimatedPrice: 350,
-      amount: 350,
-      status: 'in_progress',
-      paymentStatus: 'secured',
-      notes: '',
-      otp: '1190',
-      rating: null
-    }
-  ]);
+  const [bookings, setBookings] = useState([]);
   const [bookingFilter, setBookingFilter] = useState('all');  const [notifications, setNotifications] = useState([]);
 
   const onboarding = getStoredProfessionalOnboarding();

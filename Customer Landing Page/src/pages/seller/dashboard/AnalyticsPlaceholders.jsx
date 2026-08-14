@@ -2,36 +2,28 @@ import React from 'react';
 import { AreaChart, Area, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { TrendingUp, ShoppingBag, Package, Users, DollarSign, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
-const salesData = [
-  { name: 'Mon', revenue: 4000, target: 2400 },
-  { name: 'Tue', revenue: 3000, target: 1398 },
-  { name: 'Wed', revenue: 2000, target: 9800 },
-  { name: 'Thu', revenue: 2780, target: 3908 },
-  { name: 'Fri', revenue: 1890, target: 4800 },
-  { name: 'Sat', revenue: 2390, target: 3800 },
-  { name: 'Sun', revenue: 3490, target: 4300 },
-];
-
-const orderData = [
-  { name: 'Week 1', completed: 40, cancelled: 4, returned: 2 },
-  { name: 'Week 2', completed: 30, cancelled: 1, returned: 1 },
-  { name: 'Week 3', completed: 20, cancelled: 5, returned: 0 },
-  { name: 'Week 4', completed: 27, cancelled: 3, returned: 1 },
-];
-
+const salesData = Array.from({ length: 7 }, (_, i) => ({
+  name: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i],
+  revenue: 0,
+}));
+const orderData = Array.from({ length: 7 }, (_, i) => ({
+  name: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i],
+  completed: 0,
+  returned: 0,
+  cancelled: 0,
+}));
 const customerData = [
-  { name: 'New Customers', value: 400, color: '#10b981' },
-  { name: 'Returning', value: 300, color: '#0ea5e9' },
-  { name: 'Inactive', value: 100, color: '#94a3b8' },
+  { name: 'Segment A', value: 1, color: '#e2e8f0' },
+  { name: 'Segment B', value: 1, color: '#cbd5e1' },
+  { name: 'Segment C', value: 1, color: '#f1f5f9' },
 ];
-
-const productData = [
-  { id: '1', name: 'Organic Mangoes', sales: 450, revenue: 45000, status: 'trending' },
-  { id: '2', name: 'Basmati Rice 5kg', sales: 380, revenue: 76000, status: 'stable' },
-  { id: '3', name: 'Premium Tea 250g', sales: 290, revenue: 14500, status: 'trending' },
-  { id: '4', name: 'Mustard Oil 1L', sales: 120, revenue: 18000, status: 'down' },
-  { id: '5', name: 'Fresh Milk 1L', sales: 85, revenue: 5100, status: 'down' },
-];
+const productData = Array.from({ length: 3 }, (_, i) => ({
+  id: `placeholder-${i}`,
+  name: '\u00A0',
+  sales: 0,
+  revenue: 0,
+  status: 'stable',
+}));
 
 function StatCard({ title, value, change, isPositive }) {
   return (
@@ -54,9 +46,9 @@ export function SalesAnalyticsPlaceholder() {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <StatCard title="Gross Sales" value="₹19,550" change="12.5" isPositive={true} />
-        <StatCard title="Average Order Value" value="₹450" change="3.2" isPositive={true} />
-        <StatCard title="Sales Growth" value="+8.4%" change="2.1" isPositive={true} />
+        <StatCard title="Gross Sales" value="₹0" change="0" isPositive={true} />
+        <StatCard title="Average Order Value" value="₹0" change="0" isPositive={true} />
+        <StatCard title="Sales Growth" value="0%" change="0" isPositive={true} />
       </div>
 
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
@@ -87,10 +79,10 @@ export function OrdersAnalyticsPlaceholder() {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
-        <StatCard title="Total Orders" value="117" change="5.4" isPositive={true} />
-        <StatCard title="Completed" value="95" change="8.1" isPositive={true} />
-        <StatCard title="Cancelled" value="13" change="2.4" isPositive={false} />
-        <StatCard title="Returned" value="9" change="1.2" isPositive={false} />
+        <StatCard title="Total Orders" value="0" change="0" isPositive={true} />
+        <StatCard title="Completed" value="0" change="0" isPositive={true} />
+        <StatCard title="Cancelled" value="0" change="0" isPositive={false} />
+        <StatCard title="Returned" value="0" change="0" isPositive={false} />
       </div>
 
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
@@ -117,9 +109,9 @@ export function ProductsAnalyticsPlaceholder() {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <StatCard title="Active SKUs" value="48" change="2.0" isPositive={true} />
-        <StatCard title="Units Sold" value="1,345" change="14.2" isPositive={true} />
-        <StatCard title="Low Stock Items" value="6" change="1" isPositive={false} />
+        <StatCard title="Active SKUs" value="0" change="0" isPositive={true} />
+        <StatCard title="Units Sold" value="0" change="0" isPositive={true} />
+        <StatCard title="Low Stock Items" value="0" change="0" isPositive={false} />
       </div>
 
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
@@ -162,9 +154,9 @@ export function CustomersAnalyticsPlaceholder() {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <StatCard title="Total Customers" value="800" change="12.4" isPositive={true} />
-        <StatCard title="Repeat Rate" value="37.5%" change="4.1" isPositive={true} />
-        <StatCard title="Customer CAC" value="₹120" change="10.5" isPositive={false} />
+        <StatCard title="Total Customers" value="0" change="0" isPositive={true} />
+        <StatCard title="Repeat Rate" value="0%" change="0" isPositive={true} />
+        <StatCard title="Customer CAC" value="₹0" change="0" isPositive={false} />
       </div>
 
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm flex flex-col md:flex-row gap-8 items-center">
@@ -202,18 +194,18 @@ export function CustomersAnalyticsPlaceholder() {
 
 export function FinancialAnalyticsPlaceholder() {
   const data = [
-    { name: 'Gross Sales', amount: 125000, color: 'text-slate-900 dark:text-slate-100' },
-    { name: 'Discounts', amount: -12000, color: 'text-amber-600' },
-    { name: 'Platform Charges', amount: -8500, color: 'text-rose-600' },
-    { name: 'Refunds', amount: -4500, color: 'text-rose-600' },
-    { name: 'Net Earnings', amount: 100000, color: 'text-emerald-600 font-bold text-lg', borderTop: true },
+    { name: 'Gross Sales', amount: 0, color: 'text-slate-900 dark:text-slate-100' },
+    { name: 'Discounts', amount: 0, color: 'text-amber-600' },
+    { name: 'Platform Charges', amount: 0, color: 'text-rose-600' },
+    { name: 'Refunds', amount: 0, color: 'text-rose-600' },
+    { name: 'Net Earnings', amount: 0, color: 'text-emerald-600 font-bold text-lg', borderTop: true },
   ];
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <StatCard title="Net Earnings (MTD)" value="₹100,000" change="18.5" isPositive={true} />
-        <StatCard title="Platform Fees Paid" value="₹8,500" change="5.2" isPositive={false} />
+        <StatCard title="Net Earnings (MTD)" value="₹0" change="0" isPositive={true} />
+        <StatCard title="Platform Fees Paid" value="₹0" change="0" isPositive={false} />
       </div>
 
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm max-w-2xl mx-auto overflow-hidden">

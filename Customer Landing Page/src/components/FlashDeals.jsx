@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Timer, ShoppingCart, Heart, Eye, Star, Flame } from 'lucide-react';
-import { flashDeals } from '../data/mockData';
+// Removed mockData dependency
 
 export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
+  const [flashDeals, setFlashDeals] = useState(Array.from({ length: 5 }, (_, i) => ({
+    id: `placeholder-${i}`,
+    name: '\u00A0',
+    price: '0',
+    oldPrice: '0',
+    rating: '0',
+    deliveryTime: '—',
+    discount: 0,
+    stockLeft: 0,
+    totalStock: 100,
+    image: ''
+  })));
   // Countdown Timer state: e.g., 01:24:45
   const [timeLeft, setTimeLeft] = useState(5085); // 1 hr 24 mins 45 secs in seconds
 
@@ -97,11 +109,13 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                 {/* Product Image & Meta */}
                 <div>
                   <div className="w-full aspect-square rounded-card overflow-hidden bg-slate-100 mb-3 relative flex items-center justify-center">
-                    <img 
-                      src={deal.image} 
-                      alt={deal.name} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+                    {deal.image && (
+                      <img 
+                        src={deal.image} 
+                        alt={deal.name} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    )}
                     
                     {/* Delivery Time Badge */}
                     <div className="absolute bottom-2 left-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200/30">

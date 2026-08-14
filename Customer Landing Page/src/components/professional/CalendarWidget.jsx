@@ -2,24 +2,15 @@ import React, { useState } from 'react';
 import { Calendar, Info, Plus } from 'lucide-react';
 
 export default function CalendarWidget() {
-  const [blockedDates, setBlockedDates] = useState([12, 18, 25]); // Days in July 2026
-  const [leaveRequests, setLeaveRequests] = useState([
-    { id: 1, startDate: '2026-07-12', endDate: '2026-07-12', reason: 'Personal work', status: 'approved' },
-    { id: 2, startDate: '2026-07-25', endDate: '2026-07-25', reason: 'Medical checkup', status: 'approved' }
-  ]);
+  const [blockedDates, setBlockedDates] = useState([]); // Empty default state
+  const [leaveRequests, setLeaveRequests] = useState([]);
 
   const [newLeave, setNewLeave] = useState({
     date: '15',
     reason: 'Family event'
   });
 
-  // Mock bookings on specific calendar days (July 2026)
-  const jobDays = {
-    4: [{ time: '04:00 PM', task: 'Appliance Repair' }],
-    8: [{ time: '09:00 AM', task: 'Switch Repair' }],
-    15: [{ time: '11:00 AM', task: 'AC Installation' }],
-    22: [{ time: '02:00 PM', task: 'Wiring Overhaul' }]
-  };
+  const jobDays = {};
 
   const handleDayClick = (day) => {
     // Cannot block days with active jobs

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Heart, Eye, ShoppingCart } from 'lucide-react';
-import { featuredProducts } from '../data/mockData';
+// Removed mockData dependency
 
 export default function FeaturedProducts({ 
   onAddToCart, 
@@ -11,6 +11,18 @@ export default function FeaturedProducts({
   setSelectedCategory,
   searchQuery = ''
 }) {
+  const [featuredProducts, setFeaturedProducts] = useState(Array.from({ length: 8 }, (_, i) => ({
+    id: `placeholder-${i}`,
+    name: '\u00A0',
+    category: 'all',
+    price: '0',
+    oldPrice: '0',
+    rating: '0',
+    reviewsCount: '0',
+    deliveryTime: '—',
+    badge: '',
+    image: ''
+  })));
   const [wishlistedIds, setWishlistedIds] = useState([]);
 
   const toggleWishlist = (id) => {
@@ -156,11 +168,13 @@ export default function FeaturedProducts({
                   {/* Product Image & Info */}
                   <div>
                     <div className="w-full aspect-square rounded-card overflow-hidden bg-slate-100 mb-3 relative flex items-center justify-center">
-                      <img 
-                        src={product.image} 
-                        alt={product.name} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
+                      {product.image && (
+                        <img 
+                          src={product.image} 
+                          alt={product.name} 
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      )}
                       
                       {/* Delivery Time counter */}
                       <span className="absolute bottom-2 left-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200/30">

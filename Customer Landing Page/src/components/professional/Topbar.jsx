@@ -134,11 +134,9 @@ export default function Topbar({
             className="flex items-center gap-1.5 cursor-pointer focus:outline-none"
           >
             <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100">
-              <img 
-                src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=100&h=100&q=80" 
-                alt="Rahul Kumar" 
-                className="w-full h-full object-cover"
-              />
+              <div className="w-full h-full flex items-center justify-center bg-slate-200 dark:bg-slate-700 text-slate-500 text-xs font-bold uppercase">
+                RK
+              </div>
             </div>
             <ChevronDown size={12} className="text-slate-400" />
           </button>

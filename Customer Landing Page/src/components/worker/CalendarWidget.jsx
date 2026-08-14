@@ -11,12 +11,12 @@ export default function CalendarWidget() {
   for (let i = 0; i < offset; i++) days.push(null);
   for (let i = 1; i <= daysInMonth; i++) days.push(i);
 
-  // Present days (1 to 24, except 12, 18 which were leaves/holidays, 26 is today and marked present)
-  const presentDays = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 19, 20, 21, 22, 23, 24, 26];
-  const leaveDays = [12, 18, 25];
+  // Present days
+  const presentDays = [];
+  const leaveDays = [];
   
   // Days with jobs
-  const jobDays = [4, 8, 15, 22, 26];
+  const jobDays = [];
 
   const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 

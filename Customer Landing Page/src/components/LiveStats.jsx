@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { liveStats } from '../data/mockData';
+// Removed mockData dependency
 
 // Dynamic count-up counter component
 function Counter({ value, prefix = '', suffix = '' }) {
@@ -42,6 +42,12 @@ function Counter({ value, prefix = '', suffix = '' }) {
 }
 
 export default function LiveStats() {
+  const [liveStats, setLiveStats] = useState(Array.from({ length: 4 }, () => ({
+    value: '0',
+    prefix: '',
+    suffix: '',
+    label: '\u00A0'
+  })));
   return (
     <section className="py-12 bg-gradient-primary text-white border-b border-green-900 relative overflow-hidden">
       
@@ -56,28 +62,28 @@ export default function LiveStats() {
         {/* Statistics Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {liveStats.map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="text-center space-y-1.5"
-            >
-              <div className="text-3xl sm:text-4xl md:text-5xl font-black text-secondary tracking-tight">
-                <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
-              </div>
-              
-              <div className="h-0.5 w-10 bg-white/35 mx-auto rounded-full" />
-              
-              <p className="text-xs sm:text-sm font-bold text-white/85 tracking-wide uppercase">
-                {stat.label}
-              </p>
-            </motion.div>
-          ))}
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="text-center space-y-1.5"
+              >
+                <div className="text-3xl sm:text-4xl md:text-5xl font-black text-secondary tracking-tight">
+                  <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+                </div>
+                
+                <div className="h-0.5 w-10 bg-white/35 mx-auto rounded-full" />
+                
+                <p className="text-xs sm:text-sm font-bold text-white/85 tracking-wide uppercase">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
-      </div>
     </section>
   );
 }

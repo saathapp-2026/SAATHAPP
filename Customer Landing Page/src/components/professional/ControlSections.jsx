@@ -85,11 +85,7 @@ export function MembershipSection({ membership, renewalDate, onMembershipChange,
     onMembershipChange?.(next);
   };
 
-  const billingHistory = [
-    { id: 'INV-2026-07', date: 'Jul 01, 2026', plan: 'Growth', amount: 999, status: 'paid' },
-    { id: 'INV-2026-06', date: 'Jun 01, 2026', plan: 'Growth', amount: 999, status: 'paid' },
-    { id: 'INV-2026-05', date: 'May 01, 2026', plan: 'Starter', amount: 499, status: 'paid' }
-  ];
+  const billingHistory = [];
 
   return (
     <div className="space-y-6 text-left">
@@ -488,7 +484,7 @@ export function ProfileSettingsSection({
             <Star size={18} className="text-amber-500 fill-amber-500" />
             <h3 className="text-sm font-black uppercase tracking-wider">Reviews & Ratings</h3>
           </div>
-          <p className="text-xs text-slate-500">Your average rating is 4.8 out of 5 based on 124 reviews.</p>
+          <p className="text-xs text-slate-500">No ratings yet.</p>
           <div className="mt-4 p-4 border border-slate-100 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-900/50">
             <p className="text-xs text-slate-400 italic">Review system integration pending backend connectivity.</p>
           </div>

@@ -5,13 +5,7 @@ export default function CustomerTable() {
   const [search, setSearch] = useState('');
   const [customerTab, setCustomerTab] = useState('all');
   
-  const customers = [
-    { name: 'Rajesh Sen', phone: '9876543201', location: 'Green Park, New Delhi', jobs: 5, completedServices: 5, totalSpending: 12500, lastBooking: '12 Aug 2026', rating: 5.0, repeat: true },
-    { name: 'Sunita Roy', phone: '9876543202', location: 'Malviya Nagar, New Delhi', jobs: 3, completedServices: 3, totalSpending: 4500, lastBooking: '05 Aug 2026', rating: 4.8, repeat: true },
-    { name: 'Preeti Sharma', phone: '9876543203', location: 'Hauz Khas, New Delhi', jobs: 2, completedServices: 2, totalSpending: 3200, lastBooking: '28 Jul 2026', rating: 4.5, repeat: false },
-    { name: 'Vijay Khanna', phone: '9876543204', location: 'Green Park Ext, New Delhi', jobs: 4, completedServices: 4, totalSpending: 8900, lastBooking: '10 Aug 2026', rating: 4.9, repeat: true },
-    { name: 'Amit Verma', phone: '9876543205', location: 'Saket, New Delhi', jobs: 1, completedServices: 1, totalSpending: 1500, lastBooking: '01 Aug 2026', rating: 5.0, repeat: false }
-  ];
+  const customers = [];
 
   let filteredCustomers = customers.filter(c => 
     c.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -123,7 +117,14 @@ export default function CustomerTable() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50 dark:divide-slate-850">
-                {filteredCustomers.map((cust, idx) => (
+                {filteredCustomers.length === 0 ? (
+                  <tr>
+                    <td colSpan="6" className="py-8 text-center text-slate-400">
+                      No customers found.
+                    </td>
+                  </tr>
+                ) : (
+                  filteredCustomers.map((cust, idx) => (
                   <tr key={idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/20 transition-colors">
                     <td className="py-4">
                       <div className="flex items-center gap-2">
@@ -153,14 +154,20 @@ export default function CustomerTable() {
                       )}
                     </td>
                   </tr>
-                ))}
+                  ))
+                )}
               </tbody>
             </table>
           </div>
 
           {/* Mobile Stacked View */}
           <div className="md:hidden space-y-4">
-            {filteredCustomers.map((cust, idx) => (
+            {filteredCustomers.length === 0 ? (
+              <div className="p-4 rounded-xl border border-slate-150 dark:border-slate-850 bg-slate-50/50 dark:bg-slate-950/20 text-center text-slate-400 text-sm py-8">
+                No customers found.
+              </div>
+            ) : (
+              filteredCustomers.map((cust, idx) => (
               <div 
                 key={idx}
                 className="p-4 rounded-xl border border-slate-150 dark:border-slate-850 bg-slate-50/50 dark:bg-slate-950/20 space-y-3"
@@ -198,7 +205,8 @@ export default function CustomerTable() {
                   </div>
                 </div>
               </div>
-            ))}
+              ))
+            )}
           </div>
         </>
       )}

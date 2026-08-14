@@ -8,10 +8,10 @@ export function SellerProfilePlaceholder() {
   const fileInputRef = useRef(null);
 
   const defaultProfile = {
-    firstName: 'Rahul',
-    lastName: 'Sharma',
-    email: 'rahul.sharma@example.com',
-    mobile: '9876543210',
+    firstName: '',
+    lastName: '',
+    email: '',
+    mobile: '',
     profileImage: null
   };
 
@@ -272,10 +272,10 @@ export function SellerProfilePlaceholder() {
 export function BankDetailsPlaceholder() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    accountHolder: 'Rahul Sharma',
-    accountNumber: 'XXXXX5678',
-    ifsc: 'HDFC0001234',
-    bankName: 'HDFC Bank',
+    accountHolder: '',
+    accountNumber: '',
+    ifsc: '',
+    bankName: '',
     accountType: 'current',
   });
 

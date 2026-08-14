@@ -335,14 +335,9 @@ export default function WorkerRegisterPage() {
             </div>
 
             <div className="space-y-3 pt-4">
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleInstantApprove}
-                className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider rounded-btn transition-colors cursor-pointer border-0 shadow-md flex items-center justify-center gap-1.5"
-              >
-                <CheckCircle2 size={16} /> Instant Approve (Demo Bypass)
-              </motion.button>
+              <div className="w-full py-3 bg-slate-800 text-slate-400 font-bold text-xs uppercase tracking-wider rounded-btn border border-slate-700 flex items-center justify-center gap-1.5">
+                <CheckCircle2 size={16} /> Application Pending Review
+              </div>
 
               <button
                 onClick={() => navigate('/worker/login')}

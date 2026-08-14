@@ -8,7 +8,7 @@ const slides = [
     title: 'Everything Near You.',
     highlight: 'Delivered Today.',
     description: 'Get local groceries, hardware tools, agricultural supplies and professional services at the lowest rates from verified local vendors.',
-    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80',
+    image: '',
     color: 'from-green-600 via-green-700 to-emerald-800',
     primaryCta: 'Shop Now',
     secondaryCta: 'Book Service',
@@ -20,7 +20,7 @@ const slides = [
     title: 'Book Trusted Electricians',
     highlight: 'In Minutes.',
     description: 'Tired of waiting? Get verified home electricians, plumbers, painters, and AC technicians at fixed upfront pricing with a 30-day warranty.',
-    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80',
+    image: '',
     color: 'from-blue-600 via-blue-700 to-indigo-800',
     primaryCta: 'Book Service',
     secondaryCta: 'Become Provider',
@@ -32,7 +32,7 @@ const slides = [
     title: 'Construction Materials',
     highlight: 'Delivered Fast.',
     description: 'Order Cement, Sand, Steel Rods, Bricks, and Hardware fittings from your local suppliers. Guaranteed load dispatch within 60 minutes.',
-    image: 'https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&w=800&q=80',
+    image: '',
     color: 'from-slate-700 via-slate-800 to-slate-900',
     primaryCta: 'Order Materials',
     secondaryCta: 'View Dealers',
@@ -44,7 +44,7 @@ const slides = [
     title: 'Farm Supplies',
     highlight: 'At Your Doorstep.',
     description: 'Seeds, Organic fertilizers, crop protection and modern tractor parts. Book direct agriculture expert visits right from your farm fields.',
-    image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=800&q=80',
+    image: '',
     color: 'from-amber-600 via-amber-700 to-green-800',
     primaryCta: 'Order Supplies',
     secondaryCta: 'Consult Expert',
@@ -56,7 +56,7 @@ const slides = [
     title: 'Fresh Grocery',
     highlight: 'In 15 Minutes.',
     description: 'Fresh farm tomatoes, milk, local sweets, and groceries delivered hyper-locally with zero shipping fees on orders above ₹99.',
-    image: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800&q=80',
+    image: '',
     color: 'from-rose-600 via-rose-700 to-red-800',
     primaryCta: 'Shop Grocery',
     secondaryCta: 'Flash Deals',
@@ -243,11 +243,13 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                   className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-card overflow-hidden border-4 border-white/10 shadow-2xl bg-slate-900"
                 >
                   {/* Image with gradient mask overlay */}
-                  <img
-                    src={current.image}
-                    alt={current.title}
-                    className="w-full h-full object-cover transition-transform duration-[6s] hover:scale-105"
-                  />
+                  {current.image && (
+                    <img
+                      src={current.image}
+                      alt={current.title}
+                      className="w-full h-full object-cover transition-transform duration-[6s] hover:scale-105"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
                 </motion.div>
 

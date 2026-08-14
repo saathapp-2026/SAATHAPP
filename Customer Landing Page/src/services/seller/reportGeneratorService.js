@@ -295,21 +295,7 @@ export async function generateModuleReport({
     }));
   } else {
     // Module-agnostic placeholder rows for shared export across dashboard
-    customers = Array.from({ length: 5 }, (_, i) => ({
-      id: `${moduleKey.toUpperCase()}-${1001 + i}`,
-      name: `${MODULE_META[moduleKey]?.title || moduleKey} Row ${i + 1}`,
-      phone: '',
-      email: '',
-      city: '—',
-      state: '—',
-      registeredAt: new Date().toISOString(),
-      lastOrderAt: null,
-      totalOrders: i + 1,
-      totalSpent: (i + 1) * 1000,
-      averageOrderValue: 1000,
-      type: 'n/a',
-      status: 'active',
-    }));
+    customers = [];
   }
 
   const summary = buildExecutiveSummary(customers);

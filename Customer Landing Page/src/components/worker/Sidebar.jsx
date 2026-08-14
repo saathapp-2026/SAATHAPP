@@ -6,7 +6,6 @@ import {
   ClipboardCheck, DollarSign, Activity
 } from 'lucide-react';
 import SaathAppLogo from '../../assets/saathapp-logo.jpeg';
-import { workerProfile } from '../../data/mockData';
 
 const menuItems = [
   { id: 'dashboard', name: 'Dashboard', icon: LayoutDashboard },
@@ -73,7 +72,9 @@ export default function Sidebar({
             <div className="flex items-center gap-3">
               <div className="relative shrink-0">
                 <div className="w-12 h-12 rounded-2xl overflow-hidden ring-2 ring-primary/20 shadow-md">
-                  <img src={workerProfile.photo} alt={workerProfile.name} className="w-full h-full object-cover" />
+                  <div className="w-full h-full bg-primary flex items-center justify-center text-white font-black text-xl">
+                    SW
+                  </div>
                 </div>
                 <span
                   className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-white dark:border-slate-900 ${
@@ -83,11 +84,10 @@ export default function Sidebar({
               </div>
               <div className="min-w-0 text-left">
                 <div className="flex items-center gap-1">
-                  <h4 className="text-sm font-black text-slate-800 dark:text-white truncate">{workerProfile.name}</h4>
-                  {workerProfile.verified && <ShieldCheck size={13} className="text-primary shrink-0" />}
+                  <h4 className="text-sm font-black text-slate-800 dark:text-white truncate">Service Worker</h4>
                 </div>
-                <p className="text-[10px] font-bold text-slate-500 mt-0.5">ID: {workerProfile.id}</p>
-                <p className="text-[10px] font-black text-accent uppercase tracking-wide">{workerProfile.type}</p>
+                <p className="text-[10px] font-bold text-slate-500 mt-0.5">ID: —</p>
+                <p className="text-[10px] font-black text-accent uppercase tracking-wide">Pending</p>
               </div>
             </div>
 

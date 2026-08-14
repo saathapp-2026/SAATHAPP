@@ -7,11 +7,11 @@ import {
   getReportType,
 } from '../../config/seller/reportConstants';
 
-const STORAGE_KEY = 'saathapp_seller_reports_v1';
-const SCHEDULES_KEY = 'saathapp_seller_report_schedules_v2';
-const DOWNLOADS_KEY = 'saathapp_seller_report_downloads_v1';
-const TEMPLATES_KEY = 'saathapp_seller_report_templates_v1';
-const DRAFT_KEY = 'saathapp_seller_report_wizard_draft';
+const STORAGE_KEY = 'saathapp_seller_reports_v2';
+const SCHEDULES_KEY = 'saathapp_seller_report_schedules_v3';
+const DOWNLOADS_KEY = 'saathapp_seller_report_downloads_v2';
+const TEMPLATES_KEY = 'saathapp_seller_report_templates_v2';
+const DRAFT_KEY = 'saathapp_seller_report_wizard_draft_v2';
 
 function daysAgo(n, h = 10, m = 30) {
   const d = new Date();
@@ -39,42 +39,23 @@ function save(key, value) {
 }
 
 function seedReports() {
-  const formats = ['pdf', 'excel', 'csv', 'ppt', 'word', 'json'];
-  return REPORT_TYPES.slice(0, 12).map((t, i) => {
-    const format = formats[i % formats.length];
-    const generatedOn = daysAgo(i % 8, 9 + (i % 6), 15 + (i % 40));
-    const from = new Date();
-    from.setDate(1);
-    const to = new Date();
-    return {
-      id: `rpt-${1001 + i}`,
-      typeId: t.id,
-      name: t.label,
-      description: t.description,
-      format,
-      status: REPORT_STATUS.READY,
-      dateFrom: from.toISOString().slice(0, 10),
-      dateTo: to.toISOString().slice(0, 10),
-      generatedOn,
-      size: 1200000 + i * 180000 + (i % 3) * 90000,
-      pages: 4 + (i % 8),
-      rows: 80 + i * 12,
-      generatedBy: 'Saurabh Kumar',
-      filters: { category: 'all', status: 'all' },
-      preview: {
-        summary: {
-          revenue: 234560 - i * 4200,
-          orders: 186 - i * 3,
-          gst: 12400 - i * 120,
-          margin: 18.5 - (i % 5) * 0.3,
-        },
-        rows: Array.from({ length: 5 }, (_, r) => ({
-          label: `Row ${r + 1}`,
-          value: 1200 + r * 340 + i * 50,
-        })),
-      },
-    };
-  });
+  return Array.from({ length: 3 }, (_, i) => ({
+    id: `placeholder-rpt-${i}`,
+    typeId: 'sales',
+    name: '\u00A0',
+    description: '\u00A0',
+    format: 'pdf',
+    status: REPORT_STATUS.READY,
+    dateFrom: new Date().toISOString(),
+    dateTo: new Date().toISOString(),
+    generatedOn: new Date().toISOString(),
+    size: 0,
+    pages: 0,
+    rows: 0,
+    generatedBy: '\u00A0',
+    filters: {},
+    preview: { summary: {}, rows: [] }
+  }));
 }
 
 function ensureReports() {
@@ -122,14 +103,14 @@ export async function getReportSummary() {
   const last = [...reports].sort((a, b) => new Date(b.generatedOn) - new Date(a.generatedOn))[0];
   const lastParts = last ? splitRelative(last.generatedOn) : { dayLabel: '—', timeLabel: '' };
   const cards = [
-    { key: 'generated', label: 'Reports Generated', displayValue: Math.max(24, reports.length), changePct: 14.3, trend: 'up', color: 'violet', icon: 'chart', tooltip: 'Total reports generated this period' },
+    { key: 'generated', label: 'Reports Generated', displayValue: reports.length, changePct: 0, trend: 'up', color: 'violet', icon: 'chart', tooltip: 'Total reports generated this period' },
     { key: 'last', label: 'Last Report Generated', displayValue: lastParts.dayLabel, dayLabel: lastParts.dayLabel, timeLabel: lastParts.timeLabel, changePct: 0, trend: 'up', color: 'blue', icon: 'clock', tooltip: 'Most recent report generation', subLabel: lastParts.timeLabel },
-    { key: 'revenue', label: 'Total Revenue', displayValue: formatINR(234560), changePct: 18.6, trend: 'up', color: 'green', icon: 'rupee', tooltip: 'Revenue covered in reports' },
-    { key: 'margin', label: 'Profit Margin', displayValue: '18.5%', changePct: 2.4, trend: 'up', color: 'amber', icon: 'trend', tooltip: 'Average profit margin' },
-    { key: 'orders', label: 'Orders Processed', displayValue: 1284, changePct: 11.2, trend: 'up', color: 'sky', icon: 'orders', tooltip: 'Orders in reporting window' },
-    { key: 'gst', label: 'GST Collected', displayValue: formatINR(12400), changePct: 9.8, trend: 'up', color: 'teal', icon: 'gst', tooltip: 'GST from report period' },
-    { key: 'customers', label: 'Customer Growth', displayValue: '+18.2%', changePct: 18.2, trend: 'up', color: 'indigo', icon: 'users', tooltip: 'Customer growth vs previous period' },
-    { key: 'delivery', label: 'Delivery Performance', displayValue: '96.4%', changePct: 1.6, trend: 'up', color: 'emerald', icon: 'truck', tooltip: 'On-time delivery rate' },
+    { key: 'revenue', label: 'Total Revenue', displayValue: formatINR(0), changePct: 0, trend: 'up', color: 'green', icon: 'rupee', tooltip: 'Revenue covered in reports' },
+    { key: 'margin', label: 'Profit Margin', displayValue: '0%', changePct: 0, trend: 'up', color: 'amber', icon: 'trend', tooltip: 'Average profit margin' },
+    { key: 'orders', label: 'Orders Processed', displayValue: 0, changePct: 0, trend: 'up', color: 'sky', icon: 'orders', tooltip: 'Orders in reporting window' },
+    { key: 'gst', label: 'GST Collected', displayValue: formatINR(0), changePct: 0, trend: 'up', color: 'teal', icon: 'gst', tooltip: 'GST from report period' },
+    { key: 'customers', label: 'Customer Growth', displayValue: '0%', changePct: 0, trend: 'up', color: 'indigo', icon: 'users', tooltip: 'Customer growth vs previous period' },
+    { key: 'delivery', label: 'Delivery Performance', displayValue: '0%', changePct: 0, trend: 'up', color: 'emerald', icon: 'truck', tooltip: 'On-time delivery rate' },
   ];
   return { success: true, data: cards };
 }
@@ -151,16 +132,16 @@ function splitRelative(iso) {
 
 export async function getBusinessOverview() {
   await delay(220);
-  const spark = (base) => Array.from({ length: 12 }, (_, i) => base + Math.round(Math.sin(i / 2) * base * 0.15) + i * (base * 0.02));
+  const spark = () => Array.from({ length: 12 }, () => 0);
   return {
     success: true,
     data: {
       rangeLabel: 'This Month',
       metrics: [
-        { id: 'sales', label: 'Total Sales', value: formatINR(234560), changePct: 18.6, color: '#10b981', series: spark(18000) },
-        { id: 'orders', label: 'Total Orders', value: '1,284', changePct: 12.4, color: '#0ea5e9', series: spark(90) },
-        { id: 'aov', label: 'Avg. Order Value', value: formatINR(780), changePct: 6.8, color: '#f59e0b', series: spark(700) },
-        { id: 'customers', label: 'New Customers', value: '342', changePct: 15.2, color: '#8b5cf6', series: spark(24) },
+        { id: 'sales', label: 'Total Sales', value: formatINR(0), changePct: 0, color: '#10b981', series: spark() },
+        { id: 'orders', label: 'Total Orders', value: '0', changePct: 0, color: '#0ea5e9', series: spark() },
+        { id: 'aov', label: 'Avg. Order Value', value: formatINR(0), changePct: 0, color: '#f59e0b', series: spark() },
+        { id: 'customers', label: 'New Customers', value: '0', changePct: 0, color: '#8b5cf6', series: spark() },
       ],
     },
   };
@@ -228,34 +209,20 @@ export async function getReportAnalytics(range = 'monthly') {
 
   const series = labels.map((label, i) => ({
     label,
-    sales: 18000 + i * 3200,
-    revenue: 22000 + i * 2800,
-    orders: 80 + i * 12,
-    gst: 1800 + i * 220,
-    margin: 16 + (i % 5) * 0.6,
-    returns: 4 + (i % 3),
+    sales: 0,
+    revenue: 0,
+    orders: 0,
+    gst: 0,
+    margin: 0,
+    returns: 0,
   }));
 
   return {
     success: true,
     data: {
       series,
-      topProducts: [
-        { name: 'Basmati Rice 5kg', value: 42000 },
-        { name: 'Cold Pressed Oil', value: 28600 },
-        { name: 'Premium Tea', value: 19400 },
-      ],
-      insights: [
-        { id: 'rev', title: 'Revenue Trends', text: 'Revenue up 18.6% MoM with strong weekend spikes.' },
-        { id: 'cat', title: 'Fastest Growing Category', text: 'Grocery leading growth at +22% this month.' },
-        { id: 'best', title: 'Best Selling Products', text: 'Basmati Rice and Cold Pressed Oil drive 38% of sales.' },
-        { id: 'slow', title: 'Slow Moving Products', text: '3 SKUs below reorder velocity — review inventory.' },
-        { id: 'cust', title: 'Customer Growth', text: 'New customers +15.8%; repeat rate holding at 37%.' },
-        { id: 'margin', title: 'Profit Margin Insights', text: 'Margin improved +2.4 pts after discount optimization.' },
-        { id: 'inv', title: 'Inventory Health', text: '94% SKUs in healthy stock band; 4 low-stock alerts.' },
-        { id: 'pay', title: 'Payment Collection', text: 'Collection rate 96.2%; COD pending ₹8,420.' },
-        { id: 'ret', title: 'Return Analysis', text: 'Return rate 2.1% — within marketplace benchmark.' },
-      ],
+      topProducts: [],
+      insights: [],
     },
   };
 }

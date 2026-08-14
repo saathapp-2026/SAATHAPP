@@ -1,9 +1,21 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Star, ArrowRight, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
-import { nearbyShops } from '../data/mockData';
+// Removed mockData dependency
 
 export default function NearbyShops({ onShopSelect }) {
+  const [nearbyShops, setNearbyShops] = useState(Array.from({ length: 4 }, (_, i) => ({
+    id: `placeholder-${i}`,
+    name: '\u00A0',
+    type: '\u00A0',
+    rating: '0',
+    deliveryTime: '—',
+    distance: '—',
+    status: '',
+    tags: [],
+    image: '',
+    logo: ''
+  })));
   const scrollContainerRef = useRef(null);
 
   const scroll = (direction) => {
@@ -64,11 +76,13 @@ export default function NearbyShops({ onShopSelect }) {
               >
                 {/* Shop Banner with gradient overlay */}
                 <div className="w-full h-36 bg-slate-200 relative overflow-hidden">
-                  <img 
-                    src={shop.banner} 
-                    alt={shop.name} 
-                    className="w-full h-full object-cover transition-transform duration-[4s] group-hover:scale-105"
-                  />
+                  {shop.banner && (
+                    <img 
+                      src={shop.banner} 
+                      alt={shop.name} 
+                      className="w-full h-full object-cover transition-transform duration-[4s] group-hover:scale-105"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
                   
                   {/* Floating Left: Store Logo Tag */}

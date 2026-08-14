@@ -319,10 +319,7 @@ export default function JobsCard({
                     <p className="text-[10px] text-danger font-extrabold">Invalid OTP. Verification failed.</p>
                   )}
                   
-                  <div className="p-2.5 bg-amber-50 dark:bg-amber-955/20 text-amber-600 border border-amber-200/50 rounded-xl text-[10px] font-bold flex items-center gap-1">
-                    <AlertCircle size={12} className="flex-shrink-0" />
-                    <span>Demo check: Customer code is <strong>{job.otp}</strong></span>
-                  </div>
+                  
                 </motion.div>
               )}
 

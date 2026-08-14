@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Zap, Hammer, HardHat, Wrench, ShoppingCart, Tractor, 
   Car, Home, Sofa, Smartphone, Flame, Droplet, Newspaper, ChevronRight, ChevronLeft
 } from 'lucide-react';
-import { categories } from '../data/mockData';
+// Removed mockData dependency
 
 // Map icon string name to Lucide Component
 const iconMap = {
@@ -13,6 +13,15 @@ const iconMap = {
 };
 
 export default function Categories({ onCategorySelect, activeCategory }) {
+  const [categories, setCategories] = useState(Array.from({ length: 7 }, (_, i) => ({
+    id: `placeholder-${i}`,
+    name: '\u00A0',
+    tagline: '\u00A0',
+    iconName: '',
+    image: '',
+    gradient: 'from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900',
+    textColor: 'text-slate-500'
+  })));
   const scrollContainerRef = useRef(null);
 
   const scroll = (direction) => {
@@ -81,11 +90,13 @@ export default function Categories({ onCategorySelect, activeCategory }) {
                 <div className="relative">
                   {/* Category Image - Rounded with hover scaling */}
                   <div className="w-full h-24 sm:h-28 rounded-card overflow-hidden bg-slate-200 mb-3 relative">
-                    <img 
-                      src={category.image} 
-                      alt={category.name} 
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                    />
+                    {category.image && (
+                      <img 
+                        src={category.image} 
+                        alt={category.name} 
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                      />
+                    )}
                     {/* Dark gradient mask */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
                     

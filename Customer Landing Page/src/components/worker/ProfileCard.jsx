@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import { User, Briefcase, CreditCard, Shield, Check, Edit2, Lock } from 'lucide-react';
-import { workerProfile } from '../../data/mockData';
-
 export default function ProfileCard() {
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState({
-    fullName: workerProfile.name,
-    phone: workerProfile.phone.replace(/\D/g, '').slice(-10),
-    email: workerProfile.email,
-    experience: workerProfile.experience,
-    category: workerProfile.type,
-    skills: workerProfile.skills.join(', '),
-    bankAccount: workerProfile.bankAccount,
-    emergencyContact: workerProfile.emergencyContact,
+    fullName: '',
+    phone: '',
+    email: '',
+    experience: '',
+    category: '',
+    skills: '',
+    bankAccount: '',
+    emergencyContact: '',
   });
   const [formData, setFormData] = useState({ ...profile });
 
@@ -44,13 +42,13 @@ export default function ProfileCard() {
   return (
     <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left max-w-4xl">
       <div className="flex flex-col sm:flex-row sm:items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-800 mb-6">
-        <div className="w-24 h-24 rounded-2xl overflow-hidden ring-4 ring-primary/15 shadow-premium shrink-0">
-          <img src={workerProfile.photo} alt={workerProfile.name} className="w-full h-full object-cover" />
+        <div className="w-24 h-24 rounded-2xl overflow-hidden ring-4 ring-primary/15 shadow-premium shrink-0 bg-primary flex items-center justify-center text-white font-black text-4xl">
+          SW
         </div>
         <div className="flex-1">
-          <h3 className="text-xl font-black text-slate-800 dark:text-white">{workerProfile.name}</h3>
-          <p className="text-sm text-slate-500 mt-1">{workerProfile.type} · {workerProfile.city}</p>
-          <p className="text-xs font-bold text-primary mt-1">Worker ID: {workerProfile.id}</p>
+          <h3 className="text-xl font-black text-slate-800 dark:text-white">{profile.fullName || 'Service Worker'}</h3>
+          <p className="text-sm text-slate-500 mt-1">{profile.category || 'Not set'} · {profile.city || 'Not set'}</p>
+          <p className="text-xs font-bold text-primary mt-1">Worker ID: —</p>
         </div>
         <button
           type="button"

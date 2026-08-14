@@ -10,25 +10,13 @@ import {
 } from '../../config/seller/invoiceConstants';
 import { _loadCustomersForExport } from './sellerCustomersService';
 
-const STORAGE_KEY = 'saathapp_seller_invoices_v1';
-const DRAFT_KEY = 'saathapp_invoice_wizard_draft';
+const STORAGE_KEY = 'saathapp_seller_invoices_v2';
+const DRAFT_KEY = 'saathapp_invoice_wizard_draft_v2';
 const FY = 2026;
 
-const SEED_CUSTOMERS = [
-  { id: 'CUST-1001', name: 'Rahul Sharma', phone: '+91 98765 43210', email: 'rahul.sharma@email.com', gstin: '27AABCU9603R1ZM', billingAddress: '12, MG Road, Mumbai', shippingAddress: '12, MG Road, Mumbai', stateCode: '27', city: 'Mumbai' },
-  { id: 'CUST-1002', name: 'Priya Patel', phone: '+91 87654 32109', email: 'priya.patel@email.com', gstin: '24AADFP1234K1Z5', billingAddress: '45, CG Road, Ahmedabad', shippingAddress: '45, CG Road, Ahmedabad', stateCode: '24', city: 'Ahmedabad' },
-  { id: 'CUST-1003', name: 'Amit Kumar', phone: '+91 76543 21098', email: 'amit.kumar@email.com', gstin: '', billingAddress: '88, Ring Road, Delhi', shippingAddress: '88, Ring Road, Delhi', stateCode: '07', city: 'Delhi' },
-  { id: 'CUST-1004', name: 'Sneha Reddy', phone: '+91 65432 10987', email: 'sneha.reddy@email.com', gstin: '36AABCS1234L1Z8', billingAddress: '3, Banjara Hills, Hyderabad', shippingAddress: '3, Banjara Hills, Hyderabad', stateCode: '36', city: 'Hyderabad' },
-  { id: 'CUST-1005', name: 'Vikram Singh', phone: '+91 54321 09876', email: 'vikram.singh@email.com', gstin: '', billingAddress: '19, MI Road, Jaipur', shippingAddress: '19, MI Road, Jaipur', stateCode: '08', city: 'Jaipur' },
-];
+const SEED_CUSTOMERS = [];
 
-const SAMPLE_PRODUCTS = [
-  { id: 'p1', name: 'Organic Basmati Rice 5kg', sku: 'RCE-002', mrp: 520, sellingPrice: 450, gstPct: 5 },
-  { id: 'p2', name: 'Cold Pressed Oil 1L', sku: 'OIL-011', mrp: 320, sellingPrice: 280, gstPct: 5 },
-  { id: 'p3', name: 'Fresh Milk 1L', sku: 'MLK-003', mrp: 70, sellingPrice: 65, gstPct: 0 },
-  { id: 'p4', name: 'Premium Tea 250g', sku: 'TEA-005', mrp: 220, sellingPrice: 180, gstPct: 5 },
-  { id: 'p5', name: 'Whole Wheat Flour 10kg', sku: 'FLR-004', mrp: 480, sellingPrice: 420, gstPct: 5 },
-];
+const SAMPLE_PRODUCTS = [];
 
 function daysAgo(n, h = 10, m = 30) {
   const d = new Date();
@@ -50,80 +38,21 @@ function makeItems(seed) {
 }
 
 function buildSeed() {
-  const statuses = [
-    INVOICE_STATUS.PAID,
-    INVOICE_STATUS.PAID,
-    INVOICE_STATUS.PAID,
-    INVOICE_STATUS.PENDING,
-    INVOICE_STATUS.CANCELLED,
-    INVOICE_STATUS.DRAFT,
-    INVOICE_STATUS.OVERDUE,
-    INVOICE_STATUS.SENT,
-    INVOICE_STATUS.VIEWED,
-    INVOICE_STATUS.GENERATED,
-  ];
-  return Array.from({ length: 42 }, (_, i) => {
-    const num = 42 - i;
-    const customer = SEED_CUSTOMERS[i % SEED_CUSTOMERS.length];
-    const items = makeItems(i);
-    const place = customer.stateCode || SELLER_STATE_CODE;
-    const totals = calcInvoiceTotals(items, place);
-    const status = statuses[i % statuses.length];
-    const invoiceDate = daysAgo(i % 20, 9 + (i % 8), 15 + (i % 40));
-    const due = new Date(invoiceDate);
-    due.setDate(due.getDate() + 14);
-    const paymentStatus =
-      status === INVOICE_STATUS.PAID || status === INVOICE_STATUS.COMPLETED
-        ? PAYMENT_STATUS.PAID
-        : status === INVOICE_STATUS.CANCELLED
-          ? PAYMENT_STATUS.REFUNDED
-          : status === INVOICE_STATUS.PENDING || status === INVOICE_STATUS.OVERDUE
-            ? PAYMENT_STATUS.PENDING
-            : PAYMENT_STATUS.PENDING;
-
-    return {
-      id: `inv-${FY}-${String(num).padStart(3, '0')}`,
-      number: `INV-${FY}-${String(num).padStart(3, '0')}`,
-      orderId: i % 4 === 0 ? null : `SA-${1042 - (i % 20)}`,
-      customer,
-      items,
-      placeOfSupply: place,
-      invoiceDate,
-      dueDate: due.toISOString(),
-      paymentTerms: 'Net 14',
-      reference: i % 3 === 0 ? `REF-${1000 + i}` : '',
-      poNumber: i % 5 === 0 ? `PO-${2000 + i}` : '',
-      status,
-      paymentStatus,
-      paymentMode: ['upi', 'card', 'cash', 'wallet'][i % 4],
-      transactionId: paymentStatus === PAYMENT_STATUS.PAID ? `TXN${900000 + i}` : '',
-      paymentDate: paymentStatus === PAYMENT_STATUS.PAID ? invoiceDate : null,
-      settlementDate: paymentStatus === PAYMENT_STATUS.PAID ? daysAgo(Math.max(0, (i % 20) - 1)) : null,
-      paymentNotes: '',
-      totals,
-      gstType: customer.gstin ? 'B2B' : 'B2C',
-      branchId: 'br-main',
-      revisionHistory: [
-        { at: invoiceDate, action: 'created', by: 'seller' },
-        ...(status !== INVOICE_STATUS.DRAFT
-          ? [{ at: daysAgo(Math.max(0, (i % 20) - 1)), action: 'generated', by: 'seller' }]
-          : []),
-        ...(status === INVOICE_STATUS.SENT || status === INVOICE_STATUS.VIEWED || status === INVOICE_STATUS.PAID
-          ? [{ at: daysAgo(Math.max(0, (i % 20) - 2)), action: 'sent', by: 'seller' }]
-          : []),
-        ...(status === INVOICE_STATUS.PAID
-          ? [{ at: daysAgo(Math.max(0, (i % 20) - 3)), action: 'paid', by: 'system' }]
-          : []),
-      ],
-      notes: '',
-      creditNotes: [],
-      debitNotes: [],
-      eWayBillReady: true,
-      eInvoiceReady: true,
-      createdAt: invoiceDate,
-      updatedAt: invoiceDate,
-    };
-  });
+  return Array.from({ length: 3 }, (_, i) => ({
+    id: `placeholder-inv-${i}`,
+    number: `INV-2026-00${i+1}`,
+    orderId: '',
+    customer: { name: '\u00A0', phone: '\u00A0' },
+    items: [],
+    placeOfSupply: SELLER_STATE_CODE,
+    invoiceDate: new Date().toISOString(),
+    dueDate: new Date().toISOString(),
+    status: INVOICE_STATUS.GENERATED,
+    paymentStatus: PAYMENT_STATUS.PENDING,
+    paymentMode: 'upi',
+    totals: { grandTotal: 0, taxTotal: 0 },
+    gstType: 'B2C'
+  }));
 }
 
 function loadStore() {
@@ -302,16 +231,7 @@ export async function getInvoiceProducts(search = '') {
 
 export async function getDeliveredOrdersForInvoice() {
   await delay(150);
-  const orders = Array.from({ length: 8 }, (_, i) => ({
-    id: `SA-${1042 - i}`,
-    date: daysAgo(i + 1),
-    amount: 650 + i * 180,
-    status: 'Delivered',
-    customerId: SEED_CUSTOMERS[i % SEED_CUSTOMERS.length].id,
-    customerName: SEED_CUSTOMERS[i % SEED_CUSTOMERS.length].name,
-    items: makeItems(i + 10),
-  }));
-  return { success: true, data: orders };
+  return { success: true, data: [] };
 }
 
 export function emptyWizardDraft() {
@@ -551,9 +471,9 @@ export async function getInvoiceAnalytics() {
     d.setDate(d.getDate() - (13 - i));
     return {
       label: d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }),
-      revenue: 4000 + i * 800 + (i % 3) * 500,
-      gst: 600 + i * 90,
-      count: 2 + (i % 5),
+      revenue: 0,
+      gst: 0,
+      count: 0,
     };
   });
   return {
@@ -572,8 +492,8 @@ export async function getInvoiceAnalytics() {
       daily,
       monthly: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((label, i) => ({
         label,
-        revenue: 40000 + i * 12000,
-        gst: 6000 + i * 1500,
+        revenue: 0,
+        gst: 0,
       })),
     },
   };

@@ -28,20 +28,17 @@ export default function WorkerDashboardPage({
   const [searchQuery, setSearchQuery] = useState('');
   const [notificationPrefs, setNotificationPrefs] = useState({ jobs: true, salary: true, reviews: true });
 
-  const [attendance, setAttendance] = useState(initialAttendance);
+  const [attendance, setAttendance] = useState({ present: 0, leaves: 0, lateMarks: 0, penalty: 0 });
   const [selectedJob, setSelectedJob] = useState(null);
 
-  const [jobs, setJobs] = useState(initialWorkerJobs);
+  const [jobs, setJobs] = useState([]);
 
   const [activeLiveJob, setActiveLiveJob] = useState(null);
 
-  const [notifications, setNotifications] = useState(initialWorkerNotifications);
+  const [notifications, setNotifications] = useState([]);
 
   // Support tickets state
-  const [_supportTickets, setSupportTickets] = useState([
-    { id: 'TCK-501', subject: 'Incentive calculation error on JOB-2810', status: 'closed', response: 'Incentive of ₹350 resolved.' },
-    { id: 'TCK-608', subject: 'Late mark disputer for Jul 10 shift', status: 'open', response: 'Under operational review.' }
-  ]);
+  const [_supportTickets, setSupportTickets] = useState([]);
 
   const [ticketSubject, setTicketSubject] = useState('');
 
@@ -235,25 +232,25 @@ export default function WorkerDashboardPage({
 
                     {/* STATS CARD GRID */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-                      <StatsCard title="Today's Jobs" value={workerStats.todayJobs} icon={Briefcase} progress={55} progressColor="bg-primary" colorClass="text-primary bg-primary/10" />
-                      <StatsCard title="Assigned Jobs" value={workerStats.assignedJobs} icon={ClipboardCheck} progress={40} progressColor="bg-blue-500" colorClass="text-blue-500 bg-blue-500/10" />
-                      <StatsCard title="Completed Jobs" value={workerStats.completedJobs} icon={CheckCircle} growth={8} growthType="up" progress={88} progressColor="bg-emerald-500" colorClass="text-emerald-500 bg-emerald-500/10" />
-                      <StatsCard title="Pending Jobs" value={workerStats.pendingJobs} icon={Clock} progress={25} progressColor="bg-amber-500" colorClass="text-amber-500 bg-amber-500/10" />
+                      <StatsCard title="Today's Jobs" value={0} icon={Briefcase} progress={0} progressColor="bg-primary" colorClass="text-primary bg-primary/10" />
+                      <StatsCard title="Assigned Jobs" value={0} icon={ClipboardCheck} progress={0} progressColor="bg-blue-500" colorClass="text-blue-500 bg-blue-500/10" />
+                      <StatsCard title="Completed Jobs" value={0} icon={CheckCircle} growth={0} growthType="none" progress={0} progressColor="bg-emerald-500" colorClass="text-emerald-500 bg-emerald-500/10" />
+                      <StatsCard title="Pending Jobs" value={0} icon={Clock} progress={0} progressColor="bg-amber-500" colorClass="text-amber-500 bg-amber-500/10" />
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-                      <StatsCard title="Cancelled Jobs" value={workerStats.cancelledJobs} icon={AlertCircle} progress={12} progressColor="bg-rose-500" colorClass="text-rose-500 bg-rose-500/10" />
-                      <StatsCard title="Today's Earnings" value={`₹${workerStats.todayEarnings.toLocaleString()}`} icon={DollarSign} growth={14} growthType="up" progress={68} progressColor="bg-emerald-500" colorClass="text-emerald-500 bg-emerald-500/10" />
-                      <StatsCard title="Monthly Earnings" value={`₹${workerStats.monthlyEarnings.toLocaleString()}`} icon={Wallet} progress={82} progressColor="bg-indigo-500" colorClass="text-indigo-500 bg-indigo-500/10" />
-                      <StatsCard title="Performance Score" value={`${workerStats.performanceScore}%`} icon={Activity} progress={workerStats.performanceScore} progressColor="bg-primary" colorClass="text-primary bg-primary/10" />
+                      <StatsCard title="Cancelled Jobs" value={0} icon={AlertCircle} progress={0} progressColor="bg-rose-500" colorClass="text-rose-500 bg-rose-500/10" />
+                      <StatsCard title="Today's Earnings" value={`₹0`} icon={DollarSign} growth={0} growthType="none" progress={0} progressColor="bg-emerald-500" colorClass="text-emerald-500 bg-emerald-500/10" />
+                      <StatsCard title="Monthly Earnings" value={`₹0`} icon={Wallet} progress={0} progressColor="bg-indigo-500" colorClass="text-indigo-500 bg-indigo-500/10" />
+                      <StatsCard title="Performance Score" value={`0%`} icon={Activity} progress={0} progressColor="bg-primary" colorClass="text-primary bg-primary/10" />
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-                      <StatsCard title="Working Hours" value={`${workerStats.workingHours}h`} icon={Clock} progress={75} progressColor="bg-blue-500" colorClass="text-blue-500 bg-blue-500/10" />
-                      <StatsCard title="Attendance" value={`${workerStats.attendancePercent}%`} icon={Calendar} progress={94} progressColor="bg-emerald-500" colorClass="text-emerald-500 bg-emerald-500/10" />
-                      <StatsCard title="Monthly Salary" value={`₹${workerStats.monthlySalary.toLocaleString()}`} icon={Briefcase} progress={100} progressColor="bg-violet-500" colorClass="text-violet-500 bg-violet-500/10" />
-                      <StatsCard title="Incentives" value={`₹${workerStats.incentives.toLocaleString()}`} icon={Star} progress={72} progressColor="bg-secondary" colorClass="text-amber-600 bg-amber-500/10" />
-                      <StatsCard title="Avg Rating" value={`${workerStats.averageRating} ★`} icon={Star} progress={98} progressColor="bg-amber-500" colorClass="text-amber-500 bg-amber-500/10" />
+                      <StatsCard title="Working Hours" value={`0h`} icon={Clock} progress={0} progressColor="bg-blue-500" colorClass="text-blue-500 bg-blue-500/10" />
+                      <StatsCard title="Attendance" value={`0%`} icon={Calendar} progress={0} progressColor="bg-emerald-500" colorClass="text-emerald-500 bg-emerald-500/10" />
+                      <StatsCard title="Monthly Salary" value={`₹0`} icon={Briefcase} progress={0} progressColor="bg-violet-500" colorClass="text-violet-500 bg-violet-500/10" />
+                      <StatsCard title="Incentives" value={`₹0`} icon={Star} progress={0} progressColor="bg-secondary" colorClass="text-amber-600 bg-amber-500/10" />
+                      <StatsCard title="Avg Rating" value={`0.0 ★`} icon={Star} progress={0} progressColor="bg-amber-500" colorClass="text-amber-500 bg-amber-500/10" />
                     </div>
 
                     {/* Prominent Active Job resume banner if active */}
@@ -445,27 +442,27 @@ export default function WorkerDashboardPage({
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                       <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
                         <span className="text-[9px] font-black text-slate-450 uppercase block">Today</span>
-                        <p className="text-lg font-black text-slate-800 dark:text-slate-200 mt-1">₹{workerEarnings.today.toLocaleString()}</p>
+                        <p className="text-lg font-black text-slate-800 dark:text-slate-200 mt-1">₹0</p>
                       </div>
                       <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
                         <span className="text-[9px] font-black text-slate-450 uppercase block">Weekly</span>
-                        <p className="text-lg font-black text-slate-800 dark:text-slate-200 mt-1">₹{workerEarnings.weekly.toLocaleString()}</p>
+                        <p className="text-lg font-black text-slate-800 dark:text-slate-200 mt-1">₹0</p>
                       </div>
                       <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
                         <span className="text-[9px] font-black text-slate-450 uppercase block">Monthly</span>
-                        <p className="text-lg font-black text-primary mt-1">₹{workerEarnings.monthly.toLocaleString()}</p>
+                        <p className="text-lg font-black text-primary mt-1">₹0</p>
                       </div>
                       <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
                         <span className="text-[9px] font-black text-slate-450 uppercase block">Salary</span>
-                        <p className="text-lg font-black text-slate-800 dark:text-slate-200 mt-1">₹{workerEarnings.salary.toLocaleString()}</p>
+                        <p className="text-lg font-black text-slate-800 dark:text-slate-200 mt-1">₹0</p>
                       </div>
                       <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
                         <span className="text-[9px] font-black text-slate-450 uppercase block">Bonus</span>
-                        <p className="text-lg font-black text-emerald-600 mt-1">₹{workerEarnings.bonus.toLocaleString()}</p>
+                        <p className="text-lg font-black text-emerald-600 mt-1">₹0</p>
                       </div>
                       <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
                         <span className="text-[9px] font-black text-slate-450 uppercase block">Incentives</span>
-                        <p className="text-lg font-black text-amber-600 mt-1">₹{workerEarnings.incentives.toLocaleString()}</p>
+                        <p className="text-lg font-black text-amber-600 mt-1">₹0</p>
                       </div>
                     </div>
                   </div>

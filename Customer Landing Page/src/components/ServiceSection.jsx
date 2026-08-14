@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Star, ShieldCheck, Timer, Calendar, UserCheck } from 'lucide-react';
-import { services } from '../data/mockData';
+// Removed mockData dependency
 
 export default function ServiceSection({ onBookService }) {
+  const [services, setServices] = useState(Array.from({ length: 3 }, (_, i) => ({
+    id: `placeholder-${i}`,
+    name: '\u00A0',
+    category: '',
+    rating: '0',
+    reviewsCount: '0',
+    duration: '—',
+    price: '0',
+    saathisAvailable: '0',
+    image: ''
+  })));
   return (
     <section className="py-12 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40">
       <div className="w-full px-4 sm:px-6 lg:px-8">
@@ -35,11 +46,13 @@ export default function ServiceSection({ onBookService }) {
             >
               {/* Image Banner */}
               <div className="w-full h-44 sm:h-48 bg-slate-200 relative overflow-hidden">
-                <img 
-                  src={service.image} 
-                  alt={service.name} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                {service.image && (
+                  <img 
+                    src={service.image} 
+                    alt={service.name} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                )}
                 
                 {/* Overlay: Category Tag */}
                 <span className="absolute top-3 left-3 bg-accent text-white text-[10px] font-black uppercase tracking-wider py-0.5 px-2 rounded-full shadow-sm z-10">

@@ -8,7 +8,7 @@ import {
   inferLifecycleStage,
 } from '../../config/seller/customerConstants';
 
-const STORAGE_KEY = 'saathapp_seller_customers_v1';
+const STORAGE_KEY = 'saathapp_seller_customers_v2';
 const RECENT_SEARCH_KEY = 'saathapp_customer_recent_searches';
 
 const SEED_NAMES = [
@@ -62,101 +62,20 @@ function daysAgo(n, hours = 10, mins = 30) {
 }
 
 function buildSeed() {
-  return SEED_NAMES.map(([first, last], i) => {
-    const idNum = 1001 + i;
-    const id = `CUST-${idNum}`;
-    const city = CITIES[i % CITIES.length];
-    const state = STATES[i % STATES.length];
-    const phone = `+91 ${9000000000 + idNum * 17}`.replace(/(\d{5})(\d{5})$/, '$1 $2');
-    const email = `${first.toLowerCase()}.${last.toLowerCase()}@email.com`;
-    const totalOrders = i === 0 ? 12 : i === 1 ? 8 : i === 2 ? 15 : i === 3 ? 3 : i === 4 ? 1 : (i % 11) + (i % 3 === 0 ? 0 : 1);
-    const avg = 650 + (i % 9) * 85;
-    const totalSpent = totalOrders * avg + (i % 5) * 120;
-    let type = CUSTOMER_TYPE.NEW;
-    if (totalOrders === 0) type = CUSTOMER_TYPE.INACTIVE;
-    else if (totalSpent >= 18000 || totalOrders >= 12) type = CUSTOMER_TYPE.VIP;
-    else if (totalOrders >= 2) type = CUSTOMER_TYPE.REPEAT;
-    let status = CUSTOMER_STATUS.ACTIVE;
-    if (i === 38) status = CUSTOMER_STATUS.BLOCKED;
-    else if (i === 37 || i === 36) status = CUSTOMER_STATUS.INACTIVE;
-    else if (type === CUSTOMER_TYPE.INACTIVE) status = CUSTOMER_STATUS.INACTIVE;
-
-    const registeredAt = daysAgo(90 - (i % 80), 9, 15);
-    const lastOrderAt = totalOrders ? daysAgo(i % 14, 10 + (i % 8), 15 + (i % 40)) : null;
-    const aov = totalOrders ? Math.round(totalSpent / totalOrders) : 0;
-
-    return {
-      id,
-      name: `${first} ${last}`,
-      firstName: first,
-      lastName: last,
-      phone,
-      email,
-      city,
-      state,
-      pincode: String(110001 + (i % 90) * 111),
-      address: `${12 + i}, ${['MG Road', 'Park Street', 'Ring Road', 'Lake View'][i % 4]}, ${city}`,
-      lat: 19.07 + (i % 10) * 0.01,
-      lng: 72.87 + (i % 10) * 0.01,
-      totalOrders,
-      totalSpent,
-      averageOrderValue: aov,
-      registeredAt,
-      lastOrderAt,
-      type,
-      status,
-      verified: i % 7 !== 0 || totalOrders > 0,
-      loyaltyPoints: Math.min(5000, totalOrders * 40 + (i % 5) * 25),
-      referralCode: `REF-${first.slice(0, 3).toUpperCase()}${idNum}`,
-      referredBy: i % 5 === 0 ? 'CUST-1001' : null,
-      notes: i % 4 === 0 ? 'Prefers evening delivery. Call before dispatch.' : '',
-      wishlist: i % 3 === 0 ? ['Organic Basmati Rice', 'Cold Pressed Oil'] : [],
-      cart: i % 6 === 0 ? [{ name: 'Fresh Milk 1L', qty: 2, price: 65 }] : [],
-      documents: i % 8 === 0 ? [{ name: 'GST Certificate', url: '#' }] : [],
-      orders: Array.from({ length: Math.min(totalOrders, 5) }, (_, oi) => ({
-        id: `SA-${2000 + i * 3 + oi}`,
-        amount: aov + oi * 40,
-        status: oi === 0 ? 'Delivered' : oi === 1 ? 'Processing' : 'Delivered',
-        date: daysAgo(oi * 3 + (i % 5)),
-      })),
-      payments: Array.from({ length: Math.min(totalOrders, 3) }, (_, pi) => ({
-        id: `PAY-${idNum}-${pi}`,
-        amount: aov,
-        method: ['UPI', 'COD', 'Card'][pi % 3],
-        date: daysAgo(pi * 4 + 1),
-        status: 'Paid',
-      })),
-      returns: i % 9 === 0
-        ? [{ id: `RET-${idNum}`, orderId: `SA-${2000 + i}`, reason: 'Damaged', status: 'Resolved', date: daysAgo(20) }]
-        : [],
-      tickets: i % 11 === 0
-        ? [{ id: `TCK-${idNum}`, subject: 'Delivery delay', status: 'Closed', date: daysAgo(12) }]
-        : [],
-      timeline: [
-        { id: 'registered', at: registeredAt, label: 'Customer Registered' },
-        ...(i % 7 !== 0 || totalOrders > 0
-          ? [{ id: 'verified', at: daysAgo(85 - (i % 70)), label: 'Verified' }]
-          : []),
-        ...(totalOrders >= 1
-          ? [{ id: 'first_purchase', at: daysAgo(70 - (i % 50)), label: 'First Purchase' }]
-          : []),
-        ...(totalOrders >= 2
-          ? [{ id: 'repeat', at: daysAgo(40 - (i % 30)), label: 'Became Repeat Buyer' }]
-          : []),
-        ...(type === CUSTOMER_TYPE.VIP
-          ? [{ id: 'vip', at: daysAgo(20 - (i % 15)), label: 'Upgraded to VIP' }]
-          : []),
-        ...(status === CUSTOMER_STATUS.INACTIVE
-          ? [{ id: 'inactive', at: daysAgo(5), label: 'Marked Inactive' }]
-          : []),
-        ...(status === CUSTOMER_STATUS.BLOCKED
-          ? [{ id: 'blocked', at: daysAgo(2), label: 'Blocked' }]
-          : []),
-      ],
-      avatarColor: ['violet', 'sky', 'emerald', 'amber', 'rose', 'indigo'][i % 6],
-      lifecycleStage: null,
-    };
-  }).map((c) => ({ ...c, lifecycleStage: inferLifecycleStage(c) }));
+  return Array.from({ length: 3 }, (_, i) => ({
+    id: `placeholder-cust-${i}`,
+    name: '\u00A0',
+    phone: '\u00A0',
+    email: '\u00A0',
+    city: '\u00A0',
+    state: '\u00A0',
+    type: 'new',
+    status: 'active',
+    totalSpent: 0,
+    totalOrders: 0,
+    averageOrderValue: 0,
+    registeredAt: new Date().toISOString()
+  }));
 }
 
 function loadStore() {
@@ -439,14 +358,14 @@ export async function getCustomerAnalytics() {
     d.setDate(d.getDate() - (13 - i));
     return {
       label: d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }),
-      newCustomers: 1 + ((i * 3) % 7),
-      revenue: 8000 + i * 1200 + (i % 4) * 900,
+      newCustomers: 0,
+      revenue: 0,
     };
   });
   const monthly = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((label, i) => ({
     label,
-    newCustomers: 20 + i * 8,
-    revenue: 40000 + i * 12000,
+    newCustomers: 0,
+    revenue: 0,
   }));
   const topSpenders = [...live]
     .sort((a, b) => b.totalSpent - a.totalSpent)
@@ -454,7 +373,7 @@ export async function getCustomerAnalytics() {
     .map((c) => ({ id: c.id, name: c.name, spent: c.totalSpent, orders: c.totalOrders, type: c.type }));
   const geo = CITIES.slice(0, 6).map((city, i) => ({
     city,
-    count: live.filter((c) => c.city === city).length || 4 + i,
+    count: live.filter((c) => c.city === city).length,
   }));
   const total = live.length || 1;
   const repeatRate = Math.round((live.filter((c) => c.type === 'repeat' || c.type === 'vip').length / total) * 1000) / 10;
@@ -475,7 +394,7 @@ export async function getCustomerAnalytics() {
       topSpenders,
       geo,
       metrics: {
-        growth: 18.2,
+        growth: 0,
         repeatRate,
         revenuePerCustomer: Math.round(revenue / total),
         ordersPerCustomer: Math.round((orders / total) * 10) / 10,

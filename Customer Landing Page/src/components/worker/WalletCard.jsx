@@ -1,39 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Wallet, ShieldCheck, Download, ArrowUpRight } from 'lucide-react';
-import { workerWallet, workerEarnings } from '../../data/mockData';
-
 export default function WalletCard() {
-  const [balance, setBalance] = useState(workerWallet.balance);
+  const [balance, setBalance] = useState(0);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [ledger, setLedger] = useState([
-    ...workerWallet.withdrawHistory.map((w) => ({
-      id: w.id,
-      date: w.date,
-      desc: 'Wallet Withdrawal',
-      amount: w.amount,
-      type: 'withdrawal',
-      status: 'debited',
-    })),
-    {
-      id: 'PAY-SAL',
-      date: 'Jul 01, 2026',
-      desc: 'Monthly Base Salary',
-      amount: workerEarnings.salary,
-      type: 'salary',
-      status: 'credited',
-    },
-    {
-      id: 'PAY-BON',
-      date: 'Jun 28, 2026',
-      desc: 'Performance Bonus',
-      amount: workerWallet.bonus,
-      type: 'bonus',
-      status: 'credited',
-    },
-  ]);
+  const [ledger, setLedger] = useState([]);
 
   const handleWithdrawSubmit = (e) => {
     e.preventDefault();
@@ -91,11 +64,11 @@ export default function WalletCard() {
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-black uppercase text-slate-400">Salary Status</span>
             <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 text-[9px] font-black uppercase border border-emerald-200/50">
-              {workerWallet.salaryStatus}
+              Not Set
             </span>
           </div>
           <div>
-            <h3 className="text-2xl font-black text-slate-800 dark:text-white">₹{workerEarnings.salary.toLocaleString()}</h3>
+            <h3 className="text-2xl font-black text-slate-800 dark:text-white">₹0</h3>
             <p className="text-[10px] text-slate-500 font-semibold mt-1">Monthly base salary</p>
           </div>
         </div>
@@ -103,8 +76,8 @@ export default function WalletCard() {
         <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex flex-col justify-between min-h-[180px]">
           <span className="text-[10px] font-black uppercase text-slate-400">Pending Salary</span>
           <div>
-            <h3 className="text-2xl font-black text-slate-800 dark:text-white">₹{workerWallet.pendingSalary.toLocaleString()}</h3>
-            <p className="text-[10px] text-slate-500 font-semibold mt-1">Bonus: ₹{workerWallet.bonus.toLocaleString()}</p>
+            <h3 className="text-2xl font-black text-slate-800 dark:text-white">₹0</h3>
+            <p className="text-[10px] text-slate-500 font-semibold mt-1">Bonus: ₹0</p>
           </div>
         </div>
       </div>
@@ -132,21 +105,33 @@ export default function WalletCard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
-              {ledger.map((row) => (
-                <tr key={row.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/30">
-                  <td className="py-3 font-bold text-slate-700 dark:text-slate-300">{row.id}</td>
-                  <td className="py-3 text-slate-500">{row.date}</td>
-                  <td className="py-3">{row.desc}</td>
-                  <td className="py-3">
-                    <span className="px-2 py-0.5 rounded-full text-[9px] font-black uppercase bg-slate-100 dark:bg-slate-800 text-slate-600">
-                      {row.type}
-                    </span>
-                  </td>
-                  <td className={`py-3 text-right font-black ${row.status === 'credited' ? 'text-primary' : 'text-rose-500'}`}>
-                    {row.status === 'credited' ? '+' : '-'}₹{row.amount.toLocaleString()}
+              {ledger.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="py-8 text-center text-slate-400">
+                    No transactions yet.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                ledger.map((row) => (
+                  <tr key={row.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/30">
+                    <td className="py-3 font-bold text-slate-700 dark:text-slate-300">{row.id}</td>
+                    <td className="py-3 text-slate-500">{row.date}</td>
+                    <td className="py-3">{row.desc}</td>
+                    <td className="py-3">
+                      <span className={`px-2 py-0.5 text-[9px] font-black uppercase rounded ${
+                        row.type === 'withdrawal' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'
+                      }`}>
+                        {row.type}
+                      </span>
+                    </td>
+                    <td className={`py-3 text-right font-black ${
+                      row.status === 'credited' ? 'text-emerald-500' : 'text-slate-800 dark:text-slate-200'
+                    }`}>
+                      {row.status === 'credited' ? '+' : '-'}₹{row.amount.toLocaleString()}
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

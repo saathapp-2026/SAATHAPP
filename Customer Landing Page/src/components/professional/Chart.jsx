@@ -7,41 +7,41 @@ export default function Chart() {
   const [hoveredPoint, setHoveredPoint] = useState(null);
   const [downloading, setDownloading] = useState(false);
 
-  // Mock data for Line Chart
+  // Real data structure ready to be hydrated
   const earningsData = {
     daily: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-      values: [1200, 1800, 1400, 2200, 3100, 4200, 3800],
-      total: '17,700',
-      percentage: '12.5'
+      values: [0, 0, 0, 0, 0, 0, 0],
+      total: '0',
+      percentage: '0.0'
     },
     weekly: {
       labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-      values: [14200, 12800, 15600, 18500],
-      total: '61,100',
-      percentage: '8.4'
+      values: [0, 0, 0, 0],
+      total: '0',
+      percentage: '0.0'
     },
     monthly: {
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-      values: [42000, 48000, 52000, 49000, 61000, 68000],
-      total: '318,000',
-      percentage: '15.2'
+      values: [0, 0, 0, 0, 0, 0],
+      total: '0',
+      percentage: '0.0'
     },
     yearly: {
       labels: ['2023', '2024', '2025', '2026'],
-      values: [380000, 420000, 510000, 640000],
-      total: '1,950,000',
-      percentage: '25.4'
+      values: [0, 0, 0, 0],
+      total: '0',
+      percentage: '0.0'
     }
   };
 
-  // Mock data for Doughnut Chart
+  // Empty state for Doughnut Chart
   const bookingStatuses = [
-    { label: 'Completed', value: 45, color: '#2E7D32', offset: 0 },
-    { label: 'Upcoming', value: 20, color: '#1565C0', offset: 45 },
-    { label: 'Pending', value: 15, color: '#FFC107', offset: 65 },
-    { label: 'Cancelled', value: 8, color: '#E53935', offset: 80 },
-    { label: 'In Progress', value: 12, color: '#81C784', offset: 88 }
+    { label: 'Completed', value: 0, color: '#2E7D32', offset: 0 },
+    { label: 'Upcoming', value: 0, color: '#1565C0', offset: 0 },
+    { label: 'Pending', value: 0, color: '#FFC107', offset: 0 },
+    { label: 'Cancelled', value: 0, color: '#E53935', offset: 0 },
+    { label: 'In Progress', value: 0, color: '#81C784', offset: 0 }
   ];
 
   const currentData = earningsData[timeframe];
@@ -321,7 +321,7 @@ export default function Chart() {
 
           {/* Center text overlay */}
           <div className="absolute text-center">
-            <span className="text-xl font-black text-slate-855 dark:text-white">100+</span>
+            <span className="text-xl font-black text-slate-855 dark:text-white">0</span>
             <span className="text-[9px] text-slate-400 block font-bold uppercase tracking-wider">Total Jobs</span>
           </div>
         </div>

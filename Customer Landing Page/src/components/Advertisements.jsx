@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Tag, ChevronLeft, ChevronRight } from 'lucide-react';
-import { advertisements } from '../data/mockData';
+// Removed mockData dependency
 
 export default function Advertisements() {
+  const [advertisements, setAdvertisements] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
+    if (advertisements.length === 0) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % advertisements.length);
     }, 5500);
     return () => clearInterval(timer);
-  }, []);
+  }, [advertisements]);
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % advertisements.length);
@@ -21,7 +23,19 @@ export default function Advertisements() {
     setCurrentIndex((prev) => (prev - 1 + advertisements.length) % advertisements.length);
   };
 
-  const active = advertisements[currentIndex];
+  const active = advertisements.length > 0 ? advertisements[currentIndex] : null;
+
+  if (!active) {
+    return (
+      <section className="py-10 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40 relative w-full">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-card overflow-hidden shadow-soft border border-dashed border-slate-300 dark:border-slate-700 min-h-[160px] sm:min-h-[180px] flex items-center justify-center bg-slate-50 dark:bg-slate-800/40 text-slate-400 text-sm font-medium">
+            No active advertisements.
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-10 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40 relative w-full">

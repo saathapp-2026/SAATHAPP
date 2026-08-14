@@ -2,21 +2,17 @@ import React, { useState } from 'react';
 import { Star, MessageSquare, CornerDownRight, Send } from 'lucide-react';
 
 export default function RatingCard() {
-  const [reviews, setReviews] = useState([
-    { id: 1, author: 'Aman Varma', rating: 5, date: 'Yesterday', text: 'Rahul arrived right on time and fixed our main generator line very quickly. Extremely professional and courteous!', reply: null },
-    { id: 2, author: 'Megha Gupta', rating: 4, date: '3 days ago', text: 'Good job with fixing the kitchen light fixtures. Cleaned up after finishing the wiring. Recommended.', reply: 'Thank you for the review, Megha! Glad I could help.' },
-    { id: 3, author: 'Devendra Yadav', rating: 5, date: '1 week ago', text: 'Highly skilled. Diagnosed a complex short-circuit issue in our farmhouse that other technicians could not fix. 5 stars!', reply: null }
-  ]);
+  const [reviews, setReviews] = useState([]);
 
   const [activeReplyId, setActiveReplyId] = useState(null);
   const [replyText, setReplyText] = useState('');
 
   const starsDistribution = [
-    { stars: 5, count: 142, percentage: 80 },
-    { stars: 4, count: 28, percentage: 15 },
-    { stars: 3, count: 5, percentage: 3 },
-    { stars: 2, count: 2, percentage: 1 },
-    { stars: 1, count: 1, percentage: 1 }
+    { stars: 5, count: 0, percentage: 0 },
+    { stars: 4, count: 0, percentage: 0 },
+    { stars: 3, count: 0, percentage: 0 },
+    { stars: 2, count: 0, percentage: 0 },
+    { stars: 1, count: 0, percentage: 0 }
   ];
 
   const handleReplySubmit = (e, reviewId) => {
@@ -47,7 +43,7 @@ export default function RatingCard() {
         {/* Big star counter */}
         <div className="flex items-center gap-4 my-6">
           <div className="text-center">
-            <span className="text-5xl font-black text-slate-800 dark:text-white leading-none">4.8</span>
+            <span className="text-5xl font-black text-slate-800 dark:text-white leading-none">0.0</span>
             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mt-1">out of 5</span>
           </div>
 
@@ -59,7 +55,7 @@ export default function RatingCard() {
               <Star size={18} fill="currentColor" />
               <Star size={18} className="text-slate-200 dark:text-slate-700" fill="currentColor" />
             </div>
-            <p className="text-xs text-slate-400 font-semibold">Based on 178 bookings</p>
+            <p className="text-xs text-slate-400 font-semibold">Based on 0 bookings</p>
           </div>
         </div>
 
@@ -92,7 +88,10 @@ export default function RatingCard() {
         </div>
 
         <div className="space-y-5 overflow-y-auto max-h-[300px] pr-2 scrollbar-none">
-          {reviews.map((rev) => (
+          {reviews.length === 0 ? (
+            <p className="text-sm text-slate-400 py-4 text-center italic">No reviews yet.</p>
+          ) : (
+            reviews.map((rev) => (
             <div key={rev.id} className="pb-4 border-b border-slate-100 dark:border-slate-800/40 last:border-0 last:pb-0">
               
               {/* Author Row */}
@@ -170,7 +169,8 @@ export default function RatingCard() {
               )}
 
             </div>
-          ))}
+            ))
+          )}
         </div>
 
       </div>

@@ -28,16 +28,7 @@ export default function AttendanceCard({
     return `${hrs < 10 ? '0' + hrs : hrs}:${mins < 10 ? '0' + mins : mins}:${secs < 10 ? '0' + secs : secs}`;
   };
 
-  // Mock days in July (green: present, orange: leave)
-  const calendarDays = [
-    { day: 20, status: 'present' },
-    { day: 21, status: 'present' },
-    { day: 22, status: 'present' },
-    { day: 23, status: 'present' },
-    { day: 24, status: 'present' },
-    { day: 25, status: 'leave' },
-    { day: 26, status: 'present' }
-  ];
+  const calendarDays = [];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-left">

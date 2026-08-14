@@ -6,24 +6,15 @@ import { FeeSummarySection } from './ControlSections';
 export default function WalletCard({ onboarding }) {
   const [activeTab, setActiveTab] = useState('overview');
   
-  const [balance, setBalance] = useState(8420);
-  const [pendingBalance, _setPendingBalance] = useState(2100);
+  const [balance, setBalance] = useState(0);
+  const [pendingBalance, _setPendingBalance] = useState(0);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   
-  const [transactions, setTransactions] = useState([
-    { id: 'TXN-7489', date: 'Jul 25, 2026', desc: 'AC Installation Settlement', amount: 1560, status: 'credited' },
-    { id: 'TXN-7412', date: 'Jul 24, 2026', desc: 'Electrical Wiring Repair', amount: 2200, status: 'credited' },
-    { id: 'TXN-7390', date: 'Jul 22, 2026', desc: 'Weekly Settlement Payout', amount: 12500, status: 'debited' },
-    { id: 'TXN-7250', date: 'Jul 20, 2026', desc: 'Kitchen Light Overhaul', status: 'credited', amount: 450 },
-    { id: 'TXN-7199', date: 'Jul 19, 2026', desc: 'Geyser Repair - Pending Verification', amount: 850, status: 'pending' }
-  ]);
+  const [transactions, setTransactions] = useState([]);
 
-  const [withdrawals, setWithdrawals] = useState([
-    { id: 'WTH-0489', date: 'Jul 22, 2026', amount: 12500, bank: 'HDFC Bank - XXXX5678', status: 'completed' },
-    { id: 'WTH-0341', date: 'Jul 15, 2026', amount: 8400, bank: 'HDFC Bank - XXXX5678', status: 'completed' }
-  ]);
+  const [withdrawals, setWithdrawals] = useState([]);
 
   const handleWithdrawSubmit = (e) => {
     e.preventDefault();
@@ -66,12 +57,12 @@ export default function WalletCard({ onboarding }) {
 
   const getStats = () => {
     switch(activeTab) {
-      case 'today': return { label: "Today's Earnings", amount: 1560, jobs: 1, pending: 850 };
-      case 'this_week': return { label: "This Week's Earnings", amount: 4210, jobs: 3, pending: 1200 };
-      case 'this_month': return { label: "This Month's Earnings", amount: 18450, jobs: 12, pending: 2100 };
+      case 'today': return { label: "Today's Earnings", amount: 0, jobs: 0, pending: 0 };
+      case 'this_week': return { label: "This Week's Earnings", amount: 0, jobs: 0, pending: 0 };
+      case 'this_month': return { label: "This Month's Earnings", amount: 0, jobs: 0, pending: 0 };
       case 'overview':
       case 'total':
-      default: return { label: "Total Lifetime Settled", amount: 195000, jobs: 178, pending: 2100 };
+      default: return { label: "Total Lifetime Settled", amount: 0, jobs: 0, pending: 0 };
     }
   };
 
@@ -138,7 +129,14 @@ export default function WalletCard({ onboarding }) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-50 dark:divide-slate-850">
-                  {withdrawals.map((wth, idx) => (
+                  {withdrawals.length === 0 ? (
+                    <tr>
+                      <td colSpan="4" className="py-8 text-center text-slate-400">
+                        No payout history.
+                      </td>
+                    </tr>
+                  ) : (
+                    withdrawals.map((wth, idx) => (
                     <tr key={idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/20">
                       <td className="py-3 font-bold text-slate-800 dark:text-slate-300">{wth.id}</td>
                       <td className="py-3 text-slate-400">{wth.date}</td>
@@ -147,7 +145,8 @@ export default function WalletCard({ onboarding }) {
                         ₹{wth.amount.toLocaleString()}
                       </td>
                     </tr>
-                  ))}
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>
@@ -232,7 +231,14 @@ export default function WalletCard({ onboarding }) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-50 dark:divide-slate-850">
-                    {transactions.map((txn, idx) => (
+                    {transactions.length === 0 ? (
+                      <tr>
+                        <td colSpan="4" className="py-8 text-center text-slate-400">
+                          No transactions yet.
+                        </td>
+                      </tr>
+                    ) : (
+                      transactions.map((txn, idx) => (
                       <tr key={idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/20">
                         <td className="py-3 font-bold text-slate-800 dark:text-slate-300">{txn.id}</td>
                         <td className="py-3 text-slate-400">{txn.date}</td>
@@ -246,7 +252,8 @@ export default function WalletCard({ onboarding }) {
                           {txn.status === 'credited' ? '+' : txn.status === 'pending' ? '~' : '-'}₹{txn.amount}
                         </td>
                       </tr>
-                    ))}
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -268,7 +275,14 @@ export default function WalletCard({ onboarding }) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-50 dark:divide-slate-850">
-                    {withdrawals.slice(0,3).map((wth, idx) => (
+                    {withdrawals.length === 0 ? (
+                      <tr>
+                        <td colSpan="3" className="py-8 text-center text-slate-400">
+                          No recent withdrawals.
+                        </td>
+                      </tr>
+                    ) : (
+                      withdrawals.slice(0,3).map((wth, idx) => (
                       <tr key={idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/20">
                         <td className="py-3 font-bold text-slate-800 dark:text-slate-300">{wth.id}</td>
                         <td className="py-3 text-slate-400">{wth.date}</td>
@@ -276,7 +290,8 @@ export default function WalletCard({ onboarding }) {
                           ₹{wth.amount.toLocaleString()}
                         </td>
                       </tr>
-                    ))}
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>

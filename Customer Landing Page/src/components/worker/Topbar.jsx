@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Search, Bell, Globe, Menu, ChevronDown, Check, Sun, Moon, Sparkles, User, Settings, LogOut
 } from 'lucide-react';
-import { workerProfile } from '../../data/mockData';
 
 export default function Topbar({
   sidebarOpen,
@@ -47,7 +46,7 @@ export default function Topbar({
 
         <div className="text-left hidden sm:block min-w-0">
           <h1 className="text-sm font-black text-slate-800 dark:text-white flex items-center gap-1.5 truncate">
-            {greeting}, {workerProfile.name.split(' ')[0]}
+            {greeting}, Worker
             <Sparkles size={14} className="text-secondary shrink-0" />
           </h1>
           <p className="text-[10px] text-slate-500 font-semibold mt-0.5 truncate">{currentTime}</p>
@@ -134,8 +133,8 @@ export default function Topbar({
             onBlur={() => setTimeout(() => setProfileDropdown(false), 200)}
             className="flex items-center gap-1.5 focus:outline-none"
           >
-            <div className="w-9 h-9 rounded-xl overflow-hidden ring-2 ring-primary/15 shadow-sm">
-              <img src={workerProfile.photo} alt={workerProfile.name} className="w-full h-full object-cover" />
+            <div className="w-9 h-9 rounded-xl overflow-hidden ring-2 ring-primary/15 shadow-sm bg-primary flex items-center justify-center text-white font-black text-sm">
+              SW
             </div>
             <ChevronDown size={12} className="text-slate-400 hidden sm:block" />
           </button>
@@ -149,8 +148,8 @@ export default function Topbar({
                 className="absolute right-0 mt-1.5 w-52 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-premium py-1 z-50"
               >
                 <div className="px-3 py-2.5 border-b border-slate-100 dark:border-slate-800">
-                  <p className="text-xs font-black text-slate-800 dark:text-white">{workerProfile.name}</p>
-                  <p className="text-[10px] text-slate-500 truncate">{workerProfile.email}</p>
+                  <p className="text-xs font-black text-slate-800 dark:text-white">Service Worker</p>
+                  <p className="text-[10px] text-slate-500 truncate">Pending account</p>
                 </div>
                 <button
                   type="button"
