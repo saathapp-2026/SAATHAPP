@@ -369,24 +369,33 @@ export default function App() {
     '/professional/terms', '/worker/login', '/worker/register',
     '/professional/dashboard', '/worker/dashboard'
   ];
-  const isSellerRoute = routerLocation.pathname.startsWith('/seller');
-  const isPublicRoute = routerLocation.pathname === '/' || 
-                        routerLocation.pathname === '/about' || 
-                        routerLocation.pathname === '/service-warranty' || 
-                        routerLocation.pathname === '/our-story' || 
-                        routerLocation.pathname === '/faq' || 
-                        routerLocation.pathname === '/login' || 
-                        routerLocation.pathname === '/signup' || 
-                        routerLocation.pathname === '/help-support' || 
-                        routerLocation.pathname.startsWith('/wholesale') || 
-                        routerLocation.pathname === '/become-a-wholeseller' || 
-                        routerLocation.pathname === '/become-delivery-partner' || 
-                        routerLocation.pathname === '/franchise' || 
-                        routerLocation.pathname === '/advertise' || 
-                        routerLocation.pathname === '/advertise/create' || 
-                        partnerRoutes.includes(routerLocation.pathname) || 
-                        trustRoutes.includes(routerLocation.pathname) ||
-                        isSellerRoute;
+  const isSellerRoute = routerLocation.pathname.startsWith('/seller') && routerLocation.pathname !== '/seller-policy';
+  const isPublicRoute = routerLocation.pathname === '/' ||
+    routerLocation.pathname === '/about' ||
+    routerLocation.pathname === '/service-warranty' ||
+    routerLocation.pathname === '/our-story' ||
+    routerLocation.pathname === '/faq' ||
+    routerLocation.pathname === '/login' ||
+    routerLocation.pathname === '/signup' ||
+    routerLocation.pathname === '/help-support' ||
+    routerLocation.pathname === '/seller-policy' ||
+    routerLocation.pathname === '/privacy-policy' ||
+    routerLocation.pathname === '/terms-of-service' ||
+    routerLocation.pathname === '/refund-cancellation-policy' ||
+    routerLocation.pathname === '/service-warranty-policy' ||
+    routerLocation.pathname.startsWith('/wholesale') ||
+    routerLocation.pathname === '/become-a-wholeseller' ||
+    routerLocation.pathname === '/become-delivery-partner' ||
+    routerLocation.pathname === '/franchise' ||
+    routerLocation.pathname === '/advertise' ||
+    routerLocation.pathname === '/advertise/create' ||
+    partnerRoutes.includes(routerLocation.pathname) ||
+    trustRoutes.includes(routerLocation.pathname) ||
+    isSellerRoute;
+
+  if (routerLocation.pathname === '/seller-policy') {
+    return <SellerPolicyPage />;
+  }
 
   if (routerLocation.pathname === '/advertise') {
     return <AdvertisementsPage onBack={() => navigate('/')} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;

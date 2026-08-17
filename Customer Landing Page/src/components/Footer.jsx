@@ -33,7 +33,10 @@ export default function Footer() {
                   className="h-full w-full object-contain"
                 />
               </div>
-              <p className="text-xs sm:text-sm text-theme-secondary max-w-sm font-medium leading-relaxed">
+              <p
+                className="text-xs sm:text-sm text-theme-secondary max-w-sm font-medium leading-relaxed [text-wrap:balance]"
+                style={{ textWrap: 'balance' }}
+              >
                 India's premier Hyperlocal Super App combining local groceries, construction hardware, seeds and agricultural supplies, and on-demand professional technicians into a single unified marketplace.
               </p>
             </div>
