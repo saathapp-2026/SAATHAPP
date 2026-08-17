@@ -7,6 +7,7 @@ import SaathAppLogo from '../assets/saathapp-logo.jpeg';
 import { useLanguage } from '../context/LanguageContext';
 import { getCustomerMenu } from '../config/customerMenu';
 import { useTheme } from "../context/ThemeContext";
+import TopNav from './TopNav';
 
 export default function Header({
   cartCount,
@@ -112,6 +113,16 @@ export default function Header({
 
               {/* Mobile Right Action Icons */}
               <div className="flex items-center gap-2">
+                {/* SaathApp Product */}
+                <motion.button
+                  onClick={() => navigate('/products/saathapp')}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-1 rounded-full text-primary hover:bg-primary/5 transition-colors shrink-0"
+                  title="SaathApp Products"
+                >
+                  <span className="text-xl">🛍️</span>
+                </motion.button>
+
                 {/* Cart Button */}
                 <motion.button
                   onClick={onCartClick}
@@ -456,6 +467,17 @@ export default function Header({
 
             {/* Desktop Actions */}
             <div className="flex items-center gap-2.5 shrink-0">
+              
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={() => navigate('/products/saathapp')}
+                className="px-3.5 py-1.5 rounded-btn text-primary hover:bg-primary/5 transition-colors shrink-0 flex items-center justify-center gap-1.5 border border-primary/20"
+                title="SaathApp Products"
+              >
+                <span className="text-lg leading-none">🛍️</span>
+                <span className="text-xs font-bold hidden lg:block">SaathApp Products</span>
+              </motion.button>
+
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={toggleDarkMode}
@@ -548,6 +570,7 @@ export default function Header({
             </div>
           </div>
         </div>
+        <TopNav />
       </header>
 
       {/* Customer Dashboard Navigation Drawer */}

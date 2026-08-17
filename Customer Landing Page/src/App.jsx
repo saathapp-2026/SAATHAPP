@@ -59,6 +59,15 @@ import WholesalePortalPage from "./pages/wholesale/WholesalePortalPage";
 import DeliveryPartnerPortalPage from "./pages/delivery/DeliveryPartnerPortalPage";
 import SellerRoutes from './pages/seller/SellerRoutes';
 import { getStoredUsers, registerUser, authenticateUser, getStoredAuthSession, saveAuthSession, clearAuthSession, isSessionValid, getStoredPartnerSession, clearPartnerSession } from './services/authService';
+import SaathAppProductHome from './pages/saathapp-products/SaathAppProductHome';
+import ProductListing from './pages/saathapp-products/ProductListing';
+import ServiceListing from './pages/saathapp-products/ServiceListing';
+import ServiceDetails from './pages/saathapp-products/ServiceDetails';
+import ServiceBookingFlow from './pages/saathapp-products/ServiceBookingFlow';
+import ServiceBookingConfirmation from './pages/saathapp-products/ServiceBookingConfirmation';
+import ProductDetails from './pages/saathapp-products/ProductDetails';
+import BulkOrders from './pages/saathapp-products/BulkOrders';
+import TopNav from './components/TopNav';
 
 export default function App() {
   const routerLocation = useLocation();
@@ -407,6 +416,185 @@ export default function App() {
 
   if (isSellerRoute) {
     return <SellerRoutes />;
+  }
+
+  if (routerLocation.pathname === '/saathapp-products/bulk-orders') {
+    return (
+      <BulkOrders
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/saathapp-products/search');
+        }}
+        onLogin={() => { setAuthView('login'); navigate('/login'); }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
+    );
+  }
+  const isServiceListing = routerLocation.pathname === '/services' || routerLocation.pathname === '/services/';
+  
+  if (isServiceListing) {
+    return (
+      <ServiceListing
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/services');
+        }}
+        onLogin={() => { setAuthView('login'); navigate('/login'); }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
+    );
+  }
+  
+  const isServiceBookingConfirmed = routerLocation.pathname === '/services/booking-confirmed';
+  
+  if (isServiceBookingConfirmed) {
+    return (
+      <ServiceBookingConfirmation
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
+    );
+  }
+
+  const isServiceBookingFlow = routerLocation.pathname.startsWith('/services/book/');
+  
+  if (isServiceBookingFlow) {
+    return (
+      <ServiceBookingFlow
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        savedAddresses={savedAddresses}
+      />
+    );
+  }
+
+  const isServiceDetails = routerLocation.pathname.startsWith('/services/') && !routerLocation.pathname.startsWith('/services/book');
+  
+  if (isServiceDetails) {
+    return (
+      <ServiceDetails
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/services');
+        }}
+        onLogin={() => { setAuthView('login'); navigate('/login'); }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
+    );
+  }
+
+  const isOffers = routerLocation.pathname === '/offers';
+  const isAllCategories = routerLocation.pathname === '/products' || routerLocation.pathname === '/products/';
+  const isProductListing = (routerLocation.pathname.startsWith('/products/') && routerLocation.pathname !== '/products/saathapp' && routerLocation.pathname !== '/products/saathapp/') || isOffers || isAllCategories;
+
+  if (isProductListing) {
+    return (
+      <ProductListing
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/products/search'); // updated search path
+        }}
+        onLogin={() => { setAuthView('login'); navigate('/login'); }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        handleAddToCart={handleAddToCart}
+        isOffersPage={isOffers}
+        isAllCategories={isAllCategories}
+      />
+    );
+  }
+
+  if (routerLocation.pathname === '/products/saathapp' || routerLocation.pathname === '/products/saathapp/') {
+    return (
+      <SaathAppProductHome
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/products/search');
+        }}
+        onLogin={() => { setAuthView('login'); navigate('/login'); }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        handleAddToCart={handleAddToCart}
+      />
+    );
+  }
+
+  if (routerLocation.pathname.startsWith('/product/')) {
+    return (
+      <ProductDetails
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/products/search');
+        }}
+        onLogin={() => { setAuthView('login'); navigate('/login'); }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        handleAddToCart={handleAddToCart}
+      />
+    );
   }
 
   if (routerLocation.pathname === '/help-support') {
