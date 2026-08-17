@@ -3,15 +3,44 @@ import React from 'react';
 export default class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false, error: null, isRecovering: false };
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true, error };
+    const isChunkError = 
+      error?.name === 'ChunkLoadError' || 
+      (error?.message && /Failed to fetch dynamically imported module/i.test(error.message)) ||
+      (error?.message && /Importing a module script failed/i.test(error.message));
+
+    if (isChunkError) {
+      const lastReload = parseInt(sessionStorage.getItem('chunk-error-last-reload') || '0', 10);
+      const now = Date.now();
+      // Only auto-reload if we haven't already reloaded for a chunk error in the last 10 seconds
+      if (now - lastReload > 10000) {
+        sessionStorage.setItem('chunk-error-last-reload', now.toString());
+        return { hasError: true, error, isRecovering: true };
+      }
+    }
+
+    return { hasError: true, error, isRecovering: false };
   }
 
   componentDidCatch(error, errorInfo) {
     console.error('SaathApp Error Boundary caught an error:', error, errorInfo);
+    if (this.state.isRecovering) {
+      // Clear caches if possible to ensure we get the fresh app shell
+      if (window.caches) {
+        caches.keys().then((names) => {
+          for (const name of names) {
+            caches.delete(name);
+          }
+        }).finally(() => {
+          window.location.reload();
+        });
+      } else {
+        window.location.reload();
+      }
+    }
   }
 
   handleReload = () => {
@@ -19,6 +48,18 @@ export default class ErrorBoundary extends React.Component {
   };
 
   render() {
+    if (this.state.isRecovering) {
+      // Show nothing or a minimalistic loader while recovering
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white p-6 font-sans">
+          <div className="animate-pulse flex flex-col items-center">
+            <div className="w-8 h-8 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin mb-4"></div>
+            <p className="text-slate-400 text-sm font-medium">Updating application...</p>
+          </div>
+        </div>
+      );
+    }
+
     if (this.state.hasError) {
       return (
         <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white p-6 font-sans text-center">
