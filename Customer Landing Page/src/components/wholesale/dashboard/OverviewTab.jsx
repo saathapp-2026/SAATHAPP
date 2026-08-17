@@ -70,7 +70,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
           return (
             <div
               key={idx}
-              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm hover:shadow-md transition cursor-pointer"
+              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 shadow-sm hover:shadow-md transition cursor-pointer"
               onClick={() => addToast?.(`View ${kpi.label} details`, 'info')}
             >
               <div className="flex items-center justify-between text-slate-400">
@@ -91,7 +91,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
       {/* Sales Chart & Top Categories */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Revenue & Bulk Order Performance Chart Box (Fixed Blank Space) */}
-        <div className="lg:col-span-2 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between">
+        <div className="lg:col-span-2 rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Revenue &amp; Bulk Order Performance</h3>
@@ -134,7 +134,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
         </div>
 
         {/* Top Selling Categories */}
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between">
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm flex flex-col justify-between">
           <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-4">Top Category Revenue</h3>
           <div className="space-y-4">
             {dashboardData.topSellingCategories.map((cat, i) => (
@@ -143,7 +143,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
                   <span className="text-slate-800 dark:text-slate-200">{cat.name}</span>
                   <span className="text-[#00986C] font-mono">₹{cat.amount.toLocaleString('en-IN')}</span>
                 </div>
-                <div className="h-2 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                <div className="h-2 w-full rounded-full bg-page overflow-hidden">
                   <div
                     className="h-full bg-[#00986C] rounded-full"
                     style={{ width: cat.share }}
@@ -158,7 +158,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
       {/* Recent Orders & Stock Alerts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Orders Table */}
-        <div className="lg:col-span-2 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm">
+        <div className="lg:col-span-2 rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Recent Bulk Orders</h3>
             <button
@@ -183,7 +183,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                 {dashboardData.recentOrders.map((ord) => (
-                  <tr key={ord.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition cursor-pointer" onClick={() => onSelectTab('orders')}>
+                  <tr key={ord.id} className="hover:bg-page transition cursor-pointer" onClick={() => onSelectTab('orders')}>
                     <td className="py-3 font-mono font-bold text-[#00986C]">{ord.id}</td>
                     <td className="py-3 font-bold text-slate-800 dark:text-slate-200">{ord.buyer}</td>
                     <td className="py-3 font-extrabold text-slate-900 dark:text-white font-mono">₹{ord.amount.toLocaleString('en-IN')}</td>
@@ -201,7 +201,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
         </div>
 
         {/* Warehouse Stock Alerts Card */}
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between">
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
@@ -215,7 +215,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
             <div className="space-y-3">
               {(dashboardData.inventorySummary || []).length > 0 ? (
                 dashboardData.inventorySummary.map((item, idx) => (
-                  <div key={idx} className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex justify-between items-center cursor-pointer" onClick={() => onSelectTab('inventory')}>
+                  <div key={idx} className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex justify-between items-center cursor-pointer" onClick={() => onSelectTab('inventory')}>
                     <div>
                       <strong className="text-slate-900 dark:text-white font-extrabold text-xs block truncate max-w-[150px]">{item.name}</strong>
                       <span className="text-[10px] text-slate-500 font-bold">{item.warehouse}</span>
@@ -229,7 +229,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
                   </div>
                 ))
               ) : (
-                <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-dashed border-slate-200 dark:border-slate-800 text-center text-xs text-slate-400 font-medium">
+                <div className="p-6 rounded-2xl bg-page dark:bg-slate-950 border border-dashed border-slate-200 dark:border-slate-800 text-center text-xs text-slate-400 font-medium">
                   No stock alerts or low inventory items found.
                 </div>
               )}

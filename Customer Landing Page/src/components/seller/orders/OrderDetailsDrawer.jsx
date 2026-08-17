@@ -46,7 +46,7 @@ export default function OrderDetailsDrawer({
   return (
     <div className="fixed inset-0 z-[70]" role="dialog" aria-modal="true" aria-labelledby="order-drawer-title">
       <button type="button" className="absolute inset-0 bg-black/40" aria-label="Close panel" onClick={onClose} />
-      <aside className="absolute right-0 top-0 h-full w-full max-w-md bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
+      <aside className="absolute right-0 top-0 h-full w-full max-w-md bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
         {/* Header */}
         <header className="flex items-start justify-between gap-3 p-4 border-b border-slate-200 dark:border-slate-800 shrink-0">
           <div>
@@ -56,7 +56,7 @@ export default function OrderDetailsDrawer({
             </div>
             <p className="text-xs text-slate-500 mt-0.5">{order.invoiceNumber}</p>
           </div>
-          <button type="button" onClick={onClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </header>
@@ -142,7 +142,7 @@ export default function OrderDetailsDrawer({
                     <span>{v}</span>
                   </div>
                 ))}
-                <div className="flex justify-between text-sm font-bold pt-2 border-t border-slate-200 dark:border-slate-700">
+                <div className="flex justify-between text-sm font-bold pt-2 border-t border-slate-200">
                   <span>Total Amount</span>
                   <span className="text-emerald-600">{money(order.amount)}</span>
                 </div>
@@ -167,7 +167,7 @@ export default function OrderDetailsDrawer({
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   rows={2}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-sm"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-page dark:bg-slate-950 text-sm"
                   placeholder="Seller notes…"
                 />
                 <button
@@ -226,7 +226,7 @@ export default function OrderDetailsDrawer({
         </div>
 
         {/* Footer actions — mock style */}
-        <footer className="shrink-0 border-t border-slate-200 dark:border-slate-800 p-4 flex gap-2 bg-white dark:bg-slate-900">
+        <footer className="shrink-0 border-t border-slate-200 dark:border-slate-800 p-4 flex gap-2 bg-surface">
           {canAccept && (
             <button
               type="button"
@@ -260,13 +260,13 @@ export default function OrderDetailsDrawer({
             <button
               type="button"
               onClick={() => setMoreOpen((v) => !v)}
-              className="h-full px-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
+              className="h-full px-3 rounded-xl border border-slate-200 hover:bg-page"
               aria-label="More actions"
             >
               <ChevronDown size={16} />
             </button>
             {moreOpen && (
-              <div className="absolute bottom-full right-0 mb-2 w-48 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-xl p-1 z-10 max-h-56 overflow-y-auto">
+              <div className="absolute bottom-full right-0 mb-2 w-48 rounded-xl border border-slate-200 bg-surface shadow-xl p-1 z-10 max-h-56 overflow-y-auto">
                 {['print_invoice', 'print_label', 'call', 'whatsapp', 'assign', 'packed', 'ready', 'track', 'cancel'].map((id) => (
                   <button
                     key={id}
@@ -275,7 +275,7 @@ export default function OrderDetailsDrawer({
                       setMoreOpen(false);
                       onAction?.(id, order);
                     }}
-                    className="w-full text-left px-3 py-2 rounded-lg text-xs capitalize hover:bg-slate-50 dark:hover:bg-slate-800"
+                    className="w-full text-left px-3 py-2 rounded-lg text-xs capitalize hover:bg-page"
                   >
                     {id.replace(/_/g, ' ')}
                   </button>

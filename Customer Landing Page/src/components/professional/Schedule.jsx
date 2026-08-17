@@ -10,7 +10,7 @@ export default function Schedule() {
   ];
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left">
+    <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-sm font-black text-slate-800 dark:text-slate-100 uppercase tracking-wider">Today's Timeline</h3>
         <span className="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 text-[10px] font-black uppercase">
@@ -44,14 +44,14 @@ export default function Schedule() {
                       ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-500' 
                       : isInProgress 
                         ? 'bg-primary/10 text-primary' 
-                        : 'bg-slate-100 dark:bg-slate-950 text-slate-450'
+                        : 'bg-page dark:bg-slate-950 text-slate-450'
                   }`}>
                     {item.status.replace('_', ' ').toUpperCase()}
                   </span>
                 </div>
 
                 {/* Job Info */}
-                <div className="bg-slate-50 dark:bg-slate-950/40 p-3 rounded-xl border border-slate-150 dark:border-slate-850">
+                <div className="bg-page  p-3 rounded-xl border border-slate-150 dark:border-slate-850">
                   <h4 className="text-xs sm:text-sm font-black text-slate-800 dark:text-slate-200">{item.job}</h4>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold mt-0.5">Client: {item.client}</p>
                   

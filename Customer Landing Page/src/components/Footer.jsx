@@ -17,11 +17,11 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-slate-900 text-slate-400 pt-4 pb-8 border-t border-slate-800 text-left">
+    <footer className="bg-footer text-theme-secondary pt-4 pb-8 border-t border-theme-border text-left">
       <div className="w-full px-4 sm:px-6 lg:px-8">
 
         {/* Main Segment: Logo Block (Left) + Links Grid Columns (Right) in Same Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 pt-4 pb-10 border-b border-slate-800">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 pt-4 pb-10 border-b border-theme-border">
 
           {/* Logo Brand info (Left side) */}
           <div className="lg:col-span-3 flex flex-col justify-between h-full space-y-4">
@@ -33,7 +33,7 @@ export default function Footer() {
                   className="h-full w-full object-contain"
                 />
               </div>
-              <p className="text-xs sm:text-sm text-slate-400 max-w-sm font-medium leading-relaxed">
+              <p className="text-xs sm:text-sm text-theme-secondary max-w-sm font-medium leading-relaxed">
                 India's premier Hyperlocal Super App combining local groceries, construction hardware, seeds and agricultural supplies, and on-demand professional technicians into a single unified marketplace.
               </p>
             </div>
@@ -46,7 +46,7 @@ export default function Footer() {
                   href="https://instagram.com/saathapp.tech"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white"
+                  className="w-8 h-8 rounded-full bg-surface hover:bg-primary hover:text-theme flex items-center justify-center transition-colors text-theme-secondary hover:text-theme"
                   title="Instagram"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -57,7 +57,7 @@ export default function Footer() {
                   href="https://x.com/saathappT"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white"
+                  className="w-8 h-8 rounded-full bg-surface hover:bg-primary hover:text-theme flex items-center justify-center transition-colors text-theme-secondary hover:text-theme"
                   title="X (Twitter)"
                 >
                   <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -68,7 +68,7 @@ export default function Footer() {
                   href="https://linkedin.com/company/saathapp-tech"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white"
+                  className="w-8 h-8 rounded-full bg-surface hover:bg-primary hover:text-theme flex items-center justify-center transition-colors text-theme-secondary hover:text-theme"
                   title="LinkedIn"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@ export default function Footer() {
                   href="https://youtube.com/@saathappofficial"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition-colors text-slate-400 hover:text-white"
+                  className="w-8 h-8 rounded-full bg-surface hover:bg-primary hover:text-theme flex items-center justify-center transition-colors text-theme-secondary hover:text-theme"
                   title="YouTube"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -89,7 +89,7 @@ export default function Footer() {
               </div>
 
               {/* Certs list */}
-              <div className="flex items-center gap-2 bg-slate-800/40 border border-slate-800 py-1.5 px-3 rounded-btn text-[10px] font-bold text-slate-500 w-fit">
+              <div className="flex items-center gap-2 bg-surface/40 border border-theme-border py-1.5 px-3 rounded-btn text-[10px] font-bold text-theme-secondary w-fit">
                 <ShieldCheck size={14} className="text-green-600 shrink-0" />
                 <span>Startup India Recognised & ISO 9001 Audited</span>
               </div>
@@ -101,13 +101,13 @@ export default function Footer() {
 
             {/* Col 1 */}
             <div>
-              <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Company</h4>
+              <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-4.5">Company</h4>
               <ul className="space-y-3 text-xs font-semibold">
                 <li>
                   <Link
                     to="/about"
                     onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-theme transition-colors"
                   >
                     About Us
                   </Link>
@@ -116,7 +116,7 @@ export default function Footer() {
                   <Link
                     to="/our-story"
                     onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-theme transition-colors"
                   >
                     Our Story
                   </Link>
@@ -126,7 +126,7 @@ export default function Footer() {
                     href="https://www.saathappnova.co.in/careers"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
+                    className="hover:text-theme transition-colors"
                   >
                     Careers
                   </a>
@@ -136,14 +136,14 @@ export default function Footer() {
 
             {/* Col 2 */}
             <div>
-              <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Business</h4>
+              <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-4.5">Business</h4>
               <ul className="space-y-3 text-xs font-semibold">
-                <li><Link to="/seller" className="hover:text-white transition-colors">Become Seller</Link></li>
+                <li><Link to="/seller" className="hover:text-theme transition-colors">Become Seller</Link></li>
                 <li>
                   <Link
                     to="/franchise"
                     onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-theme transition-colors"
                   >
                     Become a Franchise Partner
                   </Link>
@@ -152,7 +152,7 @@ export default function Footer() {
                   <Link
                     to="/wholesale"
                     onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-theme transition-colors"
                   >
                     Become a Wholesale
                   </Link>
@@ -161,7 +161,7 @@ export default function Footer() {
                   <Link
                     to="/service-professional"
                     onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-theme transition-colors"
                   >
                     Become Service Professional
                   </Link>
@@ -170,7 +170,7 @@ export default function Footer() {
                   <Link
                     to="/become-delivery-partner"
                     onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-theme transition-colors"
                   >
                     Become Delivery Partner
                   </Link>
@@ -179,7 +179,7 @@ export default function Footer() {
                   <Link
                     to="/advertise"
                     onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-theme transition-colors"
                   >
                     Advertise With Us
                   </Link>
@@ -192,13 +192,13 @@ export default function Footer() {
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
                 {/* Col 3: Support */}
                 <div>
-                  <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Support</h4>
+                  <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-4.5">Support</h4>
                   <ul className="space-y-3 text-xs font-semibold">
                     <li>
                       <Link
                         to="/help-support"
                         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         Help & Support
                       </Link>
@@ -208,7 +208,7 @@ export default function Footer() {
                         href="https://www.saathappnova.co.in/contact"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         Contact Us
                       </a>
@@ -217,7 +217,7 @@ export default function Footer() {
                       <Link
                         to="/service-warranty"
                         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         Service Warranty
                       </Link>
@@ -226,7 +226,7 @@ export default function Footer() {
                       <Link
                         to="/faq"
                         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         FAQ
                       </Link>
@@ -236,13 +236,13 @@ export default function Footer() {
 
                 {/* Col 4: Legal */}
                 <div>
-                  <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Legal</h4>
+                  <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-4.5">Legal</h4>
                   <ul className="space-y-3 text-xs font-semibold">
                     <li>
                       <Link
                         to="/privacy-policy"
                         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         Privacy Policy
                       </Link>
@@ -251,7 +251,7 @@ export default function Footer() {
                       <Link
                         to="/terms-of-service"
                         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         Terms of Service
                       </Link>
@@ -260,7 +260,7 @@ export default function Footer() {
                       <Link
                         to="/seller-policy"
                         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         Seller Policy
                       </Link>
@@ -269,7 +269,7 @@ export default function Footer() {
                       <Link
                         to="/delivery-partner-agreement"
                         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         Delivery Partner Agreement
                       </Link>
@@ -278,7 +278,7 @@ export default function Footer() {
                       <Link
                         to="/refund-cancellation-policy"
                         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         Refund & Cancellation Policy
                       </Link>
@@ -288,13 +288,13 @@ export default function Footer() {
 
                 {/* Col 5: Trust */}
                 <div>
-                  <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Trust</h4>
+                  <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-4.5">Trust</h4>
                   <ul className="space-y-3 text-xs font-semibold">
                     <li>
                       <Link
                         to="/verified-sellers"
                         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         Verified Sellers
                       </Link>
@@ -303,7 +303,7 @@ export default function Footer() {
                       <Link
                         to="/secure-online-payments"
                         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         Secure Online Payments
                       </Link>
@@ -312,7 +312,7 @@ export default function Footer() {
                       <Link
                         to="/privacy-protected"
                         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         Privacy Protected
                       </Link>
@@ -321,7 +321,7 @@ export default function Footer() {
                       <Link
                         to="/customer-support"
                         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-white transition-colors"
+                        className="hover:text-theme transition-colors"
                       >
                         Customer Support
                       </Link>
@@ -332,7 +332,7 @@ export default function Footer() {
 
               {/* Newsletter Box (Bottom edge aligned with Contact Us column) */}
               <div className="space-y-3.5 mt-auto pt-4">
-                <h4 className="text-sm font-extrabold text-white uppercase tracking-wider">
+                <h4 className="text-sm font-extrabold text-theme uppercase tracking-wider">
                   Subscribe to our local deals newsletter
                 </h4>
 
@@ -343,7 +343,7 @@ export default function Footer() {
                     placeholder="Enter your email address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="h-11 px-4.5 rounded-btn bg-slate-800 border border-slate-750 text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-primary text-xs sm:text-sm w-full"
+                    className="h-11 px-4.5 rounded-btn bg-surface border border-theme-border text-theme placeholder-theme-secondary focus:outline-none focus:ring-1 focus:ring-primary text-xs sm:text-sm w-full"
                   />
                   <button
                     type="submit"
@@ -358,12 +358,12 @@ export default function Footer() {
 
             {/* Col 6 */}
             <div>
-              <h4 className="text-xs font-black text-white uppercase tracking-wider mb-4.5">Contact Us</h4>
-              <ul className="space-y-4 text-xs font-semibold text-slate-400 text-left">
+              <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-4.5">Contact Us</h4>
+              <ul className="space-y-4 text-xs font-semibold text-theme-secondary text-left">
                 <li className="flex items-start gap-2.5">
                   <MapPin size={14} className="text-primary shrink-0 mt-1" />
                   <div>
-                    <span className="block text-white font-bold mb-0.5">Company Regd. Office:</span>
+                    <span className="block text-theme font-bold mb-0.5">Company Regd. Office:</span>
                     <span className="leading-relaxed">
                       Bhatahar, Tharthari,<br />
                       Nalanda, Bihar – 801307<br />
@@ -374,33 +374,33 @@ export default function Footer() {
                 <li className="flex items-start gap-2.5">
                   <Mail size={14} className="text-primary shrink-0 mt-0.5" />
                   <div>
-                    <span className="block text-white font-bold mb-0.5">Help & Support:</span>
-                    <a href="mailto:support@saathapp.in" className="hover:text-white transition-colors break-all">support@saathapp.in</a>
+                    <span className="block text-theme font-bold mb-0.5">Help & Support:</span>
+                    <a href="mailto:support@saathapp.in" className="hover:text-theme transition-colors break-all">support@saathapp.in</a>
                   </div>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <Mail size={14} className="text-primary shrink-0 mt-0.5" />
                   <div>
-                    <span className="block text-white font-bold mb-0.5">Company:</span>
-                    <a href="mailto:company@saathapp.in" className="hover:text-white transition-colors break-all">company@saathapp.in</a>
+                    <span className="block text-theme font-bold mb-0.5">Company:</span>
+                    <a href="mailto:company@saathapp.in" className="hover:text-theme transition-colors break-all">company@saathapp.in</a>
                   </div>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <Phone size={14} className="text-primary shrink-0 mt-0.5" />
                   <div>
-                    <span className="block text-white font-bold mb-0.5">Contact:</span>
+                    <span className="block text-theme font-bold mb-0.5">Contact:</span>
                     <span>+91 9128842027</span>
                   </div>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <Globe size={14} className="text-primary shrink-0 mt-0.5" />
                   <div>
-                    <span className="block text-white font-bold mb-0.5">Official Website:</span>
+                    <span className="block text-theme font-bold mb-0.5">Official Website:</span>
                     <a
                       href="https://www.saathappnova.co.in"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-white transition-colors break-all"
+                      className="hover:text-theme transition-colors break-all"
                     >
                       www.saathappnova.co.in
                     </a>
@@ -416,21 +416,21 @@ export default function Footer() {
 
         {/* Copyright & Payment Methods Combined Strip */}
         <div className="pt-6 flex flex-col lg:flex-row items-center justify-between gap-4 text-xs">
-          <p className="font-semibold text-slate-500 text-left">
+          <p className="font-semibold text-theme-secondary text-left">
             © 2026 SAATHAPPNOVA PRIVATE LIMITED. All Rights Reserved.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
-            <div className="text-[10px] sm:text-xs font-extrabold text-slate-400 uppercase tracking-wider">
+            <div className="text-[10px] sm:text-xs font-extrabold text-theme-secondary uppercase tracking-wider">
               Supported Payment Methods
             </div>
-            <div className="flex flex-wrap gap-2 text-[10px] sm:text-[11px] font-bold text-slate-450 justify-center">
-              <span className="px-2.5 py-1 rounded bg-slate-800/60 border border-slate-750/30">UPI</span>
-              <span className="px-2.5 py-1 rounded bg-slate-800/60 border border-slate-750/30">RuPay</span>
-              <span className="px-2.5 py-1 rounded bg-slate-800/60 border border-slate-750/30">Visa</span>
-              <span className="px-2.5 py-1 rounded bg-slate-800/60 border border-slate-750/30">Mastercard</span>
-              <span className="px-2.5 py-1 rounded bg-slate-800/60 border border-slate-750/30">Net Banking</span>
-              <span className="px-2.5 py-1 rounded bg-slate-800/60 border border-slate-750/30">Cash on Delivery (where available)</span>
+            <div className="flex flex-wrap gap-2 text-[10px] sm:text-[11px] font-bold text-theme-secondary justify-center">
+              <span className="px-2.5 py-1 rounded bg-surface/60 border border-theme-border/30">UPI</span>
+              <span className="px-2.5 py-1 rounded bg-surface/60 border border-theme-border/30">RuPay</span>
+              <span className="px-2.5 py-1 rounded bg-surface/60 border border-theme-border/30">Visa</span>
+              <span className="px-2.5 py-1 rounded bg-surface/60 border border-theme-border/30">Mastercard</span>
+              <span className="px-2.5 py-1 rounded bg-surface/60 border border-theme-border/30">Net Banking</span>
+              <span className="px-2.5 py-1 rounded bg-surface/60 border border-theme-border/30">Cash on Delivery (where available)</span>
             </div>
           </div>
         </div>

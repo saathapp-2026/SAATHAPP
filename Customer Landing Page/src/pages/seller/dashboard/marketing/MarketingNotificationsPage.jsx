@@ -23,7 +23,7 @@ export default function MarketingNotificationsPage() {
             <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50">Campaign alerts & review updates</h2>
             <p className="max-w-2xl text-sm text-slate-500 dark:text-slate-400">Stay on top of campaign approvals, payment confirmations and review results with real-time alerts.</p>
           </div>
-          <button type="button" onClick={handleMarkAll} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
+          <button type="button" onClick={handleMarkAll} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
             Mark all read {unreadCount ? `(${unreadCount})` : ''}
           </button>
         </div>
@@ -42,10 +42,10 @@ export default function MarketingNotificationsPage() {
         </div>
         <div className="mt-6 space-y-3">
           {notifications.map((item) => (
-            <div key={item.id} className={`rounded-3xl p-4 flex flex-col gap-3 border ${item.read ? 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900' : 'border-emerald-200 bg-emerald-50 dark:bg-emerald-950/40'}`}>
+            <div key={item.id} className={`rounded-3xl p-4 flex flex-col gap-3 border ${item.read ? 'border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-900' : 'border-emerald-200 bg-emerald-50 dark:bg-emerald-950/40'}`}>
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-start gap-3">
-                  <div className="mt-1 rounded-full bg-slate-100 dark:bg-slate-900 p-2">
+                  <div className="mt-1 rounded-full bg-page dark:bg-slate-900 p-2">
                     {item.read ? <CheckCircle2 size={16} className="text-emerald-600" /> : <CircleDashed size={16} className="text-emerald-600" />}
                   </div>
                   <div>
@@ -53,7 +53,7 @@ export default function MarketingNotificationsPage() {
                     <p className="text-sm text-slate-600 dark:text-slate-300">{item.body}</p>
                   </div>
                 </div>
-                <button type="button" onClick={() => handleRead(item.id)} className="rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-2 text-slate-500 hover:text-slate-700 dark:hover:text-slate-200">
+                <button type="button" onClick={() => handleRead(item.id)} className="rounded-full border border-slate-200 bg-surface p-2 text-slate-500 hover:text-slate-700">
                   <X size={14} />
                 </button>
               </div>

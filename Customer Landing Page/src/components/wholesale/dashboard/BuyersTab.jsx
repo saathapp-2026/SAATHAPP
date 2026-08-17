@@ -58,7 +58,7 @@ export default function BuyersTab({ onSelectTab }) {
             className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
               activeSubTab === tab
                 ? 'bg-emerald-600 text-white shadow-md font-black'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
             }`}
           >
             {tab}
@@ -72,9 +72,9 @@ export default function BuyersTab({ onSelectTab }) {
       ) : activeSubTab === 'Enquiries' ? (
         <div className="space-y-4">
           <h3 className="text-sm font-black text-slate-900 dark:text-white">Active B2B Buyer RFQs &amp; Enquiries</h3>
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden text-xs">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm overflow-hidden text-xs">
             <table className="w-full text-left">
-              <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
+              <thead className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
                 <tr>
                   <th className="p-4">RFQ ID</th>
                   <th className="p-4">Buyer Store</th>
@@ -117,9 +117,9 @@ export default function BuyersTab({ onSelectTab }) {
       ) : activeSubTab === 'Quotations' ? (
         <div className="space-y-4">
           <h3 className="text-sm font-black text-slate-900 dark:text-white">Issued Price Quotations &amp; Negotiations</h3>
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden text-xs">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm overflow-hidden text-xs">
             <table className="w-full text-left">
-              <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
+              <thead className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
                 <tr>
                   <th className="p-4">Quote Ref</th>
                   <th className="p-4">Buyer Store</th>
@@ -199,7 +199,7 @@ export default function BuyersTab({ onSelectTab }) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by Buyer Business Name, City, or Category..."
-              className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 pl-10 pr-4 py-3 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 shadow-sm"
+              className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface pl-10 pr-4 py-3 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 shadow-sm"
             />
           </div>
 
@@ -208,7 +208,7 @@ export default function BuyersTab({ onSelectTab }) {
             {filteredBuyers.map((buyer) => (
               <div
                 key={buyer.id}
-                className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-4 hover:shadow-md transition"
+                className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-4 hover:shadow-md transition"
               >
                 <div className="flex items-start justify-between">
                   <div>
@@ -236,7 +236,7 @@ export default function BuyersTab({ onSelectTab }) {
                     <button
                       type="button"
                       onClick={() => setSelectedBuyerProfile(buyer)}
-                      className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-100 transition cursor-pointer"
+                      className="px-3 py-1.5 rounded-xl border border-slate-200 bg-page text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition cursor-pointer"
                     >
                       View Profile
                     </button>
@@ -258,7 +258,7 @@ export default function BuyersTab({ onSelectTab }) {
       {/* Buyer Full Profile Details Modal (PDF 4.4 Spec) */}
       {selectedBuyerProfile && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <div className="flex items-center gap-2">
                 <div className="w-9 h-9 rounded-2xl bg-emerald-500/20 text-emerald-500 flex items-center justify-center font-black">
@@ -273,14 +273,14 @@ export default function BuyersTab({ onSelectTab }) {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
                 <span className="text-[10px] font-bold text-slate-400 uppercase block">Contact Person</span>
                 <strong className="text-slate-900 dark:text-white block font-extrabold">{selectedBuyerProfile.contactPerson || 'Authorized Representative'}</strong>
                 <span className="text-[11px] text-emerald-500 font-mono block font-bold">📞 {selectedBuyerProfile.phone || '—'}</span>
                 <span className="text-[11px] text-slate-500 block">✉️ {selectedBuyerProfile.email || '—'}</span>
               </div>
 
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
                 <span className="text-[10px] font-bold text-slate-400 uppercase block">GST &amp; Verification</span>
                 <strong className="text-slate-900 dark:text-white block font-mono font-extrabold">{selectedBuyerProfile.gstin || '—'}</strong>
                 <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold block">✓ Verified Active GSTIN</span>
@@ -288,7 +288,7 @@ export default function BuyersTab({ onSelectTab }) {
               </div>
             </div>
 
-            <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+            <div className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
               <span className="text-[10px] font-bold text-slate-400 uppercase block">Registered Business Address</span>
               <p className="text-slate-800 dark:text-slate-200 font-medium">{selectedBuyerProfile.address || selectedBuyerProfile.city || '—'}</p>
             </div>
@@ -305,7 +305,7 @@ export default function BuyersTab({ onSelectTab }) {
               <button
                 type="button"
                 onClick={() => setSelectedBuyerProfile(null)}
-                className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold"
+                className="px-4 py-2 rounded-xl bg-page text-slate-800 dark:text-slate-200 font-bold"
               >
                 Close
               </button>
@@ -327,7 +327,7 @@ export default function BuyersTab({ onSelectTab }) {
       {/* Buyer Chat Drawer/Modal */}
       {selectedBuyerChat && (
         <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl flex flex-col h-[500px]">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl flex flex-col h-[500px]">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
               <div>
                 <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
@@ -356,7 +356,7 @@ export default function BuyersTab({ onSelectTab }) {
                     className={`max-w-[80%] rounded-2xl p-3 text-xs font-medium leading-relaxed ${
                       m.sender === 'you'
                         ? 'bg-emerald-600 text-white rounded-br-none'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-bl-none'
+                        : 'bg-page text-slate-900 dark:text-white rounded-bl-none'
                     }`}
                   >
                     {m.text}
@@ -371,7 +371,7 @@ export default function BuyersTab({ onSelectTab }) {
                 value={chatMessage}
                 onChange={(e) => setChatMessage(e.target.value)}
                 placeholder="Type bulk quote or message..."
-                className="flex-1 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-2.5 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none"
+                className="flex-1 rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 px-4 py-2.5 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none"
               />
               <button
                 type="submit"

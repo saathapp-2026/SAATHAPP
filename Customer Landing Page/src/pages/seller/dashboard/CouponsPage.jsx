@@ -301,7 +301,7 @@ export default function CouponsPage() {
           <button
             type="button"
             onClick={() => openCreate({ id: 'campaign_festival', group: 'campaign' })}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm font-semibold shadow-sm"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-surface px-3.5 py-2.5 text-sm font-semibold shadow-sm"
           >
             <Target size={16} />
             Create Campaign
@@ -309,7 +309,7 @@ export default function CouponsPage() {
           <button
             type="button"
             onClick={() => openCreate({ id: 'ad_image', group: 'ad' })}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm font-semibold shadow-sm"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-surface px-3.5 py-2.5 text-sm font-semibold shadow-sm"
           >
             <Megaphone size={16} />
             Create Advertisement
@@ -317,7 +317,7 @@ export default function CouponsPage() {
           <button
             type="button"
             onClick={() => openCreate({ id: 'banner_home', group: 'banner' })}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm font-semibold shadow-sm"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-surface px-3.5 py-2.5 text-sm font-semibold shadow-sm"
           >
             <Image size={16} />
             Create Banner
@@ -325,7 +325,7 @@ export default function CouponsPage() {
           <button
             type="button"
             onClick={() => openCreate({ id: 'sponsor_product', group: 'sponsored' })}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm font-semibold shadow-sm"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-surface px-3.5 py-2.5 text-sm font-semibold shadow-sm"
           >
             <Star size={16} />
             Sponsored Product
@@ -346,7 +346,7 @@ export default function CouponsPage() {
         <button
           type="button"
           onClick={() => setShowAllCards((v) => !v)}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-700 px-2.5 py-1.5 text-xs font-semibold"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold"
         >
           <LayoutGrid size={13} />
           {showAllCards ? 'Primary KPIs' : 'All KPIs'}
@@ -354,17 +354,17 @@ export default function CouponsPage() {
         <button
           type="button"
           onClick={() => setShowAnalytics((v) => !v)}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-700 px-2.5 py-1.5 text-xs font-semibold"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold"
         >
           <BarChart3 size={13} />
           {showAnalytics ? 'Hide Analytics' : 'Analytics'}
         </button>
         {selectedIds.size > 0 ? (
           <>
-            <button type="button" onClick={() => handleBulk('activate')} className="rounded-lg border border-slate-200 dark:border-slate-700 px-2.5 py-1.5 text-xs font-semibold">
+            <button type="button" onClick={() => handleBulk('activate')} className="rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold">
               Activate ({selectedIds.size})
             </button>
-            <button type="button" onClick={() => handleBulk('pause')} className="rounded-lg border border-slate-200 dark:border-slate-700 px-2.5 py-1.5 text-xs font-semibold">
+            <button type="button" onClick={() => handleBulk('pause')} className="rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold">
               Pause
             </button>
             <button type="button" onClick={() => handleBulk('delete')} className="rounded-lg border border-red-200 text-red-600 px-2.5 py-1.5 text-xs font-semibold">

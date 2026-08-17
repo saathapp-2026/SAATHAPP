@@ -32,7 +32,7 @@ export const VEHICLE_TYPES = [
 
 export default function DeliveryCategoriesSection({ onStartRegistration }) {
   return (
-    <section id="categories-covered" aria-labelledby="categories-heading" className="py-20 sm:py-24 bg-white dark:bg-slate-900">
+    <section id="categories-covered" aria-labelledby="categories-heading" className="py-20 sm:py-24 bg-surface">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
@@ -58,7 +58,7 @@ export default function DeliveryCategoriesSection({ onStartRegistration }) {
               return (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5 shadow-sm hover:shadow-md transition"
+                  className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-5 shadow-sm hover:shadow-md transition"
                 >
                   <div className="h-10 w-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-3">
                     <Icon size={20} />
@@ -82,7 +82,7 @@ export default function DeliveryCategoriesSection({ onStartRegistration }) {
               return (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5 shadow-sm hover:shadow-md transition"
+                  className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-5 shadow-sm hover:shadow-md transition"
                 >
                   <div className="h-10 w-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
                     <Icon size={20} />

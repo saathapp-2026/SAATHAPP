@@ -169,7 +169,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
         {/* Section A: Personal Information */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
+        <div className="bg-surface p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
               <User size={18} className="text-amber-500" /> Personal Information
@@ -184,37 +184,37 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
           </div>
 
           <div className="space-y-3 text-xs font-semibold">
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Full Registered Name</span>
               <strong className="text-slate-900 dark:text-white font-extrabold">{profileData.fullName}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Primary Mobile Number</span>
               <strong className="text-emerald-600 dark:text-emerald-400 font-mono font-bold">{profileData.phone} (Verified ✓)</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Alternate Mobile</span>
               <strong className="text-slate-900 dark:text-white font-mono font-bold">{profileData.altPhone}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Email Address</span>
               <strong className="text-slate-900 dark:text-white font-mono">{profileData.email}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Emergency SOS Contact</span>
               <strong className="text-rose-500 font-bold">{profileData.emergencyContactName} ({profileData.emergencyContactPhone})</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Blood Group</span>
               <strong className="text-rose-500 font-black font-mono">{profileData.bloodGroup}</strong>
             </div>
 
-            <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 space-y-1">
+            <div className="p-3 rounded-2xl bg-page space-y-1">
               <span className="text-slate-500 block">Residential Address</span>
               <strong className="text-slate-900 dark:text-white font-medium text-xs block">{profileData.address}</strong>
             </div>
@@ -222,7 +222,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
         </div>
 
         {/* Section B: Vehicle Details & Documents */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
+        <div className="bg-surface p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
               <Truck size={18} className="text-emerald-500" /> Registered Vehicle &amp; Insurance
@@ -237,32 +237,32 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
           </div>
 
           <div className="space-y-3 text-xs font-semibold">
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Vehicle Category</span>
               <strong className="text-slate-900 dark:text-white font-extrabold">{profileData.vehicleType}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Model Name</span>
               <strong className="text-slate-900 dark:text-white font-bold">{profileData.vehicleModel}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Registration Number</span>
               <strong className="text-amber-500 font-mono font-black text-sm">{profileData.vehicleRegNo}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Fuel &amp; Allowance Status</span>
               <strong className="text-emerald-500 font-bold">{profileData.fuelStatus}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Vehicle RC Expiry</span>
               <strong className="text-emerald-500 font-mono">15 Nov 2030 (Verified ✓)</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Insurance Renewal Date</span>
               <strong className="text-amber-500 font-mono">15 Nov 2026</strong>
             </div>
@@ -270,7 +270,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
         </div>
 
         {/* Section C: Bank Account & Payout Details */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
+        <div className="bg-surface p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
               <CreditCard size={18} className="text-purple-500" /> Bank Account &amp; Direct Payouts
@@ -285,32 +285,32 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
           </div>
 
           <div className="space-y-3 text-xs font-semibold">
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Account Holder Name</span>
               <strong className="text-slate-900 dark:text-white font-extrabold">{profileData.fullName}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Bank Name</span>
               <strong className="text-slate-900 dark:text-white font-bold">{profileData.bankName}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Bank Account Number</span>
               <strong className="text-amber-500 font-mono font-black">{profileData.accountNo}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Bank IFSC Code</span>
               <strong className="text-slate-900 dark:text-white font-mono">{profileData.ifscCode}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Linked UPI ID</span>
               <strong className="text-emerald-500 font-mono">{profileData.upiId}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">KYC &amp; Penny Drop Verification</span>
               <strong className="text-emerald-500 font-black">Passed &amp; Active ✓</strong>
             </div>
@@ -318,7 +318,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
         </div>
 
         {/* Section D: Security & Preferences */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
+        <div className="bg-surface p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
               <Lock size={18} className="text-rose-500" /> Account Security &amp; App Controls
@@ -327,19 +327,19 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
           </div>
 
           <div className="space-y-3 text-xs font-semibold">
-            <div className="flex justify-between items-center p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between items-center p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">App Security Lock PIN</span>
               <button type="button" onClick={() => addToast?.('Security PIN reset link sent via SMS', 'info')} className="text-blue-600 dark:text-blue-400 font-extrabold hover:underline cursor-pointer">
                 Change PIN
               </button>
             </div>
 
-            <div className="flex justify-between items-center p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between items-center p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">App Notifications</span>
               <span className="text-emerald-500 font-bold">Sound &amp; Push Active ✓</span>
             </div>
 
-            <div className="flex justify-between items-center p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between items-center p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Precise GPS Location</span>
               <span className="text-emerald-500 font-bold">Always On Shift ✓</span>
             </div>
@@ -365,7 +365,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
       {/* LOGOUT CONFIRMATION MODAL */}
       {isLogoutModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-4 text-xs sa-rise text-center">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-4 text-xs sa-rise text-center">
             <div className="w-16 h-16 rounded-full bg-rose-500/20 text-rose-500 mx-auto flex items-center justify-center font-black text-2xl">
               <LogOut size={28} />
             </div>
@@ -376,7 +376,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
               <button
                 type="button"
                 onClick={() => setIsLogoutModalOpen(false)}
-                className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold cursor-pointer active:scale-95 transition"
+                className="px-4 py-2.5 rounded-xl bg-page text-slate-800 dark:text-slate-200 font-extrabold cursor-pointer active:scale-95 transition"
               >
                 Cancel
               </button>
@@ -395,7 +395,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
       {/* EDIT PROFILE MODAL */}
       {isEditModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-black text-slate-900 dark:text-white">Edit Personal Information</h3>
               <button type="button" onClick={() => setIsEditModalOpen(false)} className="text-slate-400 font-bold p-1 cursor-pointer">✕</button>
@@ -408,7 +408,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
                   type="text"
                   value={profileData.fullName}
                   onChange={(e) => setProfileData({ ...profileData, fullName: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 font-bold text-slate-900 dark:text-white"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-page dark:bg-slate-950 font-bold text-slate-900 dark:text-white"
                 />
               </div>
 
@@ -418,7 +418,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
                   type="text"
                   value={profileData.altPhone}
                   onChange={(e) => setProfileData({ ...profileData, altPhone: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 font-bold text-slate-900 dark:text-white"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-page dark:bg-slate-950 font-bold text-slate-900 dark:text-white"
                 />
               </div>
 
@@ -428,13 +428,13 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
                   rows={2}
                   value={profileData.address}
                   onChange={(e) => setProfileData({ ...profileData, address: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 font-medium text-slate-900 dark:text-white text-xs"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-page dark:bg-slate-950 font-medium text-slate-900 dark:text-white text-xs"
                 />
               </div>
             </div>
 
             <div className="flex justify-end gap-2 pt-2">
-              <button type="button" onClick={() => setIsEditModalOpen(false)} className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold">Cancel</button>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} className="px-4 py-2 rounded-xl bg-page font-bold">Cancel</button>
               <button
                 type="button"
                 onClick={() => {
@@ -538,7 +538,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
       {/* UPLOAD RIDER PROFILE PHOTO MODAL */}
       {isAvatarUploadModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-5 text-xs sa-rise relative">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-5 text-xs sa-rise relative">
             <button
               type="button"
               onClick={() => setIsAvatarUploadModalOpen(false)}
@@ -598,7 +598,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
                 />
                 <label
                   htmlFor="riderPhotoFileInput"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-extrabold text-xs cursor-pointer transition active:scale-95 border border-slate-200 dark:border-slate-700"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-page hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-extrabold text-xs cursor-pointer transition active:scale-95 border border-slate-200"
                 >
                   <Camera size={14} className="text-amber-500" /> Choose Photo from Device
                 </label>
@@ -630,7 +630,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
               <button
                 type="button"
                 onClick={() => setIsAvatarUploadModalOpen(false)}
-                className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold cursor-pointer active:scale-95 transition"
+                className="px-4 py-2.5 rounded-xl bg-page text-slate-700 dark:text-slate-300 font-bold cursor-pointer active:scale-95 transition"
               >
                 Cancel
               </button>

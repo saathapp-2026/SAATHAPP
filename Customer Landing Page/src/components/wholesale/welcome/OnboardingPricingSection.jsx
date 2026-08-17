@@ -18,7 +18,7 @@ export default function OnboardingPricingSection({ onStartRegistration }) {
   };
 
   return (
-    <section id="onboarding-pricing" aria-labelledby="pricing-heading" className="py-20 sm:py-24 bg-white dark:bg-slate-900">
+    <section id="onboarding-pricing" aria-labelledby="pricing-heading" className="py-20 sm:py-24 bg-surface">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           id="pricing-heading"

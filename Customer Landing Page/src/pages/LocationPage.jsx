@@ -75,10 +75,10 @@ export default function LocationPage({
   const activeAddressLabel = useMemo(() => selectedAddress?.label || 'Select a delivery address', [selectedAddress]);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800">
+    <div className="min-h-screen bg-page text-slate-800">
       <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-4 sm:px-6 lg:px-8">
         <header className="mb-4 flex items-center justify-between rounded-3xl border border-slate-200 bg-white/90 px-4 py-4 shadow-sm backdrop-blur">
-          <button type="button" onClick={onBack} className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+          <button type="button" onClick={onBack} className="flex items-center gap-2 rounded-full border border-slate-200 bg-page px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-page">
             <ArrowLeft size={16} />
             Back
           </button>
@@ -99,7 +99,7 @@ export default function LocationPage({
                     value={query}
                     onChange={(event) => setQuery(event.target.value)}
                     placeholder="Search for area, street name..."
-                    className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-primary focus:bg-white"
+                    className="w-full rounded-2xl border border-slate-200 bg-page py-3 pl-10 pr-4 text-sm outline-none transition focus:border-primary focus:bg-white"
                   />
                 </div>
                 <button type="submit" className="rounded-2xl bg-primary px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90">
@@ -125,7 +125,7 @@ export default function LocationPage({
 
             <button type="button" onClick={onAddAddress} className="flex w-full items-center justify-between rounded-3xl border border-dashed border-slate-300 bg-white p-4 text-left shadow-sm transition hover:border-primary hover:bg-primary/5">
               <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 text-slate-700">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-page text-slate-700">
                   <Plus size={20} />
                 </div>
                 <div>
@@ -174,13 +174,13 @@ export default function LocationPage({
               </div>
               <div className="space-y-3">
                 {savedAddresses.length === 0 ? (
-                  <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-500">No saved addresses yet. Add one to get started.</div>
+                  <div className="rounded-2xl border border-dashed border-slate-300 bg-page p-4 text-sm text-slate-500">No saved addresses yet. Add one to get started.</div>
                 ) : (
                   savedAddresses.map((address) => (
                     <div key={address.id} className={`rounded-2xl border p-3 ${selectedAddress?.id === address.id ? 'border-primary bg-primary/5' : 'border-slate-200 bg-white'}`}>
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex gap-3">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-slate-700">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-page text-slate-700">
                             {address.addressType === 'Work' ? 'W' : address.addressType === 'Home' ? 'H' : 'O'}
                           </div>
                           <div>
@@ -189,12 +189,12 @@ export default function LocationPage({
                             {address.phoneNumber && <p className="mt-1 text-xs text-slate-500">{address.phoneNumber}</p>}
                           </div>
                         </div>
-                        <button type="button" onClick={() => onDeleteAddress(address.id)} className="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-danger">
+                        <button type="button" onClick={() => onDeleteAddress(address.id)} className="rounded-full p-2 text-slate-500 transition hover:bg-page hover:text-danger">
                           <Trash2 size={16} />
                         </button>
                       </div>
                       <div className="mt-3 flex items-center justify-between">
-                        <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-600">{address.addressType || 'Other'}</span>
+                        <span className="rounded-full bg-page px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-600">{address.addressType || 'Other'}</span>
                         <button type="button" onClick={() => onSelectAddress(address)} className="rounded-full bg-primary px-3 py-1.5 text-sm font-semibold text-white transition hover:opacity-90">
                           {selectedAddress?.id === address.id ? 'Selected' : 'Select'}
                         </button>

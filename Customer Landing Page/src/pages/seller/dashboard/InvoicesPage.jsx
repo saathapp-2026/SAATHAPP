@@ -275,7 +275,7 @@ export default function InvoicesPage() {
           <button
             type="button"
             onClick={() => setShowAllCards((v) => !v)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-surface"
           >
             <LayoutGrid size={15} />
             {showAllCards ? 'Primary Cards' : 'All Metrics'}
@@ -283,7 +283,7 @@ export default function InvoicesPage() {
           <button
             type="button"
             onClick={() => setShowAnalytics((v) => !v)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-surface"
           >
             <BarChart3 size={15} />
             {showAnalytics ? 'Hide Analytics' : 'Analytics'}
@@ -295,7 +295,7 @@ export default function InvoicesPage() {
               toast.success(`Created ${res.data.length} draft invoice(s) from delivered orders`);
               await refreshAll();
             }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-surface"
             title="Auto-create drafts from delivered orders"
           >
             <PackageCheck size={15} />
@@ -304,7 +304,7 @@ export default function InvoicesPage() {
           <button
             type="button"
             onClick={() => setImportOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-surface"
           >
             <Upload size={15} />
             Import

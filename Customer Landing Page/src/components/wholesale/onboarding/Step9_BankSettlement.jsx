@@ -37,7 +37,7 @@ export default function Step9_BankSettlement({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-3xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
           Phase 8 — Bank & Settlement Setup
         </div>
@@ -61,7 +61,7 @@ export default function Step9_BankSettlement({ onNext, onPrev }) {
                   required
                   value={formData.accountHolderName}
                   onChange={(e) => updateFormData({ accountHolderName: e.target.value })}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                   placeholder="Must match GST / Business Name"
                 />
               </div>
@@ -76,7 +76,7 @@ export default function Step9_BankSettlement({ onNext, onPrev }) {
                 required
                 value={formData.bankName}
                 onChange={(e) => updateFormData({ bankName: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="e.g. HDFC Bank"
               />
             </div>
@@ -92,7 +92,7 @@ export default function Step9_BankSettlement({ onNext, onPrev }) {
                   maxLength={11}
                   value={formData.ifscCode}
                   onChange={(e) => handleIfscLookup(e.target.value)}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3.5 text-sm font-mono uppercase font-bold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3.5 text-sm font-mono uppercase font-bold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                   placeholder="HDFC0000240"
                 />
               </div>
@@ -114,7 +114,7 @@ export default function Step9_BankSettlement({ onNext, onPrev }) {
                   required
                   value={formData.accountNumber}
                   onChange={(e) => updateFormData({ accountNumber: e.target.value })}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-mono font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-mono font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                   placeholder="•••• •••• •••• 8239"
                 />
               </div>
@@ -131,7 +131,7 @@ export default function Step9_BankSettlement({ onNext, onPrev }) {
                   required
                   value={formData.confirmAccountNumber}
                   onChange={(e) => updateFormData({ confirmAccountNumber: e.target.value })}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-mono font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-mono font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                   placeholder="50200049182394"
                 />
               </div>
@@ -145,7 +145,7 @@ export default function Step9_BankSettlement({ onNext, onPrev }) {
                 type="text"
                 value={formData.upiId}
                 onChange={(e) => updateFormData({ upiId: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="saathappwholesale@hdfcbank"
               />
             </div>
@@ -166,7 +166,7 @@ export default function Step9_BankSettlement({ onNext, onPrev }) {
                     className={`cursor-pointer rounded-2xl border p-4 transition ${
                       isSelected
                         ? 'border-emerald-500 bg-emerald-500/10 text-slate-900 dark:text-white shadow-md ring-2 ring-emerald-500/20'
-                        : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-slate-300'
+                        : 'border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 hover:border-slate-300'
                     }`}
                   >
                     <Clock size={18} className={isSelected ? 'text-emerald-500' : 'text-slate-400'} />
@@ -182,7 +182,7 @@ export default function Step9_BankSettlement({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

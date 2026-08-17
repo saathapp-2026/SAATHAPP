@@ -447,7 +447,7 @@ export default function SellerPolicyPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800">
+    <div className="min-h-screen bg-page text-slate-800">
       <Header
         cartCount={0}
         onCartClick={() => { }}
@@ -566,7 +566,7 @@ export default function SellerPolicyPage() {
           <Link
             to="/"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-page"
           >
             <ArrowLeft size={16} />
             Back

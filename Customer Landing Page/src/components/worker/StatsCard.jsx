@@ -16,9 +16,9 @@ export default function StatsCard({
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-5 rounded-card shadow-soft hover:shadow-premium transition-all flex flex-col justify-between h-40 text-left relative overflow-hidden group"
+      className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-5 rounded-card shadow-soft hover:shadow-premium transition-all flex flex-col justify-between h-40 text-left relative overflow-hidden group"
     >
-      <div className="absolute top-0 right-0 w-16 h-16 bg-slate-50 dark:bg-slate-950 rounded-full blur-md pointer-events-none group-hover:scale-110 transition-transform duration-500" />
+      <div className="absolute top-0 right-0 w-16 h-16 bg-page dark:bg-slate-950 rounded-full blur-md pointer-events-none group-hover:scale-110 transition-transform duration-500" />
       
       {/* Top row: Icon & Growth Badge */}
       <div className="flex items-center justify-between relative z-10">
@@ -50,7 +50,7 @@ export default function StatsCard({
 
       {/* Bottom row: Progress bar */}
       {progress !== undefined && (
-        <div className="w-full h-1 bg-slate-100 dark:bg-slate-800 rounded-full mt-3 overflow-hidden relative z-10">
+        <div className="w-full h-1 bg-page rounded-full mt-3 overflow-hidden relative z-10">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}

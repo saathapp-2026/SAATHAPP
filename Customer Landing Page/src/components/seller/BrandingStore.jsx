@@ -28,7 +28,7 @@ export default function BrandingStore({ variant = 'dark', onRequestSubmitted }) 
             transition={{ delay: i * 0.03 }}
             className={`rounded-2xl border p-5 flex flex-col ${
               isLight
-                ? 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-violet-300 dark:hover:border-violet-700'
+                ? 'bg-surface border-slate-200 dark:border-slate-800 hover:border-violet-300 dark:hover:border-violet-700'
                 : 'bg-white/5 border-white/10 hover:border-white/20'
             } transition-colors`}
           >

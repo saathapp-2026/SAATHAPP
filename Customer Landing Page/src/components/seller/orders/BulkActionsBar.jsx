@@ -23,12 +23,12 @@ export default function BulkActionsBar({ count, onAction, loading }) {
   return (
     <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 w-[min(920px,calc(100%-1.5rem))]">
       <div
-        className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-slate-900/95 backdrop-blur shadow-2xl px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-3"
+        className="rounded-2xl border border-slate-200 bg-white/95 backdrop-blur shadow-2xl px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-3"
         role="region"
         aria-label="Bulk actions"
       >
         <p className="text-sm font-bold tabular-nums shrink-0 text-slate-700 dark:text-slate-200">
-          <span className="inline-flex h-7 min-w-7 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 px-2 mr-2">
+          <span className="inline-flex h-7 min-w-7 items-center justify-center rounded-lg bg-page px-2 mr-2">
             {count}
           </span>
           Selected
@@ -51,13 +51,13 @@ export default function BulkActionsBar({ count, onAction, loading }) {
               type="button"
               disabled={loading || count === 0}
               onClick={() => setMoreOpen((v) => !v)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 hover:bg-page disabled:opacity-40"
             >
               <MoreHorizontal size={13} />
               More Actions
             </button>
             {moreOpen && (
-              <div className="absolute bottom-full mb-2 right-0 w-48 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-xl p-1 z-50">
+              <div className="absolute bottom-full mb-2 right-0 w-48 rounded-xl border border-slate-200 bg-surface shadow-xl p-1 z-50">
                 {MORE.map(({ id, label, icon: Icon }) => (
                   <button
                     key={id}
@@ -66,7 +66,7 @@ export default function BulkActionsBar({ count, onAction, loading }) {
                       setMoreOpen(false);
                       onAction(id);
                     }}
-                    className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-left hover:bg-slate-50 dark:hover:bg-slate-800"
+                    className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-left hover:bg-page"
                   >
                     <Icon size={12} />
                     {label}

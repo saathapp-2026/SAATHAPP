@@ -37,7 +37,7 @@ export default function WelcomeKitPage() {
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 text-center"
+          className="rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 p-8 text-center"
         >
           <Crown size={40} className="text-violet-400 mx-auto mb-4" />
           <h2 className="text-xl font-bold mb-2">Upgrade to Unlock Your Welcome Kit</h2>

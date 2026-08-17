@@ -92,7 +92,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-4xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
           Phase 4 — Warehouse & Business Address
         </div>
@@ -126,7 +126,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
               <select
                 value={formData.state}
                 onChange={(e) => updateFormData({ state: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
               >
                 {INDIAN_STATES.map((s) => (
                   <option key={s} value={s}>
@@ -145,7 +145,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
                 required
                 value={formData.district}
                 onChange={(e) => updateFormData({ district: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="Enter district"
               />
             </div>
@@ -159,7 +159,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
                 required
                 value={formData.city}
                 onChange={(e) => updateFormData({ city: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="Enter city"
               />
             </div>
@@ -174,7 +174,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
                 maxLength={6}
                 value={formData.pincode}
                 onChange={(e) => updateFormData({ pincode: e.target.value.replace(/\D/g, '') })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="Enter 6-digit pincode"
               />
             </div>
@@ -191,7 +191,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
                 required
                 value={formData.registeredAddress}
                 onChange={(e) => updateFormData({ registeredAddress: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="Full GST-registered address..."
               />
             </div>
@@ -220,7 +220,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
                 disabled={formData.sameAsRegistered}
                 value={formData.warehouseAddress}
                 onChange={(e) => updateFormData({ warehouseAddress: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-60"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-60"
                 placeholder="Warehouse street, hub number..."
               />
             </div>
@@ -235,7 +235,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
                 type="text"
                 value={formData.pickupAddress}
                 onChange={(e) => updateFormData({ pickupAddress: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="Gate 4, Hub..."
               />
             </div>
@@ -247,7 +247,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
                 type="text"
                 value={formData.loadingPoint}
                 onChange={(e) => updateFormData({ loadingPoint: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="Dock #3 & #4"
               />
             </div>
@@ -259,14 +259,14 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
                 type="text"
                 value={formData.landmark}
                 onChange={(e) => updateFormData({ landmark: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="Near Metro Station"
               />
             </div>
           </div>
 
           {/* Multiple Warehouse Manager */}
-          <div className="mt-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/60 p-5">
+          <div className="mt-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950/60 p-5">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">
@@ -289,7 +289,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
               {formData.additionalWarehouses.map((wh, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm"
+                  className="flex items-center justify-between p-3.5 rounded-xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm"
                 >
                   <div>
                     <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400">
@@ -314,7 +314,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

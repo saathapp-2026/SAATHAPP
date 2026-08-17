@@ -68,7 +68,7 @@ export default function CalendarWidget() {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-left">
       
       {/* Calendar Grid card */}
-      <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all">
+      <div className="lg:col-span-2 bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all">
         
         {/* Header info */}
         <div className="flex items-center justify-between mb-6">
@@ -115,7 +115,7 @@ export default function CalendarWidget() {
                       ? 'bg-rose-50 border-rose-200 text-rose-600 dark:bg-rose-950/20 dark:border-rose-900/60'
                       : hasJobs
                         ? 'bg-emerald-50 border-primary/20 text-slate-800 dark:bg-emerald-950/20 dark:border-primary/20 dark:text-slate-200'
-                        : 'bg-slate-50/60 border-slate-100 hover:border-slate-350 dark:bg-slate-950/40 dark:border-slate-850 dark:hover:border-slate-700 text-slate-700 dark:text-slate-300'
+                        : 'bg-slate-50/60 border-slate-100 hover:border-slate-350  dark:border-slate-850 dark:hover:border-slate-700 text-slate-700 dark:text-slate-300'
                   }`}
                 >
                   <span className="text-[10px] font-bold">{day}</span>
@@ -141,7 +141,7 @@ export default function CalendarWidget() {
             })}
           </div>
 
-          <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 bg-slate-50 dark:bg-slate-950 p-2 rounded-xl mt-4">
+          <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 bg-page dark:bg-slate-950 p-2 rounded-xl mt-4">
             <Info size={12} className="text-slate-400 flex-shrink-0" />
             <span>Click any date to block/unblock your availability for instant leads.</span>
           </div>
@@ -151,7 +151,7 @@ export default function CalendarWidget() {
       </div>
 
       {/* Leave Requests Drawer */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all flex flex-col justify-between">
+      <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all flex flex-col justify-between">
         
         {/* Request Form */}
         <div className="space-y-4">
@@ -168,7 +168,7 @@ export default function CalendarWidget() {
                 value={newLeave.date}
                 onChange={(e) => setNewLeave(prev => ({ ...prev, date: e.target.value }))}
                 placeholder="e.g. 15"
-                className="input-field dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                className="input-field dark:border-slate-800 dark:text-white"
               />
             </div>
             
@@ -180,7 +180,7 @@ export default function CalendarWidget() {
                 value={newLeave.reason}
                 onChange={(e) => setNewLeave(prev => ({ ...prev, reason: e.target.value }))}
                 placeholder="e.g. Family function"
-                className="input-field dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                className="input-field dark:border-slate-800 dark:text-white"
               />
             </div>
 
@@ -195,14 +195,14 @@ export default function CalendarWidget() {
         </div>
 
         {/* Historic Request List */}
-        <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/40 text-left">
+        <div className="mt-6 pt-4 border-t border-slate-100  text-left">
           <h4 className="text-xs font-black text-slate-450 dark:text-slate-500 uppercase tracking-wider mb-3">Leave Log</h4>
           
           <div className="space-y-2 overflow-y-auto max-h-[150px] pr-1 scrollbar-none">
             {leaveRequests.map(req => (
               <div 
                 key={req.id}
-                className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-150 dark:border-slate-850/80 flex items-center justify-between"
+                className="p-3 bg-page dark:bg-slate-950 rounded-xl border border-slate-150 dark:border-slate-850/80 flex items-center justify-between"
               >
                 <div>
                   <span className="text-[10px] font-black text-slate-800 dark:text-slate-200">{req.startDate}</span>

@@ -49,7 +49,7 @@ export default function MarketingBillingPage() {
         {BILLING_ITEMS.map((item) => (
           <div key={item.key} className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-5 shadow-sm">
             <div className="flex items-center gap-3">
-              <span className="rounded-2xl bg-slate-100 dark:bg-slate-900 p-3 text-emerald-600"><FileText size={18} /></span>
+              <span className="rounded-2xl bg-page dark:bg-slate-900 p-3 text-emerald-600"><FileText size={18} /></span>
               <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">{item.label}</p>
             </div>
             <p className="mt-4 text-3xl font-bold text-slate-900 dark:text-slate-50">{item.key === 'roas' ? `${summary?.[item.key] || 0}x` : formatINR(summary?.[item.key])}</p>
@@ -63,17 +63,17 @@ export default function MarketingBillingPage() {
             <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">Latest invoice</p>
             <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-50">GST invoice #INV-2026-021</h3>
           </div>
-          <div className="inline-flex items-center gap-2 rounded-2xl bg-slate-100 dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
+          <div className="inline-flex items-center gap-2 rounded-2xl bg-page dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
             <Wallet size={16} /> Payment pending
           </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 mt-6">
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-4">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-900 p-4">
             <p className="text-xs text-slate-500 dark:text-slate-400">Invoice amount</p>
             <p className="mt-2 text-xl font-semibold text-slate-900 dark:text-slate-50">{formatINR(summary?.spent || 0)}</p>
           </div>
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-4">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-900 p-4">
             <p className="text-xs text-slate-500 dark:text-slate-400">Due date</p>
             <p className="mt-2 text-xl font-semibold text-slate-900 dark:text-slate-50">{new Date().toLocaleDateString('en-IN')}</p>
           </div>
@@ -81,7 +81,7 @@ export default function MarketingBillingPage() {
 
         <div className="mt-6 flex flex-wrap gap-3">
           <button type="button" className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"><CreditCard size={16} /> Pay now</button>
-          <button type="button" className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"><Clock3 size={16} /> View invoice</button>
+          <button type="button" className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-page dark:bg-slate-900 dark:text-slate-200"><Clock3 size={16} /> View invoice</button>
         </div>
       </div>
     </div>

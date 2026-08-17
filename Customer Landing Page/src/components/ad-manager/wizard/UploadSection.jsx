@@ -25,7 +25,7 @@ export default function UploadSection({ draft, updateDraft }) {
         <div className="space-y-2">
           <label className="text-sm font-semibold text-slate-700">Upload Banner / Image / Video <span className="text-rose-500">*</span></label>
           <div 
-            className="w-full h-64 rounded-2xl border-2 border-dashed border-slate-300 hover:border-[#15803D] bg-slate-50 flex flex-col items-center justify-center text-center transition-colors cursor-pointer"
+            className="w-full h-64 rounded-2xl border-2 border-dashed border-slate-300 hover:border-[#15803D] bg-page flex flex-col items-center justify-center text-center transition-colors cursor-pointer"
             onClick={handleUploadClick}
           >
             <input 

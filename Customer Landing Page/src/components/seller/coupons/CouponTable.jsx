@@ -44,7 +44,7 @@ function ActionsMenu({ item, onAction, loadingId }) {
         type="button"
         disabled={busy}
         onClick={() => setOpen((v) => !v)}
-        className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500"
+        className="p-1.5 rounded-lg hover:bg-page text-slate-500"
         aria-label="Actions"
       >
         <MoreVertical size={15} />
@@ -52,7 +52,7 @@ function ActionsMenu({ item, onAction, loadingId }) {
       {open ? (
         <>
           <button type="button" className="fixed inset-0 z-10" aria-label="Close" onClick={() => setOpen(false)} />
-          <div role="menu" className="absolute right-0 top-8 z-20 w-44 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-xl py-1 max-h-72 overflow-y-auto">
+          <div role="menu" className="absolute right-0 top-8 z-20 w-44 rounded-xl border border-slate-200 bg-surface shadow-xl py-1 max-h-72 overflow-y-auto">
             {items.map((a) => {
               const Icon = a.icon;
               return (
@@ -64,7 +64,7 @@ function ActionsMenu({ item, onAction, loadingId }) {
                     setOpen(false);
                     onAction(a.id, item);
                   }}
-                  className={`flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800 ${
+                  className={`flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page ${
                     a.danger ? 'text-red-600' : 'text-slate-700 dark:text-slate-200'
                   }`}
                 >
@@ -114,9 +114,9 @@ export default function CouponTable({
 
   if (loading) {
     return (
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 animate-pulse space-y-3" aria-busy="true">
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-6 animate-pulse space-y-3" aria-busy="true">
         {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="h-12 rounded bg-slate-200 dark:bg-slate-700" />
+          <div key={i} className="h-12 rounded bg-slate-200" />
         ))}
       </div>
     );
@@ -124,7 +124,7 @@ export default function CouponTable({
 
   if (!items.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-10 text-center">
+      <div className="rounded-2xl border border-dashed border-slate-300 bg-surface p-10 text-center">
         <Ticket className="mx-auto h-10 w-10 text-slate-300 mb-3" />
         <p className="font-semibold">No promotions yet</p>
         <p className="text-sm text-slate-500 mt-1">Create a coupon, campaign, banner, or ad to get started.</p>
@@ -139,7 +139,7 @@ export default function CouponTable({
     <section aria-label="Promotions table">
       <div className="md:hidden space-y-2">
         {items.map((item) => (
-          <div key={item.id} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 shadow-sm">
+          <div key={item.id} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-3 shadow-sm">
             <div className="flex items-start gap-2">
               <input
                 type="checkbox"
@@ -152,7 +152,7 @@ export default function CouponTable({
                 <p className="text-sm font-semibold truncate">{item.name}</p>
                 <p className="text-[11px] text-slate-500 font-mono">{item.code}</p>
                 <div className="flex flex-wrap gap-1.5 mt-1.5">
-                  <span className="rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[10px] font-semibold capitalize">{item.kind}</span>
+                  <span className="rounded-full bg-page px-2 py-0.5 text-[10px] font-semibold capitalize">{item.kind}</span>
                   <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold capitalize ${STATUS_STYLES[item.status]}`}>{item.status}</span>
                 </div>
                 <p className="text-[11px] text-slate-500 mt-1.5">
@@ -165,7 +165,7 @@ export default function CouponTable({
         ))}
       </div>
 
-      <div className="hidden md:block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm">
+      <div className="hidden md:block rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface overflow-hidden shadow-sm">
         <div className="overflow-x-auto max-h-[520px]">
           <table className="w-full text-left text-sm">
             <thead className="sticky top-0 z-[1] bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur border-b border-slate-200 dark:border-slate-800">
@@ -186,7 +186,7 @@ export default function CouponTable({
             </thead>
             <tbody>
               {items.map((item) => (
-                <tr key={item.id} className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-800/40">
+                <tr key={item.id} className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80">
                   <td className="px-3 py-3">
                     <input
                       type="checkbox"
@@ -224,7 +224,7 @@ export default function CouponTable({
             </tbody>
           </table>
         </div>
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/40">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 ">
           <p className="text-xs text-slate-500">Showing {start} to {end} of {total}</p>
           <div className="flex items-center gap-3">
             <label className="inline-flex items-center gap-2 text-xs text-slate-500">
@@ -232,7 +232,7 @@ export default function CouponTable({
               <select
                 value={pageSize}
                 onChange={(e) => onPageSizeChange?.(Number(e.target.value))}
-                className="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 py-1 text-xs"
+                className="rounded-lg border border-slate-200 bg-surface px-2 py-1 text-xs"
               >
                 {[5, 10, 20].map((n) => (
                   <option key={n} value={n}>{n}</option>
@@ -240,11 +240,11 @@ export default function CouponTable({
               </select>
             </label>
             <div className="flex gap-1">
-              <button type="button" disabled={page <= 1} onClick={() => onPageChange(page - 1)} className="h-8 w-8 rounded-lg border border-slate-200 dark:border-slate-700 disabled:opacity-40 inline-flex items-center justify-center" aria-label="Prev">
+              <button type="button" disabled={page <= 1} onClick={() => onPageChange(page - 1)} className="h-8 w-8 rounded-lg border border-slate-200 disabled:opacity-40 inline-flex items-center justify-center" aria-label="Prev">
                 <ChevronLeft size={14} />
               </button>
               <span className="inline-flex items-center px-2 text-xs font-semibold">{page} / {totalPages}</span>
-              <button type="button" disabled={page >= totalPages} onClick={() => onPageChange(page + 1)} className="h-8 w-8 rounded-lg border border-slate-200 dark:border-slate-700 disabled:opacity-40 inline-flex items-center justify-center" aria-label="Next">
+              <button type="button" disabled={page >= totalPages} onClick={() => onPageChange(page + 1)} className="h-8 w-8 rounded-lg border border-slate-200 disabled:opacity-40 inline-flex items-center justify-center" aria-label="Next">
                 <ChevronRight size={14} />
               </button>
             </div>

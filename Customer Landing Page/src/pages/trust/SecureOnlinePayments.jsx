@@ -70,7 +70,7 @@ export default function SecureOnlinePaymentsPage() {
   const [openFaq, setOpenFaq] = useState(null);
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
+    <div className="min-h-screen bg-page font-sans text-slate-800">
       <Header
         cartCount={0}
         onCartClick={() => {}}
@@ -100,7 +100,7 @@ export default function SecureOnlinePaymentsPage() {
             <Link
               to="/"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-page"
             >
               <ArrowLeft size={16} />
               Back
@@ -198,7 +198,7 @@ export default function SecureOnlinePaymentsPage() {
 
             <div className="mt-8 grid gap-6 md:grid-cols-2">
               {safetyGuidelines.map((item, idx) => (
-                <div key={idx} className="rounded-2xl border border-slate-100 bg-slate-50 p-6">
+                <div key={idx} className="rounded-2xl border border-slate-100 bg-page p-6">
                   <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
                     <CheckCircle2 size={18} className="text-emerald-500" />
                     {item.title}
@@ -225,7 +225,7 @@ export default function SecureOnlinePaymentsPage() {
                 <div key={idx} className="rounded-2xl border border-slate-200 bg-slate-50/50 overflow-hidden">
                   <button
                     onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    className="w-full flex items-center justify-between p-5 text-left font-bold text-slate-900 text-sm sm:text-base hover:bg-slate-100 transition"
+                    className="w-full flex items-center justify-between p-5 text-left font-bold text-slate-900 text-sm sm:text-base hover:bg-page transition"
                   >
                     <span>{faq.q}</span>
                     {openFaq === idx ? <ChevronUp size={20} className="text-emerald-600 shrink-0" /> : <ChevronDown size={20} className="text-slate-400 shrink-0" />}

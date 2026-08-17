@@ -71,7 +71,7 @@ export default function OnboardingFeeCalculator({
   ];
 
   return (
-    <div className={compact ? '' : 'rounded-[28px] border border-slate-200/70 dark:border-slate-800/60 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-premium'}>
+    <div className={compact ? '' : 'rounded-[28px] border border-slate-200/70 dark:border-slate-800/60 bg-surface p-6 sm:p-8 shadow-premium'}>
       {showTitle && (
         <div className="mb-8">
           <span className="inline-flex items-center gap-2 rounded-full border border-[#0A8F3D]/20 bg-[#0A8F3D]/5 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#0A8F3D]">
@@ -101,7 +101,7 @@ export default function OnboardingFeeCalculator({
                 <select
                   value={values[field.key] || ''}
                   onChange={(e) => onChange?.({ [field.key]: e.target.value })}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-[#0A8F3D] focus:outline-none focus:ring-2 focus:ring-[#0A8F3D]/20"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-[#0A8F3D] focus:outline-none focus:ring-2 focus:ring-[#0A8F3D]/20"
                 >
                   {field.options.map((opt) => (
                     <option key={opt} value={opt}>
@@ -141,7 +141,7 @@ export default function OnboardingFeeCalculator({
                 ['Calculated Fee', `${formatInr(feeResult.fee || 0)}`],
                 ['Eligibility', `${feeResult.isEligible ? 'Eligible (>= ₹10L)' : 'Not Eligible (< ₹10L)'}`],
               ].map(([label, value]) => (
-                <div key={label} className="flex justify-between gap-2 border-b border-slate-200/60 dark:border-slate-700/60 pb-1.5">
+                <div key={label} className="flex justify-between gap-2 border-b border-slate-200/60 pb-1.5">
                   <span className="text-slate-500 font-semibold">{label}</span>
                   <span className="font-bold text-slate-800 dark:text-slate-200 text-right">{value}</span>
                 </div>

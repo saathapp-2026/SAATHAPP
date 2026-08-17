@@ -19,7 +19,7 @@ export default function SettingsTab() {
         </div>
       </div>
 
-      <form onSubmit={handleSaveSettings} className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-6 max-w-3xl">
+      <form onSubmit={handleSaveSettings} className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm space-y-6 max-w-3xl">
         <div className="space-y-4 text-xs">
           <h3 className="text-sm font-extrabold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2">
             Company & Partner Details
@@ -31,7 +31,7 @@ export default function SettingsTab() {
                 type="text"
                 value={formData.businessName}
                 onChange={(e) => updateFormData({ businessName: e.target.value })}
-                className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 p-2.5 font-semibold text-slate-900 dark:text-white"
+                className="w-full rounded-xl border border-slate-300 bg-page dark:bg-slate-950 p-2.5 font-semibold text-slate-900 dark:text-white"
               />
             </div>
             <div>
@@ -40,7 +40,7 @@ export default function SettingsTab() {
                 type="text"
                 value={formData.fullName}
                 onChange={(e) => updateFormData({ fullName: e.target.value })}
-                className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 p-2.5 font-semibold text-slate-900 dark:text-white"
+                className="w-full rounded-xl border border-slate-300 bg-page dark:bg-slate-950 p-2.5 font-semibold text-slate-900 dark:text-white"
               />
             </div>
           </div>
@@ -50,7 +50,7 @@ export default function SettingsTab() {
           <h3 className="text-sm font-extrabold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2">
             API Key & Developer Access (ERP Sync)
           </h3>
-          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div className="p-4 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
             <div>
               <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">saath_live_whl_9842027184712039</span>
               <p className="text-[11px] text-slate-500 mt-0.5">Use for SAP / Tally ERP real-time inventory sync.</p>
@@ -58,7 +58,7 @@ export default function SettingsTab() {
             <button
               type="button"
               onClick={() => addToast('API Key copied to clipboard!', 'success')}
-              className="rounded-xl border border-slate-300 dark:border-slate-700 px-3 py-1.5 text-xs font-bold"
+              className="rounded-xl border border-slate-300 px-3 py-1.5 text-xs font-bold"
             >
               Copy Key
             </button>

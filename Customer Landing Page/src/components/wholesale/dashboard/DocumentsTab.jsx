@@ -55,7 +55,7 @@ export default function DocumentsTab() {
         {Object.entries(docList).map(([key, doc]) => (
           <div
             key={key}
-            className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3 flex flex-col justify-between"
+            className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-3 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-2">
@@ -71,7 +71,7 @@ export default function DocumentsTab() {
                       ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30'
                       : doc.status === 'Uploaded'
                       ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-500/30'
-                      : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
+                      : 'bg-slate-200 text-slate-500'
                   }`}
                 >
                   {doc.status}
@@ -79,19 +79,19 @@ export default function DocumentsTab() {
               </div>
 
               {doc.fileName ? (
-                <p className="text-xs text-slate-700 dark:text-slate-300 font-mono font-semibold truncate bg-slate-50 dark:bg-slate-950 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-1.5">
+                <p className="text-xs text-slate-700 dark:text-slate-300 font-mono font-semibold truncate bg-page dark:bg-slate-950 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-1.5">
                   <FileText size={14} className="text-emerald-500 shrink-0" />
                   <span className="truncate">{doc.fileName}</span>
                 </p>
               ) : (
-                <p className="text-xs text-slate-400 font-medium italic bg-slate-50 dark:bg-slate-950/50 p-2.5 rounded-xl border border-dashed border-slate-200 dark:border-slate-800">
+                <p className="text-xs text-slate-400 font-medium italic bg-page dark:bg-slate-950/50 p-2.5 rounded-xl border border-dashed border-slate-200 dark:border-slate-800">
                   No document file uploaded yet.
                 </p>
               )}
             </div>
 
             {/* REAL WORKABLE FILE UPLOAD BUTTON */}
-            <label className="cursor-pointer w-full inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 py-2.5 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+            <label className="cursor-pointer w-full inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-page dark:bg-slate-950 py-2.5 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition">
               <Upload size={14} className="text-emerald-500" /> Upload / Update File
               <input
                 type="file"

@@ -81,7 +81,7 @@ export default function Signup({ onLogin, onSignup }) {
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <label className="block text-sm font-semibold text-slate-700">
               Full name
-              <div className="mt-2 flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3">
+              <div className="mt-2 flex items-center gap-2 rounded-2xl border border-slate-200 bg-page px-3 py-3">
                 <User size={16} className="text-slate-400" />
                 <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-transparent outline-none" placeholder="Full Name" />
               </div>
@@ -89,7 +89,7 @@ export default function Signup({ onLogin, onSignup }) {
 
             <label className="block text-sm font-semibold text-slate-700">
               Email address
-              <div className="mt-2 flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3">
+              <div className="mt-2 flex items-center gap-2 rounded-2xl border border-slate-200 bg-page px-3 py-3">
                 <Mail size={16} className="text-slate-400" />
                 <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-transparent outline-none" placeholder="you@example.com" />
               </div>
@@ -97,7 +97,7 @@ export default function Signup({ onLogin, onSignup }) {
 
             <label className="block text-sm font-semibold text-slate-700">
               Phone number
-              <div className="mt-2 flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3">
+              <div className="mt-2 flex items-center gap-2 rounded-2xl border border-slate-200 bg-page px-3 py-3">
                 <Phone size={16} className="text-slate-400" />
                 <input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full bg-transparent outline-none" placeholder="10-digit mobile" />
               </div>
@@ -105,7 +105,7 @@ export default function Signup({ onLogin, onSignup }) {
 
             <label className="block text-sm font-semibold text-slate-700">
               Password
-              <div className="mt-2 flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3">
+              <div className="mt-2 flex items-center gap-2 rounded-2xl border border-slate-200 bg-page px-3 py-3">
                 <Lock size={16} className="text-slate-400" />
                 <input type={showPassword ? 'text' : 'password'} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className="w-full bg-transparent outline-none" placeholder="Create password" />
                 <button type="button" onClick={() => setShowPassword((prev) => !prev)} className="text-slate-500">
@@ -116,7 +116,7 @@ export default function Signup({ onLogin, onSignup }) {
 
             <label className="block text-sm font-semibold text-slate-700">
               Confirm password
-              <div className="mt-2 flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3">
+              <div className="mt-2 flex items-center gap-2 rounded-2xl border border-slate-200 bg-page px-3 py-3">
                 <Lock size={16} className="text-slate-400" />
                 <input type={showConfirmPassword ? 'text' : 'password'} value={form.confirm} onChange={(e) => setForm({ ...form, confirm: e.target.value })} className="w-full bg-transparent outline-none" placeholder="Re-enter password" />
                 <button type="button" onClick={() => setShowConfirmPassword((prev) => !prev)} className="text-slate-500">
@@ -154,7 +154,7 @@ export default function Signup({ onLogin, onSignup }) {
             </button>
           </form>
 
-          <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
+          <div className="mt-6 rounded-2xl border border-slate-200 bg-page p-4 text-sm text-slate-600">
             Already have an account?{' '}
             <button type="button" onClick={onLogin} className="font-semibold text-cyan-600">Login</button>
           </div>

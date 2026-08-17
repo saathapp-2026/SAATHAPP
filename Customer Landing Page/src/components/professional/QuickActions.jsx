@@ -74,7 +74,7 @@ export default function QuickActions({
   ];
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left">
+    <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left">
       <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Quick Operations</h3>
       
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -86,9 +86,9 @@ export default function QuickActions({
               onClick={act.action}
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.97 }}
-              className={`p-4 border rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors duration-200 ${act.color} dark:bg-slate-950/40 dark:border-slate-850 dark:text-slate-200 dark:hover:bg-slate-900/60`}
+              className={`p-4 border rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors duration-200 ${act.color}  dark:border-slate-850 dark:text-slate-200`}
             >
-              <div className="w-8 h-8 rounded-lg bg-white dark:bg-slate-900 shadow-sm flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-surface shadow-sm flex items-center justify-center">
                 <Icon size={16} />
               </div>
               <span className="text-[10px] font-black uppercase tracking-wider leading-none text-center">

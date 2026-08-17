@@ -33,13 +33,13 @@ export default function Topbar({
   const unreadNotifications = notifications.filter(n => !n.read).length;
 
   return (
-    <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-800 py-3 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 shadow-sm">
+    <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-800 py-3 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 shadow-sm">
       
       {/* Left side: Hamburger & Title */}
       <div className="flex items-center gap-3">
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="lg:hidden p-2 rounded-xl text-slate-500 hover:text-slate-700 dark:hover:text-slate-350 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+          className="lg:hidden p-2 rounded-xl text-slate-500 hover:text-slate-700 hover:bg-page cursor-pointer"
         >
           <Menu size={20} />
         </button>
@@ -59,7 +59,7 @@ export default function Topbar({
         <input
           type="text"
           placeholder="Search bookings, invoices, customers..."
-          className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 rounded-xl outline-none focus:border-primary/50 dark:focus:border-primary/50 transition-all text-slate-700 dark:text-slate-200"
+          className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-page dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 rounded-xl outline-none focus:border-primary/50 dark:focus:border-primary/50 transition-all text-slate-700 dark:text-slate-200"
         />
       </div>
 
@@ -69,7 +69,7 @@ export default function Topbar({
         {/* Dark Mode toggle */}
         <button
           onClick={toggleDarkMode}
-          className="p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+          className="p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-page cursor-pointer transition-colors"
           title="Toggle Theme"
         >
           {darkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -80,7 +80,7 @@ export default function Topbar({
           <button
             onClick={() => setLangDropdown(!langDropdown)}
             onBlur={() => setTimeout(() => setLangDropdown(false), 200)}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-200/60 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 cursor-pointer"
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-200/60 dark:border-slate-800 hover:bg-page text-xs font-bold text-slate-600 dark:text-slate-300 cursor-pointer"
           >
             <Globe size={14} />
             <span className="hidden sm:inline">{selectedLang}</span>
@@ -93,7 +93,7 @@ export default function Topbar({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
-                className="absolute right-0 mt-1.5 w-32 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-xl shadow-premium py-1 text-left z-55"
+                className="absolute right-0 mt-1.5 w-32 bg-surface border border-slate-200/60 dark:border-slate-800 rounded-xl shadow-premium py-1 text-left z-55"
               >
                 {['English', 'हिन्दी (Hindi)', 'বাংলা (Bengali)'].map((lang) => (
                   <button
@@ -102,7 +102,7 @@ export default function Topbar({
                       setSelectedLang(lang.split(' ')[0]);
                       setLangDropdown(false);
                     }}
-                    className="w-full px-3 py-2 text-xs font-semibold text-slate-750 dark:text-slate-350 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-between cursor-pointer"
+                    className="w-full px-3 py-2 text-xs font-semibold text-slate-750 dark:text-slate-350 hover:bg-page flex items-center justify-between cursor-pointer"
                   >
                     <span>{lang}</span>
                     {selectedLang === lang.split(' ')[0] && <Check size={10} className="text-primary" />}
@@ -115,7 +115,7 @@ export default function Topbar({
 
         {/* Notifications Bell */}
         <button
-          className="p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 relative cursor-pointer"
+          className="p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-page relative cursor-pointer"
           onClick={() => alert('View notifications via the Sidebar menu option.')}
         >
           <Bell size={18} />
@@ -133,8 +133,8 @@ export default function Topbar({
             onBlur={() => setTimeout(() => setProfileDropdown(false), 200)}
             className="flex items-center gap-1.5 cursor-pointer focus:outline-none"
           >
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100">
-              <div className="w-full h-full flex items-center justify-center bg-slate-200 dark:bg-slate-700 text-slate-500 text-xs font-bold uppercase">
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-200 bg-page">
+              <div className="w-full h-full flex items-center justify-center bg-slate-200 text-slate-500 text-xs font-bold uppercase">
                 RK
               </div>
             </div>
@@ -147,7 +147,7 @@ export default function Topbar({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
-                className="absolute right-0 mt-1.5 w-48 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-xl shadow-premium py-1 text-left z-55"
+                className="absolute right-0 mt-1.5 w-48 bg-surface border border-slate-200/60 dark:border-slate-800 rounded-xl shadow-premium py-1 text-left z-55"
               >
                 <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800/60">
                   <p className="text-xs font-black text-slate-800 dark:text-slate-200">Rahul Kumar</p>
@@ -155,14 +155,14 @@ export default function Topbar({
                 </div>
                 <button
                   onClick={() => alert('Edit profile settings via the profile tab.')}
-                  className="w-full px-3 py-2 text-xs font-semibold text-slate-650 dark:text-slate-350 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer"
+                  className="w-full px-3 py-2 text-xs font-semibold text-slate-650 dark:text-slate-350 hover:bg-page flex items-center gap-2 cursor-pointer"
                 >
                   <User size={14} className="text-slate-400" />
                   <span>My Profile</span>
                 </button>
                 <button
                   onClick={onLogout}
-                  className="w-full px-3 py-2 text-xs font-semibold text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-955 flex items-center gap-2 cursor-pointer border-t border-slate-100 dark:border-slate-800/40"
+                  className="w-full px-3 py-2 text-xs font-semibold text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-955 flex items-center gap-2 cursor-pointer border-t border-slate-100 "
                 >
                   <LogOut size={14} />
                   <span>Logout</span>

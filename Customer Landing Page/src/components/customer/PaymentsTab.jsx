@@ -25,18 +25,18 @@ export default function PaymentsTab({ orders, _transactions, walletBalance, setS
               Add Money
             </button>
           </div>
-          <div className="p-4 bg-slate-50 dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl">
+          <div className="p-4 bg-page dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl">
             <span className="text-[10px] uppercase font-bold text-slate-400 block leading-none">Wallet Balance</span>
             <span className="text-xl font-black text-slate-850 dark:text-white mt-1.5 inline-block">₹{walletBalance.toFixed(2)}</span>
           </div>
 
           <h3 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider pt-2">Saved Cards</h3>
-          <div className="p-4 bg-slate-50 dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl text-center text-xs text-slate-400 font-semibold">
+          <div className="p-4 bg-page dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl text-center text-xs text-slate-400 font-semibold">
             No saved cards.
           </div>
 
           <h3 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider pt-2">Saved UPI IDs</h3>
-          <div className="p-4 bg-slate-50 dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl text-center text-xs text-slate-400 font-semibold">
+          <div className="p-4 bg-page dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl text-center text-xs text-slate-400 font-semibold">
             No saved UPI IDs.
           </div>
         </div>
@@ -50,7 +50,7 @@ export default function PaymentsTab({ orders, _transactions, walletBalance, setS
           ) : (
             <div className="space-y-2">
               {orders.filter(o => o.status === 'Delivered').map((ord) => (
-                <div key={ord.id} className="p-3 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-xl flex items-center justify-between gap-4 text-xs">
+                <div key={ord.id} className="p-3 bg-surface border border-slate-200/60 dark:border-slate-800 rounded-xl flex items-center justify-between gap-4 text-xs">
                   <div>
                     <p className="font-black text-slate-800 dark:text-slate-200">{ord.id}</p>
                     <p className="text-[9px] text-slate-400 font-semibold">{ord.date} • ₹{ord.total}</p>

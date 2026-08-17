@@ -50,7 +50,7 @@ export default function Sidebar({
       )}
 
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-72 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 border-r border-white/20 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/80 backdrop-blur-2xl shadow-[4px_0_24px_rgba(15,23,42,0.06)] ${
+        className={`fixed top-0 bottom-0 left-0 z-50 w-72 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 border-r border-white/20 dark:border-slate-800/80 bg-white/75 backdrop-blur-2xl shadow-[4px_0_24px_rgba(15,23,42,0.06)] ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:sticky lg:h-screen lg:top-0`}
       >
@@ -61,14 +61,14 @@ export default function Sidebar({
             </div>
             <button
               type="button"
-              className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+              className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:bg-page"
               onClick={() => setIsOpen(false)}
             >
               <X size={18} />
             </button>
           </div>
 
-          <div className="rounded-2xl border border-white/60 dark:border-slate-700/60 bg-gradient-to-br from-white/90 to-slate-50/80 dark:from-slate-800/60 dark:to-slate-900/60 p-3.5 shadow-soft">
+          <div className="rounded-2xl border border-white/60 bg-gradient-to-br from-white/90 to-slate-50/80 dark:from-slate-800/60 dark:to-slate-900/60 p-3.5 shadow-soft">
             <div className="flex items-center gap-3">
               <div className="relative shrink-0">
                 <div className="w-12 h-12 rounded-2xl overflow-hidden ring-2 ring-primary/20 shadow-md">
@@ -102,7 +102,7 @@ export default function Sidebar({
                 type="button"
                 onClick={() => setIsOnline(!isOnline)}
                 className={`relative w-11 h-6 rounded-full transition-colors ${
-                  isOnline ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-slate-700'
+                  isOnline ? 'bg-emerald-500' : 'bg-slate-300'
                 }`}
               >
                 <motion.span
@@ -130,7 +130,7 @@ export default function Sidebar({
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-left text-xs font-bold transition-all ${
                   isActive
                     ? 'bg-gradient-to-r from-primary to-brand-600 text-white shadow-md shadow-primary/25'
-                    : 'text-slate-600 dark:text-slate-400 hover:bg-white/70 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-white/70 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <Icon size={17} className={isActive ? 'text-white' : 'text-slate-400'} />

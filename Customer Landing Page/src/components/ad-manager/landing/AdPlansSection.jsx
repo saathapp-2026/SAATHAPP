@@ -17,7 +17,7 @@ const MONTHLY_PRICES = ['₹5,000', '₹10,000', '₹25,000', '₹50,000', '₹1
 
 export default function AdPlansSection() {
   return (
-    <section className="py-16 bg-slate-50 dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800">
+    <section className="py-16 bg-page dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Header */}
@@ -57,7 +57,7 @@ export default function AdPlansSection() {
                 <div className="grid grid-cols-7 gap-2 mb-8">
                   {TIERS.map((tier, i) => (
                     <div key={tier.id} className="flex flex-col items-center gap-4">
-                      <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+                      <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-page dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
                         <tier.icon size={20} className={tier.iconColor} />
                       </div>
                       <div className="text-center">
@@ -100,7 +100,7 @@ export default function AdPlansSection() {
                 <div className="grid grid-cols-7 gap-2 mb-8">
                   {TIERS.map((tier, i) => (
                     <div key={tier.id} className="flex flex-col items-center gap-4">
-                      <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+                      <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-page dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
                         <tier.icon size={20} className={tier.iconColor} />
                       </div>
                       <div className="text-center">

@@ -69,7 +69,7 @@ export default function HandoverModal({ open, order, loading, onConfirm, onClose
             <input
               value={form[key]}
               onChange={(e) => set(key, e.target.value)}
-              className="mt-1 w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-sm"
+              className="mt-1 w-full px-3 py-2 rounded-xl border border-slate-200 bg-page dark:bg-slate-950 text-sm"
             />
           </label>
         ))}

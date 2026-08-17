@@ -402,7 +402,7 @@ Website: www.saathappnova.co.in
     <div className="min-h-screen bg-saath-bg flex flex-col font-body text-slate-900 overflow-x-hidden">
       
       {/* Exclusive Franchise Sticky Navbar */}
-      <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-saath-border py-2.5 sm:py-3.5 px-4 sm:px-6 md:px-12 shadow-sm transition-all duration-300">
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-saath-border py-2.5 sm:py-3.5 px-4 sm:px-6 md:px-12 shadow-sm transition-all duration-300">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
           
           <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
@@ -505,7 +505,7 @@ Website: www.saathappnova.co.in
               </button>
               <button 
                 onClick={handleDownloadBrochure}
-                className="w-full sm:w-auto bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/80 border-2 border-slate-300 dark:border-slate-600 hover:border-saath-green/60 text-slate-900 dark:text-white font-extrabold text-xs xs:text-sm sm:text-base text-center px-5 xs:px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap shadow-sm group hover:shadow-md"
+                className="w-full sm:w-auto bg-white hover:bg-page border-2 border-slate-300 hover:border-saath-green/60 text-slate-900 dark:text-white font-extrabold text-xs xs:text-sm sm:text-base text-center px-5 xs:px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap shadow-sm group hover:shadow-md"
               >
                 <Download className="w-4 h-4 sm:w-5 sm:h-5 text-saath-green group-hover:translate-y-0.5 transition-transform shrink-0" /> 
                 <span>Download Brochure</span>
@@ -520,7 +520,7 @@ Website: www.saathappnova.co.in
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
                 <button 
                   onClick={() => setSelectedTrustBadge({ title: 'Startup India Recognized', org: 'Government of India', desc: 'Officially recognized under the Department for Promotion of Industry and Internal Trade (DPIIT) startup ecosystem.' })}
-                  className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-saath-green rounded-xl px-3 py-2.5 flex flex-col items-center justify-center text-center shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  className="bg-white border border-slate-200 hover:border-saath-green rounded-xl px-3 py-2.5 flex flex-col items-center justify-center text-center shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
                   <span className="text-slate-900 dark:text-white font-black text-xs">Startup India</span>
                   <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400">Recognized</span>
@@ -528,7 +528,7 @@ Website: www.saathappnova.co.in
 
                 <button 
                   onClick={() => setSelectedTrustBadge({ title: 'DPIIT Approved Organization', org: 'Ministry of Commerce & Industry', desc: 'Audited and verified entity compliant with national digital marketplace & hyperlocal trade standards.' })}
-                  className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-saath-accent rounded-xl px-3 py-2.5 flex flex-col items-center justify-center text-center shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  className="bg-white border border-slate-200 hover:border-saath-accent rounded-xl px-3 py-2.5 flex flex-col items-center justify-center text-center shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
                   <span className="text-slate-900 dark:text-white font-black text-xs">DPIIT</span>
                   <span className="text-[10px] font-bold text-blue-700 dark:text-blue-400">Approved Org</span>
@@ -536,7 +536,7 @@ Website: www.saathappnova.co.in
 
                 <button 
                   onClick={() => setSelectedTrustBadge({ title: 'MSME Registered Enterprise', org: 'Ministry of Micro, Small & Medium Enterprises', desc: 'Registered enterprise focused on boosting regional employment and Tier-2 & Tier-3 retail growth.' })}
-                  className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-slate-400 rounded-xl px-3 py-2.5 flex flex-col items-center justify-center text-center shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  className="bg-white border border-slate-200 hover:border-slate-400 rounded-xl px-3 py-2.5 flex flex-col items-center justify-center text-center shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
                   <span className="text-slate-900 dark:text-white font-black text-xs">MSME</span>
                   <span className="text-[10px] font-extrabold text-amber-700 dark:text-amber-400">Registered</span>
@@ -544,7 +544,7 @@ Website: www.saathappnova.co.in
 
                 <button 
                   onClick={() => setSelectedTrustBadge({ title: '100% Made In India', org: 'SaathApp Tech Bharat Initiative', desc: 'Dedicated to empowering local Kiranas, regional farmers, and native Indian logistics networks.' })}
-                  className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-saath-green rounded-xl px-3 py-2.5 flex flex-col items-center justify-center text-center shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  className="bg-white border border-slate-200 hover:border-saath-green rounded-xl px-3 py-2.5 flex flex-col items-center justify-center text-center shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
                   <span className="text-slate-900 dark:text-white font-black text-xs">Made In India</span>
                   <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400">100% Bharat Focus</span>
@@ -556,7 +556,7 @@ Website: www.saathappnova.co.in
           {/* Right Image / Hero Graphic */}
           <div className="lg:col-span-6 flex justify-center relative">
             <div className="absolute inset-0 bg-gradient-to-tr from-saath-green/10 to-transparent rounded-3xl filter blur-2xl pointer-events-none" />
-            <div className="relative border border-slate-200/60 dark:border-slate-800 bg-slate-100 dark:bg-slate-800 p-8 rounded-3xl shadow-2xl shadow-slate-300/40 dark:shadow-none max-w-full w-full min-h-[320px] flex flex-col items-center justify-center text-center cursor-pointer group" onClick={handleDownloadBrochure}>
+            <div className="relative border border-slate-200/60 dark:border-slate-800 bg-page p-8 rounded-3xl shadow-2xl shadow-slate-300/40 dark:shadow-none max-w-full w-full min-h-[320px] flex flex-col items-center justify-center text-center cursor-pointer group" onClick={handleDownloadBrochure}>
               <Building2 size={48} className="text-saath-green mb-3 group-hover:scale-110 transition-transform" />
               <h4 className="text-sm font-black text-slate-900 dark:text-white">SaathApp Franchise Network</h4>
               <p className="text-xs text-slate-500 font-semibold mt-1">Hyperlocal Ecosystem & Territory Distribution</p>
@@ -566,7 +566,7 @@ Website: www.saathappnova.co.in
       </section>
 
       {/* SECTION 2: WHY SAATH SECTION */}
-      <section id="why-saath" className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-white dark:bg-slate-900 border-t border-b border-slate-100 dark:border-slate-800">
+      <section id="why-saath" className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-surface border-t border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3 sm:space-y-4">
             <span className="text-saath-green font-extrabold text-xs uppercase tracking-widest">Why Partner With Us?</span>
@@ -597,14 +597,14 @@ Website: www.saathappnova.co.in
                     toast.success(`Selected feature: ${card.title}. Learn more in models section!`);
                     scrollToSection('models');
                   }}
-                  className="group bg-white dark:bg-slate-900/90 p-6 sm:p-8 rounded-3xl border-2 border-slate-200/80 dark:border-slate-800 hover:border-saath-green dark:hover:border-saath-green hover:shadow-xl hover:shadow-saath-green/10 hover:-translate-y-1.5 transition-all duration-300 text-left cursor-pointer active:scale-[0.98] relative overflow-hidden flex flex-col justify-between"
+                  className="group bg-white p-6 sm:p-8 rounded-3xl border-2 border-slate-200/80 dark:border-slate-800 hover:border-saath-green dark:hover:border-saath-green hover:shadow-xl hover:shadow-saath-green/10 hover:-translate-y-1.5 transition-all duration-300 text-left cursor-pointer active:scale-[0.98] relative overflow-hidden flex flex-col justify-between"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl ${card.bg} border flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                         <Icon className={`w-6 h-6 sm:w-7 sm:h-7 ${card.color}`} />
                       </div>
-                      <span className="text-[10px] font-extrabold uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700">
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider bg-page text-slate-800 dark:text-slate-200 px-2.5 py-1 rounded-full border border-slate-200">
                         {card.tag}
                       </span>
                     </div>
@@ -657,7 +657,7 @@ Website: www.saathappnova.co.in
                   className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl font-extrabold text-xs sm:text-sm transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
                     selectedModelTab === tab.id
                       ? 'bg-saath-green text-white shadow-md shadow-saath-green/20'
-                      : 'bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-600'
+                      : 'bg-white hover:bg-page text-slate-800 dark:text-slate-100 border border-slate-300'
                   }`}
                 >
                   {tab.label}
@@ -677,7 +677,7 @@ Website: www.saathappnova.co.in
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.2 }}
-                  className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/60 dark:border-slate-800 shadow-lg shadow-slate-100 dark:shadow-none hover:shadow-2xl hover:shadow-slate-200 dark:hover:shadow-slate-800 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden text-left"
+                  className="bg-surface rounded-3xl border border-slate-200/60 dark:border-slate-800 shadow-lg shadow-slate-100 dark:shadow-none hover:shadow-2xl hover:shadow-slate-200 dark:hover:shadow-slate-800 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden text-left"
                 >
                   {/* Top Header */}
                   <div className="p-5 sm:p-8 pb-4 border-b border-slate-100 dark:border-slate-800">
@@ -697,7 +697,7 @@ Website: www.saathappnova.co.in
 
                   {/* Body Content */}
                   <div className="p-5 sm:p-8 pt-4 space-y-4 flex-grow">
-                    <div className="grid grid-cols-2 gap-3 sm:gap-4 bg-slate-50 dark:bg-slate-800/50 p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4 bg-page p-3.5 sm:p-4 rounded-2xl border border-slate-200">
                       <div>
                         <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-700 dark:text-slate-200 uppercase tracking-widest block">Est. Investment</span>
                         <span className="text-sm sm:text-base font-black text-slate-900 dark:text-white">{item.investment}</span>
@@ -736,14 +736,14 @@ Website: www.saathappnova.co.in
                   </div>
 
                   {/* Card Footer: Opens Model Detail Specification Modal */}
-                  <div className="bg-slate-50/50 dark:bg-slate-800/30 p-5 sm:p-8 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+                  <div className="bg-slate-50/50 p-5 sm:p-8 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
                     <div className="text-left">
                       <span className="text-[9px] font-extrabold text-slate-700 dark:text-slate-200 uppercase tracking-wider block">Ideal Partner:</span>
                       <span className="text-xs font-black text-slate-900 dark:text-white line-clamp-1">{item.partner}</span>
                     </div>
                     <button 
                       onClick={() => setSelectedModelDetail(item)}
-                      className="bg-white dark:bg-slate-800 hover:bg-saath-green hover:text-white border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-black px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-1 shrink-0 active:scale-95 cursor-pointer whitespace-nowrap"
+                      className="bg-white hover:bg-saath-green hover:text-white border border-slate-200 text-slate-800 dark:text-slate-200 text-xs font-black px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-1 shrink-0 active:scale-95 cursor-pointer whitespace-nowrap"
                     >
                       Details <ArrowRight className="w-3 h-3" />
                     </button>
@@ -758,7 +758,7 @@ Website: www.saathappnova.co.in
       </section>
 
       {/* SECTION 4: INVESTMENT TRANSPARENCY & RETURNS CALCULATOR */}
-      <section id="investment" className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-white dark:bg-slate-900 border-t border-b border-slate-100 dark:border-slate-800">
+      <section id="investment" className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-surface border-t border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
@@ -775,7 +775,7 @@ Website: www.saathappnova.co.in
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* Left: Financial Grid Table */}
-            <div className="lg:col-span-7 bg-saath-bg dark:bg-slate-800/40 rounded-3xl p-5 sm:p-8 border border-slate-200/60 dark:border-slate-800 space-y-4 sm:space-y-6 text-left">
+            <div className="lg:col-span-7 bg-saath-bg rounded-3xl p-5 sm:p-8 border border-slate-200/60 dark:border-slate-800 space-y-4 sm:space-y-6 text-left">
               <div className="flex items-center justify-between">
                 <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white">Franchise Financial Grid</h3>
                 <span className="text-xs font-bold text-slate-600 dark:text-slate-300">Setup & ROI Metrics</span>
@@ -784,7 +784,7 @@ Website: www.saathappnova.co.in
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[500px]">
                   <thead>
-                    <tr className="border-b border-slate-200 dark:border-slate-700 text-[11px] sm:text-xs font-extrabold uppercase text-slate-700 dark:text-slate-200">
+                    <tr className="border-b border-slate-200 text-[11px] sm:text-xs font-extrabold uppercase text-slate-700 dark:text-slate-200">
                       <th className="py-3 px-2">Franchise Model</th>
                       <th className="py-3 px-2">Est. Capital</th>
                       <th className="py-3 px-2">Setup Time</th>
@@ -806,8 +806,8 @@ Website: www.saathappnova.co.in
                           setCalculatorModel(row.name);
                           toast.success(`Calculated metrics for: ${row.name}`);
                         }}
-                        className={`hover:bg-white dark:hover:bg-slate-800 cursor-pointer transition-colors ${
-                          calculatorModel === row.name ? 'bg-white dark:bg-slate-800 text-saath-green font-black' : ''
+                        className={`hover:bg-white cursor-pointer transition-colors ${
+                          calculatorModel === row.name ? 'bg-white text-saath-green font-black' : ''
                         }`}
                       >
                         <td className="py-3 px-2 flex items-center gap-2">
@@ -996,7 +996,7 @@ Website: www.saathappnova.co.in
                 <div 
                   key={i} 
                   onClick={() => toast.success(`Included deliverable: ${del.title}`)}
-                  className={`group bg-white dark:bg-slate-900 p-6 rounded-3xl border-2 border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-xl ${del.hover} hover:-translate-y-1.5 transition-all duration-300 space-y-3 cursor-pointer active:scale-95 flex flex-col justify-between`}
+                  className={`group bg-surface p-6 rounded-3xl border-2 border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-xl ${del.hover} hover:-translate-y-1.5 transition-all duration-300 space-y-3 cursor-pointer active:scale-95 flex flex-col justify-between`}
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
@@ -1023,7 +1023,7 @@ Website: www.saathappnova.co.in
       </section>
 
       {/* SECTION 6: MONETIZATION FLOW */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-white dark:bg-slate-900 border-t border-b border-slate-100 dark:border-slate-800">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-surface border-t border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
@@ -1045,13 +1045,13 @@ Website: www.saathappnova.co.in
               { emoji: '📈', name: 'Franchise Expansion', margin: 'Expansion Share', desc: 'District Agents receive sub-licensing shares when local city agent franchises onboarding inside their territories finalize operations.' },
               { emoji: '🤝', name: 'Business Partnerships', margin: 'B2B Margins', desc: 'Secure bulk business distribution agreements (FPOs, farmer inputs, seeds supply, hardware orders) and collect operational commissions.' }
             ].map((rev, i) => (
-              <div key={i} className="bg-saath-bg dark:bg-slate-800/40 p-6 sm:p-8 rounded-2xl border border-slate-100 dark:border-slate-800 space-y-4 flex flex-col justify-between">
+              <div key={i} className="bg-saath-bg p-6 sm:p-8 rounded-2xl border border-slate-100 dark:border-slate-800 space-y-4 flex flex-col justify-between">
                 <div className="space-y-3">
                   <span className="text-2xl sm:text-3xl block">{rev.emoji}</span>
                   <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">{rev.name}</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed font-medium">{rev.desc}</p>
                 </div>
-                <div className="pt-4 border-t border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between">
+                <div className="pt-4 border-t border-slate-200/60 flex items-center justify-between">
                   <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest">Target margins</span>
                   <span className="bg-saath-green-light text-saath-green border border-saath-green/20 px-2.5 sm:px-3 py-1 rounded-full text-xs font-black">
                     {rev.margin}
@@ -1096,7 +1096,7 @@ Website: www.saathappnova.co.in
                     scrollToSection('apply-form');
                     toast.success(`Selected profile: ${p.role}`);
                   }}
-                  className="group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border-2 border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-xl hover:shadow-saath-green/10 hover:border-saath-green dark:hover:border-saath-green hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden cursor-pointer flex flex-col justify-between active:scale-[0.98]"
+                  className="group bg-surface p-6 sm:p-8 rounded-3xl border-2 border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-xl hover:shadow-saath-green/10 hover:border-saath-green dark:hover:border-saath-green hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden cursor-pointer flex flex-col justify-between active:scale-[0.98]"
                 >
                   {/* Subtle Corner Background Glow */}
                   <div className="absolute -top-12 -right-12 w-28 h-28 bg-saath-green/5 rounded-full filter blur-xl group-hover:bg-saath-green/15 transition-all pointer-events-none" />
@@ -1107,7 +1107,7 @@ Website: www.saathappnova.co.in
                       <div className={`w-12 h-12 rounded-2xl ${p.iconBg} border flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                         <Icon className={`w-6 h-6 ${p.iconColor}`} />
                       </div>
-                      <span className="text-xs font-black font-mono tracking-widest text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full border border-slate-200/60 dark:border-slate-700">
+                      <span className="text-xs font-black font-mono tracking-widest text-slate-400 dark:text-slate-500 bg-page px-3 py-1 rounded-full border border-slate-200/60">
                         {p.num}
                       </span>
                     </div>
@@ -1142,7 +1142,7 @@ Website: www.saathappnova.co.in
       </section>
 
       {/* SECTION 8: TIMELINE FRAMEWORK */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-white dark:bg-slate-900 border-t border-b border-slate-100 dark:border-slate-800">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-surface border-t border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
@@ -1171,7 +1171,7 @@ Website: www.saathappnova.co.in
                   scrollToSection('apply-form');
                   toast.success(`Milestone Step ${st.step}: ${st.title}. Submit application to begin!`);
                 }}
-                className="group bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-3xl border-2 border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-lg hover:border-saath-green hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-between cursor-pointer active:scale-95"
+                className="group bg-surface p-4 sm:p-5 rounded-3xl border-2 border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-lg hover:border-saath-green hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-between cursor-pointer active:scale-95"
               >
                 <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-saath-green text-white font-black text-sm sm:text-base flex items-center justify-center shadow-md shadow-saath-green/20 group-hover:scale-110 transition-transform">
                   {st.step}
@@ -1215,7 +1215,7 @@ Website: www.saathappnova.co.in
                   className={`w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-3.5 rounded-2xl font-black text-xs sm:text-sm transition-all cursor-pointer flex items-center justify-center gap-2 active:scale-95 ${
                     activePhase === p.phase
                       ? 'bg-saath-green text-white shadow-xl shadow-saath-green/20'
-                      : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100'
+                      : 'bg-white text-slate-700 dark:text-slate-300 border border-slate-200 hover:bg-page'
                   }`}
                 >
                   {p.label}
@@ -1226,7 +1226,7 @@ Website: www.saathappnova.co.in
           </div>
 
           {/* Phase Details Card */}
-          <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-12 border border-slate-200/60 dark:border-slate-800 shadow-xl max-w-4xl mx-auto text-left space-y-6 sm:space-y-8">
+          <div className="bg-surface rounded-3xl p-6 sm:p-12 border border-slate-200/60 dark:border-slate-800 shadow-xl max-w-4xl mx-auto text-left space-y-6 sm:space-y-8">
             <div className="space-y-2">
               <span className="bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider">
                 Active phase
@@ -1241,7 +1241,7 @@ Website: www.saathappnova.co.in
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-4 border-t border-slate-100 dark:border-slate-800">
               {roadmapPhases[activePhase].stats.map((st, i) => (
-                <div key={i} className="bg-saath-bg dark:bg-slate-800/40 p-4 sm:p-6 rounded-2xl border border-slate-100 dark:border-slate-800 text-center">
+                <div key={i} className="bg-saath-bg p-4 sm:p-6 rounded-2xl border border-slate-100 dark:border-slate-800 text-center">
                   <span className="text-xl sm:text-3xl font-black text-saath-green block mb-1">{st.val}</span>
                   <span className="text-[10px] sm:text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider">{st.label}</span>
                 </div>
@@ -1253,7 +1253,7 @@ Website: www.saathappnova.co.in
       </section>
 
       {/* SECTION 10: PARTNER SUCCESS STORIES */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 md:px-12 bg-white dark:bg-slate-900 border-t border-b border-slate-100 dark:border-slate-800">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 md:px-12 bg-surface border-t border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-5xl mx-auto bg-slate-900 text-white rounded-3xl p-6 sm:p-12 space-y-5 sm:space-y-6 text-center shadow-2xl relative overflow-hidden">
           <div className="space-y-2 sm:space-y-3">
             <span className="text-saath-green font-extrabold text-xs uppercase tracking-widest">Partner Success Stories</span>
@@ -1301,7 +1301,7 @@ Website: www.saathappnova.co.in
             {faqs.map((faq, idx) => (
               <div 
                 key={idx}
-                className="bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+                className="bg-surface border border-slate-200/70 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
               >
                 <button
                   onClick={() => toggleFaq(idx)}
@@ -1323,7 +1323,7 @@ Website: www.saathappnova.co.in
       </section>
 
       {/* SECTION 12: CONTACT & APPLICATION FORM */}
-      <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
+      <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 bg-surface border-t border-slate-100 dark:border-slate-800">
         <div id="apply-form" className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
@@ -1340,7 +1340,7 @@ Website: www.saathappnova.co.in
             
             {/* Left Desk Cards */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="bg-saath-bg dark:bg-slate-800/40 p-6 sm:p-8 rounded-3xl border border-slate-200/60 dark:border-slate-800 space-y-6">
+              <div className="bg-saath-bg p-6 sm:p-8 rounded-3xl border border-slate-200/60 dark:border-slate-800 space-y-6">
                 <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">Direct Communication Desk</h3>
                 
                 <div className="space-y-4">
@@ -1369,7 +1369,7 @@ Website: www.saathappnova.co.in
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-slate-200/60 dark:border-slate-700/60 space-y-3">
+                <div className="pt-6 border-t border-slate-200/60 space-y-3">
                   <div className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-saath-green shrink-0" />
                     <span>Territory exclusivity assurance</span>
@@ -1387,7 +1387,7 @@ Website: www.saathappnova.co.in
             </div>
 
             {/* Right Application Form */}
-            <div className="lg:col-span-7 bg-saath-bg dark:bg-slate-800/40 p-6 sm:p-10 rounded-3xl border border-slate-200/60 dark:border-slate-800 shadow-xl">
+            <div className="lg:col-span-7 bg-saath-bg p-6 sm:p-10 rounded-3xl border border-slate-200/60 dark:border-slate-800 shadow-xl">
               <form onSubmit={handleFormSubmit} className="space-y-5 sm:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                   
@@ -1400,7 +1400,7 @@ Website: www.saathappnova.co.in
                       placeholder="Enter your full name"
                       value={formData.fullName}
                       onChange={handleFormChange}
-                      className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1413,7 +1413,7 @@ Website: www.saathappnova.co.in
                       placeholder="Enter 10-digit mobile number"
                       value={formData.phone}
                       onChange={handleFormChange}
-                      className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1430,7 +1430,7 @@ Website: www.saathappnova.co.in
                       placeholder="Enter email address"
                       value={formData.email}
                       onChange={handleFormChange}
-                      className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1442,7 +1442,7 @@ Website: www.saathappnova.co.in
                       placeholder="Business / Manager / Retailer"
                       value={formData.occupation}
                       onChange={handleFormChange}
-                      className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1459,7 +1459,7 @@ Website: www.saathappnova.co.in
                       placeholder="City name"
                       value={formData.city}
                       onChange={handleFormChange}
-                      className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1472,7 +1472,7 @@ Website: www.saathappnova.co.in
                       placeholder="District name"
                       value={formData.district}
                       onChange={handleFormChange}
-                      className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1482,7 +1482,7 @@ Website: www.saathappnova.co.in
                       name="state"
                       value={formData.state}
                       onChange={handleFormChange}
-                      className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     >
                       <option value="Bihar">Bihar</option>
                       <option value="Jharkhand">Jharkhand</option>
@@ -1502,7 +1502,7 @@ Website: www.saathappnova.co.in
                       name="capital"
                       value={formData.capital}
                       onChange={handleFormChange}
-                      className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     >
                       <option value="₹50K - ₹2 Lakhs">₹50K - ₹2 Lakhs</option>
                       <option value="₹2L - ₹5 Lakhs">₹2L - ₹5 Lakhs</option>
@@ -1519,7 +1519,7 @@ Website: www.saathappnova.co.in
                       name="experience"
                       value={formData.experience}
                       onChange={handleFormChange}
-                      className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     >
                       <option value="No prior business experience">No prior business experience</option>
                       <option value="1 - 3 Years">1 - 3 Years</option>
@@ -1538,7 +1538,7 @@ Website: www.saathappnova.co.in
                     placeholder="Provide details about your preferred location or specific franchise requirements..."
                     value={formData.message}
                     onChange={handleFormChange}
-                    className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green resize-none"
+                    className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green resize-none"
                   />
                 </div>
 
@@ -1555,7 +1555,7 @@ Website: www.saathappnova.co.in
                   <button 
                     type="button"
                     onClick={handleOpenScheduleModal}
-                    className="w-full sm:w-auto bg-white dark:bg-slate-900 hover:bg-saath-green-light/40 dark:hover:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 hover:border-saath-green/60 text-slate-800 dark:text-slate-100 font-extrabold text-xs xs:text-sm sm:text-base px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap shadow-sm group hover:shadow-md"
+                    className="w-full sm:w-auto bg-surface hover:bg-saath-green-light/40 border-2 border-slate-200 hover:border-saath-green/60 text-slate-800 dark:text-slate-100 font-extrabold text-xs xs:text-sm sm:text-base px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap shadow-sm group hover:shadow-md"
                   >
                     <PhoneCall className="w-4 h-4 text-saath-green group-hover:rotate-12 transition-transform shrink-0" />
                     <span>Schedule Call</span>
@@ -1584,11 +1584,11 @@ Website: www.saathappnova.co.in
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative text-left overflow-y-auto max-h-[90vh]"
+              className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative text-left overflow-y-auto max-h-[90vh]"
             >
               <button 
                 onClick={() => setIsBrochureModalOpen(false)}
-                className="absolute right-5 top-5 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-full bg-slate-100 dark:bg-slate-800 transition-colors cursor-pointer"
+                className="absolute right-5 top-5 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-full bg-page transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1605,7 +1605,7 @@ Website: www.saathappnova.co.in
               </div>
 
               {/* Brochure Preview Content */}
-              <div className="space-y-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed bg-slate-50 dark:bg-slate-800/40 p-4 sm:p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
+              <div className="space-y-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed bg-page p-4 sm:p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
                 <div className="flex items-center gap-2 text-saath-green font-bold text-sm">
                   <CheckCircle2 className="w-4 h-4" /> Ready for Immediate Download & Review
                 </div>
@@ -1636,7 +1636,7 @@ Website: www.saathappnova.co.in
                     setIsBrochureModalOpen(false);
                     scrollToSection('apply-form');
                   }}
-                  className="w-full sm:w-auto bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl transition-all cursor-pointer"
+                  className="w-full sm:w-auto bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl transition-all cursor-pointer"
                 >
                   Apply Directly for Franchise
                 </button>
@@ -1654,11 +1654,11 @@ Website: www.saathappnova.co.in
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative text-left"
+              className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative text-left"
             >
               <button 
                 onClick={() => setIsScheduleModalOpen(false)}
-                className="absolute right-5 top-5 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-full bg-slate-100 dark:bg-slate-800 transition-colors cursor-pointer"
+                className="absolute right-5 top-5 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-full bg-page transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1679,7 +1679,7 @@ Website: www.saathappnova.co.in
                     <select 
                       value={scheduleData.date}
                       onChange={(e) => setScheduleData(prev => ({ ...prev, date: e.target.value }))}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="w-full bg-page border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     >
                       <option value="Tomorrow">Tomorrow</option>
                       <option value="Day After Tomorrow">Day After Tomorrow</option>
@@ -1693,7 +1693,7 @@ Website: www.saathappnova.co.in
                     <select 
                       value={scheduleData.timeSlot}
                       onChange={(e) => setScheduleData(prev => ({ ...prev, timeSlot: e.target.value }))}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="w-full bg-page border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     >
                       <option value="Morning (10:00 AM - 12:00 PM)">Morning (10:00 AM - 12:00 PM)</option>
                       <option value="Afternoon (02:00 PM - 04:00 PM)">Afternoon (02:00 PM - 04:00 PM)</option>
@@ -1712,7 +1712,7 @@ Website: www.saathappnova.co.in
                           className={`py-2 px-3 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                             scheduleData.mode === mode 
                               ? 'bg-saath-green text-white border-saath-green' 
-                              : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                              : 'bg-page text-slate-700 dark:text-slate-300 border-slate-200'
                           }`}
                         >
                           {mode}
@@ -1729,7 +1729,7 @@ Website: www.saathappnova.co.in
                       placeholder="Enter 10-digit mobile number"
                       value={scheduleData.phone}
                       onChange={(e) => setScheduleData(prev => ({ ...prev, phone: e.target.value }))}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="w-full bg-page border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1755,7 +1755,7 @@ Website: www.saathappnova.co.in
                     </p>
                   </div>
 
-                  <div className="bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl text-xs font-bold space-y-1 text-left border border-slate-100 dark:border-slate-700">
+                  <div className="bg-page p-4 rounded-2xl text-xs font-bold space-y-1 text-left border border-slate-100">
                     <div>📅 Date: <span className="text-slate-900 dark:text-white">{scheduledResult.date}</span></div>
                     <div>⏰ Slot: <span className="text-slate-900 dark:text-white">{scheduledResult.timeSlot}</span></div>
                   </div>
@@ -1782,11 +1782,11 @@ Website: www.saathappnova.co.in
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative text-left"
+              className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative text-left"
             >
               <button 
                 onClick={() => setIsSubmittedModalOpen(false)}
-                className="absolute right-5 top-5 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-full bg-slate-100 dark:bg-slate-800 transition-colors cursor-pointer"
+                className="absolute right-5 top-5 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-full bg-page transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1804,7 +1804,7 @@ Website: www.saathappnova.co.in
                 </p>
               </div>
 
-              <div className="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 text-xs space-y-2">
+              <div className="bg-page p-4 rounded-2xl border border-slate-100 text-xs space-y-2">
                 <div className="flex justify-between">
                   <span className="text-slate-400">Territory Request:</span>
                   <span className="font-bold text-slate-900 dark:text-white">{submissionReceipt.city}, {submissionReceipt.district} ({submissionReceipt.state})</span>
@@ -1841,7 +1841,7 @@ Website: www.saathappnova.co.in
                 </button>
                 <button 
                   onClick={() => setIsSubmittedModalOpen(false)}
-                  className="w-full sm:w-auto bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm px-6 py-3 rounded-xl cursor-pointer"
+                  className="w-full sm:w-auto bg-page text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm px-6 py-3 rounded-xl cursor-pointer"
                 >
                   Close Window
                 </button>
@@ -1860,11 +1860,11 @@ Website: www.saathappnova.co.in
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative text-left overflow-y-auto max-h-[90vh]"
+              className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative text-left overflow-y-auto max-h-[90vh]"
             >
               <button 
                 onClick={() => setSelectedModelDetail(null)}
-                className="absolute right-5 top-5 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-full bg-slate-100 dark:bg-slate-800 transition-colors cursor-pointer"
+                className="absolute right-5 top-5 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-full bg-page transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1879,7 +1879,7 @@ Website: www.saathappnova.co.in
                 <p className="text-xs text-slate-500 font-medium">{selectedModelDetail.description}</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 bg-slate-50 dark:bg-slate-800/40 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
+              <div className="grid grid-cols-2 gap-4 bg-page p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
                 <div>
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Investment Needed</span>
                   <span className="text-lg font-black text-saath-green">{selectedModelDetail.investment}</span>
@@ -1894,7 +1894,7 @@ Website: www.saathappnova.co.in
                 <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Core Services Portfolio</h4>
                 <div className="grid grid-cols-2 gap-2 text-xs font-bold text-slate-700 dark:text-slate-300">
                   {selectedModelDetail.services.map((s, i) => (
-                    <div key={i} className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 p-2.5 rounded-xl border border-slate-100 dark:border-slate-700">
+                    <div key={i} className="flex items-center gap-2 bg-page p-2.5 rounded-xl border border-slate-100">
                       <CheckCircle2 className="w-4 h-4 text-saath-green shrink-0" />
                       <span>{s}</span>
                     </div>
@@ -1928,7 +1928,7 @@ Website: www.saathappnova.co.in
                 </button>
                 <button
                   onClick={() => setSelectedModelDetail(null)}
-                  className="w-full sm:w-auto bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl cursor-pointer"
+                  className="w-full sm:w-auto bg-page text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl cursor-pointer"
                 >
                   Close Specification
                 </button>
@@ -1947,11 +1947,11 @@ Website: www.saathappnova.co.in
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl relative text-left"
+              className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl relative text-left"
             >
               <button 
                 onClick={() => setSelectedTrustBadge(null)}
-                className="absolute right-4 top-4 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-full bg-slate-100 dark:bg-slate-800 transition-colors cursor-pointer"
+                className="absolute right-4 top-4 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-full bg-page transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1964,7 +1964,7 @@ Website: www.saathappnova.co.in
                 </h3>
               </div>
 
-              <p className="text-xs text-slate-600 dark:text-slate-300 font-medium leading-relaxed bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
+              <p className="text-xs text-slate-600 dark:text-slate-300 font-medium leading-relaxed bg-page p-4 rounded-xl border border-slate-100">
                 {selectedTrustBadge.desc}
               </p>
 

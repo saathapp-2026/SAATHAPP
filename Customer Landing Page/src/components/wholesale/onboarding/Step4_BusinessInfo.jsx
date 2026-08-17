@@ -69,7 +69,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-3xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
           Phase 3 — Business Profile & Location Tier
         </div>
@@ -93,7 +93,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
                   required
                   value={formData.businessName}
                   onChange={(e) => updateFormData({ businessName: e.target.value })}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                   placeholder="Enter registered business name"
                 />
               </div>
@@ -108,7 +108,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
                 <select
                   value={formData.businessType}
                   onChange={(e) => updateFormData({ businessType: e.target.value })}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 >
                   {BUSINESS_TYPES.map((t) => (
                     <option key={t} value={t}>
@@ -128,7 +128,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
                 <select
                   value={formData.businessCategory}
                   onChange={(e) => updateFormData({ businessCategory: e.target.value })}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 >
                   {BUSINESS_CATEGORIES.map((c) => (
                     <option key={c} value={c}>
@@ -155,7 +155,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
                     className={`cursor-pointer rounded-2xl border p-4 transition ${
                       isSelected
                         ? 'border-emerald-500 bg-emerald-500/10 text-slate-900 dark:text-white shadow-md ring-2 ring-emerald-500/20'
-                        : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-slate-300'
+                        : 'border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 hover:border-slate-300'
                     }`}
                   >
                     <MapPin size={18} className={isSelected ? 'text-emerald-500' : 'text-slate-400'} />
@@ -197,10 +197,10 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
                   required
                   value={formData.businessCapital ?? 2500000}
                   onChange={(e) => updateFormData({ businessCapital: Number(e.target.value) })}
-                  className={`w-full rounded-2xl border bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3 text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 ${
+                  className={`w-full rounded-2xl border bg-page dark:bg-slate-950 pl-11 pr-4 py-3 text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 ${
                     Number(formData.businessCapital ?? 2500000) < 1000000
                       ? 'border-rose-500 text-rose-600 focus:ring-rose-500/20'
-                      : 'border-slate-300 dark:border-slate-700 focus:border-emerald-500 focus:ring-emerald-500/20'
+                      : 'border-slate-300 focus:border-emerald-500 focus:ring-emerald-500/20'
                   }`}
                   placeholder="Enter business capital (e.g. 2500000)"
                 />
@@ -221,7 +221,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
                 type="text"
                 value={formData.brandName}
                 onChange={(e) => updateFormData({ brandName: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="Enter brand name (if any)"
               />
             </div>
@@ -238,7 +238,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
                 required
                 value={formData.yearsInBusiness}
                 onChange={(e) => updateFormData({ yearsInBusiness: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="Enter years in business"
               />
             </div>
@@ -249,7 +249,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
               <select
                 value={formData.numberOfEmployees}
                 onChange={(e) => updateFormData({ numberOfEmployees: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
               >
                 {EMPLOYEE_RANGES.map((r) => (
                   <option key={r} value={r}>
@@ -269,7 +269,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
               required
               value={formData.companyDescription}
               onChange={(e) => updateFormData({ companyDescription: e.target.value })}
-              className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 p-4 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+              className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 p-4 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
               placeholder="Describe your wholesale operations, product catalogue scale, and distribution reach..."
             />
           </div>
@@ -278,7 +278,7 @@ export default function Step4_BusinessInfo({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

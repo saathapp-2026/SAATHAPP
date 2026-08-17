@@ -58,7 +58,7 @@ export default function BulkUploadModal({ open, onClose, onDone }) {
       zIndex={SELLER_Z.modal}
       contentClassName="w-full max-w-lg"
     >
-      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+      <div className="rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 dark:border-slate-800">
           <div>
             <h2 id="bulk-upload-title" className="text-lg font-bold">
@@ -66,7 +66,7 @@ export default function BulkUploadModal({ open, onClose, onDone }) {
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">Bulk PDF, images, or ZIP</p>
           </div>
-          <button type="button" onClick={handleClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={handleClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -84,7 +84,7 @@ export default function BulkUploadModal({ open, onClose, onDone }) {
               addFiles(e.dataTransfer.files);
             }}
             className={`rounded-2xl border-2 border-dashed p-6 text-center ${
-              dragOver ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-300 dark:border-slate-700'
+              dragOver ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-300'
             }`}
           >
             <FileArchive className="mx-auto h-8 w-8 text-slate-400 mb-2" />
@@ -123,7 +123,7 @@ export default function BulkUploadModal({ open, onClose, onDone }) {
                 <span>Upload progress</span>
                 <span>{progress}%</span>
               </div>
-              <div className="h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+              <div className="h-2 rounded-full bg-page overflow-hidden">
                 <div className="h-full bg-emerald-500 transition-all" style={{ width: `${progress}%` }} />
               </div>
             </div>
@@ -148,7 +148,7 @@ export default function BulkUploadModal({ open, onClose, onDone }) {
           ) : null}
 
           <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={handleClose} className="rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm">
+            <button type="button" onClick={handleClose} className="rounded-xl border border-slate-200 px-4 py-2 text-sm">
               Close
             </button>
             <button

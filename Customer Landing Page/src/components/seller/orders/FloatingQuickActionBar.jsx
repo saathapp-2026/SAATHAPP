@@ -22,7 +22,7 @@ export default function FloatingQuickActionBar({ badgeCount = 0, onAction }) {
             key={id}
             type="button"
             onClick={() => onAction?.(id)}
-            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-lg text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-surface border border-slate-200 shadow-lg text-xs font-semibold hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500"
             title={label}
           >
             <span className="relative">

@@ -45,7 +45,7 @@ export default function Sidebar({
         />
       )}
 
-      <aside className={`fixed top-0 bottom-0 left-0 z-50 w-72 bg-white dark:bg-slate-900 border-r border-slate-200/60 dark:border-slate-800 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 ${
+      <aside className={`fixed top-0 bottom-0 left-0 z-50 w-72 bg-surface border-r border-slate-200/60 dark:border-slate-800 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       } lg:sticky lg:h-screen lg:top-0`}>
 
@@ -55,7 +55,7 @@ export default function Sidebar({
               <img src={SaathAppLogo} alt="SaathApp Logo" className="h-full w-full object-contain" />
             </div>
             <button
-              className="lg:hidden text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+              className="lg:hidden text-slate-400 hover:text-slate-600 cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
               <X size={20} />
@@ -64,7 +64,7 @@ export default function Sidebar({
 
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="w-12 h-12 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 flex items-center justify-center text-[9px] font-bold text-slate-400">
+              <div className="w-12 h-12 rounded-full overflow-hidden border border-slate-200 bg-page flex items-center justify-center text-[9px] font-bold text-slate-400">
                 {partnerPhoto ? (
                   <span className="px-1 text-center leading-tight">{String(partnerPhoto).slice(0, 12)}</span>
                 ) : (
@@ -85,7 +85,7 @@ export default function Sidebar({
             </div>
           </div>
 
-          <div className="mt-4 flex items-center justify-between bg-slate-50 dark:bg-slate-950 p-2.5 rounded-xl border border-slate-150 dark:border-slate-850">
+          <div className="mt-4 flex items-center justify-between bg-page dark:bg-slate-950 p-2.5 rounded-xl border border-slate-150 dark:border-slate-850">
             <div className="text-left">
               <span className="text-[10px] font-black uppercase text-slate-450 block leading-none">Duty Status</span>
               <span className={`text-[11px] font-extrabold ${isOnline ? 'text-primary' : 'text-slate-400'} uppercase mt-0.5 inline-block`}>
@@ -95,7 +95,7 @@ export default function Sidebar({
             <button
               onClick={() => setIsOnline(!isOnline)}
               className={`w-10 h-6 rounded-full p-1 cursor-pointer transition-colors duration-300 flex items-center ${
-                isOnline ? 'bg-primary' : 'bg-slate-300 dark:bg-slate-800'
+                isOnline ? 'bg-primary' : 'bg-slate-300'
               }`}
             >
               <motion.div
@@ -119,7 +119,7 @@ export default function Sidebar({
                 className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider text-left transition-all duration-200 cursor-pointer ${
                   isActive
                     ? 'bg-primary text-white shadow-md'
-                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-950 hover:text-slate-800 dark:hover:text-slate-200'
+                    : 'text-slate-500 dark:text-slate-400 hover:bg-page hover:text-slate-800'
                 }`}
               >
                 <Icon size={16} className={isActive ? 'text-white' : 'text-slate-400'} />

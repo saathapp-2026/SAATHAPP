@@ -52,10 +52,10 @@ export default function CreatePromoMenu({ onSelect }) {
       {open ? (
         <div
           role="menu"
-          className="absolute right-0 z-40 mt-2 w-[min(92vw,560px)] rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-2xl overflow-hidden"
+          className="absolute right-0 z-40 mt-2 w-[min(92vw,560px)] rounded-2xl border border-slate-200 bg-surface shadow-2xl overflow-hidden"
         >
           <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr]">
-            <div className="border-b sm:border-b-0 sm:border-r border-slate-200 dark:border-slate-800 p-2 bg-slate-50/80 dark:bg-slate-950/40">
+            <div className="border-b sm:border-b-0 sm:border-r border-slate-200 dark:border-slate-800 p-2 bg-slate-50/80 ">
               {CREATE_MENU.map((g) => {
                 const Icon = GROUP_ICONS[g.id] || Ticket;
                 return (
@@ -67,7 +67,7 @@ export default function CreatePromoMenu({ onSelect }) {
                     className={`flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-xs font-semibold ${
                       activeGroup === g.id
                         ? 'bg-emerald-600 text-white'
-                        : 'text-slate-700 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-800'
+                        : 'text-slate-700 dark:text-slate-200 hover:bg-white'
                     }`}
                   >
                     <Icon size={14} />

@@ -108,7 +108,7 @@ export function SellerProfilePlaceholder() {
   return (
     <div className="max-w-3xl">
       <Toaster position="top-right" />
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
         <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <User className="text-emerald-500" size={20} />
@@ -120,7 +120,7 @@ export function SellerProfilePlaceholder() {
           {!isEditing && (
             <button 
               onClick={handleEditClick}
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-700 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-slate-300 transition-colors"
             >
               <Edit2 size={16} /> Edit Profile
             </button>
@@ -196,8 +196,8 @@ export function SellerProfilePlaceholder() {
                 disabled={!isEditing}
                 className={`w-full rounded-lg px-3.5 py-2.5 text-sm outline-none transition-colors ${
                   isEditing 
-                    ? 'border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500' 
-                    : 'border-transparent bg-slate-50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 cursor-default'
+                    ? 'border border-slate-300 bg-surface focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500' 
+                    : 'border-transparent bg-page text-slate-700 dark:text-slate-300 cursor-default'
                 }`} 
               />
             </div>
@@ -211,8 +211,8 @@ export function SellerProfilePlaceholder() {
                 disabled={!isEditing}
                 className={`w-full rounded-lg px-3.5 py-2.5 text-sm outline-none transition-colors ${
                   isEditing 
-                    ? 'border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500' 
-                    : 'border-transparent bg-slate-50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 cursor-default'
+                    ? 'border border-slate-300 bg-surface focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500' 
+                    : 'border-transparent bg-page text-slate-700 dark:text-slate-300 cursor-default'
                 }`} 
               />
             </div>
@@ -226,8 +226,8 @@ export function SellerProfilePlaceholder() {
                 disabled={!isEditing}
                 className={`w-full rounded-lg px-3.5 py-2.5 text-sm outline-none transition-colors ${
                   isEditing 
-                    ? 'border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500' 
-                    : 'border-transparent bg-slate-50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 cursor-default'
+                    ? 'border border-slate-300 bg-surface focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500' 
+                    : 'border-transparent bg-page text-slate-700 dark:text-slate-300 cursor-default'
                 }`} 
               />
             </div>
@@ -238,7 +238,7 @@ export function SellerProfilePlaceholder() {
                 required 
                 value={currentData.mobile} 
                 disabled
-                className="w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900/80 px-3.5 py-2.5 text-sm outline-none cursor-not-allowed text-slate-500 dark:text-slate-400" 
+                className="w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-page px-3.5 py-2.5 text-sm outline-none cursor-not-allowed text-slate-500 dark:text-slate-400" 
                 title="Mobile number cannot be changed directly" 
               />
             </div>
@@ -249,7 +249,7 @@ export function SellerProfilePlaceholder() {
               <button 
                 type="button" 
                 onClick={handleDiscard}
-                className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500"
+                className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white border border-slate-300 rounded-lg hover:bg-page transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500"
               >
                 Discard Changes
               </button>
@@ -291,7 +291,7 @@ export function BankDetailsPlaceholder() {
   return (
     <div className="max-w-3xl">
       <Toaster position="top-right" />
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
         <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Landmark className="text-emerald-500" size={20} />
@@ -305,7 +305,7 @@ export function BankDetailsPlaceholder() {
           </span>
         </div>
         
-        <div className="p-6 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800">
+        <div className="p-6 bg-page border-b border-slate-200 dark:border-slate-800">
           <p className="text-sm text-slate-600 dark:text-slate-400 mb-0">
             <strong>Important:</strong> Changing bank details requires re-verification by our team. Withdrawals will be paused for 24-48 hours during verification.
           </p>
@@ -315,26 +315,26 @@ export function BankDetailsPlaceholder() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div className="sm:col-span-2">
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Account Holder Name</label>
-              <input type="text" required value={formData.accountHolder} onChange={e => setFormData({...formData, accountHolder: e.target.value})} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
+              <input type="text" required value={formData.accountHolder} onChange={e => setFormData({...formData, accountHolder: e.target.value})} className="w-full rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Bank Name</label>
-              <input type="text" required value={formData.bankName} onChange={e => setFormData({...formData, bankName: e.target.value})} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
+              <input type="text" required value={formData.bankName} onChange={e => setFormData({...formData, bankName: e.target.value})} className="w-full rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Account Type</label>
-              <select value={formData.accountType} onChange={e => setFormData({...formData, accountType: e.target.value})} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500">
+              <select value={formData.accountType} onChange={e => setFormData({...formData, accountType: e.target.value})} className="w-full rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500">
                 <option value="savings">Savings Account</option>
                 <option value="current">Current Account</option>
               </select>
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Account Number</label>
-              <input type="password" required value={formData.accountNumber} onChange={e => setFormData({...formData, accountNumber: e.target.value})} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
+              <input type="password" required value={formData.accountNumber} onChange={e => setFormData({...formData, accountNumber: e.target.value})} className="w-full rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">IFSC Code</label>
-              <input type="text" required value={formData.ifsc} onChange={e => setFormData({...formData, ifsc: e.target.value})} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 uppercase" placeholder="e.g. SBIN0001234" />
+              <input type="text" required value={formData.ifsc} onChange={e => setFormData({...formData, ifsc: e.target.value})} className="w-full rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 uppercase" placeholder="e.g. SBIN0001234" />
             </div>
           </div>
 
@@ -360,7 +360,7 @@ export function AccountSettingsPlaceholder() {
     <div className="max-w-3xl space-y-6">
       <Toaster position="top-right" />
       
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
         <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
           <Key className="text-emerald-500" size={20} />
           <div>
@@ -371,25 +371,25 @@ export function AccountSettingsPlaceholder() {
         <form onSubmit={handleSave} className="p-6 space-y-5">
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Current Password</label>
-            <input type="password" required className="w-full max-w-md rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
+            <input type="password" required className="w-full max-w-md rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">New Password</label>
-            <input type="password" required className="w-full max-w-md rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
+            <input type="password" required className="w-full max-w-md rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Confirm New Password</label>
-            <input type="password" required className="w-full max-w-md rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
+            <input type="password" required className="w-full max-w-md rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
           </div>
           <div>
-            <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 rounded-lg hover:bg-slate-800 dark:hover:bg-slate-100 shadow-sm">
+            <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 rounded-lg hover:bg-slate-800 shadow-sm">
               Update Password
             </button>
           </div>
         </form>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
         <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
           <Bell className="text-emerald-500" size={20} />
           <div>
@@ -406,7 +406,7 @@ export function AccountSettingsPlaceholder() {
           ].map(item => (
             <div key={item.id} className="flex items-start gap-4">
               <div className="pt-1">
-                <input type="checkbox" id={item.id} defaultChecked={item.defaultChecked} className="w-4 h-4 text-emerald-600 border-slate-300 rounded focus:ring-emerald-500 dark:bg-slate-800 dark:border-slate-600" />
+                <input type="checkbox" id={item.id} defaultChecked={item.defaultChecked} className="w-4 h-4 text-emerald-600 border-slate-300 rounded focus:ring-emerald-500" />
               </div>
               <div>
                 <label htmlFor={item.id} className="text-sm font-medium text-slate-900 dark:text-slate-100 cursor-pointer">{item.title}</label>

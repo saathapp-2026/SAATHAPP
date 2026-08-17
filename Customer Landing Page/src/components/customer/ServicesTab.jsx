@@ -90,7 +90,7 @@ export default function ServicesTab({ _bookings, setBookings, _walletBalance, _s
             className={`px-4.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider cursor-pointer border transition-all ${
               filter === cat
                 ? 'bg-[#6C3BFF] text-white border-[#6C3BFF]'
-                : 'bg-slate-50 dark:bg-slate-955/20 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:border-slate-350'
+                : 'bg-page dark:bg-slate-955/20 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:border-slate-350'
             }`}
           >
             {cat}
@@ -107,14 +107,14 @@ export default function ServicesTab({ _bookings, setBookings, _walletBalance, _s
             <div key={srv.id} className="p-5 bg-slate-50/50 dark:bg-slate-955/10 rounded-2xl border border-slate-205 dark:border-slate-800/80 flex flex-col justify-between gap-4 text-left">
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <span className="px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-slate-200/50 dark:bg-slate-800 text-slate-600 dark:text-slate-355">{srv.category}</span>
+                  <span className="px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-slate-200/50 text-slate-600 dark:text-slate-355">{srv.category}</span>
                   <span className="flex items-center gap-0.5 text-xs font-black text-amber-500">★ {srv.rating}</span>
                 </div>
                 <h3 className="text-sm font-black text-slate-800 dark:text-white leading-tight">{srv.name}</h3>
                 <p className="text-xs text-slate-400 font-semibold leading-relaxed line-clamp-2">{srv.description}</p>
               </div>
               
-              <div className="flex items-center justify-between pt-2 border-t border-slate-200/40 dark:border-slate-800/40">
+              <div className="flex items-center justify-between pt-2 border-t border-slate-200/40 ">
                 <div>
                   <span className="text-[10px] text-slate-400 font-bold block uppercase leading-none">Starting from</span>
                   <span className="text-base font-black text-slate-850 dark:text-white mt-1 inline-block">₹{srv.price}</span>
@@ -138,7 +138,7 @@ export default function ServicesTab({ _bookings, setBookings, _walletBalance, _s
       {/* Booking Form Modal Overlay */}
       {showBookingFormModal && selectedService && (
         <div className="fixed inset-0 z-55 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-slate-955/80 backdrop-blur-sm">
-          <div className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-205 dark:border-slate-800 rounded-card p-6 shadow-premium space-y-4 text-left">
+          <div className="w-full max-w-md bg-surface border border-slate-205 dark:border-slate-800 rounded-card p-6 shadow-premium space-y-4 text-left">
             <div>
               <h3 className="text-base font-black text-slate-800 dark:text-white uppercase tracking-wider">Book Service Details</h3>
               <p className="text-xs text-slate-400 font-semibold mt-0.5">{selectedService.name} • ₹{selectedService.price}</p>
@@ -185,7 +185,7 @@ export default function ServicesTab({ _bookings, setBookings, _walletBalance, _s
               <button
                 type="button"
                 onClick={() => setShowBookingFormModal(false)}
-                className="px-4 py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 rounded-xl font-bold uppercase cursor-pointer"
+                className="px-4 py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl font-bold uppercase cursor-pointer"
               >
                 Cancel
               </button>

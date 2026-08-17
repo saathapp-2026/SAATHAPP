@@ -21,7 +21,7 @@ export default function MessagesTab() {
   const currentThread = threads[activeThread] || null;
 
   return (
-    <div className="h-[600px] rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden flex flex-col md:flex-row">
+    <div className="h-[600px] rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm overflow-hidden flex flex-col md:flex-row">
       {/* Threads List */}
       <div className="w-full md:w-80 border-r border-slate-200 dark:border-slate-800 flex flex-col bg-slate-50/50 dark:bg-slate-950/50">
         <div className="p-4 border-b border-slate-200 dark:border-slate-800">
@@ -38,7 +38,7 @@ export default function MessagesTab() {
                 className={`p-4 cursor-pointer transition ${
                   activeThread === idx
                     ? 'bg-emerald-500/10 dark:bg-emerald-950/40 border-l-4 border-emerald-500'
-                    : 'hover:bg-slate-100 dark:hover:bg-slate-800'
+                    : 'hover:bg-page'
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -59,7 +59,7 @@ export default function MessagesTab() {
       </div>
 
       {/* Chat Area */}
-      <div className="flex-1 flex flex-col bg-white dark:bg-slate-900 justify-between">
+      <div className="flex-1 flex flex-col bg-surface justify-between">
         {currentThread ? (
           <>
             <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
@@ -83,7 +83,7 @@ export default function MessagesTab() {
                     className={`max-w-[75%] rounded-2xl p-3 text-xs font-medium leading-relaxed ${
                       m.sender === 'you'
                         ? 'bg-emerald-600 text-white rounded-br-none'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-bl-none'
+                        : 'bg-page text-slate-900 dark:text-white rounded-bl-none'
                     }`}
                   >
                     {m.text}
@@ -107,7 +107,7 @@ export default function MessagesTab() {
             value={inputMsg}
             onChange={(e) => setInputMsg(e.target.value)}
             placeholder="Type your message or price quote..."
-            className="flex-1 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-2.5 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none"
+            className="flex-1 rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 px-4 py-2.5 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none"
           />
           <button
             type="submit"

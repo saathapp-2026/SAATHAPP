@@ -470,14 +470,14 @@ export default function OrdersPage() {
                 },
               });
             }}
-            className="px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800"
+            className="px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-surface hover:bg-page"
           >
             Import
           </button>
           <button
             type="button"
             onClick={() => setShowAnalytics((v) => !v)}
-            className="px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800"
+            className="px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-surface hover:bg-page"
           >
             {showAnalytics ? 'Hide Reports' : 'Reports'}
           </button>

@@ -16,7 +16,7 @@ export default function ServiceSection({ onBookService }) {
     image: ''
   })));
   return (
-    <section className="py-12 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40">
+    <section className="py-12 bg-surface border-b border-slate-100 ">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -47,7 +47,7 @@ export default function ServiceSection({ onBookService }) {
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
               whileHover={{ y: -6 }}
-              className="bg-white dark:bg-slate-900 rounded-card overflow-hidden border border-slate-200/60 dark:border-slate-800/50 shadow-soft hover:shadow-premium group flex flex-col justify-between"
+              className="bg-surface rounded-card overflow-hidden border border-slate-200/60  shadow-soft hover:shadow-premium group flex flex-col justify-between"
             >
               {/* Image Banner */}
               <div className="w-full h-44 sm:h-48 bg-slate-200 relative overflow-hidden">
@@ -90,13 +90,13 @@ export default function ServiceSection({ onBookService }) {
                 </div>
 
                 {/* Specs: job duration */}
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 py-1 px-2 bg-slate-50 dark:bg-slate-800/40 rounded-md w-fit">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 py-1 px-2 bg-page rounded-md w-fit">
                   <Timer size={13} className="text-slate-400" />
                   <span>Duration: {service.duration}</span>
                 </div>
 
                 {/* Price and Book CTA button */}
-                <div className="flex items-center justify-between gap-3 pt-3 border-t border-slate-100 dark:border-slate-800/40">
+                <div className="flex items-center justify-between gap-3 pt-3 border-t border-slate-100 ">
                   <div className="text-left">
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Starts From</span>
                     <span className="text-xl font-black text-slate-950 dark:text-white">₹{service.price}</span>

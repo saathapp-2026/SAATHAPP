@@ -43,7 +43,7 @@ export default function WizardHeader({ user, onBack }) {
           
           <div className="w-px h-6 bg-slate-200 hidden sm:block" />
           
-          <button className="relative p-2 text-slate-400 hover:bg-slate-100 rounded-full transition-colors">
+          <button className="relative p-2 text-slate-400 hover:bg-page rounded-full transition-colors">
             <Bell size={20} />
             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white" />
           </button>

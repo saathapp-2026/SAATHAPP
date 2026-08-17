@@ -86,7 +86,7 @@ export default function Step11_SubscriptionPlans({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-5xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
           Phase 10 — Pricing & Plans
         </div>
@@ -124,7 +124,7 @@ export default function Step11_SubscriptionPlans({ onNext, onPrev }) {
                   onClick={() => updateFormData({ selectedPlan: plan.id })}
                   className={`relative cursor-pointer rounded-2xl border p-5 transition flex flex-col justify-between ${isSelected
                       ? 'border-emerald-500 bg-emerald-500/10 dark:bg-emerald-950/30 text-slate-900 dark:text-white shadow-xl ring-2 ring-emerald-500'
-                      : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-slate-300'
+                      : 'border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 hover:border-slate-300'
                     }`}
                 >
                   {plan.popular && (
@@ -157,7 +157,7 @@ export default function Step11_SubscriptionPlans({ onNext, onPrev }) {
                       type="button"
                       className={`w-full rounded-xl py-2 text-xs font-extrabold transition ${isSelected
                           ? 'bg-emerald-600 text-white'
-                          : 'bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200'
+                          : 'bg-white border border-slate-300 text-slate-800 dark:text-slate-200'
                         }`}
                     >
                       {isSelected ? 'Selected Plan' : 'Select Plan'}
@@ -169,14 +169,14 @@ export default function Step11_SubscriptionPlans({ onNext, onPrev }) {
           </div>
 
           {/* Digital Agreement Box */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-5">
             <div className="flex items-center gap-2 mb-3">
               <FileText size={20} className="text-emerald-500" />
               <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">
                 Digital Wholesale Merchant Agreement
               </h3>
             </div>
-            <div className="h-28 overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 text-xs text-slate-600 dark:text-slate-400 space-y-2 leading-relaxed scrollbar-thin">
+            <div className="h-28 overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-3 text-xs text-slate-600 dark:text-slate-400 space-y-2 leading-relaxed scrollbar-thin">
               <p>
                 <strong>1. Overview & Eligibility:</strong> By executing this agreement, you represent that your business holds a valid GSTIN registration, PAN, and applicable licenses to distribute wholesale goods on SaathApp.
               </p>
@@ -206,7 +206,7 @@ export default function Step11_SubscriptionPlans({ onNext, onPrev }) {
                   type="text"
                   value={formData.signatureName || formData.fullName}
                   onChange={(e) => updateFormData({ signatureName: e.target.value })}
-                  className="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1.5 text-xs font-bold font-mono text-emerald-600 dark:text-emerald-400"
+                  className="rounded-xl border border-slate-300 bg-surface px-3 py-1.5 text-xs font-bold font-mono text-emerald-600 dark:text-emerald-400"
                   placeholder="Rakesh Kumar"
                 />
               </div>
@@ -217,7 +217,7 @@ export default function Step11_SubscriptionPlans({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

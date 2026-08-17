@@ -178,7 +178,7 @@ function PopularArticles() {
             >
               <button
                 onClick={() => setSelectedArticle(null)}
-                className="absolute right-6 top-6 rounded-full p-2 text-[#94A3B8] hover:bg-slate-100 hover:text-[#0F172A] transition-colors"
+                className="absolute right-6 top-6 rounded-full p-2 text-[#94A3B8] hover:bg-page hover:text-[#0F172A] transition-colors"
               >
                 <X size={20} />
               </button>

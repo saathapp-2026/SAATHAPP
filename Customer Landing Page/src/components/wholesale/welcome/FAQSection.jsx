@@ -8,7 +8,7 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="py-20 sm:py-24 bg-white dark:bg-slate-900">
+    <section id="faq" aria-labelledby="faq-heading" className="py-20 sm:py-24 bg-surface">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           id="faq-heading"
@@ -28,7 +28,7 @@ export default function FAQSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.04 }}
-                className={`overflow-hidden rounded-[18px] border bg-white dark:bg-slate-900 transition-shadow duration-300 ${
+                className={`overflow-hidden rounded-[18px] border bg-surface transition-shadow duration-300 ${
                   isOpen
                     ? 'border-[#0A8F3D]/40 shadow-premium'
                     : 'border-slate-200/70 dark:border-slate-800/60 shadow-soft hover:border-[#0A8F3D]/20'
@@ -61,7 +61,7 @@ export default function FAQSection() {
                     </span>
                     <span
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-transform duration-300 ${
-                        isOpen ? 'rotate-180 bg-[#0A8F3D]/10 text-[#0A8F3D]' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                        isOpen ? 'rotate-180 bg-[#0A8F3D]/10 text-[#0A8F3D]' : 'bg-page text-slate-500'
                       }`}
                     >
                       <ChevronDown size={16} aria-hidden="true" />

@@ -25,7 +25,7 @@ export default function OnboardingStatusCard({ onboardingFee, onRenew }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-soft"
+      className="rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 p-6 shadow-soft"
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">

@@ -65,7 +65,7 @@ export default function SummarySidebar({ draft, reach, updateDraft }) {
           <div className="flex justify-between items-start">
             <span className="text-sm text-slate-500">Location Tier</span>
             <span className="text-sm font-semibold text-slate-900 text-right">
-              <span className="bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-xs font-bold">{calcResult.normTier}</span>
+              <span className="bg-page text-slate-700 px-2 py-0.5 rounded text-xs font-bold">{calcResult.normTier}</span>
             </span>
           </div>
           {draft.locationType === 'radius' && (
@@ -186,7 +186,7 @@ export default function SummarySidebar({ draft, reach, updateDraft }) {
           
           <p className="text-xs text-slate-400 mb-3 font-medium">or Scan QR Code</p>
           
-          <div className="w-40 h-40 bg-slate-100 rounded-xl mb-4 border border-slate-200 flex items-center justify-center relative overflow-hidden">
+          <div className="w-40 h-40 bg-page rounded-xl mb-4 border border-slate-200 flex items-center justify-center relative overflow-hidden">
              {/* Fake QR code pattern */}
              <div className="w-32 h-32 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMzMzIiAvPgo8cmVjdCB4PSI0IiB5PSI0IiB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMzMzIiAvPgo8L3N2Zz4=')] opacity-80" />
              <div className="absolute inset-0 m-auto w-10 h-10 bg-white rounded-lg shadow-md flex items-center justify-center">
@@ -196,7 +196,7 @@ export default function SummarySidebar({ draft, reach, updateDraft }) {
              </div>
           </div>
           
-          <div className="w-full py-2 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center gap-2 mb-4">
+          <div className="w-full py-2 bg-page rounded-lg border border-slate-200 flex items-center justify-center gap-2 mb-4">
             <span className="text-xs font-semibold text-slate-600">UPI ID: saathapp@upi</span>
             <Copy size={12} className="text-slate-400 cursor-pointer hover:text-slate-600" />
           </div>

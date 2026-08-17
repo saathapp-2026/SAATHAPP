@@ -93,7 +93,7 @@ export default function CartTab({ cart, setCart, walletBalance, setWalletBalance
       </div>
 
       {cart.length === 0 ? (
-        <div className="p-8 text-center bg-slate-50 dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl space-y-2">
+        <div className="p-8 text-center bg-page dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl space-y-2">
           <span className="text-3xl block">🛒</span>
           <p className="text-xs font-black text-slate-850 dark:text-white uppercase tracking-wider">Your cart is empty</p>
           <p className="text-xs text-slate-400 font-semibold">Explore agriculture resources and hardware products from home page.</p>
@@ -119,14 +119,14 @@ export default function CartTab({ cart, setCart, walletBalance, setWalletBalance
                   <div className="flex items-center border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden bg-white dark:bg-slate-950">
                     <button
                       onClick={() => handleUpdateQty(item.id, -1)}
-                      className="px-2 py-1 hover:bg-slate-55 dark:hover:bg-slate-850 cursor-pointer font-bold text-xs"
+                      className="px-2 py-1 hover:bg-slate-55 cursor-pointer font-bold text-xs"
                     >
                       -
                     </button>
                     <span className="px-3 text-xs font-black text-slate-800 dark:text-white">{item.count}</span>
                     <button
                       onClick={() => handleUpdateQty(item.id, 1)}
-                      className="px-2 py-1 hover:bg-slate-55 dark:hover:bg-slate-850 cursor-pointer font-bold text-xs"
+                      className="px-2 py-1 hover:bg-slate-55 cursor-pointer font-bold text-xs"
                     >
                       +
                     </button>
@@ -144,7 +144,7 @@ export default function CartTab({ cart, setCart, walletBalance, setWalletBalance
           </div>
 
           {/* Order Summary Checkout Card */}
-          <div className="bg-slate-50 dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl p-5 space-y-4">
+          <div className="bg-page dark:bg-slate-955/20 border border-slate-200/50 dark:border-slate-800 rounded-2xl p-5 space-y-4">
             <h3 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Summary & Checkout</h3>
             
             <div className="space-y-2.5 text-xs font-semibold text-slate-500 dark:text-slate-400">
@@ -181,7 +181,7 @@ export default function CartTab({ cart, setCart, walletBalance, setWalletBalance
                 />
                 <button
                   onClick={handleApplyCoupon}
-                  className="px-3.5 py-2 bg-slate-800 hover:bg-slate-900 text-white dark:bg-slate-700 dark:hover:bg-slate-600 rounded-xl text-xs font-bold cursor-pointer"
+                  className="px-3.5 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold cursor-pointer"
                 >
                   Apply
                 </button>

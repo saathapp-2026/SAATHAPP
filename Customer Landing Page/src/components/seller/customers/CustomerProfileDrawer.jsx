@@ -50,7 +50,7 @@ export default function CustomerProfileDrawer({
       className="flex justify-end"
       contentClassName="h-full"
     >
-      <aside className="h-full w-full max-w-lg bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
+      <aside className="h-full w-full max-w-lg bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
         <div className="flex items-start justify-between gap-3 p-4 border-b border-slate-200 dark:border-slate-800">
           <div>
             <h2 className="text-lg font-bold">{customer.name}</h2>
@@ -64,7 +64,7 @@ export default function CustomerProfileDrawer({
               </span>
             </div>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -83,7 +83,7 @@ export default function CustomerProfileDrawer({
               type="button"
               onClick={() => onAction?.(id, customer)}
               disabled={!!loadingAction}
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border border-slate-200 hover:bg-page disabled:opacity-40"
             >
               <Icon size={12} />
               {label}
@@ -100,7 +100,7 @@ export default function CustomerProfileDrawer({
               aria-selected={tab === t.id}
               onClick={() => setTab(t.id)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap ${
-                tab === t.id ? 'bg-emerald-500 text-white' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800'
+                tab === t.id ? 'bg-emerald-500 text-white' : 'text-slate-500 hover:bg-page'
               }`}
             >
               {t.label}
@@ -268,7 +268,7 @@ export default function CustomerProfileDrawer({
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 rows={5}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                className="w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 placeholder="Add internal notes…"
               />
               <button

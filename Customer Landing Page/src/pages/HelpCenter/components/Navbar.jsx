@@ -108,7 +108,7 @@ function Navbar() {
               items-center justify-center
               h-[44px] w-[44px]
               rounded-[10px]
-              bg-slate-100
+              bg-page
               text-[#0F172A]
               hover:bg-slate-200
               transition-colors

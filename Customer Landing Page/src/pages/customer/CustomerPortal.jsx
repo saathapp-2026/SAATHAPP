@@ -130,7 +130,7 @@ export default function CustomerPortal({
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+    <div className="min-h-screen bg-page dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
       <Header
         cartCount={cartCount}
         onCartClick={onCartClick}
@@ -202,7 +202,7 @@ export default function CustomerPortal({
                   onClick={() => scrollToSection('features')}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="py-3.5 px-8 rounded-btn border border-slate-205 dark:border-slate-800 bg-white/40 dark:bg-slate-800/40 text-slate-700 dark:text-slate-200 font-extrabold text-sm sm:text-base cursor-pointer hover:bg-white/70 dark:hover:bg-slate-800/70 transition-colors"
+                  className="py-3.5 px-8 rounded-btn border border-slate-205 dark:border-slate-800 bg-white/40 text-slate-700 dark:text-slate-200 font-extrabold text-sm sm:text-base cursor-pointer hover:bg-white/70 transition-colors"
                 >
                   Explore Features
                 </motion.button>
@@ -228,7 +228,7 @@ export default function CustomerPortal({
         </section>
 
         {/* Section 2: Why Choose SaathApp */}
-        <section ref={sectionRefs.whychoose} className="py-16 bg-slate-100/50 dark:bg-slate-900/20 border-t border-b border-slate-200/50 dark:border-slate-850">
+        <section ref={sectionRefs.whychoose} className="py-16 bg-slate-100/50 border-t border-b border-slate-200/50 dark:border-slate-850">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
             <div className="space-y-3 max-w-xl mx-auto">
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white uppercase tracking-wider">Why Choose SaathApp</h2>
@@ -239,7 +239,7 @@ export default function CustomerPortal({
               {whyChooseReasons.map((reason, idx) => {
                 const Icon = reason.icon;
                 return (
-                  <div key={idx} className="p-6 bg-white dark:bg-slate-900 rounded-card border border-slate-200/40 dark:border-slate-800 text-left space-y-4 shadow-sm hover:shadow-md transition-shadow">
+                  <div key={idx} className="p-6 bg-surface rounded-card border border-slate-200/40 dark:border-slate-800 text-left space-y-4 shadow-sm hover:shadow-md transition-shadow">
                     <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${reason.color} flex items-center justify-center text-white`}>
                       <Icon size={22} />
                     </div>
@@ -263,7 +263,7 @@ export default function CustomerPortal({
             {featuresList.map((feature, idx) => {
               const Icon = feature.icon;
               return (
-                <div key={idx} className="p-6 bg-white dark:bg-slate-900 rounded-card border border-slate-200/40 dark:border-slate-800 text-left flex items-start gap-4 shadow-sm hover:shadow-soft transition-all">
+                <div key={idx} className="p-6 bg-surface rounded-card border border-slate-200/40 dark:border-slate-800 text-left flex items-start gap-4 shadow-sm hover:shadow-soft transition-all">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 mt-0.5">
                     <Icon size={20} />
                   </div>
@@ -278,7 +278,7 @@ export default function CustomerPortal({
         </section>
 
         {/* Section 4: How It Works */}
-        <section ref={sectionRefs.howitworks} className="py-16 bg-slate-100/50 dark:bg-slate-900/20 border-t border-b border-slate-200/50 dark:border-slate-850 text-center">
+        <section ref={sectionRefs.howitworks} className="py-16 bg-slate-100/50 border-t border-b border-slate-200/50 dark:border-slate-850 text-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="space-y-3 max-w-xl mx-auto">
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white uppercase tracking-wider">How It Works</h2>
@@ -287,7 +287,7 @@ export default function CustomerPortal({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
               {howItWorksSteps.map((step, idx) => (
-                <div key={idx} className="space-y-4 text-left bg-white dark:bg-slate-900 p-6 rounded-card border border-slate-200/40 dark:border-slate-800 shadow-sm relative z-10">
+                <div key={idx} className="space-y-4 text-left bg-surface p-6 rounded-card border border-slate-200/40 dark:border-slate-800 shadow-sm relative z-10">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-black uppercase text-primary tracking-widest">{step.step}</span>
                     <span className="text-3xl font-black text-slate-200 dark:text-slate-800 font-mono">0{idx + 1}</span>
@@ -309,7 +309,7 @@ export default function CustomerPortal({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
             {customerBenefits.map((benefit, idx) => (
-              <div key={idx} className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-card shadow-sm space-y-4">
+              <div key={idx} className="p-6 bg-surface border border-slate-200 dark:border-slate-800 rounded-card shadow-sm space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">{benefit.title}</h3>
                   <span className="text-xs font-black text-[#6C3BFF] uppercase tracking-wider">{benefit.highlight}</span>
@@ -321,7 +321,7 @@ export default function CustomerPortal({
                     <span>Performance Rating</span>
                     <span>{benefit.progress}%</span>
                   </div>
-                  <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <div className="w-full h-2 bg-page rounded-full overflow-hidden">
                     <div className={`h-full ${benefit.progressColor}`} style={{ width: `${benefit.progress}%` }} />
                   </div>
                 </div>
@@ -331,7 +331,7 @@ export default function CustomerPortal({
         </section>
 
         {/* Section 6: FAQs */}
-        <section ref={sectionRefs.faq} className="py-16 bg-slate-100/50 dark:bg-slate-900/20 border-t border-b border-slate-200/50 dark:border-slate-850 text-center">
+        <section ref={sectionRefs.faq} className="py-16 bg-slate-100/50 border-t border-b border-slate-200/50 dark:border-slate-850 text-center">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="space-y-3 max-w-xl mx-auto">
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white uppercase tracking-wider">Frequently Asked Questions</h2>
@@ -340,10 +340,10 @@ export default function CustomerPortal({
 
             <div className="space-y-4 text-left">
               {faqsList.map((faq, idx) => (
-                <div key={idx} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+                <div key={idx} className="bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
                   <button
                     onClick={() => toggleFaq(idx)}
-                    className="w-full px-6 py-4 flex items-center justify-between text-xs sm:text-sm font-black text-slate-850 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-850/30 text-left transition-colors cursor-pointer"
+                    className="w-full px-6 py-4 flex items-center justify-between text-xs sm:text-sm font-black text-slate-850 dark:text-slate-200 hover:bg-page text-left transition-colors cursor-pointer"
                   >
                     <span>{faq.q}</span>
                     <ChevronUp size={16} className={`text-slate-405 transition-transform duration-300 ${faqOpen[idx] ? '' : 'rotate-180'}`} />

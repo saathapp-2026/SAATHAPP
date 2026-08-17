@@ -112,7 +112,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
   return (
     <div className="space-y-6 sa-fade">
       {/* Module Header & Sub-Tabs */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm space-y-4">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-0.5 text-xs font-bold text-amber-500">
@@ -142,13 +142,13 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
                 }}
                 className={`flex items-center gap-2 px-3.5 py-2.5 rounded-2xl text-xs font-extrabold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 ${isActive
                   ? 'bg-amber-500 text-slate-950 shadow-md font-black'
-                  : 'bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800'
+                  : 'bg-page text-slate-600 dark:text-slate-300 hover:bg-slate-200'
                   }`}
               >
                 <Icon size={15} />
                 <span>{tab.label}</span>
                 {tab.count && (
-                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${isActive ? 'bg-slate-950 text-amber-400' : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'}`}>
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${isActive ? 'bg-slate-950 text-amber-400' : 'bg-slate-200 text-slate-700 dark:text-slate-300'}`}>
                     {tab.count}
                   </span>
                 )}
@@ -186,7 +186,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-3 shadow-lg">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 space-y-3 shadow-lg">
               <div className="h-12 w-12 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
                 <Phone size={24} />
               </div>
@@ -194,7 +194,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
               <p className="text-xs text-slate-500 font-bold font-mono">1800-SAATH-RIDER (1800-72284-74337)</p>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-3 shadow-lg">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 space-y-3 shadow-lg">
               <div className="h-12 w-12 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
                 <MessageSquare size={24} />
               </div>
@@ -202,7 +202,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
               <p className="text-xs text-slate-500 font-bold font-mono">+91 91288 42027 (24/7 Live Chat)</p>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-3 shadow-lg">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 space-y-3 shadow-lg">
               <div className="h-12 w-12 rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center">
                 <LifeBuoy size={24} />
               </div>
@@ -215,13 +215,13 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
 
       {/* 2. FAQs */}
       {activeSubTab === 'faqs' && (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+        <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
           <h2 className="text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
             <FileText size={20} className="text-amber-500" /> Frequently Asked Questions
           </h2>
           <div className="space-y-3">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="border border-slate-100 dark:border-slate-800 rounded-2xl p-4 bg-slate-50 dark:bg-slate-800/40">
+              <div key={idx} className="border border-slate-100 dark:border-slate-800 rounded-2xl p-4 bg-page">
                 <button
                   type="button"
                   onClick={() => setExpandedFaq(expandedFaq === idx ? null : idx)}
@@ -231,7 +231,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
                   <ChevronDown size={16} className={`text-slate-400 transition-transform ${expandedFaq === idx ? 'rotate-180' : ''}`} />
                 </button>
                 {expandedFaq === idx && (
-                  <p className="mt-3 text-xs text-slate-600 dark:text-slate-300 font-medium border-t border-slate-200 dark:border-slate-700/60 pt-3">
+                  <p className="mt-3 text-xs text-slate-600 dark:text-slate-300 font-medium border-t border-slate-200 pt-3">
                     {faq.a}
                   </p>
                 )}
@@ -243,7 +243,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
 
       {/* 3. Create Ticket (With delivery issue categories) */}
       {activeSubTab === 'create' && (
-        <form onSubmit={handleCreateTicketSubmit} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-4 max-w-2xl">
+        <form onSubmit={handleCreateTicketSubmit} className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-4 max-w-2xl">
           <h2 className="text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
             <Plus size={20} className="text-amber-500" /> Raise New Delivery Support Ticket
           </h2>
@@ -257,7 +257,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
               <select
                 value={ticketForm.category}
                 onChange={(e) => setTicketForm({ ...ticketForm, category: e.target.value })}
-                className="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-extrabold focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-page text-slate-900 dark:text-white font-extrabold focus:outline-none focus:ring-2 focus:ring-amber-500"
               >
                 {ISSUE_CATEGORIES.map((cat, i) => (
                   <option key={i} value={cat}>{cat}</option>
@@ -272,7 +272,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
                 value={ticketForm.orderId}
                 onChange={(e) => setTicketForm({ ...ticketForm, orderId: e.target.value })}
                 placeholder="e.g. DEL-98420"
-                className="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-mono focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-page text-slate-900 dark:text-white font-mono focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
             </div>
 
@@ -284,7 +284,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
                 value={ticketForm.subject}
                 onChange={(e) => setTicketForm({ ...ticketForm, subject: e.target.value })}
                 placeholder="Brief summary of the issue..."
-                className="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-page text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
             </div>
 
@@ -296,7 +296,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
                 value={ticketForm.description}
                 onChange={(e) => setTicketForm({ ...ticketForm, description: e.target.value })}
                 placeholder="Describe what happened, store name, customer issue, or error code..."
-                className="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-page text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
             </div>
 
@@ -312,14 +312,14 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
 
       {/* 4. My Tickets */}
       {activeSubTab === 'tickets' && (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+        <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
           <h2 className="text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
             <Clock size={20} className="text-amber-500" /> My Submitted Support Tickets
           </h2>
 
           <div className="space-y-3">
             {myTickets.map((ticket) => (
-              <div key={ticket.id} className="border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 bg-slate-50 dark:bg-slate-800/40">
+              <div key={ticket.id} className="border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 bg-page">
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-mono font-black text-amber-500">{ticket.id}</span>
                   <span className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full ${ticket.status === 'Resolved' ? 'bg-emerald-500/20 text-emerald-500' : 'bg-amber-500/20 text-amber-500'}`}>
@@ -332,7 +332,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
                   <span>Order: <strong>{ticket.orderId}</strong></span>
                   <span>Date: <strong>{ticket.createdDate}</strong></span>
                 </div>
-                <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                <div className="p-3 rounded-xl bg-surface border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 font-medium">
                   <strong>Desk Update: </strong> {ticket.response}
                 </div>
               </div>
@@ -343,7 +343,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
 
       {/* 5. Contact Support */}
       {activeSubTab === 'contact' && (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-6 max-w-xl">
+        <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-6 max-w-xl">
           <h2 className="text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
             <Phone size={20} className="text-amber-500" /> Direct Contact Channels
           </h2>
@@ -379,25 +379,25 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
 
           {/* Sub-section Modules Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 shadow-sm">
+            <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 shadow-sm">
               <BookOpen size={22} className="text-amber-500" />
               <h3 className="font-black text-slate-900 dark:text-white text-sm">Delivery Guidelines</h3>
               <p className="text-slate-500 text-[11px]">Best practices for fragile item handling, cold chain &amp; customer politeness.</p>
             </div>
 
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 shadow-sm">
+            <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 shadow-sm">
               <ShieldCheck size={22} className="text-emerald-500" />
               <h3 className="font-black text-slate-900 dark:text-white text-sm">Safety Training</h3>
               <p className="text-slate-500 text-[11px]">Two-wheeler road safety, helmet rules, rain protocol &amp; defensive driving.</p>
             </div>
 
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 shadow-sm">
+            <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 shadow-sm">
               <Video size={22} className="text-blue-500" />
               <h3 className="font-black text-slate-900 dark:text-white text-sm">Video Courses</h3>
               <p className="text-slate-500 text-[11px]">5-minute video tutorials on using rider app features &amp; COD collection.</p>
             </div>
 
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 shadow-sm">
+            <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 shadow-sm">
               <Award size={22} className="text-purple-500" />
               <h3 className="font-black text-slate-900 dark:text-white text-sm">Certificates</h3>
               <p className="text-slate-500 text-[11px]">Gold Fleet Captain certification badge &amp; performance rewards.</p>

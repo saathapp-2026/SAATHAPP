@@ -46,7 +46,7 @@ export default function MarketingTab() {
             className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
               activeSubTab === tab
                 ? 'bg-emerald-600 text-white shadow-md font-black'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
             }`}
           >
             {tab}
@@ -60,7 +60,7 @@ export default function MarketingTab() {
           <h3 className="text-sm font-black text-slate-900 dark:text-white">Active Wholesale Offers &amp; B2B Coupons</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[].map((o) => (
-              <div key={o.code} className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+              <div key={o.code} className="p-5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="font-mono font-black text-sm text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-xl">{o.code}</span>
                   <span className="text-[10px] font-extrabold text-emerald-500 bg-emerald-500/10 px-2.5 py-0.5 rounded-full">{o.badge}</span>
@@ -71,7 +71,7 @@ export default function MarketingTab() {
             ))}
           </div>
           {[].length === 0 && (
-            <div className="p-8 text-center text-xs text-slate-400 font-medium bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div className="p-8 text-center text-xs text-slate-400 font-medium bg-surface rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
               No active offers or coupons created. Click "+ Create New Campaign" to launch a promotion.
             </div>
           )}
@@ -79,7 +79,7 @@ export default function MarketingTab() {
       ) : activeSubTab === 'Promotions' ? (
         <div className="space-y-4">
           <h3 className="text-sm font-black text-slate-900 dark:text-white">Featured Supplier Banners &amp; Search Placement</h3>
-          <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 text-xs">
+          <div className="p-6 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 text-xs">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
               <div>
                 <h4 className="font-extrabold text-slate-900 dark:text-white text-sm">Top Category Banner Sponsorship</h4>
@@ -98,9 +98,9 @@ export default function MarketingTab() {
       ) : activeSubTab === 'Campaigns' ? (
         <div className="space-y-4">
           <h3 className="text-sm font-black text-slate-900 dark:text-white">WhatsApp &amp; Email Broadcast Campaigns</h3>
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden text-xs">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm overflow-hidden text-xs">
             <table className="w-full text-left">
-              <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
+              <thead className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
                 <tr>
                   <th className="p-4">Campaign Name</th>
                   <th className="p-4">Channel</th>
@@ -173,7 +173,7 @@ export default function MarketingTab() {
               return (
                 <div
                   key={idx}
-                  className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition"
+                  className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition"
                 >
                   <div>
                     <div className="h-10 w-10 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-3">
@@ -186,7 +186,7 @@ export default function MarketingTab() {
                   <button
                     type="button"
                     onClick={() => addToast?.(`Configured ${tool.title}!`, 'success')}
-                    className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 py-2.5 text-xs font-extrabold text-slate-800 dark:text-slate-200 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition cursor-pointer"
+                    className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 py-2.5 text-xs font-extrabold text-slate-800 dark:text-slate-200 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition cursor-pointer"
                   >
                     {tool.action}
                   </button>

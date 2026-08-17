@@ -47,7 +47,7 @@ export default function Step13_TermsReview({ onNext, onPrev, onSelectStep }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-4xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
           Phase 12 — Legal Terms & Final Review
         </div>
@@ -61,7 +61,7 @@ export default function Step13_TermsReview({ onNext, onPrev, onSelectStep }) {
         <div className="mt-8 space-y-6">
           {/* Section 1: Summary Review Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-4 space-y-2">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-4 space-y-2">
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
                 <span className="font-extrabold text-slate-900 dark:text-white flex items-center gap-1.5">
                   <User size={15} className="text-emerald-500" /> Owner Details
@@ -75,7 +75,7 @@ export default function Step13_TermsReview({ onNext, onPrev, onSelectStep }) {
               <p><span className="text-slate-500">Email:</span> <strong>{formData.ownerEmail}</strong></p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-4 space-y-2">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-4 space-y-2">
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
                 <span className="font-extrabold text-slate-900 dark:text-white flex items-center gap-1.5">
                   <Building2 size={15} className="text-emerald-500" /> Business Profile
@@ -89,7 +89,7 @@ export default function Step13_TermsReview({ onNext, onPrev, onSelectStep }) {
               <p><span className="text-slate-500">Type:</span> <strong>{formData.businessType}</strong></p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-4 space-y-2">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-4 space-y-2">
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
                 <span className="font-extrabold text-slate-900 dark:text-white flex items-center gap-1.5">
                   <Landmark size={15} className="text-emerald-500" /> Onboarding Fee
@@ -102,7 +102,7 @@ export default function Step13_TermsReview({ onNext, onPrev, onSelectStep }) {
               <p><span className="text-slate-500">Status:</span> <strong className="text-emerald-500">Paid & Verified (2 Yrs)</strong></p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-4 space-y-2">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-4 space-y-2">
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
                 <span className="font-extrabold text-slate-900 dark:text-white flex items-center gap-1.5">
                   <CreditCard size={15} className="text-emerald-500" /> Monthly Plan
@@ -117,13 +117,13 @@ export default function Step13_TermsReview({ onNext, onPrev, onSelectStep }) {
           </div>
 
           {/* Section 2: 14-Point Legal Accordion / Scroll box */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5 space-y-3">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-5 space-y-3">
             <div className="flex items-center gap-2 font-extrabold text-sm text-slate-900 dark:text-white">
               <FileText size={18} className="text-emerald-500" />
               <span>14-Point Terms & Conditions for Wholesalers, Vendors & Suppliers</span>
             </div>
 
-            <div className="h-56 overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 text-xs text-slate-600 dark:text-slate-400 space-y-3 leading-relaxed scrollbar-thin">
+            <div className="h-56 overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-4 text-xs text-slate-600 dark:text-slate-400 space-y-3 leading-relaxed scrollbar-thin">
               {WHOLESALER_LEGAL_TERMS.map((term) => (
                 <div key={term.id} className="pb-2 border-b border-slate-100 dark:border-slate-800 last:border-0">
                   <h4 className="font-extrabold text-slate-900 dark:text-white">{term.title}</h4>
@@ -150,7 +150,7 @@ export default function Step13_TermsReview({ onNext, onPrev, onSelectStep }) {
                   type="text"
                   value={formData.signatureName || formData.fullName}
                   onChange={(e) => updateFormData({ signatureName: e.target.value })}
-                  className="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1.5 text-xs font-bold font-mono text-emerald-600 dark:text-emerald-400"
+                  className="rounded-xl border border-slate-300 bg-surface px-3 py-1.5 text-xs font-bold font-mono text-emerald-600 dark:text-emerald-400"
                   placeholder="Enter full name"
                 />
               </div>
@@ -161,7 +161,7 @@ export default function Step13_TermsReview({ onNext, onPrev, onSelectStep }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

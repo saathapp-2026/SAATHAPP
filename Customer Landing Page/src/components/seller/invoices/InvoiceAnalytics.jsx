@@ -26,7 +26,7 @@ export default function InvoiceAnalytics({ open }) {
 
   if (!open) return null;
   if (loading) {
-    return <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 animate-pulse h-48 bg-slate-50 dark:bg-slate-900" />;
+    return <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 animate-pulse h-48 bg-page dark:bg-slate-900" />;
   }
   if (!data) return null;
 
@@ -34,7 +34,7 @@ export default function InvoiceAnalytics({ open }) {
   const m = data.metrics;
 
   return (
-    <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 md:p-5 space-y-4" aria-label="Invoice analytics">
+    <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 md:p-5 space-y-4" aria-label="Invoice analytics">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <h2 className="font-bold">Invoice Analytics</h2>
         <div className="flex gap-1">
@@ -44,7 +44,7 @@ export default function InvoiceAnalytics({ open }) {
               type="button"
               onClick={() => setRange(r)}
               className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold capitalize ${
-                range === r ? 'bg-emerald-500 text-white' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800'
+                range === r ? 'bg-emerald-500 text-white' : 'text-slate-500 hover:bg-page'
               }`}
             >
               {r}

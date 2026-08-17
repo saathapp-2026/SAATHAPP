@@ -642,7 +642,7 @@ export default function TermsOfServicePage() {
                 onClick={(e) => handleSectionClick(e, sec.id)}
                 className={`shrink-0 text-xs px-3.5 py-2 rounded-full font-medium transition-all cursor-pointer relative z-10 ${isActive
                   ? 'bg-emerald-700 text-white font-semibold shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  : 'bg-page text-slate-600 hover:bg-slate-200'
                   }`}
               >
                 {sec.title.split('.')[0]}. {sec.title.split('. ')[1] || sec.title}
@@ -773,7 +773,7 @@ export default function TermsOfServicePage() {
               <Link
                 to="/"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-2xs transition hover:bg-slate-50 hover:border-slate-300"
+                className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-2xs transition hover:bg-page hover:border-slate-300"
               >
                 <ArrowLeft size={16} />
                 Back

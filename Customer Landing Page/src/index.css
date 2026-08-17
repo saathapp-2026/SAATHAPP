@@ -72,6 +72,17 @@
   --color-danger: #E53935;
   --color-danger-light: #EF5350;
   --color-danger-dark: #B71C1C;
+  --color-page: var(--bg-page);
+  --color-surface: var(--bg-surface);
+  --color-theme: var(--text-primary);
+  --color-theme-secondary: var(--text-secondary);
+  --color-theme-border: var(--border-theme);
+  --color-input-bg: var(--bg-input);
+  --color-input-text: var(--text-input);
+  --color-nav: var(--bg-nav);
+  --color-footer: var(--bg-footer);
+  --color-modal: var(--bg-modal);
+
 
   --color-saath-green: #16a34a;
   --color-saath-green-dark: #15803d;
@@ -119,25 +130,46 @@
 }
 
 @layer base {
+  :root {
+    --bg-page: #F8FAFC;
+    --bg-surface: #FFFFFF;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --border-theme: #e2e8f0;
+    --bg-input: #FFFFFF;
+    --text-input: #1e293b;
+    --bg-nav: #FFFFFF;
+    --bg-footer: #FFFFFF;
+    --bg-modal: #FFFFFF;
+  }
+
+  .dark {
+    --bg-page: #020617;
+    --bg-surface: #0a0f24;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-theme: #1e293b;
+    --bg-input: #0f172a;
+    --text-input: #f8fafc;
+    --bg-nav: #020617;
+    --bg-footer: #020617;
+    --bg-modal: #0a0f24;
+  }
+
   body {
     font-family: 'Outfit', sans-serif;
-    background-color: var(--color-background);
-    color: #1e293b;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  body.dark {
-    background-color: #0f172a;
-    color: #f8fafc;
   }
 }
 
 @layer components {
   .input-field {
-    @apply w-full rounded-xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-900 placeholder-ink-400 outline-none transition-all duration-200;
-    @apply focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 hover:border-ink-300;
+    @apply w-full rounded-xl border border-theme-border bg-input-bg px-4 py-3 text-sm text-input-text placeholder-theme-secondary outline-none transition-all duration-200;
+    @apply focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 hover:border-theme-secondary;
   }
   .input-field-error {
     @apply border-red-400 focus:border-red-500 focus:ring-red-500/10;
@@ -151,11 +183,11 @@
     @apply disabled:cursor-not-allowed disabled:opacity-60;
   }
   .btn-secondary {
-    @apply inline-flex w-full items-center justify-center gap-2.5 rounded-xl border border-ink-200 bg-white px-4 py-3 text-sm font-semibold text-ink-700 transition-all duration-200;
-    @apply hover:border-ink-300 hover:bg-ink-50 active:scale-[0.99];
+    @apply inline-flex w-full items-center justify-center gap-2.5 rounded-xl border border-theme-border bg-input-bg px-4 py-3 text-sm font-semibold text-theme transition-all duration-200;
+    @apply hover:border-theme-secondary hover:bg-page active:scale-[0.99];
   }
   .field-label {
-    @apply mb-1.5 block text-sm font-medium text-ink-700;
+    @apply mb-1.5 block text-sm font-medium text-theme;
   }
   .error-text {
     @apply mt-1.5 flex items-center gap-1 text-xs font-medium text-red-500;
@@ -310,17 +342,17 @@ body {
 }
 
 html.dark body {
-  background-color: #0F172A;
-  color: #FFFFFF;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
 }
 
 html.dark header {
-  background-color: #111827;
+  background-color: var(--bg-nav);
 }
 
 html.dark footer {
-  background-color: #111827;
-  color: #FFFFFF;
+  background-color: var(--bg-footer);
+  color: var(--text-primary);
 }
 
 /* Shared SAAS Responsive Container for Help Center */

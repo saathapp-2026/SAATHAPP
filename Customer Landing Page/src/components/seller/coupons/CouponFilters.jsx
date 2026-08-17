@@ -33,7 +33,7 @@ export default function CouponFilters({
             value={search}
             onChange={(e) => onSearch(e.target.value)}
             placeholder="Search code, name, campaign, product…"
-            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 pl-9 pr-3 py-2.5 text-sm"
+            className="w-full rounded-xl border border-slate-200 bg-surface pl-9 pr-3 py-2.5 text-sm"
             aria-label="Search promotions"
           />
         </label>
@@ -41,7 +41,7 @@ export default function CouponFilters({
           <select
             value={filters.status || 'all'}
             onChange={(e) => onChange({ ...filters, status: e.target.value })}
-            className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-sm"
+            className="rounded-xl border border-slate-200 bg-surface px-3 py-2.5 text-sm"
           >
             {STATUSES.map((s) => (
               <option key={s.id} value={s.id}>{s.label}</option>
@@ -50,7 +50,7 @@ export default function CouponFilters({
           <select
             value={filters.typeId || 'all'}
             onChange={(e) => onChange({ ...filters, typeId: e.target.value })}
-            className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-sm max-w-[180px]"
+            className="rounded-xl border border-slate-200 bg-surface px-3 py-2.5 text-sm max-w-[180px]"
           >
             <option value="all">All Types</option>
             {ALL_PROMO_TYPES.map((t) => (
@@ -60,7 +60,7 @@ export default function CouponFilters({
           <select
             value={filters.category || ''}
             onChange={(e) => onChange({ ...filters, category: e.target.value || undefined })}
-            className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-sm"
+            className="rounded-xl border border-slate-200 bg-surface px-3 py-2.5 text-sm"
           >
             <option value="">All Categories</option>
             {CATEGORIES.map((c) => (
@@ -80,7 +80,7 @@ export default function CouponFilters({
             className={`rounded-full px-3 py-1 text-xs font-semibold border transition-colors ${
               (filters.kind || 'all') === k.id
                 ? 'bg-emerald-600 text-white border-emerald-600'
-                : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
+                : 'border-slate-200 text-slate-600 dark:text-slate-300 hover:bg-page'
             }`}
           >
             {k.label}

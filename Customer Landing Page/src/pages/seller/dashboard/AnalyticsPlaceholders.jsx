@@ -27,7 +27,7 @@ const productData = Array.from({ length: 3 }, (_, i) => ({
 
 function StatCard({ title, value, change, isPositive }) {
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+    <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
       <h3 className="text-sm font-medium text-slate-500">{title}</h3>
       <div className="mt-2 flex items-baseline gap-2">
         <span className="text-2xl font-bold text-slate-900 dark:text-slate-50">{value}</span>
@@ -51,7 +51,7 @@ export function SalesAnalyticsPlaceholder() {
         <StatCard title="Sales Growth" value="0%" change="0" isPositive={true} />
       </div>
 
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
         <h3 className="text-lg font-bold text-slate-900 dark:text-slate-50 mb-6">Revenue Trend (Last 7 Days)</h3>
         <div className="h-80 w-full">
           <ResponsiveContainer width="100%" height="100%">
@@ -85,7 +85,7 @@ export function OrdersAnalyticsPlaceholder() {
         <StatCard title="Returned" value="0" change="0" isPositive={false} />
       </div>
 
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
         <h3 className="text-lg font-bold text-slate-900 dark:text-slate-50 mb-6">Order Fulfillment Breakdown</h3>
         <div className="h-80 w-full">
           <ResponsiveContainer width="100%" height="100%">
@@ -114,14 +114,14 @@ export function ProductsAnalyticsPlaceholder() {
         <StatCard title="Low Stock Items" value="0" change="0" isPositive={false} />
       </div>
 
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
         <div className="p-6 border-b border-slate-200 dark:border-slate-800">
           <h3 className="text-lg font-bold text-slate-900 dark:text-slate-50">Product Performance Matrix</h3>
           <p className="text-sm text-slate-500">Track your best and worst performing products.</p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm whitespace-nowrap">
-            <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 font-medium border-b border-slate-200 dark:border-slate-800">
+            <thead className="bg-page text-slate-500 font-medium border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="px-6 py-4">Product Name</th>
                 <th className="px-6 py-4 text-right">Units Sold</th>
@@ -131,7 +131,7 @@ export function ProductsAnalyticsPlaceholder() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {productData.map(item => (
-                <tr key={item.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <tr key={item.id} className="hover:bg-page">
                   <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">{item.name}</td>
                   <td className="px-6 py-4 text-right text-slate-600 dark:text-slate-400">{item.sales}</td>
                   <td className="px-6 py-4 text-right text-slate-600 dark:text-slate-400">₹{item.revenue.toLocaleString('en-IN')}</td>
@@ -159,7 +159,7 @@ export function CustomersAnalyticsPlaceholder() {
         <StatCard title="Customer CAC" value="₹0" change="0" isPositive={false} />
       </div>
 
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm flex flex-col md:flex-row gap-8 items-center">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm flex flex-col md:flex-row gap-8 items-center">
         <div className="flex-1 w-full max-w-sm">
           <h3 className="text-lg font-bold text-slate-900 dark:text-slate-50 mb-2">Customer Demographics</h3>
           <p className="text-sm text-slate-500 mb-6">Breakdown of your customer acquisition segments.</p>
@@ -208,7 +208,7 @@ export function FinancialAnalyticsPlaceholder() {
         <StatCard title="Platform Fees Paid" value="₹0" change="0" isPositive={false} />
       </div>
 
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm max-w-2xl mx-auto overflow-hidden">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm max-w-2xl mx-auto overflow-hidden">
         <div className="p-6 border-b border-slate-200 dark:border-slate-800">
           <h3 className="text-lg font-bold text-slate-900 dark:text-slate-50">Financial Summary (Month to Date)</h3>
         </div>

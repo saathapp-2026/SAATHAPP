@@ -17,14 +17,14 @@ export default function CTASection({ onStartRegistration }) {
   };
 
   return (
-    <section id="register" aria-labelledby="cta-heading" className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-950/50">
+    <section id="register" aria-labelledby="cta-heading" className="py-20 sm:py-24 bg-page dark:bg-slate-950/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="relative overflow-hidden rounded-[32px] border border-slate-200/70 dark:border-slate-800/60 bg-white dark:bg-slate-900 shadow-premium"
+          className="relative overflow-hidden rounded-[32px] border border-slate-200/70 dark:border-slate-800/60 bg-surface shadow-premium"
         >
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-[#0A8F3D]/5 via-transparent to-emerald-400/5" />
 
@@ -59,7 +59,7 @@ export default function CTASection({ onStartRegistration }) {
                 </button>
                 <a
                   href="mailto:wholesale@saathapp.in"
-                  className="inline-flex items-center justify-center gap-2 rounded-[16px] border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-8 py-3.5 text-sm font-extrabold text-slate-700 dark:text-slate-200 transition hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A8F3D]"
+                  className="inline-flex items-center justify-center gap-2 rounded-[16px] border border-slate-200 bg-white px-8 py-3.5 text-sm font-extrabold text-slate-700 dark:text-slate-200 transition hover:bg-page focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A8F3D]"
                 >
                   <Mail size={16} />
                   Contact Sales
@@ -67,18 +67,18 @@ export default function CTASection({ onStartRegistration }) {
               </div>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                <div className="flex items-center gap-2.5 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-800/50 px-4 py-3">
+                <div className="flex items-center gap-2.5 rounded-2xl border border-slate-200/70 bg-page px-4 py-3">
                   <Building2 size={16} className="text-[#0A8F3D] shrink-0" />
                   <span className="font-semibold text-slate-700 dark:text-slate-300">wholesale@saathapp.in</span>
                 </div>
-                <div className="flex items-center gap-2.5 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-800/50 px-4 py-3">
+                <div className="flex items-center gap-2.5 rounded-2xl border border-slate-200/70 bg-page px-4 py-3">
                   <Phone size={16} className="text-[#0A8F3D] shrink-0" />
                   <span className="font-semibold text-slate-700 dark:text-slate-300">+91 1800-SAATHAPP</span>
                 </div>
               </div>
             </div>
 
-            <div className="relative min-h-[280px] lg:min-h-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center p-8 text-center">
+            <div className="relative min-h-[280px] lg:min-h-full bg-page flex items-center justify-center p-8 text-center">
               <div className="flex flex-col items-center gap-2 text-slate-400">
                 <Building2 size={36} className="text-emerald-500/60" />
                 <span className="text-xs font-semibold">Wholesale Logistics Network</span>

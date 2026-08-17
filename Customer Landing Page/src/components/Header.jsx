@@ -6,6 +6,7 @@ import { usePWA } from '../context/PWAContext';
 import SaathAppLogo from '../assets/saathapp-logo.jpeg';
 import { useLanguage } from '../context/LanguageContext';
 import { getCustomerMenu } from '../config/customerMenu';
+import { useTheme } from "../context/ThemeContext";
 
 export default function Header({
   cartCount,
@@ -24,11 +25,13 @@ export default function Header({
   _onWishlistPage,
   _onSettingsPage,
   onLogout,
-  darkMode,
-  toggleDarkMode,
   onVoiceSearchClick,
   onImageSearchClick
 }) {
+  
+  const { resolvedTheme, setTheme } = useTheme();
+  const darkMode = resolvedTheme === "dark";
+  const toggleDarkMode = () => setTheme(darkMode ? "light" : "dark");
   const { t } = useLanguage();
   const { canInstall, isInstalled, installApp } = usePWA();
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -79,7 +82,7 @@ export default function Header({
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 shadow-xs">
+      <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-surface/95 backdrop-blur-md border-b border-theme-border shadow-xs">
         <div className="w-full px-3 sm:px-6 lg:px-8">
 
           {/* ========================================================= */}
@@ -135,7 +138,7 @@ export default function Header({
                 {/* Profile Icon */}
                 <button
                   onClick={() => navigate('/profile')}
-                  className="w-7 h-7 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden border border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 shrink-0"
+                  className="w-7 h-7 rounded-full bg-slate-200 overflow-hidden border border-slate-300 flex items-center justify-center text-theme-secondary shrink-0"
                   title="Open profile"
                 >
                   {user?.photo ? (
@@ -148,7 +151,7 @@ export default function Header({
                 {/* Hamburger Menu Toggle */}
                 <button
                   onClick={() => setIsCustomerMenuOpen(true)}
-                  className="p-1.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors rounded-btn cursor-pointer"
+                  className="p-1.5 text-theme-secondary hover:bg-page  transition-colors rounded-btn cursor-pointer"
                   title="Open menu"
                 >
                   <Menu size={18} />
@@ -160,14 +163,14 @@ export default function Header({
             <button
               type="button"
               onClick={() => navigate('/location')}
-              className="flex items-center gap-1.5 text-slate-700 dark:text-slate-200 text-xs font-semibold py-0.5 hover:opacity-80 text-left cursor-pointer"
+              className="flex items-center gap-1.5 text-theme-secondary text-xs font-semibold py-0.5 hover:opacity-80 text-left cursor-pointer"
             >
               <MapPin size={14} className="text-primary shrink-0" />
-              <span className="text-slate-400 font-bold uppercase text-[9px] tracking-wider shrink-0">Deliver to:</span>
-              <span className="truncate text-xs font-bold text-slate-800 dark:text-slate-100 max-w-[200px]">
+              <span className="text-theme-secondary font-bold uppercase text-[9px] tracking-wider shrink-0">Deliver to:</span>
+              <span className="truncate text-xs font-bold text-theme max-w-[200px]">
                 {location || 'Select Location...'}
               </span>
-              <ChevronDown size={13} className="text-slate-400 shrink-0" />
+              <ChevronDown size={13} className="text-theme-secondary shrink-0" />
             </button>
 
             {/* Mobile Row 3: Full-width Search Bar */}
@@ -180,11 +183,11 @@ export default function Header({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="w-full h-9 pl-9 pr-9 rounded-btn border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-xs text-xs"
+                    className="w-full h-9 pl-9 pr-9 rounded-btn border border-theme-border bg-surface text-theme placeholder-theme-secondary  focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-xs text-xs"
                   />
 
                   {/* Search Icon */}
-                  <div className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-400">
+                  <div className="absolute left-2.5 top-1/2 -translate-y-1/2 text-theme-secondary">
                     <Search size={15} />
                   </div>
 
@@ -194,7 +197,7 @@ export default function Header({
                       type="button"
                       onClick={onVoiceSearchClick}
                       whileHover={{ scale: 1.1, color: '#1565C0' }}
-                      className="p-1 text-slate-400 hover:text-accent rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+                      className="p-1 text-theme-secondary hover:text-accent rounded-full hover:bg-page  transition-all"
                       title="Voice Search"
                     >
                       <Mic size={15} />
@@ -211,12 +214,12 @@ export default function Header({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute left-0 right-0 mt-2 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 rounded-card shadow-premium overflow-hidden z-50 text-left"
+                    className="absolute left-0 right-0 mt-2 bg-surface/95 backdrop-blur-xl border border-theme-border rounded-card shadow-premium overflow-hidden z-50 text-left"
                   >
                     {searchQuery.trim() === '' ? (
                       <div className="p-4">
                         <div className="mb-3">
-                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-2">
+                          <span className="text-[10px] font-bold text-theme-secondary uppercase tracking-wider flex items-center gap-1.5 mb-2">
                             <History size={12} /> Recent Searches
                           </span>
                           <div className="flex flex-wrap gap-1.5">
@@ -228,7 +231,7 @@ export default function Header({
                                   onSearch(term);
                                   setIsSearchFocused(false);
                                 }}
-                                className="text-[11px] font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 py-1 px-2.5 rounded-full transition-colors"
+                                className="text-[11px] font-medium text-theme-secondary bg-page py-1 px-2.5 rounded-full transition-colors"
                               >
                                 {term}
                               </button>
@@ -237,7 +240,7 @@ export default function Header({
                         </div>
 
                         <div>
-                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-2">
+                          <span className="text-[10px] font-bold text-theme-secondary uppercase tracking-wider flex items-center gap-1.5 mb-2">
                             <Flame size={12} className="text-amber-500" /> Popular Searches
                           </span>
                           <div className="flex flex-wrap gap-1.5">
@@ -249,7 +252,7 @@ export default function Header({
                                   onSearch(term);
                                   setIsSearchFocused(false);
                                 }}
-                                className="text-[11px] font-medium text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 py-1 px-2.5 rounded-full flex items-center gap-1 transition-all"
+                                className="text-[11px] font-medium text-theme-secondary bg-page border border-theme-border py-1 px-2.5 rounded-full flex items-center gap-1 transition-all"
                               >
                                 <Sparkles size={10} className="text-amber-500" />
                                 {term}
@@ -269,14 +272,14 @@ export default function Header({
                                 onSearch(suggestion);
                                 setIsSearchFocused(false);
                               }}
-                              className="w-full px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 flex items-center gap-2.5 transition-colors border-b border-slate-100/50 dark:border-slate-900/50 last:border-b-0"
+                              className="w-full px-4 py-2.5 text-xs font-medium text-theme-secondary hover:bg-page  flex items-center gap-2.5 transition-colors border-b border-theme-border last:border-b-0"
                             >
-                              <Search size={13} className="text-slate-400 shrink-0" />
+                              <Search size={13} className="text-theme-secondary shrink-0" />
                               <span>{suggestion}</span>
                             </button>
                           ))
                         ) : (
-                          <div className="px-4 py-2.5 text-xs text-slate-400 italic">
+                          <div className="px-4 py-2.5 text-xs text-theme-secondary italic">
                             No direct match. Press Enter to search "{searchQuery}"
                           </div>
                         )}
@@ -322,16 +325,16 @@ export default function Header({
             <button
               type="button"
               onClick={() => navigate('/location')}
-              className="flex items-center gap-2 rounded-btn border border-slate-200/70 bg-slate-100/90 px-3 py-2 text-slate-700 shadow-xs transition hover:shadow-sm dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-200 cursor-pointer shrink-0"
+              className="flex items-center gap-2 rounded-btn border border-theme-border bg-page px-3 py-2 text-theme-secondary shadow-xs transition hover:shadow-sm/90 cursor-pointer shrink-0"
             >
               <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary dark:text-primary-light shrink-0">
                 <MapPin size={15} />
               </div>
               <div className="text-left">
-                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-400">Deliver to</div>
-                <div className="max-w-[150px] md:max-w-[200px] truncate text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100">{location || 'Select Location...'}</div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-secondary">Deliver to</div>
+                <div className="max-w-[150px] md:max-w-[200px] truncate text-xs sm:text-sm font-semibold text-theme">{location || 'Select Location...'}</div>
               </div>
-              <ChevronDown size={14} className="text-slate-400 dark:text-slate-400 shrink-0" />
+              <ChevronDown size={14} className="text-theme-secondary shrink-0" />
             </button>
 
             {/* Desktop Search Bar */}
@@ -344,11 +347,11 @@ export default function Header({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="w-full h-11 pl-10 pr-10 rounded-btn border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
+                    className="w-full h-11 pl-10 pr-10 rounded-btn border border-theme-border bg-surface text-theme placeholder-theme-secondary  focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
                   />
 
                   {/* Search Icon */}
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-400">
+                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-theme-secondary">
                     <Search size={18} />
                   </div>
 
@@ -358,7 +361,7 @@ export default function Header({
                       type="button"
                       onClick={onVoiceSearchClick}
                       whileHover={{ scale: 1.1, color: '#1565C0' }}
-                      className="p-1.5 text-slate-400 hover:text-accent rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+                      className="p-1.5 text-theme-secondary hover:text-accent rounded-full hover:bg-page  transition-all"
                       title="Voice Search"
                     >
                       <Mic size={18} />
@@ -375,12 +378,12 @@ export default function Header({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute left-0 right-0 mt-2 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 rounded-card shadow-premium overflow-hidden z-50 text-left"
+                    className="absolute left-0 right-0 mt-2 bg-surface/95 backdrop-blur-xl border border-theme-border rounded-card shadow-premium overflow-hidden z-50 text-left"
                   >
                     {searchQuery.trim() === '' ? (
                       <div className="p-5">
                         <div className="mb-4">
-                          <span className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
+                          <span className="text-xs font-bold text-theme-secondary uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
                             <History size={13} /> Recent Searches
                           </span>
                           <div className="flex flex-wrap gap-2">
@@ -392,7 +395,7 @@ export default function Header({
                                   onSearch(term);
                                   setIsSearchFocused(false);
                                 }}
-                                className="text-xs font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 py-1.5 px-3 rounded-full transition-colors"
+                                className="text-xs font-medium text-theme-secondary bg-page hover:bg-slate-200  py-1.5 px-3 rounded-full transition-colors"
                               >
                                 {term}
                               </button>
@@ -401,7 +404,7 @@ export default function Header({
                         </div>
 
                         <div>
-                          <span className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
+                          <span className="text-xs font-bold text-theme-secondary uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
                             <Flame size={13} className="text-amber-500" /> Popular Searches
                           </span>
                           <div className="flex flex-wrap gap-2">
@@ -413,7 +416,7 @@ export default function Header({
                                   onSearch(term);
                                   setIsSearchFocused(false);
                                 }}
-                                className="text-xs font-medium text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 hover:bg-primary/5 hover:border-primary/30 dark:hover:bg-primary/10 py-1.5 px-3 rounded-full flex items-center gap-1 transition-all"
+                                className="text-xs font-medium text-theme-secondary bg-page border border-theme-border hover:bg-primary/5 hover:border-primary/30 dark:hover:bg-primary/10 py-1.5 px-3 rounded-full flex items-center gap-1 transition-all"
                               >
                                 <Sparkles size={11} className="text-amber-500" />
                                 {term}
@@ -433,14 +436,14 @@ export default function Header({
                                 onSearch(suggestion);
                                 setIsSearchFocused(false);
                               }}
-                              className="w-full px-4.5 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 flex items-center gap-3 transition-colors border-b border-slate-100/50 dark:border-slate-900/50 last:border-b-0"
+                              className="w-full px-4.5 py-3 text-sm font-medium text-theme-secondary hover:bg-page  flex items-center gap-3 transition-colors border-b border-theme-border last:border-b-0"
                             >
-                              <Search size={14} className="text-slate-400 shrink-0" />
+                              <Search size={14} className="text-theme-secondary shrink-0" />
                               <span>{suggestion}</span>
                             </button>
                           ))
                         ) : (
-                          <div className="px-4 py-3 text-sm text-slate-400 italic">
+                          <div className="px-4 py-3 text-sm text-theme-secondary italic">
                             No direct match. Press Enter to search "{searchQuery}"
                           </div>
                         )}
@@ -456,13 +459,13 @@ export default function Header({
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={toggleDarkMode}
-                className="p-2 rounded-btn text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors shrink-0"
+                className="p-2 rounded-btn text-theme-secondary hover:text-theme-secondary  hover:bg-page  transition-colors shrink-0"
                 title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
               >
                 {darkMode ? <Sun size={20} className="text-amber-400" /> : <Moon size={20} />}
               </motion.button>
 
-              <button className="relative p-2 rounded-btn text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors shrink-0">
+              <button className="relative p-2 rounded-btn text-theme-secondary hover:text-theme-secondary  hover:bg-page  transition-colors shrink-0">
                 <Bell size={20} />
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-danger rounded-full" />
               </button>
@@ -472,7 +475,7 @@ export default function Header({
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   onClick={installApp}
-                  className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white rounded-btn transition-colors"
+                  className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-surface rounded-btn transition-colors"
                 >
                   <Download size={14} />
                   <span className="hidden sm:inline">Install App</span>
@@ -484,7 +487,7 @@ export default function Header({
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   onClick={onLogin}
-                  className="hidden md:flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 bg-white/80 hover:bg-slate-100 dark:bg-slate-900/70 dark:hover:bg-slate-800 border border-slate-200/70 dark:border-slate-700/70 rounded-btn transition-all"
+                  className="hidden md:flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-theme-secondary bg-surface/80 hover:bg-page/70  border border-theme-border rounded-btn transition-all"
                 >
                   <span>{t('login')}</span>
                 </motion.button>
@@ -525,7 +528,7 @@ export default function Header({
 
               <button
                 onClick={() => navigate('/profile')}
-                className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden cursor-pointer border border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-500 shrink-0"
+                className="w-9 h-9 rounded-full bg-slate-200 overflow-hidden cursor-pointer border border-slate-300 flex items-center justify-center text-theme-secondary shrink-0"
                 title="Open profile"
               >
                 {user?.photo ? (
@@ -537,7 +540,7 @@ export default function Header({
 
               <button
                 onClick={() => setIsCustomerMenuOpen(true)}
-                className="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors rounded-btn cursor-pointer shrink-0"
+                className="p-2 text-theme-secondary hover:text-theme-secondary  hover:bg-page  transition-colors rounded-btn cursor-pointer shrink-0"
                 title="Open customer dashboard menu"
               >
                 <Menu size={20} />
@@ -566,23 +569,23 @@ export default function Header({
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', bounce: 0, duration: 0.3 }}
-              className="fixed right-0 top-0 bottom-0 w-[280px] bg-white dark:bg-slate-900 shadow-2xl z-[60] flex flex-col border-l border-slate-200 dark:border-slate-800"
+              className="fixed right-0 top-0 bottom-0 w-[280px] bg-surface shadow-2xl z-[60] flex flex-col border-l border-theme-border"
             >
               {/* Drawer Header with Quick Utilities */}
-              <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
+              <div className="flex items-center justify-between p-4 border-b border-theme-border bg-page/50">
                 <div className="flex items-center gap-2">
                   {/* Theme Toggle */}
                   <motion.button
                     whileTap={{ scale: 0.9 }}
                     onClick={toggleDarkMode}
-                    className="p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-xs cursor-pointer"
+                    className="p-2 rounded-xl text-theme-secondary bg-surface border border-theme-border shadow-xs cursor-pointer"
                     title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
                   >
                     {darkMode ? <Sun size={17} className="text-amber-400" /> : <Moon size={17} />}
                   </motion.button>
 
                   {/* Notification Bell */}
-                  <button className="relative p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-xs cursor-pointer">
+                  <button className="relative p-2 rounded-xl text-theme-secondary bg-surface border border-theme-border shadow-xs cursor-pointer">
                     <Bell size={17} />
                     <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-danger rounded-full" />
                   </button>
@@ -590,7 +593,7 @@ export default function Header({
 
                 <button
                   onClick={() => setIsCustomerMenuOpen(false)}
-                  className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 bg-slate-100 dark:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+                  className="p-1.5 text-theme-secondary hover:text-theme-secondary  bg-page rounded-lg transition-colors cursor-pointer"
                   aria-label="Close menu"
                 >
                   <X size={18} />
@@ -608,7 +611,7 @@ export default function Header({
                         setIsCustomerMenuOpen(false);
                         navigate('/customer/dashboard', { state: { activeTab: item.tab } });
                       }}
-                      className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-left transition-all cursor-pointer text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/40 hover:text-[#6C3BFF] dark:hover:text-white"
+                      className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-left transition-all cursor-pointer text-theme-secondary hover:bg-page  hover:text-[#6C3BFF] dark:hover:text-white"
                     >
                       <Icon size={16} />
                       <span>{item.label}</span>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTheme } from "./context/ThemeContext";
 import { useLocation, useNavigate } from 'react-router-dom';
 import SplashScreen from './pages/SplashScreen';
 import HomePage from './pages/Home';
@@ -86,7 +87,9 @@ export default function App() {
   });
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [darkMode, setDarkMode] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+  const darkMode = resolvedTheme === "dark";
+  const toggleDarkMode = () => setTheme(darkMode ? "light" : "dark");
   const [showSplash, setShowSplash] = useState(() => {
     if (typeof window === 'undefined') return false;
     return !window.sessionStorage.getItem('saathapp-splash-shown');
@@ -293,7 +296,7 @@ export default function App() {
     setAuthView('home');
     setActivePage('home');
     setErrorMessage('');
-
+    
     if (routerLocation.pathname === '/customer/dashboard' || routerLocation.pathname === '/profile' || routerLocation.state?.from === '/customer/dashboard') {
       navigate('/customer/dashboard');
     } else {
@@ -320,7 +323,7 @@ export default function App() {
     setAuthView('home');
     setActivePage('home');
     setErrorMessage('');
-
+    
     if (routerLocation.pathname === '/customer/dashboard' || routerLocation.pathname === '/profile' || routerLocation.state?.from === '/customer/dashboard') {
       navigate('/customer/dashboard');
     } else {
@@ -367,26 +370,26 @@ export default function App() {
     '/professional/dashboard', '/worker/dashboard'
   ];
   const isSellerRoute = routerLocation.pathname.startsWith('/seller');
-  const isPublicRoute = routerLocation.pathname === '/' ||
-    routerLocation.pathname === '/about' ||
-    routerLocation.pathname === '/service-warranty' ||
-    routerLocation.pathname === '/our-story' ||
-    routerLocation.pathname === '/faq' ||
-    routerLocation.pathname === '/login' ||
-    routerLocation.pathname === '/signup' ||
-    routerLocation.pathname === '/help-support' ||
-    routerLocation.pathname.startsWith('/wholesale') ||
-    routerLocation.pathname === '/become-a-wholeseller' ||
-    routerLocation.pathname === '/become-delivery-partner' ||
-    routerLocation.pathname === '/franchise' ||
-    routerLocation.pathname === '/advertise' ||
-    routerLocation.pathname === '/advertise/create' ||
-    partnerRoutes.includes(routerLocation.pathname) ||
-    trustRoutes.includes(routerLocation.pathname) ||
-    isSellerRoute;
+  const isPublicRoute = routerLocation.pathname === '/' || 
+                        routerLocation.pathname === '/about' || 
+                        routerLocation.pathname === '/service-warranty' || 
+                        routerLocation.pathname === '/our-story' || 
+                        routerLocation.pathname === '/faq' || 
+                        routerLocation.pathname === '/login' || 
+                        routerLocation.pathname === '/signup' || 
+                        routerLocation.pathname === '/help-support' || 
+                        routerLocation.pathname.startsWith('/wholesale') || 
+                        routerLocation.pathname === '/become-a-wholeseller' || 
+                        routerLocation.pathname === '/become-delivery-partner' || 
+                        routerLocation.pathname === '/franchise' || 
+                        routerLocation.pathname === '/advertise' || 
+                        routerLocation.pathname === '/advertise/create' || 
+                        partnerRoutes.includes(routerLocation.pathname) || 
+                        trustRoutes.includes(routerLocation.pathname) ||
+                        isSellerRoute;
 
   if (routerLocation.pathname === '/advertise') {
-    return <AdvertisementsPage onBack={() => navigate('/')} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} cartCount={cartCount} />;
+    return <AdvertisementsPage onBack={() => navigate('/')} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/advertise/create') {
@@ -402,23 +405,23 @@ export default function App() {
   }
 
   if (routerLocation.pathname === '/about') {
-    return <AboutPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} />;
+    return <AboutPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/service-warranty') {
-    return <ServiceWarrantyPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} />;
+    return <ServiceWarrantyPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/our-story') {
-    return <OurStoryPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} />;
+    return <OurStoryPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/faq') {
-    return <FaqPage onBack={() => navigate('/')} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} />;
+    return <FaqPage onBack={() => navigate('/')} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/delivery-partner-agreement') {
-    return <DeliveryPartnerAgreementPage isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} />;
+    return <DeliveryPartnerAgreementPage isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/franchise') {
@@ -447,7 +450,7 @@ export default function App() {
         isAuthenticated={isAuthenticated}
         user={user}
         darkMode={darkMode}
-        toggleDarkMode={() => setDarkMode((v) => !v)}
+        toggleDarkMode={toggleDarkMode}
         onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
         onImageSearchClick={() => setIsImageModalOpen(true)}
         onBack={() => navigate('/')}
@@ -505,7 +508,7 @@ export default function App() {
             document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
           }, 100);
         }}
-        toggleDarkMode={() => setDarkMode((value) => !value)}
+        toggleDarkMode={toggleDarkMode}
         onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
         onImageSearchClick={() => setIsImageModalOpen(true)}
         onDetectGPS={handleGPSDetect}
@@ -578,7 +581,7 @@ export default function App() {
           setActivePage('settings');
           navigate('/');
         }}
-        toggleDarkMode={() => setDarkMode((value) => !value)}
+        toggleDarkMode={toggleDarkMode}
         onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
         onImageSearchClick={() => setIsImageModalOpen(true)}
         onDetectGPS={handleGPSDetect}
@@ -650,7 +653,7 @@ export default function App() {
           setActivePage('settings');
           navigate('/');
         }}
-        toggleDarkMode={() => setDarkMode((value) => !value)}
+        toggleDarkMode={toggleDarkMode}
         onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
         onImageSearchClick={() => setIsImageModalOpen(true)}
         onDetectGPS={handleGPSDetect}
@@ -712,7 +715,7 @@ export default function App() {
     return (
       <ProfessionalDashboardPage
         darkMode={darkMode}
-        toggleDarkMode={() => setDarkMode((value) => !value)}
+        toggleDarkMode={toggleDarkMode}
         onLogout={() => {
           clearPartnerSession();
           navigate('/professional/login');
@@ -730,7 +733,7 @@ export default function App() {
     return (
       <WorkerDashboardPage
         darkMode={darkMode}
-        toggleDarkMode={() => setDarkMode((value) => !value)}
+        toggleDarkMode={toggleDarkMode}
         onLogout={() => {
           clearPartnerSession();
           navigate('/worker/login');
@@ -770,7 +773,7 @@ export default function App() {
         isAuthenticated={isAuthenticated}
         user={user}
         darkMode={darkMode}
-        toggleDarkMode={() => setDarkMode((value) => !value)}
+        toggleDarkMode={toggleDarkMode}
         onLogin={() => navigate('/login')}
         onSignup={() => navigate('/signup')}
         onProfile={() => navigate('/profile')}
@@ -801,7 +804,7 @@ export default function App() {
         isAuthenticated={isAuthenticated}
         user={user}
         darkMode={darkMode}
-        toggleDarkMode={() => setDarkMode((value) => !value)}
+        toggleDarkMode={toggleDarkMode}
         onLogin={() => navigate('/login')}
         onSignup={() => navigate('/signup')}
         onProfile={() => navigate('/profile')}
@@ -929,12 +932,12 @@ export default function App() {
           setSearchQuery(query);
           document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
         }}
-        toggleDarkMode={() => setDarkMode((value) => !value)}
+        toggleDarkMode={toggleDarkMode}
         onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
         onImageSearchClick={() => setIsImageModalOpen(true)}
         onDetectGPS={handleGPSDetect}
         onAddToCart={handleAddToCart}
-        onQuickView={() => { }}
+        onQuickView={() => {}}
         onCategorySelect={(category) => {
           setSelectedCategory(category);
           document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -982,7 +985,7 @@ export default function App() {
           setIsCartOpen(false);
         }}
         onCloseCart={() => setIsCartOpen(false)}
-        onCloseQuickView={() => { }}
+        onCloseQuickView={() => {}}
         onCloseVoiceModal={() => setIsVoiceModalOpen(false)}
         onCloseImageModal={() => setIsImageModalOpen(false)}
         onCloseLocationModal={() => setIsLocationModalOpen(false)}
@@ -991,7 +994,7 @@ export default function App() {
         getCartQuantity={getCartQuantity}
         handleAddToCart={handleAddToCart}
         setIsCartOpen={setIsCartOpen}
-        setQuickViewProduct={() => { }}
+        setQuickViewProduct={() => {}}
         setIsVoiceModalOpen={setIsVoiceModalOpen}
         setIsImageModalOpen={setIsImageModalOpen}
         setIsLocationModalOpen={setIsLocationModalOpen}
@@ -1068,15 +1071,15 @@ export default function App() {
   }
 
   if (activePage === 'about') {
-    return <AboutPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} />;
+    return <AboutPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (activePage === 'service-warranty') {
-    return <ServiceWarrantyPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} />;
+    return <ServiceWarrantyPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (activePage === 'our-story') {
-    return <OurStoryPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} />;
+    return <OurStoryPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (activePage === 'cart') {
@@ -1135,12 +1138,12 @@ export default function App() {
         setSearchQuery(query);
         document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
       }}
-      toggleDarkMode={() => setDarkMode((value) => !value)}
+      toggleDarkMode={toggleDarkMode}
       onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
       onImageSearchClick={() => setIsImageModalOpen(true)}
       onDetectGPS={handleGPSDetect}
       onAddToCart={handleAddToCart}
-      onQuickView={() => { }}
+      onQuickView={() => {}}
       onCategorySelect={(category) => {
         setSelectedCategory(category);
         document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -1188,7 +1191,7 @@ export default function App() {
         setIsCartOpen(false);
       }}
       onCloseCart={() => setIsCartOpen(false)}
-      onCloseQuickView={() => { }}
+      onCloseQuickView={() => {}}
       onCloseVoiceModal={() => setIsVoiceModalOpen(false)}
       onCloseImageModal={() => setIsImageModalOpen(false)}
       onCloseLocationModal={() => setIsLocationModalOpen(false)}
@@ -1197,7 +1200,7 @@ export default function App() {
       getCartQuantity={getCartQuantity}
       handleAddToCart={handleAddToCart}
       setIsCartOpen={setIsCartOpen}
-      setQuickViewProduct={() => { }}
+      setQuickViewProduct={() => {}}
       setIsVoiceModalOpen={setIsVoiceModalOpen}
       setIsImageModalOpen={setIsImageModalOpen}
       setIsLocationModalOpen={setIsLocationModalOpen}

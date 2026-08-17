@@ -30,7 +30,7 @@ export default function Step2_AuthOtp({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
           Phase 1 — Authentication
         </div>
@@ -42,14 +42,14 @@ export default function Step2_AuthOtp({ onNext, onPrev }) {
         </p>
 
         {/* Toggle Mode */}
-        <div className="mt-6 flex rounded-2xl bg-slate-100 dark:bg-slate-800/80 p-1">
+        <div className="mt-6 flex rounded-2xl bg-page p-1">
           <button
             type="button"
             onClick={() => setActiveMode('mobile')}
             className={`flex-1 py-2.5 text-xs font-extrabold rounded-xl transition flex items-center justify-center gap-2 ${
               activeMode === 'mobile'
-                ? 'bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 shadow-md'
-                : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'bg-surface text-emerald-600 dark:text-emerald-400 shadow-md'
+                : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <Smartphone size={16} />
@@ -60,8 +60,8 @@ export default function Step2_AuthOtp({ onNext, onPrev }) {
             onClick={() => setActiveMode('email')}
             className={`flex-1 py-2.5 text-xs font-extrabold rounded-xl transition flex items-center justify-center gap-2 ${
               activeMode === 'email'
-                ? 'bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 shadow-md'
-                : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'bg-surface text-emerald-600 dark:text-emerald-400 shadow-md'
+                : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <Mail size={16} />
@@ -86,13 +86,13 @@ export default function Step2_AuthOtp({ onNext, onPrev }) {
                     maxLength={10}
                     value={formData.mobileNumber}
                     onChange={(e) => updateFormData({ mobileNumber: e.target.value.replace(/\D/g, '') })}
-                    className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-14 pr-24 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                    className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-14 pr-24 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                     placeholder="Enter 10-digit mobile number"
                   />
                   <button
                     type="button"
                     onClick={handleSendOtp}
-                    className="absolute right-2 text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-slate-800 px-3 py-1.5 rounded-xl transition"
+                    className="absolute right-2 text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 px-3 py-1.5 rounded-xl transition"
                   >
                     Resend OTP
                   </button>
@@ -111,7 +111,7 @@ export default function Step2_AuthOtp({ onNext, onPrev }) {
                     maxLength={6}
                     value={formData.otp}
                     onChange={(e) => updateFormData({ otp: e.target.value })}
-                    className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-28 py-3.5 text-base tracking-[0.25em] font-extrabold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                    className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-28 py-3.5 text-base tracking-[0.25em] font-extrabold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                     placeholder="123456"
                   />
                   <span className="absolute right-3.5 inline-flex items-center gap-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
@@ -142,7 +142,7 @@ export default function Step2_AuthOtp({ onNext, onPrev }) {
                   required
                   value={formData.emailLogin}
                   onChange={(e) => updateFormData({ emailLogin: e.target.value })}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                   placeholder="partner@company.com"
                 />
               </div>
@@ -153,7 +153,7 @@ export default function Step2_AuthOtp({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               Back
             </button>

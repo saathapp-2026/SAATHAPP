@@ -30,7 +30,7 @@ const PRIMARY = ['generated', 'last', 'revenue'];
 
 function Skeleton() {
   return (
-    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 animate-pulse h-[108px]" />
+    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-5 animate-pulse h-[108px]" />
   );
 }
 
@@ -77,7 +77,7 @@ export default function ReportSummaryCards({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.04 }}
             onClick={() => onCardClick?.(card)}
-            className={`text-left rounded-2xl border bg-white dark:bg-slate-900 p-5 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
+            className={`text-left rounded-2xl border bg-surface p-5 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
               active
                 ? 'border-emerald-500 shadow-md ring-1 ring-emerald-500'
                 : 'border-slate-200 dark:border-slate-800 shadow-sm'

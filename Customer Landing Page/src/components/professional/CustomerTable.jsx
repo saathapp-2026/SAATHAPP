@@ -17,10 +17,10 @@ export default function CustomerTable() {
   }
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left">
+    <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left">
       
       {/* Header and Search */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-100 dark:border-slate-800/40">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-100 ">
         <div>
           <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Client Database</h3>
           <p className="text-[11px] text-slate-450 mt-0.5">Database of clients you have serviced</p>
@@ -34,7 +34,7 @@ export default function CustomerTable() {
             placeholder="Search by client or location..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs border border-slate-200/80 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none focus:border-primary/50"
+            className="w-full pl-9 pr-4 py-2 text-xs border border-slate-200/80 dark:border-slate-800 rounded-xl bg-page dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none focus:border-primary/50"
           />
         </div>
       </div>
@@ -53,7 +53,7 @@ export default function CustomerTable() {
             className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase transition-colors cursor-pointer ${
               customerTab === tab.id
                 ? 'bg-primary text-white'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
             }`}
           >
             {tab.label}
@@ -67,7 +67,7 @@ export default function CustomerTable() {
           {filteredCustomers.map((cust, idx) => (
             <div key={idx} className="p-4 border border-slate-200 dark:border-slate-800 rounded-xl flex flex-col gap-3">
               <div className="flex items-center gap-3 border-b border-slate-100 dark:border-slate-800/80 pb-3">
-                <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-bold text-slate-600 dark:text-slate-300">
+                <div className="w-10 h-10 rounded-full bg-page flex items-center justify-center font-bold text-slate-600 dark:text-slate-300">
                   {cust.name.charAt(0)}
                 </div>
                 <div>
@@ -89,7 +89,7 @@ export default function CustomerTable() {
       ) : customerTab === 'history' ? (
         <div className="space-y-4">
           {filteredCustomers.map((cust, idx) => (
-            <div key={idx} className="p-4 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl flex justify-between items-center">
+            <div key={idx} className="p-4 bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl flex justify-between items-center">
               <div>
                 <h4 className="text-sm font-black text-slate-800 dark:text-slate-200">{cust.name}</h4>
                 <p className="text-[10px] text-slate-500 mt-0.5">Last booked: {cust.lastBooking}</p>
@@ -125,10 +125,10 @@ export default function CustomerTable() {
                   </tr>
                 ) : (
                   filteredCustomers.map((cust, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/20 transition-colors">
+                  <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
                     <td className="py-4">
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-bold text-[10px] text-slate-600 dark:text-slate-300">
+                        <div className="w-7 h-7 rounded-full bg-page flex items-center justify-center font-bold text-[10px] text-slate-600 dark:text-slate-300">
                           {cust.name.split(' ').map(n => n[0]).join('')}
                         </div>
                         <span className="font-black text-slate-800 dark:text-slate-200">{cust.name}</span>
@@ -174,7 +174,7 @@ export default function CustomerTable() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-black text-xs text-slate-500">
+                    <div className="w-8 h-8 rounded-full bg-page flex items-center justify-center font-black text-xs text-slate-500">
                       {cust.name.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div>

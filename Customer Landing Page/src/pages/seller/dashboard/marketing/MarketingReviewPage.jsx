@@ -13,7 +13,7 @@ import { formatINR, getAdType } from '../../../../config/seller/adConstants';
 function statusBadge(status) {
   if (status === 'complete') return 'bg-emerald-100 text-emerald-700';
   if (status === 'pending') return 'bg-amber-100 text-amber-700';
-  return 'bg-slate-100 text-slate-600';
+  return 'bg-page text-slate-600';
 }
 
 export default function MarketingReviewPage() {
@@ -143,7 +143,7 @@ export default function MarketingReviewPage() {
               type="button"
               onClick={() => handleStatusUpdate('rejected')}
               disabled={actionLoading}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white text-slate-700 px-4 py-2 text-sm font-semibold shadow-sm hover:bg-slate-100 disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white text-slate-700 px-4 py-2 text-sm font-semibold shadow-sm hover:bg-page disabled:opacity-50"
             >
               <AlertTriangle size={16} /> Reject
             </button>
@@ -163,12 +163,12 @@ export default function MarketingReviewPage() {
         <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-6 shadow-sm">
           <div className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-3xl bg-slate-50 dark:bg-slate-900 p-4">
+              <div className="rounded-3xl bg-page dark:bg-slate-900 p-4">
                 <p className="text-xs uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">Campaign Information</p>
                 <h2 className="mt-2 text-lg font-semibold text-slate-900 dark:text-slate-50">{campaign.name}</h2>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{campaign.description || campaign.headline}</p>
               </div>
-              <div className="rounded-3xl bg-slate-50 dark:bg-slate-900 p-4">
+              <div className="rounded-3xl bg-page dark:bg-slate-900 p-4">
                 <p className="text-xs uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">Seller</p>
                 <p className="mt-2 text-sm font-semibold text-slate-900 dark:text-slate-50">Saath Grocery Shop</p>
                 <p className="text-sm text-slate-500 dark:text-slate-400">GST: 27AABCU9603R1ZM</p>
@@ -227,7 +227,7 @@ export default function MarketingReviewPage() {
           </div>
         </div>
 
-        <aside className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-6 shadow-sm">
+        <aside className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-900 p-6 shadow-sm">
           <p className="text-xs uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">Review checklist</p>
           <div className="mt-4 space-y-3">
             {checklist.map((item) => (
@@ -267,7 +267,7 @@ export default function MarketingReviewPage() {
         </div>
       </div>
 
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-6 shadow-sm">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-900 p-6 shadow-sm">
         <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">Pending review campaigns</p>
         <div className="mt-4 grid gap-3">
           {reviewList.length ? (
@@ -276,7 +276,7 @@ export default function MarketingReviewPage() {
                 key={item.id}
                 type="button"
                 onClick={() => setSelectedId(item.id)}
-                className={`rounded-3xl border p-4 text-left ${selectedId === item.id ? 'border-emerald-500 bg-white dark:bg-slate-950' : 'border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900'}`}
+                className={`rounded-3xl border p-4 text-left ${selectedId === item.id ? 'border-emerald-500 bg-white dark:bg-slate-950' : 'border-slate-200 bg-page dark:border-slate-800 dark:bg-slate-900'}`}
               >
                 <p className="font-semibold text-slate-900 dark:text-slate-50">{item.name}</p>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{item.status.replace(/_/g, ' ')} • {item.typeId}</p>

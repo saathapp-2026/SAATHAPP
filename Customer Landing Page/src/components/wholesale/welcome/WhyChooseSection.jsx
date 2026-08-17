@@ -5,7 +5,7 @@ import SectionHeading from './SectionHeading';
 
 export default function WhyChooseSection() {
   return (
-    <section id="why-saathapp" aria-labelledby="why-saathapp-heading" className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-950/50">
+    <section id="why-saathapp" aria-labelledby="why-saathapp-heading" className="py-20 sm:py-24 bg-page dark:bg-slate-950/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           id="why-saathapp-heading"
@@ -25,7 +25,7 @@ export default function WhyChooseSection() {
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ delay: index * 0.06, duration: 0.45 }}
                 whileHover={{ y: -6, scale: 1.01 }}
-                className="group relative overflow-hidden rounded-[20px] border border-slate-200/70 dark:border-slate-800/60 bg-white dark:bg-slate-900 p-7 shadow-soft hover:shadow-premium transition-all duration-300"
+                className="group relative overflow-hidden rounded-[20px] border border-slate-200/70 dark:border-slate-800/60 bg-surface p-7 shadow-soft hover:shadow-premium transition-all duration-300"
               >
                 <div
                   aria-hidden="true"

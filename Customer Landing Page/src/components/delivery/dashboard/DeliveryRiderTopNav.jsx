@@ -42,13 +42,13 @@ export default function DeliveryRiderTopNav({
   };
 
   return (
-    <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 shadow-sm px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4 sa-fade">
+    <header className="bg-surface border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 shadow-sm px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4 sa-fade">
       {/* Left: Shift Toggle & Live Telemetry Indicators */}
       <div className="flex items-center gap-3 flex-wrap">
         <button
           type="button"
           onClick={onToggleMobileSidebar}
-          className="md:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer active:scale-95 transition-all duration-150 hover:bg-slate-100 dark:hover:bg-slate-800"
+          className="md:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer active:scale-95 transition-all duration-150 hover:bg-page"
         >
           <Truck size={20} />
         </button>
@@ -82,7 +82,7 @@ export default function DeliveryRiderTopNav({
             <span>GPS Active</span>
           </div>
           <div className="flex items-center gap-1">
-            <span className="text-[10px] font-extrabold bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-700 dark:text-slate-300">4G</span>
+            <span className="text-[10px] font-extrabold bg-slate-200 px-1.5 py-0.5 rounded text-slate-700 dark:text-slate-300">4G</span>
           </div>
           <div className="flex items-center gap-1">
             <Battery size={14} className="text-emerald-500" />
@@ -97,7 +97,7 @@ export default function DeliveryRiderTopNav({
         <button
           type="button"
           onClick={() => addToast?.('📍 GPS Location & route refreshed', 'info')}
-          className="hidden sm:flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
+          className="hidden sm:flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-page text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
           title="Refresh Location"
         >
           <RefreshCw size={13} className="text-amber-500" /> <span className="hidden md:inline">Refresh Location</span>
@@ -118,7 +118,7 @@ export default function DeliveryRiderTopNav({
         <button
           type="button"
           onClick={handleSupportClick}
-          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer font-extrabold text-xs shadow-sm active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
+          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-300 text-slate-800 dark:text-slate-200 hover:bg-page cursor-pointer font-extrabold text-xs shadow-sm active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
           title="SaathApp Support & Help Center"
         >
           <HelpCircle size={15} className="text-amber-500" />
@@ -130,7 +130,7 @@ export default function DeliveryRiderTopNav({
           <button
             type="button"
             onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
-            className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
+            className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-page transition cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
             title="Rider Notifications"
           >
             <Bell size={16} />
@@ -140,7 +140,7 @@ export default function DeliveryRiderTopNav({
           </button>
 
           {isNotificationsOpen && (
-            <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl z-50 p-4 space-y-3 sa-rise">
+            <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl z-50 p-4 space-y-3 sa-rise">
               <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2.5">
                 <div className="flex items-center gap-2">
                   <Bell size={16} className="text-amber-500" />
@@ -163,7 +163,7 @@ export default function DeliveryRiderTopNav({
                   <button
                     type="button"
                     onClick={() => setIsNotificationsOpen(false)}
-                    className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 cursor-pointer active:scale-95 transition rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                    className="text-slate-400 hover:text-slate-600 p-1 cursor-pointer active:scale-95 transition rounded-lg hover:bg-page"
                   >
                     <X size={16} />
                   </button>
@@ -182,7 +182,7 @@ export default function DeliveryRiderTopNav({
                       }}
                       className={`p-3 rounded-2xl border transition cursor-pointer flex items-start gap-3 active:scale-[0.98] ${n.unread
                         ? 'bg-amber-500/5 dark:bg-amber-500/10 border-amber-500/20'
-                        : 'bg-slate-50/50 dark:bg-slate-800/40 border-slate-100 dark:border-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800'
+                        : 'bg-slate-50/50 border-slate-100 dark:border-slate-800/80 hover:bg-page'
                         }`}
                     >
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${n.color}`}>
@@ -223,7 +223,7 @@ export default function DeliveryRiderTopNav({
         <button
           type="button"
           onClick={toggleDarkMode}
-          className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
+          className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-page transition cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
         >
           {darkMode ? <Sun size={17} className="text-amber-400" /> : <Moon size={17} />}
         </button>
@@ -245,7 +245,7 @@ export default function DeliveryRiderTopNav({
           </button>
 
           {isProfileMenuOpen && (
-            <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl z-50 p-3 space-y-2 sa-rise">
+            <div className="absolute right-0 mt-2 w-64 bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl z-50 p-3 space-y-2 sa-rise">
               <div className="p-2 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-sm">
                   👤
@@ -262,7 +262,7 @@ export default function DeliveryRiderTopNav({
                   setIsProfileMenuOpen(false);
                   if (onOpenProfilePage) onOpenProfilePage();
                 }}
-                className="w-full flex items-center gap-2 p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 transition cursor-pointer active:scale-95"
+                className="w-full flex items-center gap-2 p-2.5 rounded-xl hover:bg-page text-xs font-bold text-slate-800 dark:text-slate-200 transition cursor-pointer active:scale-95"
               >
                 <span>👤</span> View Full Rider Profile
               </button>

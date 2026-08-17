@@ -17,7 +17,7 @@ export default function BrandingRequestsList({ requests, variant = 'light' }) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-2xl border p-6 ${
-        isLight ? 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800' : 'bg-white/5 border-white/10'
+        isLight ? 'bg-surface border-slate-200 dark:border-slate-800' : 'bg-white/5 border-white/10'
       }`}
     >
       <div className="flex items-center gap-2 mb-4">
@@ -32,7 +32,7 @@ export default function BrandingRequestsList({ requests, variant = 'light' }) {
         {requests.map((req) => (
           <div
             key={req.id}
-            className={`p-4 rounded-xl border ${isLight ? 'border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50' : 'border-white/10 bg-white/5'}`}
+            className={`p-4 rounded-xl border ${isLight ? 'border-slate-100 dark:border-slate-800 bg-page' : 'border-white/10 bg-white/5'}`}
           >
             <div className="flex items-start justify-between gap-3">
               <div>
@@ -52,7 +52,7 @@ export default function BrandingRequestsList({ requests, variant = 'light' }) {
               </span>
             </div>
             {req.notes && (
-              <p className="text-xs text-slate-500 mt-2 pt-2 border-t border-slate-200 dark:border-slate-700">
+              <p className="text-xs text-slate-500 mt-2 pt-2 border-t border-slate-200">
                 {req.notes}
               </p>
             )}

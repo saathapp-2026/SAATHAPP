@@ -34,7 +34,7 @@ export default function AttendanceCard({
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-left">
       
       {/* Clock In / Out Controller */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all flex flex-col justify-between h-56">
+      <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all flex flex-col justify-between h-56">
         <div>
           <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">Shift Punch Card</span>
           <h3 className="text-base sm:text-lg font-black text-slate-800 dark:text-white mt-0.5">Punch Attendance</h3>
@@ -53,7 +53,7 @@ export default function AttendanceCard({
             </div>
           ) : (
             <div className="space-y-1">
-              <span className="text-[9px] font-black bg-slate-100 dark:bg-slate-800 text-slate-450 px-2 py-0.5 rounded-full uppercase inline-block">
+              <span className="text-[9px] font-black bg-page text-slate-450 px-2 py-0.5 rounded-full uppercase inline-block">
                 Not Clocked In
               </span>
               <h2 className="text-3xl font-mono font-black text-slate-400 dark:text-slate-600 mt-1">
@@ -86,13 +86,13 @@ export default function AttendanceCard({
       </div>
 
       {/* Attendance Stats Cards */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all flex flex-col justify-between h-56">
+      <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all flex flex-col justify-between h-56">
         <div>
           <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">Overview</span>
           <h3 className="text-base sm:text-lg font-black text-slate-800 dark:text-white mt-0.5">Shift Metrics</h3>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 border-t border-slate-100 dark:border-slate-800/40 pt-4 mt-auto">
+        <div className="grid grid-cols-3 gap-4 border-t border-slate-100  pt-4 mt-auto">
           <div>
             <span className="text-[9px] font-black uppercase tracking-wider text-slate-400 block">Working Hrs</span>
             <p className="font-black text-slate-800 dark:text-slate-200 text-sm mt-0.5">{attendance.totalHours} hrs</p>
@@ -107,15 +107,15 @@ export default function AttendanceCard({
           </div>
         </div>
 
-        <div className="flex items-start gap-1.5 p-2 bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-xl text-[10px] text-slate-450 font-bold mt-4">
+        <div className="flex items-start gap-1.5 p-2 bg-page dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-xl text-[10px] text-slate-450 font-bold mt-4">
           <Info size={12} className="mt-0.5 flex-shrink-0" />
           <span>Clock in before 09:15 AM daily to avoid late marks penalty.</span>
         </div>
       </div>
 
       {/* Mini Attendance Calendar */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left flex flex-col justify-between h-56">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800/40">
+      <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left flex flex-col justify-between h-56">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 ">
           <h4 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Weekly Attendance Logs</h4>
           <span className="text-[9px] font-black text-slate-450 uppercase flex items-center gap-1">
             <Calendar size={10} />

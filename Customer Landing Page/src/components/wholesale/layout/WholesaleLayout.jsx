@@ -58,7 +58,7 @@ export default function WholesaleLayout({
               <Link
                 to="/"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-soft transition hover:bg-slate-50 dark:hover:bg-slate-800"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-surface px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-soft transition hover:bg-page"
               >
                 <ArrowLeft size={16} aria-hidden="true" />
                 Back to Home

@@ -198,7 +198,7 @@ export default function ServiceWarranty({ onBack, onLogout, isAuthenticated = fa
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800" style={{ scrollBehavior: 'smooth' }}>
+    <div className="min-h-screen bg-page text-slate-800" style={{ scrollBehavior: 'smooth' }}>
       <Header
         cartCount={0}
         onCartClick={() => {}}
@@ -350,7 +350,7 @@ export default function ServiceWarranty({ onBack, onLogout, isAuthenticated = fa
             <button
               type="button"
               onClick={() => (onBack ? onBack() : navigate('/', { replace: true }))}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:bg-slate-50 hover:shadow-md cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:bg-page hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
               Back

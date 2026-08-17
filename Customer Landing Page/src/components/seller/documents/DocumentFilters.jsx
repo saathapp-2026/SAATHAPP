@@ -24,7 +24,7 @@ export default function DocumentFilters({
   const types = category?.types || DOC_CATEGORIES.flatMap((c) => c.types);
 
   return (
-    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 space-y-3">
+    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 space-y-3">
       <div className="flex flex-col lg:flex-row gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" aria-hidden />
@@ -33,14 +33,14 @@ export default function DocumentFilters({
             value={search}
             onChange={(e) => onSearch(e.target.value)}
             placeholder="Search name, number, GSTIN, PAN, Aadhaar, category…"
-            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 pl-10 pr-3 py-2.5 text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full rounded-xl border border-slate-200 bg-white dark:bg-slate-950 pl-10 pr-3 py-2.5 text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             aria-label="Search documents"
           />
         </div>
         <button
           type="button"
           onClick={onReset}
-          className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
+          className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-page"
         >
           <X size={14} />
           Reset
@@ -55,7 +55,7 @@ export default function DocumentFilters({
           <select
             value={filters.categoryId}
             onChange={(e) => onChange({ ...filters, categoryId: e.target.value, typeId: 'all' })}
-            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-sm"
+            className="w-full rounded-xl border border-slate-200 bg-white dark:bg-slate-950 px-3 py-2 text-sm"
           >
             <option value="all">All categories</option>
             {DOC_CATEGORIES.map((c) => (
@@ -71,7 +71,7 @@ export default function DocumentFilters({
           <select
             value={filters.typeId}
             onChange={(e) => onChange({ ...filters, typeId: e.target.value })}
-            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-sm"
+            className="w-full rounded-xl border border-slate-200 bg-white dark:bg-slate-950 px-3 py-2 text-sm"
           >
             <option value="all">All types</option>
             {types.map((t) => (
@@ -87,7 +87,7 @@ export default function DocumentFilters({
           <select
             value={filters.status}
             onChange={(e) => onChange({ ...filters, status: e.target.value })}
-            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-sm"
+            className="w-full rounded-xl border border-slate-200 bg-white dark:bg-slate-950 px-3 py-2 text-sm"
           >
             {STATUS_OPTIONS.map((o) => (
               <option key={o.value} value={o.value}>
@@ -102,7 +102,7 @@ export default function DocumentFilters({
           <select
             value={filters.expiry}
             onChange={(e) => onChange({ ...filters, expiry: e.target.value })}
-            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-sm"
+            className="w-full rounded-xl border border-slate-200 bg-white dark:bg-slate-950 px-3 py-2 text-sm"
           >
             <option value="all">All expiry states</option>
             {Object.entries(EXPIRY_BADGES).map(([k, v]) => (
@@ -120,7 +120,7 @@ export default function DocumentFilters({
               type="date"
               value={filters.dateFrom}
               onChange={(e) => onChange({ ...filters, dateFrom: e.target.value })}
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-2 py-2 text-sm"
+              className="w-full rounded-xl border border-slate-200 bg-white dark:bg-slate-950 px-2 py-2 text-sm"
             />
           </label>
           <label className="text-xs text-slate-500 dark:text-slate-400 space-y-1">
@@ -129,7 +129,7 @@ export default function DocumentFilters({
               type="date"
               value={filters.dateTo}
               onChange={(e) => onChange({ ...filters, dateTo: e.target.value })}
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-2 py-2 text-sm"
+              className="w-full rounded-xl border border-slate-200 bg-white dark:bg-slate-950 px-2 py-2 text-sm"
             />
           </label>
         </div>

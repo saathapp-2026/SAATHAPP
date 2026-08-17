@@ -22,15 +22,15 @@ export default function NotificationPanel({
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft hover:shadow-premium transition-all text-left">
-      <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-100 dark:border-slate-800/40">
+    <div className="bg-surface border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft hover:shadow-premium transition-all text-left">
+      <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-100 ">
         <div className="flex items-center gap-2">
           <Bell size={18} className="text-slate-400" />
           <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Alert Logs</h3>
         </div>
         <button
           onClick={onClearAll}
-          className="text-[10px] font-black uppercase text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+          className="text-[10px] font-black uppercase text-slate-400 hover:text-slate-600 cursor-pointer"
         >
           Clear Logs
         </button>
@@ -48,11 +48,11 @@ export default function NotificationPanel({
               className={`p-4 rounded-xl border flex items-start justify-between gap-3 transition-colors ${
                 notif.read
                   ? 'bg-slate-50/50 dark:bg-slate-950/20 border-slate-150 dark:border-slate-850/80 opacity-75'
-                  : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-sm'
+                  : 'bg-surface border-slate-200 dark:border-slate-800 shadow-sm'
               }`}
             >
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-slate-50 dark:bg-slate-950 flex items-center justify-center flex-shrink-0 border border-slate-100 dark:border-slate-800">
+                <div className="w-8 h-8 rounded-lg bg-page dark:bg-slate-950 flex items-center justify-center flex-shrink-0 border border-slate-100 dark:border-slate-800">
                   {getIcon(notif.type)}
                 </div>
                 <div className="space-y-1 text-left">

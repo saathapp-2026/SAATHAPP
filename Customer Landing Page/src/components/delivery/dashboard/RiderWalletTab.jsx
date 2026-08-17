@@ -372,7 +372,7 @@ export default function RiderWalletTab() {
       {/* ========================================================================= */}
       {/* 1. HEADER SECTION (Recommended Layout: Date Filter, Refresh, Download, Export) */}
       {/* ========================================================================= */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-surface p-5 sm:p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
         <div>
           <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 font-extrabold text-xs uppercase tracking-wider mb-1">
             <Wallet size={16} /> Rider Financial Portal
@@ -387,7 +387,7 @@ export default function RiderWalletTab() {
 
         <div className="flex flex-wrap items-center gap-2">
           {/* 1. Date Range Dropdown Pill */}
-          <div className="relative w-full sm:w-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl px-3 py-2 text-xs font-extrabold text-slate-800 dark:text-slate-200 flex items-center justify-between gap-1.5 shadow-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-95 transition-all duration-150 touch-manipulation">
+          <div className="relative w-full sm:w-auto bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl px-3 py-2 text-xs font-extrabold text-slate-800 dark:text-slate-200 flex items-center justify-between gap-1.5 shadow-sm cursor-pointer hover:bg-page active:scale-95 transition-all duration-150 touch-manipulation">
             <div className="flex items-center gap-1.5">
               <Calendar size={14} className="text-slate-500 dark:text-slate-400 shrink-0" />
               <select
@@ -412,7 +412,7 @@ export default function RiderWalletTab() {
           <button
             type="button"
             onClick={handleRefresh}
-            className={`w-[calc(50%-4px)] sm:w-auto px-3 py-2 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-xs shadow-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none ${isRefreshing ? 'text-amber-500' : ''}`}
+            className={`w-[calc(50%-4px)] sm:w-auto px-3 py-2 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 hover:bg-page text-slate-800 dark:text-slate-200 font-extrabold text-xs shadow-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none ${isRefreshing ? 'text-amber-500' : ''}`}
             title="Refresh Payout Data"
           >
             <RefreshCw size={14} className={isRefreshing ? 'animate-spin text-amber-500' : ''} />
@@ -427,7 +427,7 @@ export default function RiderWalletTab() {
               if (el) el.scrollIntoView({ behavior: 'smooth' });
               addToast?.('Navigated to Recent Transactions', 'info');
             }}
-            className="w-[calc(50%-4px)] sm:w-auto px-3 py-2 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-xs shadow-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none"
+            className="w-[calc(50%-4px)] sm:w-auto px-3 py-2 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 hover:bg-page text-slate-800 dark:text-slate-200 font-extrabold text-xs shadow-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none"
           >
             <FileText size={14} className="text-slate-500 dark:text-slate-400" />
             <span>TXN History</span>
@@ -441,7 +441,7 @@ export default function RiderWalletTab() {
               if (el) el.scrollIntoView({ behavior: 'smooth' });
               addToast?.('Navigated to Bank Payout History', 'info');
             }}
-            className="w-[calc(50%-4px)] sm:w-auto px-3 py-2 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-xs shadow-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none"
+            className="w-[calc(50%-4px)] sm:w-auto px-3 py-2 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 hover:bg-page text-slate-800 dark:text-slate-200 font-extrabold text-xs shadow-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none"
           >
             <Landmark size={14} className="text-slate-500 dark:text-slate-400" />
             <span>Payout History</span>
@@ -452,25 +452,25 @@ export default function RiderWalletTab() {
             <button
               type="button"
               onClick={() => setIsExportDropdownOpen(!isExportDropdownOpen)}
-              className="w-full sm:w-auto px-3.5 py-2 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-xs shadow-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none"
+              className="w-full sm:w-auto px-3.5 py-2 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 hover:bg-page text-slate-800 dark:text-slate-200 font-extrabold text-xs shadow-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none"
             >
               <Share2 size={14} className="text-amber-500" /> Export <ChevronDown size={12} />
             </button>
             {isExportDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-30 py-1 text-xs font-bold text-slate-700 dark:text-slate-300 sa-rise">
-                <button type="button" onClick={() => generateAndDownloadStatement('pdf')} className="w-full text-left px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+              <div className="absolute right-0 mt-2 w-48 bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-30 py-1 text-xs font-bold text-slate-700 dark:text-slate-300 sa-rise">
+                <button type="button" onClick={() => generateAndDownloadStatement('pdf')} className="w-full text-left px-4 py-2.5 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <FileText size={14} className="text-rose-500" /> Export PDF Report
                 </button>
-                <button type="button" onClick={() => generateAndDownloadStatement('excel')} className="w-full text-left px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                <button type="button" onClick={() => generateAndDownloadStatement('excel')} className="w-full text-left px-4 py-2.5 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <FileSpreadsheet size={14} className="text-emerald-500" /> Export Excel (.xls)
                 </button>
-                <button type="button" onClick={() => generateAndDownloadStatement('csv')} className="w-full text-left px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                <button type="button" onClick={() => generateAndDownloadStatement('csv')} className="w-full text-left px-4 py-2.5 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <FileCode size={14} className="text-amber-500" /> Export CSV (.csv)
                 </button>
-                <button type="button" onClick={() => generateAndDownloadStatement('word')} className="w-full text-left px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                <button type="button" onClick={() => generateAndDownloadStatement('word')} className="w-full text-left px-4 py-2.5 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <FileText size={14} className="text-blue-500" /> Export Word (.doc)
                 </button>
-                <button type="button" onClick={() => window.print()} className="w-full text-left px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                <button type="button" onClick={() => window.print()} className="w-full text-left px-4 py-2.5 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <Printer size={14} className="text-sky-500" /> Print Summary
                 </button>
               </div>
@@ -487,17 +487,17 @@ export default function RiderWalletTab() {
               <Download size={14} /> Download Statement <ChevronDown size={12} />
             </button>
             {isStatementDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-52 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-30 py-1 text-xs font-bold text-slate-700 dark:text-slate-300 sa-rise">
-                <button type="button" onClick={() => generateAndDownloadStatement('pdf')} className="w-full text-left px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+              <div className="absolute right-0 mt-2 w-52 bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-30 py-1 text-xs font-bold text-slate-700 dark:text-slate-300 sa-rise">
+                <button type="button" onClick={() => generateAndDownloadStatement('pdf')} className="w-full text-left px-4 py-2.5 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <FileText size={14} className="text-rose-500" /> Download PDF Statement
                 </button>
-                <button type="button" onClick={() => generateAndDownloadStatement('excel')} className="w-full text-left px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                <button type="button" onClick={() => generateAndDownloadStatement('excel')} className="w-full text-left px-4 py-2.5 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <FileSpreadsheet size={14} className="text-emerald-500" /> Download Excel (.xls)
                 </button>
-                <button type="button" onClick={() => generateAndDownloadStatement('csv')} className="w-full text-left px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                <button type="button" onClick={() => generateAndDownloadStatement('csv')} className="w-full text-left px-4 py-2.5 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <FileCode size={14} className="text-amber-500" /> Download CSV (.csv)
                 </button>
-                <button type="button" onClick={() => window.print()} className="w-full text-left px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                <button type="button" onClick={() => window.print()} className="w-full text-left px-4 py-2.5 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <Printer size={14} className="text-sky-500" /> Print Statement
                 </button>
               </div>
@@ -515,7 +515,7 @@ export default function RiderWalletTab() {
         <button
           type="button"
           onClick={() => setActiveModal('withdraw')}
-          className="p-3.5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
+          className="p-3.5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
         >
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 flex items-center justify-center shrink-0 shadow-xs">
@@ -535,7 +535,7 @@ export default function RiderWalletTab() {
         <button
           type="button"
           onClick={() => setTxnFilter('Bonuses')}
-          className="p-3.5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
+          className="p-3.5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
         >
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-500 dark:text-amber-400 flex items-center justify-center shrink-0 shadow-xs">
@@ -555,7 +555,7 @@ export default function RiderWalletTab() {
         <button
           type="button"
           onClick={() => setTxnFilter('Earnings')}
-          className="p-3.5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
+          className="p-3.5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
         >
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 shadow-xs">
@@ -575,7 +575,7 @@ export default function RiderWalletTab() {
         <button
           type="button"
           onClick={() => setTxnFilter('Earnings')}
-          className="p-3.5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
+          className="p-3.5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
         >
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 shadow-xs">
@@ -595,7 +595,7 @@ export default function RiderWalletTab() {
         <button
           type="button"
           onClick={() => setTxnFilter('Bonuses')}
-          className="p-3.5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
+          className="p-3.5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
         >
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full bg-purple-100 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 shadow-xs">
@@ -615,7 +615,7 @@ export default function RiderWalletTab() {
         <button
           type="button"
           onClick={() => setTxnFilter('Tips')}
-          className="p-3.5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
+          className="p-3.5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
         >
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full bg-cyan-100 dark:bg-cyan-950/60 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0 shadow-xs">
@@ -635,7 +635,7 @@ export default function RiderWalletTab() {
         <button
           type="button"
           onClick={() => addToast?.('Referral link copied to clipboard!', 'success')}
-          className="p-3.5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
+          className="p-3.5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-left space-y-2 flex flex-col justify-between select-none"
         >
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full bg-pink-100 dark:bg-pink-950/60 text-pink-600 dark:text-pink-400 flex items-center justify-center shrink-0 shadow-xs">
@@ -717,7 +717,7 @@ export default function RiderWalletTab() {
           </div>
 
           {/* Destination Bank Account Card */}
-          <div className="lg:col-span-3 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xl space-y-5 flex flex-col justify-between">
+          <div className="lg:col-span-3 rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-xl space-y-5 flex flex-col justify-between">
             <div className="space-y-5">
               {/* Header: Title + Green Verified Badge + Option Menu Dots */}
               <div className="flex justify-between items-center">
@@ -734,17 +734,17 @@ export default function RiderWalletTab() {
                   <button
                     type="button"
                     onClick={() => setIsBankMenuOpen(!isBankMenuOpen)}
-                    className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation"
+                    className="p-1.5 rounded-full hover:bg-page text-slate-400 hover:text-slate-700 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation"
                     title="Bank Options"
                   >
                     <MoreVertical size={16} />
                   </button>
                   {isBankMenuOpen && (
-                    <div className="absolute right-0 mt-1 w-44 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-20 py-1 text-xs font-bold text-slate-700 dark:text-slate-300 sa-rise">
-                      <button type="button" onClick={() => { setActiveModal('addBank'); setIsBankMenuOpen(false); }} className="w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                    <div className="absolute right-0 mt-1 w-44 bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-20 py-1 text-xs font-bold text-slate-700 dark:text-slate-300 sa-rise">
+                      <button type="button" onClick={() => { setActiveModal('addBank'); setIsBankMenuOpen(false); }} className="w-full text-left px-4 py-2 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                         <Edit3 size={13} className="text-sky-500" /> Edit Bank Details
                       </button>
-                      <button type="button" onClick={() => { addToast?.('Re-verifying bank account via penny drop...', 'info'); setIsBankMenuOpen(false); }} className="w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                      <button type="button" onClick={() => { addToast?.('Re-verifying bank account via penny drop...', 'info'); setIsBankMenuOpen(false); }} className="w-full text-left px-4 py-2 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                         <CheckCircle2 size={13} className="text-emerald-500" /> Verify Account
                       </button>
                     </div>
@@ -822,7 +822,7 @@ export default function RiderWalletTab() {
               <button
                 type="button"
                 onClick={() => setActiveModal('addBank')}
-                className="w-full sm:w-1/3 py-2.5 px-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-blue-600 dark:text-blue-400 font-extrabold text-xs shadow-sm flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none"
+                className="w-full sm:w-1/3 py-2.5 px-4 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 hover:bg-page text-blue-600 dark:text-blue-400 font-extrabold text-xs shadow-sm flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none"
               >
                 <RotateCcw size={14} className="text-blue-600 dark:text-blue-400" /> Change Bank
               </button>
@@ -830,7 +830,7 @@ export default function RiderWalletTab() {
               <button
                 type="button"
                 onClick={() => setActiveModal('addBank')}
-                className="w-full sm:w-2/3 py-2.5 px-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-white font-extrabold text-xs shadow-sm flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none"
+                className="w-full sm:w-2/3 py-2.5 px-4 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 hover:bg-page text-slate-900 dark:text-white font-extrabold text-xs shadow-sm flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none"
               >
                 <Plus size={14} className="text-slate-700 dark:text-slate-300" /> Add New Bank
               </button>
@@ -839,7 +839,7 @@ export default function RiderWalletTab() {
         </div>
 
         {/* Row 2: Withdraw Quick Actions (Bank, UPI, Schedule Payout) */}
-        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 border-l-4 border-l-emerald-500 shadow-xl p-5 space-y-4">
+        <div className="bg-surface rounded-3xl border border-slate-200 dark:border-slate-800 border-l-4 border-l-emerald-500 shadow-xl p-5 space-y-4">
           <h3 className="text-sm font-black text-slate-900 dark:text-white">
             Withdraw Quick Actions
           </h3>
@@ -906,7 +906,7 @@ export default function RiderWalletTab() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
         {/* 1. Earnings Breakdown Donut Card */}
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
+        <div className="bg-surface p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="text-sm font-black text-slate-900 dark:text-white">
               Earnings Breakdown (This Month)
@@ -915,7 +915,7 @@ export default function RiderWalletTab() {
               <button
                 type="button"
                 onClick={() => generateAndDownloadStatement('pdf')}
-                className="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 active:scale-95 transition-all duration-150 cursor-pointer touch-manipulation"
+                className="px-2.5 py-1 rounded-xl bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-300 active:scale-95 transition-all duration-150 cursor-pointer touch-manipulation"
                 title="Download Breakdown PDF"
               >
                 Download
@@ -923,7 +923,7 @@ export default function RiderWalletTab() {
               <button
                 type="button"
                 onClick={() => window.print()}
-                className="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 active:scale-95 transition-all duration-150 cursor-pointer touch-manipulation"
+                className="px-2.5 py-1 rounded-xl bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-300 active:scale-95 transition-all duration-150 cursor-pointer touch-manipulation"
                 title="Print Breakdown"
               >
                 Print
@@ -1016,7 +1016,7 @@ export default function RiderWalletTab() {
         </div>
 
         {/* 2. Earnings Trend Smooth Area Line Chart Card */}
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-3">
+        <div className="bg-surface p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-3">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2 flex-wrap gap-2">
             <h3 className="text-sm font-black text-slate-900 dark:text-white">
               Earnings Trend
@@ -1024,7 +1024,7 @@ export default function RiderWalletTab() {
 
             <div className="flex items-center gap-2">
               {/* Trend Filter Pills */}
-              <div className="flex items-center gap-1 text-[10px] font-extrabold bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+              <div className="flex items-center gap-1 text-[10px] font-extrabold bg-page p-1 rounded-xl">
                 {['Income', 'Bonus', 'Tips', 'Payout'].map((t) => (
                   <button
                     key={t}
@@ -1044,7 +1044,7 @@ export default function RiderWalletTab() {
                 <select
                   value={trendPeriod}
                   onChange={(e) => setTrendPeriod(e.target.value)}
-                  className="appearance-none bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-extrabold px-3 py-1 pr-6 rounded-xl cursor-pointer focus:outline-none"
+                  className="appearance-none bg-page border border-slate-200 text-slate-800 dark:text-slate-200 text-xs font-extrabold px-3 py-1 pr-6 rounded-xl cursor-pointer focus:outline-none"
                 >
                   <option value="This Month">This Month</option>
                   <option value="This Week">This Week</option>
@@ -1150,7 +1150,7 @@ export default function RiderWalletTab() {
       <div className="space-y-6">
 
         {/* 1. Transaction History Table */}
-        <div id="recent-transactions-section" className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden space-y-4 p-5 scroll-mt-24">
+        <div id="recent-transactions-section" className="bg-surface rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden space-y-4 p-5 scroll-mt-24">
 
           {/* Table Header & Top Controls */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
@@ -1172,7 +1172,7 @@ export default function RiderWalletTab() {
                     }}
                     className={`px-3 py-1.5 rounded-xl cursor-pointer active:scale-95 transition-all duration-150 shrink-0 touch-manipulation select-none ${txnFilter === cat
                       ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                      : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
                       }`}
                   >
                     {cat}
@@ -1187,7 +1187,7 @@ export default function RiderWalletTab() {
                   value={txnSearchQuery}
                   onChange={(e) => setTxnSearchQuery(e.target.value)}
                   placeholder="Search TXN ID..."
-                  className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs font-bold text-slate-900 dark:text-white focus:outline-none"
+                  className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 text-xs font-bold text-slate-900 dark:text-white focus:outline-none"
                 />
               </div>
             </div>
@@ -1196,7 +1196,7 @@ export default function RiderWalletTab() {
           {/* Transactions Table */}
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs whitespace-nowrap">
-              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-400 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-800">
+              <thead className="bg-page dark:bg-slate-950 text-slate-400 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="p-3.5">TXN ID</th>
                   <th className="p-3.5">Date &amp; Time</th>
@@ -1212,7 +1212,7 @@ export default function RiderWalletTab() {
 
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-semibold text-slate-700 dark:text-slate-300">
                 {filteredTransactions.map((txn) => (
-                  <tr key={txn.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                  <tr key={txn.id} className="hover:bg-page transition">
                     <td className="p-3.5 font-mono font-black text-slate-900 dark:text-white">{txn.id}</td>
                     <td className="p-3.5 font-mono text-[11px] text-slate-500">
                       {txn.date}
@@ -1220,7 +1220,7 @@ export default function RiderWalletTab() {
                     </td>
                     <td className="p-3.5 font-bold text-slate-900 dark:text-white">{txn.description}</td>
                     <td className="p-3.5">
-                      <span className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded text-[10px] font-extrabold">
+                      <span className="bg-page text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded text-[10px] font-extrabold">
                         {txn.category}
                       </span>
                     </td>
@@ -1243,7 +1243,7 @@ export default function RiderWalletTab() {
                         <button
                           type="button"
                           onClick={() => { setSelectedTxn(txn); setActiveModal('txnDetails'); }}
-                          className="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-extrabold text-[11px] cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation"
+                          className="px-2.5 py-1 rounded-xl bg-page hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-extrabold text-[11px] cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation"
                         >
                           Details
                         </button>
@@ -1266,7 +1266,7 @@ export default function RiderWalletTab() {
         {/* 2. Bank Payout History & Payout Summary Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Payout Summary Card (1 Col) */}
-          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-4 flex flex-col justify-between">
+          <div className="bg-surface rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-4 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2">
                 <h3 className="text-sm font-black text-slate-900 dark:text-white tracking-tight">
@@ -1318,7 +1318,7 @@ export default function RiderWalletTab() {
           </div>
 
           {/* Payout History Table (2 Cols) */}
-          <div id="payout-history-section" className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden p-5 space-y-3 scroll-mt-24">
+          <div id="payout-history-section" className="lg:col-span-2 bg-surface rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden p-5 space-y-3 scroll-mt-24">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2">
               <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <Landmark size={16} className="text-amber-500" /> Bank Payout History
@@ -1328,7 +1328,7 @@ export default function RiderWalletTab() {
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs whitespace-nowrap">
-                <thead className="bg-slate-50 dark:bg-slate-950 text-slate-400 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-800">
+                <thead className="bg-page dark:bg-slate-950 text-slate-400 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-800">
                   <tr>
                     <th className="p-3">Payout ID</th>
                     <th className="p-3">Amount (₹)</th>
@@ -1340,7 +1340,7 @@ export default function RiderWalletTab() {
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-semibold text-slate-700 dark:text-slate-300">
                   {payoutHistory.map((p) => (
-                    <tr key={p.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                    <tr key={p.id} className="hover:bg-page transition">
                       <td className="p-3 font-mono font-black text-slate-900 dark:text-white">{p.id}</td>
                       <td className="p-3 font-mono font-black text-amber-500 text-sm">₹{p.amount.toLocaleString()}</td>
                       <td className="p-3 font-mono text-slate-500">{p.date}</td>
@@ -1368,7 +1368,7 @@ export default function RiderWalletTab() {
         </div>
 
         {/* 3. Tax Reports / Tax Documents Card */}
-        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-4">
+        <div className="bg-surface rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-4">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
               <Landmark size={16} className="text-amber-500" /> Tax Reports &amp; Statements
@@ -1383,7 +1383,7 @@ export default function RiderWalletTab() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-semibold">
-            <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
+            <div className="flex items-center justify-between p-3 rounded-2xl bg-page border border-slate-200/60">
               <span className="flex items-center gap-2 text-slate-800 dark:text-slate-200 font-bold">
                 <FileText size={16} className="text-slate-400 shrink-0" /> Annual Tax Summary (FY 2025-26)
               </span>
@@ -1396,7 +1396,7 @@ export default function RiderWalletTab() {
               </button>
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
+            <div className="flex items-center justify-between p-3 rounded-2xl bg-page border border-slate-200/60">
               <span className="flex items-center gap-2 text-slate-800 dark:text-slate-200 font-bold">
                 <FileText size={16} className="text-slate-400 shrink-0" /> TDS Certificate (Form 16A)
               </span>
@@ -1409,7 +1409,7 @@ export default function RiderWalletTab() {
               </button>
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
+            <div className="flex items-center justify-between p-3 rounded-2xl bg-page border border-slate-200/60">
               <span className="flex items-center gap-2 text-slate-800 dark:text-slate-200 font-bold">
                 <FileText size={16} className="text-slate-400 shrink-0" /> GST Summary Report
               </span>
@@ -1486,7 +1486,7 @@ export default function RiderWalletTab() {
         {/* 2. Targets Section: Weekly Target Incentives & Customer Tips Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Incentives Card (Targets) */}
-          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-3">
+          <div className="bg-surface rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-3">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2">
               <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <Sparkles size={16} className="text-purple-500" /> Weekly Target Incentives
@@ -1496,15 +1496,15 @@ export default function RiderWalletTab() {
               </span>
             </div>
             <div className="grid grid-cols-3 gap-2 text-xs font-bold text-center">
-              <div className="p-2 rounded-2xl bg-slate-50 dark:bg-slate-800">
+              <div className="p-2 rounded-2xl bg-page">
                 <span className="text-[10px] text-slate-400 block">Completed</span>
                 <strong className="text-base text-emerald-600 dark:text-emerald-400 font-mono">16</strong>
               </div>
-              <div className="p-2 rounded-2xl bg-slate-50 dark:bg-slate-800">
+              <div className="p-2 rounded-2xl bg-page">
                 <span className="text-[10px] text-slate-400 block">Remaining</span>
                 <strong className="text-base text-amber-500 font-mono">4</strong>
               </div>
-              <div className="p-2 rounded-2xl bg-slate-50 dark:bg-slate-800">
+              <div className="p-2 rounded-2xl bg-page">
                 <span className="text-[10px] text-slate-400 block">Bonus Unlock</span>
                 <strong className="text-base text-purple-600 dark:text-purple-400 font-mono">₹500</strong>
               </div>
@@ -1515,14 +1515,14 @@ export default function RiderWalletTab() {
                 <span>Progress (80%)</span>
                 <span>4 orders to go!</span>
               </div>
-              <div className="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+              <div className="w-full h-2 rounded-full bg-page overflow-hidden">
                 <div className="h-full bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full w-[80%]" />
               </div>
             </div>
           </div>
 
           {/* Customer Tips Summary Card */}
-          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-3">
+          <div className="bg-surface rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-3">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2">
               <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <DollarSign size={16} className="text-cyan-500" /> Customer Tips Summary
@@ -1532,15 +1532,15 @@ export default function RiderWalletTab() {
               </span>
             </div>
             <div className="grid grid-cols-3 gap-2 text-xs font-bold text-center">
-              <div className="p-2 rounded-2xl bg-slate-50 dark:bg-slate-800">
+              <div className="p-2 rounded-2xl bg-page">
                 <span className="text-[10px] text-slate-400 block">Today's Tips</span>
                 <strong className="text-base text-slate-900 dark:text-white font-mono">₹120</strong>
               </div>
-              <div className="p-2 rounded-2xl bg-slate-50 dark:bg-slate-800">
+              <div className="p-2 rounded-2xl bg-page">
                 <span className="text-[10px] text-slate-400 block">Monthly Tips</span>
                 <strong className="text-base text-cyan-600 dark:text-cyan-400 font-mono">₹2,350</strong>
               </div>
-              <div className="p-2 rounded-2xl bg-slate-50 dark:bg-slate-800">
+              <div className="p-2 rounded-2xl bg-page">
                 <span className="text-[10px] text-slate-400 block">Highest Single Tip</span>
                 <strong className="text-base text-emerald-600 dark:text-emerald-400 font-mono">₹300</strong>
               </div>
@@ -1609,7 +1609,7 @@ export default function RiderWalletTab() {
         </div>
 
         {/* 4. Need Help with Bank Payouts? Footer Section */}
-        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-5 space-y-3 shadow-xl">
+        <div className="bg-surface rounded-3xl border border-slate-200 dark:border-slate-800 p-5 space-y-3 shadow-xl">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-100 dark:border-slate-800 pb-2">
             <h3 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
               <HelpCircle size={16} className="text-amber-500" /> Need Help with Bank Payouts?
@@ -1685,12 +1685,12 @@ export default function RiderWalletTab() {
       {/* WITHDRAW POPUP MODAL (Page 40 PDF Specifications) */}
       {activeModal === 'withdraw' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <Zap size={18} className="text-amber-500" /> Instant Bank Withdrawal
               </h3>
-              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
+              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 font-bold p-1.5 rounded-xl hover:bg-page cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
             </div>
 
             <form onSubmit={handleConfirmWithdraw} className="space-y-3">
@@ -1708,7 +1708,7 @@ export default function RiderWalletTab() {
                     onClick={() => setWithdrawAmount(amt)}
                     className={`py-2 rounded-xl font-mono font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation ${withdrawAmount === amt
                       ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
+                      : 'bg-page text-slate-700 dark:text-slate-300 hover:bg-slate-200'
                       }`}
                   >
                     {amt === '2450' ? 'Max' : `₹${amt}`}
@@ -1724,7 +1724,7 @@ export default function RiderWalletTab() {
                   onChange={(e) => setWithdrawAmount(e.target.value)}
                   min="100"
                   max="50000"
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm font-mono font-black text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm font-mono font-black text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
                 />
               </div>
 
@@ -1747,12 +1747,12 @@ export default function RiderWalletTab() {
                   value={withdrawOtp}
                   onChange={(e) => setWithdrawOtp(e.target.value)}
                   placeholder="4820"
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-center text-sm font-mono font-black tracking-widest text-slate-900 dark:text-white"
+                  className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-center text-sm font-mono font-black tracking-widest text-slate-900 dark:text-white"
                 />
               </div>
 
               <div className="flex justify-end gap-2 pt-2">
-                <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 font-extrabold cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation">
+                <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2.5 rounded-xl bg-page font-extrabold cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation">
                   Cancel
                 </button>
                 <button
@@ -1771,12 +1771,12 @@ export default function RiderWalletTab() {
       {/* ADD / EDIT BANK POPUP MODAL (Page 41 PDF) */}
       {activeModal === 'addBank' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <Landmark size={18} className="text-amber-500" /> Destination Bank Account Details
               </h3>
-              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
+              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 font-bold p-1.5 rounded-xl hover:bg-page cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
             </div>
 
             <form onSubmit={handleSaveBank} className="space-y-3">
@@ -1786,7 +1786,7 @@ export default function RiderWalletTab() {
                   type="text"
                   value={bankDetails.accountHolderName}
                   onChange={(e) => setBankDetails({ ...bankDetails, accountHolderName: e.target.value })}
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white"
+                  className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white"
                 />
               </div>
 
@@ -1796,7 +1796,7 @@ export default function RiderWalletTab() {
                   type="text"
                   value={bankDetails.bankName}
                   onChange={(e) => setBankDetails({ ...bankDetails, bankName: e.target.value })}
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white"
+                  className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white"
                 />
               </div>
 
@@ -1807,7 +1807,7 @@ export default function RiderWalletTab() {
                     type="text"
                     value={bankDetails.accountNumber}
                     onChange={(e) => setBankDetails({ ...bankDetails, accountNumber: e.target.value })}
-                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white"
+                    className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white"
                   />
                 </div>
                 <div>
@@ -1816,7 +1816,7 @@ export default function RiderWalletTab() {
                     type="text"
                     value={bankDetails.ifscCode}
                     onChange={(e) => setBankDetails({ ...bankDetails, ifscCode: e.target.value })}
-                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white"
+                    className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white"
                   />
                 </div>
               </div>
@@ -1827,12 +1827,12 @@ export default function RiderWalletTab() {
                   type="text"
                   value={bankDetails.upiId}
                   onChange={(e) => setBankDetails({ ...bankDetails, upiId: e.target.value })}
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white"
+                  className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white"
                 />
               </div>
 
               <div className="flex justify-end gap-2 pt-2">
-                <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 font-extrabold cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation">
+                <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2.5 rounded-xl bg-page font-extrabold cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation">
                   Cancel
                 </button>
                 <button type="submit" className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black cursor-pointer shadow active:scale-95 transition-all duration-150 touch-manipulation">
@@ -1847,16 +1847,16 @@ export default function RiderWalletTab() {
       {/* SCHEDULE PAYOUT POPUP MODAL */}
       {activeModal === 'schedulePayout' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <Clock size={18} className="text-amber-500" /> Schedule Auto Payout Frequency
               </h3>
-              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
+              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 font-bold p-1.5 rounded-xl hover:bg-page cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
             </div>
 
             <div className="space-y-3">
-              <div className="flex justify-between items-center p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+              <div className="flex justify-between items-center p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                 <span className="font-bold text-slate-800 dark:text-slate-200">Auto Payout Mode</span>
                 <button
                   type="button"
@@ -1873,7 +1873,7 @@ export default function RiderWalletTab() {
                 <select
                   value={payoutFrequency}
                   onChange={(e) => setPayoutFrequency(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white"
+                  className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white"
                 >
                   <option value="Daily Settlement">Daily Settlement (Next Morning 06:00 AM)</option>
                   <option value="Weekly Settlement">Weekly Settlement (Every Monday)</option>
@@ -1883,7 +1883,7 @@ export default function RiderWalletTab() {
             </div>
 
             <div className="flex justify-end gap-2 pt-2">
-              <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 font-extrabold cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation">
+              <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2.5 rounded-xl bg-page font-extrabold cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation">
                 Cancel
               </button>
               <button
@@ -1904,12 +1904,12 @@ export default function RiderWalletTab() {
       {/* TXN DETAILS MODAL */}
       {selectedTxn && activeModal === 'txnDetails' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <FileText size={18} className="text-amber-500" /> Transaction Details: {selectedTxn.id}
               </h3>
-              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
+              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 font-bold p-1.5 rounded-xl hover:bg-page cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
             </div>
 
             <div className="space-y-2 text-slate-700 dark:text-slate-300 font-mono text-[11px]">
@@ -1941,12 +1941,12 @@ export default function RiderWalletTab() {
       {/* 1. RAISE TICKET MODAL */}
       {activeModal === 'raiseTicket' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <FileText size={18} className="text-amber-500" /> Raise Support Ticket
               </h3>
-              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
+              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 font-bold p-1.5 rounded-xl hover:bg-page cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
             </div>
 
             <form onSubmit={(e) => {
@@ -1959,7 +1959,7 @@ export default function RiderWalletTab() {
                 <select
                   value={ticketForm.category}
                   onChange={(e) => setTicketForm({ ...ticketForm, category: e.target.value })}
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
                 >
                   <option value="Bank Payout Delay">Bank Payout Delay / Not Credited</option>
                   <option value="Failed Withdrawal Refund">Failed Withdrawal Refund Issue</option>
@@ -1976,7 +1976,7 @@ export default function RiderWalletTab() {
                   value={ticketForm.txnId}
                   onChange={(e) => setTicketForm({ ...ticketForm, txnId: e.target.value })}
                   placeholder="e.g. TXN-90838"
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white"
+                  className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white"
                 />
               </div>
 
@@ -1987,12 +1987,12 @@ export default function RiderWalletTab() {
                   value={ticketForm.description}
                   onChange={(e) => setTicketForm({ ...ticketForm, description: e.target.value })}
                   placeholder="Describe your payout issue or question in detail..."
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
                 />
               </div>
 
               <div className="flex justify-end gap-2 pt-2">
-                <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 font-extrabold cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation">
+                <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2.5 rounded-xl bg-page font-extrabold cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation">
                   Cancel
                 </button>
                 <button type="submit" className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black cursor-pointer shadow active:scale-95 transition-all duration-150 touch-manipulation">
@@ -2007,12 +2007,12 @@ export default function RiderWalletTab() {
       {/* 2. CALL SUPPORT MODAL */}
       {activeModal === 'callSupport' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <HelpCircle size={18} className="text-emerald-500" /> 24×7 Rider Support Helpline
               </h3>
-              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
+              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 font-bold p-1.5 rounded-xl hover:bg-page cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
             </div>
 
             <div className="space-y-3">
@@ -2030,7 +2030,7 @@ export default function RiderWalletTab() {
                 </a>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center justify-between">
+              <div className="p-3.5 rounded-2xl bg-page border border-slate-200 flex items-center justify-between">
                 <div>
                   <span className="text-[10px] font-bold text-slate-400 uppercase block">Request Immediate Callback</span>
                   <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Rider Payout Specialist Desk</span>
@@ -2065,7 +2065,7 @@ export default function RiderWalletTab() {
       {/* 3. CHAT SUPPORT MODAL */}
       {activeModal === 'chatSupport' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise flex flex-col h-[520px]">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise flex flex-col h-[520px]">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3 shrink-0">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full bg-sky-500/20 text-sky-500 flex items-center justify-center font-black">
@@ -2078,7 +2078,7 @@ export default function RiderWalletTab() {
                   </span>
                 </div>
               </div>
-              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
+              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 font-bold p-1.5 rounded-xl hover:bg-page cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
             </div>
 
             {/* Chat Messages Body */}
@@ -2087,7 +2087,7 @@ export default function RiderWalletTab() {
                 <div key={idx} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div className={`max-w-[85%] p-3 rounded-2xl text-xs font-semibold leading-relaxed ${msg.sender === 'user'
                     ? 'bg-amber-500 text-slate-950 rounded-br-none font-bold'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-none'
+                    : 'bg-page text-slate-800 dark:text-slate-200 rounded-bl-none'
                     }`}>
                     {msg.text}
                   </div>
@@ -2116,7 +2116,7 @@ export default function RiderWalletTab() {
                       }]);
                     }, 600);
                   }}
-                  className="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 shrink-0 cursor-pointer active:scale-95 transition"
+                  className="px-2.5 py-1 rounded-xl bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-300 shrink-0 cursor-pointer active:scale-95 transition"
                 >
                   {txt}
                 </button>
@@ -2143,7 +2143,7 @@ export default function RiderWalletTab() {
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 placeholder="Type your message..."
-                className="flex-1 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="flex-1 bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
               <button type="submit" className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black cursor-pointer active:scale-95 transition">
                 Send
@@ -2156,12 +2156,12 @@ export default function RiderWalletTab() {
       {/* 4. FAQS MODAL */}
       {activeModal === 'faqs' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise max-h-[550px] flex flex-col">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise max-h-[550px] flex flex-col">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3 shrink-0">
               <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <Info size={18} className="text-purple-500" /> Payout &amp; Wallet FAQs
               </h3>
-              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
+              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 font-bold p-1.5 rounded-xl hover:bg-page cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
             </div>
 
             <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
@@ -2192,11 +2192,11 @@ export default function RiderWalletTab() {
                   a: 'No! 100% of customer tips are retained by the rider with zero platform commission or deductions.'
                 }
               ].map((faq) => (
-                <div key={faq.id} className="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-slate-50/50 dark:bg-slate-800/40">
+                <div key={faq.id} className="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-slate-50/50">
                   <button
                     type="button"
                     onClick={() => setExpandedFaq(expandedFaq === faq.id ? null : faq.id)}
-                    className="w-full p-3 text-left font-black text-slate-900 dark:text-white flex justify-between items-center gap-2 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                    className="w-full p-3 text-left font-black text-slate-900 dark:text-white flex justify-between items-center gap-2 cursor-pointer hover:bg-page transition"
                   >
                     <span>{faq.q}</span>
                     <ChevronDown size={14} className={`shrink-0 transition-transform ${expandedFaq === faq.id ? 'rotate-180 text-amber-500' : 'text-slate-400'}`} />
@@ -2222,12 +2222,12 @@ export default function RiderWalletTab() {
       {/* 5. PAYMENT POLICIES MODAL */}
       {activeModal === 'paymentPolicies' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise max-h-[550px] flex flex-col">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise max-h-[550px] flex flex-col">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3 shrink-0">
               <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <ShieldCheck size={18} className="text-rose-500" /> Payment &amp; Settlement Policies
               </h3>
-              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
+              <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-600 font-bold p-1.5 rounded-xl hover:bg-page cursor-pointer active:scale-95 transition-all duration-150"><X size={18} /></button>
             </div>
 
             <div className="flex-1 overflow-y-auto space-y-3 pr-1 text-slate-700 dark:text-slate-300 font-medium text-[11px] leading-relaxed">
@@ -2236,17 +2236,17 @@ export default function RiderWalletTab() {
                 <p>All payouts are settled directly into verified bank accounts using Reserve Bank of India (RBI) approved IMPS rails with 256-Bit SSL encryption.</p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 space-y-1">
+              <div className="p-3 rounded-2xl bg-page space-y-1">
                 <h4 className="font-black text-slate-900 dark:text-white text-xs">2. Daily Auto-Payout Cutoff</h4>
                 <p>Daily auto-settlements are triggered automatically every morning at 06:00 AM for all balances exceeding ₹100.</p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 space-y-1">
+              <div className="p-3 rounded-2xl bg-page space-y-1">
                 <h4 className="font-black text-slate-900 dark:text-white text-xs">3. TDS &amp; Tax Deductions</h4>
                 <p>Tax Deducted at Source (TDS) of 1% is applicable as per Section 194O of the Income Tax Act for annual payouts exceeding ₹5,00,000. Annual Form 16A statements are downloadable under Tax Reports.</p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 space-y-1">
+              <div className="p-3 rounded-2xl bg-page space-y-1">
                 <h4 className="font-black text-slate-900 dark:text-white text-xs">4. Fraud &amp; Security Shield</h4>
                 <p>Any suspicious or multi-device login attempt locks withdrawal actions for 24 hours to prevent unauthorized transfers.</p>
               </div>

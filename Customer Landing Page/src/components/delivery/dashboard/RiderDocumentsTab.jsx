@@ -27,7 +27,7 @@ export default function RiderDocumentsTab() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {documents.map((doc, idx) => (
-          <div key={idx} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3">
+          <div key={idx} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-3">
             <div className="flex items-center justify-between">
               <div className="h-10 w-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
                 <ShieldCheck size={20} />

@@ -49,7 +49,7 @@ export default function Step13_VerificationStatus({ onGoToDashboard }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-4xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
@@ -100,7 +100,7 @@ export default function Step13_VerificationStatus({ onGoToDashboard }) {
                   stage.id === 'Approved' && isApproved
                     ? 'border-emerald-500 bg-emerald-500/10 dark:bg-emerald-950/30'
                     : isCompleted
-                    ? 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950'
+                    ? 'border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950'
                     : 'border-slate-200/60 dark:border-slate-800/60 opacity-60'
                 }`}
               >
@@ -110,7 +110,7 @@ export default function Step13_VerificationStatus({ onGoToDashboard }) {
                       ? 'bg-emerald-500 text-slate-950 font-black'
                       : isCurrent
                       ? 'bg-amber-500 text-slate-950 animate-pulse font-black'
-                      : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
+                      : 'bg-slate-200 text-slate-500'
                   }`}
                 >
                   {isCompleted ? <CheckCircle2 size={20} /> : idx + 1}
@@ -123,7 +123,7 @@ export default function Step13_VerificationStatus({ onGoToDashboard }) {
                       className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
                         isCompleted
                           ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400'
-                          : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
+                          : 'bg-slate-200 text-slate-500'
                       }`}
                     >
                       {isCompleted ? 'Verified' : 'Pending'}
@@ -172,7 +172,7 @@ export default function Step13_VerificationStatus({ onGoToDashboard }) {
             <button
               type="button"
               onClick={onGoToDashboard}
-              className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-white text-slate-950 hover:bg-slate-100 px-8 py-3.5 text-sm font-extrabold shadow-2xl transition hover:scale-105"
+              className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-white text-slate-950 hover:bg-page px-8 py-3.5 text-sm font-extrabold shadow-2xl transition hover:scale-105"
             >
               <LayoutDashboard size={18} />
               Launch Wholesale Dashboard

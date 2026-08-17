@@ -43,7 +43,7 @@ export default function AdFactorsSection() {
         <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight shrink-0">
           Factors That Affect Pricing
         </h2>
-        <div className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
+        <div className="h-px flex-1 bg-slate-200" />
       </div>
 
       <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 sm:gap-4">

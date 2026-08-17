@@ -15,7 +15,7 @@ import { getOrderAnalytics, exportOrders } from '../../../services/seller/seller
 
 function Metric({ label, value, suffix = '' }) {
   return (
-    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
+    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-4">
       <p className="text-xs text-slate-500 mb-1">{label}</p>
       <p className="text-xl font-bold tabular-nums">
         {value}
@@ -60,7 +60,7 @@ export default function OrderAnalytics({ filters }) {
   if (loading) {
     return (
       <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 animate-pulse">
-        <div className="h-40 bg-slate-100 dark:bg-slate-800 rounded-xl" />
+        <div className="h-40 bg-page rounded-xl" />
       </div>
     );
   }
@@ -70,7 +70,7 @@ export default function OrderAnalytics({ filters }) {
   const chartData = range === 'monthly' ? data.monthly : data.daily;
 
   return (
-    <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 md:p-6 space-y-4" aria-label="Orders analytics">
+    <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 md:p-6 space-y-4" aria-label="Orders analytics">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <h2 className="font-bold text-lg">Analytics</h2>
         <div className="flex flex-wrap gap-2">
@@ -80,16 +80,16 @@ export default function OrderAnalytics({ filters }) {
               type="button"
               onClick={() => setRange(r)}
               className={`px-3 py-1 rounded-lg text-xs font-medium capitalize ${
-                range === r ? 'bg-emerald-500 text-white' : 'border border-slate-200 dark:border-slate-700'
+                range === r ? 'bg-emerald-500 text-white' : 'border border-slate-200'
               }`}
             >
               {r}
             </button>
           ))}
-          <button type="button" onClick={() => handleExport('csv')} className="inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs border border-slate-200 dark:border-slate-700">
+          <button type="button" onClick={() => handleExport('csv')} className="inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs border border-slate-200">
             <Download size={12} /> CSV
           </button>
-          <button type="button" onClick={() => handleExport('excel')} className="inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs border border-slate-200 dark:border-slate-700">
+          <button type="button" onClick={() => handleExport('excel')} className="inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs border border-slate-200">
             <Download size={12} /> Excel
           </button>
         </div>

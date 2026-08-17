@@ -40,7 +40,7 @@ export default function BusinessOverview({ data, loading, dateFrom, dateTo, onDa
 
   if (loading) {
     return (
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 animate-pulse h-44" aria-busy="true" />
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-5 animate-pulse h-44" aria-busy="true" />
     );
   }
 
@@ -49,13 +49,13 @@ export default function BusinessOverview({ data, loading, dateFrom, dateTo, onDa
   return (
     <section
       aria-label="Business overview"
-      className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm"
+      className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm"
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
         <h2 className="text-base font-bold text-slate-900 dark:text-slate-50">
           Business Overview (This Month)
         </h2>
-        <label className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 px-3 py-2 text-xs font-medium text-slate-600 dark:text-slate-300">
+        <label className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-page px-3 py-2 text-xs font-medium text-slate-600 dark:text-slate-300">
           <Calendar size={14} className="text-slate-400 shrink-0" />
           <span className="sr-only">Date range</span>
           <input

@@ -7,7 +7,7 @@ import { getStoredSellerAuth } from '../../services/sellerAuthService';
 const inputClass = (isLight) =>
   `w-full px-4 py-2.5 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 ${
     isLight
-      ? 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white'
+      ? 'bg-white border-slate-200 text-slate-900 dark:text-white'
       : 'bg-white/5 border-white/10 text-white placeholder-slate-500'
   }`;
 
@@ -45,7 +45,7 @@ export default function BrandingQuoteForm({ product, onClose, variant = 'dark', 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         className={`rounded-2xl border p-8 text-center ${
-          isLight ? 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800' : 'bg-white/5 border-white/10'
+          isLight ? 'bg-surface border-slate-200 dark:border-slate-800' : 'bg-white/5 border-white/10'
         }`}
       >
         <CheckCircle2 size={48} className="text-emerald-500 mx-auto mb-4" />
@@ -65,7 +65,7 @@ export default function BrandingQuoteForm({ product, onClose, variant = 'dark', 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-2xl border p-6 ${
-        isLight ? 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800' : 'bg-white/5 border-white/10'
+        isLight ? 'bg-surface border-slate-200 dark:border-slate-800' : 'bg-white/5 border-white/10'
       }`}
     >
       <div className="flex items-center justify-between mb-4">
@@ -76,7 +76,7 @@ export default function BrandingQuoteForm({ product, onClose, variant = 'dark', 
       </div>
 
       {product && (
-        <div className={`mb-4 p-3 rounded-xl flex items-center gap-3 ${isLight ? 'bg-slate-50 dark:bg-slate-800' : 'bg-white/5'}`}>
+        <div className={`mb-4 p-3 rounded-xl flex items-center gap-3 ${isLight ? 'bg-page' : 'bg-white/5'}`}>
           <span className="text-2xl">{product.icon}</span>
           <span className="font-medium text-sm">{product.name}</span>
         </div>

@@ -99,13 +99,13 @@ export default function ExportReportModal({
 
   return (
     <SellerOverlay open={open} onClose={onClose} labelledBy="export-report-title" zIndex={SELLER_Z.modal}>
-      <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl">
-        <div className="sticky top-0 z-[1] flex items-center justify-between gap-3 px-5 py-4 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur">
+      <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl">
+        <div className="sticky top-0 z-[1] flex items-center justify-between gap-3 px-5 py-4 border-b border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur">
           <div>
             <h2 id="export-report-title" className="font-bold text-lg">Export Report</h2>
             <p className="text-xs text-slate-500 mt-0.5">Configure filters and generate a downloadable report</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -125,7 +125,7 @@ export default function ExportReportModal({
                     className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-sm font-medium transition-colors ${
                       active
                         ? 'border-emerald-500 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-300'
-                        : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                        : 'border-slate-200 hover:bg-page'
                     }`}
                   >
                     <Icon size={15} />
@@ -147,7 +147,7 @@ export default function ExportReportModal({
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold border ${
                     dateRange === d.id
                       ? 'border-emerald-500 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30'
-                      : 'border-slate-200 dark:border-slate-700'
+                      : 'border-slate-200'
                   }`}
                 >
                   {d.label}
@@ -162,7 +162,7 @@ export default function ExportReportModal({
                     type="date"
                     value={customRange.from}
                     onChange={(e) => setCustomRange((r) => ({ ...r, from: e.target.value }))}
-                    className="mt-1 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                    className="mt-1 w-full rounded-lg border border-slate-200 bg-transparent px-3 py-2 text-sm"
                   />
                 </label>
                 <label className="text-xs text-slate-500">
@@ -171,7 +171,7 @@ export default function ExportReportModal({
                     type="date"
                     value={customRange.to}
                     onChange={(e) => setCustomRange((r) => ({ ...r, to: e.target.value }))}
-                    className="mt-1 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                    className="mt-1 w-full rounded-lg border border-slate-200 bg-transparent px-3 py-2 text-sm"
                   />
                 </label>
               </div>
@@ -185,7 +185,7 @@ export default function ExportReportModal({
                 <select
                   value={customerType}
                   onChange={(e) => setCustomerType(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-lg border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 >
                   <option value="all">All</option>
                   <option value="new">New</option>
@@ -199,7 +199,7 @@ export default function ExportReportModal({
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-lg border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 >
                   <option value="all">All</option>
                   <option value="active">Active</option>
@@ -221,7 +221,7 @@ export default function ExportReportModal({
                 ['includeTransactions', 'Include Transaction History'],
                 ['includeOrders', 'Include Order History'],
               ].map(([key, label]) => (
-                <label key={key} className="flex items-center gap-2 text-sm rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-2">
+                <label key={key} className="flex items-center gap-2 text-sm rounded-lg border border-slate-200 px-3 py-2">
                   <input type="checkbox" checked={!!options[key]} onChange={() => toggleOpt(key)} className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" />
                   {label}
                 </label>
@@ -230,7 +230,7 @@ export default function ExportReportModal({
           </div>
 
           {preview && (
-            <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950/40 p-4 text-sm space-y-2">
+            <div className="rounded-xl border border-slate-200 bg-page  p-4 text-sm space-y-2">
               <p className="font-semibold">{preview.module?.title} · {preview.totalRows} rows</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
                 <span>Total: <b>{preview.summary.totalCustomers}</b></span>
@@ -244,15 +244,15 @@ export default function ExportReportModal({
           )}
         </div>
 
-        <div className="sticky bottom-0 flex flex-wrap justify-end gap-2 px-5 py-4 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95">
-          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+        <div className="sticky bottom-0 flex flex-wrap justify-end gap-2 px-5 py-4 border-t border-slate-200 dark:border-slate-800 bg-white/95">
+          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200 hover:bg-page">
             Cancel
           </button>
           <button
             type="button"
             disabled={loading}
             onClick={handlePreview}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-page disabled:opacity-50"
           >
             <Eye size={14} />
             Preview Report

@@ -105,8 +105,8 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
 
   return (
     <SellerOverlay open={open} onClose={requestClose} labelledBy="coupon-wizard-title" zIndex={SELLER_Z.modal} className="flex items-end sm:items-center justify-center p-0 sm:p-4" contentClassName="w-full max-w-3xl">
-      <div className="max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl">
-        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur px-5 py-4">
+      <div className="max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl">
+        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur px-5 py-4">
           <div>
             <h2 id="coupon-wizard-title" className="text-lg font-bold">
               {editItem ? 'Edit Coupon' : 'Create Coupon'}
@@ -115,7 +115,7 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
               {type.label} · Step {draft.step} of 6
             </p>
           </div>
-          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -124,7 +124,7 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
           <ol className="flex gap-1 mb-5" aria-label="Wizard progress">
             {COUPON_WIZARD_STEPS.map((s) => (
               <li key={s.id} className="flex-1">
-                <div className={`h-1.5 rounded-full ${draft.step >= s.id ? 'bg-emerald-500' : 'bg-slate-200 dark:bg-slate-700'}`} />
+                <div className={`h-1.5 rounded-full ${draft.step >= s.id ? 'bg-emerald-500' : 'bg-slate-200'}`} />
                 <p className={`mt-1 text-[9px] font-medium truncate ${draft.step === s.id ? 'text-emerald-600' : 'text-slate-400'}`}>{s.label}</p>
               </li>
             ))}
@@ -137,28 +137,28 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
               <label className="block text-xs font-medium">
                 Coupon Name *
                 <div className="mt-1 flex gap-2">
-                  <input value={draft.name} onChange={(e) => patch({ name: e.target.value })} className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="Summer Sale 20%" />
-                  <button type="button" disabled={aiBusy} onClick={() => suggest('coupon_name', (v) => ({ name: v }))} className="inline-flex items-center gap-1 rounded-xl border border-slate-200 dark:border-slate-700 px-3 text-xs font-semibold" title="AI suggest">
+                  <input value={draft.name} onChange={(e) => patch({ name: e.target.value })} className="flex-1 rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" placeholder="Summer Sale 20%" />
+                  <button type="button" disabled={aiBusy} onClick={() => suggest('coupon_name', (v) => ({ name: v }))} className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-3 text-xs font-semibold" title="AI suggest">
                     <Sparkles size={13} /> AI
                   </button>
                 </div>
               </label>
               <label className="block text-xs font-medium">
                 Coupon Code *
-                <input value={draft.code} onChange={(e) => patch({ code: e.target.value.toUpperCase() })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm font-mono" placeholder="SUMMER20" />
+                <input value={draft.code} onChange={(e) => patch({ code: e.target.value.toUpperCase() })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm font-mono" placeholder="SUMMER20" />
               </label>
               <label className="block text-xs font-medium">
                 Description
                 <div className="mt-1 flex gap-2">
-                  <textarea value={draft.description} onChange={(e) => patch({ description: e.target.value })} rows={2} className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
-                  <button type="button" disabled={aiBusy} onClick={() => suggest('offer_description', (v) => ({ description: v }))} className="self-start inline-flex items-center gap-1 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2 text-xs font-semibold">
+                  <textarea value={draft.description} onChange={(e) => patch({ description: e.target.value })} rows={2} className="flex-1 rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
+                  <button type="button" disabled={aiBusy} onClick={() => suggest('offer_description', (v) => ({ description: v }))} className="self-start inline-flex items-center gap-1 rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold">
                     <Sparkles size={13} />
                   </button>
                 </div>
               </label>
               <label className="block text-xs font-medium">
                 Internal Notes
-                <textarea value={draft.notes} onChange={(e) => patch({ notes: e.target.value })} rows={2} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <textarea value={draft.notes} onChange={(e) => patch({ notes: e.target.value })} rows={2} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
             </>
           )}
@@ -167,30 +167,30 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium">
                 Discount Type
-                <select value={draft.discountType} onChange={(e) => patch({ discountType: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.discountType} onChange={(e) => patch({ discountType: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   <option value="percentage">Percentage</option>
                   <option value="flat">Flat Discount</option>
                 </select>
               </label>
               <label className="block text-xs font-medium">
                 Discount Value
-                <input type="number" value={draft.discountValue} onChange={(e) => patch({ discountValue: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" value={draft.discountValue} onChange={(e) => patch({ discountValue: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">
                 Maximum Discount
-                <input type="number" value={draft.maxDiscount} onChange={(e) => patch({ maxDiscount: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" value={draft.maxDiscount} onChange={(e) => patch({ maxDiscount: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">
                 Minimum Order
-                <input type="number" value={draft.minOrder} onChange={(e) => patch({ minOrder: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" value={draft.minOrder} onChange={(e) => patch({ minOrder: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">
                 Maximum Uses
-                <input type="number" value={draft.maxUses} onChange={(e) => patch({ maxUses: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" value={draft.maxUses} onChange={(e) => patch({ maxUses: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">
                 Per Customer Limit
-                <input type="number" value={draft.perCustomer} onChange={(e) => patch({ perCustomer: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" value={draft.perCustomer} onChange={(e) => patch({ perCustomer: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <button type="button" disabled={aiBusy} onClick={() => suggest('discount', (v) => ({ discountValue: parseInt(v, 10) || 15, discountType: 'percentage' }))} className="sm:col-span-2 inline-flex items-center justify-center gap-1 rounded-xl border border-dashed border-emerald-300 text-emerald-700 dark:text-emerald-300 px-3 py-2 text-xs font-semibold">
                 <Sparkles size={13} /> Suggest discount %
@@ -207,7 +207,7 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
                     type="button"
                     onClick={() => patch({ applicability: a.id })}
                     className={`rounded-xl border px-3 py-2.5 text-left text-sm ${
-                      draft.applicability === a.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200 dark:border-slate-700'
+                      draft.applicability === a.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200'
                     }`}
                   >
                     {a.label}
@@ -228,7 +228,7 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
                           else set.add(c);
                           patch({ categories: [...set] });
                         }}
-                        className={`rounded-full px-3 py-1 text-xs font-semibold border ${on ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200 dark:border-slate-700'}`}
+                        className={`rounded-full px-3 py-1 text-xs font-semibold border ${on ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200'}`}
                       >
                         {c}
                       </button>
@@ -243,19 +243,19 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium">
                 Start Date
-                <input type="date" value={String(draft.startAt).slice(0, 10)} onChange={(e) => patch({ startAt: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="date" value={String(draft.startAt).slice(0, 10)} onChange={(e) => patch({ startAt: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">
                 End Date
-                <input type="date" value={String(draft.endAt).slice(0, 10)} onChange={(e) => patch({ endAt: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="date" value={String(draft.endAt).slice(0, 10)} onChange={(e) => patch({ endAt: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">
                 Time Slot
-                <input type="time" value={draft.timeSlot} onChange={(e) => patch({ timeSlot: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="time" value={draft.timeSlot} onChange={(e) => patch({ timeSlot: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">
                 Timezone
-                <select value={draft.timezone} onChange={(e) => patch({ timezone: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.timezone} onChange={(e) => patch({ timezone: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   <option value="Asia/Kolkata">Asia/Kolkata</option>
                   <option value="UTC">UTC</option>
                 </select>
@@ -279,18 +279,18 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
                 ['codAllowed', 'COD Allowed'],
                 ['onlineOnly', 'Online Payment Only'],
               ].map(([key, label]) => (
-                <label key={key} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2.5 text-xs font-medium">
+                <label key={key} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2.5 text-xs font-medium">
                   <input type="checkbox" checked={!!draft[key]} onChange={(e) => patch({ [key]: e.target.checked })} />
                   {label}
                 </label>
               ))}
               <label className="block text-xs font-medium sm:col-span-2">
                 Exclude Categories
-                <input value={draft.excludeCategories} onChange={(e) => patch({ excludeCategories: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="Fashion, Electronics" />
+                <input value={draft.excludeCategories} onChange={(e) => patch({ excludeCategories: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" placeholder="Fashion, Electronics" />
               </label>
               <label className="block text-xs font-medium sm:col-span-2">
                 Exclude Products
-                <input value={draft.excludeProducts} onChange={(e) => patch({ excludeProducts: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="SKU list" />
+                <input value={draft.excludeProducts} onChange={(e) => patch({ excludeProducts: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" placeholder="SKU list" />
               </label>
             </div>
           )}
@@ -304,7 +304,7 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
                     type="button"
                     onClick={() => setPreviewDevice(d)}
                     className={`rounded-full px-3 py-1 text-xs font-semibold capitalize border ${
-                      previewDevice === d ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200 dark:border-slate-700'
+                      previewDevice === d ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200'
                     }`}
                   >
                     {d}
@@ -329,14 +329,14 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
           )}
         </div>
 
-        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-5 py-4">
-          <button type="button" disabled={draft.step <= 1 || busy} onClick={() => patch({ step: draft.step - 1 })} className="inline-flex items-center gap-1 rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm font-semibold disabled:opacity-40">
+        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-white/95 px-5 py-4">
+          <button type="button" disabled={draft.step <= 1 || busy} onClick={() => patch({ step: draft.step - 1 })} className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold disabled:opacity-40">
             <ChevronLeft size={16} /> Back
           </button>
           <div className="flex gap-2">
             {draft.step === 6 ? (
               <>
-                <button type="button" disabled={busy} onClick={() => publish(true)} className="rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm font-semibold">
+                <button type="button" disabled={busy} onClick={() => publish(true)} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold">
                   Save Draft
                 </button>
                 <button type="button" disabled={busy} onClick={() => publish(false)} className="rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 text-sm font-semibold">

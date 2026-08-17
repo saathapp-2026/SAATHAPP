@@ -55,7 +55,7 @@ const partners = [
 
 export default function BecomePartner({ onBecomePartnerSelect }) {
   return (
-    <section className="py-12 bg-slate-50 dark:bg-slate-950/40 border-b border-slate-100 dark:border-slate-800/40">
+    <section className="py-12 bg-page  border-b border-slate-100 ">
       <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Title */}
@@ -80,7 +80,7 @@ export default function BecomePartner({ onBecomePartnerSelect }) {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
                 whileHover={{ y: -4 }}
-                className={`bg-white dark:bg-slate-900 rounded-card p-3 sm:p-3.5 border border-slate-200/60 dark:border-slate-800/50 shadow-soft hover:shadow-premium text-left flex flex-col justify-between h-[210px] sm:h-[220px] lg:h-[215px] xl:h-[210px] transition-all ${partner.shadow}`}
+                className={`bg-surface rounded-card p-3 sm:p-3.5 border border-slate-200/60  shadow-soft hover:shadow-premium text-left flex flex-col justify-between h-[210px] sm:h-[220px] lg:h-[215px] xl:h-[210px] transition-all ${partner.shadow}`}
               >
                 
                 {/* Header: Title and Icon */}

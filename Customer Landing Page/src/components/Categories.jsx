@@ -36,18 +36,18 @@ export default function Categories({ onCategorySelect, activeCategory }) {
   };
 
   return (
-    <section className="py-8 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40 relative w-full">
+    <section className="py-8 bg-surface border-b border-slate-100  relative w-full">
       {/* Full-width Carousel Controls */}
       <button
         onClick={() => scroll('left')}
-        className="absolute left-2 sm:left-4 top-[55%] -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hidden md:flex items-center justify-center transition-colors shadow-sm border border-slate-200 dark:border-slate-700"
+        className="absolute left-2 sm:left-4 top-[55%] -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white hover:bg-page text-slate-600 dark:text-slate-300 hidden md:flex items-center justify-center transition-colors shadow-sm border border-slate-200"
         title="Scroll Left"
       >
         <ChevronLeft size={16} />
       </button>
       <button
         onClick={() => scroll('right')}
-        className="absolute right-2 sm:right-4 top-[55%] -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hidden md:flex items-center justify-center transition-colors shadow-sm border border-slate-200 dark:border-slate-700"
+        className="absolute right-2 sm:right-4 top-[55%] -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white hover:bg-page text-slate-600 dark:text-slate-300 hidden md:flex items-center justify-center transition-colors shadow-sm border border-slate-200"
         title="Scroll Right"
       >
         <ChevronRight size={16} />
@@ -129,7 +129,7 @@ export default function Categories({ onCategorySelect, activeCategory }) {
           <motion.div
             onClick={() => onCategorySelect('all')}
             whileHover={{ y: -5 }}
-            className="flex-none w-36 sm:w-40 snap-start cursor-pointer rounded-card p-3 text-center bg-slate-50 dark:bg-slate-800/40 border border-dashed border-slate-300 dark:border-slate-700 flex flex-col items-center justify-center h-[162px] sm:h-[178px] transition-all hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-solid hover:border-primary/50"
+            className="flex-none w-36 sm:w-40 snap-start cursor-pointer rounded-card p-3 text-center bg-page border border-dashed border-slate-300 flex flex-col items-center justify-center h-[162px] sm:h-[178px] transition-all hover:bg-page hover:border-solid hover:border-primary/50"
           >
             <div className="w-10 h-10 rounded-full bg-primary/10 text-primary dark:text-primary-light flex items-center justify-center mb-2.5 shadow-sm">
               <ChevronRight size={20} />

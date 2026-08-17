@@ -29,7 +29,7 @@ export default function MembershipFeatureComparison({ variant = 'dark' }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-2xl overflow-hidden border ${
-        isLight ? 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800' : 'bg-white/5 border-white/10'
+        isLight ? 'bg-surface border-slate-200 dark:border-slate-800' : 'bg-white/5 border-white/10'
       }`}
     >
       <div className={`p-6 border-b ${isLight ? 'border-slate-200 dark:border-slate-800' : 'border-white/10'}`}>
@@ -42,8 +42,8 @@ export default function MembershipFeatureComparison({ variant = 'dark' }) {
       <div className="overflow-x-auto">
         <table className="w-full min-w-[720px] text-sm">
           <thead>
-            <tr className={isLight ? 'bg-slate-50 dark:bg-slate-800/50' : 'bg-white/5'}>
-              <th className={`text-left p-4 font-semibold sticky left-0 z-10 ${isLight ? 'bg-slate-50 dark:bg-slate-800/50' : 'bg-slate-900/80'}`}>
+            <tr className={isLight ? 'bg-page' : 'bg-white/5'}>
+              <th className={`text-left p-4 font-semibold sticky left-0 z-10 ${isLight ? 'bg-page' : 'bg-slate-900/80'}`}>
                 Feature
               </th>
               {plans.map((plan) => (
@@ -69,10 +69,10 @@ export default function MembershipFeatureComparison({ variant = 'dark' }) {
               <tr
                 key={row.feature}
                 className={`border-t ${isLight ? 'border-slate-100 dark:border-slate-800' : 'border-white/5'} ${
-                  i % 2 === 0 ? '' : isLight ? 'bg-slate-50/50 dark:bg-slate-800/20' : 'bg-white/[0.02]'
+                  i % 2 === 0 ? '' : isLight ? 'bg-slate-50/50' : 'bg-white/[0.02]'
                 }`}
               >
-                <td className={`p-4 font-medium sticky left-0 z-10 ${isLight ? 'bg-white dark:bg-slate-900' : 'bg-slate-900/90'}`}>
+                <td className={`p-4 font-medium sticky left-0 z-10 ${isLight ? 'bg-surface' : 'bg-slate-900/90'}`}>
                   {row.feature}
                 </td>
                 {PLAN_IDS.map((id) => (

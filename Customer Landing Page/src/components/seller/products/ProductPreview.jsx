@@ -40,7 +40,7 @@ function ImageFrame({ image, className = '' }) {
   if (image) {
     return (
       <div className={`flex flex-col items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-emerald-50 dark:from-slate-800 dark:to-slate-700 ${className}`}>
-        <div className="h-16 w-16 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow flex items-center justify-center mb-2">
+        <div className="h-16 w-16 rounded-2xl bg-white/80 shadow flex items-center justify-center mb-2">
           <span className="text-2xl font-bold text-emerald-600">{(image.name || 'P').charAt(0).toUpperCase()}</span>
         </div>
         <p className="text-xs font-semibold text-slate-600 dark:text-slate-300 px-4 text-center line-clamp-2">
@@ -93,7 +93,7 @@ export default function ProductPreview({ draft, onGoToImages }) {
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border ${
                 device === id
                   ? 'bg-emerald-500 text-white border-emerald-500'
-                  : 'border-slate-200 dark:border-slate-700'
+                  : 'border-slate-200'
               }`}
             >
               <Icon size={12} /> {label}
@@ -101,9 +101,9 @@ export default function ProductPreview({ draft, onGoToImages }) {
           ))}
         </div>
 
-        <div className={`mx-auto ${widthClass} w-full rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-white dark:bg-slate-950 shadow-sm`}>
+        <div className={`mx-auto ${widthClass} w-full rounded-2xl border border-slate-200 overflow-hidden bg-white dark:bg-slate-950 shadow-sm`}>
           {/* Image gallery */}
-          <div className="bg-slate-50 dark:bg-slate-900">
+          <div className="bg-page dark:bg-slate-900">
             <div className="aspect-[4/3] w-full relative">
               {activeImage ? (
                 <ImageFrame image={activeImage} className="absolute inset-0 h-full w-full" />
@@ -133,7 +133,7 @@ export default function ProductPreview({ draft, onGoToImages }) {
                     type="button"
                     onClick={() => setActiveIdx(i)}
                     className={`relative h-14 w-14 shrink-0 rounded-lg overflow-hidden border-2 ${
-                      i === activeIdx ? 'border-emerald-500' : 'border-slate-200 dark:border-slate-700'
+                      i === activeIdx ? 'border-emerald-500' : 'border-slate-200'
                     }`}
                     aria-label={`View ${img.label || `image ${i + 1}`}`}
                   >
@@ -241,7 +241,7 @@ export default function ProductPreview({ draft, onGoToImages }) {
                 <h3 className="font-semibold text-sm mb-1">Variants ({draft.variants.type})</h3>
                 <div className="flex flex-wrap gap-1.5">
                   {draft.variants.items.map((v) => (
-                    <span key={v.id} className="px-2.5 py-1 rounded-lg text-xs font-medium border border-slate-200 dark:border-slate-700">
+                    <span key={v.id} className="px-2.5 py-1 rounded-lg text-xs font-medium border border-slate-200">
                       {v.value || v.sku} · {money(v.offerPrice || v.price)} · Qty {v.stock || 0}
                     </span>
                   ))}
@@ -275,7 +275,7 @@ export default function ProductPreview({ draft, onGoToImages }) {
               </p>
             </div>
 
-            <div className="rounded-xl bg-slate-50 dark:bg-slate-900 p-3 text-sm">
+            <div className="rounded-xl bg-page dark:bg-slate-900 p-3 text-sm">
               <p className="font-semibold">Seller Information</p>
               <p className="text-slate-500 text-xs mt-0.5">SAATHAPP Verified Partner · GST invoice available</p>
             </div>
@@ -287,7 +287,7 @@ export default function ProductPreview({ draft, onGoToImages }) {
         </div>
       </SectionCard>
 
-      <section className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 sm:p-6">
+      <section className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-4 sm:p-6">
         <h4 className="font-bold text-sm mb-3">Final Checklist</h4>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {checklist.map((c) => (

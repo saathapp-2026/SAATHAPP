@@ -650,7 +650,7 @@ export default function RiderHistoryTab() {
       {/* ========================================================================= */}
       {/* 1. HEADER SECTION (Page 25 PDF Layout)                                    */}
       {/* ========================================================================= */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-surface p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
         <div>
           <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 font-extrabold text-xs uppercase tracking-wider mb-1">
             <CheckCircle2 size={16} /> Delivery Agent Portal
@@ -678,25 +678,25 @@ export default function RiderHistoryTab() {
             <button
               type="button"
               onClick={() => setIsExportDropdownOpen(!isExportDropdownOpen)}
-              className="px-4 py-2.5 rounded-2xl bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 text-white font-black text-xs flex items-center gap-1.5 cursor-pointer shadow active:scale-95 transition-all duration-150"
+              className="px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs flex items-center gap-1.5 cursor-pointer shadow active:scale-95 transition-all duration-150"
             >
               <Share2 size={14} /> Export <ChevronDown size={12} />
             </button>
             {isExportDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-44 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-30 py-1 text-xs font-bold text-slate-700 dark:text-slate-300 sa-rise">
-                <button type="button" onClick={() => handleExport('pdf')} className="w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+              <div className="absolute right-0 mt-2 w-44 bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-30 py-1 text-xs font-bold text-slate-700 dark:text-slate-300 sa-rise">
+                <button type="button" onClick={() => handleExport('pdf')} className="w-full text-left px-4 py-2 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <FileText size={14} className="text-rose-500" /> Export PDF
                 </button>
-                <button type="button" onClick={() => handleExport('excel')} className="w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                <button type="button" onClick={() => handleExport('excel')} className="w-full text-left px-4 py-2 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <FileSpreadsheet size={14} className="text-emerald-500" /> Export Excel
                 </button>
-                <button type="button" onClick={() => handleExport('csv')} className="w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                <button type="button" onClick={() => handleExport('csv')} className="w-full text-left px-4 py-2 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <FileCode size={14} className="text-amber-500" /> Export CSV
                 </button>
-                <button type="button" onClick={() => handleExport('word')} className="w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                <button type="button" onClick={() => handleExport('word')} className="w-full text-left px-4 py-2 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <FileText size={14} className="text-blue-500" /> Export Word
                 </button>
-                <button type="button" onClick={() => handleExport('powerpoint')} className="w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                <button type="button" onClick={() => handleExport('powerpoint')} className="w-full text-left px-4 py-2 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                   <Layers size={14} className="text-orange-500" /> Export PowerPoint
                 </button>
               </div>
@@ -707,7 +707,7 @@ export default function RiderHistoryTab() {
           <button
             type="button"
             onClick={() => window.print()}
-            className="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150"
+            className="p-2.5 rounded-2xl bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150"
             title="Print Deliveries List"
           >
             <Printer size={16} />
@@ -717,7 +717,7 @@ export default function RiderHistoryTab() {
           <button
             type="button"
             onClick={handleRefresh}
-            className={`p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150 ${isRefreshing ? 'animate-spin text-amber-500' : ''}`}
+            className={`p-2.5 rounded-2xl bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150 ${isRefreshing ? 'animate-spin text-amber-500' : ''}`}
             title="Refresh Deliveries Log"
           >
             <RefreshCw size={16} />
@@ -733,7 +733,7 @@ export default function RiderHistoryTab() {
         <button
           type="button"
           onClick={() => { setDateFilter('Today'); addToast?.('Filtered by Today\'s Deliveries', 'info'); }}
-          className="p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
+          className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Today's Deliveries</span>
           <strong className="text-xl font-black text-slate-900 dark:text-white font-mono mt-1 block">16</strong>
@@ -745,7 +745,7 @@ export default function RiderHistoryTab() {
         <button
           type="button"
           onClick={() => { setSelectedOrder(orders[0]); setActiveModal('earningsDetails'); }}
-          className="p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
+          className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Today's Earnings</span>
           <strong className="text-xl font-black text-amber-500 font-mono mt-1 block">₹0</strong>
@@ -757,7 +757,7 @@ export default function RiderHistoryTab() {
         <button
           type="button"
           onClick={() => { setDateFilter('This Week'); addToast?.('Filtered by Completed Week', 'info'); }}
-          className="p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
+          className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Completed Week</span>
           <strong className="text-xl font-black text-slate-900 dark:text-white font-mono mt-1 block">98</strong>
@@ -769,7 +769,7 @@ export default function RiderHistoryTab() {
         <button
           type="button"
           onClick={() => { setDateFilter('This Month'); addToast?.('Filtered by Completed Month', 'info'); }}
-          className="p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
+          className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Completed Month</span>
           <strong className="text-xl font-black text-slate-900 dark:text-white font-mono mt-1 block">342</strong>
@@ -781,7 +781,7 @@ export default function RiderHistoryTab() {
         <button
           type="button"
           onClick={() => { handleSort('rating'); addToast?.('Sorted by Customer Rating', 'info'); }}
-          className="p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
+          className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Average Rating</span>
           <strong className="text-xl font-black text-amber-400 font-mono mt-1 flex items-center gap-1">
@@ -793,7 +793,7 @@ export default function RiderHistoryTab() {
         <button
           type="button"
           onClick={() => { handleSort('distanceVal'); addToast?.('Sorted by Distance', 'info'); }}
-          className="p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
+          className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Total Distance</span>
           <strong className="text-xl font-black text-slate-900 dark:text-white font-mono mt-1 block">128 KM</strong>
@@ -805,7 +805,7 @@ export default function RiderHistoryTab() {
         <button
           type="button"
           onClick={() => { handleSort('durationVal'); addToast?.('Sorted by Delivery Time', 'info'); }}
-          className="p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
+          className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Avg Delivery Time</span>
           <strong className="text-xl font-black text-sky-500 font-mono mt-1 block">18 min</strong>
@@ -817,7 +817,7 @@ export default function RiderHistoryTab() {
         <button
           type="button"
           onClick={() => { setFilterStatus('Delivered'); addToast?.('Filtered by Delivered status', 'info'); }}
-          className="p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
+          className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Completion Rate</span>
           <strong className="text-xl font-black text-emerald-500 font-mono mt-1 block">99%</strong>
@@ -832,7 +832,7 @@ export default function RiderHistoryTab() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
         {/* 1. Earnings Summary Breakdown Card */}
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+        <div className="bg-surface p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2">
             <span className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
               <DollarSign size={15} className="text-amber-500" /> Earnings Summary
@@ -864,7 +864,7 @@ export default function RiderHistoryTab() {
         </div>
 
         {/* 2. Delivery Type Breakdown Card (Page 25 Donut Widget) */}
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+        <div className="bg-surface p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2">
             <span className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
               <PieChart size={15} className="text-sky-500" /> Delivery Type Breakdown
@@ -887,19 +887,19 @@ export default function RiderHistoryTab() {
             </div>
 
             <div className="flex-1 space-y-1.5 text-[11px] font-bold">
-              <button type="button" onClick={() => setFilterDeliveryType('Grocery')} className="w-full flex justify-between items-center hover:bg-slate-100 dark:hover:bg-slate-800 p-1 rounded cursor-pointer active:scale-95 transition">
+              <button type="button" onClick={() => setFilterDeliveryType('Grocery')} className="w-full flex justify-between items-center hover:bg-page p-1 rounded cursor-pointer active:scale-95 transition">
                 <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> Grocery</span>
                 <span className="font-mono text-slate-500">128 (37%)</span>
               </button>
-              <button type="button" onClick={() => setFilterDeliveryType('Medicine')} className="w-full flex justify-between items-center hover:bg-slate-100 dark:hover:bg-slate-800 p-1 rounded cursor-pointer active:scale-95 transition">
+              <button type="button" onClick={() => setFilterDeliveryType('Medicine')} className="w-full flex justify-between items-center hover:bg-page p-1 rounded cursor-pointer active:scale-95 transition">
                 <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-rose-500" /> Medicine</span>
                 <span className="font-mono text-slate-500">86 (25%)</span>
               </button>
-              <button type="button" onClick={() => setFilterDeliveryType('Food')} className="w-full flex justify-between items-center hover:bg-slate-100 dark:hover:bg-slate-800 p-1 rounded cursor-pointer active:scale-95 transition">
+              <button type="button" onClick={() => setFilterDeliveryType('Food')} className="w-full flex justify-between items-center hover:bg-page p-1 rounded cursor-pointer active:scale-95 transition">
                 <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Food</span>
                 <span className="font-mono text-slate-500">72 (21%)</span>
               </button>
-              <button type="button" onClick={() => setFilterDeliveryType('Parcel')} className="w-full flex justify-between items-center hover:bg-slate-100 dark:hover:bg-slate-800 p-1 rounded cursor-pointer active:scale-95 transition">
+              <button type="button" onClick={() => setFilterDeliveryType('Parcel')} className="w-full flex justify-between items-center hover:bg-page p-1 rounded cursor-pointer active:scale-95 transition">
                 <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-sky-500" /> Parcel</span>
                 <span className="font-mono text-slate-500">56 (17%)</span>
               </button>
@@ -908,7 +908,7 @@ export default function RiderHistoryTab() {
         </div>
 
         {/* 3. Performance Trend Dual-Axis Line Graph (PDF Page 25 Exact Copy) */}
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+        <div className="bg-surface p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2">
             <h3 className="text-sm font-black text-slate-900 dark:text-white">
               Performance Trend
@@ -920,7 +920,7 @@ export default function RiderHistoryTab() {
                   setTrendPeriod(e.target.value);
                   addToast?.(`Performance Trend set to ${e.target.value}`, 'info');
                 }}
-                className="appearance-none bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-[11px] font-bold px-3 py-1 pr-6 rounded-xl cursor-pointer focus:outline-none"
+                className="appearance-none bg-page border border-slate-200 text-slate-800 dark:text-slate-200 text-[11px] font-bold px-3 py-1 pr-6 rounded-xl cursor-pointer focus:outline-none"
               >
                 <option value="This Month">This Month</option>
                 <option value="This Week">This Week</option>
@@ -1066,7 +1066,7 @@ export default function RiderHistoryTab() {
       {/* ========================================================================= */}
       {/* 3 & 4. PAGE 27 EXACT HORIZONTAL FILTER BAR (6 Labeled Boxes + Buttons)    */}
       {/* ========================================================================= */}
-      <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div className="bg-surface p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
 
         {/* Search Bar Top */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -1077,7 +1077,7 @@ export default function RiderHistoryTab() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search Order ID, Customer, Store, Mobile, Area..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
             {searchQuery && (
               <button
@@ -1094,7 +1094,7 @@ export default function RiderHistoryTab() {
             <button
               type="button"
               onClick={handleResetFilters}
-              className="px-3.5 py-2 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150"
+              className="px-3.5 py-2 rounded-2xl bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150"
             >
               Reset Filters
             </button>
@@ -1112,7 +1112,7 @@ export default function RiderHistoryTab() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 pt-2">
 
           {/* 1. Date Dropdown Box */}
-          <div className="relative bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 focus-within:ring-2 focus-within:ring-amber-500 transition">
+          <div className="relative bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 focus-within:ring-2 focus-within:ring-amber-500 transition">
             <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 block leading-tight">Date</span>
             <select
               value={dateFilter}
@@ -1131,7 +1131,7 @@ export default function RiderHistoryTab() {
           </div>
 
           {/* 2. Delivery Type Dropdown Box */}
-          <div className="relative bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 focus-within:ring-2 focus-within:ring-amber-500 transition">
+          <div className="relative bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 focus-within:ring-2 focus-within:ring-amber-500 transition">
             <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 block leading-tight">Delivery Type</span>
             <select
               value={filterDeliveryType}
@@ -1148,7 +1148,7 @@ export default function RiderHistoryTab() {
           </div>
 
           {/* 3. Store Dropdown Box */}
-          <div className="relative bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 focus-within:ring-2 focus-within:ring-amber-500 transition">
+          <div className="relative bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 focus-within:ring-2 focus-within:ring-amber-500 transition">
             <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 block leading-tight">Store</span>
             <select
               value={filterStore}
@@ -1167,7 +1167,7 @@ export default function RiderHistoryTab() {
           </div>
 
           {/* 4. Payment Type Dropdown Box */}
-          <div className="relative bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 focus-within:ring-2 focus-within:ring-amber-500 transition">
+          <div className="relative bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 focus-within:ring-2 focus-within:ring-amber-500 transition">
             <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 block leading-tight">Payment Type</span>
             <select
               value={filterPayment}
@@ -1182,7 +1182,7 @@ export default function RiderHistoryTab() {
           </div>
 
           {/* 5. Status Dropdown Box */}
-          <div className="relative bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 focus-within:ring-2 focus-within:ring-amber-500 transition">
+          <div className="relative bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 focus-within:ring-2 focus-within:ring-amber-500 transition">
             <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 block leading-tight">Status</span>
             <select
               value={filterStatus}
@@ -1196,7 +1196,7 @@ export default function RiderHistoryTab() {
           </div>
 
           {/* 6. Payout Range Dropdown Box */}
-          <div className="relative bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 focus-within:ring-2 focus-within:ring-amber-500 transition">
+          <div className="relative bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 focus-within:ring-2 focus-within:ring-amber-500 transition">
             <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 block leading-tight">Payout Range</span>
             <select
               value={filterPayoutRange}
@@ -1217,7 +1217,7 @@ export default function RiderHistoryTab() {
             onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
             className={`h-full min-h-[48px] rounded-2xl text-xs font-black flex items-center justify-center gap-2 cursor-pointer border transition px-3 active:scale-95 transition-all duration-150 ${showAdvancedFilters
               ? 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 border-slate-900'
-              : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800'
+              : 'bg-surface text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-800 hover:bg-page'
               }`}
           >
             <Filter size={15} /> More Filters
@@ -1235,7 +1235,7 @@ export default function RiderHistoryTab() {
                 value={filterCustomer}
                 onChange={(e) => setFilterCustomer(e.target.value)}
                 placeholder="Filter by customer..."
-                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 dark:text-slate-200"
+                className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 dark:text-slate-200"
               />
             </div>
 
@@ -1244,7 +1244,7 @@ export default function RiderHistoryTab() {
               <select
                 value={filterDistance}
                 onChange={(e) => setFilterDistance(e.target.value)}
-                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 dark:text-slate-200"
+                className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 dark:text-slate-200"
               >
                 <option value="All">All Distances</option>
                 <option value="< 2 km">&lt; 2 km</option>
@@ -1258,7 +1258,7 @@ export default function RiderHistoryTab() {
               <select
                 value={filterCity}
                 onChange={(e) => setFilterCity(e.target.value)}
-                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 dark:text-slate-200"
+                className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 dark:text-slate-200"
               >
                 <option value="All">All Cities</option>
                 <option value="Patna">Patna</option>
@@ -1272,7 +1272,7 @@ export default function RiderHistoryTab() {
               <select
                 value={filterZone}
                 onChange={(e) => setFilterZone(e.target.value)}
-                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 dark:text-slate-200"
+                className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 dark:text-slate-200"
               >
                 <option value="All">All Zones</option>
                 <option value="Boring Road">Boring Road</option>
@@ -1364,10 +1364,10 @@ export default function RiderHistoryTab() {
       {/* ========================================================================= */}
       {/* 5. COMPLETED DELIVERIES TABLE (Exact Page 28 PDF Columns & Buttons)       */}
       {/* ========================================================================= */}
-      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden">
+      <div className="bg-surface rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs whitespace-nowrap">
-            <thead className="bg-slate-50 dark:bg-slate-950 text-slate-400 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
+            <thead className="bg-page dark:bg-slate-950 text-slate-400 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
               <tr>
                 <th className="p-4 w-10 text-center">
                   <button type="button" onClick={handleSelectAllRows} className="cursor-pointer text-slate-400 hover:text-amber-500 active:scale-95 transition">
@@ -1378,31 +1378,31 @@ export default function RiderHistoryTab() {
                     )}
                   </button>
                 </th>
-                <th className="p-4 cursor-pointer hover:text-slate-700 dark:hover:text-slate-200" onClick={() => handleSort('id')}>
+                <th className="p-4 cursor-pointer hover:text-slate-700" onClick={() => handleSort('id')}>
                   Order ID {sortField === 'id' && (sortOrder === 'asc' ? '↑' : '↓')}
                 </th>
-                <th className="p-4 cursor-pointer hover:text-slate-700 dark:hover:text-slate-200" onClick={() => handleSort('orderDate')}>
+                <th className="p-4 cursor-pointer hover:text-slate-700" onClick={() => handleSort('orderDate')}>
                   Date &amp; Time {sortField === 'orderDate' && (sortOrder === 'asc' ? '↑' : '↓')}
                 </th>
                 <th className="p-4">Delivery Type</th>
                 <th className="p-4">Store Name</th>
                 <th className="p-4">Customer Details</th>
-                <th className="p-4 cursor-pointer hover:text-slate-700 dark:hover:text-slate-200" onClick={() => handleSort('distanceVal')}>
+                <th className="p-4 cursor-pointer hover:text-slate-700" onClick={() => handleSort('distanceVal')}>
                   Distance {sortField === 'distanceVal' && (sortOrder === 'asc' ? '↑' : '↓')}
                 </th>
-                <th className="p-4 cursor-pointer hover:text-slate-700 dark:hover:text-slate-200" onClick={() => handleSort('durationVal')}>
+                <th className="p-4 cursor-pointer hover:text-slate-700" onClick={() => handleSort('durationVal')}>
                   Duration {sortField === 'durationVal' && (sortOrder === 'asc' ? '↑' : '↓')}
                 </th>
                 <th className="p-4">Items</th>
                 <th className="p-4">Payment</th>
                 <th className="p-4">COD</th>
-                <th className="p-4 cursor-pointer hover:text-slate-700 dark:hover:text-slate-200" onClick={() => handleSort('payout')}>
+                <th className="p-4 cursor-pointer hover:text-slate-700" onClick={() => handleSort('payout')}>
                   Payout {sortField === 'payout' && (sortOrder === 'asc' ? '↑' : '↓')}
                 </th>
                 <th className="p-4">Bonus</th>
                 <th className="p-4">Tip</th>
                 <th className="p-4">Status</th>
-                <th className="p-4 cursor-pointer hover:text-slate-700 dark:hover:text-slate-200" onClick={() => handleSort('rating')}>
+                <th className="p-4 cursor-pointer hover:text-slate-700" onClick={() => handleSort('rating')}>
                   Rating {sortField === 'rating' && (sortOrder === 'asc' ? '↑' : '↓')}
                 </th>
                 <th className="p-4 text-right pr-6">Actions</th>
@@ -1428,7 +1428,7 @@ export default function RiderHistoryTab() {
                   return (
                     <tr
                       key={order.id}
-                      className={`hover:bg-slate-50 dark:hover:bg-slate-800/40 transition ${isSelected ? 'bg-amber-500/10 dark:bg-amber-500/10' : ''
+                      className={`hover:bg-page transition ${isSelected ? 'bg-amber-500/10 dark:bg-amber-500/10' : ''
                         }`}
                     >
                       <td className="p-4 text-center">
@@ -1486,7 +1486,7 @@ export default function RiderHistoryTab() {
 
                       {/* Payment Mode */}
                       <td className="p-4">
-                        <span className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded text-[10px] font-bold">
+                        <span className="bg-page text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded text-[10px] font-bold">
                           {order.payment}
                         </span>
                       </td>
@@ -1529,7 +1529,7 @@ export default function RiderHistoryTab() {
                           <button
                             type="button"
                             onClick={() => openOrderModal(order, 'details')}
-                            className="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-extrabold text-[11px] flex items-center gap-1 cursor-pointer active:scale-95 transition-all duration-150"
+                            className="px-2.5 py-1 rounded-xl bg-page hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-extrabold text-[11px] flex items-center gap-1 cursor-pointer active:scale-95 transition-all duration-150"
                             title="View Full Details"
                           >
                             <Eye size={12} /> Details
@@ -1590,7 +1590,7 @@ export default function RiderHistoryTab() {
         </div>
 
         {/* 17. Pagination Bar (Exact Page 33 PDF Layout) */}
-        <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-slate-600 dark:text-slate-400">
+        <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-slate-600 dark:text-slate-400">
           <div>
             Showing <span className="text-slate-900 dark:text-white font-mono">{filteredOrders.length > 0 ? (currentPage - 1) * rowsPerPage + 1 : 0}</span> to{' '}
             <span className="text-slate-900 dark:text-white font-mono">{Math.min(currentPage * rowsPerPage, filteredOrders.length)}</span> of{' '}
@@ -1607,7 +1607,7 @@ export default function RiderHistoryTab() {
                   setRowsPerPage(Number(e.target.value));
                   setCurrentPage(1);
                 }}
-                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-2 py-1 text-xs font-bold text-slate-800 dark:text-slate-200 focus:outline-none"
+                className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl px-2 py-1 text-xs font-bold text-slate-800 dark:text-slate-200 focus:outline-none"
               >
                 <option value={10}>10</option>
                 <option value={25}>25</option>
@@ -1622,7 +1622,7 @@ export default function RiderHistoryTab() {
                 type="button"
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                className="p-1.5 rounded-xl border border-slate-200 dark:border-slate-800 disabled:opacity-40 hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer active:scale-95 transition"
+                className="p-1.5 rounded-xl border border-slate-200 dark:border-slate-800 disabled:opacity-40 hover:bg-slate-200 cursor-pointer active:scale-95 transition"
               >
                 <ChevronLeft size={16} />
               </button>
@@ -1634,7 +1634,7 @@ export default function RiderHistoryTab() {
                   onClick={() => setCurrentPage(pg)}
                   className={`px-3 py-1 rounded-xl font-extrabold cursor-pointer active:scale-95 transition-all duration-150 ${currentPage === pg
                     ? 'bg-amber-500 text-slate-950 shadow-sm'
-                    : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
+                    : 'bg-surface border border-slate-200 dark:border-slate-800 hover:bg-page'
                     }`}
                 >
                   {pg}
@@ -1645,7 +1645,7 @@ export default function RiderHistoryTab() {
                 type="button"
                 disabled={currentPage === totalPages}
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                className="p-1.5 rounded-xl border border-slate-200 dark:border-slate-800 disabled:opacity-40 hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer active:scale-95 transition"
+                className="p-1.5 rounded-xl border border-slate-200 dark:border-slate-800 disabled:opacity-40 hover:bg-slate-200 cursor-pointer active:scale-95 transition"
               >
                 <ChevronRight size={16} />
               </button>
@@ -1658,7 +1658,7 @@ export default function RiderHistoryTab() {
       {/* ========================================================================= */}
       {/* QUICK ACTIONS BAR (PDF Page 29/34 Exact Bottom Bar from Screenshot)        */}
       {/* ========================================================================= */}
-      <div className="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+      <div className="bg-surface p-4 sm:p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
         <div className="flex items-center justify-between">
           <span className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
             <Zap size={16} className="text-amber-500" /> Quick Delivery Actions
@@ -1673,7 +1673,7 @@ export default function RiderHistoryTab() {
           <button
             type="button"
             onClick={() => openOrderModal(selectedOrder || orders[0], 'details')}
-            className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-blue-500/40 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
+            className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-blue-500/40 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
           >
             <div className="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
               <Eye size={18} />
@@ -1688,7 +1688,7 @@ export default function RiderHistoryTab() {
           <button
             type="button"
             onClick={() => openOrderModal(selectedOrder || orders[0], 'invoice')}
-            className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
+            className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
           >
             <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
               <FileText size={18} />
@@ -1703,7 +1703,7 @@ export default function RiderHistoryTab() {
           <button
             type="button"
             onClick={() => openOrderModal(selectedOrder || orders[0], 'proof')}
-            className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-sky-500/40 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
+            className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-sky-500/40 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
           >
             <div className="w-9 h-9 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
               <ShieldCheck size={18} />
@@ -1718,7 +1718,7 @@ export default function RiderHistoryTab() {
           <button
             type="button"
             onClick={() => openOrderModal(selectedOrder || orders[0], 'route')}
-            className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-amber-500/40 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
+            className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-amber-500/40 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
           >
             <div className="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
               <Navigation size={18} />
@@ -1733,7 +1733,7 @@ export default function RiderHistoryTab() {
           <button
             type="button"
             onClick={() => openOrderModal(selectedOrder || orders[0], 'feedback')}
-            className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-purple-500/40 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
+            className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-purple-500/40 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
           >
             <div className="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
               <Star size={18} className="fill-purple-500" />
@@ -1748,7 +1748,7 @@ export default function RiderHistoryTab() {
           <button
             type="button"
             onClick={() => openOrderModal(selectedOrder || orders[0], 'ticket')}
-            className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-rose-500/40 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
+            className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-rose-500/40 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
           >
             <div className="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
               <AlertTriangle size={18} />
@@ -1763,9 +1763,9 @@ export default function RiderHistoryTab() {
           <button
             type="button"
             onClick={() => addToast?.('More action options: Re-order dispatch, Share proof, Request audit.', 'info')}
-            className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-slate-400 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
+            className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-slate-400 flex items-center gap-3 text-left cursor-pointer active:scale-95 transition-all duration-150 group"
           >
-            <div className="w-9 h-9 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
+            <div className="w-9 h-9 rounded-xl bg-slate-200 text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
               <MoreHorizontal size={18} />
             </div>
             <div className="min-w-0">
@@ -1791,7 +1791,7 @@ export default function RiderHistoryTab() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
           {/* Daily Deliveries Bar Chart */}
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+          <div className="bg-surface p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Daily Deliveries</span>
               <span className="text-[10px] font-extrabold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full">+14% Growth</span>
@@ -1816,7 +1816,7 @@ export default function RiderHistoryTab() {
                   <span className="text-[10px] font-mono font-extrabold text-slate-500 dark:text-slate-400 group-hover:text-amber-500 transition-colors">
                     {d.count}
                   </span>
-                  <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-xl h-24 p-1 flex items-end overflow-hidden">
+                  <div className="w-full bg-page rounded-xl h-24 p-1 flex items-end overflow-hidden">
                     <div
                       style={{ height: `${(d.count / 32) * 100}%` }}
                       className="w-full bg-gradient-to-t from-amber-500 via-amber-400 to-amber-300 rounded-lg group-hover:from-amber-400 group-hover:to-amber-200 transition-all duration-300 shadow-sm"
@@ -1829,7 +1829,7 @@ export default function RiderHistoryTab() {
           </div>
 
           {/* Weekly Earnings Bar Chart */}
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+          <div className="bg-surface p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Weekly Earnings</span>
               <span className="text-[10px] font-extrabold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded-full">₹0 Total</span>
@@ -1851,7 +1851,7 @@ export default function RiderHistoryTab() {
                   <span className="text-[10px] font-mono font-extrabold text-amber-500 group-hover:text-emerald-400 transition-colors">
                     ₹{w.amt}
                   </span>
-                  <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-xl h-24 p-1 flex items-end overflow-hidden">
+                  <div className="w-full bg-page rounded-xl h-24 p-1 flex items-end overflow-hidden">
                     <div
                       style={{ height: `${(w.amt / 2800) * 100}%` }}
                       className="w-full bg-gradient-to-t from-emerald-600 via-emerald-500 to-emerald-400 rounded-lg group-hover:brightness-110 transition-all duration-300 shadow-sm"
@@ -1864,7 +1864,7 @@ export default function RiderHistoryTab() {
           </div>
 
           {/* Customer Ratings Distribution Chart */}
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+          <div className="bg-surface p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Customer Ratings</span>
               <span className="text-[10px] font-extrabold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-full">4.9 ★ Avg</span>
@@ -1881,10 +1881,10 @@ export default function RiderHistoryTab() {
                   key={r.stars}
                   type="button"
                   onClick={() => { handleSort('rating'); addToast?.(`Filtered by ${r.stars} reviews (${r.count})`, 'info'); }}
-                  className="w-full flex items-center gap-3 hover:bg-slate-100 dark:hover:bg-slate-800 p-1 rounded-xl cursor-pointer active:scale-95 transition"
+                  className="w-full flex items-center gap-3 hover:bg-page p-1 rounded-xl cursor-pointer active:scale-95 transition"
                 >
                   <span className="w-14 text-[11px] font-bold text-slate-500 text-left">{r.stars}</span>
-                  <div className="flex-1 bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden p-0.5">
+                  <div className="flex-1 bg-page h-3 rounded-full overflow-hidden p-0.5">
                     <div style={{ width: r.pct }} className={`${r.color} h-full rounded-full transition-all duration-500`} />
                   </div>
                   <span className="w-8 text-[11px] font-mono font-black text-right text-slate-700 dark:text-slate-300">{r.count}</span>
@@ -1983,7 +1983,7 @@ export default function RiderHistoryTab() {
               key={idx}
               type="button"
               onClick={() => addToast?.(`${kpi.label}: ${kpi.val}`, 'info')}
-              className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-amber-500/40 cursor-pointer active:scale-95 transition text-left"
+              className="p-4 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm hover:border-amber-500/40 cursor-pointer active:scale-95 transition text-left"
             >
               <span className="text-[10px] text-slate-400 font-bold uppercase block">{kpi.label}</span>
               <strong className={`text-base font-black font-mono mt-1 block ${kpi.color}`}>{kpi.val}</strong>
@@ -2059,7 +2059,7 @@ export default function RiderHistoryTab() {
 
           {/* 7. ORDER DETAILS POPUP MODAL (Page 29 PDF) */}
           {activeModal === 'details' && (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-3xl w-full shadow-2xl space-y-6 text-xs sa-rise my-8">
+            <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-3xl w-full shadow-2xl space-y-6 text-xs sa-rise my-8">
               <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-4">
                 <div>
                   <span className="text-[10px] font-extrabold text-amber-500 uppercase tracking-widest block">Full Delivery Information</span>
@@ -2075,7 +2075,7 @@ export default function RiderHistoryTab() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                 {/* Pickup Details */}
-                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-2">
+                <div className="p-4 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-2">
                   <h4 className="font-black text-slate-900 dark:text-white text-xs uppercase flex items-center gap-1.5 text-amber-500">
                     <MapPin size={14} /> Pickup Store Details
                   </h4>
@@ -2086,7 +2086,7 @@ export default function RiderHistoryTab() {
                 </div>
 
                 {/* Drop Details */}
-                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-2">
+                <div className="p-4 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-2">
                   <h4 className="font-black text-slate-900 dark:text-white text-xs uppercase flex items-center gap-1.5 text-emerald-500">
                     <MapPin size={14} /> Drop Customer Details
                   </h4>
@@ -2113,7 +2113,7 @@ export default function RiderHistoryTab() {
               {/* 8. Vertical Progress Timeline */}
               <div className="space-y-2">
                 <h4 className="font-black text-slate-900 dark:text-white text-xs uppercase">Delivery Workflow Timeline</h4>
-                <div className="flex justify-between items-center bg-slate-50 dark:bg-slate-950 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 text-[11px] overflow-x-auto">
+                <div className="flex justify-between items-center bg-page dark:bg-slate-950 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 text-[11px] overflow-x-auto">
                   {selectedOrder.timeline.map((st, idx) => (
                     <div key={idx} className="flex items-center gap-2 shrink-0">
                       <div className="flex flex-col items-center">
@@ -2155,12 +2155,12 @@ export default function RiderHistoryTab() {
                   onChange={(e) => setRiderNotesText(e.target.value)}
                   rows={2}
                   placeholder="Add notes about this delivery..."
-                  className="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs font-bold text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 text-xs font-bold text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 />
               </div>
 
               <div className="flex justify-end gap-2 pt-2">
-                <button type="button" onClick={() => setActiveModal(null)} className="px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-extrabold cursor-pointer active:scale-95 transition">
+                <button type="button" onClick={() => setActiveModal(null)} className="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-extrabold cursor-pointer active:scale-95 transition">
                   Close
                 </button>
               </div>
@@ -2169,7 +2169,7 @@ export default function RiderHistoryTab() {
 
           {/* 9. PROOF OF DELIVERY MODAL (Page 30 PDF) */}
           {activeModal === 'proof' && (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+            <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
               <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
                 <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                   <ShieldCheck size={18} className="text-emerald-500" /> Proof of Delivery (POD)
@@ -2183,23 +2183,23 @@ export default function RiderHistoryTab() {
                   <img src={selectedOrder.deliveryPhoto} alt="Delivery Photo" className="w-full h-40 object-cover rounded-2xl border border-slate-200 dark:border-slate-800" />
                 </div>
 
-                <div className="flex justify-between items-center p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <div className="flex justify-between items-center p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                   <span className="text-slate-400 font-bold">Customer Signature:</span>
                   <strong className="font-serif italic text-base text-amber-500">{selectedOrder.signature}</strong>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 font-mono text-[11px]">
-                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                  <div className="p-2.5 rounded-xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                     <span className="text-slate-400 block text-[9px] font-sans">Verified OTP</span>
                     <strong className="text-emerald-500 font-black text-sm">{selectedOrder.otp}</strong>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                  <div className="p-2.5 rounded-xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                     <span className="text-slate-400 block text-[9px] font-sans">QR Scan</span>
                     <strong className="text-emerald-500 font-black text-xs">VERIFIED ✓</strong>
                   </div>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-[10px] text-slate-400 font-mono">
+                <div className="p-2.5 rounded-xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-[10px] text-slate-400 font-mono">
                   GPS Tag: {selectedOrder.gps} • {selectedOrder.completionTime}
                 </div>
               </div>
@@ -2214,7 +2214,7 @@ export default function RiderHistoryTab() {
 
           {/* 10. MAP ROUTE HISTORY MODAL (Page 31 PDF) */}
           {activeModal === 'route' && (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 text-xs sa-rise">
+            <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 text-xs sa-rise">
               <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
                 <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                   <Navigation size={18} className="text-amber-500" /> Route History &amp; GPS Log
@@ -2233,15 +2233,15 @@ export default function RiderHistoryTab() {
               </div>
 
               <div className="grid grid-cols-3 gap-2 font-mono text-[11px] text-center">
-                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <div className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                   <span className="text-[10px] text-slate-400 font-sans block">Distance</span>
                   <strong className="text-slate-900 dark:text-white font-black">{selectedOrder.distance}</strong>
                 </div>
-                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <div className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                   <span className="text-[10px] text-slate-400 font-sans block">Travel Time</span>
                   <strong className="text-slate-900 dark:text-white font-black">{selectedOrder.duration}</strong>
                 </div>
-                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <div className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                   <span className="text-[10px] text-slate-400 font-sans block">Avg Speed</span>
                   <strong className="text-amber-500 font-black">{selectedOrder.route.speed}</strong>
                 </div>
@@ -2257,7 +2257,7 @@ export default function RiderHistoryTab() {
 
           {/* 12. CUSTOMER RATING & FEEDBACK MODAL (Page 32 PDF) */}
           {activeModal === 'feedback' && (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+            <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
               <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
                 <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                   <Star size={18} className="fill-amber-400 text-amber-400" /> Customer Feedback &amp; Review
@@ -2273,7 +2273,7 @@ export default function RiderHistoryTab() {
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+                <div className="p-3.5 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
                   <span className="text-[10px] font-bold text-slate-400 uppercase block">Customer Review Note</span>
                   <p className="text-slate-800 dark:text-slate-200 italic font-medium text-xs">
                     "{selectedOrder.feedback}"
@@ -2291,7 +2291,7 @@ export default function RiderHistoryTab() {
 
           {/* SUPPORT TICKET & REPORT DISPUTE MODAL (Page 34 PDF) */}
           {activeModal === 'ticket' && (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+            <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
               <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
                 <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                   <AlertTriangle size={18} className="text-rose-500" /> Reopen Ticket / Report Issue
@@ -2305,7 +2305,7 @@ export default function RiderHistoryTab() {
                   <select
                     value={issueReason}
                     onChange={(e) => setIssueReason(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 dark:text-slate-200"
+                    className="w-full bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 dark:text-slate-200"
                   >
                     <option value="Payment Issue">Payment / Payout Discrepancy</option>
                     <option value="Customer Not Available">Customer Not Available</option>
@@ -2323,12 +2323,12 @@ export default function RiderHistoryTab() {
                     value={issueComment}
                     onChange={(e) => setIssueComment(e.target.value)}
                     placeholder="Describe the issue regarding this delivery..."
-                    className="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs font-bold text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    className="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 text-xs font-bold text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
                   />
                 </div>
 
                 <div className="flex justify-end gap-2 pt-2">
-                  <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-extrabold cursor-pointer active:scale-95 transition">
+                  <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-page font-extrabold cursor-pointer active:scale-95 transition">
                     Cancel
                   </button>
                   <button type="submit" className="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-extrabold cursor-pointer shadow active:scale-95 transition">
@@ -2341,7 +2341,7 @@ export default function RiderHistoryTab() {
 
           {/* EARNINGS DETAILS MODAL (Page 31 PDF) */}
           {activeModal === 'earningsDetails' && (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+            <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
               <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
                 <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                   <DollarSign size={18} className="text-amber-500" /> Full Earnings Breakdown (Page 31)
@@ -2372,7 +2372,7 @@ export default function RiderHistoryTab() {
 
           {/* INVOICE MODAL */}
           {activeModal === 'invoice' && (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+            <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
               <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
                 <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                   <FileText size={18} className="text-emerald-500" /> Delivery Tax Invoice: {selectedOrder.id}

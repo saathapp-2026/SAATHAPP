@@ -181,7 +181,7 @@ export default function WorkerPortal({
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+    <div className="min-h-screen bg-page dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
       <Header
         cartCount={cartCount}
         onCartClick={onCartClick}
@@ -249,7 +249,7 @@ export default function WorkerPortal({
                   }}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="py-3.5 px-8 rounded-btn border border-slate-205 dark:border-slate-800 bg-white/40 dark:bg-slate-800/40 text-slate-700 dark:text-slate-200 font-extrabold text-sm sm:text-base cursor-pointer hover:bg-white/70 dark:hover:bg-slate-800/70 transition-colors"
+                  className="py-3.5 px-8 rounded-btn border border-slate-205 dark:border-slate-800 bg-white/40 text-slate-700 dark:text-slate-200 font-extrabold text-sm sm:text-base cursor-pointer hover:bg-white/70 transition-colors"
                 >
                   Worker Login
                 </motion.button>
@@ -275,7 +275,7 @@ export default function WorkerPortal({
         </section>
 
         {/* Section 2: Why Join SaathApp */}
-        <section ref={sectionRefs.whyjoin} className="py-16 bg-slate-100/50 dark:bg-slate-900/20 border-t border-b border-slate-200/50 dark:border-slate-850">
+        <section ref={sectionRefs.whyjoin} className="py-16 bg-slate-100/50 border-t border-b border-slate-200/50 dark:border-slate-850">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
             <div className="space-y-3 max-w-xl mx-auto">
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white uppercase tracking-wider">Why Join SaathApp</h2>
@@ -284,7 +284,7 @@ export default function WorkerPortal({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {benefits.map((benefit, idx) => (
-                <div key={idx} className="p-6 bg-white dark:bg-slate-900 rounded-card border border-slate-200/40 dark:border-slate-800 text-left space-y-4 shadow-sm hover:shadow-md transition-shadow">
+                <div key={idx} className="p-6 bg-surface rounded-card border border-slate-200/40 dark:border-slate-800 text-left space-y-4 shadow-sm hover:shadow-md transition-shadow">
                   <div className="w-12 h-12 rounded-xl bg-[#6C3BFF]/10 text-[#6C3BFF] dark:bg-[#6C3BFF]/15 flex items-center justify-center">
                     <benefit.icon size={22} />
                   </div>
@@ -305,7 +305,7 @@ export default function WorkerPortal({
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category, idx) => (
-              <div key={idx} className="p-6 bg-white dark:bg-slate-900 rounded-card border border-slate-200/40 dark:border-slate-800 text-left flex items-start gap-4 shadow-sm hover:shadow-soft transition-all">
+              <div key={idx} className="p-6 bg-surface rounded-card border border-slate-200/40 dark:border-slate-800 text-left flex items-start gap-4 shadow-sm hover:shadow-soft transition-all">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 mt-0.5">
                   <category.icon size={20} />
                 </div>
@@ -319,7 +319,7 @@ export default function WorkerPortal({
         </section>
 
         {/* Section 4: Registration Process */}
-        <section ref={sectionRefs.process} className="py-16 bg-slate-100/50 dark:bg-slate-900/20 border-t border-b border-slate-200/50 dark:border-slate-850 text-center">
+        <section ref={sectionRefs.process} className="py-16 bg-slate-100/50 border-t border-b border-slate-200/50 dark:border-slate-850 text-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="space-y-3 max-w-xl mx-auto">
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white uppercase tracking-wider">Registration Process</h2>
@@ -328,7 +328,7 @@ export default function WorkerPortal({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
               {processSteps.map((step, idx) => (
-                <div key={idx} className="space-y-4 text-left bg-white dark:bg-slate-900 p-6 rounded-card border border-slate-200/40 dark:border-slate-800 shadow-sm relative z-10">
+                <div key={idx} className="space-y-4 text-left bg-surface p-6 rounded-card border border-slate-200/40 dark:border-slate-800 shadow-sm relative z-10">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-black uppercase text-primary tracking-widest">{step.step}</span>
                     <span className="text-3xl font-black text-slate-200 dark:text-slate-800 font-mono">0{idx + 1}</span>
@@ -350,7 +350,7 @@ export default function WorkerPortal({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {requiredDocuments.map((doc, idx) => (
-              <div key={idx} className="p-5 bg-white dark:bg-slate-900 rounded-card border border-slate-200/40 dark:border-slate-800 text-left space-y-3 shadow-sm hover:shadow-soft transition-all">
+              <div key={idx} className="p-5 bg-surface rounded-card border border-slate-200/40 dark:border-slate-800 text-left space-y-3 shadow-sm hover:shadow-soft transition-all">
                 <div className="w-10 h-10 rounded-xl bg-[#6C3BFF]/10 text-[#6C3BFF] dark:bg-[#6C3BFF]/20 flex items-center justify-center">
                   <doc.icon size={20} />
                 </div>
@@ -362,7 +362,7 @@ export default function WorkerPortal({
         </section>
 
         {/* Section 6: Earnings */}
-        <section ref={sectionRefs.earnings} className="py-16 bg-slate-100/50 dark:bg-slate-900/20 border-t border-b border-slate-200/50 dark:border-slate-850 text-center">
+        <section ref={sectionRefs.earnings} className="py-16 bg-slate-100/50 border-t border-b border-slate-200/50 dark:border-slate-850 text-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="space-y-3 max-w-xl mx-auto">
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white uppercase tracking-wider">Earnings and Incentives</h2>
@@ -371,7 +371,7 @@ export default function WorkerPortal({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
               {earningsModel.map((model, idx) => (
-                <div key={idx} className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-card shadow-sm space-y-4">
+                <div key={idx} className="p-6 bg-surface border border-slate-200 dark:border-slate-800 rounded-card shadow-sm space-y-4">
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">{model.title}</h3>
                     <span className="text-xs font-black text-[#6C3BFF] uppercase tracking-wider">{model.highlight}</span>
@@ -383,7 +383,7 @@ export default function WorkerPortal({
                       <span>Earning Limit Target</span>
                       <span>{model.progress}%</span>
                     </div>
-                    <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div className="w-full h-2 bg-page rounded-full overflow-hidden">
                       <div className={`h-full ${model.progressColor}`} style={{ width: `${model.progress}%` }} />
                     </div>
                   </div>
@@ -402,10 +402,10 @@ export default function WorkerPortal({
 
           <div className="space-y-4 text-left">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+              <div key={idx} className="bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
                 <button
                   onClick={() => toggleFaq(idx)}
-                  className="w-full px-6 py-4 flex items-center justify-between text-xs sm:text-sm font-black text-slate-850 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-850/30 text-left transition-colors cursor-pointer"
+                  className="w-full px-6 py-4 flex items-center justify-between text-xs sm:text-sm font-black text-slate-850 dark:text-slate-200 hover:bg-page text-left transition-colors cursor-pointer"
                 >
                   <span>{faq.q}</span>
                   <ChevronUp size={16} className={`text-slate-405 transition-transform duration-300 ${faqOpen[idx] ? '' : 'rotate-180'}`} />
@@ -468,16 +468,16 @@ export default function WorkerPortal({
               initial={{ scale: 0.9, opacity: 0, y: 15 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 15 }}
-              className="w-full max-w-lg bg-white dark:bg-slate-900 rounded-card border border-slate-205 dark:border-slate-800 shadow-premium overflow-hidden text-left"
+              className="w-full max-w-lg bg-surface rounded-card border border-slate-205 dark:border-slate-800 shadow-premium overflow-hidden text-left"
             >
-              <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800/40 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/50">
+              <div className="px-6 py-5 border-b border-slate-100  flex items-center justify-between bg-slate-50/50">
                 <div>
                   <h3 className="text-base sm:text-lg font-black text-slate-800 dark:text-white">Worker Onboarding Form</h3>
                   <p className="text-[10px] text-slate-450 mt-0.5">Register as an assistant service partner</p>
                 </div>
                 <button
                   onClick={() => setShowApplyModal(false)}
-                  className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-colors cursor-pointer"
+                  className="w-8 h-8 rounded-full bg-page hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-colors cursor-pointer"
                 >
                   ✕
                 </button>

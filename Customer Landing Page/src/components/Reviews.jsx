@@ -27,20 +27,20 @@ export default function Reviews() {
   const current = testimonials.length > 0 ? testimonials[activeIndex] : null;
 
   return (
-    <section className="py-12 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40 relative w-full">
+    <section className="py-12 bg-surface border-b border-slate-100  relative w-full">
       {/* Arrow Navigation */}
       {testimonials.length > 1 && (
         <>
           <button
             onClick={handlePrev}
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hidden sm:flex items-center justify-center transition-colors shadow-sm border border-slate-200 dark:border-slate-700 z-10"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-page hover:bg-slate-200 text-slate-600 dark:text-slate-300 hidden sm:flex items-center justify-center transition-colors shadow-sm border border-slate-200 z-10"
             title="Previous Review"
           >
             <ChevronLeft size={16} />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hidden sm:flex items-center justify-center transition-colors shadow-sm border border-slate-200 dark:border-slate-700 z-10"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-page hover:bg-slate-200 text-slate-600 dark:text-slate-300 hidden sm:flex items-center justify-center transition-colors shadow-sm border border-slate-200 z-10"
             title="Next Review"
           >
             <ChevronRight size={16} />
@@ -60,7 +60,7 @@ export default function Reviews() {
         <div className="relative min-h-[220px] flex items-center justify-center">
           
           {!current ? (
-            <div className="p-8 max-w-xl mx-auto rounded-card border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/40 text-center text-sm font-semibold text-slate-400">
+            <div className="p-8 max-w-xl mx-auto rounded-card border border-dashed border-slate-200 dark:border-slate-800 bg-page  text-center text-sm font-semibold text-slate-400">
               No customer reviews yet. Be the first to share your experience!
             </div>
           ) : (

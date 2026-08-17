@@ -41,7 +41,7 @@ export default function Step4_RiderLocationVehicle({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-3xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-3.5 py-1 text-xs font-bold text-amber-600 dark:text-amber-400">
           Phase 3 — Location Tier & Vehicle Selection
         </div>
@@ -67,7 +67,7 @@ export default function Step4_RiderLocationVehicle({ onNext, onPrev }) {
                     onClick={() => updateFormData({ locationTier: tier.id })}
                     className={`cursor-pointer rounded-2xl border p-4 transition ${isSelected
                         ? 'border-amber-500 bg-amber-500/10 text-slate-900 dark:text-white shadow-md ring-2 ring-amber-500/30'
-                        : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-slate-300'
+                        : 'border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 hover:border-slate-300'
                       }`}
                   >
                     <MapPin size={18} className={isSelected ? 'text-amber-500' : 'text-slate-400'} />
@@ -105,7 +105,7 @@ export default function Step4_RiderLocationVehicle({ onNext, onPrev }) {
                 <select
                   value={formData.vehicleType}
                   onChange={(e) => updateFormData({ vehicleType: e.target.value })}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
                 >
                   {VEHICLE_OPTIONS.map((v) => (
                     <option key={v} value={v}>
@@ -124,7 +124,7 @@ export default function Step4_RiderLocationVehicle({ onNext, onPrev }) {
                 type="text"
                 value={formData.vehicleNumber}
                 onChange={(e) => updateFormData({ vehicleNumber: e.target.value.toUpperCase() })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
                 placeholder="e.g. BR-01-AB-9842"
               />
             </div>
@@ -140,7 +140,7 @@ export default function Step4_RiderLocationVehicle({ onNext, onPrev }) {
                 required
                 value={formData.city}
                 onChange={(e) => updateFormData({ city: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
                 placeholder="Patna"
               />
             </div>
@@ -153,7 +153,7 @@ export default function Step4_RiderLocationVehicle({ onNext, onPrev }) {
                 required
                 value={formData.state}
                 onChange={(e) => updateFormData({ state: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
                 placeholder="Bihar"
               />
             </div>
@@ -167,7 +167,7 @@ export default function Step4_RiderLocationVehicle({ onNext, onPrev }) {
                 required
                 value={formData.pincode}
                 onChange={(e) => updateFormData({ pincode: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
                 placeholder="800001"
               />
             </div>
@@ -177,7 +177,7 @@ export default function Step4_RiderLocationVehicle({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

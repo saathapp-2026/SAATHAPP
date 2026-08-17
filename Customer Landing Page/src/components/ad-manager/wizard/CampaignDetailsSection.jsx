@@ -108,7 +108,7 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
               <label className="block text-sm font-bold text-slate-900 mb-3">Select Cities</label>
               <div className="flex flex-wrap gap-2 mb-4">
                 {(draft.targetCities || []).map(city => (
-                  <div key={city} className="flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-md border border-slate-200 text-sm font-medium text-slate-700">
+                  <div key={city} className="flex items-center gap-1.5 bg-page px-3 py-1.5 rounded-md border border-slate-200 text-sm font-medium text-slate-700">
                     {city}
                     <button onClick={() => toggleCity(city)} className="text-slate-400 hover:text-slate-600">
                       <X size={14} />
@@ -142,7 +142,7 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
                         type="button"
                         onClick={() => updateDraft({ radius: rad })}
                         className={`px-3 py-1.5 text-xs font-bold rounded-lg border transition ${
-                          active ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
+                          active ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-page text-slate-700 border-slate-200 hover:border-slate-300'
                         }`}
                       >
                         {rad}

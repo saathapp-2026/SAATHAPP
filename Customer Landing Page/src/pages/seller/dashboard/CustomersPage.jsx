@@ -326,7 +326,7 @@ export default function CustomersPage() {
           <button
             type="button"
             onClick={() => setShowAllCards((v) => !v)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-surface hover:bg-page"
             title="Toggle all summary cards"
           >
             <LayoutGrid size={15} />
@@ -335,7 +335,7 @@ export default function CustomersPage() {
           <button
             type="button"
             onClick={() => setImportOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-surface hover:bg-page"
           >
             <Upload size={15} />
             Import

@@ -31,7 +31,7 @@ export default function InventoryTab() {
         {warehousesList.map((wh, idx) => (
           <div
             key={idx}
-            className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3"
+            className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-3"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -52,7 +52,7 @@ export default function InventoryTab() {
       </div>
 
       {/* Batch & Stock Table */}
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6 space-y-4">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm p-6 space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Batch & Expiry Management</h3>
           <span className="text-xs font-bold text-slate-500">ISO Batch Tracking Active</span>
@@ -60,7 +60,7 @@ export default function InventoryTab() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase tracking-wider">
+            <thead className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase tracking-wider">
               <tr>
                 <th className="p-3">Batch ID</th>
                 <th className="p-3">Item Description</th>
@@ -73,7 +73,7 @@ export default function InventoryTab() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
               {[].map((row, i) => (
-                <tr key={i} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                <tr key={i} className="hover:bg-page transition">
                   <td className="p-3 font-mono font-bold text-emerald-600 dark:text-emerald-400">{row.batch}</td>
                   <td className="p-3 font-extrabold text-slate-900 dark:text-white">{row.item}</td>
                   <td className="p-3">{row.wh}</td>

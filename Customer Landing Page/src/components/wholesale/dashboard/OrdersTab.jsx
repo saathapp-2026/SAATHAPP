@@ -211,7 +211,7 @@ export default function OrdersTab() {
             className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
               activeStatusTab === tab
                 ? 'bg-[#00986C] text-white shadow-md font-black'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
             }`}
           >
             {tab}
@@ -262,15 +262,15 @@ export default function OrdersTab() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by Order ID, Buyer Store Name, or Category..."
-              className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 pl-10 pr-4 py-3 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 shadow-sm"
+              className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface pl-10 pr-4 py-3 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 shadow-sm"
             />
           </div>
 
       {/* Orders Table */}
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase tracking-wider">
+            <thead className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase tracking-wider">
               <tr>
                 <th className="p-4">Order ID</th>
                 <th className="p-4">Buyer Store</th>
@@ -283,7 +283,7 @@ export default function OrdersTab() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
               {filteredOrders.map((o) => (
-                <tr key={o.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                <tr key={o.id} className="hover:bg-page transition">
                   <td className="p-4 font-mono font-bold text-[#00986C]">{o.id}</td>
                   <td className="p-4 font-extrabold text-slate-900 dark:text-white">{o.buyer}</td>
                   <td className="p-4">{o.category} ({o.itemsCount} SKUs)</td>
@@ -292,7 +292,7 @@ export default function OrdersTab() {
                     <select
                       value={o.status}
                       onChange={(e) => handleUpdateStatus(o.id, e.target.value)}
-                      className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-1.5 text-xs font-bold text-slate-900 dark:text-white focus:outline-none cursor-pointer"
+                      className="rounded-xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-1.5 text-xs font-bold text-slate-900 dark:text-white focus:outline-none cursor-pointer"
                     >
                       <option value="New Orders">New Orders</option>
                       <option value="Accepted">Accepted</option>
@@ -335,7 +335,7 @@ export default function OrdersTab() {
       {/* Order Detail Modal */}
       {selectedOrder && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Order Details - {selectedOrder.id}</h3>
               <button type="button" onClick={() => setSelectedOrder(null)} className="text-slate-400 font-bold p-1">
@@ -357,7 +357,7 @@ export default function OrdersTab() {
               <button
                 type="button"
                 onClick={() => setSelectedOrder(null)}
-                className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 font-bold"
+                className="px-4 py-2 rounded-xl border border-slate-300 font-bold"
               >
                 Close
               </button>
@@ -379,7 +379,7 @@ export default function OrdersTab() {
       {/* CSV EXPORTED PREVIEW MODAL */}
       {previewModalData && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-4xl w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-4xl w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-[#00986C] flex items-center justify-center font-bold">
@@ -399,7 +399,7 @@ export default function OrdersTab() {
 
             <div className="overflow-x-auto max-h-80 border border-slate-200 dark:border-slate-800 rounded-2xl">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-100 dark:bg-slate-950 font-bold text-slate-700 dark:text-slate-300 uppercase text-[10px]">
+                <thead className="bg-page dark:bg-slate-950 font-bold text-slate-700 dark:text-slate-300 uppercase text-[10px]">
                   <tr>
                     {previewModalData.headers.map((h, i) => (
                       <th key={i} className="p-3 border-b border-slate-200 dark:border-slate-800">{h}</th>
@@ -408,7 +408,7 @@ export default function OrdersTab() {
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                   {previewModalData.rows.map((row, idx) => (
-                    <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-950">
+                    <tr key={idx} className="hover:bg-page">
                       {row.map((cell, cIdx) => (
                         <td key={cIdx} className="p-3 font-mono">{cell}</td>
                       ))}

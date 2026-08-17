@@ -521,7 +521,7 @@ export default function AnalyticsTab() {
         {/* Toolbar Controls */}
         <div className="flex flex-wrap items-center gap-2">
           {/* Date Range */}
-          <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700">
+          <div className="flex items-center gap-1.5 bg-page p-1.5 rounded-2xl border border-slate-200">
             <span className="text-[10px] font-black uppercase text-slate-400 pl-2">Range:</span>
             <select
               value={dateRange}
@@ -529,7 +529,7 @@ export default function AnalyticsTab() {
                 setDateRange(e.target.value);
                 addToast?.(`Updated date range to ${e.target.value}`, 'info');
               }}
-              className="bg-white dark:bg-slate-900 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-800 dark:text-slate-200 border-0 focus:ring-0 cursor-pointer shadow-sm"
+              className="bg-surface px-3 py-1.5 rounded-xl text-xs font-bold text-slate-800 dark:text-slate-200 border-0 focus:ring-0 cursor-pointer shadow-sm"
             >
               <option value="1 Aug – 31 Aug 2026">1 Aug – 31 Aug 2026</option>
               <option value="1 Jul – 31 Jul 2026">1 Jul – 31 Jul 2026</option>
@@ -539,7 +539,7 @@ export default function AnalyticsTab() {
           </div>
 
           {/* Compare With */}
-          <div className="hidden sm:flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700">
+          <div className="hidden sm:flex items-center gap-1.5 bg-page p-1.5 rounded-2xl border border-slate-200">
             <span className="text-[10px] font-black uppercase text-slate-400 pl-2">Compare:</span>
             <select
               value={compareRange}
@@ -547,7 +547,7 @@ export default function AnalyticsTab() {
                 setCompareRange(e.target.value);
                 addToast?.(`Comparing with ${e.target.value}`, 'info');
               }}
-              className="bg-white dark:bg-slate-900 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-800 dark:text-slate-200 border-0 focus:ring-0 cursor-pointer shadow-sm"
+              className="bg-surface px-3 py-1.5 rounded-xl text-xs font-bold text-slate-800 dark:text-slate-200 border-0 focus:ring-0 cursor-pointer shadow-sm"
             >
               <option value="1 Jul – 31 Jul 2026">1 Jul – 31 Jul 2026</option>
               <option value="Previous Quarter">Previous Quarter</option>
@@ -559,7 +559,7 @@ export default function AnalyticsTab() {
           <button
             type="button"
             onClick={() => addToast?.('🔄 Analytics data refreshed successfully', 'success')}
-            className="p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer active:scale-95 shadow-sm"
+            className="p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface text-slate-700 dark:text-slate-300 hover:bg-page transition cursor-pointer active:scale-95 shadow-sm"
             title="Refresh Data"
           >
             <RefreshCw size={15} className="text-[#00986C]" />
@@ -569,7 +569,7 @@ export default function AnalyticsTab() {
           <button
             type="button"
             onClick={() => setActiveModal('schedule')}
-            className="p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer active:scale-95 shadow-sm"
+            className="p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface text-slate-700 dark:text-slate-300 hover:bg-page transition cursor-pointer active:scale-95 shadow-sm"
             title="Schedule Automated Email Reports"
           >
             <Calendar size={15} className="text-[#00986C]" />
@@ -579,7 +579,7 @@ export default function AnalyticsTab() {
           <button
             type="button"
             onClick={() => setActiveModal('share')}
-            className="p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer active:scale-95 shadow-sm"
+            className="p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface text-slate-700 dark:text-slate-300 hover:bg-page transition cursor-pointer active:scale-95 shadow-sm"
             title="Share Report"
           >
             <Share2 size={15} className="text-[#00986C]" />
@@ -597,7 +597,7 @@ export default function AnalyticsTab() {
 
             {/* Export Dropdown */}
             {isExportDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-30 text-xs font-bold space-y-1 sa-rise">
+              <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-30 text-xs font-bold space-y-1 sa-rise">
                 <button
                   type="button"
                   onClick={() => {
@@ -605,7 +605,7 @@ export default function AnalyticsTab() {
                     setIsExportDropdownOpen(false);
                     addToast?.('Generated PDF report with SaathApp Official Logo', 'success');
                   }}
-                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-page flex items-center gap-2 text-slate-800 dark:text-slate-200"
                 >
                   <FileText size={16} className="text-rose-500" /> Export as PDF (.pdf)
                 </button>
@@ -616,7 +616,7 @@ export default function AnalyticsTab() {
                     setIsExportDropdownOpen(false);
                     addToast?.('Exported Excel report with 9 separate sheets', 'success');
                   }}
-                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-page flex items-center gap-2 text-slate-800 dark:text-slate-200"
                 >
                   <FileSpreadsheet size={16} className="text-emerald-500" /> Export as Excel (.xlsx)
                 </button>
@@ -627,7 +627,7 @@ export default function AnalyticsTab() {
                     setIsExportDropdownOpen(false);
                     addToast?.('Exported CSV dataset report', 'success');
                   }}
-                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-page flex items-center gap-2 text-slate-800 dark:text-slate-200"
                 >
                   <FileCode size={16} className="text-teal-500" /> Export as CSV (.csv)
                 </button>
@@ -638,7 +638,7 @@ export default function AnalyticsTab() {
                     setIsExportDropdownOpen(false);
                     addToast?.('Exported Word professional report (6 Sections)', 'success');
                   }}
-                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-page flex items-center gap-2 text-slate-800 dark:text-slate-200"
                 >
                   <FileText size={16} className="text-blue-600" /> Export as Word (.docx)
                 </button>
@@ -649,7 +649,7 @@ export default function AnalyticsTab() {
                     setIsExportDropdownOpen(false);
                     addToast?.('Generated PowerPoint presentation (9 Slides)', 'success');
                   }}
-                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200"
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-page flex items-center gap-2 text-slate-800 dark:text-slate-200"
                 >
                   <Presentation size={16} className="text-amber-500" /> Export as PowerPoint (.pptx)
                 </button>
@@ -660,7 +660,7 @@ export default function AnalyticsTab() {
                     generatePdfReport(reportConfig);
                     setIsExportDropdownOpen(false);
                   }}
-                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-600 dark:text-slate-400"
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-page flex items-center gap-2 text-slate-600 dark:text-slate-400"
                 >
                   <Printer size={16} /> Print Report
                 </button>
@@ -670,7 +670,7 @@ export default function AnalyticsTab() {
                     addToast?.('Report emailed to registered seller account', 'success');
                     setIsExportDropdownOpen(false);
                   }}
-                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2 text-slate-600 dark:text-slate-400"
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-page flex items-center gap-2 text-slate-600 dark:text-slate-400"
                 >
                   <Mail size={16} /> Email Report
                 </button>
@@ -701,7 +701,7 @@ export default function AnalyticsTab() {
             }}
             className={`shrink-0 rounded-xl px-4 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${activeAnalyticsTab === tab
                 ? 'bg-emerald-600 text-white shadow-md font-black'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
               }`}
           >
             {tab}
@@ -712,7 +712,7 @@ export default function AnalyticsTab() {
       {/* 4. TABLES & DONUT CHART ROW (3 COLUMNS) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Top Performing Categories Table */}
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3 flex flex-col justify-between">
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-3 flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center mb-3">
               <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white flex items-center gap-1.5">
@@ -738,7 +738,7 @@ export default function AnalyticsTab() {
                     { name: 'Packaging & Supplies', orders: 198, gmv: '₹3.6L', growth: '↑ 12.1%' },
                     { name: 'Hardware & Tools', orders: 135, gmv: '₹2.1L', growth: '↑ 10.7%' },
                   ].map((c, i) => (
-                    <tr key={i} className="hover:bg-slate-50 dark:hover:bg-slate-950 transition cursor-pointer" onClick={() => addToast?.(`Category: ${c.name} (${c.orders} orders)`, 'info')}>
+                    <tr key={i} className="hover:bg-page transition cursor-pointer" onClick={() => addToast?.(`Category: ${c.name} (${c.orders} orders)`, 'info')}>
                       <td className="py-2.5 font-extrabold text-slate-900 dark:text-white truncate max-w-[130px]">{c.name}</td>
                       <td className="py-2.5 text-right font-mono text-slate-500">{c.orders}</td>
                       <td className="py-2.5 text-right font-mono font-bold">{c.gmv}</td>
@@ -760,7 +760,7 @@ export default function AnalyticsTab() {
         </div>
 
         {/* Top Selling Products Table */}
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3 flex flex-col justify-between">
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-3 flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center mb-3">
               <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white flex items-center gap-1.5">
@@ -779,7 +779,7 @@ export default function AnalyticsTab() {
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
                   {[].map((p, i) => (
-                    <tr key={i} className="hover:bg-slate-50 dark:hover:bg-slate-950 transition cursor-pointer" onClick={() => addToast?.(`Product: ${p.title} (${p.gmv})`, 'info')}>
+                    <tr key={i} className="hover:bg-page transition cursor-pointer" onClick={() => addToast?.(`Product: ${p.title} (${p.gmv})`, 'info')}>
                       <td className="py-2.5 font-extrabold text-slate-900 dark:text-white flex items-center gap-2 truncate max-w-[150px]">
                         <img src={p.img} alt={p.title} className="w-7 h-7 rounded-lg object-cover border border-slate-200 shrink-0" />
                         <span className="truncate">{p.title}</span>
@@ -803,7 +803,7 @@ export default function AnalyticsTab() {
         </div>
 
         {/* Sales by Top States Donut Chart */}
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3 flex flex-col justify-between">
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-3 flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center mb-2">
               <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white flex items-center gap-1.5">
@@ -828,7 +828,7 @@ export default function AnalyticsTab() {
                   { name: 'Delhi', val: '₹2.8L (9.9%)', color: 'bg-teal-500' },
                   { name: 'Others', val: '₹2.6L (9.1%)', color: 'bg-slate-400' },
                 ].map((st, i) => (
-                  <div key={i} className="flex items-center justify-between text-[11px] hover:bg-slate-50 dark:hover:bg-slate-950 p-1 rounded transition cursor-pointer" onClick={() => addToast?.(`State: ${st.name} - ${st.val}`, 'info')}>
+                  <div key={i} className="flex items-center justify-between text-[11px] hover:bg-page p-1 rounded transition cursor-pointer" onClick={() => addToast?.(`State: ${st.name} - ${st.val}`, 'info')}>
                     <div className="flex items-center gap-1.5 truncate">
                       <span className={`w-2 h-2 rounded-full ${st.color} shrink-0`} />
                       <span className="text-slate-700 dark:text-slate-300 truncate">{st.name}</span>
@@ -851,7 +851,7 @@ export default function AnalyticsTab() {
       </div>
 
       {/* 5. AI BUSINESS SUMMARY BANNER */}
-      <div className="rounded-3xl bg-slate-50 dark:bg-slate-950 p-5 border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+      <div className="rounded-3xl bg-page dark:bg-slate-950 p-5 border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0">
             <Sparkles size={20} />
@@ -881,7 +881,7 @@ export default function AnalyticsTab() {
       {/* 6. REPORT SETTINGS POPUP MODAL (PDF Page 25) */}
       {isReportModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
                 <Download className="text-emerald-500" size={18} /> Report Settings Popup
@@ -907,7 +907,7 @@ export default function AnalyticsTab() {
                     onClick={() => setReportConfig((p) => ({ ...p, format: fmt }))}
                     className={`py-2 rounded-xl font-black uppercase text-center border transition ${reportConfig.format === fmt
                         ? 'bg-emerald-500/20 border-emerald-500 text-emerald-600 dark:text-emerald-400 shadow-sm'
-                        : 'bg-slate-100 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
+                        : 'bg-page dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
                       }`}
                   >
                     {fmt}
@@ -923,7 +923,7 @@ export default function AnalyticsTab() {
               <select
                 value={reportConfig.dateRange}
                 onChange={(e) => setReportConfig((p) => ({ ...p, dateRange: e.target.value }))}
-                className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
+                className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-page dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
               >
                 <option value="Last 30 Days">Last 30 Days</option>
                 <option value="This Month">This Month</option>
@@ -932,7 +932,7 @@ export default function AnalyticsTab() {
               </select>
             </div>
 
-            <div className="space-y-2 bg-slate-50 dark:bg-slate-950 p-3 rounded-2xl border border-slate-200 dark:border-slate-800">
+            <div className="space-y-2 bg-page dark:bg-slate-950 p-3 rounded-2xl border border-slate-200 dark:border-slate-800">
               <label className="block font-bold uppercase text-slate-700 dark:text-slate-300 text-[10px]">Include</label>
               <div className="grid grid-cols-2 gap-2 text-[11px]">
                 {[
@@ -961,7 +961,7 @@ export default function AnalyticsTab() {
                 <select
                   value={reportConfig.orientation}
                   onChange={(e) => setReportConfig((p) => ({ ...p, orientation: e.target.value }))}
-                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2 font-bold text-slate-900 dark:text-white"
+                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-page dark:bg-slate-950 p-2 font-bold text-slate-900 dark:text-white"
                 >
                   <option value="portrait">Portrait</option>
                   <option value="landscape">Landscape</option>
@@ -974,7 +974,7 @@ export default function AnalyticsTab() {
                   type="text"
                   value={reportConfig.fileName}
                   onChange={(e) => setReportConfig((p) => ({ ...p, fileName: e.target.value }))}
-                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2 font-mono text-xs text-slate-900 dark:text-white font-bold"
+                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-page dark:bg-slate-950 p-2 font-mono text-xs text-slate-900 dark:text-white font-bold"
                 />
               </div>
             </div>
@@ -983,7 +983,7 @@ export default function AnalyticsTab() {
               <button
                 type="button"
                 onClick={() => setIsReportModalOpen(false)}
-                className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold"
+                className="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 dark:text-slate-300 font-bold"
               >
                 Cancel
               </button>
@@ -1002,7 +1002,7 @@ export default function AnalyticsTab() {
       {/* 7. SCHEDULE REPORT MODAL */}
       {activeModal === 'schedule' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
                 <Calendar className="text-[#00986C]" size={18} /> Schedule Automated Email Report
@@ -1017,7 +1017,7 @@ export default function AnalyticsTab() {
                   type="email"
                   value={scheduleEmail}
                   onChange={(e) => setScheduleEmail(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
+                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-page dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
                 />
               </div>
 
@@ -1026,7 +1026,7 @@ export default function AnalyticsTab() {
                 <select
                   value={scheduleFrequency}
                   onChange={(e) => setScheduleFrequency(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
+                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-page dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
                 >
                   <option value="daily">Daily Morning Summary (8:00 AM)</option>
                   <option value="weekly">Weekly Every Monday</option>
@@ -1056,7 +1056,7 @@ export default function AnalyticsTab() {
       {/* 8. SHARE REPORT MODAL */}
       {activeModal === 'share' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
                 <Share2 className="text-[#00986C]" size={18} /> Share Analytics Dashboard
@@ -1068,7 +1068,7 @@ export default function AnalyticsTab() {
               Anyone with this encrypted link will be able to view a read-only snapshot of this Analytics report.
             </p>
 
-            <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-950 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
+            <div className="flex items-center gap-2 bg-page dark:bg-slate-950 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
               <input
                 type="text"
                 readOnly
@@ -1085,7 +1085,7 @@ export default function AnalyticsTab() {
             </div>
 
             <div className="pt-2 flex justify-end">
-              <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 font-bold">Done</button>
+              <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-slate-200 font-bold">Done</button>
             </div>
           </div>
         </div>
@@ -1094,7 +1094,7 @@ export default function AnalyticsTab() {
       {/* 9. VIEW ALL CATEGORIES MODAL */}
       {activeModal === 'categories' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-2xl w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-2xl w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-black text-slate-900 dark:text-white">All Performing Categories Breakdown</h3>
               <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 hover:text-slate-200 font-bold p-1"><X size={18} /></button>
@@ -1120,7 +1120,7 @@ export default function AnalyticsTab() {
                     { name: 'Plumbing & Bathroom', orders: 110, gmv: '₹1.8L', growth: '+9.4%' },
                     { name: 'Safety & Protection', orders: 90, gmv: '₹1.3L', growth: '+8.2%' },
                   ].map((c, i) => (
-                    <tr key={i} className="hover:bg-slate-50 dark:hover:bg-slate-950">
+                    <tr key={i} className="hover:bg-page">
                       <td className="py-2.5 font-bold text-slate-900 dark:text-white">{c.name}</td>
                       <td className="py-2.5 text-right font-mono">{c.orders}</td>
                       <td className="py-2.5 text-right font-mono font-bold">{c.gmv}</td>
@@ -1141,7 +1141,7 @@ export default function AnalyticsTab() {
       {/* 10. AI DETAILED INSIGHTS MODAL */}
       {activeModal === 'aiInsights' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-xl w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-xl w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <Sparkles className="text-[#00986C]" size={20} /> AI Business Recommendations & Insights

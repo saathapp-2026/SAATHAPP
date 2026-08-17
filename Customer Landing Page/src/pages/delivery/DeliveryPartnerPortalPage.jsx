@@ -99,7 +99,7 @@ function DeliveryPortalInner(props) {
   // Welcome Page (Step 1)
   if (currentStep === 1) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100">
+      <div className="min-h-screen bg-page dark:bg-slate-950 text-slate-800 dark:text-slate-100">
         <Header
           cartCount={props.cartCount || 0}
           onCartClick={props.onCartClick || (() => {})}
@@ -128,7 +128,7 @@ function DeliveryPortalInner(props) {
             <button
               type="button"
               onClick={() => navigate('/')}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 shadow-sm hover:bg-slate-100 transition"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-surface px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 shadow-sm hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Back to Home
@@ -138,7 +138,7 @@ function DeliveryPortalInner(props) {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl"
+            className="overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl"
           >
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-2xl space-y-4">
@@ -167,7 +167,7 @@ function DeliveryPortalInner(props) {
                   </button>
                   <a
                     href="#delivery-fee-structure"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
                   >
                     View Onboarding Fee Matrix
                   </a>
@@ -204,7 +204,7 @@ function DeliveryPortalInner(props) {
 
   // Steps 2 to 11: Rider Onboarding Stepper
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col text-slate-900 dark:text-slate-100">
+    <div className="min-h-screen bg-page dark:bg-slate-950 flex flex-col text-slate-900 dark:text-slate-100">
       <DeliveryStepperHeader currentStep={currentStep} onSelectStep={handleSelectStep} />
 
       <main className="flex-1 pb-16">

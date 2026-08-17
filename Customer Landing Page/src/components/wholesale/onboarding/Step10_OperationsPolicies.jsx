@@ -28,7 +28,7 @@ export default function Step10_OperationsPolicies({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-3xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
           Phase 9 — Business Operations & Policies
         </div>
@@ -56,7 +56,7 @@ export default function Step10_OperationsPolicies({ onNext, onPrev }) {
                     className={`rounded-xl px-3.5 py-2 text-xs font-bold transition flex items-center gap-1.5 ${
                       isSelected
                         ? 'bg-emerald-600 text-white shadow-md'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
+                        : 'bg-page text-slate-700 dark:text-slate-300 hover:bg-slate-200'
                     }`}
                   >
                     {isSelected && <CheckCircle2 size={13} />}
@@ -79,7 +79,7 @@ export default function Step10_OperationsPolicies({ onNext, onPrev }) {
                   required
                   value={formData.workingHours}
                   onChange={(e) => updateFormData({ workingHours: e.target.value })}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                   placeholder="09:00 AM - 08:00 PM"
                 />
               </div>
@@ -92,7 +92,7 @@ export default function Step10_OperationsPolicies({ onNext, onPrev }) {
               <select
                 value={formData.orderProcessingTime}
                 onChange={(e) => updateFormData({ orderProcessingTime: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
               >
                 {PROCESSING_TIMES.map((t) => (
                   <option key={t} value={t}>
@@ -112,7 +112,7 @@ export default function Step10_OperationsPolicies({ onNext, onPrev }) {
                 type="text"
                 value={formData.returnPolicy}
                 onChange={(e) => updateFormData({ returnPolicy: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="7-Day Return for Damaged Goods"
               />
             </div>
@@ -124,7 +124,7 @@ export default function Step10_OperationsPolicies({ onNext, onPrev }) {
                 type="text"
                 value={formData.replacementPolicy}
                 onChange={(e) => updateFormData({ replacementPolicy: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="Instant Replacement"
               />
             </div>
@@ -136,7 +136,7 @@ export default function Step10_OperationsPolicies({ onNext, onPrev }) {
                 type="text"
                 value={formData.cancellationPolicy}
                 onChange={(e) => updateFormData({ cancellationPolicy: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="Before Dispatch"
               />
             </div>
@@ -144,7 +144,7 @@ export default function Step10_OperationsPolicies({ onNext, onPrev }) {
 
           {/* GST Billing & Invoicing Toggles */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+            <div className="flex items-center justify-between p-4 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
               <div>
                 <h4 className="text-xs font-extrabold text-slate-900 dark:text-white">GST Tax Invoice Support</h4>
                 <p className="text-[11px] text-slate-500">Provide GST input tax credit invoice to buyers.</p>
@@ -157,7 +157,7 @@ export default function Step10_OperationsPolicies({ onNext, onPrev }) {
               />
             </div>
 
-            <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+            <div className="flex items-center justify-between p-4 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
               <div>
                 <h4 className="text-xs font-extrabold text-slate-900 dark:text-white">Instant E-Invoice Generation</h4>
                 <p className="text-[11px] text-slate-500">Generate e-way bill and PDF invoice automatically.</p>
@@ -175,7 +175,7 @@ export default function Step10_OperationsPolicies({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

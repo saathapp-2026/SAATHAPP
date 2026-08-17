@@ -91,7 +91,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
             className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
               activeSubTab === tab
                 ? 'bg-emerald-600 text-white shadow-md font-black'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
             }`}
           >
             {tab}
@@ -107,24 +107,24 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
       ) : activeSubTab === 'Business Resources' ? (
         <BrandingHardwareStoreTab />
       ) : activeSubTab === 'Business Information' ? (
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4">
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm space-y-4">
           <h3 className="text-base font-black text-slate-900 dark:text-white">Registered Enterprise Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
             <div>
               <label className="block font-bold text-slate-400 uppercase mb-1">Company Legal Name</label>
-              <input type="text" readOnly value={profile.companyName} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 font-bold text-slate-900 dark:text-white" />
+              <input type="text" readOnly value={profile.companyName} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 font-bold text-slate-900 dark:text-white" />
             </div>
             <div>
               <label className="block font-bold text-slate-400 uppercase mb-1">Trade / Brand Name</label>
-              <input type="text" readOnly value={profile.tradeName} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 font-bold text-slate-900 dark:text-white" />
+              <input type="text" readOnly value={profile.tradeName} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 font-bold text-slate-900 dark:text-white" />
             </div>
             <div>
               <label className="block font-bold text-slate-400 uppercase mb-1">GSTIN Identifier</label>
-              <input type="text" readOnly value={profile.gstin} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 font-mono font-bold text-emerald-500" />
+              <input type="text" readOnly value={profile.gstin} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 font-mono font-bold text-emerald-500" />
             </div>
             <div>
               <label className="block font-bold text-slate-400 uppercase mb-1">Trade License Number</label>
-              <input type="text" readOnly value={profile.tradeLicense} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 font-mono font-bold text-slate-900 dark:text-white" />
+              <input type="text" readOnly value={profile.tradeLicense} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 font-mono font-bold text-slate-900 dark:text-white" />
             </div>
           </div>
         </div>
@@ -138,7 +138,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
               { title: 'Bank Account Penny Drop Audit', status: 'Verified 🟢', detail: 'Registered Bank Account Verified' },
               { title: 'Depot Physical Verification', status: 'Verified 🟢', detail: 'Warehouse Location Audited' },
             ].map((step, idx) => (
-              <div key={idx} className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+              <div key={idx} className="p-5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
                 <div className="flex justify-between items-center">
                   <h4 className="font-extrabold text-slate-900 dark:text-white text-sm">{step.title}</h4>
                   <span className="text-xs font-bold text-emerald-500">{step.status}</span>
@@ -149,7 +149,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
           </div>
         </div>
       ) : activeSubTab === 'GST / Tax Details' ? (
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4">
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm space-y-4">
           <h3 className="text-base font-black text-slate-900 dark:text-white">GSTIN Compliance &amp; Tax Tier Setup</h3>
           <div className="space-y-3 text-xs">
             <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex justify-between items-center">
@@ -162,7 +162,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
           </div>
         </div>
       ) : activeSubTab === 'Bank Details' ? (
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4">
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm space-y-4">
           <h3 className="text-base font-black text-slate-900 dark:text-white">Linked Bank Account for Daily Payouts</h3>
           <div className="p-5 rounded-3xl bg-slate-900 text-white border border-slate-800 space-y-3 font-mono text-xs">
             <div className="flex justify-between items-center border-b border-slate-800 pb-2">
@@ -288,7 +288,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
         {/* Section A: Business Legal Details */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
+        <div className="bg-surface p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
               <Building2 size={18} className="text-emerald-500" /> Business Information &amp; Legal Tax
@@ -303,37 +303,37 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
           </div>
 
           <div className="space-y-3 text-xs font-semibold">
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Enterprise Legal Name</span>
               <strong className="text-slate-900 dark:text-white font-extrabold">{profile.legalName}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">GSTIN Registration</span>
               <strong className="text-emerald-600 dark:text-emerald-400 font-mono font-bold">{profile.gstin} (Verified ✓)</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Company PAN Number</span>
               <strong className="text-slate-900 dark:text-white font-mono font-bold">{profile.pan}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Business Entity Type</span>
               <strong className="text-slate-900 dark:text-white font-bold">{profile.entityType}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Primary Authorized Representative</span>
               <strong className="text-slate-900 dark:text-white font-bold">{profile.ownerName} ({profile.ownerPhone})</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Official Business Email</span>
               <strong className="text-slate-900 dark:text-white font-mono">{profile.email}</strong>
             </div>
 
-            <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 space-y-1">
+            <div className="p-3 rounded-2xl bg-page space-y-1">
               <span className="text-slate-500 block">Registered Business Address</span>
               <strong className="text-slate-900 dark:text-white font-medium text-xs block">{profile.registeredAddress}</strong>
             </div>
@@ -341,7 +341,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
         </div>
 
         {/* Section B: Warehouse & Logistics Specifications */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
+        <div className="bg-surface p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
               <Warehouse size={18} className="text-amber-500" /> Warehouse &amp; Logistics Network
@@ -356,27 +356,27 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
           </div>
 
           <div className="space-y-3 text-xs font-semibold">
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Central Storage Capacity</span>
               <strong className="text-slate-900 dark:text-white font-extrabold">{profile.warehouseCapacity}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Minimum Order Quantity (MOQ)</span>
               <strong className="text-amber-500 font-bold">{profile.moq}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Active Service Districts</span>
               <strong className="text-emerald-500 font-bold">{profile.activeDistricts}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Order Dispatch SLA</span>
               <strong className="text-slate-900 dark:text-white font-bold">Same Day / 24 Hours Max</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Wholesale Quality Compliance</span>
               <strong className="text-emerald-500 font-mono">FSSAI &amp; ISO Certified ✓</strong>
             </div>
@@ -384,7 +384,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
         </div>
 
         {/* Section C: Bank Account & Payout Settlement */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
+        <div className="bg-surface p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
               <CreditCard size={18} className="text-purple-500" /> Bank Settlement Account
@@ -399,27 +399,27 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
           </div>
 
           <div className="space-y-3 text-xs font-semibold">
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Account Holder Name</span>
               <strong className="text-slate-900 dark:text-white font-extrabold">{profile.legalName}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Bank Name</span>
               <strong className="text-slate-900 dark:text-white font-bold">{profile.bankName}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Account Number</span>
               <strong className="text-amber-500 font-mono font-black">{profile.accountNo}</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">IFSC Code &amp; Branch</span>
               <strong className="text-slate-900 dark:text-white font-mono">{profile.ifscCode} ({profile.branch})</strong>
             </div>
 
-            <div className="flex justify-between p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Auto-Settlement Cycle</span>
               <strong className="text-emerald-500 font-black">{profile.settlementCycle} ✓</strong>
             </div>
@@ -427,7 +427,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
         </div>
 
         {/* Section D: Security & Account Controls */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
+        <div className="bg-surface p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
               <Lock size={18} className="text-rose-500" /> Security &amp; Portal Logout
@@ -436,14 +436,14 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
           </div>
 
           <div className="space-y-3 text-xs font-semibold">
-            <div className="flex justify-between items-center p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between items-center p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Enterprise Password / PIN</span>
               <button type="button" onClick={() => addToast?.('Password reset link sent to registered email', 'info')} className="text-emerald-600 dark:text-emerald-400 font-extrabold hover:underline cursor-pointer">
                 Change Password
               </button>
             </div>
 
-            <div className="flex justify-between items-center p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div className="flex justify-between items-center p-2.5 rounded-2xl bg-page">
               <span className="text-slate-500">Staff Sub-Accounts</span>
               <span className="text-slate-900 dark:text-white font-bold">3 Active Sub-Users</span>
             </div>
@@ -471,7 +471,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
       {/* LOGOUT CONFIRMATION MODAL */}
       {isLogoutModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-4 text-xs sa-rise text-center">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-4 text-xs sa-rise text-center">
             <div className="w-16 h-16 rounded-full bg-rose-500/20 text-rose-500 mx-auto flex items-center justify-center font-black text-2xl">
               <LogOut size={28} />
             </div>
@@ -482,7 +482,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
               <button
                 type="button"
                 onClick={() => setIsLogoutModalOpen(false)}
-                className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold cursor-pointer active:scale-95 transition"
+                className="px-4 py-2.5 rounded-xl bg-page text-slate-800 dark:text-slate-200 font-extrabold cursor-pointer active:scale-95 transition"
               >
                 Cancel
               </button>
@@ -501,7 +501,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
       {/* EDIT PROFILE MODAL */}
       {isEditModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-black text-slate-900 dark:text-white">Edit Business Details</h3>
               <button type="button" onClick={() => setIsEditModalOpen(false)} className="text-slate-400 font-bold p-1 cursor-pointer">✕</button>
@@ -514,7 +514,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
                   type="text"
                   value={profile.businessName}
                   onChange={(e) => setProfile({ ...profile, businessName: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 font-bold text-slate-900 dark:text-white"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-page dark:bg-slate-950 font-bold text-slate-900 dark:text-white"
                 />
               </div>
 
@@ -524,7 +524,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
                   type="text"
                   value={profile.ownerName}
                   onChange={(e) => setProfile({ ...profile, ownerName: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 font-bold text-slate-900 dark:text-white"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-page dark:bg-slate-950 font-bold text-slate-900 dark:text-white"
                 />
               </div>
 
@@ -534,13 +534,13 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
                   rows={2}
                   value={profile.registeredAddress}
                   onChange={(e) => setProfile({ ...profile, registeredAddress: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 font-medium text-slate-900 dark:text-white text-xs"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-page dark:bg-slate-950 font-medium text-slate-900 dark:text-white text-xs"
                 />
               </div>
             </div>
 
             <div className="flex justify-end gap-2 pt-2">
-              <button type="button" onClick={() => setIsEditModalOpen(false)} className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold">Cancel</button>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} className="px-4 py-2 rounded-xl bg-page font-bold">Cancel</button>
               <button
                 type="button"
                 onClick={() => {
@@ -605,7 +605,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
       {/* UPLOAD WHOLESALE REPRESENTATIVE PHOTO MODAL */}
       {isAvatarUploadModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-5 text-xs sa-rise relative">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-5 text-xs sa-rise relative">
             <button
               type="button"
               onClick={() => setIsAvatarUploadModalOpen(false)}
@@ -665,7 +665,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
                 />
                 <label
                   htmlFor="wholesalePhotoFileInput"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-extrabold text-xs cursor-pointer transition active:scale-95 border border-slate-200 dark:border-slate-700"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-page hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-extrabold text-xs cursor-pointer transition active:scale-95 border border-slate-200"
                 >
                   <Camera size={14} className="text-emerald-500" /> Choose Photo / Logo from Device
                 </label>
@@ -698,7 +698,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
               <button
                 type="button"
                 onClick={() => setIsAvatarUploadModalOpen(false)}
-                className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold cursor-pointer active:scale-95 transition"
+                className="px-4 py-2.5 rounded-xl bg-page text-slate-700 dark:text-slate-300 font-bold cursor-pointer active:scale-95 transition"
               >
                 Cancel
               </button>

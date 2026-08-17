@@ -64,7 +64,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300 relative" style={{ scrollBehavior: 'smooth' }}>
+    <div className="min-h-screen bg-page dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300 relative" style={{ scrollBehavior: 'smooth' }}>
       
       {/* Scroll Progress Bar */}
       <motion.div 
@@ -102,7 +102,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
             <button
               type="button"
               onClick={handleBack}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-4 py-2 text-sm font-semibold text-slate-750 dark:text-slate-300 shadow-sm transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 px-4 py-2 text-sm font-semibold text-slate-750 dark:text-slate-300 shadow-sm transition-all duration-300 hover:bg-page hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
               Back
@@ -144,10 +144,10 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="rounded-[32px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-sm text-left relative overflow-hidden"
+            className="rounded-[32px] border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-sm text-left relative overflow-hidden"
           >
             {/* Timeline Line decorator (for large screens) */}
-            <div className="absolute left-8 sm:left-14 top-16 bottom-16 w-0.5 bg-slate-100 dark:bg-slate-800 hidden md:block" />
+            <div className="absolute left-8 sm:left-14 top-16 bottom-16 w-0.5 bg-page hidden md:block" />
 
             <div className="space-y-12">
               
@@ -265,7 +265,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="rounded-[32px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-sm text-left space-y-6"
+            className="rounded-[32px] border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-sm text-left space-y-6"
           >
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400">
@@ -303,7 +303,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
 
             {/* Premium Founder Information Card */}
             <div className="mt-8 border-t border-slate-150 dark:border-slate-800 pt-8">
-              <div className="rounded-[24px] border border-slate-200 dark:border-slate-800 bg-slate-55/40 dark:bg-slate-900/60 p-6 sm:p-8 flex flex-col gap-6 md:flex-row md:items-start md:justify-between hover:shadow-soft transition-all">
+              <div className="rounded-[24px] border border-slate-200 dark:border-slate-800 bg-slate-55/40 p-6 sm:p-8 flex flex-col gap-6 md:flex-row md:items-start md:justify-between hover:shadow-soft transition-all">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
@@ -373,7 +373,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
             <button
               type="button"
               onClick={handleBack}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-5 py-3 text-sm font-semibold text-slate-700 dark:text-slate-350 shadow-sm transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-surface px-5 py-3 text-sm font-semibold text-slate-700 dark:text-slate-350 shadow-sm transition-all duration-300 hover:bg-page hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
               Back

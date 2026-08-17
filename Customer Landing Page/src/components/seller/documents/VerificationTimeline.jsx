@@ -7,7 +7,7 @@ export default function VerificationTimeline({ timeline = [] }) {
   }
 
   return (
-    <ol className="relative border-l border-slate-200 dark:border-slate-700 ml-2 space-y-4">
+    <ol className="relative border-l border-slate-200 ml-2 space-y-4">
       {[...timeline].reverse().map((ev, i) => (
         <li key={`${ev.at}-${i}`} className="ml-4">
           <span className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full bg-emerald-500 ring-4 ring-white dark:ring-slate-900" />

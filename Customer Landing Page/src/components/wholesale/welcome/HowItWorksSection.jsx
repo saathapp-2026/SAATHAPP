@@ -5,7 +5,7 @@ import SectionHeading from './SectionHeading';
 
 export default function HowItWorksSection() {
   return (
-    <section id="how-it-works" aria-labelledby="how-it-works-heading" className="py-20 sm:py-24 bg-white dark:bg-slate-900">
+    <section id="how-it-works" aria-labelledby="how-it-works-heading" className="py-20 sm:py-24 bg-surface">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           id="how-it-works-heading"
@@ -53,7 +53,7 @@ export default function HowItWorksSection() {
                   <div className={`flex ${isEven ? 'lg:justify-start' : 'lg:justify-end'}`}>
                     <div className="relative w-full max-w-sm">
                       <div className="absolute -inset-1 rounded-[24px] bg-gradient-to-br from-[#0A8F3D]/20 to-emerald-300/20 blur-lg" />
-                      <div className="relative flex items-center gap-4 rounded-[22px] border border-slate-200/70 dark:border-slate-700/60 bg-white dark:bg-slate-800 p-5 shadow-premium">
+                      <div className="relative flex items-center gap-4 rounded-[22px] border border-slate-200/70 bg-white p-5 shadow-premium">
                         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0A8F3D] to-[#087a34] text-white shadow-[0_0_15px_rgba(10,143,61,0.35)]">
                           <Icon size={24} aria-hidden="true" />
                         </div>

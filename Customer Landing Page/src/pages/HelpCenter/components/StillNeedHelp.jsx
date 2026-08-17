@@ -133,7 +133,7 @@ function StillNeedHelp() {
                   </div>
                 </div>
 
-                <div className="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-[#ECFDF5] group-hover:text-[#16A34A] transition-colors">
+                <div className="w-9 h-9 rounded-full bg-page flex items-center justify-center text-slate-400 group-hover:bg-[#ECFDF5] group-hover:text-[#16A34A] transition-colors">
                   <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </div>

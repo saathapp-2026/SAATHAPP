@@ -390,7 +390,7 @@ export default function WorkerDashboardPage({
 
                 {/* 4. COMPLETED JOBS */}
                 {activeTab === 'completed_jobs' && (
-                  <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft text-left overflow-x-auto">
+                  <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft text-left overflow-x-auto">
                     <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Completed Jobs History</h3>
                     <table className="w-full text-left text-xs min-w-[640px]">
                       <thead>
@@ -405,7 +405,7 @@ export default function WorkerDashboardPage({
                       </thead>
                       <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
                         {filteredJobs.filter(j => j.status === 'completed').map((job) => (
-                          <tr key={job.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/30">
+                          <tr key={job.id} className="hover:bg-slate-50/50">
                             <td className="py-3 font-bold text-slate-800 dark:text-slate-200">{job.customerName}</td>
                             <td className="py-3 text-slate-600 dark:text-slate-400">{job.serviceName}</td>
                             <td className="py-3 text-slate-500">{job.date}</td>
@@ -425,7 +425,7 @@ export default function WorkerDashboardPage({
 
                 {/* 5. EARNINGS STATEMENT PANEL */}
                 {activeTab === 'earnings' && (
-                  <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left space-y-6">
+                  <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left space-y-6">
                     <div className="pb-4 border-b border-slate-100 dark:border-slate-850/80 flex items-center justify-between">
                       <div>
                         <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Salary & Incentive Breakdown</h3>
@@ -440,27 +440,27 @@ export default function WorkerDashboardPage({
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                      <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
+                      <div className="p-4 bg-page dark:bg-slate-950 rounded-xl border border-slate-200/40">
                         <span className="text-[9px] font-black text-slate-450 uppercase block">Today</span>
                         <p className="text-lg font-black text-slate-800 dark:text-slate-200 mt-1">₹0</p>
                       </div>
-                      <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
+                      <div className="p-4 bg-page dark:bg-slate-950 rounded-xl border border-slate-200/40">
                         <span className="text-[9px] font-black text-slate-450 uppercase block">Weekly</span>
                         <p className="text-lg font-black text-slate-800 dark:text-slate-200 mt-1">₹0</p>
                       </div>
-                      <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
+                      <div className="p-4 bg-page dark:bg-slate-950 rounded-xl border border-slate-200/40">
                         <span className="text-[9px] font-black text-slate-450 uppercase block">Monthly</span>
                         <p className="text-lg font-black text-primary mt-1">₹0</p>
                       </div>
-                      <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
+                      <div className="p-4 bg-page dark:bg-slate-950 rounded-xl border border-slate-200/40">
                         <span className="text-[9px] font-black text-slate-450 uppercase block">Salary</span>
                         <p className="text-lg font-black text-slate-800 dark:text-slate-200 mt-1">₹0</p>
                       </div>
-                      <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
+                      <div className="p-4 bg-page dark:bg-slate-950 rounded-xl border border-slate-200/40">
                         <span className="text-[9px] font-black text-slate-450 uppercase block">Bonus</span>
                         <p className="text-lg font-black text-emerald-600 mt-1">₹0</p>
                       </div>
-                      <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
+                      <div className="p-4 bg-page dark:bg-slate-950 rounded-xl border border-slate-200/40">
                         <span className="text-[9px] font-black text-slate-450 uppercase block">Incentives</span>
                         <p className="text-lg font-black text-amber-600 mt-1">₹0</p>
                       </div>
@@ -499,15 +499,15 @@ export default function WorkerDashboardPage({
 
                 {/* 11. DOCUMENTS UPLOADS */}
                 {activeTab === 'documents' && (
-                  <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left space-y-6 max-w-2xl">
-                    <div className="pb-4 border-b border-slate-100 dark:border-slate-800/40">
+                  <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left space-y-6 max-w-2xl">
+                    <div className="pb-4 border-b border-slate-100 ">
                       <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Worker Verifications</h3>
                       <p className="text-[10px] text-slate-450 mt-0.5">Government credentials uploaded for verification checking</p>
                     </div>
 
                     <div className="space-y-4">
                       {workerDocuments.map((doc, idx) => (
-                        <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/60 dark:border-slate-800 flex items-center justify-between">
+                        <div key={idx} className="p-3 bg-page dark:bg-slate-950 rounded-xl border border-slate-200/60 dark:border-slate-800 flex items-center justify-between">
                           <div>
                             <span className="text-xs font-black text-slate-800 dark:text-slate-200">{doc.name}</span>
                             <p className="text-[10px] text-slate-450 font-mono mt-0.5">{doc.file}</p>
@@ -534,29 +534,29 @@ export default function WorkerDashboardPage({
                 {activeTab === 'support' && (
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-left">
                     <div className="lg:col-span-2 space-y-6">
-                      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
+                      <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
                         <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Raise Ticket</h3>
                         <form onSubmit={handleRaiseTicket} className="mt-4 space-y-3">
-                          <input type="text" required value={ticketSubject} onChange={(e) => setTicketSubject(e.target.value)} placeholder="Subject" className="input-field w-full dark:bg-slate-850 dark:border-slate-800 dark:text-white" />
+                          <input type="text" required value={ticketSubject} onChange={(e) => setTicketSubject(e.target.value)} placeholder="Subject" className="input-field w-full dark:border-slate-800 dark:text-white" />
                           <button type="submit" className="btn-primary w-full cursor-pointer text-xs">Submit Support Ticket</button>
                         </form>
                       </div>
-                      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
+                      <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
                         <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">FAQs</h3>
                         <div className="space-y-3">
                           {workerSupportFaqs.map((faq, i) => (
-                            <div key={i} className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40">
+                            <div key={i} className="p-3 bg-page dark:bg-slate-950 rounded-xl border border-slate-200/40">
                               <p className="text-xs font-black text-slate-800 dark:text-slate-200">{faq.q}</p>
                               <p className="text-[11px] text-slate-500 mt-1">{faq.a}</p>
                             </div>
                           ))}
                         </div>
                       </div>
-                      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
+                      <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
                         <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Training Videos</h3>
                         <div className="space-y-2">
                           {workerTrainingVideos.map((video, i) => (
-                            <button key={i} type="button" onClick={() => alert(`Playing: ${video.title}`)} className="w-full flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/40 hover:border-primary/30 cursor-pointer">
+                            <button key={i} type="button" onClick={() => alert(`Playing: ${video.title}`)} className="w-full flex items-center justify-between p-3 bg-page dark:bg-slate-950 rounded-xl border border-slate-200/40 hover:border-primary/30 cursor-pointer">
                               <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{video.title}</span>
                               <span className="text-[10px] text-slate-400">{video.duration}</span>
                             </button>
@@ -586,7 +586,7 @@ export default function WorkerDashboardPage({
 
                 {/* 15. SETTINGS PANEL */}
                 {activeTab === 'settings' && (
-                  <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left space-y-4 max-w-2xl">
+                  <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left space-y-4 max-w-2xl">
                     <div className="pb-4 border-b border-slate-100 dark:border-slate-800">
                       <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Settings</h3>
                       <p className="text-xs text-slate-500 mt-1">Manage appearance, notifications, privacy and security</p>
@@ -606,7 +606,7 @@ export default function WorkerDashboardPage({
                         <button
                           type="button"
                           onClick={item.onToggle}
-                          className={`w-11 h-6 rounded-full p-0.5 transition-colors ${item.toggle ? 'bg-primary' : 'bg-slate-300 dark:bg-slate-700'}`}
+                          className={`w-11 h-6 rounded-full p-0.5 transition-colors ${item.toggle ? 'bg-primary' : 'bg-slate-300'}`}
                         >
                           <span className={`block w-5 h-5 bg-white rounded-full shadow transition-transform ${item.toggle ? 'translate-x-5' : 'translate-x-0'}`} />
                         </button>
@@ -637,7 +637,7 @@ export default function WorkerDashboardPage({
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   onClick={(e) => e.stopPropagation()}
-                  className="w-full max-w-lg bg-white dark:bg-slate-900 rounded-card border border-slate-200 dark:border-slate-800 p-6 shadow-premium text-left space-y-4"
+                  className="w-full max-w-lg bg-surface rounded-card border border-slate-200 dark:border-slate-800 p-6 shadow-premium text-left space-y-4"
                 >
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-black text-slate-800 dark:text-white">Job Details</h3>
@@ -668,7 +668,7 @@ export default function WorkerDashboardPage({
       </div>
 
       {/* MOBILE BOTTOM NAVIGATION BAR */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-200/60 dark:border-slate-850 px-4 py-2 flex items-center justify-around shadow-premium">
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-xl border-t border-slate-200/60 dark:border-slate-850 px-4 py-2 flex items-center justify-around shadow-premium">
         <button 
           onClick={() => setActiveTab('dashboard')} 
           className={`flex flex-col items-center gap-0.5 cursor-pointer ${

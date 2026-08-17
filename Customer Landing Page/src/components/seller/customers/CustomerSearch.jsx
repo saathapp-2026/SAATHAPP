@@ -53,13 +53,13 @@ export default function CustomerSearch({ value, onChange, onCommit, placeholder 
         }}
         placeholder={placeholder}
         aria-label="Smart customer search"
-        className="w-full pl-9 pr-9 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        className="w-full pl-9 pr-9 py-2.5 rounded-xl border border-slate-200 bg-white dark:bg-slate-950 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
       />
       {local && (
         <button
           type="button"
           aria-label="Clear search"
-          className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800"
+          className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-page"
           onClick={() => {
             setLocal('');
             onChange?.('');
@@ -69,7 +69,7 @@ export default function CustomerSearch({ value, onChange, onCommit, placeholder 
         </button>
       )}
       {open && recent.length > 0 && !local && (
-        <div className="absolute z-[40] mt-1.5 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-xl p-1">
+        <div className="absolute z-[40] mt-1.5 w-full rounded-xl border border-slate-200 bg-surface shadow-xl p-1">
           <p className="px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wide text-slate-400">Recent searches</p>
           {recent.map((r) => (
             <button
@@ -80,7 +80,7 @@ export default function CustomerSearch({ value, onChange, onCommit, placeholder 
                 onChange?.(r);
                 setOpen(false);
               }}
-              className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-left hover:bg-slate-50 dark:hover:bg-slate-800"
+              className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-left hover:bg-page"
             >
               <Clock size={13} className="text-slate-400" />
               {r}

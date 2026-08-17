@@ -26,7 +26,7 @@ export default function Step6_CoverageLogistics({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-3xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
           Phase 5 — Service Coverage & Delivery
         </div>
@@ -54,7 +54,7 @@ export default function Step6_CoverageLogistics({ onNext, onPrev }) {
                     className={`flex items-center gap-2 rounded-2xl border p-3.5 text-xs font-bold transition text-left ${
                       isSelected
                         ? 'border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shadow-md ring-2 ring-emerald-500/20'
-                        : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:border-slate-300'
+                        : 'border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:border-slate-300'
                     }`}
                   >
                     <Globe2 size={16} className={isSelected ? 'text-emerald-500' : 'text-slate-400'} />
@@ -80,7 +80,7 @@ export default function Step6_CoverageLogistics({ onNext, onPrev }) {
                     className={`cursor-pointer rounded-2xl border p-4 transition ${
                       isSelected
                         ? 'border-emerald-500 bg-emerald-500/10 text-slate-900 dark:text-white shadow-md ring-2 ring-emerald-500/20'
-                        : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-slate-300'
+                        : 'border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 hover:border-slate-300'
                     }`}
                   >
                     <Truck size={20} className={isSelected ? 'text-emerald-500' : 'text-slate-400'} />
@@ -104,7 +104,7 @@ export default function Step6_CoverageLogistics({ onNext, onPrev }) {
                   required
                   value={formData.dailyDeliveryCapacity}
                   onChange={(e) => updateFormData({ dailyDeliveryCapacity: e.target.value })}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                   placeholder="500+ Bulk Orders / Day"
                 />
               </div>
@@ -118,7 +118,7 @@ export default function Step6_CoverageLogistics({ onNext, onPrev }) {
                 type="text"
                 value={formData.fleetDetails}
                 onChange={(e) => updateFormData({ fleetDetails: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3.5 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="12 Trucks, 5 Vans..."
               />
             </div>
@@ -128,7 +128,7 @@ export default function Step6_CoverageLogistics({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

@@ -6,7 +6,7 @@ import SectionHeading from './SectionHeading';
 
 export default function OnboardingTimeSection() {
   return (
-    <section id="onboarding-time" aria-labelledby="onboarding-time-heading" className="py-20 sm:py-24 bg-white dark:bg-slate-900">
+    <section id="onboarding-time" aria-labelledby="onboarding-time-heading" className="py-20 sm:py-24 bg-surface">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           id="onboarding-time-heading"
@@ -25,7 +25,7 @@ export default function OnboardingTimeSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ delay: index * 0.08, duration: 0.45 }}
-                className="relative rounded-[20px] border border-slate-200/70 dark:border-slate-800/60 bg-slate-50 dark:bg-slate-950/50 p-7 shadow-soft"
+                className="relative rounded-[20px] border border-slate-200/70 dark:border-slate-800/60 bg-page dark:bg-slate-950/50 p-7 shadow-soft"
               >
                 {index < onboardingTimeline.length - 1 && (
                   <div

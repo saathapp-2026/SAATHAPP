@@ -41,13 +41,13 @@ export default function CustomerNotifyModal({ open, onClose, customerIds = [] })
 
   return (
     <SellerOverlay open={open} onClose={onClose} labelledBy="notify-customers-title">
-      <div className="w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-5 space-y-4">
+      <div className="w-full max-w-md rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl p-5 space-y-4">
         <div className="flex items-start justify-between">
           <div>
             <h2 id="notify-customers-title" className="font-bold text-lg">Send Notification</h2>
             <p className="text-xs text-slate-500 mt-0.5">{customerIds.length} recipient(s)</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -63,7 +63,7 @@ export default function CustomerNotifyModal({ open, onClose, customerIds = [] })
                 className={`flex flex-col items-center gap-1 rounded-xl border p-2 text-[11px] font-semibold ${
                   channel === id
                     ? 'border-emerald-500 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30'
-                    : 'border-slate-200 dark:border-slate-700'
+                    : 'border-slate-200'
                 }`}
               >
                 <Icon size={14} />
@@ -78,7 +78,7 @@ export default function CustomerNotifyModal({ open, onClose, customerIds = [] })
           <select
             value={template}
             onChange={(e) => setTemplate(e.target.value)}
-            className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+            className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
           >
             {NOTIFICATION_TEMPLATES.map((t) => (
               <option key={t.id} value={t.id}>{t.label}</option>
@@ -92,12 +92,12 @@ export default function CustomerNotifyModal({ open, onClose, customerIds = [] })
             onChange={(e) => setMessage(e.target.value)}
             rows={4}
             placeholder="Write your custom message…"
-            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+            className="w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
           />
         )}
 
         <div className="flex justify-end gap-2">
-          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200 dark:border-slate-700">
+          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200">
             Cancel
           </button>
           <button

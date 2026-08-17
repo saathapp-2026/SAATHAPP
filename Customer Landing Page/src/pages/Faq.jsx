@@ -237,7 +237,7 @@ export default function Faq({ onBack, isAuthenticated = false, user = null, dark
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800" style={{ scrollBehavior: 'smooth' }}>
+    <div className="min-h-screen bg-page text-slate-800" style={{ scrollBehavior: 'smooth' }}>
       <Header
         cartCount={0}
         onCartClick={() => {}}
@@ -318,7 +318,7 @@ export default function Faq({ onBack, isAuthenticated = false, user = null, dark
             <label className="mb-4 block text-sm font-semibold text-slate-600" htmlFor="faq-search">
               Search answers in real time
             </label>
-            <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 shadow-sm">
+            <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-page px-4 py-3 shadow-sm">
               <CircleHelp size={18} className="text-emerald-600" />
               <input
                 id="faq-search"
@@ -346,7 +346,7 @@ export default function Faq({ onBack, isAuthenticated = false, user = null, dark
                     <button
                       type="button"
                       onClick={() => handleToggleSection(section.title)}
-                      className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-slate-50 sm:px-8"
+                      className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-page sm:px-8"
                     >
                       <div className="flex items-center gap-3">
                         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">

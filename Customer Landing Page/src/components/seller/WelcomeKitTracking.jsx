@@ -38,7 +38,7 @@ export default function WelcomeKitTracking({ membership, onUpdate }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6"
+      className="rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 p-6"
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -66,7 +66,7 @@ export default function WelcomeKitTracking({ membership, onUpdate }) {
                 className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
                   i <= currentIndex
                     ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-400'
+                    : 'bg-page text-slate-400'
                 }`}
               >
                 {i < currentIndex ? '✓' : i + 1}
@@ -76,14 +76,14 @@ export default function WelcomeKitTracking({ membership, onUpdate }) {
               </span>
             </div>
             {i < STATUS_STEPS.length - 1 && (
-              <div className={`flex-1 h-1 mx-1 mb-4 rounded-full transition-colors ${i < currentIndex ? 'bg-amber-500' : 'bg-slate-200 dark:bg-slate-700'}`} />
+              <div className={`flex-1 h-1 mx-1 mb-4 rounded-full transition-colors ${i < currentIndex ? 'bg-amber-500' : 'bg-slate-200'}`} />
             )}
           </React.Fragment>
         ))}
       </div>
 
       <div className="grid sm:grid-cols-2 gap-4 text-sm">
-        <div className="flex items-start gap-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+        <div className="flex items-start gap-2 p-3 rounded-xl bg-page">
           <Hash size={16} className="text-slate-400 shrink-0 mt-0.5" />
           <div>
             <p className="text-xs text-slate-500">Tracking Number</p>
@@ -92,7 +92,7 @@ export default function WelcomeKitTracking({ membership, onUpdate }) {
             </p>
           </div>
         </div>
-        <div className="flex items-start gap-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+        <div className="flex items-start gap-2 p-3 rounded-xl bg-page">
           <MapPin size={16} className="text-slate-400 shrink-0 mt-0.5" />
           <div>
             <p className="text-xs text-slate-500">Shipping Address</p>

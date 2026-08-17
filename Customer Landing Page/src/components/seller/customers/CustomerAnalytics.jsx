@@ -55,8 +55,8 @@ export default function CustomerAnalytics({
   if (loading) {
     return (
       <div className="space-y-3 animate-pulse">
-        <div className="h-40 rounded-2xl bg-slate-100 dark:bg-slate-800" />
-        <div className="h-40 rounded-2xl bg-slate-100 dark:bg-slate-800" />
+        <div className="h-40 rounded-2xl bg-page" />
+        <div className="h-40 rounded-2xl bg-page" />
       </div>
     );
   }
@@ -80,7 +80,7 @@ export default function CustomerAnalytics({
 
   return (
     <div className={`space-y-4 ${compact ? '' : ''}`}>
-      <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
+      <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4">
         <div className="flex items-center justify-between gap-2 mb-3">
           <h3 className="font-bold text-sm">Customer Analytics</h3>
           <div className="flex gap-1">
@@ -90,7 +90,7 @@ export default function CustomerAnalytics({
                 type="button"
                 onClick={() => setRange(r)}
                 className={`px-2 py-0.5 rounded text-[10px] font-semibold capitalize ${
-                  range === r ? 'bg-emerald-500 text-white' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  range === r ? 'bg-emerald-500 text-white' : 'text-slate-500 hover:bg-page'
                 }`}
               >
                 {r}
@@ -162,7 +162,7 @@ export default function CustomerAnalytics({
               Retention: `${data.metrics.retention}%`,
               Churn: `${data.metrics.churn}%`,
             }).map(([label, value]) => (
-              <div key={label} className="rounded-xl bg-slate-50 dark:bg-slate-950/50 p-2.5">
+              <div key={label} className="rounded-xl bg-page dark:bg-slate-950/50 p-2.5">
                 <p className="text-[10px] text-slate-500">{label}</p>
                 <p className="font-bold text-sm tabular-nums">{value}</p>
               </div>
@@ -171,7 +171,7 @@ export default function CustomerAnalytics({
         )}
       </section>
 
-      <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
+      <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4">
         <h3 className="font-bold text-sm mb-3">Quick Actions</h3>
         <div className="grid grid-cols-2 gap-2">
           {quick.map(({ id, label, icon: Icon, onClick }) => (
@@ -179,7 +179,7 @@ export default function CustomerAnalytics({
               key={id}
               type="button"
               onClick={onClick}
-              className="flex flex-col items-center gap-1.5 rounded-xl border border-slate-200 dark:border-slate-700 p-3 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+              className="flex flex-col items-center gap-1.5 rounded-xl border border-slate-200 p-3 text-xs font-semibold hover:bg-page transition-colors"
             >
               <Icon size={16} className="text-emerald-600" />
               {label}
@@ -188,7 +188,7 @@ export default function CustomerAnalytics({
         </div>
       </section>
 
-      <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
+      <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4">
         <h3 className="font-bold text-sm mb-3">Report Downloads</h3>
         <div className="flex flex-wrap gap-2">
           {reportFormats.map((f) => (
@@ -199,7 +199,7 @@ export default function CustomerAnalytics({
                 await generateModuleReport({ moduleKey: 'customers', format: f.id, options: { includeCharts: true } });
                 toast.success(`${f.label} report ready`);
               }}
-              className="px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
+              className="px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border border-slate-200 hover:bg-page"
             >
               {f.label}
             </button>

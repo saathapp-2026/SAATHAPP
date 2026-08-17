@@ -62,10 +62,10 @@ export default function DocumentsCard() {
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft hover:shadow-premium transition-all text-left space-y-6">
+    <div className="bg-surface border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft hover:shadow-premium transition-all text-left space-y-6">
       
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/40 pb-4">
+      <div className="flex items-center justify-between border-b border-slate-100  pb-4">
         <div>
           <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Verification Documents</h3>
           <p className="text-[10px] text-slate-450 mt-0.5">Government IDs and trade licenses required for verification</p>
@@ -93,7 +93,7 @@ export default function DocumentsCard() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="absolute inset-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center gap-2"
+                    className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center gap-2"
                   >
                     <Loader2 size={24} className="text-primary animate-spin" />
                     <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">Uploading File...</span>
@@ -104,7 +104,7 @@ export default function DocumentsCard() {
               {/* Top row: Title and status */}
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-start gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-white dark:bg-slate-900 shadow-sm flex items-center justify-center flex-shrink-0 text-slate-500">
+                  <div className="w-8 h-8 rounded-lg bg-surface shadow-sm flex items-center justify-center flex-shrink-0 text-slate-500">
                     <FileText size={16} />
                   </div>
                   <div>
@@ -123,7 +123,7 @@ export default function DocumentsCard() {
                 
                 <button
                   onClick={() => handleUploadSimulate(doc.id)}
-                  className="flex items-center gap-1 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-[10px] font-black uppercase text-slate-500 hover:text-primary transition-all cursor-pointer shadow-sm"
+                  className="flex items-center gap-1 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-surface text-[10px] font-black uppercase text-slate-500 hover:text-primary transition-all cursor-pointer shadow-sm"
                 >
                   <UploadCloud size={12} />
                   <span>{doc.file ? 'Upload Again' : 'Upload'}</span>

@@ -212,7 +212,7 @@ export default function Membership({ mode = 'onboarding' }) {
   );
 
   const tabNav = (
-    <div className={`flex flex-wrap gap-2 p-1 rounded-xl ${isOnboarding ? 'bg-white/5' : 'bg-slate-100 dark:bg-slate-800'}`}>
+    <div className={`flex flex-wrap gap-2 p-1 rounded-xl ${isOnboarding ? 'bg-white/5' : 'bg-page'}`}>
       {tabs.map((tab) => (
         <button
           key={tab.id}
@@ -220,7 +220,7 @@ export default function Membership({ mode = 'onboarding' }) {
           onClick={() => setActiveTab(tab.id)}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             activeTab === tab.id
-              ? isOnboarding ? 'bg-violet-500 text-white' : 'bg-white dark:bg-slate-900 text-violet-600 shadow-sm'
+              ? isOnboarding ? 'bg-violet-500 text-white' : 'bg-surface text-violet-600 shadow-sm'
               : isOnboarding ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-slate-700'
           }`}
         >
@@ -258,14 +258,14 @@ export default function Membership({ mode = 'onboarding' }) {
           <ArrowRight size={18} />
         </button>
         {isOnboarding && (
-          <button type="button" onClick={handleSkip} className={`flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-medium transition-colors ${isOnboarding ? 'bg-white/10 border border-white/20 text-white hover:bg-white/15' : 'bg-slate-100 dark:bg-slate-800'}`}>
+          <button type="button" onClick={handleSkip} className={`flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-medium transition-colors ${isOnboarding ? 'bg-white/10 border border-white/20 text-white hover:bg-white/15' : 'bg-page'}`}>
             <SkipForward size={16} />
             Skip for Now
           </button>
         )}
         {!isOnboarding && membership?.subscribed && (
           <>
-            <button type="button" onClick={handleRenew} disabled={loading} className="py-3.5 px-6 rounded-xl border border-slate-200 dark:border-slate-700 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+            <button type="button" onClick={handleRenew} disabled={loading} className="py-3.5 px-6 rounded-xl border border-slate-200 font-medium hover:bg-page transition-colors">
               Renew
             </button>
             <button type="button" onClick={handleCancel} disabled={loading} className="py-3.5 px-6 rounded-xl border border-red-200 text-red-500 font-medium hover:bg-red-50 transition-colors">
@@ -278,7 +278,7 @@ export default function Membership({ mode = 'onboarding' }) {
   );
 
   const paymentHistorySection = membership?.paymentHistory?.length > 0 && (
-    <div className={`rounded-2xl border p-6 ${planVariant === 'light' ? 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800' : 'bg-white/5 border-white/10'}`}>
+    <div className={`rounded-2xl border p-6 ${planVariant === 'light' ? 'bg-surface border-slate-200 dark:border-slate-800' : 'bg-white/5 border-white/10'}`}>
       <h3 className="font-bold mb-4">Payment History</h3>
       <div className="space-y-2">
         {membership.paymentHistory.map((p) => (
@@ -344,7 +344,7 @@ export default function Membership({ mode = 'onboarding' }) {
             </div>
             <ExportReportButton moduleKey="membership" />
           </div>
-          <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6">
+          <div className="rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 p-6">
             {content}
           </div>
           <Link to="/seller/dashboard" className="text-sm text-emerald-500 hover:text-emerald-600">

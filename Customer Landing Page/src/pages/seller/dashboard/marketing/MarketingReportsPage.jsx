@@ -65,7 +65,7 @@ export default function MarketingReportsPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search reports"
-              className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 pl-10 pr-4 py-3 text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-900 pl-10 pr-4 py-3 text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
           </div>
         </div>
@@ -73,19 +73,19 @@ export default function MarketingReportsPage() {
         {loading ? (
           <div className="mt-6 animate-pulse space-y-3">
             {[...Array(4)].map((_, index) => (
-              <div key={index} className="h-20 rounded-3xl bg-slate-100 dark:bg-slate-800" />
+              <div key={index} className="h-20 rounded-3xl bg-page" />
             ))}
           </div>
         ) : (
           <div className="mt-6 grid gap-4">
             {filteredReports.map((report) => (
-              <div key={report.id} className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-5 sm:flex sm:items-center sm:justify-between">
+              <div key={report.id} className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-900 p-5 sm:flex sm:items-center sm:justify-between">
                 <div className="space-y-2">
                   <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">{report.name}</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400">{report.description}</p>
                 </div>
                 <div className="mt-4 flex flex-wrap items-center gap-2 sm:mt-0">
-                  <span className="rounded-full bg-slate-100 dark:bg-slate-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">{report.format}</span>
+                  <span className="rounded-full bg-page px-3 py-1 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">{report.format}</span>
                   <span className="rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 text-xs font-semibold">{formatINR(report.value)}</span>
                   <button type="button" onClick={() => downloadReport(report)} className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-700">
                     <ArrowUpRight size={14} /> Download

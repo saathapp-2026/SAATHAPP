@@ -218,10 +218,10 @@ export default function InvoicesTab() {
       </div>
 
       {/* Invoices Table */}
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden p-6 space-y-4">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm overflow-hidden p-6 space-y-4">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase tracking-wider">
+            <thead className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase tracking-wider">
               <tr>
                 <th className="p-3">Invoice No</th>
                 <th className="p-3">Order Ref</th>
@@ -234,7 +234,7 @@ export default function InvoicesTab() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
               {invoices.map((inv) => (
-                <tr key={inv.inv} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                <tr key={inv.inv} className="hover:bg-page transition">
                   <td className="p-3 font-mono font-bold text-[#00986C]">{inv.inv}</td>
                   <td className="p-3 font-mono text-slate-500">{inv.orderId}</td>
                   <td className="p-3 font-extrabold text-slate-900 dark:text-white">{inv.buyer}</td>
@@ -276,7 +276,7 @@ export default function InvoicesTab() {
       {/* CSV EXPORTED PREVIEW MODAL */}
       {previewModalData && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-4xl w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-4xl w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-[#00986C] flex items-center justify-center font-bold">
@@ -296,7 +296,7 @@ export default function InvoicesTab() {
 
             <div className="overflow-x-auto max-h-80 border border-slate-200 dark:border-slate-800 rounded-2xl">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-100 dark:bg-slate-950 font-bold text-slate-700 dark:text-slate-300 uppercase text-[10px]">
+                <thead className="bg-page dark:bg-slate-950 font-bold text-slate-700 dark:text-slate-300 uppercase text-[10px]">
                   <tr>
                     {previewModalData.headers.map((h, i) => (
                       <th key={i} className="p-3 border-b border-slate-200 dark:border-slate-800">{h}</th>
@@ -305,7 +305,7 @@ export default function InvoicesTab() {
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                   {previewModalData.rows.map((row, idx) => (
-                    <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-950">
+                    <tr key={idx} className="hover:bg-page">
                       {row.map((cell, cIdx) => (
                         <td key={cIdx} className="p-3 font-mono">{cell}</td>
                       ))}

@@ -290,7 +290,7 @@ export default function DocumentsPage() {
           <button
             type="button"
             onClick={() => setBulkOpen(true)}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-surface px-3 py-2 text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-page"
           >
             <Upload size={16} /> Import Documents
           </button>
@@ -299,7 +299,7 @@ export default function DocumentsPage() {
             type="button"
             disabled={verifying}
             onClick={onVerifyStatus}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-surface px-3 py-2 text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-page disabled:opacity-60"
           >
             <RefreshCw size={16} className={verifying ? 'animate-spin' : ''} /> Verify Status
           </button>
@@ -333,7 +333,7 @@ export default function DocumentsPage() {
             <button
               type="button"
               onClick={() => setShowCompliance(false)}
-              className="text-xs text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
+              className="text-xs text-slate-500 hover:text-slate-800"
             >
               Hide
             </button>

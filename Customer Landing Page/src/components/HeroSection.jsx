@@ -257,7 +257,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -bottom-4 -left-4 sm:-left-8 p-3.5 rounded-card shadow-premium border border-white/20 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-slate-800 dark:text-slate-100 flex items-center gap-3"
+                  className="absolute -bottom-4 -left-4 sm:-left-8 p-3.5 rounded-card shadow-premium border border-white/20 bg-white/90 backdrop-blur-md text-slate-800 dark:text-slate-100 flex items-center gap-3"
                 >
                   <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-primary dark:text-emerald-400 font-bold text-sm">
                     ✓

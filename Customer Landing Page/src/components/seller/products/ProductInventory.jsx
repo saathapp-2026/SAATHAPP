@@ -27,7 +27,7 @@ export default function ProductInventory({ value, errors = {}, onChange, sku }) 
             <TextInput value={value.shelfLocation} onChange={(e) => set('shelfLocation', e.target.value)} placeholder="A-12-03" />
           </Field>
           <Field label="SKU">
-            <TextInput value={sku || ''} readOnly className="bg-slate-50 dark:bg-slate-900" />
+            <TextInput value={sku || ''} readOnly className="bg-page dark:bg-slate-900" />
           </Field>
           <Field label="Minimum Stock Alert">
             <TextInput type="number" min="0" value={value.minStockAlert} onChange={(e) => set('minStockAlert', e.target.value)} />
@@ -65,7 +65,7 @@ export default function ProductInventory({ value, errors = {}, onChange, sku }) 
           ['Reserved', reserved],
           ['Status', low ? 'Low Stock' : stock <= 0 ? 'Out of Stock' : 'In Stock'],
         ].map(([k, v]) => (
-          <div key={k} className={`rounded-xl border p-3 ${low || stock <= 0 ? 'border-amber-300 bg-amber-50 dark:bg-amber-950/20' : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900'}`}>
+          <div key={k} className={`rounded-xl border p-3 ${low || stock <= 0 ? 'border-amber-300 bg-amber-50 dark:bg-amber-950/20' : 'border-slate-200 dark:border-slate-800 bg-surface'}`}>
             <p className="text-[11px] text-slate-500">{k}</p>
             <p className="font-bold">{v}</p>
           </div>

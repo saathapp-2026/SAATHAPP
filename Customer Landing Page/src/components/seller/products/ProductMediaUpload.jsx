@@ -160,9 +160,9 @@ function ImageSlot({ item, label, onRemove, onReplace, large, disabled }) {
 
   return (
     <div
-      className={`relative rounded-xl border border-dashed overflow-hidden bg-slate-50 dark:bg-slate-800/50 ${
+      className={`relative rounded-xl border border-dashed overflow-hidden bg-page ${
         large ? 'aspect-[4/3]' : 'aspect-square'
-      } ${hasImage ? 'border-emerald-400 dark:border-emerald-600' : 'border-slate-300 dark:border-slate-600'}`}
+      } ${hasImage ? 'border-emerald-400 dark:border-emerald-600' : 'border-slate-300'}`}
     >
       {hasImage ? (
         <>
@@ -430,7 +430,7 @@ export default function ProductMediaUpload({ value, errors = {}, onChange, onUpl
               <button
                 type="button"
                 onClick={() => multiRef.current?.click()}
-                className="aspect-square rounded-xl border border-dashed border-slate-300 dark:border-slate-600 flex flex-col items-center justify-center text-slate-400 hover:text-emerald-600 text-[10px]"
+                className="aspect-square rounded-xl border border-dashed border-slate-300 flex flex-col items-center justify-center text-slate-400 hover:text-emerald-600 text-[10px]"
               >
                 <ImagePlus size={16} />
                 Add Image
@@ -461,7 +461,7 @@ export default function ProductMediaUpload({ value, errors = {}, onChange, onUpl
                   runTool(id);
                 }
               }}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-200 hover:bg-page disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {toolBusy ? <Loader2 size={12} className="animate-spin" /> : <Icon size={12} />}
               {label}
@@ -480,7 +480,7 @@ export default function ProductMediaUpload({ value, errors = {}, onChange, onUpl
               value={media.youtubeUrl || ''}
               onChange={(e) => commit((prev) => ({ ...prev, youtubeUrl: e.target.value }))}
               placeholder="https://youtube.com/watch?v=…"
-              className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 text-sm"
+              className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white dark:bg-slate-950 text-sm"
             />
           </div>
           <div>

@@ -23,7 +23,7 @@ export default function MembershipStatusCard({ membership, onRenew, onCancel, on
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-soft"
+      className="rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 p-6 shadow-soft"
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -68,7 +68,7 @@ export default function MembershipStatusCard({ membership, onRenew, onCancel, on
       </div>
 
       {!isSubscribed && (
-        <p className="text-sm text-slate-500 mb-4 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+        <p className="text-sm text-slate-500 mb-4 p-3 rounded-xl bg-page border border-slate-200">
           You are currently using the <strong>Standard Seller Experience</strong>. Upgrade anytime to unlock premium business tools, reports, automation, and support.
         </p>
       )}
@@ -82,18 +82,18 @@ export default function MembershipStatusCard({ membership, onRenew, onCancel, on
           {isSubscribed ? 'Manage Membership' : 'Upgrade Now'}
         </Link>
         {isSubscribed && onRenew && (
-          <button type="button" onClick={onRenew} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+          <button type="button" onClick={onRenew} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-200 text-sm font-medium hover:bg-page transition-colors">
             <RefreshCw size={14} />
             Renew
           </button>
         )}
         {lastPayment?.invoiceId && onDownloadInvoice && (
-          <button type="button" onClick={() => onDownloadInvoice(lastPayment.invoiceId)} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium hover:bg-slate-50 transition-colors">
+          <button type="button" onClick={() => onDownloadInvoice(lastPayment.invoiceId)} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-200 text-sm font-medium hover:bg-page transition-colors">
             <Download size={14} />
             Download Invoice
           </button>
         )}
-        <Link to="/seller/dashboard/membership" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium hover:bg-slate-50 transition-colors">
+        <Link to="/seller/dashboard/membership" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-200 text-sm font-medium hover:bg-page transition-colors">
           <History size={14} />
           Payment History
         </Link>
@@ -106,7 +106,7 @@ export default function MembershipStatusCard({ membership, onRenew, onCancel, on
         {isSubscribed && membership?.planId !== 'free' && (
           <Link
             to="/seller/dashboard/membership"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-200 text-sm font-medium hover:bg-page transition-colors"
           >
             Downgrade
           </Link>

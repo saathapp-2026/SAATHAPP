@@ -47,7 +47,7 @@ export default function MarketingAnalyticsPage() {
                 key={item}
                 type="button"
                 onClick={() => setRange(item)}
-                className={`rounded-2xl px-4 py-2 text-sm font-semibold ${range === item ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-600 dark:bg-slate-900 dark:text-slate-300'}`}
+                className={`rounded-2xl px-4 py-2 text-sm font-semibold ${range === item ? 'bg-emerald-600 text-white' : 'bg-page text-slate-600 dark:bg-slate-900 dark:text-slate-300'}`}
               >
                 {item.charAt(0).toUpperCase() + item.slice(1)}
               </button>
@@ -98,9 +98,9 @@ export default function MarketingAnalyticsPage() {
         <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-6 shadow-sm">
           <h3 className="text-base font-bold text-slate-900 dark:text-slate-50">Market Signals</h3>
           <ul className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-300">
-            <li className="rounded-2xl bg-slate-50 dark:bg-slate-900 p-3">Mumbai remains the strongest growth market with 42% share.</li>
-            <li className="rounded-2xl bg-slate-50 dark:bg-slate-900 p-3">Mobile devices dominate ad engagement at 64%.</li>
-            <li className="rounded-2xl bg-slate-50 dark:bg-slate-900 p-3">Premium campaigns are getting 1.8x higher ROAS in category placements.</li>
+            <li className="rounded-2xl bg-page dark:bg-slate-900 p-3">Mumbai remains the strongest growth market with 42% share.</li>
+            <li className="rounded-2xl bg-page dark:bg-slate-900 p-3">Mobile devices dominate ad engagement at 64%.</li>
+            <li className="rounded-2xl bg-page dark:bg-slate-900 p-3">Premium campaigns are getting 1.8x higher ROAS in category placements.</li>
           </ul>
         </div>
       </div>

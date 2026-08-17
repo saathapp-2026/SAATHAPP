@@ -31,7 +31,7 @@ const ICON_BG = {
   sky: 'bg-sky-100 text-sky-600 dark:bg-sky-900/40 dark:text-sky-300',
   green: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-300',
   red: 'bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-300',
-  slate: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300',
+  slate: 'bg-page text-slate-600 dark:text-slate-300',
   yellow: 'bg-amber-100 text-amber-600 dark:bg-amber-900/40 dark:text-amber-300',
   emerald: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-300',
   amber: 'bg-violet-100 text-violet-600 dark:bg-violet-900/40 dark:text-violet-300',
@@ -51,13 +51,13 @@ export const PRIMARY_SUMMARY_KEYS = [
 
 function SummaryCardSkeleton() {
   return (
-    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3.5 animate-pulse min-w-[140px]">
+    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-3.5 animate-pulse min-w-[140px]">
       <div className="flex justify-between mb-3">
-        <div className="h-9 w-9 rounded-lg bg-slate-200 dark:bg-slate-700" />
+        <div className="h-9 w-9 rounded-lg bg-slate-200" />
       </div>
-      <div className="h-3 w-16 rounded bg-slate-200 dark:bg-slate-700 mb-2" />
-      <div className="h-6 w-12 rounded bg-slate-200 dark:bg-slate-700 mb-2" />
-      <div className="h-3 w-20 rounded bg-slate-200 dark:bg-slate-700" />
+      <div className="h-3 w-16 rounded bg-slate-200 mb-2" />
+      <div className="h-6 w-12 rounded bg-slate-200 mb-2" />
+      <div className="h-3 w-20 rounded bg-slate-200" />
     </div>
   );
 }
@@ -96,7 +96,7 @@ export default function OrderSummaryCards({ cards = [], loading, onCardClick, ac
             transition={{ delay: i * 0.02 }}
             title={card.tooltip}
             onClick={() => onCardClick?.(card)}
-            className={`text-left rounded-xl border bg-white dark:bg-slate-900 p-3.5 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
+            className={`text-left rounded-xl border bg-surface p-3.5 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
               active
                 ? 'border-emerald-500 shadow-md ring-1 ring-emerald-500'
                 : 'border-slate-200 dark:border-slate-800'

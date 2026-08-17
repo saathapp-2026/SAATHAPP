@@ -188,7 +188,7 @@ export default function DashboardHome() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
-            className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5"
+            className="rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 p-5"
           >
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-slate-500">{label}</span>
@@ -214,14 +214,14 @@ export default function DashboardHome() {
 
       <WelcomeKitTracking membership={data.membership} onUpdate={handleWelcomeKitUpdate} />
 
-      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6">
+      <div className="rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 p-6">
         <h3 className="font-bold mb-3">Quick Links</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
           {QUICK_LINKS.map(({ to, label, icon: Icon, color }) => (
             <Link
               key={to}
               to={to}
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2.5 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-medium hover:bg-page transition-colors"
             >
               <Icon size={16} className={color} />
               {label}

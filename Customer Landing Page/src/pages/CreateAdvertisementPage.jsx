@@ -106,14 +106,14 @@ export default function CreateAdvertisementPage({ user }) {
               <div className="flex items-center justify-between pt-6 border-t border-slate-200">
                 <button 
                   onClick={() => navigate('/advertise')}
-                  className="px-6 py-3 text-slate-600 font-medium hover:bg-slate-100 rounded-lg transition-colors"
+                  className="px-6 py-3 text-slate-600 font-medium hover:bg-page rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
                 <div className="flex gap-4">
                   <button 
                     onClick={handleSaveDraft}
-                    className="px-6 py-3 border border-slate-300 text-slate-700 font-medium hover:bg-slate-50 rounded-lg transition-colors bg-white shadow-sm"
+                    className="px-6 py-3 border border-slate-300 text-slate-700 font-medium hover:bg-page rounded-lg transition-colors bg-white shadow-sm"
                   >
                     Save Draft
                   </button>
@@ -154,7 +154,7 @@ export default function CreateAdvertisementPage({ user }) {
               ))}
             </div>
             <div className="flex justify-between border-t border-slate-200 pt-6">
-              <button onClick={() => setCurrentStep(1)} className="px-6 py-3 text-slate-600 font-medium hover:bg-slate-100 rounded-lg">Back</button>
+              <button onClick={() => setCurrentStep(1)} className="px-6 py-3 text-slate-600 font-medium hover:bg-page rounded-lg">Back</button>
               <button onClick={() => setCurrentStep(3)} className="px-8 py-3 bg-[#15803D] text-white font-bold rounded-lg hover:bg-emerald-700">Continue to Preview</button>
             </div>
           </div>
@@ -163,11 +163,11 @@ export default function CreateAdvertisementPage({ user }) {
         {currentStep === 3 && (
           <div className="mt-8 bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
             <h2 className="text-2xl font-bold text-slate-900 mb-6">Ad Preview</h2>
-            <div className="bg-slate-100 h-64 rounded-xl border border-slate-200 flex items-center justify-center mb-8">
+            <div className="bg-page h-64 rounded-xl border border-slate-200 flex items-center justify-center mb-8">
               <p className="text-slate-500 font-medium">This is a mockup of how your ad will appear to customers.</p>
             </div>
             <div className="flex justify-between border-t border-slate-200 pt-6">
-              <button onClick={() => setCurrentStep(2)} className="px-6 py-3 text-slate-600 font-medium hover:bg-slate-100 rounded-lg">Back</button>
+              <button onClick={() => setCurrentStep(2)} className="px-6 py-3 text-slate-600 font-medium hover:bg-page rounded-lg">Back</button>
               <button onClick={() => setCurrentStep(4)} className="px-8 py-3 bg-[#15803D] text-white font-bold rounded-lg hover:bg-emerald-700">Proceed to Payment</button>
             </div>
           </div>
@@ -176,7 +176,7 @@ export default function CreateAdvertisementPage({ user }) {
         {currentStep === 4 && (
           <div className="mt-8 bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
             <h2 className="text-2xl font-bold text-slate-900 mb-6">Payment Details</h2>
-            <div className="bg-slate-50 p-6 rounded-xl border border-slate-200 mb-8 max-w-md">
+            <div className="bg-page p-6 rounded-xl border border-slate-200 mb-8 max-w-md">
               <p className="text-sm text-slate-500 mb-2">Total Amount to Pay</p>
               <p className="text-4xl font-black text-[#15803D] mb-6">₹2,999</p>
               <button className="w-full py-4 bg-slate-900 text-white font-bold rounded-lg flex justify-center items-center gap-2">
@@ -185,7 +185,7 @@ export default function CreateAdvertisementPage({ user }) {
               <p className="text-xs text-center text-slate-400 mt-4">100% Secure Payment via Razorpay</p>
             </div>
             <div className="flex justify-between border-t border-slate-200 pt-6">
-              <button onClick={() => setCurrentStep(3)} className="px-6 py-3 text-slate-600 font-medium hover:bg-slate-100 rounded-lg">Back</button>
+              <button onClick={() => setCurrentStep(3)} className="px-6 py-3 text-slate-600 font-medium hover:bg-page rounded-lg">Back</button>
               <button onClick={() => setCurrentStep(5)} className="px-8 py-3 bg-[#15803D] text-white font-bold rounded-lg hover:bg-emerald-700">Simulate Success</button>
             </div>
           </div>

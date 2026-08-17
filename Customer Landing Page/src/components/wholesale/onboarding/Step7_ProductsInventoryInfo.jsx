@@ -73,7 +73,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-4xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
           Phase 6 — Product & Inventory Information
         </div>
@@ -101,7 +101,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                     className={`rounded-xl px-3.5 py-2 text-xs font-bold transition flex items-center gap-1.5 ${
                       isSelected
                         ? 'bg-emerald-600 text-white shadow-md'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
+                        : 'bg-page text-slate-700 dark:text-slate-300 hover:bg-slate-200'
                     }`}
                   >
                     {isSelected && <CheckCircle2 size={13} />}
@@ -123,7 +123,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                 required
                 value={formData.minOrderQuantity}
                 onChange={(e) => updateFormData({ minOrderQuantity: Number(e.target.value) })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="50"
               />
             </div>
@@ -135,7 +135,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                 type="text"
                 value={formData.monthlySupplyCapacity}
                 onChange={(e) => updateFormData({ monthlySupplyCapacity: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="1,00,000 Units"
               />
             </div>
@@ -147,14 +147,14 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                 type="text"
                 value={formData.stockAvailability}
                 onChange={(e) => updateFormData({ stockAvailability: e.target.value })}
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 placeholder="In Stock (24hr Dispatch)"
               />
             </div>
           </div>
 
           {/* Bulk Pricing Tier Builder */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/60 p-5">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950/60 p-5">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">
@@ -175,7 +175,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
               {formData.pricingTiers.map((tier, idx) => (
                 <div
                   key={idx}
-                  className="flex flex-wrap items-center gap-3 p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
+                  className="flex flex-wrap items-center gap-3 p-3 rounded-xl bg-surface border border-slate-200 dark:border-slate-800"
                 >
                   <div className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300">
                     <span>Qty {tier.minQty} to {tier.maxQty} units:</span>
@@ -200,7 +200,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
           {/* File Uploaders: Catalogue & Images */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {/* Catalog Upload */}
-            <div className="rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 p-5 text-center">
+            <div className="rounded-2xl border-2 border-dashed border-slate-300 bg-page dark:bg-slate-950 p-5 text-center">
               <UploadCloud size={32} className="mx-auto text-emerald-500" />
               <h4 className="mt-2 text-xs font-extrabold text-slate-900 dark:text-white">
                 Upload Product Catalogue (PDF/Excel)
@@ -216,7 +216,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                 <button
                   type="button"
                   onClick={() => catalogInputRef.current?.click()}
-                  className="rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
+                  className="rounded-xl bg-white border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
                 >
                   Choose PDF / Excel File
                 </button>
@@ -231,7 +231,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
             </div>
 
             {/* Images Upload */}
-            <div className="rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 p-5 text-center">
+            <div className="rounded-2xl border-2 border-dashed border-slate-300 bg-page dark:bg-slate-950 p-5 text-center">
               <Package size={32} className="mx-auto text-emerald-500" />
               <h4 className="mt-2 text-xs font-extrabold text-slate-900 dark:text-white">
                 Upload Sample Product Images
@@ -241,7 +241,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                 {formData.productImages.map((img, i) => (
                   <span
                     key={i}
-                    className="rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[11px] font-semibold px-2.5 py-1"
+                    className="rounded-xl bg-slate-200 text-slate-700 dark:text-slate-300 text-[11px] font-semibold px-2.5 py-1"
                   >
                     {img.name}
                   </span>
@@ -251,7 +251,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                 <button
                   type="button"
                   onClick={() => imageInputRef.current?.click()}
-                  className="rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
+                  className="rounded-xl bg-white border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
                 >
                   Choose Images
                 </button>
@@ -271,7 +271,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

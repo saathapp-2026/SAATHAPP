@@ -11,7 +11,7 @@ export default function DashboardLayout({ seller, onLogout }) {
   const { sidebarCollapsed, toggleSidebarCollapsed } = useSellerUI();
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex">
+    <div className="min-h-screen bg-page dark:bg-slate-950 flex">
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
@@ -21,7 +21,7 @@ export default function DashboardLayout({ seller, onLogout }) {
       )}
 
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transform transition-all lg:translate-x-0 flex flex-col ${
+        className={`fixed lg:static inset-y-0 left-0 z-50 bg-surface border-r border-slate-200 dark:border-slate-800 transform transition-all lg:translate-x-0 flex flex-col ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } ${sidebarCollapsed ? 'w-16 lg:w-16' : 'w-64'}`}
         aria-label="Seller dashboard navigation"
@@ -34,7 +34,7 @@ export default function DashboardLayout({ seller, onLogout }) {
           <div className="flex items-center gap-1">
             <button
               type="button"
-              className="hidden lg:flex p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="hidden lg:flex p-1 rounded-lg hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500"
               onClick={toggleSidebarCollapsed}
               aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             >
@@ -58,7 +58,7 @@ export default function DashboardLayout({ seller, onLogout }) {
                 `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
                   isActive
                     ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
-                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-page'
                 }`
               }
             >
@@ -72,7 +72,7 @@ export default function DashboardLayout({ seller, onLogout }) {
           {!sidebarCollapsed && (
             <Link
               to="/"
-              className="flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded"
+              className="flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded"
             >
               <ChevronLeft size={16} />
               Back to Store

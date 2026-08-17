@@ -82,7 +82,7 @@ export default function AdTypeSelector({ onSelect, onViewGuide }) {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.03 }}
-              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm flex flex-col gap-3"
+              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 shadow-sm flex flex-col gap-3"
             >
               <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${COLOR[t.color] || COLOR.emerald}`}>
                 <Icon size={18} />

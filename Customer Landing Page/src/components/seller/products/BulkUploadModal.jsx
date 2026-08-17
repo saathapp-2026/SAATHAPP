@@ -36,13 +36,13 @@ export default function BulkUploadModal({ open, onClose, onImported }) {
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center p-4" role="dialog" aria-modal="true">
       <button type="button" className="absolute inset-0 bg-black/50" aria-label="Close" onClick={onClose} />
-      <div className="relative w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-4">
+      <div className="relative w-full max-w-lg rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-4">
         <div className="flex items-start justify-between">
           <div>
             <h2 className="font-bold text-lg">Excel / CSV Bulk Import</h2>
             <p className="text-sm text-slate-500">Upload products from a spreadsheet</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onClose} className="p-1 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -56,7 +56,7 @@ export default function BulkUploadModal({ open, onClose, onImported }) {
         </button>
 
         <div
-          className="rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-600 p-8 text-center cursor-pointer hover:border-emerald-500"
+          className="rounded-xl border-2 border-dashed border-slate-300 p-8 text-center cursor-pointer hover:border-emerald-500"
           onClick={() => fileRef.current?.click()}
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => {
@@ -72,7 +72,7 @@ export default function BulkUploadModal({ open, onClose, onImported }) {
 
         {loading && <p className="text-sm text-slate-500">Validating & importing…</p>}
         {report && (
-          <div className="rounded-xl bg-slate-50 dark:bg-slate-800/50 p-3 text-sm space-y-1">
+          <div className="rounded-xl bg-page p-3 text-sm space-y-1">
             <p className="font-semibold">Import report</p>
             <p className="text-emerald-600">Imported: {report.ok}</p>
             <p className="text-red-500">Failed: {report.failed}</p>

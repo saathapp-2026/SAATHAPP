@@ -64,13 +64,13 @@ export default function OrderTimeline({ timeline = [], currentStatus, variant = 
                   className={`h-6 w-6 rounded-full flex items-center justify-center shrink-0 ${
                     done
                       ? 'bg-emerald-500 text-white'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-400 border border-slate-200 dark:border-slate-700'
+                      : 'bg-page text-slate-400 border border-slate-200'
                   }`}
                 >
                   {done ? <Check size={12} strokeWidth={3} /> : <span className="h-1.5 w-1.5 rounded-full bg-current" />}
                 </span>
                 {!isLast && (
-                  <span className={`w-0.5 flex-1 min-h-[20px] ${done ? 'bg-emerald-400' : 'bg-slate-200 dark:bg-slate-700'}`} />
+                  <span className={`w-0.5 flex-1 min-h-[20px] ${done ? 'bg-emerald-400' : 'bg-slate-200'}`} />
                 )}
               </div>
               <div className={`pb-4 ${done ? '' : 'opacity-50'}`}>
@@ -103,7 +103,7 @@ export default function OrderTimeline({ timeline = [], currentStatus, variant = 
   const sorted = [...timeline].sort((a, b) => a.at - b.at);
 
   return (
-    <ol className="relative space-y-0 border-l-2 border-slate-200 dark:border-slate-700 ml-3" aria-label="Order timeline">
+    <ol className="relative space-y-0 border-l-2 border-slate-200 ml-3" aria-label="Order timeline">
       {sorted.map((event, i) => {
         const dt = new Date(event.at);
         return (

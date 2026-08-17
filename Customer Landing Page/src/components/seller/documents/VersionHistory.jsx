@@ -14,7 +14,7 @@ export default function VersionHistory({ versions = [], onDownload, onRestore, c
       {sorted.map((v, idx) => (
         <div
           key={v.version}
-          className="rounded-xl border border-slate-200 dark:border-slate-700 p-3 flex items-start justify-between gap-3"
+          className="rounded-xl border border-slate-200 p-3 flex items-start justify-between gap-3"
         >
           <div>
             <p className="font-semibold text-slate-900 dark:text-slate-100">
@@ -31,7 +31,7 @@ export default function VersionHistory({ versions = [], onDownload, onRestore, c
             <button
               type="button"
               onClick={() => onDownload?.(v)}
-              className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+              className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-page"
             >
               <Download size={12} /> Download
             </button>

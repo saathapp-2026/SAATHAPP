@@ -17,13 +17,13 @@ export default function ConfirmDialog({
 }) {
   return (
     <SellerOverlay open={open} onClose={onCancel} labelledBy="confirm-title" zIndex={SELLER_Z.modal}>
-      <div className="w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-4">
+      <div className="w-full max-w-md rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-4">
         <div className="flex items-start justify-between gap-3">
           <div>
             <h2 id="confirm-title" className="font-bold text-lg">{title}</h2>
             {message && <p className="text-sm text-slate-500 mt-1">{message}</p>}
           </div>
-          <button type="button" onClick={onCancel} className="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onCancel} className="p-1 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -33,7 +33,7 @@ export default function ConfirmDialog({
             type="button"
             onClick={onCancel}
             disabled={loading}
-            className="px-4 py-2 rounded-xl text-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
+            className="px-4 py-2 rounded-xl text-sm border border-slate-200 hover:bg-page"
           >
             {cancelLabel}
           </button>

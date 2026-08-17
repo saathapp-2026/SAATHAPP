@@ -184,7 +184,7 @@ export default function ServiceProfessionalPage({
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+    <div className="min-h-screen bg-page dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
       {/* Header component integration */}
       <Header
         cartCount={cartCount}
@@ -285,14 +285,14 @@ export default function ServiceProfessionalPage({
                   onClick={() => navigate('/professional/login')}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="py-3.5 px-8 rounded-btn border border-slate-200 dark:border-slate-700 bg-white/40 dark:bg-slate-800/40 text-slate-700 dark:text-slate-200 font-extrabold text-sm sm:text-base cursor-pointer hover:bg-white/70 dark:hover:bg-slate-800/70 transition-colors"
+                  className="py-3.5 px-8 rounded-btn border border-slate-200 bg-white/40 text-slate-700 dark:text-slate-200 font-extrabold text-sm sm:text-base cursor-pointer hover:bg-white/70 transition-colors"
                 >
                   Partner Login
                 </motion.button>
               </div>
 
               {/* Stats highlights */}
-              <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200/60 dark:border-slate-800/50 max-w-lg">
+              <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200/60  max-w-lg">
                 <div>
                   <h4 className="text-xl sm:text-2xl font-black text-slate-800 dark:text-white">₹50K+</h4>
                   <p className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-0.5">Monthly Earnings</p>
@@ -316,8 +316,8 @@ export default function ServiceProfessionalPage({
                 <div className="absolute w-56 h-56 rounded-full border border-dashed border-secondary/20 dark:border-secondary/15 animate-spin" style={{ animationDuration: '25s', animationDirection: 'reverse' }} />
                 
                 {/* Glass core sphere */}
-                <div className="absolute w-48 h-48 rounded-full bg-gradient-to-tr from-primary/10 to-brand-500/20 dark:from-slate-900/50 dark:to-slate-800/50 backdrop-blur-md shadow-premium border border-white/30 dark:border-slate-800/40 flex flex-col items-center justify-center">
-                  <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-900 flex items-center justify-center shadow-premium border border-slate-100 dark:border-slate-800">
+                <div className="absolute w-48 h-48 rounded-full bg-gradient-to-tr from-primary/10 to-brand-500/20 dark:from-slate-900/50 dark:to-slate-800/50 backdrop-blur-md shadow-premium border border-white/30  flex flex-col items-center justify-center">
+                  <div className="w-16 h-16 rounded-2xl bg-surface flex items-center justify-center shadow-premium border border-slate-100 dark:border-slate-800">
                     <Briefcase size={28} className="text-primary" />
                   </div>
                   <span className="text-xs font-black text-slate-600 dark:text-slate-300 mt-3 uppercase tracking-wider">Join as Partner</span>
@@ -355,7 +355,7 @@ export default function ServiceProfessionalPage({
         </section>
 
         {/* STICKY SUB-NAVIGATION */}
-        <nav className="sticky top-[68px] z-30 w-full border-y border-slate-200/60 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl transition-all shadow-sm">
+        <nav className="sticky top-[68px] z-30 w-full border-y border-slate-200/60 dark:border-slate-800 bg-white/80 backdrop-blur-xl transition-all shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-start overflow-x-auto scrollbar-none gap-8 py-3.5">
             {[
               { id: 'hero', name: 'Overview' },
@@ -369,7 +369,7 @@ export default function ServiceProfessionalPage({
                 key={tab.id}
                 onClick={() => scrollToSection(tab.id)}
                 className={`text-xs sm:text-sm font-black uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors relative pb-0.5 ${
-                  activeSubTab === tab.id ? 'text-primary' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200'
+                  activeSubTab === tab.id ? 'text-primary' : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
                 {tab.name}
@@ -412,7 +412,7 @@ export default function ServiceProfessionalPage({
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.05 }}
                     whileHover={{ y: -6 }}
-                    className="bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-850 p-6 rounded-card shadow-soft hover:shadow-premium hover:border-slate-300 dark:hover:border-slate-800 text-left flex flex-col justify-between group transition-all"
+                    className="bg-surface border border-slate-200/50 dark:border-slate-850 p-6 rounded-card shadow-soft hover:shadow-premium hover:border-slate-300 dark:hover:border-slate-800 text-left flex flex-col justify-between group transition-all"
                   >
                     <div className="space-y-4">
                       {/* Icon header */}
@@ -456,7 +456,7 @@ export default function ServiceProfessionalPage({
 
             {/* Timelines tabs selector */}
             <div className="flex justify-center mt-10">
-              <div className="inline-flex p-1 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-full shadow-sm max-w-full overflow-x-auto scrollbar-none">
+              <div className="inline-flex p-1 bg-surface border border-slate-200/80 dark:border-slate-800 rounded-full shadow-sm max-w-full overflow-x-auto scrollbar-none">
                 {[
                   { id: 'joining', label: '1. Onboarding Process' },
                   { id: 'booking', label: '2. Customer Booking Flow' },
@@ -466,7 +466,7 @@ export default function ServiceProfessionalPage({
                     key={item.id}
                     onClick={() => setJourneyTab(item.id)}
                     className={`px-4 sm:px-6 py-2 rounded-full text-xs font-black uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors relative ${
-                      journeyTab === item.id ? 'text-white' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200'
+                      journeyTab === item.id ? 'text-white' : 'text-slate-400 hover:text-slate-600'
                     }`}
                   >
                     <span className="relative z-10">{item.label}</span>
@@ -514,11 +514,11 @@ export default function ServiceProfessionalPage({
                           className="relative pl-14 sm:pl-16 group"
                         >
                           {/* Circle step badge */}
-                          <div className="absolute left-3 top-0.5 w-6 h-6 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-850 flex items-center justify-center group-hover:border-primary transition-colors z-10">
-                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 group-hover:bg-primary" />
+                          <div className="absolute left-3 top-0.5 w-6 h-6 rounded-full bg-surface border-2 border-slate-300 dark:border-slate-850 flex items-center justify-center group-hover:border-primary transition-colors z-10">
+                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-primary" />
                           </div>
 
-                          <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-card p-6 sm:p-8 shadow-soft hover:shadow-premium transition-all">
+                          <div className="bg-surface border border-slate-200/60 dark:border-slate-800/80 rounded-card p-6 sm:p-8 shadow-soft hover:shadow-premium transition-all">
                             <span className="text-[10px] font-black uppercase tracking-widest text-primary block">{step.step}</span>
                             <div className="flex items-center gap-3 mt-1">
                               <StepIcon size={20} className="text-slate-700 dark:text-slate-200" />
@@ -532,7 +532,7 @@ export default function ServiceProfessionalPage({
                             {step.docs && (
                               <div className="flex flex-wrap gap-2 mt-4">
                                 {step.docs.map((doc, dIdx) => (
-                                  <span key={dIdx} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-50 dark:bg-slate-950 text-[10px] font-bold text-slate-450 border border-slate-200 dark:border-slate-850/60">
+                                  <span key={dIdx} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-page dark:bg-slate-950 text-[10px] font-bold text-slate-450 border border-slate-200 dark:border-slate-850/60">
                                     <Check size={10} className="text-primary" />
                                     <span>{doc}</span>
                                   </span>
@@ -573,11 +573,11 @@ export default function ServiceProfessionalPage({
                           transition={{ delay: idx * 0.05 }}
                           className="relative pl-14 sm:pl-16 group"
                         >
-                          <div className="absolute left-3 top-0.5 w-6 h-6 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-850 flex items-center justify-center group-hover:border-primary transition-colors z-10">
-                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 group-hover:bg-primary" />
+                          <div className="absolute left-3 top-0.5 w-6 h-6 rounded-full bg-surface border-2 border-slate-300 dark:border-slate-850 flex items-center justify-center group-hover:border-primary transition-colors z-10">
+                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-primary" />
                           </div>
 
-                          <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-card p-6 sm:p-8 shadow-soft hover:shadow-premium transition-all relative">
+                          <div className="bg-surface border border-slate-200/60 dark:border-slate-800/80 rounded-card p-6 sm:p-8 shadow-soft hover:shadow-premium transition-all relative">
                             {/* Pulse arrow pointing downwards to symbolize flow */}
                             {idx < 5 && (
                               <div className="absolute bottom-[-24px] left-[-32px] sm:left-[-34px] text-primary animate-pulse pointer-events-none hidden md:block">
@@ -631,15 +631,15 @@ export default function ServiceProfessionalPage({
                           transition={{ delay: idx * 0.05 }}
                           className="relative pl-14 sm:pl-16 group"
                         >
-                          <div className="absolute left-3 top-0.5 w-6 h-6 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-850 flex items-center justify-center group-hover:border-primary transition-colors z-10">
-                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 group-hover:bg-primary" />
+                          <div className="absolute left-3 top-0.5 w-6 h-6 rounded-full bg-surface border-2 border-slate-300 dark:border-slate-850 flex items-center justify-center group-hover:border-primary transition-colors z-10">
+                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-primary" />
                           </div>
 
-                          <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-card p-6 sm:p-8 shadow-soft hover:shadow-premium transition-all">
+                          <div className="bg-surface border border-slate-200/60 dark:border-slate-800/80 rounded-card p-6 sm:p-8 shadow-soft hover:shadow-premium transition-all">
                             <span className="text-[10px] font-black uppercase tracking-widest text-primary block">{step.step}</span>
                             <h3 className="text-base sm:text-lg font-black text-slate-800 dark:text-white mt-0.5">{step.title}</h3>
                             
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 pt-4 border-t border-slate-100 dark:border-slate-800/50">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 pt-4 border-t border-slate-100 ">
                               <div className="space-y-1 text-left">
                                 <span className="text-[9px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 block">💼 What Professional Does</span>
                                 <p className="text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed">{step.prof}</p>
@@ -697,7 +697,7 @@ export default function ServiceProfessionalPage({
                     whileHover={{ y: -4, scale: 1.02 }}
                     className={`p-6 rounded-card border text-left flex flex-col justify-between h-44 bg-gradient-to-br ${service.bg} shadow-soft hover:shadow-premium transition-all`}
                   >
-                    <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/20 dark:border-slate-800 flex items-center justify-center shadow-sm">
+                    <div className="w-10 h-10 rounded-xl bg-surface border border-slate-200/20 dark:border-slate-800 flex items-center justify-center shadow-sm">
                       <ServiceIcon size={20} className="text-primary" />
                     </div>
                     <div className="space-y-0.5">
@@ -751,7 +751,7 @@ export default function ServiceProfessionalPage({
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.05 }}
-                    className="bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-850 p-6 sm:p-8 rounded-card shadow-soft hover:shadow-premium transition-all flex flex-col justify-between"
+                    className="bg-surface border border-slate-200/50 dark:border-slate-850 p-6 sm:p-8 rounded-card shadow-soft hover:shadow-premium transition-all flex flex-col justify-between"
                   >
                     <div className="space-y-4">
                       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -771,7 +771,7 @@ export default function ServiceProfessionalPage({
                         <span>Partner satisfaction rate</span>
                         <span>{benefit.progress}%</span>
                       </div>
-                      <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                      <div className="w-full h-1.5 bg-page rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${benefit.progress}%` }}
@@ -814,7 +814,7 @@ export default function ServiceProfessionalPage({
               ].map((faq, idx) => (
                 <div
                   key={idx}
-                  className="border border-slate-200/60 dark:border-slate-800/80 rounded-card bg-white dark:bg-slate-900 shadow-soft overflow-hidden"
+                  className="border border-slate-200/60 dark:border-slate-800/80 rounded-card bg-surface shadow-soft overflow-hidden"
                 >
                   <button
                     onClick={() => toggleFaq(idx)}
@@ -836,7 +836,7 @@ export default function ServiceProfessionalPage({
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.25, ease: 'easeInOut' }}
                       >
-                        <div className="px-6 pb-6 pt-1 border-t border-slate-105 dark:border-slate-800/40 text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                        <div className="px-6 pb-6 pt-1 border-t border-slate-105  text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
                           {faq.a}
                         </div>
                       </motion.div>
@@ -904,7 +904,7 @@ export default function ServiceProfessionalPage({
       >
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="p-3.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-premium hover:shadow-glow-primary text-slate-500 hover:text-primary transition-all cursor-pointer"
+          className="p-3.5 rounded-full bg-surface border border-slate-200/60 dark:border-slate-800 shadow-premium hover:shadow-glow-primary text-slate-500 hover:text-primary transition-all cursor-pointer"
         >
           <ChevronUp size={20} />
         </button>
@@ -919,17 +919,17 @@ export default function ServiceProfessionalPage({
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 15 }}
               transition={{ type: 'spring', duration: 0.4 }}
-              className="w-full max-w-lg bg-white dark:bg-slate-900 rounded-card border border-slate-200/60 dark:border-slate-800/80 shadow-premium overflow-hidden text-left"
+              className="w-full max-w-lg bg-surface rounded-card border border-slate-200/60 dark:border-slate-800/80 shadow-premium overflow-hidden text-left"
             >
               {/* Header */}
-              <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800/40 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/50">
+              <div className="px-6 py-5 border-b border-slate-100  flex items-center justify-between bg-slate-50/50">
                 <div>
                   <h3 className="text-base sm:text-lg font-black text-slate-800 dark:text-white">Partner Application Form</h3>
                   <p className="text-[10px] text-slate-400 mt-0.5">Become a verified SaathApp technician or worker</p>
                 </div>
                 <button
                   onClick={() => setShowApplyModal(false)}
-                  className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-705 flex items-center justify-center text-slate-500 transition-colors cursor-pointer"
+                  className="w-8 h-8 rounded-full bg-page hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-colors cursor-pointer"
                 >
                   ✕
                 </button>
@@ -954,7 +954,7 @@ export default function ServiceProfessionalPage({
                           value={formData.fullName}
                           onChange={handleInputChange}
                           placeholder="Enter your legal full name"
-                          className="input-field dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                          className="input-field dark:border-slate-800 dark:text-white"
                         />
                       </div>
 
@@ -969,7 +969,7 @@ export default function ServiceProfessionalPage({
                           onChange={handleInputChange}
                           pattern="[0-9]{10}"
                           placeholder="10-digit mobile number"
-                          className="input-field dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                          className="input-field dark:border-slate-800 dark:text-white"
                         />
                       </div>
 
@@ -984,7 +984,7 @@ export default function ServiceProfessionalPage({
                             value={formData.city}
                             onChange={handleInputChange}
                             placeholder="e.g. Patna, Nalanda"
-                            className="input-field dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                            className="input-field dark:border-slate-800 dark:text-white"
                           />
                         </div>
 
@@ -995,7 +995,7 @@ export default function ServiceProfessionalPage({
                             name="experience"
                             value={formData.experience}
                             onChange={handleInputChange}
-                            className="input-field dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                            className="input-field dark:border-slate-800 dark:text-white"
                           >
                             <option>Fresher (&lt; 1 Year)</option>
                             <option>1-3 Years</option>
@@ -1012,7 +1012,7 @@ export default function ServiceProfessionalPage({
                           name="category"
                           value={formData.category}
                           onChange={handleInputChange}
-                          className="input-field dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                          className="input-field dark:border-slate-800 dark:text-white"
                         >
                           <option>Electrician</option>
                           <option>Plumber</option>
@@ -1067,7 +1067,7 @@ export default function ServiceProfessionalPage({
                           Thank you for choosing SaathApp. Our verification team will review your application and contact you on <strong>+91 {formData.phone}</strong> within 24–48 hours.
                         </p>
                       </div>
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 dark:bg-slate-950 text-[10px] font-black uppercase text-slate-400 border border-slate-205 dark:border-slate-800/80">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-page dark:bg-slate-950 text-[10px] font-black uppercase text-slate-400 border border-slate-205 dark:border-slate-800/80">
                         <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                         <span>Status: Pending Review</span>
                       </div>

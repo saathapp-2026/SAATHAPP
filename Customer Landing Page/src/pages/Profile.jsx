@@ -263,30 +263,30 @@ export default function Profile({ user, onBack, onLogout }) {
     return (
       <div className="min-h-screen bg-[#F8F9FC] dark:bg-slate-950 px-4 py-8 sm:px-6 lg:px-8 text-left">
         <div className="mx-auto max-w-7xl flex flex-col md:flex-row gap-6">
-          <div className="w-full md:w-[280px] bg-white dark:bg-slate-900 h-[600px] rounded-[18px] p-6 space-y-6 animate-pulse border border-slate-200/50 dark:border-slate-800">
+          <div className="w-full md:w-[280px] bg-surface h-[600px] rounded-[18px] p-6 space-y-6 animate-pulse border border-slate-200/50 dark:border-slate-800">
             <div className="flex items-center gap-3">
-              <div className="w-14 h-14 rounded-full bg-slate-200 dark:bg-slate-800" />
+              <div className="w-14 h-14 rounded-full bg-slate-200" />
               <div className="space-y-2 flex-1">
-                <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-3/4" />
-                <div className="h-3 bg-slate-200 dark:bg-slate-800 rounded w-1/2" />
+                <div className="h-4 bg-slate-200 rounded w-3/4" />
+                <div className="h-3 bg-slate-200 rounded w-1/2" />
               </div>
             </div>
-            <div className="h-24 bg-slate-200 dark:bg-slate-800 rounded-[14px]" />
+            <div className="h-24 bg-slate-200 rounded-[14px]" />
             <div className="space-y-3 pt-4">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-8 bg-slate-200 dark:bg-slate-800 rounded-lg" />
+                <div key={i} className="h-8 bg-slate-200 rounded-lg" />
               ))}
             </div>
           </div>
-          <div className="flex-1 bg-white dark:bg-slate-900 rounded-[18px] p-6 sm:p-8 animate-pulse border border-slate-200/50 dark:border-slate-800 space-y-6">
-            <div className="h-8 bg-slate-200 dark:bg-slate-800 rounded w-1/3" />
-            <div className="h-32 bg-slate-200 dark:bg-slate-800 rounded-[18px]" />
+          <div className="flex-1 bg-surface rounded-[18px] p-6 sm:p-8 animate-pulse border border-slate-200/50 dark:border-slate-800 space-y-6">
+            <div className="h-8 bg-slate-200 rounded w-1/3" />
+            <div className="h-32 bg-slate-200 rounded-[18px]" />
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-24 bg-slate-200 dark:bg-slate-800 rounded-[14px]" />
+                <div key={i} className="h-24 bg-slate-200 rounded-[14px]" />
               ))}
             </div>
-            <div className="h-40 bg-slate-200 dark:bg-slate-800 rounded-[18px]" />
+            <div className="h-40 bg-slate-200 rounded-[18px]" />
           </div>
         </div>
       </div>
@@ -315,7 +315,7 @@ export default function Profile({ user, onBack, onLogout }) {
           <div className="w-full md:w-[280px] space-y-6 shrink-0 sticky top-6">
             
             {/* Sidebar Profile Card */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 rounded-[18px] p-5 shadow-sm text-center">
+            <div className="bg-surface border border-slate-200/50 dark:border-slate-800 rounded-[18px] p-5 shadow-sm text-center">
               <div className="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-[#6C3BFF] to-[#FF5A7A] text-white flex items-center justify-center font-black text-2xl mx-auto border-2 border-white dark:border-slate-800 shadow-md">
                 <span>{(profile?.name || 'U').charAt(0).toUpperCase()}</span>
               </div>
@@ -342,7 +342,7 @@ export default function Profile({ user, onBack, onLogout }) {
           </div>
 
           {/* RIGHT CONTENT DISPLAY WINDOW */}
-          <div className="flex-1 w-full bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 rounded-[18px] p-6 sm:p-8 shadow-sm">
+          <div className="flex-1 w-full bg-surface border border-slate-200/50 dark:border-slate-800 rounded-[18px] p-6 sm:p-8 shadow-sm">
             
 
 
@@ -363,18 +363,18 @@ export default function Profile({ user, onBack, onLogout }) {
                   <input
                     type="text"
                     placeholder="Search dashboard..."
-                    className="w-48 xl:w-60 h-9 px-3 pl-8 text-xs bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-200 dark:border-slate-800 rounded-xl outline-none focus:border-[#6C3BFF]"
+                    className="w-48 xl:w-60 h-9 px-3 pl-8 text-xs bg-page dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-200 dark:border-slate-800 rounded-xl outline-none focus:border-[#6C3BFF]"
                   />
                   <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                 </div>
                 
                 {/* Language button dropdown */}
                 <div className="relative group">
-                  <button className="p-2 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer">
+                  <button className="p-2 bg-page dark:bg-slate-900 hover:bg-slate-200 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer">
                     <Globe size={16} className="text-[#6C3BFF]" />
                   </button>
                   {/* Hover dropdown list */}
-                  <div className="absolute right-0 mt-2 w-36 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg p-1.5 hidden group-hover:block z-50">
+                  <div className="absolute right-0 mt-2 w-36 bg-surface border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg p-1.5 hidden group-hover:block z-50">
                     {[
                       { code: 'en', label: 'English' },
                       { code: 'hi', label: 'हिन्दी' },
@@ -384,7 +384,7 @@ export default function Profile({ user, onBack, onLogout }) {
                       <button
                         key={lang.code}
                         onClick={() => changeLanguage(lang.code)}
-                        className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 ${
+                        className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-page ${
                           language === lang.code ? 'text-[#6C3BFF] bg-[#6C3BFF]/5' : 'text-slate-800 dark:text-slate-300'
                         }`}
                       >
@@ -397,7 +397,7 @@ export default function Profile({ user, onBack, onLogout }) {
                 {/* Theme toggle button */}
                 <button
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  className="p-2 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer"
+                  className="p-2 bg-page dark:bg-slate-900 hover:bg-slate-200 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer"
                 >
                   {theme === 'dark' ? <Sun size={16} className="text-amber-500" /> : <Moon size={16} className="text-[#6C3BFF]" />}
                 </button>
@@ -405,7 +405,7 @@ export default function Profile({ user, onBack, onLogout }) {
                 {/* Notification Bell */}
                 <button 
                   onClick={() => setActiveTab('notifications')}
-                  className="relative p-2 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer"
+                  className="relative p-2 bg-page dark:bg-slate-900 hover:bg-slate-200 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer"
                 >
                   <Bell size={16} className="text-[#6C3BFF]" />
                   {notifications.some(n => !n.read) && (
@@ -442,27 +442,27 @@ export default function Profile({ user, onBack, onLogout }) {
 
                     {/* Statistics Cards */}
                     <div className="grid grid-cols-2 lg:grid-cols-5 gap-3.5">
-                      <div className="bg-[#6C3BFF]/5 dark:bg-slate-900/60 p-4.5 rounded-2xl border border-[#6C3BFF]/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
+                      <div className="bg-[#6C3BFF]/5 p-4.5 rounded-2xl border border-[#6C3BFF]/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
                         <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Orders</p>
                         <p className="mt-1 text-2xl font-black text-slate-900 dark:text-white">{orders.length}</p>
                       </div>
-                      <div className="bg-amber-500/5 dark:bg-slate-900/60 p-4.5 rounded-2xl border border-amber-500/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
+                      <div className="bg-amber-500/5 p-4.5 rounded-2xl border border-amber-500/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
                         <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Active Orders</p>
                         <p className="mt-1 text-2xl font-black text-slate-900 dark:text-white">
                           {orders.filter(o => o.status === 'Pending' || o.status === 'In Transit').length}
                         </p>
                       </div>
-                      <div className="bg-emerald-500/5 dark:bg-slate-900/60 p-4.5 rounded-2xl border border-emerald-500/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
+                      <div className="bg-emerald-500/5 p-4.5 rounded-2xl border border-emerald-500/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
                         <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Completed Orders</p>
                         <p className="mt-1 text-2xl font-black text-slate-900 dark:text-white">
                           {orders.filter(o => o.status === 'Delivered').length}
                         </p>
                       </div>
-                      <div className="bg-blue-500/5 dark:bg-slate-900/60 p-4.5 rounded-2xl border border-blue-500/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
+                      <div className="bg-blue-500/5 p-4.5 rounded-2xl border border-blue-500/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
                         <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Wallet Balance</p>
                         <p className="mt-1 text-2xl font-black text-slate-900 dark:text-white">₹{walletBalance.toFixed(2)}</p>
                       </div>
-                      <div className="bg-[#FF5A7A]/5 dark:bg-slate-900/60 p-4.5 rounded-2xl border border-[#FF5A7A]/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
+                      <div className="bg-[#FF5A7A]/5 p-4.5 rounded-2xl border border-[#FF5A7A]/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
                         <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Reward Points</p>
                         <p className="mt-1 text-2xl font-black text-slate-900 dark:text-white">{rewards?.points || 0}</p>
                       </div>
@@ -475,16 +475,16 @@ export default function Profile({ user, onBack, onLogout }) {
                       <div className="space-y-6">
                         
                         {/* Recent Orders Preview */}
-                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                        <div className="bg-slate-50/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Recent Orders</h4>
                             <button onClick={() => setActiveTab('orders')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">View All</button>
                           </div>
                           <div className="space-y-2">
                             {orders.slice(0, 2).map((order) => (
-                              <div key={order.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs shadow-sm">
+                              <div key={order.id} className="flex items-center justify-between p-3 bg-surface border border-slate-200 dark:border-slate-800 rounded-xl text-xs shadow-sm">
                                 <div className="flex items-center gap-2">
-                                  <span className="text-lg w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-950 flex items-center justify-center border border-slate-200 dark:border-slate-800">{order.thumbnail}</span>
+                                  <span className="text-lg w-8 h-8 rounded-lg bg-page dark:bg-slate-950 flex items-center justify-center border border-slate-200 dark:border-slate-800">{order.thumbnail}</span>
                                   <div>
                                     <p className="font-bold text-slate-900 dark:text-slate-100 truncate max-w-[120px] sm:max-w-none">{order.items.join(', ')}</p>
                                     <p className="text-[9px] text-slate-500 dark:text-slate-400 font-semibold">{order.date}</p>
@@ -501,14 +501,14 @@ export default function Profile({ user, onBack, onLogout }) {
                         </div>
 
                         {/* Upcoming Bookings Preview */}
-                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                        <div className="bg-slate-50/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Upcoming Services</h4>
                             <button onClick={() => setActiveTab('bookings')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">View Schedule</button>
                           </div>
                           <div className="space-y-2">
                             {bookings.filter(b => b.status === 'Scheduled' || b.status === 'In Progress').slice(0, 2).map((booking) => (
-                              <div key={booking.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs shadow-sm">
+                              <div key={booking.id} className="flex items-center justify-between p-3 bg-surface border border-slate-200 dark:border-slate-800 rounded-xl text-xs shadow-sm">
                                 <div className="space-y-0.5 text-left">
                                   <p className="font-bold text-slate-900 dark:text-slate-100">{booking.service}</p>
                                   <p className="text-[9px] text-slate-500 dark:text-slate-400 font-semibold">{booking.date} at {booking.time} • {booking.provider}</p>
@@ -520,15 +520,15 @@ export default function Profile({ user, onBack, onLogout }) {
                         </div>
 
                         {/* Saved Addresses Preview */}
-                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                        <div className="bg-slate-50/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Saved Addresses</h4>
                             <button onClick={() => setActiveTab('addresses')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">Manage</button>
                           </div>
                           <div className="space-y-2">
                             {addresses.slice(0, 2).map((addr) => (
-                              <div key={addr.id} className="p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-left shadow-sm">
-                                <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-[8px] uppercase tracking-wider">{addr.type}</span>
+                              <div key={addr.id} className="p-3 bg-surface border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-left shadow-sm">
+                                <span className="px-2 py-0.5 rounded bg-page text-slate-700 dark:text-slate-300 font-bold text-[8px] uppercase tracking-wider">{addr.type}</span>
                                 <p className="mt-1 text-slate-800 dark:text-slate-200 font-medium truncate">{addr.address}</p>
                               </div>
                             ))}
@@ -541,14 +541,14 @@ export default function Profile({ user, onBack, onLogout }) {
                       <div className="space-y-6">
                         
                         {/* Notifications Preview */}
-                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                        <div className="bg-slate-50/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Recent Notifications</h4>
                             <button onClick={() => setActiveTab('notifications')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">Read All</button>
                           </div>
                           <div className="space-y-2">
                             {notifications.slice(0, 2).map((notif) => (
-                              <div key={notif.id} className="flex gap-2.5 p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-left shadow-sm">
+                              <div key={notif.id} className="flex gap-2.5 p-3 bg-surface border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-left shadow-sm">
                                 <div className="w-1.5 h-1.5 bg-[#6C3BFF] rounded-full shrink-0 mt-1.5" />
                                 <div>
                                   <p className="font-bold text-slate-900 dark:text-slate-100">{notif.title}</p>
@@ -560,15 +560,15 @@ export default function Profile({ user, onBack, onLogout }) {
                         </div>
 
                         {/* Wallet & Rewards Summary */}
-                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                        <div className="bg-slate-50/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Wallet Summary</h4>
                           <div className="grid grid-cols-2 gap-3">
-                            <div className="bg-white dark:bg-slate-900 p-4 border border-slate-200 dark:border-slate-800 rounded-xl text-left shadow-sm">
+                            <div className="bg-surface p-4 border border-slate-200 dark:border-slate-800 rounded-xl text-left shadow-sm">
                               <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Available Cash</p>
                               <p className="text-lg font-black text-slate-900 dark:text-white mt-0.5">₹{walletBalance.toFixed(2)}</p>
                               <button onClick={() => setShowAddMoneyModal(true)} className="mt-2 text-[9px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">Add cash</button>
                             </div>
-                            <div className="bg-white dark:bg-slate-900 p-4 border border-slate-200 dark:border-slate-800 rounded-xl text-left shadow-sm">
+                            <div className="bg-surface p-4 border border-slate-200 dark:border-slate-800 rounded-xl text-left shadow-sm">
                               <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Reward Points</p>
                               <p className="text-lg font-black text-slate-900 dark:text-white mt-0.5">{(rewards?.points || 0)} pts</p>
                               <button onClick={() => setActiveTab('rewards')} className="mt-2 text-[9px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">Redeem</button>
@@ -577,20 +577,20 @@ export default function Profile({ user, onBack, onLogout }) {
                         </div>
 
                         {/* Support Tickets Preview */}
-                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                        <div className="bg-slate-50/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Active Support Tickets</h4>
                             <button onClick={() => setActiveTab('support')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">New Ticket</button>
                           </div>
                           <div className="space-y-2">
                             {tickets.slice(0, 2).map((ticket) => (
-                              <div key={ticket.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-left shadow-sm">
+                              <div key={ticket.id} className="flex items-center justify-between p-3 bg-surface border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-left shadow-sm">
                                 <div>
                                   <p className="font-bold text-slate-900 dark:text-slate-100 truncate max-w-[150px] sm:max-w-none">{ticket.subject}</p>
                                   <p className="text-[9px] text-slate-500 dark:text-slate-400 font-semibold mt-0.5">Category: {ticket.category} • Updated: {ticket.lastUpdated}</p>
                                 </div>
                                 <span className={`px-2 py-0.5 rounded-full font-bold text-[8px] uppercase ${
-                                  ticket.status === 'Open' ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+                                  ticket.status === 'Open' ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400' : 'bg-page text-slate-600 dark:text-slate-400'
                                 }`}>{ticket.status}</span>
                               </div>
                             ))}
@@ -598,19 +598,19 @@ export default function Profile({ user, onBack, onLogout }) {
                         </div>
 
                         {/* Quick Actions Panel */}
-                        <div className="bg-slate-50/80 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                        <div className="bg-slate-50/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Quick Actions</h4>
                           <div className="grid grid-cols-2 gap-2 text-xs">
-                            <button onClick={() => setShowAddMoneyModal(true)} className="py-2.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
+                            <button onClick={() => setShowAddMoneyModal(true)} className="py-2.5 px-3 bg-surface hover:bg-page border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
                               💰 Add Wallet Money
                             </button>
-                            <button onClick={() => { setEditingAddress(null); setNewAddressType('Home'); setNewAddressContent(''); setShowAddressModal(true); }} className="py-2.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
+                            <button onClick={() => { setEditingAddress(null); setNewAddressType('Home'); setNewAddressContent(''); setShowAddressModal(true); }} className="py-2.5 px-3 bg-surface hover:bg-page border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
                               📍 Add New Address
                             </button>
-                            <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="py-2.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
+                            <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="py-2.5 px-3 bg-surface hover:bg-page border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
                               🌓 Toggle Dark Theme
                             </button>
-                            <button onClick={() => setActiveTab('support')} className="py-2.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
+                            <button onClick={() => setActiveTab('support')} className="py-2.5 px-3 bg-surface hover:bg-page border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
                               ✉️ Raise Help Ticket
                             </button>
                           </div>
@@ -650,7 +650,7 @@ export default function Profile({ user, onBack, onLogout }) {
 
                           {/* Body thumbnails */}
                           <div className="flex items-center gap-4">
-                            <span className="text-2xl w-12 h-12 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-center shrink-0">{order.thumbnail}</span>
+                            <span className="text-2xl w-12 h-12 bg-page dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-center shrink-0">{order.thumbnail}</span>
                             <div className="space-y-1">
                               <p className="font-black text-slate-900 dark:text-slate-100 text-sm leading-none">{order.items.join(', ')}</p>
                               <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">Total Invoice Amount: ₹{order.total.toFixed(2)}</p>
@@ -661,7 +661,7 @@ export default function Profile({ user, onBack, onLogout }) {
                           <div className="flex flex-wrap gap-2.5 pt-2 justify-end">
                             <button
                               onClick={() => alert(`Simulating invoice download for ${order.id}`)}
-                              className="px-4.5 py-2 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-700 dark:text-slate-300 font-black uppercase tracking-wider cursor-pointer"
+                              className="px-4.5 py-2 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl text-slate-700 dark:text-slate-300 font-black uppercase tracking-wider cursor-pointer"
                             >
                               Download Invoice
                             </button>
@@ -690,8 +690,8 @@ export default function Profile({ user, onBack, onLogout }) {
 
                     <div className="space-y-4">
                       {bookings.map((booking) => (
-                        <div key={booking.id} className="p-5 border border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/30 space-y-4">
-                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/50 dark:border-slate-800/50 pb-3 text-xs">
+                        <div key={booking.id} className="p-5 border border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 space-y-4">
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/50  pb-3 text-xs">
                             <div>
                               <p className="font-black text-[#6C3BFF] dark:text-[#8B5CF6] uppercase">{booking.id}</p>
                               <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold mt-0.5">Scheduled for: {booking.date} at {booking.time}</p>
@@ -720,7 +720,7 @@ export default function Profile({ user, onBack, onLogout }) {
                               </button>
                               <button
                                 onClick={() => alert(`Reschedule dialog for booking ${booking.id}`)}
-                                className="py-2 px-4 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-bold cursor-pointer"
+                                className="py-2 px-4 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-page transition-colors font-bold cursor-pointer"
                               >
                                 Reschedule
                               </button>
@@ -767,9 +767,9 @@ export default function Profile({ user, onBack, onLogout }) {
                           <button
                             key={idx}
                             onClick={act.action}
-                            className="flex flex-col items-center gap-2 p-3 bg-slate-50 hover:bg-[#6C3BFF]/5 dark:bg-slate-900 dark:hover:bg-[#6C3BFF]/10 rounded-xl border border-slate-200 dark:border-slate-800 transition-colors cursor-pointer text-center"
+                            className="flex flex-col items-center gap-2 p-3 bg-page hover:bg-[#6C3BFF]/5 dark:bg-slate-900 dark:hover:bg-[#6C3BFF]/10 rounded-xl border border-slate-200 dark:border-slate-800 transition-colors cursor-pointer text-center"
                           >
-                            <div className="w-8 h-8 rounded-lg bg-white dark:bg-slate-900 text-[#6C3BFF] shadow-sm flex items-center justify-center">
+                            <div className="w-8 h-8 rounded-lg bg-surface text-[#6C3BFF] shadow-sm flex items-center justify-center">
                               <Icon size={14} />
                             </div>
                             <span className="font-black uppercase tracking-wider text-[10px] text-slate-700 dark:text-slate-300">{act.label}</span>
@@ -783,7 +783,7 @@ export default function Profile({ user, onBack, onLogout }) {
                       <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Transaction History</h3>
                       <div className="space-y-2">
                         {transactions.map((txn) => (
-                          <div key={txn.id} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-800 rounded-xl text-xs gap-3 shadow-sm bg-white dark:bg-slate-900">
+                          <div key={txn.id} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-800 rounded-xl text-xs gap-3 shadow-sm bg-surface">
                             <div className="flex items-center gap-3">
                               <div className={`w-9 h-9 rounded-lg flex items-center justify-center font-bold ${
                                 txn.type === 'Credit'
@@ -849,7 +849,7 @@ export default function Profile({ user, onBack, onLogout }) {
                                 navigator.clipboard.writeText(coupon.code);
                                 alert(`Coupon code ${coupon.code} copied to clipboard!`);
                               }}
-                              className="py-1.5 px-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg font-black uppercase text-[10px] text-[#6C3BFF] cursor-pointer shadow-sm"
+                              className="py-1.5 px-3 bg-surface border border-slate-200 dark:border-slate-800 rounded-lg font-black uppercase text-[10px] text-[#6C3BFF] cursor-pointer shadow-sm"
                             >
                               Copy Code
                             </button>
@@ -906,7 +906,7 @@ export default function Profile({ user, onBack, onLogout }) {
                         }`}>
                           <div className="space-y-2">
                             <div className="flex items-center justify-between">
-                              <span className="px-2 py-0.5 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-350 rounded-lg font-bold text-[9px] uppercase tracking-wider">
+                              <span className="px-2 py-0.5 bg-page dark:bg-slate-900 text-slate-700 dark:text-slate-350 rounded-lg font-bold text-[9px] uppercase tracking-wider">
                                 {addr.type}
                               </span>
                               {addr.isDefault && (
@@ -939,7 +939,7 @@ export default function Profile({ user, onBack, onLogout }) {
                                   setNewAddressContent(addr.address);
                                   setShowAddressModal(true);
                                 }}
-                                className="p-2 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg text-slate-500 hover:text-slate-700 cursor-pointer"
+                                className="p-2 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-lg text-slate-500 hover:text-slate-700 cursor-pointer"
                                 title="Edit Address"
                               >
                                 <Pencil size={12} />
@@ -982,7 +982,7 @@ export default function Profile({ user, onBack, onLogout }) {
                         <div key={notif.id} className={`p-4 border rounded-2xl flex items-start gap-3.5 text-xs text-left transition-all ${
                           notif.read ? 'bg-slate-50/30 dark:bg-slate-950/10 border-slate-100 dark:border-slate-800' : 'bg-[#6C3BFF]/5 dark:bg-[#6C3BFF]/10 border-[#6C3BFF]/20'
                         }`}>
-                          <div className={`w-2.5 h-2.5 rounded-full shrink-0 mt-1.5 ${notif.read ? 'bg-slate-300 dark:bg-slate-700' : 'bg-[#6C3BFF]'}`} />
+                          <div className={`w-2.5 h-2.5 rounded-full shrink-0 mt-1.5 ${notif.read ? 'bg-slate-300' : 'bg-[#6C3BFF]'}`} />
                           <div className="space-y-1">
                             <div className="flex items-center gap-2">
                               <p className="font-black text-slate-800 dark:text-slate-200">{notif.title}</p>
@@ -1033,7 +1033,7 @@ export default function Profile({ user, onBack, onLogout }) {
                     </div>
 
                     {/* Bottom assistance trigger buttons */}
-                    <div className="bg-slate-50 dark:bg-slate-955/20 border border-slate-205 dark:border-slate-800 rounded-2xl p-5 sm:p-6 text-center space-y-4">
+                    <div className="bg-page dark:bg-slate-955/20 border border-slate-205 dark:border-slate-800 rounded-2xl p-5 sm:p-6 text-center space-y-4">
                       <div className="space-y-1">
                         <h4 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Need more help?</h4>
                         <p className="text-[11px] text-slate-455 font-semibold">Our tech-support executives are available 24/7 to solve your complaints.</p>
@@ -1046,10 +1046,10 @@ export default function Profile({ user, onBack, onLogout }) {
                         <button onClick={() => alert('Opening support ticket...')} className="py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-bold uppercase tracking-wider cursor-pointer shadow-sm">
                           Raise Ticket
                         </button>
-                        <button onClick={() => window.location.assign('mailto:support@saathapp.in')} className="py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 rounded-xl text-slate-700 dark:text-slate-350 font-bold uppercase tracking-wider cursor-pointer">
+                        <button onClick={() => window.location.assign('mailto:support@saathapp.in')} className="py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl text-slate-700 dark:text-slate-350 font-bold uppercase tracking-wider cursor-pointer">
                           Email Support
                         </button>
-                        <button onClick={() => window.location.assign('tel:+919128842027')} className="py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 rounded-xl text-slate-700 dark:text-slate-350 font-bold uppercase tracking-wider cursor-pointer">
+                        <button onClick={() => window.location.assign('tel:+919128842027')} className="py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl text-slate-700 dark:text-slate-350 font-bold uppercase tracking-wider cursor-pointer">
                           Call Support
                         </button>
                       </div>
@@ -1084,10 +1084,10 @@ export default function Profile({ user, onBack, onLogout }) {
                             <button
                               key={idx}
                               onClick={() => alert(`Simulating modal for ${c.title}`)}
-                              className="flex items-center justify-between p-4 border border-slate-205 dark:border-slate-800 hover:border-[#6C3BFF]/50 hover:bg-slate-50/50 dark:hover:bg-slate-950/20 rounded-xl transition-all cursor-pointer text-left group"
+                              className="flex items-center justify-between p-4 border border-slate-205 dark:border-slate-800 hover:border-[#6C3BFF]/50 hover:bg-slate-50/50 rounded-xl transition-all cursor-pointer text-left group"
                             >
                               <div className="flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-lg bg-slate-50 dark:bg-slate-900 text-[#6C3BFF] flex items-center justify-center shrink-0">
+                                <div className="w-9 h-9 rounded-lg bg-page dark:bg-slate-900 text-[#6C3BFF] flex items-center justify-center shrink-0">
                                   <Icon size={16} />
                                 </div>
                                 <div>
@@ -1108,7 +1108,7 @@ export default function Profile({ user, onBack, onLogout }) {
                       
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                         {/* Status Checklists */}
-                        <div className="bg-slate-50 dark:bg-slate-955/20 rounded-2xl p-4 border border-slate-200/50 dark:border-slate-800 space-y-3.5">
+                        <div className="bg-page dark:bg-slate-955/20 rounded-2xl p-4 border border-slate-200/50 dark:border-slate-800 space-y-3.5">
                           <div className="flex items-center justify-between">
                             <span className="font-bold text-slate-600 dark:text-slate-400">Email Address</span>
                             <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full">
@@ -1128,7 +1128,7 @@ export default function Profile({ user, onBack, onLogout }) {
                         </div>
 
                         {/* 2FA Toggle Block */}
-                        <div className="bg-slate-50 dark:bg-slate-955/20 rounded-2xl p-4 border border-slate-200/50 dark:border-slate-800 flex flex-col justify-between gap-4">
+                        <div className="bg-page dark:bg-slate-955/20 rounded-2xl p-4 border border-slate-200/50 dark:border-slate-800 flex flex-col justify-between gap-4">
                           <div className="space-y-1">
                             <h4 className="font-black text-slate-800 dark:text-white uppercase tracking-wider text-[10px]">Two-Factor Authentication (2FA)</h4>
                             <p className="text-[10px] text-slate-455 font-semibold leading-relaxed">Require security codes upon signing in from unrecognized desktop browsers.</p>
@@ -1140,7 +1140,7 @@ export default function Profile({ user, onBack, onLogout }) {
                                 saveProfileChanges(updated);
                               }}
                               className={`relative w-10 h-5.5 transition-colors duration-300 rounded-full cursor-pointer ${
-                                profile?.twoFactor ? 'bg-[#6C3BFF]' : 'bg-slate-300 dark:bg-slate-800'
+                                profile?.twoFactor ? 'bg-[#6C3BFF]' : 'bg-slate-300'
                               }`}
                             >
                               <span className={`absolute top-0.75 left-0.75 w-4 h-4 bg-white rounded-full transition-transform duration-300 ${
@@ -1199,7 +1199,7 @@ export default function Profile({ user, onBack, onLogout }) {
                               className={`flex flex-col items-center gap-2 p-4 border rounded-2xl cursor-pointer transition-all ${
                                 isSelected
                                   ? 'border-[#6C3BFF] bg-[#6C3BFF]/5 text-[#6C3BFF] dark:bg-[#6C3BFF]/20 dark:text-white'
-                                  : 'border-slate-205 dark:border-slate-800 bg-slate-50 dark:bg-slate-955/20 hover:border-[#6C3BFF]/50'
+                                  : 'border-slate-205 dark:border-slate-800 bg-page dark:bg-slate-955/20 hover:border-[#6C3BFF]/50'
                               }`}
                             >
                               <Icon size={16} className="text-[#6C3BFF]" />
@@ -1228,7 +1228,7 @@ export default function Profile({ user, onBack, onLogout }) {
                               className={`px-4.5 py-2 border rounded-xl cursor-pointer transition-all ${
                                 isSelected
                                   ? 'border-[#6C3BFF] bg-[#6C3BFF]/5 text-[#6C3BFF] dark:bg-[#6C3BFF]/20 dark:text-white'
-                                  : 'border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800'
+                                  : 'border-slate-200 dark:border-slate-800 hover:bg-page'
                               }`}
                             >
                               {lang.label}
@@ -1241,7 +1241,7 @@ export default function Profile({ user, onBack, onLogout }) {
                     {/* Channels toggles */}
                     <div className="space-y-3 pt-2">
                       <h3 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Notification Channels</h3>
-                      <div className="bg-slate-50 dark:bg-slate-955/20 rounded-2xl p-4 border border-slate-200/50 dark:border-slate-800 space-y-3.5 text-xs">
+                      <div className="bg-page dark:bg-slate-955/20 rounded-2xl p-4 border border-slate-200/50 dark:border-slate-800 space-y-3.5 text-xs">
                         {[
                           { label: 'Push Notifications', desc: 'Live tracker overlay alerts on order updates' },
                           { label: 'SMS updates', desc: 'OTP verification links and billing transcripts' },
@@ -1351,7 +1351,7 @@ export default function Profile({ user, onBack, onLogout }) {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-sm bg-white dark:bg-slate-900 border border-slate-205 dark:border-slate-800 rounded-card p-6 shadow-premium space-y-4"
+              className="w-full max-w-sm bg-surface border border-slate-205 dark:border-slate-800 rounded-card p-6 shadow-premium space-y-4"
             >
               <h4 className="text-base font-black text-slate-850 dark:text-white uppercase tracking-wider">Add Money to Wallet</h4>
               <div className="space-y-3">
@@ -1371,7 +1371,7 @@ export default function Profile({ user, onBack, onLogout }) {
                       key={v}
                       type="button"
                       onClick={() => setAddMoneyAmount(String(v))}
-                      className="px-4 py-2 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer"
+                      className="px-4 py-2 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-lg cursor-pointer"
                     >
                       +₹{v}
                     </button>
@@ -1382,7 +1382,7 @@ export default function Profile({ user, onBack, onLogout }) {
                 <button
                   type="button"
                   onClick={() => setShowAddMoneyModal(false)}
-                  className="px-4 py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 rounded-xl font-bold uppercase cursor-pointer"
+                  className="px-4 py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl font-bold uppercase cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -1407,7 +1407,7 @@ export default function Profile({ user, onBack, onLogout }) {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-205 dark:border-slate-800 rounded-card p-6 shadow-premium space-y-4"
+              className="w-full max-w-md bg-surface border border-slate-205 dark:border-slate-800 rounded-card p-6 shadow-premium space-y-4"
             >
               <h4 className="text-base font-black text-slate-850 dark:text-white uppercase tracking-wider">
                 {editingAddress ? 'Modify Address' : 'Add New Address'}
@@ -1426,7 +1426,7 @@ export default function Profile({ user, onBack, onLogout }) {
                         className={`px-4.5 py-2 border rounded-xl font-bold uppercase cursor-pointer ${
                           newAddressType === t
                             ? 'border-[#6C3BFF] bg-[#6C3BFF]/5 text-[#6C3BFF]'
-                            : 'border-slate-200 dark:border-slate-800 hover:bg-slate-50'
+                            : 'border-slate-200 dark:border-slate-800 hover:bg-page'
                         }`}
                       >
                         {t}
@@ -1452,7 +1452,7 @@ export default function Profile({ user, onBack, onLogout }) {
                 <button
                   type="button"
                   onClick={() => setShowAddressModal(false)}
-                  className="px-4 py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 rounded-xl font-bold uppercase cursor-pointer"
+                  className="px-4 py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl font-bold uppercase cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -1477,7 +1477,7 @@ export default function Profile({ user, onBack, onLogout }) {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-sm bg-white dark:bg-slate-900 border border-slate-205 dark:border-slate-800 rounded-card p-6 shadow-premium text-center space-y-4"
+              className="w-full max-w-sm bg-surface border border-slate-205 dark:border-slate-800 rounded-card p-6 shadow-premium text-center space-y-4"
             >
               <div className="w-12 h-12 rounded-full bg-rose-50 dark:bg-rose-955/20 text-rose-500 border border-rose-200/50 flex items-center justify-center mx-auto">
                 <LogOut size={22} className="ml-0.5" />
@@ -1492,7 +1492,7 @@ export default function Profile({ user, onBack, onLogout }) {
                 <button
                   type="button"
                   onClick={() => setShowLogoutConfirm(false)}
-                  className="w-full py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 rounded-xl font-bold uppercase cursor-pointer"
+                  className="w-full py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl font-bold uppercase cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -1520,7 +1520,7 @@ export default function Profile({ user, onBack, onLogout }) {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-sm bg-white dark:bg-slate-900 border border-slate-205 dark:border-slate-800 rounded-card p-6 shadow-premium text-center space-y-4"
+              className="w-full max-w-sm bg-surface border border-slate-205 dark:border-slate-800 rounded-card p-6 shadow-premium text-center space-y-4"
             >
               <div className="w-12 h-12 rounded-full bg-rose-50 dark:bg-rose-955/20 text-rose-500 border border-rose-200/50 flex items-center justify-center mx-auto">
                 <Trash2 size={22} />
@@ -1536,7 +1536,7 @@ export default function Profile({ user, onBack, onLogout }) {
                 <button
                   type="button"
                   onClick={() => setShowDeleteConfirm(false)}
-                  className="w-full py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 rounded-xl font-bold uppercase cursor-pointer"
+                  className="w-full py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl font-bold uppercase cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -1594,7 +1594,7 @@ function ProfileForm({ profile, onSave }) {
   const inputStyle = { WebkitTextFillColor: 'currentColor' };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4 text-xs font-semibold shadow-sm">
+    <form onSubmit={handleSubmit} className="bg-white border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4 text-xs font-semibold shadow-sm">
       
       {/* Photo Initial */}
       <div className="flex items-center gap-4">
@@ -1622,7 +1622,7 @@ function ProfileForm({ profile, onSave }) {
             disabled={!isEditing}
             onChange={(e) => setName(e.target.value)}
             style={inputStyle}
-            className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-slate-100 disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
+            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
           />
         </div>
 
@@ -1636,7 +1636,7 @@ function ProfileForm({ profile, onSave }) {
             disabled={!isEditing}
             onChange={(e) => setEmail(e.target.value)}
             style={inputStyle}
-            className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-slate-100 disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
+            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
           />
         </div>
 
@@ -1644,7 +1644,7 @@ function ProfileForm({ profile, onSave }) {
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
             <label className="block text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wide">Mobile Number</label>
-            <span className="text-[10px] font-black text-slate-700 dark:text-slate-300 uppercase bg-slate-200/90 dark:bg-slate-800/80 px-2 py-0.5 rounded-md tracking-wider">Read Only</span>
+            <span className="text-[10px] font-black text-slate-700 dark:text-slate-300 uppercase bg-slate-200/90 px-2 py-0.5 rounded-md tracking-wider">Read Only</span>
           </div>
           <input
             type="text"
@@ -1652,7 +1652,7 @@ function ProfileForm({ profile, onSave }) {
             readOnly
             disabled
             style={inputStyle}
-            className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-900 disabled:bg-slate-100 disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm"
+            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-900 disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm"
           />
         </div>
 
@@ -1664,7 +1664,7 @@ function ProfileForm({ profile, onSave }) {
             disabled={!isEditing}
             onChange={(e) => setGender(e.target.value)}
             style={inputStyle}
-            className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-slate-100 disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
+            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
           >
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -1682,7 +1682,7 @@ function ProfileForm({ profile, onSave }) {
             disabled={!isEditing}
             onChange={(e) => setDob(e.target.value)}
             style={inputStyle}
-            className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-slate-100 disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
+            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
           />
         </div>
 
@@ -1694,7 +1694,7 @@ function ProfileForm({ profile, onSave }) {
           <button
             type="button"
             onClick={() => setIsEditing(true)}
-            className="px-6 py-2.5 border border-slate-300 dark:border-slate-700 bg-white hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-900 dark:text-white rounded-xl font-black uppercase tracking-wider cursor-pointer shadow-sm transition-colors"
+            className="px-6 py-2.5 border border-slate-300 bg-white hover:bg-page dark:bg-slate-900 text-slate-900 dark:text-white rounded-xl font-black uppercase tracking-wider cursor-pointer shadow-sm transition-colors"
           >
             Edit Profile
           </button>
@@ -1709,7 +1709,7 @@ function ProfileForm({ profile, onSave }) {
                 setDob(profile.dob || '');
                 setIsEditing(false);
               }}
-              className="px-5 py-2.5 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-bold uppercase tracking-wider cursor-pointer transition-colors"
+              className="px-5 py-2.5 border border-slate-300 hover:bg-page text-slate-700 dark:text-slate-300 rounded-xl font-bold uppercase tracking-wider cursor-pointer transition-colors"
             >
               Cancel
             </button>

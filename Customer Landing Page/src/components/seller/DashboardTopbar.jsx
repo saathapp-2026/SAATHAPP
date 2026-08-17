@@ -97,11 +97,11 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
   ];
 
   return (
-    <header className="sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 px-4 py-3">
+    <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 px-4 py-3">
       <div className="flex items-center gap-3">
         <button
           type="button"
-          className="lg:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          className="lg:hidden p-2 rounded-lg hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500"
           onClick={onMenuClick}
           aria-label="Open navigation menu"
         >
@@ -116,7 +116,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search orders, products, customers, reports..."
             aria-label="Search dashboard"
-            className="w-full pl-9 pr-4 py-2 text-sm rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            className="w-full pl-9 pr-4 py-2 text-sm rounded-xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
           />
         </form>
 
@@ -124,7 +124,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
           <button
             type="button"
             onClick={() => setTheme(darkMode ? 'light' : 'dark')}
-            className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="p-2 rounded-lg text-slate-500 hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500"
             aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {darkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -134,7 +134,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
             <button
               type="button"
               onClick={() => { setShowLang(!showLang); setShowNotifications(false); setShowProfile(false); }}
-              className="flex items-center gap-1 p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="flex items-center gap-1 p-2 rounded-lg text-slate-500 hover:bg-page text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
               aria-label="Change language"
               aria-expanded={showLang}
             >
@@ -143,14 +143,14 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
               <ChevronDown size={14} />
             </button>
             {showLang && (
-              <div className="absolute right-0 mt-1 w-40 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl py-1 z-50" role="menu">
+              <div className="absolute right-0 mt-1 w-40 rounded-xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl py-1 z-50" role="menu">
                 {LANGUAGES.map((lang) => (
                   <button
                     key={lang.code}
                     type="button"
                     role="menuitem"
                     onClick={() => { changeLanguage(lang.code); setShowLang(false); }}
-                    className={`w-full text-left px-4 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus:bg-slate-50 dark:focus:bg-slate-800 ${language === lang.code ? 'text-emerald-600 font-medium' : ''}`}
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-page focus:outline-none focus:bg-page dark:focus:bg-slate-800 ${language === lang.code ? 'text-emerald-600 font-medium' : ''}`}
                   >
                     {lang.label}
                   </button>
@@ -163,7 +163,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
             <button
               type="button"
               onClick={() => { setShowNotifications(!showNotifications); setShowLang(false); setShowProfile(false); }}
-              className="relative p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="relative p-2 rounded-lg text-slate-500 hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500"
               aria-label={`Notifications${unread > 0 ? `, ${unread} unread` : ''}`}
               aria-expanded={showNotifications}
             >
@@ -175,7 +175,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
               )}
             </button>
             {showNotifications && (
-              <div className="absolute right-0 mt-1 w-80 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl z-50" role="dialog" aria-label="Notifications">
+              <div className="absolute right-0 mt-1 w-80 rounded-xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl z-50" role="dialog" aria-label="Notifications">
                 <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-800">
                   <span className="font-semibold text-sm">Notifications</span>
                   <div className="flex items-center gap-2">
@@ -203,7 +203,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
                         key={n.id}
                         type="button"
                         onClick={() => handleMarkRead(n.id)}
-                        className={`w-full text-left px-4 py-3 border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 focus:outline-none focus:bg-slate-50 dark:focus:bg-slate-800/50 ${!n.read ? 'bg-emerald-50/50 dark:bg-emerald-950/20' : ''}`}
+                        className={`w-full text-left px-4 py-3 border-b border-slate-100 dark:border-slate-800 hover:bg-page focus:outline-none focus:bg-page dark:focus:bg-slate-800/50 ${!n.read ? 'bg-emerald-50/50 dark:bg-emerald-950/20' : ''}`}
                       >
                         <p className="text-sm font-medium">{n.title}</p>
                         <p className="text-xs text-slate-500 mt-0.5">{n.body}</p>
@@ -220,7 +220,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
             <button
               type="button"
               onClick={() => { setShowProfile(!showProfile); setShowLang(false); setShowNotifications(false); }}
-              className="flex items-center gap-2 p-1.5 pr-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="flex items-center gap-2 p-1.5 pr-3 rounded-xl hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500"
               aria-label="Profile menu"
               aria-expanded={showProfile}
             >
@@ -237,7 +237,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
               <ChevronDown size={14} className="hidden md:block text-slate-400" />
             </button>
             {showProfile && (
-              <div className="absolute right-0 mt-1 w-56 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl py-1 z-50" role="menu">
+              <div className="absolute right-0 mt-1 w-56 rounded-xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl py-1 z-50" role="menu">
                 <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800">
                   <p className="text-sm font-semibold truncate">
                     {profileData?.firstName ? `${profileData.firstName} ${profileData.lastName || ''}` : seller?.fullName}
@@ -252,7 +252,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
                     type="button"
                     role="menuitem"
                     onClick={() => { navigate(path); setShowProfile(false); }}
-                    className="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus:bg-slate-50 dark:focus:bg-slate-800"
+                    className="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-page focus:outline-none focus:bg-page dark:focus:bg-slate-800"
                   >
                     <Icon size={16} /> {label}
                   </button>

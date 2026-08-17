@@ -256,7 +256,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
   return (
     <div className="w-full max-w-[1400px] mx-auto flex flex-col min-h-[calc(100vh-7.5rem)] overflow-x-hidden">
       {/* Header + stepper */}
-      <div className="shrink-0 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 sm:p-6 mb-4">
+      <div className="shrink-0 rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 sm:p-6 mb-4">
         <div className="flex items-start justify-between gap-3 mb-4">
           <div className="min-w-0">
             <h1 className="text-xl sm:text-2xl font-bold truncate">Add Wholesale Product SKU</h1>
@@ -265,7 +265,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
           <button
             type="button"
             onClick={handleClose}
-            className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 shrink-0"
+            className="p-2 rounded-lg hover:bg-page shrink-0"
             aria-label="Close wizard"
           >
             <X size={18} />
@@ -355,11 +355,11 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
 
       {/* Sticky footer — stays inside content column, not under sidebar */}
       <div className="sticky bottom-0 z-20 mt-4 -mx-0">
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur shadow-lg px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur shadow-lg px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2">
           <button
             type="button"
             onClick={handleClose}
-            className="px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
+            className="px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200 hover:bg-page"
           >
             Cancel
           </button>
@@ -368,7 +368,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
               type="button"
               disabled={saving}
               onClick={saveDraftNow}
-              className="px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50"
+              className="px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200 hover:bg-page disabled:opacity-50"
             >
               Save Draft
             </button>
@@ -376,7 +376,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
               <button
                 type="button"
                 onClick={goPrev}
-                className="px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700"
+                className="px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200"
               >
                 Previous
               </button>

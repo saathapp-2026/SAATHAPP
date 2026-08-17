@@ -84,13 +84,13 @@ export default function CustomerImportModal({ open, onClose, onImported }) {
 
   return (
     <SellerOverlay open={open} onClose={onClose} labelledBy="import-customers-title">
-      <div className="w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-5 space-y-4">
+      <div className="w-full max-w-lg rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl p-5 space-y-4">
         <div className="flex items-start justify-between">
           <div>
             <h2 id="import-customers-title" className="font-bold text-lg">Import Customers</h2>
             <p className="text-xs text-slate-500 mt-0.5">Upload Excel or CSV. Duplicates are skipped.</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -100,7 +100,7 @@ export default function CustomerImportModal({ open, onClose, onImported }) {
           Download Sample Template
         </button>
 
-        <label className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-slate-300 dark:border-slate-600 p-8 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/40">
+        <label className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-slate-300 p-8 cursor-pointer hover:bg-page">
           <Upload size={22} className="text-slate-400" />
           <span className="text-sm font-medium">Drop CSV / Excel or click to browse</span>
           <span className="text-xs text-slate-400">{fileName || 'No file selected'}</span>
@@ -115,7 +115,7 @@ export default function CustomerImportModal({ open, onClose, onImported }) {
         )}
 
         {result && (
-          <div className="rounded-xl border border-slate-200 dark:border-slate-700 p-3 text-xs space-y-1">
+          <div className="rounded-xl border border-slate-200 p-3 text-xs space-y-1">
             <p>Imported: <b>{result.imported}</b></p>
             <p>Duplicates: <b>{result.duplicates}</b></p>
             <p>Errors: <b>{result.errors?.length || 0}</b></p>
@@ -126,7 +126,7 @@ export default function CustomerImportModal({ open, onClose, onImported }) {
         )}
 
         <div className="flex justify-end gap-2">
-          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200 dark:border-slate-700">
+          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200">
             Cancel
           </button>
           <button

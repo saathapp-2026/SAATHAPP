@@ -14,7 +14,7 @@ export const EQUIPMENT_CATALOGUE = [
 
 export default function DeliveryEquipmentStoreSection({ onStartRegistration }) {
   return (
-    <section id="equipment-store" aria-labelledby="equipment-heading" className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-950/60">
+    <section id="equipment-store" aria-labelledby="equipment-heading" className="py-20 sm:py-24 bg-page dark:bg-slate-950/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400">
@@ -43,7 +43,7 @@ export default function DeliveryEquipmentStoreSection({ onStartRegistration }) {
             return (
               <div
                 key={idx}
-                className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between"
+                className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between"
               >
                 <div>
                   <div className="h-10 w-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-3">

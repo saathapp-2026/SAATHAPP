@@ -25,13 +25,13 @@ export default function InvoiceImportModal({ open, onClose, onImported }) {
 
   return (
     <SellerOverlay open={open} onClose={onClose} labelledBy="import-inv-title">
-      <div className="w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-5 space-y-4">
+      <div className="w-full max-w-lg rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl p-5 space-y-4">
         <div className="flex items-start justify-between">
           <div>
             <h2 id="import-inv-title" className="font-bold text-lg">Import Invoices</h2>
             <p className="text-xs text-slate-500 mt-0.5">Upload CSV / Excel export</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -50,7 +50,7 @@ export default function InvoiceImportModal({ open, onClose, onImported }) {
         >
           <Download size={14} /> Download Sample Template
         </button>
-        <label className="flex flex-col items-center gap-2 rounded-2xl border border-dashed border-slate-300 dark:border-slate-600 p-8 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/40">
+        <label className="flex flex-col items-center gap-2 rounded-2xl border border-dashed border-slate-300 p-8 cursor-pointer hover:bg-page">
           <Upload size={22} className="text-slate-400" />
           <span className="text-sm font-medium">Drop CSV or click to browse</span>
           <span className="text-xs text-slate-400">{fileName || 'No file selected'}</span>
@@ -70,7 +70,7 @@ export default function InvoiceImportModal({ open, onClose, onImported }) {
           />
         </label>
         <div className="flex justify-end gap-2">
-          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200 dark:border-slate-700">Cancel</button>
+          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200">Cancel</button>
           <button
             type="button"
             disabled={loading || !rows.length}

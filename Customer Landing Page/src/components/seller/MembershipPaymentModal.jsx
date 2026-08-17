@@ -25,7 +25,7 @@ export default function MembershipPaymentModal({ planId, onClose, onSuccess }) {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+        className="bg-surface rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
       >
         <div className="flex items-center justify-between p-5 border-b border-slate-200 dark:border-slate-800">
           <h3 className="font-bold">Complete Payment</h3>
@@ -57,7 +57,7 @@ export default function MembershipPaymentModal({ planId, onClose, onSuccess }) {
                   className={`py-2.5 px-3 rounded-xl text-sm font-medium border transition-colors ${
                     method === m.id
                       ? 'border-violet-500 bg-violet-500/10 text-violet-600'
-                      : 'border-slate-200 dark:border-slate-700'
+                      : 'border-slate-200'
                   }`}
                 >
                   {m.label}
@@ -66,13 +66,13 @@ export default function MembershipPaymentModal({ planId, onClose, onSuccess }) {
             </div>
           </div>
 
-          <div className="rounded-xl border border-slate-200 dark:border-slate-700 p-3 space-y-2">
+          <div className="rounded-xl border border-slate-200 p-3 space-y-2">
             <input
               type="text"
               placeholder="Card / UPI ID"
               defaultValue="demo@upi"
               aria-label="Payment identifier"
-              className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+              className="w-full px-3 py-2 rounded-lg bg-page border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
               readOnly
             />
             <p className="text-[10px] text-slate-400 flex items-center gap-1">

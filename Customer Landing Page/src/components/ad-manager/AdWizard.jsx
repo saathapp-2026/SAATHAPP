@@ -228,20 +228,20 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
 
   return (
     <SellerOverlay open={open} onClose={requestClose} labelledBy="ad-wizard-title" zIndex={SELLER_Z.modal} className="flex items-end sm:items-center justify-center p-0 sm:p-4" contentClassName="w-full max-w-4xl">
-      <div className="max-h-[94vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl">
-        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur px-5 py-4">
+      <div className="max-h-[94vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl">
+        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur px-5 py-4">
           <div>
             <h2 id="ad-wizard-title" className="text-lg font-bold">{editItem ? 'Edit Advertisement' : 'Create Advertisement'}</h2>
             <p className="text-xs text-slate-500 mt-0.5">{type.label} · Step {draft.step}/14 · Draft auto-saves</p>
           </div>
-          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close"><X size={18} /></button>
+          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close"><X size={18} /></button>
         </div>
 
         <div className="px-5 pt-4">
           <ol className="flex gap-1 mb-5 overflow-x-auto" aria-label="Wizard progress">
             {WIZARD_STEPS.map((s) => (
               <li key={s.id} className="min-w-[64px] flex-1">
-                <div className={`h-1.5 rounded-full ${draft.step >= s.id ? 'bg-emerald-500' : 'bg-slate-200 dark:bg-slate-700'}`} />
+                <div className={`h-1.5 rounded-full ${draft.step >= s.id ? 'bg-emerald-500' : 'bg-slate-200'}`} />
                 <p className={`mt-1 text-[9px] font-medium truncate ${draft.step === s.id ? 'text-emerald-600' : 'text-slate-400'}`}>{s.label}</p>
               </li>
             ))}
@@ -252,23 +252,23 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           {draft.step === 1 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium sm:col-span-2">Campaign Name *
-                <input value={draft.name} onChange={(e) => patch({ name: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="Store Banner — Homepage" />
+                <input value={draft.name} onChange={(e) => patch({ name: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" placeholder="Store Banner — Homepage" />
               </label>
               <label className="block text-xs font-medium sm:col-span-2">Advertiser Category *
-                <select value={draft.category || draft.businessCategory || 'medium_shop'} onChange={(e) => patch({ category: e.target.value, businessCategory: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.category || draft.businessCategory || 'medium_shop'} onChange={(e) => patch({ category: e.target.value, businessCategory: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   {ADVERTISER_CATEGORIES.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
                 </select>
               </label>
               <label className="block text-xs font-medium">Objective *
-                <select value={draft.objective} onChange={(e) => patch({ objective: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.objective} onChange={(e) => patch({ objective: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   {OBJECTIVES.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
                 </select>
               </label>
               <label className="block text-xs font-medium">Priority
-                <input type="number" min={1} max={10} value={draft.priority} onChange={(e) => patch({ priority: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" min={1} max={10} value={draft.priority} onChange={(e) => patch({ priority: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium sm:col-span-2">Campaign Description
-                <textarea value={draft.description} onChange={(e) => patch({ description: e.target.value })} rows={3} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <textarea value={draft.description} onChange={(e) => patch({ description: e.target.value })} rows={3} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
             </div>
           )}
@@ -282,7 +282,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
                     key={t.id}
                     type="button"
                     onClick={() => patch({ campaignType: t.id })}
-                    className={`rounded-2xl border p-4 text-left transition ${draft.campaignType === t.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200 dark:border-slate-700'}`}
+                    className={`rounded-2xl border p-4 text-left transition ${draft.campaignType === t.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200'}`}
                   >
                     <p className="text-sm font-semibold">{t.label}</p>
                   </button>
@@ -345,11 +345,11 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
                   ['category', 'Entire Category'],
                   ['store', 'Entire Store'],
                 ].map(([id, label]) => (
-                  <button key={id} type="button" onClick={() => patch({ productMode: id, products: id === 'store' ? [] : draft.products })} className={`rounded-full px-3 py-1.5 text-xs font-semibold border ${draft.productMode === id ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200 dark:border-slate-700'}`}>{label}</button>
+                  <button key={id} type="button" onClick={() => patch({ productMode: id, products: id === 'store' ? [] : draft.products })} className={`rounded-full px-3 py-1.5 text-xs font-semibold border ${draft.productMode === id ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200'}`}>{label}</button>
                 ))}
               </div>
               {draft.productMode === 'category' ? (
-                <select value={draft.category} onChange={(e) => patch({ category: e.target.value })} className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.category} onChange={(e) => patch({ category: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   <option value="">Select category</option>
                   {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
@@ -357,13 +357,13 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
                 <>
                   <label className="relative block">
                     <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                    <input value={productSearch} onChange={(e) => setProductSearch(e.target.value)} placeholder="Search products…" className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent pl-9 pr-3 py-2 text-sm" />
+                    <input value={productSearch} onChange={(e) => setProductSearch(e.target.value)} placeholder="Search products…" className="w-full rounded-xl border border-slate-200 bg-transparent pl-9 pr-3 py-2 text-sm" />
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-64 overflow-y-auto">
                     {products.map((p) => {
                       const on = (draft.products || []).includes(p.id);
                       return (
-                        <button key={p.id} type="button" onClick={() => toggleProduct(p.id)} className={`text-left rounded-xl border p-3 ${on ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/20' : 'border-slate-200 dark:border-slate-700'}`}>
+                        <button key={p.id} type="button" onClick={() => toggleProduct(p.id)} className={`text-left rounded-xl border p-3 ${on ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/20' : 'border-slate-200'}`}>
                           <p className="text-sm font-semibold">{p.name}</p>
                           <p className="text-[11px] text-slate-500 mt-0.5">{p.sku} · Stock {p.stock} · ★ {p.rating}</p>
                           <p className="text-xs font-semibold mt-1">{formatINR(p.price)} <span className="text-emerald-600">-{p.discount}%</span></p>
@@ -373,7 +373,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
                   </div>
                 </>
               ) : (
-                <p className="text-sm text-slate-500 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 p-4">Entire store will be promoted.</p>
+                <p className="text-sm text-slate-500 rounded-xl border border-dashed border-slate-300 p-4">Entire store will be promoted.</p>
               )}
             </div>
           )}
@@ -382,34 +382,34 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium sm:col-span-2">Headline
                 <div className="mt-1 flex gap-2">
-                  <input value={draft.headline} onChange={(e) => patch({ headline: e.target.value })} className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="Fresh Mangoes" />
+                  <input value={draft.headline} onChange={(e) => patch({ headline: e.target.value })} className="flex-1 rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" placeholder="Fresh Mangoes" />
                   <button type="button" onClick={() => suggest('headline', (v) => ({ headline: v }))} className="rounded-xl border px-3 text-xs font-semibold inline-flex items-center gap-1"><Sparkles size={13} /> AI</button>
                 </div>
               </label>
               <label className="block text-xs font-medium sm:col-span-2">Short Description
                 <div className="mt-1 flex gap-2">
-                  <textarea value={draft.shortDescription} onChange={(e) => patch({ shortDescription: e.target.value })} rows={2} className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                  <textarea value={draft.shortDescription} onChange={(e) => patch({ shortDescription: e.target.value })} rows={2} className="flex-1 rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
                   <button type="button" onClick={() => suggest('copy', (v) => ({ shortDescription: v }))} className="self-start rounded-xl border px-3 py-2 text-xs font-semibold"><Sparkles size={13} /></button>
                 </div>
               </label>
               {(type.id === 'offer' || type.id === 'text') && (
                 <>
                   <label className="block text-xs font-medium">Offer Text
-                    <input value={draft.offerText} onChange={(e) => patch({ offerText: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="20% OFF" />
+                    <input value={draft.offerText} onChange={(e) => patch({ offerText: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" placeholder="20% OFF" />
                   </label>
                   <label className="block text-xs font-medium">Coupon
-                    <input value={draft.coupon} onChange={(e) => patch({ coupon: e.target.value.toUpperCase() })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm font-mono" />
+                    <input value={draft.coupon} onChange={(e) => patch({ coupon: e.target.value.toUpperCase() })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm font-mono" />
                   </label>
                 </>
               )}
               <label className="block text-xs font-medium">CTA Button
                 <div className="mt-1 flex gap-2">
-                  <input value={draft.cta} onChange={(e) => patch({ cta: e.target.value })} className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                  <input value={draft.cta} onChange={(e) => patch({ cta: e.target.value })} className="flex-1 rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
                   <button type="button" onClick={() => suggest('cta', (v) => ({ cta: v }))} className="rounded-xl border px-3 text-xs font-semibold"><Sparkles size={13} /></button>
                 </div>
               </label>
               <label className="block text-xs font-medium">Destination URL
-                <input value={draft.destinationUrl} onChange={(e) => patch({ destinationUrl: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="/product/..." />
+                <input value={draft.destinationUrl} onChange={(e) => patch({ destinationUrl: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" placeholder="/product/..." />
               </label>
               {(type.id === 'banner' || type.id === 'festival') && (
                 <>
@@ -451,7 +451,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           {draft.step === 6 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium sm:col-span-2">Landing Page *
-                <select value={draft.landingPage} onChange={(e) => patch({ landingPage: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.landingPage} onChange={(e) => patch({ landingPage: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   {LANDING_PAGES.map((page) => (
                     <option key={page.id} value={page.id}>{page.label}</option>
                   ))}
@@ -459,17 +459,17 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
               </label>
               {['custom_url', 'external_website'].includes(draft.landingPage) && (
                 <label className="block text-xs font-medium sm:col-span-2">Landing URL
-                  <input value={draft.destinationUrl} onChange={(e) => patch({ destinationUrl: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="https://example.com" />
+                  <input value={draft.destinationUrl} onChange={(e) => patch({ destinationUrl: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" placeholder="https://example.com" />
                 </label>
               )}
               {draft.landingPage === 'whatsapp' && (
                 <label className="block text-xs font-medium sm:col-span-2">WhatsApp Number
-                  <input value={draft.whatsappNumber || ''} onChange={(e) => patch({ whatsappNumber: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="+91 90000 00000" />
+                  <input value={draft.whatsappNumber || ''} onChange={(e) => patch({ whatsappNumber: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" placeholder="+91 90000 00000" />
                 </label>
               )}
               {draft.landingPage === 'phone_call' && (
                 <label className="block text-xs font-medium sm:col-span-2">Phone Number
-                  <input value={draft.phoneNumber || ''} onChange={(e) => patch({ phoneNumber: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="+91 90000 00000" />
+                  <input value={draft.phoneNumber || ''} onChange={(e) => patch({ phoneNumber: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" placeholder="+91 90000 00000" />
                 </label>
               )}
             </div>
@@ -478,28 +478,28 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           {draft.step === 7 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium">Country
-                <input value={draft.country} onChange={(e) => patch({ country: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input value={draft.country} onChange={(e) => patch({ country: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">State
-                <input value={draft.state} onChange={(e) => patch({ state: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input value={draft.state} onChange={(e) => patch({ state: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">City
-                <input value={draft.city} onChange={(e) => patch({ city: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input value={draft.city} onChange={(e) => patch({ city: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">Pincode / Radius
                 <div className="mt-1 flex gap-2">
-                  <input value={draft.pincode} onChange={(e) => patch({ pincode: e.target.value })} placeholder="Pincode" className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
-                  <input type="number" value={draft.radius} onChange={(e) => patch({ radius: e.target.value })} className="w-20 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-2 py-2 text-sm" title="km" />
+                  <input value={draft.pincode} onChange={(e) => patch({ pincode: e.target.value })} placeholder="Pincode" className="flex-1 rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
+                  <input type="number" value={draft.radius} onChange={(e) => patch({ radius: e.target.value })} className="w-20 rounded-xl border border-slate-200 bg-transparent px-2 py-2 text-sm" title="km" />
                 </div>
               </label>
               <label className="block text-xs font-medium">Age Min
-                <input type="number" value={draft.ageMin} onChange={(e) => patch({ ageMin: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" value={draft.ageMin} onChange={(e) => patch({ ageMin: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">Age Max
-                <input type="number" value={draft.ageMax} onChange={(e) => patch({ ageMax: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" value={draft.ageMax} onChange={(e) => patch({ ageMax: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">Gender
-                <select value={draft.gender} onChange={(e) => patch({ gender: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.gender} onChange={(e) => patch({ gender: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   <option value="all">All</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -515,7 +515,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
                         const set = new Set(draft.customerTypes || []);
                         if (on) set.delete(c); else set.add(c);
                         patch({ customerTypes: [...set] });
-                      }} className={`rounded-full px-3 py-1 text-xs font-semibold capitalize border ${on ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200 dark:border-slate-700'}`}>{c}</button>
+                      }} className={`rounded-full px-3 py-1 text-xs font-semibold capitalize border ${on ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200'}`}>{c}</button>
                     );
                   })}
                 </div>
@@ -533,7 +533,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
                         const set = new Set(draft.interests || []);
                         if (on) set.delete(c); else set.add(c);
                         patch({ interests: [...set] });
-                      }} className={`rounded-full px-3 py-1 text-xs font-semibold border ${on ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200 dark:border-slate-700'}`}>{c}</button>
+                      }} className={`rounded-full px-3 py-1 text-xs font-semibold border ${on ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200'}`}>{c}</button>
                     );
                   })}
                 </div>
@@ -554,7 +554,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
                       const set = new Set(draft.placements || []);
                       if (on) set.delete(p.id); else set.add(p.id);
                       patch({ placements: [...set], placement: [...set][0] || '' });
-                    }} className={`rounded-xl border px-3 py-2.5 text-left text-sm ${on ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200 dark:border-slate-700'}`}>{p.label}</button>
+                    }} className={`rounded-xl border px-3 py-2.5 text-left text-sm ${on ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200'}`}>{p.label}</button>
                   );
                 })}
               </div>
@@ -564,12 +564,12 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           {draft.step === 9 && (
             <div className="space-y-4">
               <label className="block text-xs font-medium">Coverage Level
-                <select value={draft.coverageLevel} onChange={(e) => patch({ coverageLevel: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.coverageLevel} onChange={(e) => patch({ coverageLevel: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   {COVERAGE_LEVELS.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
                 </select>
               </label>
               <label className="block text-xs font-medium">Coverage Areas
-                <input value={(draft.coverageAreas || []).join(', ')} onChange={(e) => patch({ coverageAreas: e.target.value.split(',').map((value) => value.trim()).filter(Boolean) })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" placeholder="Mumbai, Pune, Thane" />
+                <input value={(draft.coverageAreas || []).join(', ')} onChange={(e) => patch({ coverageAreas: e.target.value.split(',').map((value) => value.trim()).filter(Boolean) })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" placeholder="Mumbai, Pune, Thane" />
                 <p className="text-[11px] text-slate-500 mt-1">Add specific regions to refine your coverage.</p>
               </label>
               {draft.coverageLevel === 'india' && <p className="text-sm text-slate-500">Nationwide coverage selected. No location details required.</p>}
@@ -580,21 +580,21 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium">Daily Budget
                 <div className="mt-1 flex gap-2">
-                  <input type="number" value={draft.dailyBudget} onChange={(e) => patch({ dailyBudget: e.target.value })} className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                  <input type="number" value={draft.dailyBudget} onChange={(e) => patch({ dailyBudget: e.target.value })} className="flex-1 rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
                   <button type="button" onClick={() => suggest('budget', (v) => ({ dailyBudget: parseInt(String(v).replace(/[^\d]/g, ''), 10) || 1000 }))} className="rounded-xl border px-3 text-xs font-semibold"><Sparkles size={13} /></button>
                 </div>
               </label>
               <label className="block text-xs font-medium">Total Budget
-                <input type="number" value={draft.totalBudget} onChange={(e) => patch({ totalBudget: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" value={draft.totalBudget} onChange={(e) => patch({ totalBudget: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">Weekly Budget
-                <input type="number" value={draft.weeklyBudget} onChange={(e) => patch({ weeklyBudget: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" value={draft.weeklyBudget} onChange={(e) => patch({ weeklyBudget: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">Monthly Budget
-                <input type="number" value={draft.monthlyBudget} onChange={(e) => patch({ monthlyBudget: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" value={draft.monthlyBudget} onChange={(e) => patch({ monthlyBudget: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">Bid Strategy
-                <select value={draft.bidStrategy} onChange={(e) => patch({ bidStrategy: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.bidStrategy} onChange={(e) => patch({ bidStrategy: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   <option value="auto">Auto</option>
                   <option value="manual">Manual</option>
                 </select>
@@ -606,7 +606,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
                   ['Est. CPC', formatINR(estimate.cpc)],
                   ['Est. Conv.', estimate.conversions],
                 ].map(([k, v]) => (
-                  <div key={k} className="rounded-xl bg-slate-50 dark:bg-slate-800/50 p-3">
+                  <div key={k} className="rounded-xl bg-page p-3">
                     <p className="text-[10px] text-slate-500">{k}</p>
                     <p className="text-sm font-bold">{v}</p>
                   </div>
@@ -618,27 +618,27 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           {draft.step === 13 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium">Payment Method *
-                <select value={draft.paymentMethod} onChange={(e) => patch({ paymentMethod: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.paymentMethod} onChange={(e) => patch({ paymentMethod: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   {PAYMENT_METHODS.map((method) => <option key={method.id} value={method.id}>{method.label}</option>)}
                 </select>
               </label>
               <label className="block text-xs font-medium">Invoice Type *
-                <select value={draft.invoiceType} onChange={(e) => patch({ invoiceType: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.invoiceType} onChange={(e) => patch({ invoiceType: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   <option value="gst_invoice">GST Invoice</option>
                   <option value="proforma_invoice">Proforma Invoice</option>
                   <option value="corporate_invoice">Corporate Invoice</option>
                 </select>
               </label>
               <label className="block text-xs font-medium">Discount (₹)
-                <input type="number" value={draft.couponDiscount} onChange={(e) => patch({ couponDiscount: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" value={draft.couponDiscount} onChange={(e) => patch({ couponDiscount: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">Platform Fee (%)
-                <input type="number" min={0} value={draft.platformFeePercent} onChange={(e) => patch({ platformFeePercent: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" min={0} value={draft.platformFeePercent} onChange={(e) => patch({ platformFeePercent: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">Tax (%)
-                <input type="number" min={0} value={draft.gstPercent} onChange={(e) => patch({ gstPercent: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="number" min={0} value={draft.gstPercent} onChange={(e) => patch({ gstPercent: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
-              <div className="sm:col-span-2 rounded-2xl bg-slate-50 dark:bg-slate-800/50 p-4">
+              <div className="sm:col-span-2 rounded-2xl bg-page p-4">
                 <div className="grid grid-cols-2 gap-3 text-sm text-slate-600 dark:text-slate-300">
                   <div>
                     <p className="text-[11px] uppercase text-slate-400">Total Budget</p>
@@ -657,7 +657,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
                     <p className="font-semibold">{formatINR(billingSummary.tax)}</p>
                   </div>
                 </div>
-                <div className="mt-4 rounded-2xl bg-white dark:bg-slate-900 p-4 shadow-sm border border-slate-200 dark:border-slate-800">
+                <div className="mt-4 rounded-2xl bg-surface p-4 shadow-sm border border-slate-200 dark:border-slate-800">
                   <p className="text-[11px] uppercase text-slate-400">Final Amount</p>
                   <p className="text-lg font-bold">{formatINR(billingSummary.finalAmount)}</p>
                 </div>
@@ -668,19 +668,19 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           {draft.step === 10 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="block text-xs font-medium">Start Date
-                <input type="date" value={String(draft.startAt).slice(0, 10)} onChange={(e) => patch({ startAt: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="date" value={String(draft.startAt).slice(0, 10)} onChange={(e) => patch({ startAt: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">Start Time
-                <input type="time" value={draft.startTime} onChange={(e) => patch({ startTime: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="time" value={draft.startTime} onChange={(e) => patch({ startTime: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">End Date
-                <input type="date" value={String(draft.endAt).slice(0, 10)} onChange={(e) => patch({ endAt: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="date" value={String(draft.endAt).slice(0, 10)} onChange={(e) => patch({ endAt: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">End Time
-                <input type="time" value={draft.endTime} onChange={(e) => patch({ endTime: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm" />
+                <input type="time" value={draft.endTime} onChange={(e) => patch({ endTime: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
               </label>
               <label className="block text-xs font-medium">Recurring
-                <select value={draft.recurring} onChange={(e) => patch({ recurring: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.recurring} onChange={(e) => patch({ recurring: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   <option value="none">None</option>
                   <option value="daily">Daily</option>
                   <option value="weekly">Weekly</option>
@@ -688,7 +688,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
                 </select>
               </label>
               <label className="block text-xs font-medium">Timezone
-                <select value={draft.timezone} onChange={(e) => patch({ timezone: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm">
+                <select value={draft.timezone} onChange={(e) => patch({ timezone: e.target.value })} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm">
                   <option value="Asia/Kolkata">Asia/Kolkata</option>
                   <option value="UTC">UTC</option>
                 </select>
@@ -704,10 +704,10 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
             <div className="space-y-3">
               <div className="flex flex-wrap gap-2">
                 {['desktop', 'tablet', 'mobile'].map((d) => (
-                  <button key={d} type="button" onClick={() => setPreviewDevice(d)} className={`rounded-full px-3 py-1 text-xs font-semibold capitalize border ${previewDevice === d ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200 dark:border-slate-700'}`}>{d}</button>
+                  <button key={d} type="button" onClick={() => setPreviewDevice(d)} className={`rounded-full px-3 py-1 text-xs font-semibold capitalize border ${previewDevice === d ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200'}`}>{d}</button>
                 ))}
                 {['homepage', 'category', 'product', 'search'].map((p) => (
-                  <button key={p} type="button" onClick={() => setPreviewPage(p)} className={`rounded-full px-3 py-1 text-xs font-semibold capitalize border ${previewPage === p ? 'border-emerald-500 text-emerald-700' : 'border-slate-200 dark:border-slate-700'}`}>{p}</button>
+                  <button key={p} type="button" onClick={() => setPreviewPage(p)} className={`rounded-full px-3 py-1 text-xs font-semibold capitalize border ${previewPage === p ? 'border-emerald-500 text-emerald-700' : 'border-slate-200'}`}>{p}</button>
                 ))}
               </div>
               <div className={`mx-auto rounded-2xl border border-emerald-200 dark:border-emerald-900 bg-gradient-to-br from-emerald-50 to-white dark:from-emerald-950/20 dark:to-slate-900 p-5 ${previewDevice === 'mobile' ? 'max-w-[280px]' : previewDevice === 'tablet' ? 'max-w-md' : 'max-w-full'}`}>
@@ -735,13 +735,13 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
                   ['Payment', PAYMENT_METHODS.find((m) => m.id === draft.paymentMethod)?.label || draft.paymentMethod],
                   ['Invoice', draft.invoiceType?.replace(/_/g, ' ')],
                 ].map(([label, value]) => (
-                  <div key={label} className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 p-4">
+                  <div key={label} className="rounded-2xl border border-slate-200 bg-page dark:bg-slate-900 p-4">
                     <p className="text-[10px] uppercase text-slate-400">{label}</p>
                     <p className="mt-2 text-sm font-semibold text-slate-800 dark:text-slate-200">{value}</p>
                   </div>
                 ))}
               </div>
-              <div className="rounded-2xl bg-slate-50 dark:bg-slate-800/50 p-4 text-sm text-slate-600 dark:text-slate-300">
+              <div className="rounded-2xl bg-page p-4 text-sm text-slate-600 dark:text-slate-300">
                 <p className="font-semibold text-slate-700 dark:text-slate-100">Review before submission</p>
                 <p className="mt-2">Ensure the campaign objective, audience, placement, budget, and payment details are correct before sending the campaign for approval.</p>
               </div>
@@ -749,12 +749,12 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           )}
         </div>
 
-        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-5 py-4">
-          <button type="button" disabled={draft.step <= 1 || busy} onClick={() => patch({ step: draft.step - 1 })} className="inline-flex items-center gap-1 rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm font-semibold disabled:opacity-40">
+        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-white/95 px-5 py-4">
+          <button type="button" disabled={draft.step <= 1 || busy} onClick={() => patch({ step: draft.step - 1 })} className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold disabled:opacity-40">
             <ChevronLeft size={16} /> Back
           </button>
           <div className="flex gap-2">
-            <button type="button" disabled={busy} onClick={() => publish({ asDraft: true })} className="rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm font-semibold">Save Draft</button>
+            <button type="button" disabled={busy} onClick={() => publish({ asDraft: true })} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold">Save Draft</button>
             {draft.step < 14 ? (
               <button type="button" disabled={!canNext() || busy} onClick={() => { if (!canNext()) { toast.error('Complete required fields'); return; } patch({ step: draft.step + 1 }); }} className="inline-flex items-center gap-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 text-sm font-semibold disabled:opacity-40">
                 Continue <ChevronRight size={16} />

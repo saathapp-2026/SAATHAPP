@@ -86,7 +86,7 @@ export default function OrderActions({
             ? 'bg-emerald-500 text-white hover:bg-emerald-600'
             : variant === 'danger'
               ? 'bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-950/30 dark:text-red-400'
-              : 'border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+              : 'border border-slate-200 hover:bg-page text-slate-700 dark:text-slate-300'
         }`}
       >
         <Icon size={12} aria-hidden="true" />
@@ -106,14 +106,14 @@ export default function OrderActions({
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="p-1 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
+            className="p-1 rounded-lg border border-slate-200 hover:bg-page"
             aria-label="More actions"
             aria-expanded={open}
           >
             <MoreHorizontal size={14} />
           </button>
           {open && (
-            <div className="absolute right-0 top-full mt-1 z-20 w-52 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg p-1 max-h-64 overflow-y-auto">
+            <div className="absolute right-0 top-full mt-1 z-20 w-52 rounded-xl border border-slate-200 bg-surface shadow-lg p-1 max-h-64 overflow-y-auto">
               {rest.map((a) => (
                 <button
                   key={a.id}
@@ -123,7 +123,7 @@ export default function OrderActions({
                     setOpen(false);
                     onAction?.(a.id, order);
                   }}
-                  className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-left hover:bg-slate-50 dark:hover:bg-slate-800"
+                  className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-left hover:bg-page"
                 >
                   <a.icon size={12} />
                   {a.label}

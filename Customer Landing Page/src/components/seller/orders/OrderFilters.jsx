@@ -21,7 +21,7 @@ function Select({ label, value, options, onChange, allLabel }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-label={label}
-        className="w-full appearance-none pl-3 pr-8 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        className="w-full appearance-none pl-3 pr-8 py-2 rounded-lg border border-slate-200 bg-surface text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
       >
         <option value="">{allLabel}</option>
         {options.map((o) => (
@@ -54,7 +54,7 @@ export default function OrderFilters({
   return (
     <div className="space-y-3">
       {/* Compact toolbar */}
-      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 flex flex-col xl:flex-row gap-2.5 xl:items-center">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-3 flex flex-col xl:flex-row gap-2.5 xl:items-center">
         <div className="relative flex-1 min-w-[200px]">
           <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
@@ -63,7 +63,7 @@ export default function OrderFilters({
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search by Order ID, Customer, Phone or Product…"
             aria-label="Search orders"
-            className="w-full pl-9 pr-8 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full pl-9 pr-8 py-2 rounded-lg border border-slate-200 bg-page dark:bg-slate-950 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
           />
           {search && (
             <button type="button" onClick={() => onSearchChange('')} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400" aria-label="Clear search">
@@ -108,7 +108,7 @@ export default function OrderFilters({
             className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border transition-colors ${
               showMore
                 ? 'bg-emerald-50 border-emerald-300 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800 dark:text-emerald-300'
-                : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                : 'border-slate-200 hover:bg-page'
             }`}
           >
             <Filter size={14} /> Filters
@@ -116,7 +116,7 @@ export default function OrderFilters({
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border border-slate-200 hover:bg-page"
           >
             <RotateCcw size={14} /> Reset
           </button>
@@ -129,19 +129,19 @@ export default function OrderFilters({
             type="date"
             value={filters.customRange?.from || ''}
             onChange={(e) => onChange({ ...filters, customRange: { ...filters.customRange, from: e.target.value } })}
-            className="px-2 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-sm bg-white dark:bg-slate-900"
+            className="px-2 py-1.5 rounded-lg border border-slate-200 text-sm bg-surface"
           />
           <input
             type="date"
             value={filters.customRange?.to || ''}
             onChange={(e) => onChange({ ...filters, customRange: { ...filters.customRange, to: e.target.value } })}
-            className="px-2 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-sm bg-white dark:bg-slate-900"
+            className="px-2 py-1.5 rounded-lg border border-slate-200 text-sm bg-surface"
           />
         </div>
       )}
 
       {showMore && (
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-3">
           <p className="text-xs font-semibold text-slate-500 mb-2">More filters</p>
           <div className="flex flex-wrap gap-1.5">
             {OTHER_FILTERS.map((opt) => {
@@ -160,7 +160,7 @@ export default function OrderFilters({
                   className={`px-2.5 py-1 rounded-lg text-xs font-medium border ${
                     active
                       ? 'bg-emerald-500 text-white border-emerald-500'
-                      : 'border-slate-200 dark:border-slate-700'
+                      : 'border-slate-200'
                   }`}
                 >
                   {opt.label}
@@ -188,12 +188,12 @@ export default function OrderFilters({
               className={`shrink-0 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
                 active
                   ? 'bg-emerald-500 text-white shadow-sm'
-                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                  : 'bg-surface text-slate-600 dark:text-slate-300 border border-slate-200 hover:bg-page'
               }`}
             >
               {pill.label}
               {count != null && count > 0 && (
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${active ? 'bg-white/25' : 'bg-slate-100 dark:bg-slate-800'}`}>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${active ? 'bg-white/25' : 'bg-page'}`}>
                   {count}
                 </span>
               )}

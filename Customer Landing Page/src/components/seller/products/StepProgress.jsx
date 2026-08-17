@@ -28,7 +28,7 @@ export default function StepProgress({ currentStep, completedSteps = [], onStepC
                   className={`h-7 w-7 sm:h-8 sm:w-8 rounded-full inline-flex items-center justify-center text-[11px] border-2 shrink-0 ${
                     active || done
                       ? 'bg-emerald-500 border-emerald-500 text-white'
-                      : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-400'
+                      : 'bg-surface border-slate-200 text-slate-400'
                   }`}
                 >
                   {done && !active ? <Check size={12} strokeWidth={3} /> : step.id}
@@ -36,7 +36,7 @@ export default function StepProgress({ currentStep, completedSteps = [], onStepC
                 <span className="text-center leading-tight truncate w-full">{step.label}</span>
                 <span
                   className={`h-0.5 w-full rounded-full ${
-                    active ? 'bg-emerald-500' : done ? 'bg-emerald-300' : 'bg-slate-200 dark:bg-slate-700'
+                    active ? 'bg-emerald-500' : done ? 'bg-emerald-300' : 'bg-slate-200'
                   }`}
                   aria-hidden="true"
                 />

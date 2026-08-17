@@ -45,7 +45,7 @@ export default function ReportAnalytics({ data, loading, range, onRangeChange })
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3" aria-busy="true">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="h-40 rounded-xl border border-slate-200 dark:border-slate-800 animate-pulse bg-white dark:bg-slate-900" />
+          <div key={i} className="h-40 rounded-xl border border-slate-200 dark:border-slate-800 animate-pulse bg-surface" />
         ))}
       </div>
     );
@@ -68,7 +68,7 @@ export default function ReportAnalytics({ data, loading, range, onRangeChange })
               className={`rounded-full px-2.5 py-1 text-[10px] font-semibold border ${
                 range === r.id
                   ? 'bg-emerald-600 text-white border-emerald-600'
-                  : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
+                  : 'border-slate-200 text-slate-600 dark:text-slate-300'
               }`}
             >
               {r.label}
@@ -81,7 +81,7 @@ export default function ReportAnalytics({ data, loading, range, onRangeChange })
         {charts.map((c) => (
           <div
             key={c.id}
-            className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4"
+            className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-4"
           >
             <p className="text-xs font-semibold text-slate-700 dark:text-slate-200 mb-3">{c.title}</p>
             <MiniBars series={series} keyName={c.key} color={c.color} />
@@ -90,7 +90,7 @@ export default function ReportAnalytics({ data, loading, range, onRangeChange })
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-4">
           <p className="text-xs font-semibold mb-3">Top Products</p>
           <ul className="space-y-2">
             {topProducts.map((p) => (
@@ -101,11 +101,11 @@ export default function ReportAnalytics({ data, loading, range, onRangeChange })
             ))}
           </ul>
         </div>
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-4">
           <p className="text-xs font-semibold mb-3">BI Insights (AI-ready)</p>
           <ul className="space-y-2 max-h-48 overflow-y-auto">
             {insights.map((ins) => (
-              <li key={ins.id} className="rounded-lg bg-slate-50 dark:bg-slate-800/50 p-2.5">
+              <li key={ins.id} className="rounded-lg bg-page p-2.5">
                 <p className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">{ins.title}</p>
                 <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5">{ins.text}</p>
               </li>

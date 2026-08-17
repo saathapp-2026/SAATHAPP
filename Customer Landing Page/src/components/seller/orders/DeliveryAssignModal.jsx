@@ -27,13 +27,13 @@ export default function DeliveryAssignModal({ open, order, loading, onAssign, on
   return (
     <div className="fixed inset-0 z-[80] flex items-end sm:items-center justify-center p-0 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="assign-title">
       <button type="button" className="absolute inset-0 bg-black/50" aria-label="Close" onClick={onClose} />
-      <div className="relative w-full sm:max-w-2xl max-h-[90vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl">
-        <div className="sticky top-0 flex items-center justify-between gap-3 p-4 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+      <div className="relative w-full sm:max-w-2xl max-h-[90vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl">
+        <div className="sticky top-0 flex items-center justify-between gap-3 p-4 border-b border-slate-200 dark:border-slate-800 bg-surface">
           <div>
             <h2 id="assign-title" className="font-bold text-lg">Assign Delivery Agent</h2>
             <p className="text-sm text-slate-500">Order {order.id} · {order.customer.name}</p>
           </div>
-          <button type="button" onClick={onClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -42,7 +42,7 @@ export default function DeliveryAssignModal({ open, order, loading, onAssign, on
           {fetching && (
             <div className="space-y-2 animate-pulse">
               {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="h-24 rounded-xl bg-slate-100 dark:bg-slate-800" />
+                <div key={i} className="h-24 rounded-xl bg-page" />
               ))}
             </div>
           )}
@@ -51,7 +51,7 @@ export default function DeliveryAssignModal({ open, order, loading, onAssign, on
               key={agent.id}
               className={`flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-xl border ${
                 agent.available
-                  ? 'border-slate-200 dark:border-slate-700'
+                  ? 'border-slate-200'
                   : 'border-slate-100 dark:border-slate-800 opacity-60'
               }`}
             >
@@ -67,7 +67,7 @@ export default function DeliveryAssignModal({ open, order, loading, onAssign, on
                   <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold ${
                     agent.available
                       ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300'
-                      : 'bg-slate-100 text-slate-500'
+                      : 'bg-page text-slate-500'
                   }`}>
                     {agent.available ? 'Available' : 'Busy'}
                   </span>

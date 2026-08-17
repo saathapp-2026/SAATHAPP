@@ -26,7 +26,7 @@ export default function AdsRightPanel({
 
   return (
     <aside className="space-y-4 lg:sticky lg:top-4 lg:self-start" aria-label="Ad insights">
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm">
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 shadow-sm">
         <h3 className="text-sm font-bold mb-3">Ad Summary</h3>
         <ul className="space-y-2.5">
           {rows.map(([k, v]) => (
@@ -38,7 +38,7 @@ export default function AdsRightPanel({
         </ul>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm">
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 shadow-sm">
         <h3 className="text-sm font-bold mb-3">Quick Actions</h3>
         <ul className="space-y-1">
           {actions.map((a) => {
@@ -48,7 +48,7 @@ export default function AdsRightPanel({
                 <button
                   type="button"
                   onClick={() => onQuickAction?.(a.id)}
-                  className="flex w-full items-center gap-2 rounded-xl px-2 py-2.5 text-left text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
+                  className="flex w-full items-center gap-2 rounded-xl px-2 py-2.5 text-left text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-page"
                 >
                   <Icon size={15} className="text-emerald-600" />
                   <span className="flex-1">{a.label}</span>
@@ -60,14 +60,14 @@ export default function AdsRightPanel({
         </ul>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm">
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 shadow-sm">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-bold">Top Performing Ads</h3>
         </div>
         <ul className="space-y-3">
           {topAds.map((ad) => (
             <li key={ad.id} className="flex items-start gap-2.5">
-              <div className="h-9 w-9 rounded-lg bg-slate-100 dark:bg-slate-800 inline-flex items-center justify-center shrink-0">
+              <div className="h-9 w-9 rounded-lg bg-page inline-flex items-center justify-center shrink-0">
                 <ImageIcon size={14} className="text-slate-400" />
               </div>
               <div className="min-w-0 flex-1">
@@ -88,7 +88,7 @@ export default function AdsRightPanel({
         <button
           type="button"
           onClick={onViewAllPerformance}
-          className="mt-3 w-full rounded-xl border border-slate-200 dark:border-slate-700 py-2 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800"
+          className="mt-3 w-full rounded-xl border border-slate-200 py-2 text-xs font-semibold hover:bg-page"
         >
           View All Performance
         </button>

@@ -9,7 +9,7 @@ export default function HowItWorks() {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section className="py-12 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40">
+    <section className="py-12 bg-surface border-b border-slate-100 ">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         
         {/* Title */}
@@ -25,7 +25,7 @@ export default function HowItWorks() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
           
           {/* Horizontal Line Connector (desktop only) */}
-          <div className="absolute top-[39px] left-[12%] right-[12%] h-0.5 bg-slate-100 dark:bg-slate-800 hidden md:block z-10" />
+          <div className="absolute top-[39px] left-[12%] right-[12%] h-0.5 bg-page hidden md:block z-10" />
 
           {howItWorksSteps.map((item, index) => {
             const Icon = stepIcons[index];
@@ -51,7 +51,7 @@ export default function HowItWorks() {
                   className={`w-20 h-20 rounded-full flex items-center justify-center border-2 transition-all relative ${
                     isSelected 
                       ? 'bg-primary border-primary text-white' 
-                      : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-400 group-hover:border-primary/50 group-hover:text-primary'
+                      : 'bg-surface border-slate-200 dark:border-slate-800 text-slate-400 group-hover:border-primary/50 group-hover:text-primary'
                   }`}
                 >
                   <Icon size={28} />
@@ -60,7 +60,7 @@ export default function HowItWorks() {
                   <span className={`absolute -bottom-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black border-2 ${
                     isSelected
                       ? 'bg-secondary text-slate-900 border-primary'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-500 border-white dark:border-slate-900'
+                      : 'bg-page text-slate-500 border-white dark:border-slate-900'
                   }`}>
                     {item.step}
                   </span>

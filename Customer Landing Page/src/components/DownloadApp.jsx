@@ -17,7 +17,7 @@ export default function DownloadApp() {
   }
 
   return (
-    <section className="py-16 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40 overflow-hidden relative">
+    <section className="py-16 bg-surface border-b border-slate-100  overflow-hidden relative">
       
       {/* Background Blobs */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
@@ -110,7 +110,7 @@ export default function DownloadApp() {
               <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-16 h-3 bg-slate-950 rounded-full z-30" />
 
               {/* Simulated App Screen */}
-              <div className="flex-1 bg-slate-50 dark:bg-slate-950 rounded-[28px] overflow-hidden flex flex-col p-3 relative text-slate-800 dark:text-slate-200">
+              <div className="flex-1 bg-page dark:bg-slate-950 rounded-[28px] overflow-hidden flex flex-col p-3 relative text-slate-800 dark:text-slate-200">
                 {/* Simulated Header */}
                 <div className="flex justify-between items-center py-2.5 border-b border-slate-100 dark:border-slate-850 text-[10px] font-bold text-slate-500">
                   <span className="text-[9px] font-extrabold text-primary">SaathApp</span>
@@ -122,7 +122,7 @@ export default function DownloadApp() {
                   <span className="text-[8px] font-bold text-slate-400 block uppercase tracking-wider text-left">Services</span>
                   <div className="grid grid-cols-3 gap-1.5">
                     {['Zap', 'Hammer', 'Tractor'].map((icon, i) => (
-                      <div key={i} className="bg-white dark:bg-slate-900 border border-slate-200/40 dark:border-slate-850 p-2 rounded-xl text-center flex flex-col items-center">
+                      <div key={i} className="bg-surface border border-slate-200/40 dark:border-slate-850 p-2 rounded-xl text-center flex flex-col items-center">
                         <div className="w-5 h-5 rounded-md bg-primary/10 flex items-center justify-center text-primary">
                           {i === 0 ? '⚡' : i === 1 ? '🔨' : '🚜'}
                         </div>
@@ -139,7 +139,7 @@ export default function DownloadApp() {
                   initial={{ y: 50, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 1 }}
-                  className="absolute bottom-4 left-3 right-3 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-2 rounded-2xl border border-slate-200/50 dark:border-slate-800/80 shadow-lg text-left flex items-center gap-2"
+                  className="absolute bottom-4 left-3 right-3 bg-white/95 backdrop-blur-md p-2 rounded-2xl border border-slate-200/50 dark:border-slate-800/80 shadow-lg text-left flex items-center gap-2"
                 >
                   <div className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">
                     ✓

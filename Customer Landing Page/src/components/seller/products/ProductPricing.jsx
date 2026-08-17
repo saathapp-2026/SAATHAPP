@@ -36,7 +36,7 @@ export default function ProductPricing({ value, errors = {}, onChange }) {
             <TextInput type="number" min="0" value={value.wholesalePrice} onChange={(e) => set('wholesalePrice', e.target.value)} />
           </Field>
           <Field label="Discount (%)">
-            <TextInput type="number" value={value.discountPct || calc.discountPct} readOnly className="bg-slate-50 dark:bg-slate-900" />
+            <TextInput type="number" value={value.discountPct || calc.discountPct} readOnly className="bg-page dark:bg-slate-900" />
           </Field>
           <Field label="GST %">
             <TextSelect value={value.gstPct} onChange={(e) => set('gstPct', Number(e.target.value))}>
@@ -80,7 +80,7 @@ export default function ProductPricing({ value, errors = {}, onChange }) {
             ['Net Earnings', money(calc.netEarnings)],
             ['Profit Margin', `${calc.profitMargin}%`],
           ].map(([k, v]) => (
-            <div key={k} className="rounded-lg bg-white dark:bg-slate-900 border border-emerald-100 dark:border-emerald-900 p-2.5">
+            <div key={k} className="rounded-lg bg-surface border border-emerald-100 dark:border-emerald-900 p-2.5">
               <dt className="text-[11px] text-slate-500">{k}</dt>
               <dd className="font-bold tabular-nums">{v}</dd>
             </div>

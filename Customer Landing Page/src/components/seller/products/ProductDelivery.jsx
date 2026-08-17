@@ -13,7 +13,7 @@ function ChipToggle({ options, selected = [], onChange }) {
             type="button"
             onClick={() => onChange(active ? selected.filter((x) => x !== o.id) : [...selected, o.id])}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold border ${
-              active ? 'bg-emerald-500 text-white border-emerald-500' : 'border-slate-200 dark:border-slate-700'
+              active ? 'bg-emerald-500 text-white border-emerald-500' : 'border-slate-200'
             }`}
           >
             {o.label}
@@ -44,7 +44,7 @@ export default function ProductDelivery({ value, errors = {}, onChange }) {
             ['returnAvailable', 'Return Available'],
             ['replacementAvailable', 'Replacement Available'],
           ].map(([key, label]) => (
-            <label key={key} className="inline-flex items-center gap-2 text-sm rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-2">
+            <label key={key} className="inline-flex items-center gap-2 text-sm rounded-lg border border-slate-200 px-3 py-2">
               <input type="checkbox" checked={!!value[key]} onChange={(e) => set(key, e.target.checked)} />
               {label}
             </label>
@@ -60,7 +60,7 @@ export default function ProductDelivery({ value, errors = {}, onChange }) {
             ['schedule', 'Schedule Publish'],
             ['hide', 'Hide Product'],
           ].map(([id, label]) => (
-            <label key={id} className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm cursor-pointer ${value.visibility === id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200 dark:border-slate-700'}`}>
+            <label key={id} className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm cursor-pointer ${value.visibility === id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200'}`}>
               <input type="radio" name="visibility" checked={value.visibility === id} onChange={() => set('visibility', id)} />
               {label}
             </label>

@@ -106,7 +106,7 @@ function FAQ() {
                 <div
                   className={`
                     w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300
-                    ${open === index ? "rotate-180 text-[#16A34A] bg-[#ECFDF3]" : "text-[#64748B] bg-slate-100"}
+                    ${open === index ? "rotate-180 text-[#16A34A] bg-[#ECFDF3]" : "text-[#64748B] bg-page"}
                   `}
                 >
                   <ChevronDown size={18} />

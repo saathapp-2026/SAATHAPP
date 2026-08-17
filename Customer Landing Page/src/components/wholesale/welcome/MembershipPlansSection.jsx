@@ -98,7 +98,7 @@ export default function MembershipPlansSection({ onStartRegistration }) {
   };
 
   return (
-    <section id="membership-plans" aria-labelledby="membership-heading" className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-950/60">
+    <section id="membership-plans" aria-labelledby="membership-heading" className="py-20 sm:py-24 bg-page dark:bg-slate-950/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-blue-600 dark:text-blue-400">
@@ -119,8 +119,8 @@ export default function MembershipPlansSection({ onStartRegistration }) {
               key={idx}
               className={`group relative rounded-3xl border p-6 transition-all duration-300 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(10,143,61,0.2)] hover:border-[#0A8F3D] hover:ring-2 hover:ring-[#0A8F3D]/40 ${
                 plan.popular
-                  ? 'border-[#0A8F3D] bg-white dark:bg-slate-900 shadow-2xl ring-2 ring-[#0A8F3D]'
-                  : 'border-slate-200/70 dark:border-slate-800/60 bg-white dark:bg-slate-900 shadow-sm'
+                  ? 'border-[#0A8F3D] bg-surface shadow-2xl ring-2 ring-[#0A8F3D]'
+                  : 'border-slate-200/70 dark:border-slate-800/60 bg-surface shadow-sm'
               }`}
             >
               {plan.popular && (
@@ -163,7 +163,7 @@ export default function MembershipPlansSection({ onStartRegistration }) {
                   className={`w-full rounded-2xl py-3 text-xs font-extrabold transition-all duration-200 shadow group-hover:scale-[1.02] ${
                     plan.popular
                       ? 'bg-[#0A8F3D] hover:bg-[#087a34] text-white shadow-[#0A8F3D]/20'
-                      : 'bg-slate-900 dark:bg-slate-800 text-white hover:bg-[#0A8F3D]'
+                      : 'bg-slate-900 text-white hover:bg-[#0A8F3D]'
                   }`}
                 >
                   Start Registration

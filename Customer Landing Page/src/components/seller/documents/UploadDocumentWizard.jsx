@@ -196,8 +196,8 @@ export default function UploadDocumentWizard({
       className="flex items-end sm:items-center justify-center p-0 sm:p-4"
       contentClassName="w-full max-w-3xl"
     >
-      <div className="max-h-[94vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl">
-        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur px-5 py-4">
+      <div className="max-h-[94vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl">
+        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur px-5 py-4">
           <div>
             <h2 id="doc-wizard-title" className="text-lg font-bold text-slate-900 dark:text-slate-50">
               {replaceItem ? 'Replace Document' : editItem ? 'Edit Document' : 'Upload Document'}
@@ -206,7 +206,7 @@ export default function UploadDocumentWizard({
               Step {draft.step}/5 · Draft auto-saves
             </p>
           </div>
-          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -215,7 +215,7 @@ export default function UploadDocumentWizard({
           <ol className="flex gap-1 mb-5" aria-label="Wizard progress">
             {WIZARD_STEPS.map((s) => (
               <li key={s.id} className="min-w-0 flex-1">
-                <div className={`h-1.5 rounded-full ${draft.step >= s.id ? 'bg-emerald-500' : 'bg-slate-200 dark:bg-slate-700'}`} />
+                <div className={`h-1.5 rounded-full ${draft.step >= s.id ? 'bg-emerald-500' : 'bg-slate-200'}`} />
                 <p className={`mt-1 text-[10px] font-medium truncate ${draft.step === s.id ? 'text-emerald-600' : 'text-slate-400'}`}>
                   {s.label}
                 </p>
@@ -235,7 +235,7 @@ export default function UploadDocumentWizard({
                     const cat = DOC_CATEGORIES.find((c) => c.id === e.target.value);
                     patch({ categoryId: e.target.value, typeId: cat?.types?.[0]?.id || 'custom' });
                   }}
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 >
                   {DOC_CATEGORIES.map((c) => (
                     <option key={c.id} value={c.id}>
@@ -253,7 +253,7 @@ export default function UploadDocumentWizard({
                     const t = getDocType(e.target.value);
                     patch({ typeId: e.target.value, name: draft.name || t.label });
                   }}
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 >
                   {types.map((t) => (
                     <option key={t.id} value={t.id}>
@@ -267,7 +267,7 @@ export default function UploadDocumentWizard({
                 <input
                   value={draft.name}
                   onChange={(e) => patch({ name: e.target.value })}
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                   placeholder="e.g. Aadhaar Card — Primary"
                 />
                 {errors.name ? <span className="text-red-500 text-[11px]">{errors.name}</span> : null}
@@ -278,7 +278,7 @@ export default function UploadDocumentWizard({
                   value={draft.description}
                   onChange={(e) => patch({ description: e.target.value })}
                   rows={3}
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                   placeholder="Optional notes for compliance review"
                 />
               </label>
@@ -301,7 +301,7 @@ export default function UploadDocumentWizard({
                 className={`rounded-2xl border-2 border-dashed p-8 text-center transition-colors ${
                   dragOver
                     ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20'
-                    : 'border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950'
+                    : 'border-slate-300 bg-page dark:bg-slate-950'
                 }`}
               >
                 <Upload className="mx-auto h-8 w-8 text-slate-400 mb-2" />
@@ -319,7 +319,7 @@ export default function UploadDocumentWizard({
                     type="button"
                     disabled
                     title="Camera capture — coming soon"
-                    className="inline-flex items-center gap-1 rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm font-medium text-slate-400 cursor-not-allowed"
+                    className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium text-slate-400 cursor-not-allowed"
                   >
                     <Camera size={14} /> Camera
                   </button>
@@ -334,7 +334,7 @@ export default function UploadDocumentWizard({
               </div>
               {errors.file ? <p className="text-red-500 text-xs">{errors.file}</p> : null}
               {draft.fileName ? (
-                <div className="rounded-xl border border-slate-200 dark:border-slate-700 p-3 flex items-start gap-3">
+                <div className="rounded-xl border border-slate-200 p-3 flex items-start gap-3">
                   {draft.previewUrl ? (
                     <img
                       src={draft.previewUrl}
@@ -343,7 +343,7 @@ export default function UploadDocumentWizard({
                       style={{ transform: `rotate(${draft.rotation}deg)` }}
                     />
                   ) : (
-                    <div className="h-20 w-20 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                    <div className="h-20 w-20 rounded-lg bg-page flex items-center justify-center">
                       <ImageIcon className="text-slate-400" />
                     </div>
                   )}
@@ -402,7 +402,7 @@ export default function UploadDocumentWizard({
                     type={type}
                     value={draft[key] || ''}
                     onChange={(e) => patch({ [key]: e.target.value })}
-                    className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                    className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                   />
                   {errors[key] ? <span className="text-red-500 text-[11px]">{errors[key]}</span> : null}
                 </label>
@@ -412,7 +412,7 @@ export default function UploadDocumentWizard({
 
           {draft.step === 4 && (
             <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-slate-200 dark:border-slate-700 p-4 space-y-2">
+              <div className="rounded-xl border border-slate-200 p-4 space-y-2">
                 <p className="font-semibold text-slate-900 dark:text-slate-100">{draft.name}</p>
                 <p className="text-slate-500">
                   {getDocType(draft.typeId).categoryLabel} · {getDocType(draft.typeId).label}
@@ -436,7 +436,7 @@ export default function UploadDocumentWizard({
           )}
 
           {draft.step === 5 && (
-            <div className="rounded-xl border border-slate-200 dark:border-slate-700 p-4 space-y-3 text-sm">
+            <div className="rounded-xl border border-slate-200 p-4 space-y-3 text-sm">
               <p className="font-semibold text-slate-900 dark:text-slate-100">Submit for verification</p>
               <ol className="space-y-2 text-slate-600 dark:text-slate-300">
                 <li>1. Submit</li>
@@ -452,7 +452,7 @@ export default function UploadDocumentWizard({
             <button
               type="button"
               onClick={requestClose}
-              className="rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm font-medium"
+              className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium"
             >
               Cancel
             </button>
@@ -461,7 +461,7 @@ export default function UploadDocumentWizard({
                 type="button"
                 disabled={busy}
                 onClick={saveDraft}
-                className="rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm font-medium"
+                className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium"
               >
                 Save Draft
               </button>
@@ -469,7 +469,7 @@ export default function UploadDocumentWizard({
                 <button
                   type="button"
                   onClick={() => patch({ step: draft.step - 1 })}
-                  className="rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm font-medium"
+                  className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium"
                 >
                   Back
                 </button>

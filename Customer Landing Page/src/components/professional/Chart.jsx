@@ -89,7 +89,7 @@ export default function Chart() {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       
       {/* Interactive Line Chart: Earnings */}
-      <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left flex flex-col justify-between">
+      <div className="lg:col-span-2 bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left flex flex-col justify-between">
         
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -105,7 +105,7 @@ export default function Chart() {
           </div>
 
           {/* Timeframe Selector */}
-          <div className="flex bg-slate-50 dark:bg-slate-950 p-1 border border-slate-200/60 dark:border-slate-800 rounded-xl w-max">
+          <div className="flex bg-page dark:bg-slate-950 p-1 border border-slate-200/60 dark:border-slate-800 rounded-xl w-max">
             {['daily', 'weekly', 'monthly', 'yearly'].map((period) => (
               <button
                 key={period}
@@ -116,7 +116,7 @@ export default function Chart() {
                 className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider cursor-pointer transition-colors ${
                   timeframe === period 
                     ? 'bg-primary text-white shadow-sm' 
-                    : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200'
+                    : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
                 {period}
@@ -287,7 +287,7 @@ export default function Chart() {
       </div>
 
       {/* Doughnut Chart: Booking Status Breakdown */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left flex flex-col justify-between">
+      <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left flex flex-col justify-between">
         <div>
           <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">Order Analysis</span>
           <h3 className="text-base sm:text-lg font-black text-slate-800 dark:text-white mt-0.5">Booking Statuses</h3>

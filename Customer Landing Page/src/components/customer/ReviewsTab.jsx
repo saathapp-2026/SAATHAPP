@@ -74,7 +74,7 @@ export default function ReviewsTab({ bookings, reviewsList, setReviewsList }) {
         ) : (
           <div className="space-y-3">
             {reviewsList.map((rev) => (
-              <div key={rev.id} className="p-4 bg-slate-50 dark:bg-slate-955/20 border border-slate-205 dark:border-slate-850 rounded-2xl space-y-2">
+              <div key={rev.id} className="p-4 bg-page dark:bg-slate-955/20 border border-slate-205 dark:border-slate-850 rounded-2xl space-y-2">
                 <div className="flex items-center justify-between">
                   <h4 className="text-xs font-black text-slate-855 dark:text-white">{rev.serviceName}</h4>
                   <div className="flex gap-0.5 text-xs text-amber-500 font-bold">
@@ -92,7 +92,7 @@ export default function ReviewsTab({ bookings, reviewsList, setReviewsList }) {
       {/* Review Form Modal Overlay */}
       {showReviewFormModal && selectedBooking && (
         <div className="fixed inset-0 z-55 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-slate-955/80 backdrop-blur-sm">
-          <div className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-205 dark:border-slate-800 rounded-card p-6 shadow-premium space-y-4 text-left">
+          <div className="w-full max-w-md bg-surface border border-slate-205 dark:border-slate-800 rounded-card p-6 shadow-premium space-y-4 text-left">
             <div>
               <h3 className="text-base font-black text-slate-800 dark:text-white uppercase tracking-wider">Submit Review</h3>
               <p className="text-xs text-slate-400 font-semibold mt-0.5">{selectedBooking.service} • {selectedBooking.provider}</p>
@@ -131,7 +131,7 @@ export default function ReviewsTab({ bookings, reviewsList, setReviewsList }) {
               <button
                 type="button"
                 onClick={() => setShowReviewFormModal(false)}
-                className="px-4 py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 rounded-xl font-bold uppercase cursor-pointer"
+                className="px-4 py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl font-bold uppercase cursor-pointer"
               >
                 Cancel
               </button>

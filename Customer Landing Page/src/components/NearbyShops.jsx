@@ -30,18 +30,18 @@ export default function NearbyShops({ onShopSelect }) {
   };
 
   return (
-    <section className="py-12 bg-slate-50 dark:bg-slate-950/40 border-b border-slate-100 dark:border-slate-800/40 relative w-full">
+    <section className="py-12 bg-page  border-b border-slate-100  relative w-full">
       {/* Full-width Carousel Controls */}
       <button
         onClick={() => scroll('left')}
-        className="absolute left-2 sm:left-4 top-[55%] -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hidden md:flex items-center justify-center transition-colors border border-slate-200/50 dark:border-slate-750 shadow-sm"
+        className="absolute left-2 sm:left-4 top-[55%] -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white hover:bg-page text-slate-600 dark:text-slate-300 hidden md:flex items-center justify-center transition-colors border border-slate-200/50 shadow-sm"
         title="Scroll Left"
       >
         <ChevronLeft size={16} />
       </button>
       <button
         onClick={() => scroll('right')}
-        className="absolute right-2 sm:right-4 top-[55%] -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hidden md:flex items-center justify-center transition-colors border border-slate-200/50 dark:border-slate-750 shadow-sm"
+        className="absolute right-2 sm:right-4 top-[55%] -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white hover:bg-page text-slate-600 dark:text-slate-300 hidden md:flex items-center justify-center transition-colors border border-slate-200/50 shadow-sm"
         title="Scroll Right"
       >
         <ChevronRight size={16} />
@@ -72,7 +72,7 @@ export default function NearbyShops({ onShopSelect }) {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="flex-none w-72 sm:w-80 snap-start bg-white dark:bg-slate-900 rounded-card overflow-hidden border border-slate-200/60 dark:border-slate-800/50 shadow-soft hover:shadow-premium group"
+                className="flex-none w-72 sm:w-80 snap-start bg-surface rounded-card overflow-hidden border border-slate-200/60  shadow-soft hover:shadow-premium group"
               >
                 {/* Shop Banner with gradient overlay */}
                 <div className="w-full h-36 bg-slate-200 relative overflow-hidden">
@@ -112,15 +112,15 @@ export default function NearbyShops({ onShopSelect }) {
                   </div>
 
                   {/* Specs: Distance, Delivery Time, Rating */}
-                  <div className="grid grid-cols-3 gap-2 py-2 border-y border-slate-100 dark:border-slate-800/40 text-[11px] font-bold text-slate-500">
-                    <div className="flex flex-col items-center border-r border-slate-100 dark:border-slate-800/40">
+                  <div className="grid grid-cols-3 gap-2 py-2 border-y border-slate-100  text-[11px] font-bold text-slate-500">
+                    <div className="flex flex-col items-center border-r border-slate-100 ">
                       <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Distance</span>
                       <span className="text-slate-700 dark:text-slate-200 mt-0.5 flex items-center gap-0.5">
                         <MapPin size={10} className="text-primary" /> {shop.distance}
                       </span>
                     </div>
 
-                    <div className="flex flex-col items-center border-r border-slate-100 dark:border-slate-800/40">
+                    <div className="flex flex-col items-center border-r border-slate-100 ">
                       <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Delivery</span>
                       <span className="text-slate-750 dark:text-slate-200 mt-0.5 text-green-600 dark:text-green-400">
                         {shop.deliveryTime}
@@ -149,7 +149,7 @@ export default function NearbyShops({ onShopSelect }) {
                       whileTap={isClosed ? {} : { scale: 0.97 }}
                       className={`h-9 px-4 rounded-btn font-extrabold text-xs flex items-center gap-1 transition-all ${
                         isClosed 
-                          ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed border border-transparent' 
+                          ? 'bg-page text-slate-400 cursor-not-allowed border border-transparent' 
                           : 'bg-primary text-white hover:bg-primary-dark shadow-sm hover:shadow-md'
                       }`}
                     >

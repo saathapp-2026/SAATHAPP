@@ -375,22 +375,22 @@ function SectionBody({ section }) {
   if (section.isCompanyInfo) {
     return (
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-xl border border-slate-200/80 bg-slate-50/80 p-4.5 transition-all hover:bg-slate-50">
+        <div className="rounded-xl border border-slate-200/80 bg-slate-50/80 p-4.5 transition-all hover:bg-page">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Company Name</p>
           <p className="mt-1 font-semibold text-slate-900">SAATHAPPNOVA PRIVATE LIMITED</p>
         </div>
-        <div className="rounded-xl border border-slate-200/80 bg-slate-50/80 p-4.5 transition-all hover:bg-slate-50">
+        <div className="rounded-xl border border-slate-200/80 bg-slate-50/80 p-4.5 transition-all hover:bg-page">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Platform Name</p>
           <p className="mt-1 font-semibold text-slate-900">SaathApp</p>
         </div>
-        <div className="sm:col-span-2 rounded-xl border border-slate-200/80 bg-slate-50/80 p-4.5 transition-all hover:bg-slate-50">
+        <div className="sm:col-span-2 rounded-xl border border-slate-200/80 bg-slate-50/80 p-4.5 transition-all hover:bg-page">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Registered Office</p>
           <p className="mt-1.5 flex items-start gap-2.5 text-sm text-slate-800 font-medium">
             <MapPin size={18} className="mt-0.5 shrink-0 text-emerald-700" />
             <span>Bhatahar, Tharthari, Nalanda, Bihar – 801307, India</span>
           </p>
         </div>
-        <div className="rounded-xl border border-slate-200/80 bg-slate-50/80 p-4.5 transition-all hover:bg-slate-50">
+        <div className="rounded-xl border border-slate-200/80 bg-slate-50/80 p-4.5 transition-all hover:bg-page">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Customer Support Email</p>
           <p className="mt-1.5">
             <a href="mailto:support@saathapp.in" className="inline-flex items-center gap-2 font-semibold text-emerald-800 hover:text-emerald-900 hover:underline">
@@ -399,7 +399,7 @@ function SectionBody({ section }) {
             </a>
           </p>
         </div>
-        <div className="rounded-xl border border-slate-200/80 bg-slate-50/80 p-4.5 transition-all hover:bg-slate-50">
+        <div className="rounded-xl border border-slate-200/80 bg-slate-50/80 p-4.5 transition-all hover:bg-page">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Legal Email</p>
           <p className="mt-1.5">
             <a href="mailto:legal@saathapp.in" className="inline-flex items-center gap-2 font-semibold text-emerald-800 hover:text-emerald-900 hover:underline">
@@ -408,7 +408,7 @@ function SectionBody({ section }) {
             </a>
           </p>
         </div>
-        <div className="sm:col-span-2 rounded-xl border border-slate-200/80 bg-slate-50/80 p-4.5 transition-all hover:bg-slate-50">
+        <div className="sm:col-span-2 rounded-xl border border-slate-200/80 bg-slate-50/80 p-4.5 transition-all hover:bg-page">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Phone / WhatsApp</p>
           <p className="mt-1.5 flex items-center gap-2.5 font-semibold text-slate-800">
             <Phone size={18} className="shrink-0 text-emerald-700" />
@@ -482,7 +482,7 @@ function SectionBody({ section }) {
       {section.groups?.map((group) => (
         <div
           key={group.label}
-          className="mt-4.5 rounded-2xl border border-slate-200/80 bg-slate-50/70 p-5 sm:p-6 transition-all hover:bg-slate-50"
+          className="mt-4.5 rounded-2xl border border-slate-200/80 bg-slate-50/70 p-5 sm:p-6 transition-all hover:bg-page"
         >
           <p className="text-sm sm:text-[15px] font-bold text-slate-900 flex items-center gap-2.5">
             <span className="h-2.5 w-2.5 rounded-full bg-emerald-600"></span>
@@ -668,7 +668,7 @@ export default function PrivacyPolicyPublicPage() {
                 onClick={(e) => handleSectionClick(e, sec.id)}
                 className={`shrink-0 text-xs px-3.5 py-2 rounded-full font-medium transition-all cursor-pointer relative z-10 ${isActive
                   ? 'bg-emerald-700 text-white font-semibold shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  : 'bg-page text-slate-600 hover:bg-slate-200'
                   }`}
               >
                 {sec.title.split('.')[0]}. {sec.title.split('. ')[1] || sec.title}
@@ -799,7 +799,7 @@ export default function PrivacyPolicyPublicPage() {
               <Link
                 to="/"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-2xs transition hover:bg-slate-50 hover:border-slate-300"
+                className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-2xs transition hover:bg-page hover:border-slate-300"
               >
                 <ArrowLeft size={16} />
                 Back

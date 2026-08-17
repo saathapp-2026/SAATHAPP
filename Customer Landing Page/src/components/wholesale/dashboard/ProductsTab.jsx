@@ -71,7 +71,7 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
           <button
             type="button"
             onClick={() => setIsExcelModalOpen(true)}
-            className="inline-flex items-center gap-1.5 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2.5 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition"
+            className="inline-flex items-center gap-1.5 rounded-2xl border border-slate-300 bg-surface px-4 py-2.5 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
           >
             <FileSpreadsheet size={15} className="text-emerald-500" /> Excel Bulk Import
           </button>
@@ -99,7 +99,7 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
             className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
               activeSubTab === tab
                 ? 'bg-emerald-600 text-white shadow-md font-black'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
             }`}
           >
             {tab}
@@ -120,7 +120,7 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
               { title: 'Construction & Materials', skus: 0, value: '₹0', icon: '🧱' },
               { title: 'Electrical & Lighting', skus: 0, value: '₹0', icon: '💡' },
             ].map((c) => (
-              <div key={c.title} className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+              <div key={c.title} className="p-5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
                 <span className="text-3xl">{c.icon}</span>
                 <h4 className="font-extrabold text-slate-900 dark:text-white text-sm">{c.title}</h4>
                 <div className="flex justify-between text-xs text-slate-500 font-semibold pt-2 border-t border-slate-100 dark:border-slate-800">
@@ -134,9 +134,9 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
       ) : activeSubTab === 'SKU Management' ? (
         <div className="space-y-4">
           <h3 className="text-sm font-black text-slate-900 dark:text-white">SKU Barcode &amp; Packaging Specs</h3>
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden text-xs">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm overflow-hidden text-xs">
             <table className="w-full text-left">
-              <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
+              <thead className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
                 <tr>
                   <th className="p-4">SKU ID</th>
                   <th className="p-4">Product Name</th>
@@ -166,7 +166,7 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
           <h3 className="text-sm font-black text-slate-900 dark:text-white">Wholesale Quantity Tier Discount Matrix</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {products.slice(0, 4).map((p) => (
-              <div key={p.id} className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+              <div key={p.id} className="p-5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
                 <div className="flex justify-between items-start">
                   <div>
                     <span className="text-[10px] font-mono text-emerald-500 font-bold">{p.id}</span>
@@ -175,7 +175,7 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
                   <span className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-black px-2.5 py-1 rounded-full">Base: ₹{p.price}</span>
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-center text-xs pt-2 border-t border-slate-100 dark:border-slate-800">
-                  <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800">
+                  <div className="p-2 rounded-xl bg-page">
                     <span className="text-[10px] text-slate-400 block">Tier 1 (1-49)</span>
                     <strong className="text-slate-900 dark:text-white">₹{p.price}</strong>
                   </div>
@@ -197,7 +197,7 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
           <h3 className="text-sm font-black text-slate-900 dark:text-white">Inventory Stock Levels &amp; Availability</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.map((p) => (
-              <div key={p.id} className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+              <div key={p.id} className="p-4 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
                 <div>
                   <h4 className="font-extrabold text-slate-900 dark:text-white text-xs">{p.name}</h4>
                   <span className="text-[10px] text-slate-400 font-mono">{p.id}</span>
@@ -222,15 +222,15 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by SKU Code, Product Name, Category, or Brand..."
-              className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 pl-10 pr-4 py-3 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+              className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface pl-10 pr-4 py-3 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
             />
           </div>
 
           {/* Table */}
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase tracking-wider">
+                <thead className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase tracking-wider">
                   <tr>
                     <th className="p-4">SKU ID</th>
                     <th className="p-4">Product Title</th>
@@ -244,7 +244,7 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
                   {filteredProducts.map((p) => (
-                    <tr key={p.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                    <tr key={p.id} className="hover:bg-page transition">
                       <td className="p-4 font-mono font-bold text-emerald-600 dark:text-emerald-400">{p.id}</td>
                       <td className="p-4 font-extrabold text-slate-900 dark:text-white">{p.name}</td>
                       <td className="p-4">{p.category}</td>
@@ -304,7 +304,7 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
       {/* Excel Import Modal */}
       {isExcelModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl text-center">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl text-center">
             <FileSpreadsheet size={40} className="mx-auto text-emerald-500" />
             <h3 className="mt-2 text-base font-extrabold text-slate-900 dark:text-white">
               Excel / CSV Wholesale Catalogue Upload

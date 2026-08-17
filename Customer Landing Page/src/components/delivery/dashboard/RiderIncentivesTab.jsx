@@ -69,7 +69,7 @@ export default function RiderIncentivesTab() {
   return (
     <div className="space-y-6 sa-fade">
       {/* Header & Sub-Tabs */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm space-y-4">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-0.5 text-xs font-bold text-amber-500">
@@ -101,13 +101,13 @@ export default function RiderIncentivesTab() {
                 }}
                 className={`flex items-center gap-2 px-3.5 py-2.5 rounded-2xl text-xs font-extrabold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${isActive
                     ? 'bg-amber-500 text-slate-950 shadow-md font-black'
-                    : 'bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800'
+                    : 'bg-page text-slate-600 dark:text-slate-300 hover:bg-slate-200'
                   }`}
               >
                 <Icon size={15} />
                 <span>{tab.label}</span>
                 {tab.count && (
-                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${isActive ? 'bg-slate-950 text-amber-400' : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'}`}>
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${isActive ? 'bg-slate-950 text-amber-400' : 'bg-slate-200 text-slate-700 dark:text-slate-300'}`}>
                     {tab.count}
                   </span>
                 )}
@@ -137,11 +137,11 @@ export default function RiderIncentivesTab() {
             return (
               <div
                 key={item.id}
-                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-4 flex flex-col justify-between relative overflow-hidden group hover:border-amber-500/50 transition"
+                className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-4 flex flex-col justify-between relative overflow-hidden group hover:border-amber-500/50 transition"
               >
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-page text-slate-600 dark:text-slate-300">
                       {item.type}
                     </span>
                     <span className="text-[10px] font-black uppercase text-amber-500 font-mono bg-amber-500/10 px-2.5 py-1 rounded-full">
@@ -171,7 +171,7 @@ export default function RiderIncentivesTab() {
                       <span className="text-slate-500">Progress ({item.completed} / {item.target})</span>
                       <span className={isDone ? 'text-emerald-500 font-mono font-black' : 'text-amber-500 font-mono font-black'}>{pct}%</span>
                     </div>
-                    <div className="h-3 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-slate-800">
+                    <div className="h-3 w-full bg-page rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-slate-800">
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${isDone ? 'bg-emerald-500' : 'bg-gradient-to-r ' + item.color}`}
                         style={{ width: `${pct}%` }}
@@ -187,7 +187,7 @@ export default function RiderIncentivesTab() {
                   <button
                     type="button"
                     onClick={() => addToast?.(`Claiming details for ${item.title}`, 'info')}
-                    className="px-3.5 py-1.5 rounded-xl bg-slate-900 dark:bg-slate-800 text-amber-400 font-black text-xs hover:bg-slate-800 transition cursor-pointer active:scale-95"
+                    className="px-3.5 py-1.5 rounded-xl bg-slate-900 text-amber-400 font-black text-xs hover:bg-slate-800 transition cursor-pointer active:scale-95"
                   >
                     {isDone ? 'View Credit' : 'Track Status'}
                   </button>

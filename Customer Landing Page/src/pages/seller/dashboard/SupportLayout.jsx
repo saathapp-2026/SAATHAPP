@@ -30,7 +30,7 @@ export default function SupportLayout() {
               className={`pb-3 text-sm font-medium border-b-2 transition-colors ${
                 currentTab === tab.id
                   ? 'border-emerald-500 text-emerald-600 dark:text-emerald-400'
-                  : 'border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                  : 'border-transparent text-slate-500 hover:text-slate-700'
               }`}
             >
               {tab.label}

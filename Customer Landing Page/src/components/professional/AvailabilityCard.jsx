@@ -45,10 +45,10 @@ export default function AvailabilityCard() {
   const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft hover:shadow-premium transition-all text-left space-y-6">
+    <div className="bg-surface border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft hover:shadow-premium transition-all text-left space-y-6">
       
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/40 pb-4">
+      <div className="flex items-center justify-between border-b border-slate-100  pb-4">
         <div>
           <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Availability Scheduler</h3>
           <p className="text-[10px] text-slate-450 mt-0.5">Define your daily shifts, break schedules, and vacation toggles</p>
@@ -75,7 +75,7 @@ export default function AvailabilityCard() {
                   className={`px-4 py-2.5 rounded-xl border text-xs font-black uppercase tracking-wider cursor-pointer transition-all ${
                     active 
                       ? 'bg-primary border-primary text-white shadow-sm' 
-                      : 'bg-slate-50 border-slate-200 text-slate-400 dark:bg-slate-950/40 dark:border-slate-800'
+                      : 'bg-page border-slate-200 text-slate-400  dark:border-slate-800'
                   }`}
                 >
                   <span className="flex items-center gap-1">
@@ -89,7 +89,7 @@ export default function AvailabilityCard() {
         </div>
 
         {/* Working Hours */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-slate-800/40">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 ">
           
           <div className="space-y-3">
             <label className="field-label flex items-center gap-1.5">
@@ -102,7 +102,7 @@ export default function AvailabilityCard() {
                 <select 
                   value={hours.start}
                   onChange={(e) => setHours(prev => ({ ...prev, start: e.target.value }))}
-                  className="input-field mt-1 dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                  className="input-field mt-1 dark:border-slate-800 dark:text-white"
                 >
                   <option>08:00 AM</option>
                   <option>09:00 AM</option>
@@ -114,7 +114,7 @@ export default function AvailabilityCard() {
                 <select 
                   value={hours.end}
                   onChange={(e) => setHours(prev => ({ ...prev, end: e.target.value }))}
-                  className="input-field mt-1 dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                  className="input-field mt-1 dark:border-slate-800 dark:text-white"
                 >
                   <option>05:00 PM</option>
                   <option>06:00 PM</option>
@@ -136,7 +136,7 @@ export default function AvailabilityCard() {
                 <select 
                   value={hours.breakStart}
                   onChange={(e) => setHours(prev => ({ ...prev, breakStart: e.target.value }))}
-                  className="input-field mt-1 dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                  className="input-field mt-1 dark:border-slate-800 dark:text-white"
                 >
                   <option>12:00 PM</option>
                   <option>01:00 PM</option>
@@ -148,7 +148,7 @@ export default function AvailabilityCard() {
                 <select 
                   value={hours.breakEnd}
                   onChange={(e) => setHours(prev => ({ ...prev, breakEnd: e.target.value }))}
-                  className="input-field mt-1 dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                  className="input-field mt-1 dark:border-slate-800 dark:text-white"
                 >
                   <option>01:00 PM</option>
                   <option>02:00 PM</option>
@@ -161,7 +161,7 @@ export default function AvailabilityCard() {
         </div>
 
         {/* Special Modes (Holiday / Vacation) */}
-        <div className="pt-4 border-t border-slate-100 dark:border-slate-800/40 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+        <div className="pt-4 border-t border-slate-100  grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
           
           {/* Holiday Mode */}
           <div className="p-4 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50/50 dark:bg-slate-950/20 flex items-center justify-between">
@@ -174,7 +174,7 @@ export default function AvailabilityCard() {
               type="button"
               onClick={() => handleModeToggle('holidayMode')}
               className={`w-10 h-6 rounded-full p-1 cursor-pointer transition-colors duration-300 flex items-center ${
-                modes.holidayMode ? 'bg-primary' : 'bg-slate-300 dark:bg-slate-800'
+                modes.holidayMode ? 'bg-primary' : 'bg-slate-300'
               }`}
             >
               <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
@@ -194,7 +194,7 @@ export default function AvailabilityCard() {
               type="button"
               onClick={() => handleModeToggle('vacationMode')}
               className={`w-10 h-6 rounded-full p-1 cursor-pointer transition-colors duration-300 flex items-center ${
-                modes.vacationMode ? 'bg-primary' : 'bg-slate-300 dark:bg-slate-800'
+                modes.vacationMode ? 'bg-primary' : 'bg-slate-300'
               }`}
             >
               <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
@@ -216,7 +216,7 @@ export default function AvailabilityCard() {
         )}
 
         {/* Save button */}
-        <div className="flex justify-end pt-4 border-t border-slate-100 dark:border-slate-800/40">
+        <div className="flex justify-end pt-4 border-t border-slate-100 ">
           <button
             type="submit"
             className="btn-primary w-full sm:w-auto px-6 cursor-pointer flex items-center justify-center gap-1.5"

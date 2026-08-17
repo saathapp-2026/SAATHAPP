@@ -34,7 +34,7 @@ const ICON_BG = {
   emerald: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-300',
   orange: 'bg-orange-100 text-orange-600 dark:bg-orange-900/40 dark:text-orange-300',
   red: 'bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-300',
-  slate: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300',
+  slate: 'bg-page text-slate-600 dark:text-slate-300',
   rose: 'bg-rose-100 text-rose-600 dark:bg-rose-900/40 dark:text-rose-300',
 };
 
@@ -42,11 +42,11 @@ const PRIMARY = ['total', 'month', 'gst', 'pending'];
 
 function Skeleton() {
   return (
-    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3.5 animate-pulse">
-      <div className="h-9 w-9 rounded-lg bg-slate-200 dark:bg-slate-700 mb-2.5" />
-      <div className="h-3 w-20 rounded bg-slate-200 dark:bg-slate-700 mb-2" />
-      <div className="h-6 w-14 rounded bg-slate-200 dark:bg-slate-700 mb-2" />
-      <div className="h-3 w-24 rounded bg-slate-200 dark:bg-slate-700" />
+    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-3.5 animate-pulse">
+      <div className="h-9 w-9 rounded-lg bg-slate-200 mb-2.5" />
+      <div className="h-3 w-20 rounded bg-slate-200 mb-2" />
+      <div className="h-6 w-14 rounded bg-slate-200 mb-2" />
+      <div className="h-3 w-24 rounded bg-slate-200" />
     </div>
   );
 }
@@ -83,7 +83,7 @@ export default function InvoiceSummaryCards({ cards = [], loading, onCardClick, 
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.03 }}
             onClick={() => onCardClick?.(card)}
-            className={`text-left rounded-xl border bg-white dark:bg-slate-900 p-3.5 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
+            className={`text-left rounded-xl border bg-surface p-3.5 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
               active ? 'border-emerald-500 shadow-md ring-1 ring-emerald-500' : 'border-slate-200 dark:border-slate-800'
             }`}
           >

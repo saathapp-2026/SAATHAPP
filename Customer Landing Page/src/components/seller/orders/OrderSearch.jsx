@@ -44,7 +44,7 @@ export default function OrderSearch({ value, onChange, debounceMs = 300 }) {
         onChange={(e) => setLocal(e.target.value)}
         placeholder="Search Order ID, customer, phone, product, SKU, invoice…"
         aria-label="Search orders"
-        className="w-full pl-9 pr-9 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        className="w-full pl-9 pr-9 py-2.5 rounded-xl border border-slate-200 bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
       />
       {local && (
         <button

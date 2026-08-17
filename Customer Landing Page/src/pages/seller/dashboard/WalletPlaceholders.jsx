@@ -40,10 +40,10 @@ export function SettlementsPlaceholder() {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm whitespace-nowrap">
-            <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 font-medium border-b border-slate-200 dark:border-slate-800">
+            <thead className="bg-page text-slate-500 font-medium border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="px-4 py-3">Reference ID</th>
                 <th className="px-4 py-3">Date</th>
@@ -54,7 +54,7 @@ export function SettlementsPlaceholder() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {data.map(row => (
-                <tr key={row.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <tr key={row.id} className="hover:bg-page">
                   <td className="px-4 py-3 font-medium text-slate-900 dark:text-slate-100">{row.ref}</td>
                   <td className="px-4 py-3 text-slate-500">{new Date(row.date).toLocaleDateString()}</td>
                   <td className="px-4 py-3 text-slate-500">{row.name}</td>
@@ -111,14 +111,14 @@ export function WithdrawalsPlaceholder() {
     <div className="space-y-6">
       <Toaster position="top-right" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="md:col-span-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+        <div className="md:col-span-1 bg-surface border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
           <h3 className="text-sm font-medium text-slate-500 mb-4">Request Manual Payout</h3>
           <form onSubmit={handleWithdraw} className="space-y-4">
             <div>
               <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Amount (₹)</label>
-              <input type="number" required value={reqAmount} onChange={e => setReqAmount(e.target.value)} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" placeholder="e.g. 5000" />
+              <input type="number" required value={reqAmount} onChange={e => setReqAmount(e.target.value)} className="w-full rounded-lg border border-slate-300 bg-surface px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" placeholder="e.g. 5000" />
             </div>
-            <button type="submit" disabled={loading} className="w-full px-4 py-2 text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 rounded-lg hover:bg-slate-800 dark:hover:bg-slate-100 disabled:opacity-50">
+            <button type="submit" disabled={loading} className="w-full px-4 py-2 text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 rounded-lg hover:bg-slate-800 disabled:opacity-50">
               {loading ? 'Processing...' : 'Withdraw Funds'}
             </button>
           </form>
@@ -129,13 +129,13 @@ export function WithdrawalsPlaceholder() {
           </div>
         </div>
         
-        <div className="md:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm flex flex-col">
+        <div className="md:col-span-2 bg-surface border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm flex flex-col">
           <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
             <h2 className="text-sm font-bold text-slate-900 dark:text-slate-50">Payout History</h2>
           </div>
           <div className="overflow-x-auto flex-1">
             <table className="w-full text-left text-sm whitespace-nowrap">
-              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 font-medium border-b border-slate-200 dark:border-slate-800">
+              <thead className="bg-page text-slate-500 font-medium border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="px-4 py-2">Ref</th>
                   <th className="px-4 py-2">Date</th>
@@ -145,7 +145,7 @@ export function WithdrawalsPlaceholder() {
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {data.map(row => (
-                  <tr key={row.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                  <tr key={row.id} className="hover:bg-page">
                     <td className="px-4 py-2 font-medium text-slate-900 dark:text-slate-100">{row.ref}</td>
                     <td className="px-4 py-2 text-slate-500">{new Date(row.date).toLocaleDateString()}</td>
                     <td className="px-4 py-2 font-medium">₹{row.amount.toLocaleString('en-IN')}</td>
@@ -185,18 +185,18 @@ export function StatementPlaceholder() {
         <div className="flex items-center gap-2">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-            <input type="text" placeholder="Search reference..." value={search} onChange={e => setSearch(e.target.value)} className="w-full sm:w-64 pl-9 pr-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 outline-none focus:border-emerald-500" />
+            <input type="text" placeholder="Search reference..." value={search} onChange={e => setSearch(e.target.value)} className="w-full sm:w-64 pl-9 pr-4 py-2 text-sm rounded-lg border border-slate-300 bg-surface outline-none focus:border-emerald-500" />
           </div>
-          <button className="p-2 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">
+          <button className="p-2 border border-slate-300 rounded-lg hover:bg-page">
             <Filter size={16} className="text-slate-500" />
           </button>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm whitespace-nowrap">
-            <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 font-medium border-b border-slate-200 dark:border-slate-800">
+            <thead className="bg-page text-slate-500 font-medium border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="px-4 py-3">Date</th>
                 <th className="px-4 py-3">Description</th>
@@ -207,7 +207,7 @@ export function StatementPlaceholder() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {filtered.map(row => (
-                <tr key={row.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <tr key={row.id} className="hover:bg-page">
                   <td className="px-4 py-3 text-slate-500">{new Date(row.date).toLocaleString('en-IN')}</td>
                   <td className="px-4 py-3 text-slate-900 dark:text-slate-100">{row.name}</td>
                   <td className="px-4 py-3 text-slate-500 text-xs font-mono">{row.ref}</td>

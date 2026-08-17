@@ -56,7 +56,7 @@ export default function AdWhyChooseSection() {
           {REASONS.map((r, i) => (
             <div 
               key={i} 
-              className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 bg-slate-50/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900 transition-all duration-300 flex flex-col sm:flex-row lg:flex-col items-center sm:items-start lg:items-center text-center sm:text-left lg:text-center gap-4 shadow-sm hover:shadow-xl hover:-translate-y-1"
+              className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 bg-slate-50/50 hover:bg-white transition-all duration-300 flex flex-col sm:flex-row lg:flex-col items-center sm:items-start lg:items-center text-center sm:text-left lg:text-center gap-4 shadow-sm hover:shadow-xl hover:-translate-y-1"
             >
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${r.bg} ${r.color}`}>
                 <r.icon size={24} strokeWidth={2.5} className="group-hover:scale-110 transition-transform" />

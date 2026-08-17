@@ -39,7 +39,7 @@ export default function WishlistTab({ wishlist, setWishlist, cart, setCart }) {
       </div>
 
       {wishlist.length === 0 ? (
-        <div className="p-8 text-center bg-slate-50 dark:bg-slate-950/20 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-2">
+        <div className="p-8 text-center bg-page dark:bg-slate-950/20 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-2">
           <Heart size={32} className="mx-auto text-slate-400" />
           <p className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Your wishlist is empty</p>
           <p className="text-[11px] text-slate-500 font-semibold">Save your favorite services or products to quickly access them later.</p>

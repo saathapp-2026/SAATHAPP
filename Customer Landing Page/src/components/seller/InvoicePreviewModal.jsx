@@ -20,7 +20,7 @@ export default function InvoicePreviewModal({ invoice, onClose }) {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden"
+        className="bg-surface rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden"
       >
         <div className="flex items-center justify-between p-5 border-b border-slate-200 dark:border-slate-800">
           <div className="flex items-center gap-2">
@@ -56,7 +56,7 @@ export default function InvoicePreviewModal({ invoice, onClose }) {
             </div>
           </div>
 
-          <div className="rounded-xl bg-slate-50 dark:bg-slate-800 p-4 text-xs text-slate-500">
+          <div className="rounded-xl bg-page p-4 text-xs text-slate-500">
             Demo invoice generated locally. Full PDF invoices will be available when backend is connected.
           </div>
 

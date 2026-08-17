@@ -27,9 +27,9 @@ export default function Advertisements() {
 
   if (!active) {
     return (
-      <section className="py-10 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40 relative w-full">
+      <section className="py-10 bg-surface border-b border-slate-100  relative w-full">
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-card overflow-hidden shadow-soft border border-dashed border-slate-300 dark:border-slate-700 min-h-[160px] sm:min-h-[180px] flex items-center justify-center bg-slate-50 dark:bg-slate-800/40 text-slate-400 text-sm font-medium">
+          <div className="relative rounded-card overflow-hidden shadow-soft border border-dashed border-slate-300 min-h-[160px] sm:min-h-[180px] flex items-center justify-center bg-page text-slate-400 text-sm font-medium">
             No active advertisements.
           </div>
         </div>
@@ -38,18 +38,18 @@ export default function Advertisements() {
   }
 
   return (
-    <section className="py-10 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40 relative w-full">
+    <section className="py-10 bg-surface border-b border-slate-100  relative w-full">
       {/* Full-width Carousel Controls */}
       <button
         onClick={handlePrev}
-        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 dark:bg-slate-800/50 dark:hover:bg-slate-700 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300 dark:border-slate-600"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300"
         title="Previous ad"
       >
         <ChevronLeft size={16} />
       </button>
       <button
         onClick={handleNext}
-        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 dark:bg-slate-800/50 dark:hover:bg-slate-700 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300 dark:border-slate-600"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300"
         title="Next ad"
       >
         <ChevronRight size={16} />
@@ -99,7 +99,7 @@ export default function Advertisements() {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="h-8 px-4 rounded-full bg-white text-slate-900 font-extrabold text-[11px] flex items-center gap-1 hover:bg-slate-100 transition-colors shadow-sm"
+                  className="h-8 px-4 rounded-full bg-white text-slate-900 font-extrabold text-[11px] flex items-center gap-1 hover:bg-page transition-colors shadow-sm"
                 >
                   <span>{active.cta}</span>
                   <ArrowRight size={11} />

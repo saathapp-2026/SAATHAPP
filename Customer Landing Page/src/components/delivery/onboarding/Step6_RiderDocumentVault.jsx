@@ -43,7 +43,7 @@ export default function Step6_RiderDocumentVault({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-4xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-3.5 py-1 text-xs font-bold text-amber-600 dark:text-amber-400">
           Phase 5 — Rider Document Vault
         </div>
@@ -66,13 +66,13 @@ export default function Step6_RiderDocumentVault({ onNext, onPrev }) {
                   className={`rounded-2xl border p-4 transition flex items-center justify-between gap-3 ${
                     isUploaded
                       ? 'border-emerald-500/30 bg-emerald-500/10'
-                      : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950'
+                      : 'border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950'
                   }`}
                 >
                   <div className="flex items-center gap-3 overflow-hidden">
                     <div
                       className={`h-10 w-10 shrink-0 rounded-xl flex items-center justify-center ${
-                        isUploaded ? 'bg-emerald-500 text-slate-950 font-bold' : 'bg-slate-200 dark:bg-slate-800 text-slate-400'
+                        isUploaded ? 'bg-emerald-500 text-slate-950 font-bold' : 'bg-slate-200 text-slate-400'
                       }`}
                     >
                       {isUploaded ? <CheckCircle2 size={20} /> : <FileText size={18} />}
@@ -113,7 +113,7 @@ export default function Step6_RiderDocumentVault({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

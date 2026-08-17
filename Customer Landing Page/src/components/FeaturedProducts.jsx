@@ -75,7 +75,7 @@ export default function FeaturedProducts({
   };
 
   return (
-    <section className="py-12 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800/40">
+    <section className="py-12 bg-surface border-b border-slate-100 ">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -94,7 +94,7 @@ export default function FeaturedProducts({
                 className={`text-xs font-bold py-2 px-4 rounded-btn border transition-all cursor-pointer ${
                   selectedCategory === tab.id
                     ? 'bg-primary border-primary text-white shadow-glow-primary'
-                    : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200/60 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                    : 'bg-page border-slate-200/60 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-page'
                 }`}
               >
                 {tab.label}
@@ -105,7 +105,7 @@ export default function FeaturedProducts({
 
         {/* Products Grid Layout */}
         {filteredProducts.length === 0 ? (
-          <div className="rounded-card border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm font-medium text-slate-500 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-400">
+          <div className="rounded-card border border-dashed border-slate-300 bg-page p-8 text-center text-sm font-medium text-slate-500 dark:border-slate-800  dark:text-slate-400">
             No products available at the moment.
           </div>
         ) : (
@@ -127,7 +127,7 @@ export default function FeaturedProducts({
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.2 }}
                   whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-slate-900 rounded-card p-3 sm:p-4 border border-slate-200/60 dark:border-slate-800/50 shadow-soft hover:shadow-premium relative flex flex-col justify-between group"
+                  className="bg-surface rounded-card p-3 sm:p-4 border border-slate-200/60  shadow-soft hover:shadow-premium relative flex flex-col justify-between group"
                 >
                   
                   {/* Floating Left: Badges */}
@@ -148,7 +148,7 @@ export default function FeaturedProducts({
                       className={`w-7.5 h-7.5 rounded-full flex items-center justify-center shadow-md border ${
                         isWishlisted 
                           ? 'bg-danger text-white border-transparent' 
-                          : 'bg-white/95 dark:bg-slate-800 text-slate-400 hover:text-danger border-slate-100 dark:border-slate-700'
+                          : 'bg-white/95 text-slate-400 hover:text-danger border-slate-100'
                       }`}
                       title={isWishlisted ? "Remove Wishlist" : "Wishlist"}
                     >
@@ -158,7 +158,7 @@ export default function FeaturedProducts({
                       onClick={() => onQuickView(product)}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="w-7.5 h-7.5 rounded-full bg-white/95 dark:bg-slate-800 text-slate-400 hover:text-primary flex items-center justify-center shadow-md border border-slate-100 dark:border-slate-700"
+                      className="w-7.5 h-7.5 rounded-full bg-white/95 text-slate-400 hover:text-primary flex items-center justify-center shadow-md border border-slate-100"
                       title="Quick View"
                     >
                       <Eye size={14} />
@@ -167,7 +167,7 @@ export default function FeaturedProducts({
 
                   {/* Product Image & Info */}
                   <div>
-                    <div className="w-full aspect-square rounded-card overflow-hidden bg-slate-100 mb-3 relative flex items-center justify-center">
+                    <div className="w-full aspect-square rounded-card overflow-hidden bg-page mb-3 relative flex items-center justify-center">
                       {product.image && (
                         <img 
                           src={product.image} 
@@ -177,7 +177,7 @@ export default function FeaturedProducts({
                       )}
                       
                       {/* Delivery Time counter */}
-                      <span className="absolute bottom-2 left-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200/30">
+                      <span className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200/30">
                         ⏱ {product.deliveryTime}
                       </span>
                     </div>
@@ -199,7 +199,7 @@ export default function FeaturedProducts({
                   </div>
 
                   {/* Pricing and Cart add button */}
-                  <div className="flex items-center justify-between gap-2 mt-4 pt-2.5 border-t border-slate-100/80 dark:border-slate-800/40">
+                  <div className="flex items-center justify-between gap-2 mt-4 pt-2.5 border-t border-slate-100/80 ">
                     <div className="text-left">
                       <span className="text-base font-black text-slate-950 dark:text-white">₹{product.price}</span>
                       <span className="text-[11px] text-slate-400 line-through block leading-none">₹{product.oldPrice}</span>

@@ -10,13 +10,13 @@ export default function Wallet({ onBack }) {
           <div className="text-sm font-semibold text-emerald-700">Available Balance</div>
           <div className="mt-2 text-3xl font-black text-emerald-900">₹ 2,450</div>
         </div>
-        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+        <div className="rounded-2xl border border-slate-200 bg-page p-5">
           <div className="flex items-center gap-2 text-sm font-semibold text-slate-700"><CreditCard size={16} className="text-cyan-600" /> Linked Payment Methods</div>
           <div className="mt-2 text-sm text-slate-600">UPI, Debit Card, and Wallet enabled</div>
         </div>
       </div>
 
-      <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+      <div className="mt-4 rounded-2xl border border-slate-200 bg-page p-5">
         <div className="flex items-center gap-2 text-sm font-semibold text-slate-700"><Sparkles size={16} className="text-amber-500" /> Recent Activity</div>
         <ul className="mt-3 space-y-2 text-sm text-slate-600">
           <li>• Cashback of ₹120 received from your last order</li>

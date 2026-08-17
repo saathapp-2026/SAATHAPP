@@ -48,7 +48,7 @@ function Field({ label, children, className = '' }) {
 }
 
 const inputCls =
-  'w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500';
+  'w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500';
 
 export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = null }) {
   const [draft, setDraft] = useState(() => emptyWizardDraft());
@@ -268,13 +268,13 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
       className="flex justify-end"
       contentClassName="h-full"
     >
-      <aside className="h-full w-full max-w-xl bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
+      <aside className="h-full w-full max-w-xl bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
         <div className="flex items-start justify-between gap-3 p-4 border-b border-slate-200 dark:border-slate-800">
           <div>
             <h2 className="text-lg font-bold">Create Invoice</h2>
             <p className="text-xs text-slate-500 mt-0.5">Generate new GST invoice for your customer · Step {step}/8</p>
           </div>
-          <button type="button" onClick={handleClose} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={handleClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -343,7 +343,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                 />
               </div>
               {!draft.customer ? (
-                <div className="rounded-xl border border-dashed border-slate-200 dark:border-slate-700 p-8 text-center">
+                <div className="rounded-xl border border-dashed border-slate-200 p-8 text-center">
                   <FileText size={28} className="mx-auto text-slate-300 mb-2" />
                   <p className="text-sm text-slate-500">No customer selected.</p>
                 </div>
@@ -364,7 +364,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                     className={`w-full text-left px-3 py-2 rounded-lg text-sm border ${
                       draft.customer?.id === c.id
                         ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/30'
-                        : 'border-transparent hover:bg-slate-50 dark:hover:bg-slate-800'
+                        : 'border-transparent hover:bg-page'
                     }`}
                   >
                     <span className="font-medium">{c.name}</span>
@@ -388,7 +388,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                     type="button"
                     onClick={() => patch({ mode: m.id, order: m.id === 'manual' ? null : draft.order })}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold border ${
-                      draft.mode === m.id ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-slate-200 dark:border-slate-700'
+                      draft.mode === m.id ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-slate-200'
                     }`}
                   >
                     {m.label}
@@ -412,7 +412,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                         toast.success('Order items imported');
                       }}
                       className={`w-full text-left rounded-xl border p-3 text-sm ${
-                        draft.order?.id === o.id ? 'border-emerald-500 bg-emerald-50/50' : 'border-slate-200 dark:border-slate-700'
+                        draft.order?.id === o.id ? 'border-emerald-500 bg-emerald-50/50' : 'border-slate-200'
                       }`}
                     >
                       <div className="flex justify-between">
@@ -427,7 +427,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                 </div>
               )}
               {draft.mode === 'manual' && (
-                <p className="text-sm text-slate-500 rounded-xl border border-dashed border-slate-200 dark:border-slate-700 p-4">
+                <p className="text-sm text-slate-500 rounded-xl border border-dashed border-slate-200 p-4">
                   Manual invoice — add products in step 4.
                 </p>
               )}
@@ -500,7 +500,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                     key={p.id}
                     type="button"
                     onClick={() => addProduct(p)}
-                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
+                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border border-slate-200 hover:bg-page"
                   >
                     <Plus size={11} /> {p.name}
                   </button>
@@ -508,17 +508,17 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
               </div>
               <div className="space-y-2">
                 {(draft.items || []).map((it) => (
-                  <div key={it.id} className="rounded-xl border border-slate-200 dark:border-slate-700 p-3 space-y-2">
+                  <div key={it.id} className="rounded-xl border border-slate-200 p-3 space-y-2">
                     <div className="flex justify-between gap-2">
                       <div>
                         <p className="text-sm font-semibold">{it.name}</p>
                         <p className="text-[11px] text-slate-400">{it.sku}</p>
                       </div>
                       <div className="flex gap-1">
-                        <button type="button" aria-label="Duplicate" onClick={() => duplicateItem(it.id)} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <button type="button" aria-label="Duplicate" onClick={() => duplicateItem(it.id)} className="p-1.5 rounded-lg hover:bg-page">
                           <Copy size={13} />
                         </button>
-                        <button type="button" aria-label="Delete" onClick={() => removeItem(it.id)} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-red-500">
+                        <button type="button" aria-label="Delete" onClick={() => removeItem(it.id)} className="p-1.5 rounded-lg hover:bg-page text-red-500">
                           <Trash2 size={13} />
                         </button>
                       </div>
@@ -544,7 +544,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                   <button
                     type="button"
                     onClick={() => products[0] && addProduct(products[0])}
-                    className="w-full py-3 rounded-xl border border-dashed border-slate-300 dark:border-slate-600 text-sm font-semibold text-emerald-600 inline-flex items-center justify-center gap-1"
+                    className="w-full py-3 rounded-xl border border-dashed border-slate-300 text-sm font-semibold text-emerald-600 inline-flex items-center justify-center gap-1"
                   >
                     <Plus size={14} /> Add Item
                   </button>
@@ -556,7 +556,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
           {step === 5 && (
             <section className="space-y-3">
               <h3 className="font-semibold text-sm">5. GST & Tax</h3>
-              <div className="rounded-xl border border-slate-200 dark:border-slate-700 p-4 space-y-2 text-sm">
+              <div className="rounded-xl border border-slate-200 p-4 space-y-2 text-sm">
                 <div className="flex justify-between"><span className="text-slate-500">Sub Total</span><span className="tabular-nums">{formatINR(totals.subtotal)}</span></div>
                 {totals.intra ? (
                   <>
@@ -590,7 +590,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                     type="button"
                     onClick={() => patch({ paymentMode: m.id })}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold border ${
-                      draft.paymentMode === m.id ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-slate-200 dark:border-slate-700'
+                      draft.paymentMode === m.id ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-slate-200'
                     }`}
                   >
                     {m.label}
@@ -625,7 +625,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
           {step === 7 && (
             <section className="space-y-3">
               <h3 className="font-semibold text-sm">7. Preview Invoice</h3>
-              <div className="rounded-xl border border-slate-200 dark:border-slate-700 p-4 text-sm space-y-3 bg-slate-50 dark:bg-slate-950/40">
+              <div className="rounded-xl border border-slate-200 p-4 text-sm space-y-3 bg-page ">
                 <div className="flex justify-between gap-3">
                   <div>
                     <p className="font-bold">SAATHAPP Tax Invoice</p>
@@ -649,7 +649,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                     </li>
                   ))}
                 </ul>
-                <div className="flex justify-between font-bold text-emerald-600 pt-2 border-t border-slate-200 dark:border-slate-700">
+                <div className="flex justify-between font-bold text-emerald-600 pt-2 border-t border-slate-200">
                   <span>Grand Total</span>
                   <span className="tabular-nums">{formatINR(totals.grandTotal)}</span>
                 </div>
@@ -666,10 +666,10 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                   <h3 className="font-bold text-lg">Invoice Generated</h3>
                   <p className="text-sm text-slate-500">{generated.number} · {formatINR(generated.totals?.grandTotal)}</p>
                   <div className="flex flex-wrap justify-center gap-2">
-                    <button type="button" onClick={() => downloadInvoicePdf(generated)} className="px-3 py-2 rounded-xl text-sm font-semibold border border-slate-200 dark:border-slate-700">
+                    <button type="button" onClick={() => downloadInvoicePdf(generated)} className="px-3 py-2 rounded-xl text-sm font-semibold border border-slate-200">
                       Download PDF
                     </button>
-                    <button type="button" onClick={() => printInvoiceDoc(generated)} className="px-3 py-2 rounded-xl text-sm font-semibold border border-slate-200 dark:border-slate-700">
+                    <button type="button" onClick={() => printInvoiceDoc(generated)} className="px-3 py-2 rounded-xl text-sm font-semibold border border-slate-200">
                       Print
                     </button>
                     <button
@@ -678,7 +678,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                         window.open(`mailto:${generated.customer?.email || ''}?subject=${encodeURIComponent(generated.number)}`);
                         toast.success('Email compose opened');
                       }}
-                      className="px-3 py-2 rounded-xl text-sm font-semibold border border-slate-200 dark:border-slate-700"
+                      className="px-3 py-2 rounded-xl text-sm font-semibold border border-slate-200"
                     >
                       Email
                     </button>
@@ -713,7 +713,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
 
           {/* Live totals strip like mockup */}
           {step >= 4 && step <= 7 && (
-            <div className="rounded-xl border border-slate-200 dark:border-slate-700 p-3 space-y-1.5 text-sm">
+            <div className="rounded-xl border border-slate-200 p-3 space-y-1.5 text-sm">
               <div className="flex justify-between text-slate-500"><span>Sub Total</span><span className="tabular-nums">{formatINR(totals.subtotal)}</span></div>
               <div className="flex justify-between text-slate-500"><span>Total GST</span><span className="tabular-nums">{formatINR(totals.taxTotal)}</span></div>
               <div className="flex justify-between text-slate-500"><span>Round Off</span><span className="tabular-nums">{formatINR(totals.roundOff)}</span></div>
@@ -725,16 +725,16 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
           )}
         </div>
 
-        <div className="sticky bottom-0 flex flex-wrap gap-2 p-4 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95">
-          <button type="button" onClick={handleClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200 dark:border-slate-700">
+        <div className="sticky bottom-0 flex flex-wrap gap-2 p-4 border-t border-slate-200 dark:border-slate-800 bg-white/95">
+          <button type="button" onClick={handleClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200">
             Cancel
           </button>
           {step > 1 && step < 8 && (
-            <button type="button" onClick={goPrev} className="px-4 py-2 rounded-xl text-sm border border-slate-200 dark:border-slate-700">
+            <button type="button" onClick={goPrev} className="px-4 py-2 rounded-xl text-sm border border-slate-200">
               Back
             </button>
           )}
-          <button type="button" disabled={saving} onClick={saveDraftNow} className="px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 dark:border-slate-700 disabled:opacity-50">
+          <button type="button" disabled={saving} onClick={saveDraftNow} className="px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 disabled:opacity-50">
             Save as Draft
           </button>
           {step < 7 && (

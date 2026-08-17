@@ -82,7 +82,7 @@ export default function DeliveryAgentLandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800">
+    <div className="min-h-screen bg-page text-slate-800">
       <Header
         cartCount={0}
         onCartClick={() => { }}
@@ -110,7 +110,7 @@ export default function DeliveryAgentLandingPage() {
           <Link
             to="/"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-page"
           >
             <ArrowLeft size={16} />
             Back
@@ -214,7 +214,7 @@ export default function DeliveryAgentLandingPage() {
                     <div className="mt-2 hidden h-full min-h-[48px] w-0.5 bg-primary/20 sm:block" />
                   )}
                 </div>
-                <div className="flex-1 rounded-[24px] border border-slate-200 bg-slate-50 p-4 sm:p-5">
+                <div className="flex-1 rounded-[24px] border border-slate-200 bg-page p-4 sm:p-5">
                   <h3 className="text-base font-black text-slate-900 sm:text-lg">{item.title}</h3>
                   <p className="mt-2 text-sm leading-7 text-slate-600">{item.description}</p>
                 </div>

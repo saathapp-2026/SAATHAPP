@@ -92,22 +92,22 @@ export default function AdHeroSection({ onCreateAds }) {
               
               <div className="relative w-full max-w-sm mx-auto">
                 {/* Desktop Monitor Mockup */}
-                <div className="relative bg-white dark:bg-slate-900 rounded-t-2xl rounded-b border-[6px] border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden aspect-video">
+                <div className="relative bg-surface rounded-t-2xl rounded-b border-[6px] border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden aspect-video">
                   {/* Browser Bar */}
-                  <div className="h-4 bg-slate-100 dark:bg-slate-800 flex items-center px-2 gap-1.5 border-b border-slate-200 dark:border-slate-700">
+                  <div className="h-4 bg-page flex items-center px-2 gap-1.5 border-b border-slate-200">
                     <div className="w-1.5 h-1.5 rounded-full bg-rose-400" />
                     <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    <div className="ml-2 h-2 w-24 bg-white dark:bg-slate-900 rounded-sm" />
+                    <div className="ml-2 h-2 w-24 bg-surface rounded-sm" />
                   </div>
                   {/* Fake UI Content */}
-                  <div className="p-2 h-full bg-slate-50 dark:bg-slate-950 relative overflow-hidden flex flex-col">
+                  <div className="p-2 h-full bg-page dark:bg-slate-950 relative overflow-hidden flex flex-col">
                     {/* Fake Header */}
                     <div className="flex items-center justify-between mb-2 pb-1 border-b border-slate-200 dark:border-slate-800">
                       <div className="w-12 h-2 bg-emerald-500 rounded-sm" />
                       <div className="flex gap-1">
-                        <div className="w-4 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-sm" />
-                        <div className="w-4 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-sm" />
+                        <div className="w-4 h-1.5 bg-slate-200 rounded-sm" />
+                        <div className="w-4 h-1.5 bg-slate-200 rounded-sm" />
                       </div>
                     </div>
                     {/* Fake Banner Ad */}
@@ -124,7 +124,7 @@ export default function AdHeroSection({ onCreateAds }) {
                   </div>
                 </div>
                 {/* Monitor Stand */}
-                <div className="w-12 h-6 bg-slate-300 dark:bg-slate-700 mx-auto rounded-b shadow-inner border-x border-slate-400 dark:border-slate-600" />
+                <div className="w-12 h-6 bg-slate-300 mx-auto rounded-b shadow-inner border-x border-slate-400" />
                 <div className="w-24 h-1.5 bg-slate-300 dark:bg-slate-600 mx-auto rounded-full mt-0 shadow-md" />
 
                 {/* Floating Megaphone Badge */}

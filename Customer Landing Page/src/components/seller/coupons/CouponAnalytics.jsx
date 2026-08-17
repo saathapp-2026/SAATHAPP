@@ -28,7 +28,7 @@ function Bars({ series = [], keyName = 'revenue', color = '#10b981' }) {
 
 export default function CouponAnalytics({ data, loading, range, onRangeChange }) {
   if (loading) {
-    return <div className="rounded-2xl border border-slate-200 dark:border-slate-800 h-56 animate-pulse bg-white dark:bg-slate-900" aria-busy="true" />;
+    return <div className="rounded-2xl border border-slate-200 dark:border-slate-800 h-56 animate-pulse bg-surface" aria-busy="true" />;
   }
 
   const metrics = data?.metrics || {};
@@ -47,7 +47,7 @@ export default function CouponAnalytics({ data, loading, range, onRangeChange })
   ];
 
   return (
-    <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-4" aria-label="Coupon analytics">
+    <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-4" aria-label="Coupon analytics">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="text-base font-bold">Promotion Analytics</h2>
         <div className="flex flex-wrap gap-1">
@@ -57,7 +57,7 @@ export default function CouponAnalytics({ data, loading, range, onRangeChange })
               type="button"
               onClick={() => onRangeChange?.(r.id)}
               className={`rounded-full px-2.5 py-1 text-[10px] font-semibold border ${
-                range === r.id ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200 dark:border-slate-700'
+                range === r.id ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-200'
               }`}
             >
               {r.label}
@@ -68,7 +68,7 @@ export default function CouponAnalytics({ data, loading, range, onRangeChange })
 
       <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-2">
         {cards.map(([k, v]) => (
-          <div key={k} className="rounded-xl bg-slate-50 dark:bg-slate-800/50 p-3">
+          <div key={k} className="rounded-xl bg-page p-3">
             <p className="text-[10px] text-slate-500">{k}</p>
             <p className="text-sm font-bold mt-0.5">{v}</p>
           </div>

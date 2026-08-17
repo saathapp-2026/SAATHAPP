@@ -60,9 +60,9 @@ const STATUS_STYLE = {
   low_stock: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
   open: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
   in_progress: 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',
-  paused: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
-  draft: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
-  closed: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300',
+  paused: 'bg-page text-slate-700 dark:text-slate-300',
+  draft: 'bg-page text-slate-700 dark:text-slate-300',
+  closed: 'bg-page text-slate-600 dark:text-slate-300',
   refunded: 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300',
   failed: 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300',
   reorder: 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300',
@@ -205,7 +205,7 @@ function SummaryCards({ cards, loading, onClick, activeKey }) {
     return (
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4" aria-busy="true">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="h-[100px] rounded-2xl border border-slate-200 dark:border-slate-800 animate-pulse bg-white dark:bg-slate-900" />
+          <div key={i} className="h-[100px] rounded-2xl border border-slate-200 dark:border-slate-800 animate-pulse bg-surface" />
         ))}
       </div>
     );
@@ -225,7 +225,7 @@ function SummaryCards({ cards, loading, onClick, activeKey }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.03 }}
             onClick={() => onClick?.(card)}
-            className={`text-left rounded-2xl border bg-white dark:bg-slate-900 p-4 shadow-sm hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
+            className={`text-left rounded-2xl border bg-surface p-4 shadow-sm hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
               activeKey === card.key ? 'border-emerald-500 ring-1 ring-emerald-500' : 'border-slate-200 dark:border-slate-800'
             }`}
           >
@@ -271,12 +271,12 @@ function RecordFormModal({ open, title, fields, initial, onClose, onSubmit, busy
 
   return (
     <SellerOverlay open={open} onClose={onClose} labelledBy="hub-form-title" zIndex={SELLER_Z.modal} contentClassName="w-full max-w-lg">
-      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+      <div className="rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 dark:border-slate-800">
           <h2 id="hub-form-title" className="text-lg font-bold">
             {title}
           </h2>
-          <button type="button" onClick={onClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -290,13 +290,13 @@ function RecordFormModal({ open, title, fields, initial, onClose, onSubmit, busy
                   rows={3}
                   value={form[f.key] || ''}
                   onChange={(e) => patch(f.key, e.target.value)}
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 />
               ) : f.type === 'select' ? (
                 <select
                   value={form[f.key] || ''}
                   onChange={(e) => patch(f.key, e.target.value)}
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 >
                   <option value="">Select</option>
                   {(f.options || []).map((o) => (
@@ -310,7 +310,7 @@ function RecordFormModal({ open, title, fields, initial, onClose, onSubmit, busy
                   type={f.type || 'text'}
                   value={form[f.key] ?? ''}
                   onChange={(e) => patch(f.key, e.target.value)}
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 />
               )}
               {errors[f.key] ? <span className="text-red-500 text-[11px]">{errors[f.key]}</span> : null}
@@ -318,10 +318,10 @@ function RecordFormModal({ open, title, fields, initial, onClose, onSubmit, busy
           ))}
         </div>
         <div className="flex justify-end gap-2 px-5 py-4 border-t border-slate-200 dark:border-slate-800">
-          <button type="button" onClick={onClose} className="rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm">
+          <button type="button" onClick={onClose} className="rounded-xl border border-slate-200 px-4 py-2 text-sm">
             Cancel
           </button>
-          <button type="button" disabled={busy} onClick={() => submit(true)} className="rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm">
+          <button type="button" disabled={busy} onClick={() => submit(true)} className="rounded-xl border border-slate-200 px-4 py-2 text-sm">
             Save Draft
           </button>
           <button
@@ -342,19 +342,19 @@ function ViewDrawer({ open, row, columns, onClose, onEdit }) {
   if (!open || !row) return null;
   return (
     <SellerOverlay open={open} onClose={onClose} label="Record details" zIndex={SELLER_Z.drawer} className="flex justify-end" contentClassName="h-full">
-      <aside className="h-full w-full max-w-md bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
+      <aside className="h-full w-full max-w-md bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
         <div className="flex items-start justify-between gap-3 p-4 border-b border-slate-200 dark:border-slate-800">
           <div>
             <h2 className="text-lg font-bold">{row.name || row.subject || row.id}</h2>
             <p className="text-xs text-slate-500 mt-0.5">{row.id}</p>
           </div>
-          <button type="button" onClick={onClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           {columns.map((col) => (
-            <div key={col} className="rounded-xl bg-slate-50 dark:bg-slate-950 px-3 py-2">
+            <div key={col} className="rounded-xl bg-page dark:bg-slate-950 px-3 py-2">
               <p className="text-[11px] text-slate-400">{labelize(col)}</p>
               <p className="text-sm font-medium text-slate-800 dark:text-slate-100 break-all">
                 {col.includes('At') || col === 'date' || col === 'startAt' || col === 'endAt'
@@ -366,7 +366,7 @@ function ViewDrawer({ open, row, columns, onClose, onEdit }) {
             </div>
           ))}
           {row.description ? (
-            <div className="rounded-xl border border-slate-200 dark:border-slate-700 p-3 text-sm text-slate-600 dark:text-slate-300">
+            <div className="rounded-xl border border-slate-200 p-3 text-sm text-slate-600 dark:text-slate-300">
               {row.description}
             </div>
           ) : null}
@@ -375,7 +375,7 @@ function ViewDrawer({ open, row, columns, onClose, onEdit }) {
           <button type="button" onClick={() => onEdit(row)} className="flex-1 rounded-xl bg-emerald-600 text-white py-2 text-sm font-semibold">
             Edit
           </button>
-          <button type="button" onClick={onClose} className="rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm">
+          <button type="button" onClick={onClose} className="rounded-xl border border-slate-200 px-4 py-2 text-sm">
             Close
           </button>
         </div>
@@ -408,7 +408,7 @@ function SettingsPanel({ onSaved }) {
   };
 
   return (
-    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
+    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface overflow-hidden">
       <div className="flex gap-1 border-b border-slate-200 dark:border-slate-800 px-3">
         {[
           { id: 'profile', label: 'Profile' },
@@ -447,7 +447,7 @@ function SettingsPanel({ onSaved }) {
                   type={type}
                   value={form[k] || ''}
                   onChange={(e) => patch(k, e.target.value)}
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 />
               </label>
             ))}
@@ -457,7 +457,7 @@ function SettingsPanel({ onSaved }) {
                 rows={3}
                 value={form.description || ''}
                 onChange={(e) => patch('description', e.target.value)}
-                className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
               />
             </label>
           </>
@@ -470,7 +470,7 @@ function SettingsPanel({ onSaved }) {
                 type="number"
                 value={form.deliveryRadius || ''}
                 onChange={(e) => patch('deliveryRadius', e.target.value)}
-                className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
               />
             </label>
             <label className="flex items-center gap-2 text-sm mt-6">
@@ -507,7 +507,7 @@ function SettingsPanel({ onSaved }) {
         )}
       </div>
       <div className="flex justify-end gap-2 px-5 py-4 border-t border-slate-200 dark:border-slate-800">
-        <button type="button" disabled={busy} onClick={() => save(true)} className="rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm">
+        <button type="button" disabled={busy} onClick={() => save(true)} className="rounded-xl border border-slate-200 px-4 py-2 text-sm">
           Save Draft
         </button>
         <button type="button" disabled={busy} onClick={() => save(false)} className="rounded-xl bg-emerald-600 text-white px-4 py-2 text-sm font-semibold">
@@ -742,7 +742,7 @@ export default function HubInteractivePage({ moduleKey }) {
       />
 
       {meta.showChart && chartData.length ? (
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-5">
           <h3 className="font-semibold mb-3">Weekly Revenue & Orders</h3>
           <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
@@ -759,7 +759,7 @@ export default function HubInteractivePage({ moduleKey }) {
         </div>
       ) : null}
 
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 space-y-3">
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 space-y-3">
         <div className="flex flex-col lg:flex-row gap-3">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -770,7 +770,7 @@ export default function HubInteractivePage({ moduleKey }) {
                 setPage(1);
               }}
               placeholder={`Search ${meta.title.toLowerCase()}…`}
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent pl-10 pr-3 py-2.5 text-sm"
+              className="w-full rounded-xl border border-slate-200 bg-transparent pl-10 pr-3 py-2.5 text-sm"
               aria-label="Search"
             />
           </div>
@@ -782,7 +782,7 @@ export default function HubInteractivePage({ moduleKey }) {
               setActiveCard(null);
               setPage(1);
             }}
-            className="inline-flex items-center gap-1 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2 text-sm"
+            className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-3 py-2 text-sm"
           >
             <Filter size={14} /> Reset
           </button>
@@ -795,7 +795,7 @@ export default function HubInteractivePage({ moduleKey }) {
                 setFilters((f) => ({ ...f, status: e.target.value }));
                 setPage(1);
               }}
-              className="rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+              className="rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
             >
               {meta.statusOptions.map((s) => (
                 <option key={s} value={s}>
@@ -811,7 +811,7 @@ export default function HubInteractivePage({ moduleKey }) {
                 setFilters((f) => ({ ...f, category: e.target.value }));
                 setPage(1);
               }}
-              className="rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+              className="rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
             >
               <option value="all">All categories</option>
               {['Grocery', 'Dairy', 'Beverages', 'sales', 'funnel', 'growth', 'ops', 'marketing', 'orders', 'payments', 'catalog', 'invoices'].map((c) => (
@@ -828,7 +828,7 @@ export default function HubInteractivePage({ moduleKey }) {
                 setFilters((f) => ({ ...f, type: e.target.value }));
                 setPage(1);
               }}
-              className="rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+              className="rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
             >
               <option value="all">All types</option>
               {['campaign', 'coupon', 'offer', 'referral', 'credit', 'debit'].map((t) => (
@@ -845,7 +845,7 @@ export default function HubInteractivePage({ moduleKey }) {
                 setFilters((f) => ({ ...f, city: e.target.value }));
                 setPage(1);
               }}
-              className="rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+              className="rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
             >
               <option value="all">All cities</option>
               {['Pune', 'Mumbai', 'Nashik', 'All'].map((c) => (
@@ -862,7 +862,7 @@ export default function HubInteractivePage({ moduleKey }) {
                 setFilters((f) => ({ ...f, method: e.target.value }));
                 setPage(1);
               }}
-              className="rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+              className="rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
             >
               <option value="all">All methods</option>
               {['UPI', 'Card', 'COD', 'Wallet'].map((m) => (
@@ -879,7 +879,7 @@ export default function HubInteractivePage({ moduleKey }) {
                 setFilters((f) => ({ ...f, priority: e.target.value }));
                 setPage(1);
               }}
-              className="rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+              className="rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
             >
               <option value="all">All priorities</option>
               {['low', 'medium', 'high'].map((p) => (
@@ -896,7 +896,7 @@ export default function HubInteractivePage({ moduleKey }) {
               setFilters((f) => ({ ...f, dateFrom: e.target.value }));
               setPage(1);
             }}
-            className="rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+            className="rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
             aria-label="From date"
           />
           <input
@@ -906,7 +906,7 @@ export default function HubInteractivePage({ moduleKey }) {
               setFilters((f) => ({ ...f, dateTo: e.target.value }));
               setPage(1);
             }}
-            className="rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+            className="rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
             aria-label="To date"
           />
         </div>
@@ -954,11 +954,11 @@ export default function HubInteractivePage({ moduleKey }) {
         </div>
       ) : null}
 
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface overflow-hidden">
         {listLoading ? (
           <div className="p-6 space-y-3" aria-busy="true">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-10 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
+              <div key={i} className="h-10 rounded-xl bg-page animate-pulse" />
             ))}
           </div>
         ) : !rows.length ? (
@@ -972,7 +972,7 @@ export default function HubInteractivePage({ moduleKey }) {
         ) : (
           <div className="overflow-x-auto max-h-[560px]">
             <table className="min-w-full text-sm">
-              <thead className="sticky top-0 bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-300">
+              <thead className="sticky top-0 bg-page dark:bg-slate-950 text-slate-600 dark:text-slate-300">
                 <tr className="border-b border-slate-200 dark:border-slate-800">
                   <th className="px-4 py-3 text-left w-10">
                     <input
@@ -1011,7 +1011,7 @@ export default function HubInteractivePage({ moduleKey }) {
               </thead>
               <tbody>
                 {rows.map((row) => (
-                  <tr key={row.id} className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-800/40">
+                  <tr key={row.id} className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80">
                     <td className="px-4 py-3">
                       <input
                         type="checkbox"
@@ -1048,13 +1048,13 @@ export default function HubInteractivePage({ moduleKey }) {
                           <Eye size={14} className="inline mr-1" />
                           View
                         </button>
-                        <button type="button" onClick={() => setMenuId(menuId === row.id ? null : row.id)} className="rounded-lg p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="More actions">
+                        <button type="button" onClick={() => setMenuId(menuId === row.id ? null : row.id)} className="rounded-lg p-1.5 hover:bg-page" aria-label="More actions">
                           <MoreHorizontal size={16} />
                         </button>
                         {menuId === row.id ? (
                           <>
                             <button type="button" className="fixed inset-0 z-20" aria-label="Close menu" onClick={() => setMenuId(null)} />
-                            <div className="absolute right-0 top-8 z-30 w-44 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-xl py-1">
+                            <div className="absolute right-0 top-8 z-30 w-44 rounded-xl border border-slate-200 bg-surface shadow-xl py-1">
                               {[
                                 { id: 'edit', label: 'Edit', icon: Pencil },
                                 { id: 'download', label: 'Download', icon: Download },
@@ -1071,7 +1071,7 @@ export default function HubInteractivePage({ moduleKey }) {
                                     key={item.id}
                                     type="button"
                                     onClick={() => runAction(item.id, row)}
-                                    className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-slate-50 dark:hover:bg-slate-800 ${
+                                    className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-page ${
                                       item.danger ? 'text-red-600' : 'text-slate-700 dark:text-slate-200'
                                     }`}
                                   >
@@ -1104,7 +1104,7 @@ export default function HubInteractivePage({ moduleKey }) {
               setPageSize(Number(e.target.value));
               setPage(1);
             }}
-            className="rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent px-2 py-1.5"
+            className="rounded-lg border border-slate-200 bg-transparent px-2 py-1.5"
           >
             {[5, 10, 20].map((n) => (
               <option key={n} value={n}>

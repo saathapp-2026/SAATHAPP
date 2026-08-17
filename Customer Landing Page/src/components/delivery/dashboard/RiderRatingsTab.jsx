@@ -33,17 +33,17 @@ export default function RiderRatingsTab() {
         </div>
 
         {/* Incentive Badges */}
-        <div className="md:col-span-2 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-4">
+        <div className="md:col-span-2 rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 space-y-4">
           <h3 className="text-sm font-black text-slate-900 dark:text-white">Active Incentive Bonuses & Badges</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-3">
+            <div className="p-3.5 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-3">
               <Award size={24} className="text-amber-500 shrink-0" />
               <div>
                 <h4 className="font-extrabold text-slate-900 dark:text-white">Super Star Rider (+₹500 Bonus)</h4>
                 <p className="text-[10px] text-slate-500">Achieved 4.9+ rating over 100 orders</p>
               </div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-3">
+            <div className="p-3.5 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-3">
               <Zap size={24} className="text-emerald-500 shrink-0" />
               <div>
                 <h4 className="font-extrabold text-slate-900 dark:text-white">Peak Hour Champion (+₹300 Bonus)</h4>
@@ -55,11 +55,11 @@ export default function RiderRatingsTab() {
       </div>
 
       {/* Customer Reviews */}
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-4">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 space-y-4">
         <h3 className="text-sm font-black text-slate-900 dark:text-white">Recent Customer Feedback</h3>
         <div className="space-y-3">
           {reviews.map((rev, idx) => (
-            <div key={idx} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+            <div key={idx} className="p-4 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="font-extrabold text-slate-900 dark:text-white">{rev.name}</span>

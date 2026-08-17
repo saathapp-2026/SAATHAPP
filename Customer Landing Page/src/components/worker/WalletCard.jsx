@@ -54,13 +54,13 @@ export default function WalletCard() {
           <button
             type="button"
             onClick={() => setShowWithdrawModal(true)}
-            className="relative z-10 w-full py-2.5 bg-white text-primary font-extrabold text-xs uppercase rounded-xl hover:bg-slate-50 transition-colors"
+            className="relative z-10 w-full py-2.5 bg-white text-primary font-extrabold text-xs uppercase rounded-xl hover:bg-page transition-colors"
           >
             Withdraw
           </button>
         </div>
 
-        <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex flex-col justify-between min-h-[180px]">
+        <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex flex-col justify-between min-h-[180px]">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-black uppercase text-slate-400">Salary Status</span>
             <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 text-[9px] font-black uppercase border border-emerald-200/50">
@@ -73,7 +73,7 @@ export default function WalletCard() {
           </div>
         </div>
 
-        <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex flex-col justify-between min-h-[180px]">
+        <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex flex-col justify-between min-h-[180px]">
           <span className="text-[10px] font-black uppercase text-slate-400">Pending Salary</span>
           <div>
             <h3 className="text-2xl font-black text-slate-800 dark:text-white">₹0</h3>
@@ -82,7 +82,7 @@ export default function WalletCard() {
         </div>
       </div>
 
-      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
+      <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
         <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
           <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Withdraw History</h3>
           <button
@@ -113,7 +113,7 @@ export default function WalletCard() {
                 </tr>
               ) : (
                 ledger.map((row) => (
-                  <tr key={row.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/30">
+                  <tr key={row.id} className="hover:bg-slate-50/50">
                     <td className="py-3 font-bold text-slate-700 dark:text-slate-300">{row.id}</td>
                     <td className="py-3 text-slate-500">{row.date}</td>
                     <td className="py-3">{row.desc}</td>
@@ -144,7 +144,7 @@ export default function WalletCard() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-card shadow-premium p-6"
+              className="w-full max-w-md bg-surface border border-slate-200 dark:border-slate-800 rounded-card shadow-premium p-6"
             >
               <h4 className="text-lg font-black text-slate-800 dark:text-white mb-4">Withdraw Funds</h4>
               <form onSubmit={handleWithdrawSubmit} className="space-y-4">
@@ -155,7 +155,7 @@ export default function WalletCard() {
                   value={withdrawAmount}
                   onChange={(e) => setWithdrawAmount(e.target.value)}
                   placeholder="Enter amount"
-                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-950 outline-none focus:border-primary/50"
+                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-800 rounded-xl bg-page dark:bg-slate-950 outline-none focus:border-primary/50"
                 />
                 {errorMsg && <p className="text-xs text-rose-600 font-semibold">{errorMsg}</p>}
                 <div className="flex gap-2">

@@ -39,7 +39,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
   };
 
   return (
-    <section className="py-10 bg-slate-50 dark:bg-slate-950/40 border-b border-slate-100 dark:border-slate-800/40">
+    <section className="py-10 bg-page  border-b border-slate-100 ">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         
         {/* Section Header with Countdown Timer */}
@@ -83,7 +83,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -6 }}
-                className="bg-white dark:bg-slate-900 rounded-card p-3 sm:p-4 border border-slate-200/60 dark:border-slate-800/50 shadow-soft hover:shadow-premium relative flex flex-col justify-between group"
+                className="bg-surface rounded-card p-3 sm:p-4 border border-slate-200/60  shadow-soft hover:shadow-premium relative flex flex-col justify-between group"
               >
                 {/* Discount Badge overlay */}
                 <span className="absolute top-3 left-3 bg-danger text-white text-[10px] font-black uppercase tracking-wider py-1 px-2 rounded-full z-15 shadow-sm">
@@ -95,7 +95,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                   <motion.button 
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="w-7.5 h-7.5 rounded-full bg-white/95 dark:bg-slate-800 text-slate-400 hover:text-danger flex items-center justify-center shadow-md border border-slate-100 dark:border-slate-700"
+                    className="w-7.5 h-7.5 rounded-full bg-white/95 text-slate-400 hover:text-danger flex items-center justify-center shadow-md border border-slate-100"
                     title="Add to Wishlist"
                   >
                     <Heart size={14} />
@@ -104,7 +104,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                     onClick={() => onQuickView(deal)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="w-7.5 h-7.5 rounded-full bg-white/95 dark:bg-slate-800 text-slate-400 hover:text-primary flex items-center justify-center shadow-md border border-slate-100 dark:border-slate-700"
+                    className="w-7.5 h-7.5 rounded-full bg-white/95 text-slate-400 hover:text-primary flex items-center justify-center shadow-md border border-slate-100"
                     title="Quick View"
                   >
                     <Eye size={14} />
@@ -113,7 +113,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
 
                 {/* Product Image & Meta */}
                 <div>
-                  <div className="w-full aspect-square rounded-card overflow-hidden bg-slate-100 mb-3 relative flex items-center justify-center">
+                  <div className="w-full aspect-square rounded-card overflow-hidden bg-page mb-3 relative flex items-center justify-center">
                     {deal.image && (
                       <img 
                         src={deal.image} 
@@ -123,7 +123,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                     )}
                     
                     {/* Delivery Time Badge */}
-                    <div className="absolute bottom-2 left-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200/30">
+                    <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200/30">
                       ⏱ {deal.deliveryTime}
                     </div>
                   </div>
@@ -147,7 +147,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                       </span>
                       <span className="text-slate-400">{deal.stockLeft}/{deal.totalStock} units</span>
                     </div>
-                    <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div className="w-full h-1.5 bg-page rounded-full overflow-hidden">
                       <div 
                         className={`h-full rounded-full transition-all duration-500 ${isLowStock ? 'bg-danger' : 'bg-secondary'}`}
                         style={{ width: `${stockPct}%` }}
@@ -157,7 +157,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                 </div>
 
                 {/* Price tag & add button */}
-                <div className="flex items-center justify-between gap-2 mt-auto pt-2 border-t border-slate-100 dark:border-slate-800/40">
+                <div className="flex items-center justify-between gap-2 mt-auto pt-2 border-t border-slate-100 ">
                   <div className="text-left">
                     <span className="text-base font-black text-slate-950 dark:text-white">₹{deal.price}</span>
                     <span className="text-[11px] text-slate-400 line-through block leading-none">₹{deal.oldPrice}</span>

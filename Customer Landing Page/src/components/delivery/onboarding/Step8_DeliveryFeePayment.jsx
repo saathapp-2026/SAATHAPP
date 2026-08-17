@@ -65,7 +65,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-4xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-3.5 py-1 text-xs font-bold text-amber-600 dark:text-amber-400">
           Phase 8 — Mandatory Delivery Partner Onboarding Fee
         </div>
@@ -101,7 +101,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Fee Breakdown */}
           <div className="md:col-span-2 space-y-6">
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5 space-y-3">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-5 space-y-3">
               <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">
                 What this One-Time Onboarding Fee includes:
               </h3>
@@ -145,7 +145,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
           </div>
 
           {/* Payment Box (Always Visible) */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5 flex flex-col justify-between space-y-4 shadow-sm">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-5 flex flex-col justify-between space-y-4 shadow-sm">
             <div>
               <h3 className="text-sm font-extrabold text-slate-900 dark:text-white mb-3">
                 Select Payment Method
@@ -162,7 +162,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
                     onClick={() => setSelectedMethod(method.id)}
                     className={`w-full flex items-center justify-between p-3 rounded-xl border text-left font-bold transition ${selectedMethod === method.id
                         ? 'border-amber-500 bg-amber-500/10 text-amber-600 dark:text-amber-400 ring-1 ring-amber-500'
-                        : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300'
+                        : 'border-slate-200 dark:border-slate-800 bg-surface text-slate-700 dark:text-slate-300'
                       }`}
                   >
                     <div className="flex items-center gap-2">
@@ -211,7 +211,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
           <button
             type="button"
             onClick={onPrev}
-            className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+            className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
           >
             <ArrowLeft size={16} />
             Previous
@@ -243,7 +243,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative"
+              className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative"
             >
               <button
                 type="button"
@@ -267,14 +267,14 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
 
               <form onSubmit={handleConfirmPayment} className="mt-6 space-y-4 text-xs">
                 {selectedMethod === 'UPI' && (
-                  <div className="text-center space-y-3 p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                  <div className="text-center space-y-3 p-4 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                     <QrCode size={90} className="mx-auto text-slate-900 dark:text-white" />
                     <p className="font-extrabold text-slate-700 dark:text-slate-300">Scan QR Code or Enter UPI ID</p>
                     <input
                       type="text"
                       value={upiVpa}
                       onChange={(e) => setUpiVpa(e.target.value)}
-                      className="w-full text-center rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-2.5 font-mono text-xs text-slate-900 dark:text-white"
+                      className="w-full text-center rounded-xl border border-slate-300 bg-surface p-2.5 font-mono text-xs text-slate-900 dark:text-white"
                     />
                   </div>
                 )}
@@ -287,7 +287,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
                         type="text"
                         value={cardNumber}
                         onChange={(e) => setCardNumber(e.target.value)}
-                        className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3.5 py-2.5 font-mono text-xs text-slate-900 dark:text-white"
+                        className="w-full rounded-xl border border-slate-300 bg-page dark:bg-slate-950 px-3.5 py-2.5 font-mono text-xs text-slate-900 dark:text-white"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-2">
@@ -296,7 +296,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
                         <input
                           type="text"
                           defaultValue="08/28"
-                          className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3.5 py-2.5 font-mono text-xs text-slate-900 dark:text-white"
+                          className="w-full rounded-xl border border-slate-300 bg-page dark:bg-slate-950 px-3.5 py-2.5 font-mono text-xs text-slate-900 dark:text-white"
                         />
                       </div>
                       <div>
@@ -304,7 +304,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
                         <input
                           type="password"
                           defaultValue="•••"
-                          className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3.5 py-2.5 font-mono text-xs text-slate-900 dark:text-white"
+                          className="w-full rounded-xl border border-slate-300 bg-page dark:bg-slate-950 px-3.5 py-2.5 font-mono text-xs text-slate-900 dark:text-white"
                         />
                       </div>
                     </div>
@@ -314,7 +314,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
                 {selectedMethod === 'NetBanking' && (
                   <div className="space-y-2">
                     <label className="block font-bold text-slate-700 dark:text-slate-300">Select NetBanking Bank</label>
-                    <select className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 p-3 font-semibold text-xs text-slate-900 dark:text-white">
+                    <select className="w-full rounded-xl border border-slate-300 bg-page dark:bg-slate-950 p-3 font-semibold text-xs text-slate-900 dark:text-white">
                       <option>State Bank of India (SBI)</option>
                       <option>HDFC Bank</option>
                       <option>ICICI Bank</option>

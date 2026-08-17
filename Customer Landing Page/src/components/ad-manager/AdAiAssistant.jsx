@@ -35,7 +35,7 @@ export default function AdAiAssistant({ open, onClose }) {
 
   return (
     <SellerOverlay open={open} onClose={onClose} labelledBy="ad-ai-title" zIndex={SELLER_Z.modal}>
-      <div className="w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl p-5 max-h-[85vh] overflow-y-auto">
+      <div className="w-full max-w-lg rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl p-5 max-h-[85vh] overflow-y-auto">
         <div className="flex items-start justify-between mb-4">
           <div>
             <h2 id="ad-ai-title" className="text-lg font-bold inline-flex items-center gap-2">
@@ -43,18 +43,18 @@ export default function AdAiAssistant({ open, onClose }) {
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">Mock AI — ready for live model wiring</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close"><X size={16} /></button>
+          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close"><X size={16} /></button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
           {ACTIONS.map((a) => (
-            <button key={a.id} type="button" disabled={busy} onClick={() => run(a.id)} className={`rounded-xl border px-3 py-2 text-left text-xs font-semibold ${active === a.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200 dark:border-slate-700'}`}>{a.label}</button>
+            <button key={a.id} type="button" disabled={busy} onClick={() => run(a.id)} className={`rounded-xl border px-3 py-2 text-left text-xs font-semibold ${active === a.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200'}`}>{a.label}</button>
           ))}
         </div>
         {busy ? <p className="text-sm text-slate-500 text-center py-6">Generating…</p> : (
           <ul className="space-y-2">
             {results.map((r) => (
               <li key={r}>
-                <button type="button" onClick={async () => { try { await navigator.clipboard.writeText(r); toast.success('Copied'); } catch { toast.success(r); } }} className="w-full text-left rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-800">{r}</button>
+                <button type="button" onClick={async () => { try { await navigator.clipboard.writeText(r); toast.success('Copied'); } catch { toast.success(r); } }} className="w-full text-left rounded-xl border border-slate-200 px-3 py-2.5 text-sm hover:bg-page">{r}</button>
               </li>
             ))}
             {!results.length ? <li className="text-sm text-slate-500 text-center py-6">Pick an action to generate suggestions</li> : null}

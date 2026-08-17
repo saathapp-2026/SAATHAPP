@@ -55,13 +55,13 @@ function ActionsMenu({ report, onAction, loadingId }) {
 
   return (
     <div className="relative flex items-center justify-end gap-0.5">
-      <button type="button" title="View" disabled={busy} onClick={() => onAction('view', report)} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500">
+      <button type="button" title="View" disabled={busy} onClick={() => onAction('view', report)} className="p-1.5 rounded-lg hover:bg-page text-slate-500">
         <Eye size={15} />
       </button>
-      <button type="button" title="Download" disabled={busy} onClick={() => onAction('download', report)} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500">
+      <button type="button" title="Download" disabled={busy} onClick={() => onAction('download', report)} className="p-1.5 rounded-lg hover:bg-page text-slate-500">
         <Download size={15} />
       </button>
-      <button type="button" title="Share" disabled={busy} onClick={() => onAction('share', report)} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500">
+      <button type="button" title="Share" disabled={busy} onClick={() => onAction('share', report)} className="p-1.5 rounded-lg hover:bg-page text-slate-500">
         <Share2 size={15} />
       </button>
       <button
@@ -69,7 +69,7 @@ function ActionsMenu({ report, onAction, loadingId }) {
         title="More actions"
         disabled={busy}
         onClick={() => setOpen((v) => !v)}
-        className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500"
+        className="p-1.5 rounded-lg hover:bg-page text-slate-500"
         aria-haspopup="menu"
         aria-expanded={open}
       >
@@ -78,7 +78,7 @@ function ActionsMenu({ report, onAction, loadingId }) {
       {open ? (
         <>
           <button type="button" className="fixed inset-0 z-10" aria-label="Close menu" onClick={() => setOpen(false)} />
-          <div role="menu" className="absolute right-0 top-8 z-20 w-44 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-xl py-1">
+          <div role="menu" className="absolute right-0 top-8 z-20 w-44 rounded-xl border border-slate-200 bg-surface shadow-xl py-1">
             {items.map((item) => {
               const Icon = item.icon;
               return (
@@ -90,7 +90,7 @@ function ActionsMenu({ report, onAction, loadingId }) {
                     setOpen(false);
                     onAction(item.id, report);
                   }}
-                  className={`flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800 ${
+                  className={`flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page ${
                     item.danger ? 'text-red-600' : 'text-slate-700 dark:text-slate-200'
                   }`}
                 >
@@ -133,9 +133,9 @@ export default function ReportTable({
 
   if (loading) {
     return (
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 animate-pulse space-y-3" aria-busy="true">
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-6 animate-pulse space-y-3" aria-busy="true">
         {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="h-12 rounded bg-slate-200 dark:bg-slate-700" />
+          <div key={i} className="h-12 rounded bg-slate-200" />
         ))}
       </div>
     );
@@ -143,7 +143,7 @@ export default function ReportTable({
 
   if (!reports.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-10 text-center">
+      <div className="rounded-2xl border border-dashed border-slate-300 bg-surface p-10 text-center">
         <FileText className="mx-auto h-10 w-10 text-slate-300 mb-3" />
         <p className="font-semibold text-slate-800 dark:text-slate-100">No reports generated yet</p>
         <p className="text-sm text-slate-500 mt-1">Generate your first report to see it here.</p>
@@ -161,7 +161,7 @@ export default function ReportTable({
         {reports.map((r) => {
           const Icon = FORMAT_ICONS[r.format] || FileText;
           return (
-            <div key={r.id} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 space-y-2 shadow-sm">
+            <div key={r.id} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-3 space-y-2 shadow-sm">
               <div className="flex items-start gap-2">
                 <Icon size={16} className={`mt-0.5 shrink-0 ${FORMAT_ICON_COLOR[r.format]}`} />
                 <div className="min-w-0 flex-1">
@@ -185,7 +185,7 @@ export default function ReportTable({
         })}
       </div>
 
-      <div className="hidden md:block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm">
+      <div className="hidden md:block rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead className="sticky top-0 z-[1] bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur border-b border-slate-200 dark:border-slate-800">
@@ -203,7 +203,7 @@ export default function ReportTable({
               {reports.map((r) => {
                 const Icon = FORMAT_ICONS[r.format] || FileText;
                 return (
-                  <tr key={r.id} className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-800/40">
+                  <tr key={r.id} className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80">
                     <td className="px-4 py-3">
                       <div className="flex items-start gap-2.5 min-w-0">
                         <Icon size={16} className={`mt-0.5 shrink-0 ${FORMAT_ICON_COLOR[r.format]}`} />
@@ -241,7 +241,7 @@ export default function ReportTable({
           </table>
         </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/40">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 ">
           <p className="text-xs text-slate-500">
             Showing {start} to {end} of {total} reports
           </p>
@@ -251,7 +251,7 @@ export default function ReportTable({
               <select
                 value={pageSize}
                 onChange={(e) => onPageSizeChange?.(Number(e.target.value))}
-                className="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 py-1 text-xs"
+                className="rounded-lg border border-slate-200 bg-surface px-2 py-1 text-xs"
               >
                 {[5, 8, 10, 20].map((n) => (
                   <option key={n} value={n}>{n}</option>
@@ -263,7 +263,7 @@ export default function ReportTable({
                 type="button"
                 disabled={page <= 1}
                 onClick={() => onPageChange(page - 1)}
-                className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-slate-200 dark:border-slate-700 disabled:opacity-40"
+                className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-slate-200 disabled:opacity-40"
                 aria-label="Previous page"
               >
                 <ChevronLeft size={14} />
@@ -275,7 +275,7 @@ export default function ReportTable({
                 type="button"
                 disabled={page >= totalPages}
                 onClick={() => onPageChange(page + 1)}
-                className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-slate-200 dark:border-slate-700 disabled:opacity-40"
+                className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-slate-200 disabled:opacity-40"
                 aria-label="Next page"
               >
                 <ChevronRight size={14} />

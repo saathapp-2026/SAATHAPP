@@ -5,7 +5,7 @@ import SectionHeading from './SectionHeading';
 
 export default function BenefitsSection() {
   return (
-    <section id="benefits" aria-labelledby="benefits-heading" className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-950/50">
+    <section id="benefits" aria-labelledby="benefits-heading" className="py-20 sm:py-24 bg-page dark:bg-slate-950/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           id="benefits-heading"
@@ -25,7 +25,7 @@ export default function BenefitsSection() {
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ delay: index * 0.05, duration: 0.45 }}
                 whileHover={{ y: -4 }}
-                className="group rounded-[20px] border border-slate-200/70 dark:border-slate-800/60 bg-white dark:bg-slate-900 p-6 shadow-soft hover:shadow-premium transition-shadow duration-300"
+                className="group rounded-[20px] border border-slate-200/70 dark:border-slate-800/60 bg-surface p-6 shadow-soft hover:shadow-premium transition-shadow duration-300"
               >
                 <div
                   className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl ${benefit.bg} ${benefit.color} transition group-hover:scale-110 duration-300`}

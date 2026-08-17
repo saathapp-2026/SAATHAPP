@@ -21,8 +21,8 @@ export default function CalendarWidget() {
   const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100 dark:border-slate-800/40">
+    <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all text-left">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100 ">
         <div className="flex items-center gap-2">
           <Calendar size={18} className="text-primary" />
           <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">July 2026 Schedule</h3>
@@ -89,7 +89,7 @@ export default function CalendarWidget() {
           })}
         </div>
 
-        <div className="flex items-start gap-1.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-950 text-[10px] text-slate-450 font-bold border border-slate-150 dark:border-slate-850 mt-4">
+        <div className="flex items-start gap-1.5 p-3 rounded-xl bg-page dark:bg-slate-950 text-[10px] text-slate-450 font-bold border border-slate-150 dark:border-slate-850 mt-4">
           <Info size={13} className="mt-0.5 flex-shrink-0 text-slate-400" />
           <span>This schedule syncs with your attendance punching and jobs dispatched from your supervisor.</span>
         </div>

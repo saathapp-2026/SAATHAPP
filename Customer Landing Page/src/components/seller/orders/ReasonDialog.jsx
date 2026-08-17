@@ -32,7 +32,7 @@ export function ReasonDialog({
           <select
             value={reason}
             onChange={(e) => setReason(e.target.value)}
-            className="mt-1 w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-sm"
+            className="mt-1 w-full px-3 py-2 rounded-xl border border-slate-200 bg-page dark:bg-slate-950 text-sm"
           >
             {reasons.map((r) => (
               <option key={r} value={r}>{r}</option>
@@ -46,7 +46,7 @@ export function ReasonDialog({
               value={customReason}
               onChange={(e) => setCustomReason(e.target.value)}
               rows={3}
-              className="mt-1 w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-sm"
+              className="mt-1 w-full px-3 py-2 rounded-xl border border-slate-200 bg-page dark:bg-slate-950 text-sm"
               placeholder="Describe the reason…"
             />
           </label>

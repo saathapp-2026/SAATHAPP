@@ -33,7 +33,7 @@ function TimerChip({ label, deadline }) {
           ? 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300'
           : remaining < 5 * 60 * 1000
             ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300'
-            : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
+            : 'bg-page text-slate-600 dark:text-slate-300'
       }`}
       title={`${label}: ${formatRemaining(remaining)}`}
     >

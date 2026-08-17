@@ -200,14 +200,14 @@ export default function ProductsPage() {
           <button
             type="button"
             onClick={() => setShowAnalytics((v) => !v)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-surface"
           >
             <BarChart3 size={14} /> {showAnalytics ? 'Hide Analytics' : 'Analytics'}
           </button>
           <button
             type="button"
             onClick={() => setBulkOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-surface"
           >
             <Upload size={14} /> Excel Bulk Import
           </button>
@@ -231,7 +231,7 @@ export default function ProductsPage() {
           ['Low Stock', stats?.lowStock, 'text-orange-600'],
           ['Views', stats?.views, 'text-sky-600'],
         ].map(([label, value, color]) => (
-          <div key={label} className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3.5">
+          <div key={label} className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-3.5">
             <p className="text-[11px] text-slate-500 mb-1">{label}</p>
             <p className={`text-xl font-bold tabular-nums ${color}`}>{loading && stats == null ? '—' : value ?? 0}</p>
           </div>
@@ -239,7 +239,7 @@ export default function ProductsPage() {
       </div>
 
       {showAnalytics && analytics && (
-        <section className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 space-y-4">
+        <section className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-4 space-y-4">
           <h2 className="font-bold">Product Performance</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2">
             {[
@@ -251,7 +251,7 @@ export default function ProductsPage() {
               ['Revenue', money(analytics.revenue)],
               ['Returns', analytics.returns],
             ].map(([k, v]) => (
-              <div key={k} className="rounded-lg bg-slate-50 dark:bg-slate-800/50 p-2.5">
+              <div key={k} className="rounded-lg bg-page p-2.5">
                 <p className="text-[10px] text-slate-500">{k}</p>
                 <p className="font-bold text-sm">{v}</p>
               </div>
@@ -293,7 +293,7 @@ export default function ProductsPage() {
       )}
 
       {/* Filters */}
-      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 space-y-3">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-3 space-y-3">
         <div className="flex flex-col lg:flex-row gap-2">
           <div className="relative flex-1">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -302,13 +302,13 @@ export default function ProductsPage() {
               onChange={(e) => { setSearch(e.target.value); setPage(1); }}
               placeholder="Search name, SKU, barcode, brand, category…"
               aria-label="Search products"
-              className="w-full pl-9 pr-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full pl-9 pr-3 py-2 rounded-lg border border-slate-200 bg-page dark:bg-slate-950 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
           </div>
           <select
             value={stock}
             onChange={(e) => { setStock(e.target.value); setPage(1); }}
-            className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm"
+            className="px-3 py-2 rounded-lg border border-slate-200 bg-surface text-sm"
           >
             <option value="">All stock</option>
             <option value="low">Low stock</option>
@@ -317,7 +317,7 @@ export default function ProductsPage() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm"
+            className="px-3 py-2 rounded-lg border border-slate-200 bg-surface text-sm"
           >
             <option value="newest">Newest</option>
             <option value="oldest">Oldest</option>
@@ -340,7 +340,7 @@ export default function ProductsPage() {
                   else toggleStatus(p.id);
                 }}
                 className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold ${
-                  active ? 'bg-emerald-500 text-white' : 'border border-slate-200 dark:border-slate-700'
+                  active ? 'bg-emerald-500 text-white' : 'border border-slate-200'
                 }`}
               >
                 {p.label}
@@ -355,20 +355,20 @@ export default function ProductsPage() {
         <div className="rounded-xl border border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/30 p-3 flex flex-wrap gap-2 items-center">
           <span className="text-sm font-bold text-emerald-800 dark:text-emerald-300">{selected.size} selected</span>
           <button type="button" onClick={() => handleBulk('publish')} className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-white">Publish</button>
-          <button type="button" onClick={() => handleBulk('hide')} className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 inline-flex items-center gap-1"><EyeOff size={11} /> Hide</button>
-          <button type="button" onClick={() => handleBulk('archive')} className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 inline-flex items-center gap-1"><Archive size={11} /> Archive</button>
-          <button type="button" onClick={() => handleBulk('duplicate')} className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 inline-flex items-center gap-1"><Copy size={11} /> Duplicate</button>
-          <button type="button" onClick={exportCsv} className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 inline-flex items-center gap-1"><Download size={11} /> Export</button>
+          <button type="button" onClick={() => handleBulk('hide')} className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 bg-surface inline-flex items-center gap-1"><EyeOff size={11} /> Hide</button>
+          <button type="button" onClick={() => handleBulk('archive')} className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 bg-surface inline-flex items-center gap-1"><Archive size={11} /> Archive</button>
+          <button type="button" onClick={() => handleBulk('duplicate')} className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 bg-surface inline-flex items-center gap-1"><Copy size={11} /> Duplicate</button>
+          <button type="button" onClick={exportCsv} className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 bg-surface inline-flex items-center gap-1"><Download size={11} /> Export</button>
           <button type="button" onClick={() => handleBulk('delete')} className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-red-500 text-white inline-flex items-center gap-1"><Trash2 size={11} /> Delete</button>
         </div>
       )}
 
       {/* Table */}
-      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface overflow-hidden">
         {loading ? (
           <div className="p-4 space-y-2 animate-pulse">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-14 rounded-lg bg-slate-100 dark:bg-slate-800" />
+              <div key={i} className="h-14 rounded-lg bg-page" />
             ))}
           </div>
         ) : products.length === 0 ? (
@@ -384,7 +384,7 @@ export default function ProductsPage() {
           <>
             <div className="overflow-x-auto">
               <table className="w-full text-sm min-w-[900px]">
-                <thead className="bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-500 sticky top-0">
+                <thead className="bg-page text-xs text-slate-500 sticky top-0">
                   <tr>
                     <th className="px-3 py-3 text-left w-10">
                       <input
@@ -411,7 +411,7 @@ export default function ProductsPage() {
                     const cat = PRODUCT_CATEGORIES.find((c) => c.id === p.basic.category);
                     const low = Number(p.inventory.initialStock) <= Number(p.inventory.minStockAlert || 10);
                     return (
-                      <tr key={p.id} className="border-t border-slate-100 dark:border-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-800/40">
+                      <tr key={p.id} className="border-t border-slate-100 dark:border-slate-800 hover:bg-slate-50/80">
                         <td className="px-3 py-3">
                           <input
                             type="checkbox"
@@ -445,7 +445,7 @@ export default function ProductsPage() {
                         <td className="px-3 py-3"><StatusBadge status={p.status} /></td>
                         <td className="px-3 py-3">
                           <div className="flex gap-1">
-                            <button type="button" title="Edit" onClick={() => openEdit(p.id)} className="h-7 w-7 rounded-lg border border-slate-200 dark:border-slate-700 inline-flex items-center justify-center">
+                            <button type="button" title="Edit" onClick={() => openEdit(p.id)} className="h-7 w-7 rounded-lg border border-slate-200 inline-flex items-center justify-center">
                               <Eye size={12} />
                             </button>
                             <button
@@ -456,7 +456,7 @@ export default function ProductsPage() {
                                 toast.success('Duplicated');
                                 load();
                               }}
-                              className="h-7 w-7 rounded-lg border border-slate-200 dark:border-slate-700 inline-flex items-center justify-center"
+                              className="h-7 w-7 rounded-lg border border-slate-200 inline-flex items-center justify-center"
                             >
                               <Copy size={12} />
                             </button>

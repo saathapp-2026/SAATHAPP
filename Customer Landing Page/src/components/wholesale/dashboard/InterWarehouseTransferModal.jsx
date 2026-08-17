@@ -247,9 +247,9 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 overflow-y-auto sa-fade">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-5xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-5xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
         {/* MODAL HEADER */}
-        <div className="border-b border-slate-200 dark:border-slate-800 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 dark:bg-slate-950">
+        <div className="border-b border-slate-200 dark:border-slate-800 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-page dark:bg-slate-950">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-black">
               <ArrowLeftRight size={22} />
@@ -274,14 +274,14 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
           <button
             type="button"
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center justify-center font-bold"
+            className="w-8 h-8 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center justify-center font-bold"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* 4 SECTION TABS WITH CLEAN HEADINGS ONLY */}
-        <div className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 px-6 pt-2 flex flex-wrap gap-2 text-xs font-bold">
+        <div className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 px-6 pt-2 flex flex-wrap gap-2 text-xs font-bold">
           {[
             { id: 1, label: '1. Product & Warehouses' },
             { id: 2, label: '2. Logistics & Schedule' },
@@ -293,8 +293,8 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
               type="button"
               onClick={() => setActiveSection(tab.id)}
               className={`py-3 px-4 border-b-2 font-extrabold transition flex items-center gap-1.5 ${activeSection === tab.id
-                  ? 'border-emerald-600 text-emerald-600 dark:text-emerald-400 bg-white dark:bg-slate-900 rounded-t-2xl shadow-sm'
-                  : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                  ? 'border-emerald-600 text-emerald-600 dark:text-emerald-400 bg-surface rounded-t-2xl shadow-sm'
+                  : 'border-transparent text-slate-500 hover:text-slate-800'
                 }`}
             >
               <span>{tab.label}</span>
@@ -303,13 +303,13 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
         </div>
 
         {/* MAIN BODY CONTENT AREA */}
-        <div className="flex-1 p-6 overflow-y-auto sa-scrollbar text-xs space-y-6 bg-white dark:bg-slate-900">
+        <div className="flex-1 p-6 overflow-y-auto sa-scrollbar text-xs space-y-6 bg-surface">
 
           {/* TAB 1: Product, Warehouses, Quantity & Validation Checklist */}
           {activeSection === 1 && (
             <div className="space-y-6 sa-rise">
               {/* VALIDATION COMPLIANCE AUDIT CHECKLIST - SHOWN ON TAB 1 */}
-              <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 space-y-2">
+              <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 space-y-2">
                 <div className="flex items-center justify-between">
                   <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white flex items-center gap-2">
                     <ShieldCheck className="text-emerald-500" size={18} /> Transfer Validation Compliance Check
@@ -391,7 +391,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                 </div>
 
                 {/* Extended Product Info Card */}
-                <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row gap-4 items-center">
+                <div className="bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row gap-4 items-center">
                   <img
                     src={product.image}
                     alt={product.name}
@@ -440,7 +440,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
 
                 <div className="grid grid-cols-1 sm:grid-cols-7 gap-3 items-center">
                   {/* FROM WAREHOUSE */}
-                  <div className="sm:col-span-3 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 bg-slate-50 dark:bg-slate-950 space-y-3">
+                  <div className="sm:col-span-3 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 bg-page dark:bg-slate-950 space-y-3">
                     <div className="flex justify-between items-center">
                       <label className="block font-bold uppercase text-slate-500 text-[10px]">
                         FROM WAREHOUSE <span className="text-emerald-500">*</span>
@@ -453,7 +453,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                     <select
                       value={formData.fromWhCode}
                       onChange={(e) => handleFieldChange('fromWhCode', e.target.value)}
-                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 font-bold text-slate-900 dark:text-white"
+                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface p-2.5 font-bold text-slate-900 dark:text-white"
                     >
                       {MOCK_WAREHOUSES.map((w) => (
                         <option key={w.code} value={w.code}>
@@ -462,7 +462,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                       ))}
                     </select>
 
-                    <div className="text-[11px] text-slate-600 dark:text-slate-400 space-y-1 bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div className="text-[11px] text-slate-600 dark:text-slate-400 space-y-1 bg-surface p-3 rounded-xl border border-slate-200 dark:border-slate-800">
                       <p><strong className="text-slate-500">Address:</strong> {fromWh.city}</p>
                       <p><strong className="text-slate-500">Manager:</strong> {fromWh.manager}</p>
                       <div className="grid grid-cols-2 gap-1 pt-1 font-mono text-[10px]">
@@ -482,7 +482,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                   </div>
 
                   {/* TO WAREHOUSE */}
-                  <div className="sm:col-span-3 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 bg-slate-50 dark:bg-slate-950 space-y-3">
+                  <div className="sm:col-span-3 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 bg-page dark:bg-slate-950 space-y-3">
                     <div className="flex justify-between items-center">
                       <label className="block font-bold uppercase text-slate-500 text-[10px]">
                         TO WAREHOUSE <span className="text-emerald-500">*</span>
@@ -495,7 +495,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                     <select
                       value={formData.toWhCode}
                       onChange={(e) => handleFieldChange('toWhCode', e.target.value)}
-                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 font-bold text-slate-900 dark:text-white"
+                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface p-2.5 font-bold text-slate-900 dark:text-white"
                     >
                       {MOCK_WAREHOUSES.map((w) => (
                         <option key={w.code} value={w.code}>
@@ -504,7 +504,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                       ))}
                     </select>
 
-                    <div className="text-[11px] text-slate-600 dark:text-slate-400 space-y-1 bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div className="text-[11px] text-slate-600 dark:text-slate-400 space-y-1 bg-surface p-3 rounded-xl border border-slate-200 dark:border-slate-800">
                       <p><strong className="text-slate-500">Address:</strong> {toWh.city}</p>
                       <p><strong className="text-slate-500">Manager:</strong> {toWh.manager}</p>
                       <div className="grid grid-cols-2 gap-1 pt-1 font-mono text-[10px]">
@@ -537,7 +537,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                     <span className="text-[10px] text-slate-500 mt-1 block">Maximum transferable: {fromWh.available} Units</span>
                   </div>
 
-                  <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 space-y-1 font-mono text-[11px]">
+                  <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 space-y-1 font-mono text-[11px]">
                     <div className="flex justify-between text-slate-600 dark:text-slate-400">
                       <span>Available Stock:</span>
                       <strong className="text-slate-900 dark:text-white">{fromWh.available}</strong>
@@ -552,7 +552,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 flex flex-col justify-center text-xs">
+                  <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 flex flex-col justify-center text-xs">
                     {remainingFromStock < 50 ? (
                       <span className="text-rose-500 font-extrabold flex items-center gap-1">
                         <AlertTriangle size={14} /> Low / Out of Stock Warning!
@@ -733,7 +733,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                       key={pr}
                       type="button"
                       onClick={() => handleFieldChange('reason', pr)}
-                      className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-[10px] font-bold text-slate-700 dark:text-slate-300 transition"
+                      className="px-2.5 py-1 rounded-lg bg-page hover:bg-slate-200 text-[10px] font-bold text-slate-700 dark:text-slate-300 transition"
                     >
                       + {pr}
                     </button>
@@ -765,7 +765,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                   {['Invoice', 'Challan', 'E-way Bill', 'Transfer Slip', 'Photos', 'Documents'].map((docType) => (
                     <label
                       key={docType}
-                      className="cursor-pointer rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-4 text-center hover:bg-slate-100 dark:hover:bg-slate-800 transition flex flex-col items-center justify-center space-y-1"
+                      className="cursor-pointer rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-4 text-center hover:bg-page transition flex flex-col items-center justify-center space-y-1"
                     >
                       <Upload size={20} className="text-emerald-500" />
                       <span className="text-xs font-extrabold text-slate-900 dark:text-white block">+ {docType}</span>
@@ -781,11 +781,11 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                 </div>
 
                 {/* Uploaded Files List */}
-                <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-2">
+                <div className="bg-page dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-2">
                   <h4 className="text-xs font-extrabold text-slate-900 dark:text-white uppercase">Uploaded Proof Files</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {formData.attachments.map((att, i) => (
-                      <div key={i} className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 font-mono text-[11px]">
+                      <div key={i} className="flex items-center justify-between p-2.5 rounded-xl bg-surface border border-slate-200 dark:border-slate-800 font-mono text-[11px]">
                         <div className="flex items-center gap-2 truncate">
                           <FileText size={14} className="text-emerald-500 shrink-0" />
                           <span className="truncate text-slate-800 dark:text-slate-200">{att.name}</span>
@@ -798,11 +798,11 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
               </div>
 
               {/* Stock Calculation Summary Card */}
-              <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5 space-y-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+              <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-5 space-y-4 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white">Stock Calculation Summary</h4>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
-                  <div className="bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800">
+                  <div className="bg-surface p-3 rounded-2xl border border-slate-200 dark:border-slate-800">
                     <span className="text-[10px] text-slate-500 font-sans font-bold uppercase block">Current Stock ({fromWh.name})</span>
                     <strong className="text-base font-black text-slate-900 dark:text-white">{fromWh.available} Units</strong>
                   </div>
@@ -823,7 +823,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                   </div>
                 </div>
 
-                <div className="flex justify-between items-center text-xs font-mono bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <div className="flex justify-between items-center text-xs font-mono bg-surface p-3 rounded-2xl border border-slate-200 dark:border-slate-800">
                   <span>Total Warehouse System Stock: <strong>{totalSystemStock} Units</strong></span>
                   <span>Logistics Cost: <strong>₹{formData.shippingCost}</strong></span>
                   <span>Estimated Arrival: <strong>2 Days</strong></span>
@@ -837,7 +837,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
             <div className="space-y-6 sa-rise">
 
               {/* Multi-Level Approval Hierarchy */}
-              <div className="bg-slate-50 dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3">
+              <div className="bg-page dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3">
                 <div className="flex items-center justify-between">
                   <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white flex items-center gap-2">
                     <ShieldCheck size={18} className="text-amber-500" /> Multi-Level Approval Hierarchy
@@ -854,25 +854,25 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-bold">
-                  <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
+                  <div className="p-3 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 space-y-1">
                     <span className="text-[10px] text-slate-500 block uppercase">1. Manager Approval</span>
                     <span className="text-emerald-600 dark:text-emerald-400 font-extrabold block">✓ Approved</span>
                     <span className="text-[10px] text-slate-400 font-normal">Rajesh Sharma (Manager)</span>
                   </div>
 
-                  <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
+                  <div className="p-3 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 space-y-1">
                     <span className="text-[10px] text-slate-500 block uppercase">2. Supervisor Approval</span>
                     <span className="text-emerald-600 dark:text-emerald-400 font-extrabold block">✓ Approved</span>
                     <span className="text-[10px] text-slate-400 font-normal">Vikram Mehta (Supervisor)</span>
                   </div>
 
-                  <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
+                  <div className="p-3 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 space-y-1">
                     <span className="text-[10px] text-slate-500 block uppercase">3. Warehouse Lead</span>
                     <span className="text-emerald-600 dark:text-emerald-400 font-extrabold block">✓ Approved</span>
                     <span className="text-[10px] text-slate-400 font-normal">Anish Kumar (Warehouse)</span>
                   </div>
 
-                  <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
+                  <div className="p-3 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 space-y-1">
                     <span className="text-[10px] text-slate-500 block uppercase">4. HQ Final Approval</span>
                     <span className="text-amber-500 font-extrabold block">⏳ Pending HQ Review</span>
                     <span className="text-[10px] text-slate-400 font-normal">HQ Operations Queue</span>
@@ -881,7 +881,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
               </div>
 
               {/* Destination Receive Actions */}
-              <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3">
+              <div className="bg-surface p-5 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3">
                 <h4 className="text-xs font-extrabold text-slate-900 dark:text-white uppercase">
                   Destination Receive Confirmation Actions ({toWh.name})
                 </h4>
@@ -918,7 +918,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
               </div>
 
               {/* Lifecycle Status Workflow (9 Stages) */}
-              <div className="bg-slate-50 dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-4">
+              <div className="bg-page dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white flex items-center gap-2">
                     <Clock size={16} className="text-emerald-500" /> Lifecycle Status Workflow (9 Stages)
@@ -943,7 +943,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                             ? 'bg-emerald-600 text-white border-emerald-500 font-extrabold shadow-md scale-105'
                             : isDone
                               ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30'
-                              : 'bg-white dark:bg-slate-900 text-slate-400 border-slate-200 dark:border-slate-800'
+                              : 'bg-surface text-slate-400 border-slate-200 dark:border-slate-800'
                           }`}
                       >
                         <div className="w-4 h-4 rounded-full flex items-center justify-center font-black text-[9px] bg-slate-950/20">
@@ -957,7 +957,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
               </div>
 
               {/* Stakeholder Notifications Summary */}
-              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-2">
+              <div className="p-4 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-2">
                 <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white flex items-center gap-2">
                   <Bell size={16} className="text-emerald-500" /> Stakeholder Notifications & Dispatch Alerts
                 </h4>
@@ -972,11 +972,11 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
 
               {/* History & Security Audit Log */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-2">
+                <div className="bg-page dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-2">
                   <h4 className="font-extrabold text-slate-900 dark:text-white uppercase">Transfer History Ledger</h4>
                   <div className="space-y-1.5 font-mono text-[10px]">
                     {historyList.map((h) => (
-                      <div key={h.id} className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex justify-between items-center">
+                      <div key={h.id} className="p-2.5 rounded-xl bg-surface border border-slate-200 dark:border-slate-800 flex justify-between items-center">
                         <div>
                           <span className="font-bold text-emerald-600 dark:text-emerald-400 block">{h.id} ({h.qty} Units)</span>
                           <span className="text-slate-500">{h.from} ➔ {h.to}</span>
@@ -987,11 +987,11 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                   </div>
                 </div>
 
-                <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-2">
+                <div className="bg-page dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-2">
                   <h4 className="font-extrabold text-slate-900 dark:text-white uppercase">Security Audit Log</h4>
                   <div className="space-y-1.5 font-mono text-[10px]">
                     {auditLog.map((log, i) => (
-                      <div key={i} className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-0.5">
+                      <div key={i} className="p-2.5 rounded-xl bg-surface border border-slate-200 dark:border-slate-800 space-y-0.5">
                         <div className="flex justify-between font-bold text-slate-900 dark:text-white">
                           <span>{log.action}</span>
                           <span className="text-slate-400">{log.time}</span>
@@ -1007,11 +1007,11 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
         </div>
 
         {/* BOTTOM ACTION BUTTONS */}
-        <div className="border-t border-slate-200 dark:border-slate-800 px-6 py-4 bg-white dark:bg-slate-900 flex justify-end items-center gap-3">
+        <div className="border-t border-slate-200 dark:border-slate-800 px-6 py-4 bg-surface flex justify-end items-center gap-3">
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2.5 rounded-2xl border border-slate-300 dark:border-slate-700 text-xs font-extrabold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
+            className="px-5 py-2.5 rounded-2xl border border-slate-300 text-xs font-extrabold text-slate-700 dark:text-slate-300 hover:bg-page transition cursor-pointer"
           >
             Cancel
           </button>

@@ -76,10 +76,10 @@ export default function AddAddressPage({ onBack, onSaveAddress, onUseCurrentLoca
   const typeOptions = ['Home', 'Work', 'Other'];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800">
+    <div className="min-h-screen bg-page text-slate-800">
       <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-4 sm:px-6 lg:px-8">
         <header className="mb-4 flex items-center justify-between rounded-3xl border border-slate-200 bg-white/90 px-4 py-4 shadow-sm backdrop-blur">
-          <button type="button" onClick={onBack} className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+          <button type="button" onClick={onBack} className="flex items-center gap-2 rounded-full border border-slate-200 bg-page px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-page">
             <ArrowLeft size={16} />
             Back
           </button>
@@ -91,7 +91,7 @@ export default function AddAddressPage({ onBack, onSaveAddress, onUseCurrentLoca
 
         <form onSubmit={handleSubmit} className="grid gap-6 lg:grid-cols-[0.95fr_0.65fr]">
           <div className="space-y-4 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-3">
+            <div className="rounded-2xl border border-slate-200 bg-page p-3">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-black text-slate-900">Use Current Location</p>
@@ -105,53 +105,53 @@ export default function AddAddressPage({ onBack, onSaveAddress, onUseCurrentLoca
 
             <div className="rounded-2xl border border-slate-200 p-4">
               <label className="mb-2 block text-sm font-semibold text-slate-700">Location Name</label>
-              <input name="locationName" value={form.locationName} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Sirnoor" />
+              <input name="locationName" value={form.locationName} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Sirnoor" />
               {errors.locationName && <p className="mt-1 text-xs text-danger">{errors.locationName}</p>}
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm font-semibold text-slate-700">Address Line 1 *</label>
-                <input name="addressLine1" value={form.addressLine1} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="House No / Flat / Building" />
+                <input name="addressLine1" value={form.addressLine1} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="House No / Flat / Building" />
                 {errors.addressLine1 && <p className="mt-1 text-xs text-danger">{errors.addressLine1}</p>}
               </div>
               <div>
                 <label className="mb-2 block text-sm font-semibold text-slate-700">House No</label>
-                <input name="houseNo" value={form.houseNo} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="12" />
+                <input name="houseNo" value={form.houseNo} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="12" />
               </div>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm font-semibold text-slate-700">Building</label>
-                <input name="building" value={form.building} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Apex Apartments" />
+                <input name="building" value={form.building} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Apex Apartments" />
               </div>
               <div>
                 <label className="mb-2 block text-sm font-semibold text-slate-700">Street</label>
-                <input name="street" value={form.street} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Main Street" />
+                <input name="street" value={form.street} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Main Street" />
               </div>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm font-semibold text-slate-700">Landmark</label>
-                <input name="landmark" value={form.landmark} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Near school" />
+                <input name="landmark" value={form.landmark} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Near school" />
               </div>
               <div>
                 <label className="mb-2 block text-sm font-semibold text-slate-700">Area</label>
-                <input name="area" value={form.area} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Kotnoor" />
+                <input name="area" value={form.area} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Kotnoor" />
               </div>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm font-semibold text-slate-700">City *</label>
-                <input name="city" value={form.city} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Kalaburagi" />
+                <input name="city" value={form.city} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Kalaburagi" />
                 {errors.city && <p className="mt-1 text-xs text-danger">{errors.city}</p>}
               </div>
               <div>
                 <label className="mb-2 block text-sm font-semibold text-slate-700">State *</label>
-                <input name="state" value={form.state} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Karnataka" />
+                <input name="state" value={form.state} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Karnataka" />
                 {errors.state && <p className="mt-1 text-xs text-danger">{errors.state}</p>}
               </div>
             </div>
@@ -159,12 +159,12 @@ export default function AddAddressPage({ onBack, onSaveAddress, onUseCurrentLoca
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm font-semibold text-slate-700">Pincode *</label>
-                <input name="pincode" value={form.pincode} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="585102" />
+                <input name="pincode" value={form.pincode} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="585102" />
                 {errors.pincode && <p className="mt-1 text-xs text-danger">{errors.pincode}</p>}
               </div>
               <div>
                 <label className="mb-2 block text-sm font-semibold text-slate-700">Receiver Name *</label>
-                <input name="receiverName" value={form.receiverName} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Shivam" />
+                <input name="receiverName" value={form.receiverName} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Shivam" />
                 {errors.receiverName && <p className="mt-1 text-xs text-danger">{errors.receiverName}</p>}
               </div>
             </div>
@@ -172,12 +172,12 @@ export default function AddAddressPage({ onBack, onSaveAddress, onUseCurrentLoca
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm font-semibold text-slate-700">Mobile Number *</label>
-                <input name="mobileNumber" value={form.mobileNumber} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="9876543210" />
+                <input name="mobileNumber" value={form.mobileNumber} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="9876543210" />
                 {errors.mobileNumber && <p className="mt-1 text-xs text-danger">{errors.mobileNumber}</p>}
               </div>
               <div>
                 <label className="mb-2 block text-sm font-semibold text-slate-700">Alternate Mobile</label>
-                <input name="alternateMobile" value={form.alternateMobile} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Optional" />
+                <input name="alternateMobile" value={form.alternateMobile} onChange={handleChange} className="w-full rounded-2xl border border-slate-200 bg-page px-3 py-3 text-sm outline-none focus:border-primary" placeholder="Optional" />
               </div>
             </div>
 
@@ -185,7 +185,7 @@ export default function AddAddressPage({ onBack, onSaveAddress, onUseCurrentLoca
               <label className="mb-2 block text-sm font-semibold text-slate-700">Save address as</label>
               <div className="flex flex-wrap gap-2">
                 {typeOptions.map((option) => (
-                  <button key={option} type="button" onClick={() => setForm((prev) => ({ ...prev, addressType: option }))} className={`rounded-full px-3 py-2 text-sm font-semibold transition ${form.addressType === option ? 'bg-primary text-white' : 'bg-slate-100 text-slate-700'}`}>
+                  <button key={option} type="button" onClick={() => setForm((prev) => ({ ...prev, addressType: option }))} className={`rounded-full px-3 py-2 text-sm font-semibold transition ${form.addressType === option ? 'bg-primary text-white' : 'bg-page text-slate-700'}`}>
                     {option}
                   </button>
                 ))}
@@ -197,14 +197,14 @@ export default function AddAddressPage({ onBack, onSaveAddress, onUseCurrentLoca
             <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-black text-slate-900">Upload Door / Building Image</h2>
-                <label className="flex cursor-pointer items-center gap-2 rounded-full bg-slate-100 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200">
+                <label className="flex cursor-pointer items-center gap-2 rounded-full bg-page px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200">
                   <Camera size={16} />
                   Upload
                   <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
                 </label>
               </div>
 
-              <div className="mt-3 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4 text-center">
+              <div className="mt-3 rounded-2xl border border-dashed border-slate-300 bg-page p-4 text-center">
                 {form.imagePreview ? (
                   <img src={form.imagePreview} alt="Address preview" className="mx-auto h-40 w-full rounded-2xl object-cover" />
                 ) : (

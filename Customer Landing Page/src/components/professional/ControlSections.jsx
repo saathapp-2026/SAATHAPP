@@ -21,7 +21,7 @@ import {
   getProfessionalPricingConfig,
 } from '../../config/professionalOnboardingConfig';
 
-const cardClass = 'bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft text-left';
+const cardClass = 'bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft text-left';
 const labelClass = 'text-[10px] font-black uppercase tracking-wider text-slate-400';
 const valueClass = 'text-sm font-bold text-slate-800 dark:text-slate-100 mt-0.5';
 
@@ -29,7 +29,7 @@ function InfoGrid({ rows }) {
   return (
     <div className="grid sm:grid-cols-2 gap-3">
       {rows.map((row) => (
-        <div key={row.label} className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800">
+        <div key={row.label} className="p-3 rounded-xl bg-page dark:bg-slate-950 border border-slate-100 dark:border-slate-800">
           <p className={labelClass}>{row.label}</p>
           <p className={valueClass}>{row.value ?? '—'}</p>
         </div>
@@ -45,7 +45,7 @@ export function ProfessionalProfileSection({ onboarding, session, professionLabe
   return (
     <div className={`${cardClass} space-y-4`}>
       <div className="flex items-center gap-4">
-        <div className="w-16 h-16 rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 text-xs font-bold">
+        <div className="w-16 h-16 rounded-full overflow-hidden bg-page border border-slate-200 flex items-center justify-center text-slate-400 text-xs font-bold">
           {photo ? <span className="px-1 text-center leading-tight">{String(photo).slice(0, 18)}</span> : 'No Photo'}
         </div>
         <div>
@@ -106,7 +106,7 @@ export function MembershipSection({ membership, renewalDate, onMembershipChange,
               className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase transition-colors cursor-pointer ${
                 membershipTab === tab.id
                   ? 'bg-primary text-white'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
               }`}
             >
               {tab.label}
@@ -141,12 +141,12 @@ export function MembershipSection({ membership, renewalDate, onMembershipChange,
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100 dark:border-slate-800/50">
+          <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100 ">
             {current.planId !== 'growth' && (
               <button type="button" onClick={() => setMembershipTab('upgrade')} className="px-4 py-2 rounded-xl bg-primary text-white text-[10px] font-black uppercase cursor-pointer">Upgrade Plan</button>
             )}
-            <button type="button" onClick={() => run(() => downgradeProfessionalMembership('starter'))} className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-[10px] font-black uppercase cursor-pointer text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800">Downgrade</button>
-            <button type="button" onClick={() => run(() => renewProfessionalMembership(current.planId))} className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-[10px] font-black uppercase cursor-pointer text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800">Renew Manually</button>
+            <button type="button" onClick={() => run(() => downgradeProfessionalMembership('starter'))} className="px-4 py-2 rounded-xl border border-slate-200 text-[10px] font-black uppercase cursor-pointer text-slate-600 dark:text-slate-300 hover:bg-page">Downgrade</button>
+            <button type="button" onClick={() => run(() => renewProfessionalMembership(current.planId))} className="px-4 py-2 rounded-xl border border-slate-200 text-[10px] font-black uppercase cursor-pointer text-slate-600 dark:text-slate-300 hover:bg-page">Renew Manually</button>
             <button type="button" onClick={() => run(() => cancelProfessionalMembership())} className="px-4 py-2 rounded-xl border border-rose-200 text-rose-600 text-[10px] font-black uppercase cursor-pointer hover:bg-rose-50">Cancel Subscription</button>
           </div>
         </div>
@@ -159,7 +159,7 @@ export function MembershipSection({ membership, renewalDate, onMembershipChange,
             {plans.map((plan) => {
               const isCurrent = current.planId === plan.id;
               return (
-                <div key={plan.id} className={`p-4 rounded-xl border relative flex flex-col justify-between ${isCurrent ? 'border-emerald-500 bg-emerald-50/10' : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-soft hover:shadow-premium transition-shadow'}`}>
+                <div key={plan.id} className={`p-4 rounded-xl border relative flex flex-col justify-between ${isCurrent ? 'border-emerald-500 bg-emerald-50/10' : 'border-slate-200 dark:border-slate-800 bg-surface shadow-soft hover:shadow-premium transition-shadow'}`}>
                   {isCurrent && <span className="absolute -top-2.5 right-3 bg-emerald-500 text-white text-[8px] font-black uppercase px-2 py-0.5 rounded-full">Current</span>}
                   <div>
                     <p className="text-sm font-black text-slate-800 dark:text-white">{plan.name}</p>
@@ -173,7 +173,7 @@ export function MembershipSection({ membership, renewalDate, onMembershipChange,
                     </ul>
                   </div>
                   {!isCurrent && (
-                    <button type="button" onClick={() => run(() => subscribeProfessionalMembership(plan.id))} className="mt-5 w-full py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-300 transition-colors text-[10px] font-black uppercase cursor-pointer">
+                    <button type="button" onClick={() => run(() => subscribeProfessionalMembership(plan.id))} className="mt-5 w-full py-2 rounded-lg bg-page hover:bg-primary hover:text-white text-slate-600 dark:text-slate-300 transition-colors text-[10px] font-black uppercase cursor-pointer">
                       Select {plan.name}
                     </button>
                   )}
@@ -201,7 +201,7 @@ export function MembershipSection({ membership, renewalDate, onMembershipChange,
             </div>
             {/* Missing benefits */}
             {current.planId !== 'growth' && (
-              <div className="p-4 border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 rounded-xl">
+              <div className="p-4 border border-slate-200 dark:border-slate-800 bg-page rounded-xl">
                 <p className="text-xs font-black uppercase tracking-wider text-slate-500 mb-3">Missing Out On</p>
                 <ul className="space-y-2">
                   <li className="text-xs text-slate-400 flex items-center gap-2"><span className="text-slate-300">✖</span> Dedicated Account Manager</li>
@@ -245,7 +245,7 @@ export function MembershipSection({ membership, renewalDate, onMembershipChange,
               </thead>
               <tbody className="divide-y divide-slate-50 dark:divide-slate-850">
                 {billingHistory.map((inv) => (
-                  <tr key={inv.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/20">
+                  <tr key={inv.id} className="hover:bg-slate-50/50">
                     <td className="py-3 font-bold text-slate-800 dark:text-slate-300">{inv.id}</td>
                     <td className="py-3 text-slate-400">{inv.date}</td>
                     <td className="py-3 font-bold text-primary">{inv.plan}</td>
@@ -335,7 +335,7 @@ export function ProfileSettingsSection({
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase transition-colors cursor-pointer ${
                   activeSubTab === tab.id
                     ? 'bg-primary text-white'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
                 }`}
               >
                 <Icon size={12} />
@@ -378,7 +378,7 @@ export function ProfileSettingsSection({
 
       {activeSubTab === 'service_area' && (
         <div className={`${cardClass} space-y-6`}>
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800/40">
+          <div className="flex items-center justify-between pb-4 border-b border-slate-100 ">
             <div>
               <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Service Radius Map</h3>
               <p className="text-[10px] text-slate-450 mt-0.5">Define your geographical service coverage coordinates</p>
@@ -391,7 +391,7 @@ export function ProfileSettingsSection({
             </button>
           </div>
 
-          <div className="h-96 w-full rounded-card border border-slate-200 dark:border-slate-800 relative bg-slate-100 dark:bg-slate-950 overflow-hidden shadow-inner flex flex-col items-center justify-center gap-3 p-6 text-center">
+          <div className="h-96 w-full rounded-card border border-slate-200 dark:border-slate-800 relative bg-page dark:bg-slate-950 overflow-hidden shadow-inner flex flex-col items-center justify-center gap-3 p-6 text-center">
             <MapPin className="text-primary" size={32} />
             <p className="text-sm font-bold text-slate-800 dark:text-slate-200">Service Location</p>
             <p className="text-xs text-slate-500">{serviceCity}</p>
@@ -400,15 +400,15 @@ export function ProfileSettingsSection({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-semibold pt-4">
-            <div className="p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-xl">
+            <div className="p-3.5 bg-page dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-xl">
               <span className="text-[9px] font-black uppercase text-slate-450 block">Current City</span>
               <p className="font-bold text-slate-800 dark:text-slate-200 mt-1">{serviceCity}</p>
             </div>
-            <div className="p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-xl">
+            <div className="p-3.5 bg-page dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-xl">
               <span className="text-[9px] font-black uppercase text-slate-450 block">Registered Radius</span>
               <p className="font-bold text-slate-800 dark:text-slate-200 mt-1">{serviceRadiusLabel}</p>
             </div>
-            <div className="p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-xl">
+            <div className="p-3.5 bg-page dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-xl">
               <span className="text-[9px] font-black uppercase text-slate-450 block">Location Tier</span>
               <p className="font-bold text-primary mt-1 capitalize">{onboarding?.serviceLocation?.locationTier || 'Not set'}</p>
             </div>
@@ -422,7 +422,7 @@ export function ProfileSettingsSection({
 
       {activeSubTab === 'preferences' && (
         <div className={`${cardClass} space-y-6 max-w-2xl`}>
-          <div className="pb-4 border-b border-slate-100 dark:border-slate-800/40">
+          <div className="pb-4 border-b border-slate-100 ">
             <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">System Preferences</h3>
             <p className="text-[10px] text-slate-450 mt-0.5">Customize notification modes, system language, and security rules</p>
           </div>
@@ -436,7 +436,7 @@ export function ProfileSettingsSection({
               <button
                 onClick={toggleDarkMode}
                 className={`w-10 h-6 rounded-full p-1 cursor-pointer transition-colors duration-300 flex items-center ${
-                  darkMode ? 'bg-primary' : 'bg-slate-300 dark:bg-slate-800'
+                  darkMode ? 'bg-primary' : 'bg-slate-300'
                 }`}
               >
                 <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
@@ -479,13 +479,13 @@ export function ProfileSettingsSection({
       )}
 
       {activeSubTab === 'reviews' && (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft text-left">
+        <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft text-left">
           <div className="flex items-center gap-2 mb-4">
             <Star size={18} className="text-amber-500 fill-amber-500" />
             <h3 className="text-sm font-black uppercase tracking-wider">Reviews & Ratings</h3>
           </div>
           <p className="text-xs text-slate-500">No ratings yet.</p>
-          <div className="mt-4 p-4 border border-slate-100 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-900/50">
+          <div className="mt-4 p-4 border border-slate-100 dark:border-slate-800 rounded-xl bg-page">
             <p className="text-xs text-slate-400 italic">Review system integration pending backend connectivity.</p>
           </div>
         </div>
@@ -548,7 +548,7 @@ export function EquipmentSection() {
       <p className="text-xs font-black uppercase text-slate-500 mb-2">{title}</p>
       <ul className="space-y-2">
         {items.map((i) => (
-          <li key={i.id} className="flex items-center justify-between gap-2 text-xs p-2 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800">
+          <li key={i.id} className="flex items-center justify-between gap-2 text-xs p-2 rounded-lg bg-page dark:bg-slate-950 border border-slate-100 dark:border-slate-800">
             <span className="font-semibold text-slate-700 dark:text-slate-200">
               {i.name}
               {rent
@@ -556,7 +556,7 @@ export function EquipmentSection() {
                 : ` — ₹${Number(i.price).toLocaleString('en-IN')}`}
             </span>
             <span className="flex gap-1 shrink-0">
-              <button type="button" className="px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700 text-[9px] font-black uppercase cursor-pointer" onClick={() => alert(`View: ${i.name}`)}>View</button>
+              <button type="button" className="px-2 py-1 rounded-md border border-slate-200 text-[9px] font-black uppercase cursor-pointer" onClick={() => alert(`View: ${i.name}`)}>View</button>
               <button type="button" className="px-2 py-1 rounded-md bg-primary text-white text-[9px] font-black uppercase cursor-pointer" onClick={() => alert(`${rent ? 'Rent' : 'Purchase'} requested: ${i.name}`)}>{rent ? 'Rent' : 'Purchase'}</button>
             </span>
           </li>
@@ -587,7 +587,7 @@ export function BusinessServicesSection() {
       <h3 className="text-sm font-black uppercase tracking-wider">Business & Digital Services</h3>
       <ul className="space-y-2">
         {equipment.digitalServices.map((i) => (
-          <li key={i.id} className="flex items-center justify-between gap-2 text-xs p-2 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800">
+          <li key={i.id} className="flex items-center justify-between gap-2 text-xs p-2 rounded-lg bg-page dark:bg-slate-950 border border-slate-100 dark:border-slate-800">
             <span className="font-semibold">{i.name} — ₹{Number(i.price).toLocaleString('en-IN')}</span>
             <button type="button" className="px-2 py-1 rounded-md bg-primary text-white text-[9px] font-black uppercase cursor-pointer" onClick={() => alert(`Service request: ${i.name}`)}>Purchase</button>
           </li>
@@ -635,7 +635,7 @@ export function DocumentsSection({ onboarding, membership, setActiveTab }) {
               className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase transition-colors cursor-pointer ${
                 docTab === tab.id
                   ? 'bg-primary text-white'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
               }`}
             >
               {tab.label}
@@ -674,7 +674,7 @@ export function DocumentsSection({ onboarding, membership, setActiveTab }) {
                       <p className="text-xs font-black text-amber-800 dark:text-amber-200 flex items-center gap-1"><AlertCircle size={12} /> {d.label}</p>
                       <p className="text-[10px] text-amber-600 mt-0.5">Status: Missing</p>
                     </div>
-                    <button onClick={() => handleUpload(d.label)} className="text-[9px] bg-white dark:bg-slate-900 border border-amber-200 text-amber-700 px-2 py-1 rounded-md font-bold uppercase cursor-pointer hover:bg-amber-100">Upload</button>
+                    <button onClick={() => handleUpload(d.label)} className="text-[9px] bg-surface border border-amber-200 text-amber-700 px-2 py-1 rounded-md font-bold uppercase cursor-pointer hover:bg-amber-100">Upload</button>
                   </li>
                 ))}
               </ul>
@@ -689,19 +689,19 @@ export function DocumentsSection({ onboarding, membership, setActiveTab }) {
             <ClipboardList size={18} className="text-primary" />
             <h3 className="text-sm font-black uppercase tracking-wider">Professional Licenses & Certifications</h3>
           </div>
-          <div className="p-4 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-between bg-slate-50 dark:bg-slate-900/50">
+          <div className="p-4 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-between bg-page">
             <div>
               <p className="text-xs font-black text-slate-800 dark:text-slate-200">Trade License (Plumbing)</p>
               <p className="text-[10px] text-slate-500 mt-0.5">Valid until Dec 2028</p>
             </div>
             <span className="text-[10px] font-black uppercase px-2 py-1 bg-emerald-100 text-emerald-700 rounded-md">Verified</span>
           </div>
-          <div className="p-4 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-between bg-slate-50 dark:bg-slate-900/50">
+          <div className="p-4 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-between bg-page">
             <div>
               <p className="text-xs font-black text-slate-800 dark:text-slate-200">Police Clearance Certificate</p>
               <p className="text-[10px] text-slate-500 mt-0.5">Expires in 60 days</p>
             </div>
-            <button onClick={() => handleUpload('Police Clearance')} className="text-[9px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-md font-bold uppercase cursor-pointer hover:bg-slate-300">Renew/Upload</button>
+            <button onClick={() => handleUpload('Police Clearance')} className="text-[9px] bg-slate-200 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-md font-bold uppercase cursor-pointer hover:bg-slate-300">Renew/Upload</button>
           </div>
         </div>
       )}
@@ -721,7 +721,7 @@ export function DocumentsSection({ onboarding, membership, setActiveTab }) {
           <p className="text-xs text-slate-500">Review your digitally signed Professional Agreement and Platform T&Cs.</p>
           
           <div className="space-y-3">
-            <div className="p-3 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-between bg-white dark:bg-slate-900">
+            <div className="p-3 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-between bg-surface">
               <div>
                 <p className="text-xs font-black text-slate-800 dark:text-slate-200">Master Service Agreement</p>
                 <p className="text-[10px] text-slate-400 mt-0.5">Signed on: Jul 15, 2026</p>
@@ -729,7 +729,7 @@ export function DocumentsSection({ onboarding, membership, setActiveTab }) {
               <Link to="/professional/terms" className="text-[9px] bg-primary/10 text-primary px-3 py-1.5 rounded-md font-bold uppercase cursor-pointer hover:bg-primary/20">View PDF</Link>
             </div>
             
-            <div className="p-3 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-between bg-white dark:bg-slate-900">
+            <div className="p-3 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-between bg-surface">
               <div>
                 <p className="text-xs font-black text-slate-800 dark:text-slate-200">Payment & Escrow Terms</p>
                 <p className="text-[10px] text-slate-400 mt-0.5">Signed on: Jul 15, 2026</p>
@@ -770,7 +770,7 @@ export function HelpSupportModule({
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase transition-colors cursor-pointer ${
                   supportTab === tab.id
                     ? 'bg-primary text-white'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
                 }`}
               >
                 <Icon size={12} />
@@ -782,7 +782,7 @@ export function HelpSupportModule({
       </div>
 
       {supportTab === 'tickets' && (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft text-left flex flex-col justify-between max-w-3xl">
+        <div className="bg-surface border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft text-left flex flex-col justify-between max-w-3xl">
           <div className="space-y-4 w-full">
             <div>
               <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Partner Support Helpdesk</h3>
@@ -798,7 +798,7 @@ export function HelpSupportModule({
                   value={ticketSubject}
                   onChange={(e) => setTicketSubject(e.target.value)}
                   placeholder="e.g. Booking payout inquiry"
-                  className="w-full mt-1 p-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm bg-slate-50 dark:bg-slate-950 dark:text-white"
+                  className="w-full mt-1 p-2 border border-slate-200 rounded-lg text-sm bg-page dark:bg-slate-950 dark:text-white"
                 />
               </div>
 
@@ -811,15 +811,15 @@ export function HelpSupportModule({
             </form>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-slate-100 dark:border-slate-800/40 w-full text-left">
+          <div className="mt-8 pt-4 border-t border-slate-100  w-full text-left">
             <h4 className="text-xs font-black text-slate-450 dark:text-slate-500 uppercase tracking-wider mb-4">Raised Tickets History</h4>
             <div className="space-y-3">
               {supportTickets.map(tck => (
-                <div key={tck.id} className="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800 rounded-xl">
+                <div key={tck.id} className="p-3 bg-page dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800 rounded-xl">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-black text-slate-800 dark:text-slate-200">{tck.id}</span>
                     <span className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase ${
-                      tck.status === 'open' ? 'bg-blue-50 text-blue-600 border border-blue-200/50' : 'bg-slate-100 text-slate-550 border border-slate-200/60'
+                      tck.status === 'open' ? 'bg-blue-50 text-blue-600 border border-blue-200/50' : 'bg-page text-slate-550 border border-slate-200/60'
                     }`}>
                       {tck.status}
                     </span>
@@ -848,7 +848,7 @@ export function HelpSupportModule({
           </div>
           <a
             href="tel:1800123456"
-            className="w-full py-1.5 bg-white text-slate-900 text-center font-extrabold text-[10px] uppercase rounded-btn block hover:bg-slate-100 shadow-sm transition-colors"
+            className="w-full py-1.5 bg-white text-slate-900 text-center font-extrabold text-[10px] uppercase rounded-btn block hover:bg-page shadow-sm transition-colors"
           >
             Call Helpline Now
           </a>
@@ -856,11 +856,11 @@ export function HelpSupportModule({
       )}
 
       {supportTab === 'faq' && (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft text-left max-w-4xl">
+        <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft text-left max-w-4xl">
           <h4 className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Partner FAQs</h4>
           <div className="space-y-4 text-xs text-slate-600 dark:text-slate-400">
             {SUPPORT_FAQS.map((faq, i) => (
-              <div key={i} className="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-xl">
+              <div key={i} className="p-3 bg-page dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-xl">
                 <span className="font-black text-slate-800 dark:text-slate-200 block">{faq.q}</span>
                 <p className="mt-1 font-medium leading-relaxed">{faq.a}</p>
               </div>

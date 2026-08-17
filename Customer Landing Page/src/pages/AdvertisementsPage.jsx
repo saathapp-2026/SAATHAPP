@@ -44,7 +44,7 @@ export default function AdvertisementsPage({
   };
 
   return (
-    <div className={`min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col font-sans transition-colors duration-200 ${darkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen bg-page dark:bg-slate-950 flex flex-col font-sans transition-colors duration-200 ${darkMode ? 'dark' : ''}`}>
       <Header
         onBack={onBack}
         isAuthenticated={isAuthenticated}
@@ -64,7 +64,7 @@ export default function AdvertisementsPage({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-8">
               <AdFactorsSection />
-              <div className="hidden lg:block w-px bg-slate-200 dark:bg-slate-800" />
+              <div className="hidden lg:block w-px bg-slate-200" />
               <AdLocationsSection />
             </div>
           </div>

@@ -388,7 +388,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
           <button
             type="button"
             onClick={() => addToast?.('🔄 Refreshed wallet balance & transactions', 'info')}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-slate-300 dark:border-slate-800 bg-surface text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition shadow-sm cursor-pointer"
           >
             <RefreshCw size={14} className="text-[#00986C]" /> Refresh
           </button>
@@ -397,7 +397,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
           <button
             type="button"
             onClick={() => setIsStatementModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-slate-300 dark:border-slate-800 bg-surface text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition shadow-sm cursor-pointer"
           >
             <Download size={14} className="text-[#00986C]" /> Export Statement
           </button>
@@ -414,14 +414,14 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
 
             {/* Withdraw Dropdown Menu */}
             {isWithdrawDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-30 text-xs font-bold space-y-1 sa-rise">
+              <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-30 text-xs font-bold space-y-1 sa-rise">
                 <button
                   type="button"
                   onClick={() => {
                     setIsWithdrawDropdownOpen(false);
                     setIsWithdrawModalOpen(true);
                   }}
-                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2.5 text-slate-800 dark:text-slate-200"
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-page flex items-center gap-2.5 text-slate-800 dark:text-slate-200"
                 >
                   <div className="p-1.5 rounded-lg bg-emerald-500/10 text-[#00986C] shrink-0">
                     <ArrowUpRight size={15} />
@@ -439,7 +439,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                     setTxnFilter('Withdrawals');
                     addToast?.('Filtered transaction history to Withdrawals', 'info');
                   }}
-                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2.5 text-slate-800 dark:text-slate-200"
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-page flex items-center gap-2.5 text-slate-800 dark:text-slate-200"
                 >
                   <div className="p-1.5 rounded-lg bg-blue-500/10 text-blue-500 shrink-0">
                     <Clock size={15} />
@@ -456,7 +456,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                     setIsWithdrawDropdownOpen(false);
                     setIsPayoutSettingsModalOpen(true);
                   }}
-                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2.5 text-slate-800 dark:text-slate-200"
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-page flex items-center gap-2.5 text-slate-800 dark:text-slate-200"
                 >
                   <div className="p-1.5 rounded-lg bg-purple-500/10 text-purple-500 shrink-0">
                     <Sliders size={15} />
@@ -473,7 +473,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                     setIsWithdrawDropdownOpen(false);
                     setIsLinkedBanksModalOpen(true);
                   }}
-                  className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-2.5 text-slate-800 dark:text-slate-200"
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-page flex items-center gap-2.5 text-slate-800 dark:text-slate-200"
                 >
                   <div className="p-1.5 rounded-lg bg-amber-500/10 text-amber-500 shrink-0">
                     <Building2 size={15} />
@@ -492,14 +492,14 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
             <button
               type="button"
               onClick={() => setIsGstDropdownOpen(!isGstDropdownOpen)}
-              className="inline-flex items-center gap-1.5 rounded-2xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-2xl border border-slate-300 dark:border-slate-800 bg-surface px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition cursor-pointer"
             >
               <Receipt size={15} className="text-[#00986C]" /> GST Reports <ChevronDown size={14} />
             </button>
 
             {/* GST Reports Dropdown Menu (PDF Page 32) */}
             {isGstDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-60 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-30 text-xs font-bold space-y-1 sa-rise">
+              <div className="absolute right-0 mt-2 w-60 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-30 text-xs font-bold space-y-1 sa-rise">
                 {[
                   { title: 'GSTR-1', desc: 'Outward Supplies' },
                   { title: 'GSTR-3B', desc: 'Summary Tax Return' },
@@ -518,7 +518,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                       setIsGstDropdownOpen(false);
                       setIsGstModalOpen(true);
                     }}
-                    className="w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-between text-slate-800 dark:text-slate-200"
+                    className="w-full text-left p-2.5 rounded-xl hover:bg-page flex items-center justify-between text-slate-800 dark:text-slate-200"
                   >
                     <div>
                       <span className="block font-black text-slate-900 dark:text-white">{r.title}</span>
@@ -556,7 +556,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
             }}
             className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${activeFinanceTab === tab
                 ? 'bg-emerald-600 text-white shadow-md font-black'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
               }`}
           >
             {tab}
@@ -574,17 +574,17 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
               <strong className="text-3xl font-black block font-mono text-emerald-400">₹0</strong>
               <span className="text-[10px] text-slate-400">T+1 Daily Auto Settlement</span>
             </div>
-            <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
+            <div className="p-5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
               <span className="text-xs text-amber-500 font-bold uppercase">Escrow Held in Transit</span>
               <strong className="text-3xl font-black text-amber-500 block font-mono">₹0</strong>
               <span className="text-[10px] text-slate-400">Awaiting buyer delivery confirmation</span>
             </div>
-            <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
+            <div className="p-5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
               <span className="text-xs text-blue-500 font-bold uppercase">Lifetime Net Payouts</span>
               <strong className="text-3xl font-black text-slate-900 dark:text-white block font-mono">₹0</strong>
               <span className="text-[10px] text-slate-400">Transferred to Linked Account</span>
             </div>
-            <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1 flex flex-col justify-between">
+            <div className="p-5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm space-y-1 flex flex-col justify-between">
               <span className="text-xs text-slate-400 font-bold uppercase">Instant Payout Action</span>
               <button
                 type="button"
@@ -599,9 +599,9 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
       ) : activeFinanceTab === 'Pending Payouts' ? (
         <div className="space-y-4">
           <h3 className="text-base font-black text-slate-900 dark:text-white">Pending Escrow Funds &amp; In-Transit Delivery Releases</h3>
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden text-xs">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm overflow-hidden text-xs">
             <table className="w-full text-left">
-              <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
+              <thead className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
                 <tr>
                   <th className="p-4">Escrow Ref</th>
                   <th className="p-4">Order ID</th>
@@ -636,9 +636,9 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
       ) : activeFinanceTab === 'Settlements' || activeFinanceTab === 'Payout History' ? (
         <div className="space-y-4">
           <h3 className="text-base font-black text-slate-900 dark:text-white">Bank Payout Transfers &amp; T+1 Settlement Logs</h3>
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden text-xs">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm overflow-hidden text-xs">
             <table className="w-full text-left">
-              <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
+              <thead className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
                 <tr>
                   <th className="p-4">Payout Ref / UTR</th>
                   <th className="p-4">Transfer Mode</th>
@@ -660,7 +660,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                       <button
                         type="button"
                         onClick={() => addToast?.(`Downloaded Settlement Receipt ${s.utr}`, 'success')}
-                        className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white font-extrabold text-xs cursor-pointer shadow transition"
+                        className="px-3 py-1.5 rounded-xl bg-page hover:bg-emerald-600 hover:text-white font-extrabold text-xs cursor-pointer shadow transition"
                       >
                         Download PDF
                       </button>
@@ -713,7 +713,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
               </div>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between space-y-4">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm flex flex-col justify-between space-y-4">
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
@@ -725,12 +725,12 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                       <span className="text-[10px] text-slate-500 font-bold">Primary Transfer Account</span>
                     </div>
                   </div>
-                  <span className="bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-slate-200 dark:border-slate-700 flex items-center gap-1">
+                  <span className="bg-page text-slate-500 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-slate-200 flex items-center gap-1">
                     Not Verified
                   </span>
                 </div>
 
-                <div className="space-y-1.5 text-xs font-semibold bg-slate-50 dark:bg-slate-950 p-3 rounded-2xl border border-slate-100 dark:border-slate-800">
+                <div className="space-y-1.5 text-xs font-semibold bg-page dark:bg-slate-950 p-3 rounded-2xl border border-slate-100 dark:border-slate-800">
                   <div className="flex justify-between"><span className="text-slate-400">Bank Name:</span> <strong className="text-slate-900 dark:text-white">{formData.bankName || 'Not added yet'}</strong></div>
                   <div className="flex justify-between"><span className="text-slate-400">Account No:</span> <strong className="text-slate-900 dark:text-white font-mono">{formData.accountNo || 'Not added yet'}</strong></div>
                   <div className="flex justify-between"><span className="text-slate-400">IFSC Code:</span> <strong className="text-slate-900 dark:text-white font-mono">{formData.ifscCode || 'Not added yet'}</strong></div>
@@ -742,7 +742,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                 <button
                   type="button"
                   onClick={() => setIsLinkedBanksModalOpen(true)}
-                  className="flex-1 py-2 rounded-xl border border-slate-300 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-extrabold text-slate-800 dark:text-slate-200 text-center transition cursor-pointer"
+                  className="flex-1 py-2 rounded-xl border border-slate-300 dark:border-slate-800 hover:bg-page text-xs font-extrabold text-slate-800 dark:text-slate-200 text-center transition cursor-pointer"
                 >
                   Manage Banks
                 </button>
@@ -756,7 +756,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
               </div>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between space-y-4">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm flex flex-col justify-between space-y-4">
               <div>
                 <h4 className="text-xs font-black text-slate-900 dark:text-white mb-2">Quick Financial Actions &amp; Compliance</h4>
                 <p className="text-xs text-slate-500 leading-relaxed mb-4">
@@ -766,7 +766,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                   <button
                     type="button"
                     onClick={() => setIsGstModalOpen(true)}
-                    className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-left hover:border-emerald-500 transition group"
+                    className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-left hover:border-emerald-500 transition group"
                   >
                     <Receipt size={16} className="text-emerald-500 mb-1" />
                     <span className="block font-black text-xs text-slate-900 dark:text-white">GST Tax Report</span>
@@ -776,7 +776,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                   <button
                     type="button"
                     onClick={() => setIsStatementModalOpen(true)}
-                    className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-left hover:border-emerald-500 transition group"
+                    className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-left hover:border-emerald-500 transition group"
                   >
                     <Download size={16} className="text-blue-500 mb-1" />
                     <span className="block font-black text-xs text-slate-900 dark:text-white">Account Statement</span>
@@ -787,7 +787,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
             </div>
           </div>
 
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
               <div>
                 <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Escrow Wallet Transaction History</h3>
@@ -802,7 +802,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                     onClick={() => setTxnFilter(f)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${txnFilter === f
                         ? 'bg-emerald-600 text-white shadow'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                        : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
                       }`}
                   >
                     {f}
@@ -813,7 +813,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase tracking-wider">
+                <thead className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase tracking-wider">
                   <tr>
                     <th className="p-3">Transaction ID</th>
                     <th className="p-3">Description</th>
@@ -828,7 +828,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                   {transactions
                     .filter((t) => txnFilter === 'All' || t.type.toLowerCase() === txnFilter.toLowerCase() || (txnFilter === 'Credits' && t.type === 'Credit') || (txnFilter === 'Debits' && t.type === 'Debit'))
                     .map((t, idx) => (
-                      <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                      <tr key={idx} className="hover:bg-page">
                         <td className="p-3 font-mono font-extrabold text-emerald-600 dark:text-emerald-400">{t.txn}</td>
                         <td className="p-3 font-bold text-slate-900 dark:text-white">{t.desc}</td>
                         <td className="p-3 text-slate-500">{t.channel}</td>
@@ -870,7 +870,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
       {/* MODAL 1: WITHDRAW FUNDS TO BANK MODAL (PDF Pages 28-30) */}
       {modalWithdrawOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
                 <ArrowUpRight className="text-[#00986C]" size={20} /> Withdraw Funds to Bank
@@ -880,7 +880,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
 
             {withdrawStep === 1 && (
               <form onSubmit={handleWithdrawSubmit} className="space-y-4">
-                <div className="grid grid-cols-3 gap-2 bg-slate-50 dark:bg-slate-950 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 text-center">
+                <div className="grid grid-cols-3 gap-2 bg-page dark:bg-slate-950 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 text-center">
                   <div><span className="text-[10px] text-slate-400 font-bold block uppercase">Available</span><strong className="text-slate-900 dark:text-white font-mono font-black">₹0</strong></div>
                   <div><span className="text-[10px] text-slate-400 font-bold block uppercase">Withdrawable</span><strong className="text-[#00986C] font-mono font-black">₹0</strong></div>
                   <div><span className="text-[10px] text-slate-400 font-bold block uppercase">Pending</span><strong className="text-amber-500 font-mono font-black">₹0</strong></div>
@@ -888,7 +888,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
 
                 <div>
                   <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">Select Bank Account</label>
-                  <select value={selectedBank} onChange={(e) => setSelectedBank(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white">
+                  <select value={selectedBank} onChange={(e) => setSelectedBank(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-page dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white">
                     <option value="Primary Account">{formData.bankName || 'Registered Account'} (Primary Payout)</option>
                     <option value="Secondary Account">Secondary Bank Account</option>
                     <option value="Other Account">Other Account</option>
@@ -897,14 +897,14 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
 
                 <div>
                   <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">Withdraw Amount (₹)</label>
-                  <input type="number" value={withdrawAmount} onChange={(e) => setWithdrawAmount(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-mono text-sm font-black text-slate-900 dark:text-white" placeholder="Enter amount" />
+                  <input type="number" value={withdrawAmount} onChange={(e) => setWithdrawAmount(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-page dark:bg-slate-950 p-2.5 font-mono text-sm font-black text-slate-900 dark:text-white" placeholder="Enter amount" />
                 </div>
 
                 <div>
                   <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">Settlement Speed</label>
                   <div className="grid grid-cols-3 gap-2">
                     {['Instant', 'Same Day', 'Next Business Day'].map((type) => (
-                      <button key={type} type="button" onClick={() => setSettlementType(type)} className={`py-2 rounded-xl text-center font-bold border transition ${settlementType === type ? 'bg-emerald-500/20 border-emerald-500 text-[#00986C]' : 'bg-slate-100 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'}`}>{type}</button>
+                      <button key={type} type="button" onClick={() => setSettlementType(type)} className={`py-2 rounded-xl text-center font-bold border transition ${settlementType === type ? 'bg-emerald-500/20 border-emerald-500 text-[#00986C]' : 'bg-page dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'}`}>{type}</button>
                     ))}
                   </div>
                 </div>
@@ -921,7 +921,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                 <p className="text-slate-600 dark:text-slate-400">Please enter the security verification code sent to your registered mobile number for account safety.</p>
                 <div>
                   <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">Security PIN / Mobile OTP</label>
-                  <input type="password" maxLength={6} value={otpValue} onChange={(e) => setOtpValue(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-center font-mono text-lg font-black tracking-widest text-slate-900 dark:text-white" placeholder="••••••" />
+                  <input type="password" maxLength={6} value={otpValue} onChange={(e) => setOtpValue(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 text-center font-mono text-lg font-black tracking-widest text-slate-900 dark:text-white" placeholder="••••••" />
                 </div>
                 <div className="pt-2 flex justify-end gap-2">
                   <button type="button" onClick={() => setWithdrawStep(1)} className="px-4 py-2 rounded-xl border border-slate-300 font-bold">Back</button>
@@ -953,7 +953,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
       {/* MODAL 2: GST REPORTS MODAL (PDF Pages 32-35) */}
       {isGstModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
                 <Receipt className="text-[#00986C]" size={18} /> Download GST Tax Report
@@ -963,7 +963,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
 
             <div>
               <label className="block font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">Select Report Type</label>
-              <select value={gstReportType} onChange={(e) => setGstReportType(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white">
+              <select value={gstReportType} onChange={(e) => setGstReportType(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-page dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white">
                 <option value="GSTR-1">GSTR-1 (Outward Supplies)</option>
                 <option value="GSTR-3B">GSTR-3B (Summary Return)</option>
                 <option value="GSTR-9">GSTR-9 (Annual Return)</option>
@@ -977,7 +977,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">Select Date</label>
-                <select value={gstDateRange} onChange={(e) => setGstDateRange(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2 font-bold text-slate-900 dark:text-white">
+                <select value={gstDateRange} onChange={(e) => setGstDateRange(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-page dark:bg-slate-950 p-2 font-bold text-slate-900 dark:text-white">
                   <option value="Today">Today</option>
                   <option value="This Month">This Month</option>
                   <option value="Last Month">Last Month</option>
@@ -988,7 +988,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
 
               <div>
                 <label className="block font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">Export Format</label>
-                <select value={gstFormat} onChange={(e) => setGstFormat(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-2 font-bold text-slate-900 dark:text-white uppercase">
+                <select value={gstFormat} onChange={(e) => setGstFormat(e.target.value)} className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-page dark:bg-slate-950 p-2 font-bold text-slate-900 dark:text-white uppercase">
                   <option value="pdf">PDF</option>
                   <option value="excel">Excel (.xlsx)</option>
                   <option value="csv">CSV</option>
@@ -1008,7 +1008,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
       {/* MODAL 3: EXPORT STATEMENT MODAL (PDF Page 36) */}
       {isStatementModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
                 <Download className="text-[#00986C]" size={18} /> Download Financial Statements
@@ -1017,7 +1017,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
             </div>
 
             <div className="space-y-3">
-              <div className="p-3.5 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 flex justify-between items-center">
+              <div className="p-3.5 bg-page dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 flex justify-between items-center">
                 <div>
                   <strong className="text-slate-900 dark:text-white font-extrabold block text-xs">Wallet Statement</strong>
                   <span className="text-[10px] text-slate-500">Includes all escrow releases, debits &amp; refunds</span>
@@ -1029,7 +1029,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                 </div>
               </div>
 
-              <div className="p-3.5 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 flex justify-between items-center">
+              <div className="p-3.5 bg-page dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 flex justify-between items-center">
                 <div>
                   <strong className="text-slate-900 dark:text-white font-extrabold block text-xs">Bank Statement</strong>
                   <span className="text-[10px] text-slate-500">Includes bank settlement logs &amp; UTR numbers</span>
@@ -1047,7 +1047,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
       {/* MODAL 4: LINKED BANKS MODAL */}
       {isLinkedBanksModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-xs sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
                 <Building2 className="text-[#00986C]" size={18} /> Linked Bank Accounts

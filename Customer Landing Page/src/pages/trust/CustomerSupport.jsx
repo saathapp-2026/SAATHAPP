@@ -86,7 +86,7 @@ export default function CustomerSupportPage() {
   const [openFaq, setOpenFaq] = useState(null);
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
+    <div className="min-h-screen bg-page font-sans text-slate-800">
       <Header
         cartCount={0}
         onCartClick={() => {}}
@@ -116,7 +116,7 @@ export default function CustomerSupportPage() {
             <Link
               to="/"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-page"
             >
               <ArrowLeft size={16} />
               Back
@@ -189,7 +189,7 @@ export default function CustomerSupportPage() {
                   </div>
                   <a
                     href={card.link}
-                    className="mt-6 w-full text-center rounded-xl bg-slate-100 py-3 text-xs font-bold text-slate-700 transition hover:bg-emerald-600 hover:text-white"
+                    className="mt-6 w-full text-center rounded-xl bg-page py-3 text-xs font-bold text-slate-700 transition hover:bg-emerald-600 hover:text-white"
                   >
                     {card.action}
                   </a>
@@ -239,7 +239,7 @@ export default function CustomerSupportPage() {
               🛡️ Official Communication Channels
             </h2>
             <div className="mt-8 grid md:grid-cols-2 gap-6">
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+              <div className="rounded-3xl border border-slate-200 bg-page p-6">
                 <h3 className="text-lg font-bold text-slate-900">Website & Apps</h3>
                 <p className="mt-2 text-xs text-slate-600">Always check that the URL matches exactly:</p>
                 <div className="mt-4 rounded-xl border border-emerald-500 bg-white px-4 py-3 font-bold text-emerald-700 text-sm">
@@ -247,7 +247,7 @@ export default function CustomerSupportPage() {
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+              <div className="rounded-3xl border border-slate-200 bg-page p-6">
                 <h3 className="text-lg font-bold text-slate-900">Official Emails</h3>
                 <p className="mt-2 text-xs text-slate-600">Official support emails always end with:</p>
                 <div className="mt-4 rounded-xl border border-blue-500 bg-white px-4 py-3 font-bold text-blue-600 text-sm">
@@ -276,7 +276,7 @@ export default function CustomerSupportPage() {
                 <div key={idx} className="rounded-2xl border border-slate-200 bg-slate-50/50 overflow-hidden">
                   <button
                     onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    className="w-full flex items-center justify-between p-5 text-left font-bold text-slate-900 text-sm sm:text-base hover:bg-slate-100 transition"
+                    className="w-full flex items-center justify-between p-5 text-left font-bold text-slate-900 text-sm sm:text-base hover:bg-page transition"
                   >
                     <span>{faq.q}</span>
                     {openFaq === idx ? <ChevronUp size={20} className="text-emerald-600 shrink-0" /> : <ChevronDown size={20} className="text-slate-400 shrink-0" />}

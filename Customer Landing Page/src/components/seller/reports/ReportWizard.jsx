@@ -118,8 +118,8 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
       className="flex items-end sm:items-center justify-center p-0 sm:p-4"
       contentClassName="w-full max-w-3xl"
     >
-      <div className="max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl">
-        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur px-5 py-4">
+      <div className="max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl">
+        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur px-5 py-4">
           <div>
             <h2 id="report-wizard-title" className="text-lg font-bold">
               Generate Report
@@ -128,7 +128,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
               Step {draft.step} of 5 · Draft auto-saved
             </p>
           </div>
-          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -138,7 +138,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
             {WIZARD_STEPS.map((s) => (
               <li key={s.id} className="flex-1">
                 <div
-                  className={`h-1.5 rounded-full ${draft.step >= s.id ? 'bg-emerald-500' : 'bg-slate-200 dark:bg-slate-700'}`}
+                  className={`h-1.5 rounded-full ${draft.step >= s.id ? 'bg-emerald-500' : 'bg-slate-200'}`}
                 />
                 <p className={`mt-1.5 text-[10px] font-medium truncate ${draft.step === s.id ? 'text-emerald-600' : 'text-slate-400'}`}>
                   {s.label}
@@ -159,7 +159,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
                   className={`text-left rounded-xl border p-3 transition-all ${
                     draft.typeId === t.id
                       ? 'border-emerald-500 ring-1 ring-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/20'
-                      : 'border-slate-200 dark:border-slate-700 hover:border-emerald-300'
+                      : 'border-slate-200 hover:border-emerald-300'
                   }`}
                 >
                   <p className="text-sm font-semibold">{t.label}</p>
@@ -180,7 +180,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
                     className={`rounded-full px-3 py-1.5 text-xs font-semibold border ${
                       draft.datePreset === p.id
                         ? 'bg-emerald-600 text-white border-emerald-600'
-                        : 'border-slate-200 dark:border-slate-700'
+                        : 'border-slate-200'
                     }`}
                   >
                     {p.label}
@@ -194,7 +194,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
                     type="date"
                     value={draft.dateFrom}
                     onChange={(e) => patch({ dateFrom: e.target.value, datePreset: 'custom' })}
-                    className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                    className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                   />
                 </label>
                 <label className="text-xs font-medium text-slate-600 dark:text-slate-300">
@@ -203,7 +203,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
                     type="date"
                     value={draft.dateTo}
                     onChange={(e) => patch({ dateTo: e.target.value, datePreset: 'custom' })}
-                    className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                    className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                   />
                 </label>
               </div>
@@ -217,7 +217,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
                 <select
                   value={draft.category}
                   onChange={(e) => patch({ category: e.target.value })}
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 >
                   <option value="all">All Categories</option>
                   {CATEGORIES.map((c) => (
@@ -230,7 +230,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
                 <select
                   value={draft.status}
                   onChange={(e) => patch({ status: e.target.value })}
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 >
                   {STATUS_OPTS.map((s) => (
                     <option key={s} value={s}>{s === 'all' ? 'All Status' : s}</option>
@@ -243,7 +243,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
                   value={draft.city}
                   onChange={(e) => patch({ city: e.target.value })}
                   placeholder="Any city"
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 />
               </label>
               <label className="text-xs font-medium">
@@ -252,7 +252,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
                   value={draft.state}
                   onChange={(e) => patch({ state: e.target.value })}
                   placeholder="Any state"
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 />
               </label>
               <label className="text-xs font-medium">
@@ -260,7 +260,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
                 <select
                   value={draft.paymentMode}
                   onChange={(e) => patch({ paymentMode: e.target.value })}
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 >
                   {PAYMENT_OPTS.map((p) => (
                     <option key={p} value={p}>{p === 'all' ? 'All Modes' : p}</option>
@@ -272,7 +272,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
                 <select
                   value={draft.gstType}
                   onChange={(e) => patch({ gstType: e.target.value })}
-                  className="mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
                 >
                   {GST_OPTS.map((g) => (
                     <option key={g} value={g}>{g === 'all' ? 'All GST Types' : g}</option>
@@ -283,7 +283,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
           )}
 
           {draft.step === 4 && (
-            <div className="rounded-xl border border-slate-200 dark:border-slate-700 p-4 space-y-3">
+            <div className="rounded-xl border border-slate-200 p-4 space-y-3">
               <div className="flex items-start gap-2 text-amber-600 text-xs">
                 <AlertTriangle size={14} className="mt-0.5 shrink-0" />
                 Preview uses mock BI data — ready for live API wiring.
@@ -299,7 +299,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
                   ['GST', formatINR(12400)],
                   ['Margin', '18.5%'],
                 ].map(([k, v]) => (
-                  <div key={k} className="rounded-lg bg-slate-50 dark:bg-slate-800/60 p-3">
+                  <div key={k} className="rounded-lg bg-page p-3">
                     <p className="text-[10px] text-slate-500">{k}</p>
                     <p className="text-sm font-bold">{v}</p>
                   </div>
@@ -322,7 +322,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
                     className={`rounded-xl border px-3 py-2.5 text-sm font-semibold ${
                       draft.format === f.id
                         ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700'
-                        : 'border-slate-200 dark:border-slate-700'
+                        : 'border-slate-200'
                     }`}
                   >
                     {f.label}
@@ -333,12 +333,12 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
           )}
         </div>
 
-        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-5 py-4">
+        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-white/95 px-5 py-4">
           <button
             type="button"
             disabled={draft.step <= 1 || busy}
             onClick={() => patch({ step: draft.step - 1 })}
-            className="inline-flex items-center gap-1 rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm font-semibold disabled:opacity-40"
+            className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold disabled:opacity-40"
           >
             <ChevronLeft size={16} /> Back
           </button>

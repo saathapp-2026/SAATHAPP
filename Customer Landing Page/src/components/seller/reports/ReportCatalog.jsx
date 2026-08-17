@@ -77,7 +77,7 @@ const SHORT_DESC = {
 
 function Skeleton() {
   return (
-    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 animate-pulse h-[120px]" />
+    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 animate-pulse h-[120px]" />
   );
 }
 
@@ -117,7 +117,7 @@ export default function ReportCatalog({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.02 }}
               onClick={() => onGenerate?.(item)}
-              className="text-left rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm hover:shadow-md hover:border-emerald-300 dark:hover:border-emerald-700 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="text-left rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 shadow-sm hover:shadow-md hover:border-emerald-300 dark:hover:border-emerald-700 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500"
             >
               <div className="flex items-start justify-between gap-2 mb-3">
                 <div
@@ -142,7 +142,7 @@ export default function ReportCatalog({
           <button
             type="button"
             onClick={onToggleAll}
-            className="rounded-xl border border-slate-200 dark:border-slate-700 px-5 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 bg-white dark:bg-slate-900 shadow-sm"
+            className="rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-page bg-surface shadow-sm"
           >
             {showAll ? 'Show Less' : 'View All Reports'}
           </button>

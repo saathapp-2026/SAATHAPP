@@ -36,7 +36,7 @@ export default function MarketingAssistant({ open, onClose, onUse }) {
 
   return (
     <SellerOverlay open={open} onClose={onClose} labelledBy="ai-assist-title" zIndex={SELLER_Z.modal}>
-      <div className="w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl p-5 max-h-[85vh] overflow-y-auto">
+      <div className="w-full max-w-lg rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl p-5 max-h-[85vh] overflow-y-auto">
         <div className="flex items-start justify-between mb-4">
           <div>
             <h2 id="ai-assist-title" className="text-lg font-bold inline-flex items-center gap-2">
@@ -44,7 +44,7 @@ export default function MarketingAssistant({ open, onClose, onUse }) {
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">Mock AI — architecture ready for live models</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -57,7 +57,7 @@ export default function MarketingAssistant({ open, onClose, onUse }) {
               disabled={busy}
               onClick={() => run(a.id)}
               className={`rounded-xl border px-3 py-2 text-left text-xs font-semibold ${
-                active === a.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200 dark:border-slate-700'
+                active === a.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200'
               }`}
             >
               {a.label}
@@ -77,7 +77,7 @@ export default function MarketingAssistant({ open, onClose, onUse }) {
                     onUse?.({ kind: active, value: r });
                     toast.success('Suggestion copied to flow');
                   }}
-                  className="w-full text-left rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-800"
+                  className="w-full text-left rounded-xl border border-slate-200 px-3 py-2.5 text-sm hover:bg-page"
                 >
                   {r}
                 </button>

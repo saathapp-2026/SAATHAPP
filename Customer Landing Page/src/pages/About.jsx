@@ -72,7 +72,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300" style={{ scrollBehavior: 'smooth' }}>
+    <div className="min-h-screen bg-page dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300" style={{ scrollBehavior: 'smooth' }}>
       <Header
         cartCount={0}
         onCartClick={() => {}}
@@ -102,7 +102,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
             <button
               type="button"
               onClick={() => (onBack ? onBack() : navigate('/', { replace: true }))}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-350 shadow-sm transition-all duration-300 hover:bg-white dark:hover:bg-slate-900 hover:shadow-md cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-350 shadow-sm transition-all duration-300 hover:bg-white hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
               Back
@@ -152,7 +152,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="lg:col-span-7 rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm flex flex-col justify-between text-left"
+              className="lg:col-span-7 rounded-[28px] border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-8 shadow-sm flex flex-col justify-between text-left"
             >
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
@@ -171,7 +171,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
                   Instead of replacing local businesses, we help them grow by providing technology, digital visibility, and an online marketplace where customers can discover, compare, and order products and services from nearby verified sellers.
                 </p>
               </div>
-              <div className="mt-6 p-4 rounded-2xl bg-slate-55 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50">
+              <div className="mt-6 p-4 rounded-2xl bg-slate-55 border border-slate-100 ">
                 <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Our Core Vision Summary</p>
                 <p className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-1">
                   Every local business deserves a digital identity, and every customer deserves easy access to trusted local products and services.
@@ -187,7 +187,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.2 }}
-                className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm text-left flex-1"
+                className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-8 shadow-sm text-left flex-1"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-100 dark:bg-teal-950 text-teal-600 dark:text-teal-400">
@@ -219,7 +219,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.3 }}
-                className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm text-left flex-1"
+                className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-8 shadow-sm text-left flex-1"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
@@ -240,7 +240,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.4 }}
-            className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 lg:p-10 shadow-sm text-left"
+            className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-8 lg:p-10 shadow-sm text-left"
           >
             <div className="max-w-3xl space-y-2 mb-8">
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">What We Offer</h2>
@@ -251,7 +251,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {offers.map((item, idx) => (
-                <div key={idx} className="p-5 rounded-2xl border border-slate-100 dark:border-slate-800/80 bg-slate-55/50 dark:bg-slate-850/40 hover:border-emerald-500/30 transition-all group">
+                <div key={idx} className="p-5 rounded-2xl border border-slate-100 dark:border-slate-800/80 bg-slate-55/50 hover:border-emerald-500/30 transition-all group">
                   <p className="font-bold text-sm text-slate-800 dark:text-slate-200 group-hover:text-emerald-500 transition-colors">
                     {item.category}
                   </p>
@@ -277,7 +277,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
               {whyChoose.map((item, idx) => {
                 const Icon = item.icon;
                 return (
-                  <div key={idx} className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm flex flex-col justify-between hover:shadow-md transition-all hover:-translate-y-0.5">
+                  <div key={idx} className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm flex flex-col justify-between hover:shadow-md transition-all hover:-translate-y-0.5">
                     <div className="space-y-3">
                       <div className={`w-10 h-10 rounded-xl ${item.bg} ${item.color} flex items-center justify-center`}>
                         <Icon size={20} />
@@ -296,14 +296,14 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.6 }}
-            className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm text-left"
+            className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-8 shadow-sm text-left"
           >
             <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white mb-6">Our Core Values</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
               {values.map((val, idx) => {
                 const Icon = val.icon;
                 return (
-                  <div key={idx} className="p-4 rounded-xl bg-slate-55/60 dark:bg-slate-850/30 border border-slate-100 dark:border-slate-800/80">
+                  <div key={idx} className="p-4 rounded-xl bg-slate-55/60 border border-slate-100 dark:border-slate-800/80">
                     <div className="flex items-center gap-2 mb-2 text-emerald-600 dark:text-emerald-400">
                       <Icon size={16} />
                       <h3 className="font-bold text-sm text-slate-850 dark:text-slate-200">{val.title}</h3>
@@ -323,14 +323,14 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.7 }}
-              className="md:col-span-8 rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm"
+              className="md:col-span-8 rounded-[28px] border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-8 shadow-sm"
             >
               <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white mb-2">Our Ecosystem</h2>
               <p className="text-sm text-slate-500 mb-6">Together, we form a connected hyperlocal ecosystem that benefits everyone.</p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {ecosystem.map((member, idx) => (
-                  <div key={idx} className="p-4 rounded-xl border border-slate-100 dark:border-slate-800/50 bg-slate-55/30 dark:bg-slate-850/20">
+                  <div key={idx} className="p-4 rounded-xl border border-slate-100  bg-slate-55/30">
                     <p className="font-black text-sm text-emerald-600 dark:text-emerald-400">{member.role}</p>
                     <p className="text-xs text-slate-650 dark:text-slate-350 mt-1 leading-relaxed">{member.text}</p>
                   </div>
@@ -343,7 +343,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.8 }}
-              className="md:col-span-4 rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm flex flex-col justify-between"
+              className="md:col-span-4 rounded-[28px] border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-8 shadow-sm flex flex-col justify-between"
             >
               <div className="space-y-4">
                 <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">Our Future</h2>
@@ -439,7 +439,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-slate-55/40 dark:bg-slate-900/60 p-6 sm:p-8 text-center space-y-3"
+            className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-slate-55/40 p-6 sm:p-8 text-center space-y-3"
           >
             <h3 className="font-extrabold text-slate-850 dark:text-white text-lg">Our Promise</h3>
             <p className="text-sm text-slate-600 dark:text-slate-350 max-w-3xl mx-auto leading-relaxed">
@@ -460,7 +460,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
             <button
               type="button"
               onClick={() => (onBack ? onBack() : navigate('/', { replace: true }))}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-5 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-surface px-5 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition-all duration-300 hover:bg-page hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
               Back

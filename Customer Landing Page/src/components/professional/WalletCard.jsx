@@ -93,7 +93,7 @@ export default function WalletCard({ onboarding }) {
               className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase transition-colors cursor-pointer ${
                 activeTab === tab.id
                   ? 'bg-primary text-white'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
               }`}
             >
               {tab.label}
@@ -109,14 +109,14 @@ export default function WalletCard({ onboarding }) {
       )}
 
       {activeTab === 'statements' && (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex items-center justify-center h-48 mt-4">
+        <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex items-center justify-center h-48 mt-4">
           <p className="text-sm font-bold text-slate-500">No statements available for this period.</p>
         </div>
       )}
 
       {activeTab === 'payout_history' ? (
         <div className="grid grid-cols-1 gap-6">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft hover:shadow-premium transition-all">
+          <div className="bg-surface border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft hover:shadow-premium transition-all">
             <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Payout History</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-semibold text-slate-650 dark:text-slate-400">
@@ -137,7 +137,7 @@ export default function WalletCard({ onboarding }) {
                     </tr>
                   ) : (
                     withdrawals.map((wth, idx) => (
-                    <tr key={idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/20">
+                    <tr key={idx} className="hover:bg-slate-50/50">
                       <td className="py-3 font-bold text-slate-800 dark:text-slate-300">{wth.id}</td>
                       <td className="py-3 text-slate-400">{wth.date}</td>
                       <td className="py-3 truncate">{wth.bank}</td>
@@ -158,7 +158,7 @@ export default function WalletCard({ onboarding }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             
             {/* Breakout Dynamic Card */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft transition-all flex flex-col justify-between h-44">
+            <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft transition-all flex flex-col justify-between h-44">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">{currentStats.label}</span>
                 <ArrowUpRight size={20} className="text-primary" />
@@ -169,14 +169,14 @@ export default function WalletCard({ onboarding }) {
               </div>
               <button 
                 onClick={() => alert('Detailed CSV statement downloaded in background.')}
-                className="w-full py-2 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-slate-800 font-extrabold text-[11px] uppercase tracking-wider rounded-btn transition-colors cursor-pointer"
+                className="w-full py-2 bg-page dark:bg-slate-950 hover:bg-page text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-slate-800 font-extrabold text-[11px] uppercase tracking-wider rounded-btn transition-colors cursor-pointer"
               >
                 Get Tax Summary
               </button>
             </div>
 
             {/* Pending Balance Card */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all flex flex-col justify-between h-44">
+            <div className="bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft hover:shadow-premium transition-all flex flex-col justify-between h-44">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">Escrow Pending</span>
                 <AlertCircle size={20} className="text-slate-350" />
@@ -185,7 +185,7 @@ export default function WalletCard({ onboarding }) {
                 <h3 className="text-2xl font-black text-slate-800 dark:text-white">₹{currentStats.pending.toLocaleString()}</h3>
                 <p className="text-[10px] text-slate-450 font-bold uppercase tracking-wider">In-progress job holds</p>
               </div>
-              <div className="text-[10px] text-slate-400 font-semibold leading-relaxed border-t border-slate-100 dark:border-slate-800/40 pt-2.5">
+              <div className="text-[10px] text-slate-400 font-semibold leading-relaxed border-t border-slate-100  pt-2.5">
                 Will clear immediately upon customer job completion verification.
               </div>
             </div>
@@ -206,7 +206,7 @@ export default function WalletCard({ onboarding }) {
               </div>
               <button
                 onClick={() => setShowWithdrawModal(true)}
-                className="w-full py-2 bg-white text-slate-900 font-extrabold text-[11px] uppercase tracking-wider rounded-btn hover:bg-slate-50 transition-colors cursor-pointer shadow-sm"
+                className="w-full py-2 bg-white text-slate-900 font-extrabold text-[11px] uppercase tracking-wider rounded-btn hover:bg-page transition-colors cursor-pointer shadow-sm"
               >
                 Instant Withdrawal
               </button>
@@ -218,7 +218,7 @@ export default function WalletCard({ onboarding }) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
             
             {/* Transaction History */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft hover:shadow-premium transition-all">
+            <div className="bg-surface border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft hover:shadow-premium transition-all">
               <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Settlement Status (Recent Jobs)</h3>
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-semibold text-slate-650 dark:text-slate-400">
@@ -239,7 +239,7 @@ export default function WalletCard({ onboarding }) {
                       </tr>
                     ) : (
                       transactions.map((txn, idx) => (
-                      <tr key={idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/20">
+                      <tr key={idx} className="hover:bg-slate-50/50">
                         <td className="py-3 font-bold text-slate-800 dark:text-slate-300">{txn.id}</td>
                         <td className="py-3 text-slate-400">{txn.date}</td>
                         <td className="py-3 max-w-[150px] truncate">
@@ -260,7 +260,7 @@ export default function WalletCard({ onboarding }) {
             </div>
 
             {/* Withdrawal History (Preview) */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft hover:shadow-premium transition-all">
+            <div className="bg-surface border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft hover:shadow-premium transition-all">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Recent Withdrawals</h3>
                 <button onClick={() => setActiveTab('payout_history')} className="text-[10px] font-black uppercase text-primary hover:underline cursor-pointer">View All</button>
@@ -283,7 +283,7 @@ export default function WalletCard({ onboarding }) {
                       </tr>
                     ) : (
                       withdrawals.slice(0,3).map((wth, idx) => (
-                      <tr key={idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/20">
+                      <tr key={idx} className="hover:bg-slate-50/50">
                         <td className="py-3 font-bold text-slate-800 dark:text-slate-300">{wth.id}</td>
                         <td className="py-3 text-slate-400">{wth.date}</td>
                         <td className="py-3 text-right font-black text-slate-800 dark:text-slate-200">
@@ -309,9 +309,9 @@ export default function WalletCard({ onboarding }) {
               initial={{ scale: 0.9, opacity: 0, y: 15 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 15 }}
-              className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-card shadow-premium p-6"
+              className="w-full max-w-md bg-surface border border-slate-200/60 dark:border-slate-800 rounded-card shadow-premium p-6"
             >
-              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/50 pb-4 mb-4">
+              <div className="flex items-center justify-between border-b border-slate-100  pb-4 mb-4">
                 <h4 className="text-base sm:text-lg font-black text-slate-855 dark:text-white">Instant Wallet Transfer</h4>
                 <button
                   onClick={() => {
@@ -319,14 +319,14 @@ export default function WalletCard({ onboarding }) {
                     setErrorMsg('');
                     setWithdrawAmount('');
                   }}
-                  className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:bg-slate-200 flex items-center justify-center cursor-pointer"
+                  className="w-8 h-8 rounded-full bg-page text-slate-500 hover:bg-slate-200 flex items-center justify-center cursor-pointer"
                 >
                   ✕
                 </button>
               </div>
 
               <form onSubmit={handleWithdrawSubmit} className="space-y-4">
-                <div className="p-3.5 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200/60 dark:border-slate-800 flex items-center justify-between">
+                <div className="p-3.5 bg-page dark:bg-slate-950 rounded-xl border border-slate-200/60 dark:border-slate-800 flex items-center justify-between">
                   <div className="text-left">
                     <span className="text-[9px] font-black uppercase text-slate-400 block">Available limit</span>
                     <span className="text-sm font-black text-slate-800 dark:text-white">₹{balance.toLocaleString()}</span>
@@ -344,7 +344,7 @@ export default function WalletCard({ onboarding }) {
                     value={withdrawAmount}
                     onChange={(e) => setWithdrawAmount(e.target.value)}
                     placeholder="Enter amount to withdraw"
-                    className="input-field dark:bg-slate-850 dark:border-slate-800 dark:text-white"
+                    className="input-field dark:border-slate-800 dark:text-white"
                   />
                 </div>
 

@@ -345,7 +345,7 @@ export default function ReportsPage() {
           <button
             type="button"
             onClick={() => setScheduleOpen(true)}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm font-semibold shadow-sm"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-surface px-3.5 py-2.5 text-sm font-semibold shadow-sm"
           >
             <CalendarPlus size={16} />
             Schedule Report
@@ -356,7 +356,7 @@ export default function ReportsPage() {
               if (reports[0]) setShareReport(reports[0]);
               else toast.error('Generate a report first');
             }}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm font-semibold shadow-sm"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-surface px-3.5 py-2.5 text-sm font-semibold shadow-sm"
           >
             <Share2 size={16} />
             Share Report
@@ -365,7 +365,7 @@ export default function ReportsPage() {
             <button
               type="button"
               onClick={() => setMoreOpen((v) => !v)}
-              className="inline-flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-2.5 shadow-sm"
+              className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-surface p-2.5 shadow-sm"
               aria-label="More actions"
             >
               <MoreHorizontal size={16} />
@@ -373,20 +373,20 @@ export default function ReportsPage() {
             {moreOpen ? (
               <>
                 <button type="button" className="fixed inset-0 z-10" aria-label="Close" onClick={() => setMoreOpen(false)} />
-                <div className="absolute right-0 z-20 mt-2 w-52 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-xl py-1">
-                  <button type="button" onClick={() => { setShowAnalytics((v) => !v); setMoreOpen(false); }} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800">
+                <div className="absolute right-0 z-20 mt-2 w-52 rounded-xl border border-slate-200 bg-surface shadow-xl py-1">
+                  <button type="button" onClick={() => { setShowAnalytics((v) => !v); setMoreOpen(false); }} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page">
                     <BarChart3 size={13} /> {showAnalytics ? 'Hide Analytics' : 'Analytics'}
                   </button>
-                  <button type="button" onClick={() => { setShowAllCards((v) => !v); setMoreOpen(false); }} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800">
+                  <button type="button" onClick={() => { setShowAllCards((v) => !v); setMoreOpen(false); }} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page">
                     <LayoutGrid size={13} /> {showAllCards ? 'Primary KPIs' : 'All KPIs'}
                   </button>
-                  <button type="button" disabled={busyGlobal} onClick={handleGenerateAll} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50">
+                  <button type="button" disabled={busyGlobal} onClick={handleGenerateAll} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page disabled:opacity-50">
                     <Layers size={13} /> Generate All
                   </button>
-                  <button type="button" disabled={busyGlobal} onClick={handleBulkZip} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50">
+                  <button type="button" disabled={busyGlobal} onClick={handleBulkZip} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page disabled:opacity-50">
                     <Archive size={13} /> Bulk ZIP
                   </button>
-                  <button type="button" onClick={() => { setTemplatesOpen(true); setMoreOpen(false); }} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800">
+                  <button type="button" onClick={() => { setTemplatesOpen(true); setMoreOpen(false); }} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page">
                     <Bookmark size={13} /> Templates
                   </button>
                 </div>

@@ -28,7 +28,7 @@ export default function Step12_ReviewSubmit({ onNext, onPrev, onSelectStep }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-4xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
           Phase 12 — Application Review & Submission
         </div>
@@ -94,7 +94,7 @@ export default function Step12_ReviewSubmit({ onNext, onPrev, onSelectStep }) {
           )}
 
           {/* Section 1: Owner Details */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-5">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-3">
               <div className="flex items-center gap-2 font-extrabold text-sm text-slate-900 dark:text-white">
                 <User size={18} className="text-emerald-500" />
@@ -129,7 +129,7 @@ export default function Step12_ReviewSubmit({ onNext, onPrev, onSelectStep }) {
           </div>
 
           {/* Section 2: Business Info */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-5">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-3">
               <div className="flex items-center gap-2 font-extrabold text-sm text-slate-900 dark:text-white">
                 <Building2 size={18} className="text-emerald-500" />
@@ -168,7 +168,7 @@ export default function Step12_ReviewSubmit({ onNext, onPrev, onSelectStep }) {
           </div>
 
           {/* Section 3: Address & Warehouses */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-5">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-3">
               <div className="flex items-center gap-2 font-extrabold text-sm text-slate-900 dark:text-white">
                 <MapPin size={18} className="text-emerald-500" />
@@ -196,7 +196,7 @@ export default function Step12_ReviewSubmit({ onNext, onPrev, onSelectStep }) {
 
           {/* Section 4: Bank & Plan */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-5">
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-3">
                 <div className="flex items-center gap-2 font-extrabold text-sm text-slate-900 dark:text-white">
                   <Landmark size={18} className="text-emerald-500" />
@@ -217,7 +217,7 @@ export default function Step12_ReviewSubmit({ onNext, onPrev, onSelectStep }) {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-5">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-5">
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-3">
                 <div className="flex items-center gap-2 font-extrabold text-sm text-slate-900 dark:text-white">
                   <CreditCard size={18} className="text-emerald-500" />
@@ -242,7 +242,7 @@ export default function Step12_ReviewSubmit({ onNext, onPrev, onSelectStep }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

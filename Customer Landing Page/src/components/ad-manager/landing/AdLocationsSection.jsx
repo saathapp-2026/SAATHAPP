@@ -47,7 +47,7 @@ export default function AdLocationsSection() {
         <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight shrink-0">
           Advertisement Locations
         </h2>
-        <div className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
+        <div className="h-px flex-1 bg-slate-200" />
       </div>
 
       <div className="space-y-6">

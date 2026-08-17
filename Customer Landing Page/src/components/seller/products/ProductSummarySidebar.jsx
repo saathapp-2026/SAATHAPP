@@ -31,13 +31,13 @@ export default function ProductSummarySidebar({ draft, errors = {} }) {
 
   return (
     <aside className="space-y-3 sticky top-4 w-full min-w-0 overflow-x-hidden">
-      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface overflow-hidden">
         <div className="aspect-[4/3] bg-gradient-to-br from-amber-50 to-orange-100 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center overflow-hidden">
           {draft.media?.mainImage?.url?.startsWith('data:') || draft.media?.mainImage?.url?.startsWith('blob:') || draft.media?.mainImage?.url?.startsWith('http') ? (
             <img src={draft.media.mainImage.url} alt="" className="h-full w-full object-cover" />
           ) : draft.media?.mainImage ? (
             <div className="flex flex-col items-center gap-1 px-3 text-center">
-              <span className="h-12 w-12 rounded-xl bg-white/80 dark:bg-slate-900/50 flex items-center justify-center text-lg font-bold text-emerald-600">
+              <span className="h-12 w-12 rounded-xl bg-white/80 flex items-center justify-center text-lg font-bold text-emerald-600">
                 {(draft.media.mainImage.name || draft.basic?.name || 'P').charAt(0)}
               </span>
               <span className="text-[10px] text-slate-500 line-clamp-2">{draft.media.mainImage.name || 'Image attached'}</span>
@@ -71,7 +71,7 @@ export default function ProductSummarySidebar({ draft, errors = {} }) {
         </div>
       </div>
 
-      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3.5">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-3.5">
         <h4 className="font-bold text-xs uppercase tracking-wide text-slate-400 mb-2">Stock & Pricing</h4>
         <dl className="text-xs space-y-1.5">
           {[
@@ -114,7 +114,7 @@ export default function ProductSummarySidebar({ draft, errors = {} }) {
         </div>
       )}
 
-      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3.5">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface p-3.5">
         <h4 className="font-bold text-xs uppercase tracking-wide text-slate-400 mb-2 flex items-center gap-1">
           <Lightbulb size={12} /> Quick Tips
         </h4>

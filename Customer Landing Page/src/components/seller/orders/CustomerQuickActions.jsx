@@ -25,7 +25,7 @@ export default function CustomerQuickActions({ customer, onAction }) {
           className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
             id === 'block'
               ? 'border-red-200 text-red-600 hover:bg-red-50 dark:border-red-900 dark:hover:bg-red-950/30'
-              : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+              : 'border-slate-200 hover:bg-page'
           }`}
         >
           <Icon size={12} aria-hidden="true" />

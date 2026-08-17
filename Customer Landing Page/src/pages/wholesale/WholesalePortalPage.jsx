@@ -131,7 +131,7 @@ function WholesalePortalInner(props) {
 
   // Steps 2 to 14: Stepper Onboarding
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col text-slate-900 dark:text-slate-100">
+    <div className="min-h-screen bg-page dark:bg-slate-950 flex flex-col text-slate-900 dark:text-slate-100">
       <StepperHeader currentStep={currentStep} onSelectStep={handleSelectStep} />
 
       <main className="flex-1 pb-16">

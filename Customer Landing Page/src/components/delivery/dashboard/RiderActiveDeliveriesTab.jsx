@@ -180,7 +180,7 @@ export default function RiderActiveDeliveriesTab() {
     <div className="space-y-5 pb-28 sa-fade relative">
 
       {/* TOP RIDER STATUS BAR (Exact match to top row in user image) */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-3.5 sm:p-4 shadow-sm">
+      <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-3.5 sm:p-4 shadow-sm">
         <div className="flex items-center justify-between gap-3 flex-wrap">
 
           {/* Left Status Indicators */}
@@ -224,7 +224,7 @@ export default function RiderActiveDeliveriesTab() {
             <button
               type="button"
               onClick={() => setShowNotificationsDrawer(!showNotificationsDrawer)}
-              className="relative p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 cursor-pointer"
+              className="relative p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-page text-slate-700 dark:text-slate-300 cursor-pointer"
               title="Notifications"
             >
               <AlertCircle size={18} />
@@ -238,7 +238,7 @@ export default function RiderActiveDeliveriesTab() {
             <button
               type="button"
               onClick={() => triggerCall('SaathApp Rider Support', '+91 1800 200 9842', 'Rider Support')}
-              className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center gap-1 cursor-pointer"
+              className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-page text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center gap-1 cursor-pointer"
             >
               <HeadphonesIcon size={14} /> Support
             </button>
@@ -266,7 +266,7 @@ export default function RiderActiveDeliveriesTab() {
             </div>
             <div className="space-y-1 max-h-40 overflow-y-auto">
               {unreadNotifications.map((n) => (
-                <div key={n.id} className="flex items-center justify-between p-2 rounded-xl bg-white dark:bg-slate-900 text-xs border border-amber-100 dark:border-slate-800">
+                <div key={n.id} className="flex items-center justify-between p-2 rounded-xl bg-surface text-xs border border-amber-100 dark:border-slate-800">
                   <span className="text-slate-800 dark:text-slate-200 font-medium">{n.text}</span>
                   <span className="text-[10px] text-slate-400 font-mono font-bold shrink-0">{n.time}</span>
                 </div>
@@ -300,7 +300,7 @@ export default function RiderActiveDeliveriesTab() {
           <button
             type="button"
             onClick={() => addToast?.('🔄 Dispatch route & orders refreshed', 'info')}
-            className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 cursor-pointer"
+            className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-page text-slate-700 dark:text-slate-300 cursor-pointer"
             title="Refresh Orders"
           >
             <RefreshCw size={16} />
@@ -332,7 +332,7 @@ export default function RiderActiveDeliveriesTab() {
           <div className="lg:col-span-2 space-y-6">
 
             {/* LIVE ASSIGNED ORDER CARD */}
-            <div className="rounded-3xl border border-amber-500/40 bg-white dark:bg-slate-900 p-5 sm:p-6 shadow-xl space-y-5">
+            <div className="rounded-3xl border border-amber-500/40 bg-surface p-5 sm:p-6 shadow-xl space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-500 flex items-center justify-center font-black shrink-0 border border-amber-500/30">
@@ -360,7 +360,7 @@ export default function RiderActiveDeliveriesTab() {
               </div>
 
               {/* STATS ROW (Matching exact order specs grid in user image) */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 text-xs bg-slate-50 dark:bg-slate-950 p-3.5 rounded-2xl border border-slate-200/60 dark:border-slate-800">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 text-xs bg-page dark:bg-slate-950 p-3.5 rounded-2xl border border-slate-200/60 dark:border-slate-800">
                 <div>
                   <span className="text-[10px] text-slate-400 font-bold uppercase block">Order Value</span>
                   <strong className="text-slate-900 dark:text-white font-mono font-black">₹{activeOrder.orderValue}</strong>
@@ -399,7 +399,7 @@ export default function RiderActiveDeliveriesTab() {
                     }}
                     className="flex flex-col items-center gap-1 cursor-pointer group"
                   >
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center font-black transition ${s.done ? 'bg-amber-500 text-slate-950 shadow-md ring-2 ring-amber-500/30' : 'bg-slate-200 dark:bg-slate-800 text-slate-400'
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center font-black transition ${s.done ? 'bg-amber-500 text-slate-950 shadow-md ring-2 ring-amber-500/30' : 'bg-slate-200 text-slate-400'
                       }`}>
                       {s.done ? '✓' : s.step}
                     </div>
@@ -449,7 +449,7 @@ export default function RiderActiveDeliveriesTab() {
               </div>
 
               {/* Instructions Box */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs bg-white dark:bg-slate-900 p-3 rounded-2xl border border-amber-200 dark:border-amber-900/40 font-semibold">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs bg-surface p-3 rounded-2xl border border-amber-200 dark:border-amber-900/40 font-semibold">
                 <div className="space-y-0.5">
                   <span className="text-[10px] text-amber-700 dark:text-amber-400 font-black uppercase block">📦 Pickup Instructions</span>
                   <p className="text-slate-700 dark:text-slate-300 text-[11px]">{activeOrder.pickupInstructions}</p>
@@ -465,21 +465,21 @@ export default function RiderActiveDeliveriesTab() {
                 <button
                   type="button"
                   onClick={() => addToast?.('Opening Store Navigation...', 'info')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-slate-100 cursor-pointer shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
                 >
                   <Navigation size={13} className="text-amber-500" /> Navigate
                 </button>
                 <button
                   type="button"
                   onClick={() => triggerCall(`Store (${activeOrder.storeManager})`, activeOrder.storeMobile, 'Store Manager')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-slate-100 cursor-pointer shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
                 >
                   <Phone size={13} className="text-amber-500" /> Call Store
                 </button>
                 <button
                   type="button"
                   onClick={() => triggerChat(`${activeOrder.storeManager} (Store)`, 'Store')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-slate-100 cursor-pointer shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
                 >
                   <MessageSquare size={13} className="text-blue-500" /> Chat Store
                 </button>
@@ -540,7 +540,7 @@ export default function RiderActiveDeliveriesTab() {
                 </div>
               </div>
 
-              <div className="text-xs bg-white dark:bg-slate-900 p-3 rounded-2xl border border-emerald-200 dark:border-emerald-900/40 font-semibold space-y-0.5">
+              <div className="text-xs bg-surface p-3 rounded-2xl border border-emerald-200 dark:border-emerald-900/40 font-semibold space-y-0.5">
                 <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-black uppercase block">📝 Customer Delivery Notes</span>
                 <p className="text-slate-700 dark:text-slate-300 text-[11px]">{activeOrder.deliveryNotes}</p>
               </div>
@@ -550,28 +550,28 @@ export default function RiderActiveDeliveriesTab() {
                 <button
                   type="button"
                   onClick={() => triggerCall(activeOrder.customerName, activeOrder.customerMobile, 'Customer')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-slate-100 cursor-pointer shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
                 >
                   <Phone size={13} className="text-emerald-500" /> Call Customer
                 </button>
                 <button
                   type="button"
                   onClick={() => triggerChat(activeOrder.customerName, 'Customer')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-slate-100 cursor-pointer shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
                 >
                   <MessageSquare size={13} className="text-blue-500" /> Chat Customer
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveModal('shareLocation')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-slate-100 cursor-pointer shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
                 >
                   <Share2 size={13} className="text-purple-500" /> Share Location
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveModal('moreCustomer')}
-                  className="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 font-bold text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-600 dark:text-slate-300 hover:bg-page cursor-pointer"
                 >
                   ••• More
                 </button>
@@ -581,7 +581,7 @@ export default function RiderActiveDeliveriesTab() {
             {/* OTP VERIFICATION & DELIVERY ACTIONS ROW */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* OTP Box */}
-              <form onSubmit={handleVerifyOtp} className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3">
+              <form onSubmit={handleVerifyOtp} className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white">
                     CUSTOMER OTP VERIFICATION
@@ -605,7 +605,7 @@ export default function RiderActiveDeliveriesTab() {
                           n[i] = e.target.value;
                           setOtpValue(n);
                         }}
-                        className="w-9 h-9 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-center font-mono text-base font-black text-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                        className="w-9 h-9 rounded-xl border border-slate-300 bg-page dark:bg-slate-950 text-center font-mono text-base font-black text-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500"
                       />
                     ))}
                   </div>
@@ -615,7 +615,7 @@ export default function RiderActiveDeliveriesTab() {
                       setOtpTimerSeconds(165);
                       addToast?.('Resent fresh OTP code to customer', 'info');
                     }}
-                    className="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200 cursor-pointer"
+                    className="px-3 py-2 rounded-xl bg-page text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200 cursor-pointer"
                   >
                     Resend OTP
                   </button>
@@ -634,7 +634,7 @@ export default function RiderActiveDeliveriesTab() {
               </form>
 
               {/* Delivery Actions Box */}
-              <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3">
+              <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-3">
                 <span className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white block">
                   DELIVERY ACTIONS
                 </span>
@@ -694,7 +694,7 @@ export default function RiderActiveDeliveriesTab() {
             </div>
 
             {/* EXPANDABLE ORDER DETAILS SECTION */}
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm space-y-3">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-4 shadow-sm space-y-3">
               <button
                 type="button"
                 onClick={() => setExpandOrderDetails(!expandOrderDetails)}
@@ -737,7 +737,7 @@ export default function RiderActiveDeliveriesTab() {
           <div className="space-y-6">
 
             {/* LIVE ROUTE MAP CARD */}
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xl space-y-3">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-xl space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5 font-black text-amber-500 text-xs uppercase tracking-wider">
                   <Clock size={15} /> LIVE ROUTE
@@ -752,7 +752,7 @@ export default function RiderActiveDeliveriesTab() {
               </div>
 
               {/* Map Canvas Box */}
-              <div className="w-full h-72 rounded-2xl bg-slate-100 dark:bg-slate-950 relative overflow-hidden border border-slate-200 dark:border-slate-800 shadow-inner flex">
+              <div className="w-full h-72 rounded-2xl bg-page dark:bg-slate-950 relative overflow-hidden border border-slate-200 dark:border-slate-800 shadow-inner flex">
                 {/* SVG Route Visualization */}
                 <div className="relative flex-1 bg-[#e5e3df] dark:bg-[#1f293d] overflow-hidden p-3 flex flex-col justify-between">
                   <svg className="absolute inset-0 w-full h-full pointer-events-none stroke-blue-500 dark:stroke-blue-400" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none">
@@ -762,7 +762,7 @@ export default function RiderActiveDeliveriesTab() {
                   {/* Landmarks */}
                   <div className="absolute top-4 left-6 flex items-center gap-1">
                     <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-[10px] shadow">📍</div>
-                    <span className="text-[9px] font-black text-slate-800 dark:text-slate-200 bg-white/90 dark:bg-slate-900/90 px-1.5 py-0.5 rounded shadow">
+                    <span className="text-[9px] font-black text-slate-800 dark:text-slate-200 bg-white/90 px-1.5 py-0.5 rounded shadow">
                       Gandhi Maidan
                     </span>
                   </div>
@@ -775,7 +775,7 @@ export default function RiderActiveDeliveriesTab() {
 
                   <div className="absolute bottom-6 left-28 flex items-center gap-1">
                     <div className="w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center font-black text-[10px] shadow">📍</div>
-                    <span className="text-[9px] font-black text-slate-800 dark:text-slate-200 bg-white/90 dark:bg-slate-900/90 px-1.5 py-0.5 rounded shadow">
+                    <span className="text-[9px] font-black text-slate-800 dark:text-slate-200 bg-white/90 px-1.5 py-0.5 rounded shadow">
                       Kankarbagh
                     </span>
                   </div>
@@ -785,7 +785,7 @@ export default function RiderActiveDeliveriesTab() {
                 </div>
 
                 {/* Map Floating Info Panel */}
-                <div className="w-32 bg-white/95 dark:bg-slate-900/95 border-l border-slate-200 dark:border-slate-800 p-3 flex flex-col justify-center space-y-3 shrink-0">
+                <div className="w-32 bg-white/95 border-l border-slate-200 dark:border-slate-800 p-3 flex flex-col justify-center space-y-3 shrink-0">
                   <div>
                     <span className="text-[9px] text-slate-400 font-bold uppercase block">Distance</span>
                     <strong className="text-sm font-black text-slate-900 dark:text-white font-mono">3.2 KM</strong>
@@ -806,7 +806,7 @@ export default function RiderActiveDeliveriesTab() {
                 <button
                   type="button"
                   onClick={() => addToast?.('Opening Google Maps Live Route...', 'info')}
-                  className="py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 font-bold text-xs text-slate-900 dark:text-white text-center hover:bg-slate-50 transition flex items-center justify-center gap-1 cursor-pointer shadow-sm"
+                  className="py-2 px-3 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-900 dark:text-white text-center hover:bg-page transition flex items-center justify-center gap-1 cursor-pointer shadow-sm"
                 >
                   📍 Open in Maps
                 </button>
@@ -821,7 +821,7 @@ export default function RiderActiveDeliveriesTab() {
             </div>
 
             {/* TODAY'S EARNINGS BREAKUP */}
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-2">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-2">
               <span className="text-xs font-black uppercase text-slate-900 dark:text-white block">
                 TODAY'S EARNINGS BREAKUP
               </span>
@@ -838,7 +838,7 @@ export default function RiderActiveDeliveriesTab() {
             </div>
 
             {/* CURRENT SHIFT CARD */}
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-3">
               <div className="flex justify-between items-center">
                 <span className="text-xs font-black uppercase text-slate-900 dark:text-white">CURRENT SHIFT</span>
                 <span className="text-[10px] font-extrabold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">
@@ -868,7 +868,7 @@ export default function RiderActiveDeliveriesTab() {
                     setIsBreakActive(!isBreakActive);
                     addToast?.(`Break ${!isBreakActive ? 'Started' : 'Ended'}`, 'info');
                   }}
-                  className="py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 text-center hover:bg-slate-50 cursor-pointer flex items-center justify-center gap-1"
+                  className="py-2 px-3 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 text-center hover:bg-page cursor-pointer flex items-center justify-center gap-1"
                 >
                   <Pause size={13} className="text-amber-500" /> {isBreakActive ? 'End Break' : 'Start Break'}
                 </button>
@@ -886,7 +886,7 @@ export default function RiderActiveDeliveriesTab() {
             </div>
 
             {/* TODAY'S INCENTIVE PROGRESS */}
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm space-y-3">
               <span className="text-xs font-black uppercase text-slate-900 dark:text-white block">
                 TODAY'S INCENTIVE PROGRESS
               </span>
@@ -895,7 +895,7 @@ export default function RiderActiveDeliveriesTab() {
               </p>
 
               {/* Progress Bar */}
-              <div className="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden relative">
+              <div className="w-full bg-page h-2.5 rounded-full overflow-hidden relative">
                 <div className="bg-amber-500 h-full rounded-full" style={{ width: '70%' }}></div>
               </div>
               <span className="text-[10px] font-mono font-bold text-amber-500 float-right">70%</span>
@@ -921,7 +921,7 @@ export default function RiderActiveDeliveriesTab() {
       ) : null}
 
       {/* STICKY BOTTOM ACTION BAR (Positioned inside page area only, starting after sidebar) */}
-      <div className="fixed bottom-0 left-0 md:left-64 right-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 p-2.5 sm:p-3 shadow-2xl">
+      <div className="fixed bottom-0 left-0 md:left-64 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 p-2.5 sm:p-3 shadow-2xl">
         <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
 
           {/* Button 1: Navigate */}
@@ -1012,7 +1012,7 @@ export default function RiderActiveDeliveriesTab() {
       {/* MORE CUSTOMER ACTIONS MENU MODAL */}
       {activeModal === 'moreCustomer' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-3 sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-3 sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-2">
               <h3 className="text-sm font-black text-slate-900 dark:text-white">More Customer Actions</h3>
               <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 font-bold p-1">✕</button>
@@ -1023,7 +1023,7 @@ export default function RiderActiveDeliveriesTab() {
                 setActiveModal(null);
                 addToast?.('⏱️ ETA alert (12 min) sent to customer via SMS', 'success');
               }}
-              className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 text-left font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-2"
+              className="w-full p-2.5 rounded-xl bg-page dark:bg-slate-950 hover:bg-page text-left font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-2"
             >
               <Clock size={14} className="text-amber-500" /> Share Live ETA SMS
             </button>
@@ -1033,7 +1033,7 @@ export default function RiderActiveDeliveriesTab() {
                 setActiveModal(null);
                 triggerCall('SaathApp Rider Support', '+91 1800 200 9842', 'Rider Support');
               }}
-              className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 text-left font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-2"
+              className="w-full p-2.5 rounded-xl bg-page dark:bg-slate-950 hover:bg-page text-left font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-2"
             >
               <ShieldAlert size={14} className="text-rose-500" /> Request Support Assistance
             </button>
@@ -1102,7 +1102,7 @@ export default function RiderActiveDeliveriesTab() {
       {/* LIVE IN-APP CHAT MODAL */}
       {activeModal === 'chat' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 max-w-md w-full shadow-2xl space-y-4 sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-5 max-w-md w-full shadow-2xl space-y-4 sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <div>
                 <h3 className="text-sm font-black text-slate-900 dark:text-white">{chatDetails.name}</h3>
@@ -1111,10 +1111,10 @@ export default function RiderActiveDeliveriesTab() {
               <button type="button" onClick={() => setActiveModal(null)} className="text-slate-400 font-bold p-1">✕</button>
             </div>
 
-            <div className="h-48 overflow-y-auto space-y-2 p-2 bg-slate-50 dark:bg-slate-950 rounded-2xl text-xs">
+            <div className="h-48 overflow-y-auto space-y-2 p-2 bg-page dark:bg-slate-950 rounded-2xl text-xs">
               {chatDetails.messages.map((m, idx) => (
                 <div key={idx} className={`flex flex-col ${m.sender === 'You' ? 'items-end' : 'items-start'}`}>
-                  <div className={`p-2.5 rounded-2xl max-w-[80%] ${m.sender === 'You' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white'}`}>
+                  <div className={`p-2.5 rounded-2xl max-w-[80%] ${m.sender === 'You' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-200 text-slate-900 dark:text-white'}`}>
                     {m.text}
                   </div>
                   <span className="text-[9px] text-slate-400 mt-0.5">{m.time}</span>
@@ -1128,7 +1128,7 @@ export default function RiderActiveDeliveriesTab() {
                 placeholder="Type your message..."
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
-                className="flex-1 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-xs font-semibold text-slate-900 dark:text-white focus:outline-none"
+                className="flex-1 px-3 py-2 rounded-xl border border-slate-300 bg-page dark:bg-slate-950 text-xs font-semibold text-slate-900 dark:text-white focus:outline-none"
               />
               <button type="submit" className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs flex items-center gap-1">
                 <Send size={14} /> Send
@@ -1141,7 +1141,7 @@ export default function RiderActiveDeliveriesTab() {
       {/* ISSUE REPORTING MODAL */}
       {activeModal === 'issue' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-sm font-black text-rose-500 flex items-center gap-2">
                 <AlertTriangle size={18} /> REPORT DELIVERY ISSUE
@@ -1169,7 +1169,7 @@ export default function RiderActiveDeliveriesTab() {
                   onClick={() => setSelectedIssue(reason)}
                   className={`p-2.5 rounded-xl border text-left cursor-pointer transition ${selectedIssue === reason
                     ? 'bg-rose-500/10 border-rose-500 text-rose-500 font-bold'
-                    : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
+                    : 'bg-page dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
                     }`}
                 >
                   {reason}
@@ -1181,11 +1181,11 @@ export default function RiderActiveDeliveriesTab() {
               placeholder="Additional notes for support team..."
               value={issueNote}
               onChange={(e) => setIssueNote(e.target.value)}
-              className="w-full h-20 p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-xs text-slate-900 dark:text-white focus:outline-none"
+              className="w-full h-20 p-2.5 rounded-xl border border-slate-300 bg-page dark:bg-slate-950 text-xs text-slate-900 dark:text-white focus:outline-none"
             />
 
             <div className="flex justify-end gap-2 pt-2">
-              <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 font-bold text-xs">Cancel</button>
+              <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-slate-200 font-bold text-xs">Cancel</button>
               <button
                 type="button"
                 onClick={() => {
@@ -1233,13 +1233,13 @@ export default function RiderActiveDeliveriesTab() {
       {/* DIGITAL SIGNATURE MODAL */}
       {activeModal === 'signature' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 sa-rise">
             <h3 className="text-base font-black text-slate-900 dark:text-white">Customer Digital Signature</h3>
-            <div className="h-36 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 flex items-center justify-center text-slate-400 font-mono text-xs">
+            <div className="h-36 rounded-2xl border-2 border-dashed border-slate-300 bg-page dark:bg-slate-950 flex items-center justify-center text-slate-400 font-mono text-xs">
               [ Customer Signature Canvas Area ]
             </div>
             <div className="flex justify-end gap-2">
-              <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-xs font-bold">Clear</button>
+              <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-slate-200 text-xs font-bold">Clear</button>
               <button
                 type="button"
                 onClick={() => {
@@ -1283,12 +1283,12 @@ export default function RiderActiveDeliveriesTab() {
       {/* SHARE LIVE LOCATION LINK MODAL */}
       {activeModal === 'shareLocation' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 sa-rise">
             <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
               <Share2 size={18} className="text-purple-500" /> Share Live Tracking Link
             </h3>
             <p className="text-xs text-slate-500">Share live GPS route link directly with customer or store manager:</p>
-            <div className="p-3 bg-slate-100 dark:bg-slate-950 rounded-xl font-mono text-xs text-amber-600 dark:text-amber-400 break-all">
+            <div className="p-3 bg-page dark:bg-slate-950 rounded-xl font-mono text-xs text-amber-600 dark:text-amber-400 break-all">
               https://saathapp.in/track/DEL-98420-LIVE
             </div>
             <div className="flex justify-end gap-2">
@@ -1311,7 +1311,7 @@ export default function RiderActiveDeliveriesTab() {
       {/* AFTER SUCCESSFUL DELIVERY POPUP MODAL */}
       {activeModal === 'complete' && (
         <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border-2 border-emerald-500 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-6 text-center sa-rise">
+          <div className="bg-surface border-2 border-emerald-500 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-6 text-center sa-rise">
             <div className="w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-500 mx-auto flex items-center justify-center ring-8 ring-emerald-500/10">
               <CheckCircle2 size={48} />
             </div>
@@ -1325,7 +1325,7 @@ export default function RiderActiveDeliveriesTab() {
             </div>
 
             {/* Payout Breakdown */}
-            <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs space-y-2 font-semibold">
+            <div className="bg-page dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs space-y-2 font-semibold">
               <div className="flex justify-between"><span className="text-slate-500">Delivery Payout Earnings</span><strong className="font-mono text-slate-900 dark:text-white">₹120</strong></div>
               <div className="flex justify-between"><span className="text-slate-500">Customer Tip</span><strong className="font-mono text-emerald-500">₹20</strong></div>
               <div className="flex justify-between"><span className="text-slate-500">On-Time Performance Bonus</span><strong className="font-mono text-amber-500">₹30</strong></div>
@@ -1362,7 +1362,7 @@ export default function RiderActiveDeliveriesTab() {
       {/* RATE CUSTOMER MODAL */}
       {activeModal === 'rateCustomer' && (
         <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-center sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-center sa-rise">
             <h3 className="text-lg font-black text-slate-900 dark:text-white">Rate Customer Interaction</h3>
             <p className="text-xs text-slate-500">How was your experience with customer Anil Kumar?</p>
 
@@ -1383,7 +1383,7 @@ export default function RiderActiveDeliveriesTab() {
               placeholder="Add feedback notes (optional)..."
               value={customerFeedback}
               onChange={(e) => setCustomerFeedback(e.target.value)}
-              className="w-full h-20 p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-xs text-slate-900 dark:text-white focus:outline-none"
+              className="w-full h-20 p-2.5 rounded-xl border border-slate-300 bg-page dark:bg-slate-950 text-xs text-slate-900 dark:text-white focus:outline-none"
             />
 
             <button
@@ -1403,7 +1403,7 @@ export default function RiderActiveDeliveriesTab() {
       {/* FUTURE AI FEATURES DRAWER */}
       {activeModal === 'futureFeatures' && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-5 sa-rise">
+          <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-5 sa-rise">
             <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
               <h3 className="text-base font-black text-amber-500 flex items-center gap-2">
                 <Sparkles size={18} /> Future AI Features &amp; Settings
@@ -1412,7 +1412,7 @@ export default function RiderActiveDeliveriesTab() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
                 <div className="flex justify-between items-center">
                   <span className="font-extrabold text-slate-900 dark:text-white">🎙️ Voice Navigation</span>
                   <input type="checkbox" checked={voiceNavEnabled} onChange={(e) => setVoiceNavEnabled(e.target.checked)} />
@@ -1420,7 +1420,7 @@ export default function RiderActiveDeliveriesTab() {
                 <p className="text-[10px] text-slate-500">Hindi/English voice turn guidance</p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
                 <div className="flex justify-between items-center">
                   <span className="font-extrabold text-slate-900 dark:text-white">🤖 AI Route Optimization</span>
                   <input type="checkbox" checked={aiRouteOptimization} onChange={(e) => setAiRouteOptimization(e.target.checked)} />
@@ -1428,7 +1428,7 @@ export default function RiderActiveDeliveriesTab() {
                 <p className="text-[10px] text-slate-500">Live traffic bypass &amp; shortest route</p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
                 <div className="flex justify-between items-center">
                   <span className="font-extrabold text-slate-900 dark:text-white">⚡ Smart Auto-Accept</span>
                   <input type="checkbox" checked={smartAutoAccept} onChange={(e) => setSmartAutoAccept(e.target.checked)} />
@@ -1436,17 +1436,17 @@ export default function RiderActiveDeliveriesTab() {
                 <p className="text-[10px] text-slate-500">Auto accept orders matching high payout</p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
                 <span className="font-extrabold text-slate-900 dark:text-white block">⛽ Fuel Tracking</span>
                 <p className="text-[10px] text-slate-500">Estimated Fuel Level: 75% • ₹50/day allowance</p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
                 <span className="font-extrabold text-slate-900 dark:text-white block">🔋 Battery Warning</span>
                 <p className="text-[10px] text-slate-500">Battery 86% • Auto power save active</p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
                 <span className="font-extrabold text-slate-900 dark:text-white block">🖼️ Proof-of-Delivery Gallery</span>
                 <p className="text-[10px] text-slate-500">View past photos &amp; signatures</p>
               </div>

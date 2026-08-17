@@ -45,7 +45,7 @@ export default function SavedTemplatesModal({ open, onClose, onApply, draftSeed 
 
   return (
     <SellerOverlay open={open} onClose={onClose} labelledBy="templates-title" zIndex={SELLER_Z.modal}>
-      <div className="w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl p-5 max-h-[85vh] overflow-y-auto">
+      <div className="w-full max-w-lg rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl p-5 max-h-[85vh] overflow-y-auto">
         <div className="flex items-start justify-between mb-4">
           <div>
             <h2 id="templates-title" className="text-lg font-bold flex items-center gap-2">
@@ -53,7 +53,7 @@ export default function SavedTemplatesModal({ open, onClose, onApply, draftSeed 
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">Reuse filter combinations</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close">
+          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -63,7 +63,7 @@ export default function SavedTemplatesModal({ open, onClose, onApply, draftSeed 
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Template name"
-            className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm"
+            className="flex-1 rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm"
           />
           <button
             type="button"
@@ -85,7 +85,7 @@ export default function SavedTemplatesModal({ open, onClose, onApply, draftSeed 
               return (
                 <li
                   key={t.id}
-                  className="rounded-xl border border-slate-200 dark:border-slate-700 p-3 flex items-start justify-between gap-2"
+                  className="rounded-xl border border-slate-200 p-3 flex items-start justify-between gap-2"
                 >
                   <div className="min-w-0">
                     <p className="text-sm font-semibold truncate">{t.name}</p>
@@ -102,7 +102,7 @@ export default function SavedTemplatesModal({ open, onClose, onApply, draftSeed 
                         onClose?.();
                         toast.success('Template applied');
                       }}
-                      className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                      className="p-1.5 rounded-lg hover:bg-page"
                     >
                       <Copy size={14} />
                     </button>
@@ -114,7 +114,7 @@ export default function SavedTemplatesModal({ open, onClose, onApply, draftSeed 
                         toast.success('Template deleted');
                         refresh();
                       }}
-                      className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-red-500"
+                      className="p-1.5 rounded-lg hover:bg-page text-red-500"
                     >
                       <Trash2 size={14} />
                     </button>

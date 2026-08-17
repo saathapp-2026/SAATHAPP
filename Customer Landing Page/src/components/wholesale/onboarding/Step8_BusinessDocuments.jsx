@@ -49,7 +49,7 @@ export default function Step8_BusinessDocuments({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-4xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
           Phase 7 — Business Documents & Compliance
         </div>
@@ -72,7 +72,7 @@ export default function Step8_BusinessDocuments({ onNext, onPrev }) {
                   className={`rounded-2xl border p-4 transition ${
                     isUploaded
                       ? 'border-emerald-500/40 bg-emerald-500/5 dark:bg-emerald-950/20'
-                      : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950'
+                      : 'border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
@@ -97,7 +97,7 @@ export default function Step8_BusinessDocuments({ onNext, onPrev }) {
                           ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400'
                           : docState.status === 'Uploaded'
                           ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400'
-                          : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
+                          : 'bg-slate-200 text-slate-500'
                       }`}
                     >
                       {docState.status === 'Verified' && <CheckCircle2 size={11} />}
@@ -106,7 +106,7 @@ export default function Step8_BusinessDocuments({ onNext, onPrev }) {
                   </div>
 
                   {docState.fileName ? (
-                    <div className="mt-3 flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div className="mt-3 flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 bg-surface p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
                       <span className="truncate max-w-[180px]">{docState.fileName}</span>
                       <label className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer">
                         Re-upload
@@ -119,7 +119,7 @@ export default function Step8_BusinessDocuments({ onNext, onPrev }) {
                     </div>
                   ) : (
                     <div className="mt-3">
-                      <label className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 py-2.5 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer">
+                      <label className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-surface border border-slate-300 py-2.5 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition cursor-pointer">
                         <Upload size={14} />
                         Choose File (PDF/JPG)
                         <input
@@ -146,7 +146,7 @@ export default function Step8_BusinessDocuments({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

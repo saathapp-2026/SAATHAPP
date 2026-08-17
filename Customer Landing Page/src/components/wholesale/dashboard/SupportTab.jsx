@@ -50,7 +50,7 @@ export default function SupportTab() {
             className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-extrabold transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation select-none ${
               activeSubTab === tab
                 ? 'bg-emerald-600 text-white shadow-md font-black'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                : 'bg-page text-slate-600 dark:text-slate-400 hover:bg-slate-200'
             }`}
           >
             {tab}
@@ -69,7 +69,7 @@ export default function SupportTab() {
               { q: 'How do I issue custom RFQ Quotations to buyers?', a: 'Navigate to Buyers & Enquiries → Enquiries tab and click "Issue Quotation" to send a customized price and lead-time proposal.' },
               { q: 'What tax documents are required for GST compliance?', a: 'A valid GSTIN certificate and PAN are mandatory for all wholesale seller accounts to generate GST e-Invoices.' },
             ].map((faq, i) => (
-              <div key={i} className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+              <div key={i} className="p-5 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
                 <h4 className="font-extrabold text-slate-900 dark:text-white text-sm flex items-center gap-2">
                   <FileQuestion size={16} className="text-emerald-500" /> {faq.q}
                 </h4>
@@ -81,9 +81,9 @@ export default function SupportTab() {
       ) : activeSubTab === 'My Tickets' ? (
         <div className="space-y-4">
           <h3 className="text-sm font-black text-slate-900 dark:text-white">Your Priority Partner Support Tickets</h3>
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden text-xs">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface shadow-sm overflow-hidden text-xs">
             <table className="w-full text-left">
-              <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
+              <thead className="bg-page dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
                 <tr>
                   <th className="p-4">Ticket ID</th>
                   <th className="p-4">Subject</th>
@@ -119,7 +119,7 @@ export default function SupportTab() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Support Cards */}
           <div className="space-y-4">
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm">
               <div className="flex items-center gap-3">
                 <div className="p-3 rounded-2xl bg-emerald-500/10 text-emerald-500">
                   <Phone size={20} />
@@ -132,7 +132,7 @@ export default function SupportTab() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-5 shadow-sm">
               <div className="flex items-center gap-3">
                 <div className="p-3 rounded-2xl bg-emerald-500/10 text-emerald-500">
                   <Mail size={20} />
@@ -147,7 +147,7 @@ export default function SupportTab() {
           </div>
 
           {/* Ticket Form */}
-          <div className="md:col-span-2 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm">
+          <div className="md:col-span-2 rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 shadow-sm">
             <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-4">Submit a Priority Partner Ticket</h3>
             <form onSubmit={handleTicketSubmit} className="space-y-4 text-xs">
               <div>
@@ -159,7 +159,7 @@ export default function SupportTab() {
                   required
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 p-3 font-semibold text-slate-900 dark:text-white"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 p-3 font-semibold text-slate-900 dark:text-white"
                   placeholder="e.g. Bulk order dispatch delay enquiry"
                 />
               </div>
@@ -173,7 +173,7 @@ export default function SupportTab() {
                   required
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 p-3 font-semibold text-slate-900 dark:text-white"
+                  className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 p-3 font-semibold text-slate-900 dark:text-white"
                   placeholder="Explain your query or issue in detail..."
                 />
               </div>

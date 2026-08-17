@@ -118,7 +118,7 @@ export default function Step12_OptionalMembership({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-5xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 py-1 text-xs font-bold text-blue-600 dark:text-blue-400">
           Phase 11 — Optional Monthly Membership
         </div>
@@ -154,7 +154,7 @@ export default function Step12_OptionalMembership({ onNext, onPrev }) {
                   className={`relative cursor-pointer rounded-2xl border p-5 transition flex flex-col justify-between ${
                     isSelected
                       ? 'border-emerald-500 bg-emerald-500/10 dark:bg-emerald-950/30 text-slate-900 dark:text-white shadow-xl ring-2 ring-emerald-500'
-                      : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-slate-300'
+                      : 'border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 hover:border-slate-300'
                   }`}
                 >
                   {plan.popular && (
@@ -198,7 +198,7 @@ export default function Step12_OptionalMembership({ onNext, onPrev }) {
                       className={`w-full rounded-xl py-2 text-xs font-extrabold transition ${
                         isSelected
                           ? 'bg-emerald-600 text-white'
-                          : 'bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-emerald-600 hover:text-white'
+                          : 'bg-white border border-slate-300 text-slate-800 dark:text-slate-200 hover:bg-emerald-600 hover:text-white'
                       }`}
                     >
                       {isSelected ? '✓ Plan Selected' : 'Select Plan'}
@@ -213,7 +213,7 @@ export default function Step12_OptionalMembership({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous

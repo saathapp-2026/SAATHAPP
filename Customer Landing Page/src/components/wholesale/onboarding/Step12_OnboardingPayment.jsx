@@ -115,7 +115,7 @@ export default function Step12_OnboardingPayment({ onNext, onPrev }) {
       animate={{ opacity: 1, y: 0 }}
       className="mx-auto max-w-4xl py-8 px-4"
     >
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-surface p-6 sm:p-10 shadow-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
           Phase 11 — Onboarding Fee Payment
         </div>
@@ -175,10 +175,10 @@ export default function Step12_OnboardingPayment({ onNext, onPrev }) {
                     className={`flex items-start gap-3 rounded-2xl border p-4 text-left transition ${
                       isSelected
                         ? 'border-emerald-500 bg-emerald-500/10 ring-2 ring-emerald-500/20'
-                        : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-slate-300'
+                        : 'border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 hover:border-slate-300'
                     }`}
                   >
-                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${isSelected ? 'bg-emerald-500 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-600'}`}>
+                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${isSelected ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-600'}`}>
                       <Icon size={18} />
                     </div>
                     <div>
@@ -201,12 +201,12 @@ export default function Step12_OnboardingPayment({ onNext, onPrev }) {
                 value={upiId}
                 onChange={(e) => setUpiId(e.target.value)}
                 placeholder="yourname@upi"
-                className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-semibold focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full rounded-2xl border border-slate-300 bg-page dark:bg-slate-950 px-4 py-3 text-sm font-semibold focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
               />
             </div>
           )}
 
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-4 flex items-center gap-3">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-4 flex items-center gap-3">
             <IndianRupee size={20} className="text-emerald-500 shrink-0" />
             <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">
               Secure payment powered by SaathApp. GST invoice will be generated after successful payment.
@@ -218,7 +218,7 @@ export default function Step12_OnboardingPayment({ onNext, onPrev }) {
               type="button"
               onClick={onPrev}
               disabled={isProcessing}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition disabled:opacity-50"
             >
               <ArrowLeft size={16} />
               Previous

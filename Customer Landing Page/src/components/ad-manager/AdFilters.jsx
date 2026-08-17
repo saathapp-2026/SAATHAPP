@@ -4,7 +4,7 @@ import { AD_TYPES, AD_STATUSES, PLACEMENTS, OBJECTIVES } from '../../config/sell
 
 export default function AdFilters({ search, onSearch, filters, onChange, onReset }) {
   return (
-    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 shadow-sm space-y-2">
+    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-3 shadow-sm space-y-2">
       <div className="flex flex-col lg:flex-row gap-2">
         <label className="relative flex-1">
           <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -12,14 +12,14 @@ export default function AdFilters({ search, onSearch, filters, onChange, onReset
             value={search}
             onChange={(e) => onSearch(e.target.value)}
             placeholder="Search ads by name..."
-            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent pl-9 pr-3 py-2.5 text-sm"
+            className="w-full rounded-xl border border-slate-200 bg-transparent pl-9 pr-3 py-2.5 text-sm"
             aria-label="Search ads"
           />
         </label>
         <select
           value={filters.typeId || 'all'}
           onChange={(e) => onChange({ ...filters, typeId: e.target.value })}
-          className="rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2.5 text-sm"
+          className="rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-sm"
         >
           <option value="all">All Types</option>
           {AD_TYPES.map((t) => (
@@ -29,7 +29,7 @@ export default function AdFilters({ search, onSearch, filters, onChange, onReset
         <select
           value={filters.status || 'all'}
           onChange={(e) => onChange({ ...filters, status: e.target.value })}
-          className="rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2.5 text-sm"
+          className="rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-sm"
         >
           <option value="all">All Status</option>
           <option value="active">Active</option>
@@ -40,7 +40,7 @@ export default function AdFilters({ search, onSearch, filters, onChange, onReset
         <select
           value={filters.placement || 'all'}
           onChange={(e) => onChange({ ...filters, placement: e.target.value })}
-          className="rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2.5 text-sm"
+          className="rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-sm"
         >
           <option value="all">All Placements</option>
           {PLACEMENTS.map((p) => (
@@ -50,7 +50,7 @@ export default function AdFilters({ search, onSearch, filters, onChange, onReset
         <select
           value={filters.objective || 'all'}
           onChange={(e) => onChange({ ...filters, objective: e.target.value })}
-          className="rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent px-3 py-2.5 text-sm"
+          className="rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-sm"
         >
           <option value="all">All Objectives</option>
           {OBJECTIVES.map((o) => (
@@ -67,19 +67,19 @@ export default function AdFilters({ search, onSearch, filters, onChange, onReset
           placeholder="Min budget"
           value={filters.budgetMin || ''}
           onChange={(e) => onChange({ ...filters, budgetMin: e.target.value })}
-          className="w-28 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent px-2 py-1.5 text-xs"
+          className="w-28 rounded-lg border border-slate-200 bg-transparent px-2 py-1.5 text-xs"
         />
         <input
           type="number"
           placeholder="Max budget"
           value={filters.budgetMax || ''}
           onChange={(e) => onChange({ ...filters, budgetMax: e.target.value })}
-          className="w-28 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent px-2 py-1.5 text-xs"
+          className="w-28 rounded-lg border border-slate-200 bg-transparent px-2 py-1.5 text-xs"
         />
         <button
           type="button"
           onClick={onReset}
-          className="inline-flex items-center gap-1 rounded-lg border border-slate-200 dark:border-slate-700 px-2.5 py-1.5 text-xs font-semibold"
+          className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold"
         >
           <RotateCcw size={12} /> Reset
         </button>

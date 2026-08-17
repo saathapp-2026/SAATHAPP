@@ -16,17 +16,17 @@ export default function ViewAdModal({ open, onClose, ad, onEdit }) {
 
   return (
     <SellerOverlay open={open} onClose={onClose} labelledBy="view-ad-title" zIndex={SELLER_Z.modal}>
-      <div className="w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl max-h-[90vh] overflow-y-auto">
+      <div className="w-full max-w-lg rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl max-h-[90vh] overflow-y-auto">
         <div className="flex items-start justify-between gap-3 border-b border-slate-200 dark:border-slate-800 px-5 py-4">
           <div>
             <h2 id="view-ad-title" className="text-lg font-bold">{ad.name}</h2>
             <p className="text-xs text-slate-500 mt-0.5">{ad.id}</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close"><X size={16} /></button>
+          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close"><X size={16} /></button>
         </div>
         <div className="p-5 space-y-3">
           <div className="flex flex-wrap gap-2">
-            <span className="rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[10px] font-semibold">{type.short}</span>
+            <span className="rounded-full bg-page px-2.5 py-0.5 text-[10px] font-semibold">{type.short}</span>
             <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold capitalize ${STATUS_STYLES[ad.status]}`}>{ad.status === 'running' ? 'Active' : ad.status}</span>
             {ad.score ? <span className="rounded-full bg-emerald-50 text-emerald-700 px-2.5 py-0.5 text-[10px] font-semibold">Score {ad.score}</span> : null}
           </div>
@@ -44,7 +44,7 @@ export default function ViewAdModal({ open, onClose, ad, onEdit }) {
               ['ROAS', `${ad.roas}x`],
               ['Remaining', formatINR(ad.remainingBudget)],
             ].map(([k, v]) => (
-              <div key={k} className="rounded-xl bg-slate-50 dark:bg-slate-800/50 p-3">
+              <div key={k} className="rounded-xl bg-page p-3">
                 <p className="text-[10px] text-slate-500">{k}</p>
                 <p className="font-bold text-sm">{v}</p>
               </div>

@@ -66,7 +66,7 @@ export default function ProductVariants({ value, errors = {}, onChange, baseSku 
                 ))}
               </TextSelect>
             </Field>
-            <button type="button" onClick={bulkGenerate} className="px-3 py-2 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+            <button type="button" onClick={bulkGenerate} className="px-3 py-2 rounded-lg text-xs font-semibold border border-slate-200 hover:bg-page">
               Bulk Variant Generator
             </button>
             <button
@@ -80,7 +80,7 @@ export default function ProductVariants({ value, errors = {}, onChange, baseSku 
 
           <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
             <table className="w-full text-sm min-w-[800px]">
-              <thead className="bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-500">
+              <thead className="bg-page text-xs text-slate-500">
                 <tr>
                   <th className="px-3 py-2 text-left">{value.type}</th>
                   <th className="px-3 py-2 text-left">SKU</th>
@@ -108,7 +108,7 @@ export default function ProductVariants({ value, errors = {}, onChange, baseSku 
                           type="button"
                           title="Duplicate"
                           onClick={() => onChange({ ...value, items: [...value.items, { ...item, id: `var_${Date.now()}`, sku: generateSku(item.sku) }] })}
-                          className="h-7 w-7 rounded-lg border border-slate-200 dark:border-slate-700 inline-flex items-center justify-center"
+                          className="h-7 w-7 rounded-lg border border-slate-200 inline-flex items-center justify-center"
                         >
                           <Copy size={12} />
                         </button>
