@@ -293,7 +293,7 @@ export default function App() {
     setAuthView('home');
     setActivePage('home');
     setErrorMessage('');
-    
+
     if (routerLocation.pathname === '/customer/dashboard' || routerLocation.pathname === '/profile' || routerLocation.state?.from === '/customer/dashboard') {
       navigate('/customer/dashboard');
     } else {
@@ -320,7 +320,7 @@ export default function App() {
     setAuthView('home');
     setActivePage('home');
     setErrorMessage('');
-    
+
     if (routerLocation.pathname === '/customer/dashboard' || routerLocation.pathname === '/profile' || routerLocation.state?.from === '/customer/dashboard') {
       navigate('/customer/dashboard');
     } else {
@@ -367,23 +367,23 @@ export default function App() {
     '/professional/dashboard', '/worker/dashboard'
   ];
   const isSellerRoute = routerLocation.pathname.startsWith('/seller');
-  const isPublicRoute = routerLocation.pathname === '/' || 
-                        routerLocation.pathname === '/about' || 
-                        routerLocation.pathname === '/service-warranty' || 
-                        routerLocation.pathname === '/our-story' || 
-                        routerLocation.pathname === '/faq' || 
-                        routerLocation.pathname === '/login' || 
-                        routerLocation.pathname === '/signup' || 
-                        routerLocation.pathname === '/help-support' || 
-                        routerLocation.pathname.startsWith('/wholesale') || 
-                        routerLocation.pathname === '/become-a-wholeseller' || 
-                        routerLocation.pathname === '/become-delivery-partner' || 
-                        routerLocation.pathname === '/franchise' || 
-                        routerLocation.pathname === '/advertise' || 
-                        routerLocation.pathname === '/advertise/create' || 
-                        partnerRoutes.includes(routerLocation.pathname) || 
-                        trustRoutes.includes(routerLocation.pathname) ||
-                        isSellerRoute;
+  const isPublicRoute = routerLocation.pathname === '/' ||
+    routerLocation.pathname === '/about' ||
+    routerLocation.pathname === '/service-warranty' ||
+    routerLocation.pathname === '/our-story' ||
+    routerLocation.pathname === '/faq' ||
+    routerLocation.pathname === '/login' ||
+    routerLocation.pathname === '/signup' ||
+    routerLocation.pathname === '/help-support' ||
+    routerLocation.pathname.startsWith('/wholesale') ||
+    routerLocation.pathname === '/become-a-wholeseller' ||
+    routerLocation.pathname === '/become-delivery-partner' ||
+    routerLocation.pathname === '/franchise' ||
+    routerLocation.pathname === '/advertise' ||
+    routerLocation.pathname === '/advertise/create' ||
+    partnerRoutes.includes(routerLocation.pathname) ||
+    trustRoutes.includes(routerLocation.pathname) ||
+    isSellerRoute;
 
   if (routerLocation.pathname === '/advertise') {
     return <AdvertisementsPage onBack={() => navigate('/')} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={() => setDarkMode((v) => !v)} cartCount={cartCount} />;
@@ -934,7 +934,7 @@ export default function App() {
         onImageSearchClick={() => setIsImageModalOpen(true)}
         onDetectGPS={handleGPSDetect}
         onAddToCart={handleAddToCart}
-        onQuickView={() => {}}
+        onQuickView={() => { }}
         onCategorySelect={(category) => {
           setSelectedCategory(category);
           document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -982,7 +982,7 @@ export default function App() {
           setIsCartOpen(false);
         }}
         onCloseCart={() => setIsCartOpen(false)}
-        onCloseQuickView={() => {}}
+        onCloseQuickView={() => { }}
         onCloseVoiceModal={() => setIsVoiceModalOpen(false)}
         onCloseImageModal={() => setIsImageModalOpen(false)}
         onCloseLocationModal={() => setIsLocationModalOpen(false)}
@@ -991,7 +991,7 @@ export default function App() {
         getCartQuantity={getCartQuantity}
         handleAddToCart={handleAddToCart}
         setIsCartOpen={setIsCartOpen}
-        setQuickViewProduct={() => {}}
+        setQuickViewProduct={() => { }}
         setIsVoiceModalOpen={setIsVoiceModalOpen}
         setIsImageModalOpen={setIsImageModalOpen}
         setIsLocationModalOpen={setIsLocationModalOpen}
@@ -1140,7 +1140,7 @@ export default function App() {
       onImageSearchClick={() => setIsImageModalOpen(true)}
       onDetectGPS={handleGPSDetect}
       onAddToCart={handleAddToCart}
-      onQuickView={() => {}}
+      onQuickView={() => { }}
       onCategorySelect={(category) => {
         setSelectedCategory(category);
         document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -1188,7 +1188,7 @@ export default function App() {
         setIsCartOpen(false);
       }}
       onCloseCart={() => setIsCartOpen(false)}
-      onCloseQuickView={() => {}}
+      onCloseQuickView={() => { }}
       onCloseVoiceModal={() => setIsVoiceModalOpen(false)}
       onCloseImageModal={() => setIsImageModalOpen(false)}
       onCloseLocationModal={() => setIsLocationModalOpen(false)}
@@ -1197,7 +1197,7 @@ export default function App() {
       getCartQuantity={getCartQuantity}
       handleAddToCart={handleAddToCart}
       setIsCartOpen={setIsCartOpen}
-      setQuickViewProduct={() => {}}
+      setQuickViewProduct={() => { }}
       setIsVoiceModalOpen={setIsVoiceModalOpen}
       setIsImageModalOpen={setIsImageModalOpen}
       setIsLocationModalOpen={setIsLocationModalOpen}
