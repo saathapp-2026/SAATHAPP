@@ -25,21 +25,28 @@ export default class ErrorBoundary extends React.Component {
     return { hasError: true, error, isRecovering: false };
   }
 
-  componentDidCatch(error, errorInfo) {
+  async componentDidCatch(error, errorInfo) {
     console.error('SaathApp Error Boundary caught an error:', error, errorInfo);
     if (this.state.isRecovering) {
-      // Clear caches if possible to ensure we get the fresh app shell
-      if (window.caches) {
-        caches.keys().then((names) => {
-          for (const name of names) {
-            caches.delete(name);
+      if ('serviceWorker' in navigator) {
+        try {
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          for (const registration of registrations) {
+            await registration.unregister();
           }
-        }).finally(() => {
-          window.location.reload();
-        });
-      } else {
-        window.location.reload();
+        } catch (e) {}
       }
+      if (window.caches) {
+        try {
+          const names = await caches.keys();
+          for (const name of names) {
+            await caches.delete(name);
+          }
+        } catch (e) {}
+      }
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set('v', Date.now().toString());
+      window.location.href = newUrl.toString();
     }
   }
 
