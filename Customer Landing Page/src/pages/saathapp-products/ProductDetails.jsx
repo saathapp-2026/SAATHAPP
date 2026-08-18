@@ -43,13 +43,15 @@ export default function ProductDetails({
         ? `${product.name} | Spiritual & Puja Items Online | SaathApp` 
         : `${product.name} | SaathApp Official`;
         
-      if (product.category === 'spiritual-puja') {
-        trackEvent('spiritual_product_view', {
-          product_id: product.id,
-          product_name: product.name,
-          subcategory: product.subCategory
-        });
-      }
+      trackEvent('product_view', {
+        productId: product.id,
+        name: product.name,
+        category: product.category,
+        price: product.price,
+        ...(product.groceryTier && { groceryTier: product.groceryTier }),
+        ...(product.electronicsType && { electronicsType: product.electronicsType }),
+        ...(product.spiritualType && { spiritualType: product.spiritualType })
+      });
     }
   }, [product]);
 
@@ -206,7 +208,45 @@ export default function ProductDetails({
                 <span className="text-lg text-slate-400 line-through font-semibold">₹{product.price + 200}</span>
                 <span className="text-sm font-bold text-green-600 dark:text-green-400 mb-1">Save ₹200 (25% Off)</span>
               </div>
-              <p className="text-sm text-slate-500">Inclusive of all taxes</p>
+              <p className="text-sm text-slate-500 mb-4">Inclusive of all taxes</p>
+              
+              {product.promotion?.active && (
+                <div className="bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/50 p-4 rounded-xl mb-6">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="bg-rose-500 text-white text-xs font-bold px-2 py-0.5 rounded uppercase tracking-wide">
+                      {product.promotion.type.replace(/_/g, ' ')}
+                    </span>
+                    <span className="font-bold text-rose-700 dark:text-rose-400">
+                      {product.promotion.discount} OFF
+                    </span>
+                  </div>
+                  <p className="text-sm text-rose-600 dark:text-rose-300">
+                    Special promotion applied to this product.
+                  </p>
+                </div>
+              )}
+
+              {/* Vertical Specific Fields */}
+              <div className="flex gap-4">
+                {product.category === 'grocery' && product.groceryTier && (
+                  <div className="bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 inline-flex flex-col">
+                    <span className="text-[10px] uppercase font-bold text-slate-400">Grocery Tier</span>
+                    <span className="text-sm font-semibold">{product.groceryTier === 'Premium' ? 'Premium Grocery' : 'Normal Grocery'}</span>
+                  </div>
+                )}
+                {product.category === 'electronics' && product.electronicsType && (
+                  <div className="bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 inline-flex flex-col">
+                    <span className="text-[10px] uppercase font-bold text-slate-400">Electronics Type</span>
+                    <span className="text-sm font-semibold">{product.electronicsType}</span>
+                  </div>
+                )}
+                {product.category === 'spiritual-puja' && product.spiritualType && (
+                  <div className="bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 inline-flex flex-col">
+                    <span className="text-[10px] uppercase font-bold text-slate-400">Spiritual Type</span>
+                    <span className="text-sm font-semibold">{product.spiritualType}</span>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="h-px w-full bg-slate-200 dark:bg-slate-800 my-6" />

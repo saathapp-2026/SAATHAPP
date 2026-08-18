@@ -39,6 +39,17 @@ export default function ProductListing({
     if (pathParts[2]) subCategoryId = pathParts[2];
   }
 
+  React.useEffect(() => {
+    if (categoryId && categoryId !== 'all') {
+      trackEvent('category_view', {
+        category: categoryId,
+        subCategory: subCategoryId || null,
+        festival: festivalFilter || null,
+        isSearch: !!searchQuery
+      });
+    }
+  }, [categoryId, subCategoryId, festivalFilter, searchQuery]);
+
   const isSearch = categoryId === 'search';
   const isOffersPage = categoryId === 'offers';
   const isAllCategories = categoryId === 'all' || (!categoryId && !festivalFilter);
@@ -127,15 +138,21 @@ export default function ProductListing({
       const cat = (p.category || '').toLowerCase();
       const sub = (p.subCategory || '').toLowerCase().replace('-', ' ');
       const desc = (p.description || '').toLowerCase();
+      const seller = (p.brand || '').toLowerCase();
+      const groceryTier = (p.groceryTier || '').toLowerCase();
+      const electronicsType = (p.electronicsType || '').toLowerCase();
+      const spiritualType = (p.spiritualType || '').toLowerCase();
       
       if (name === query) return 100;
       if (name.startsWith(query)) return 50;
       if (name.includes(query)) return 20;
       
-      const matchesAll = queryTerms.every(t => name.includes(t) || cat.includes(t) || sub.includes(t) || desc.includes(t));
+      const searchFields = [name, cat, sub, desc, seller, groceryTier, electronicsType, spiritualType];
+      
+      const matchesAll = queryTerms.every(t => searchFields.some(field => field.includes(t)));
       if (matchesAll) return 10;
       
-      const matchesSome = queryTerms.some(t => name.includes(t) || cat.includes(t) || sub.includes(t));
+      const matchesSome = queryTerms.some(t => [name, cat, sub, seller, groceryTier].some(field => field.includes(t)));
       if (matchesSome) return 1;
       
       return 0;
@@ -145,7 +162,7 @@ export default function ProductListing({
       .filter(p => getScore(p) > 0)
       .sort((a, b) => getScore(b) - getScore(a));
   } else if (isOffersPage) {
-    filteredProducts = products.filter(p => p.isOffer);
+    filteredProducts = products.filter(p => p.promotion?.active);
   } else if (!isAllCategories && categoryId && categoryId !== 'all') {
     filteredProducts = products.filter(p => p.category === categoryId);
     if (subCategoryId) {
@@ -185,6 +202,22 @@ export default function ProductListing({
       p.description?.toLowerCase().includes(isDaily ? 'daily' : o) || 
       p.name?.toLowerCase().includes(isDaily ? 'daily' : o)
     );
+  }
+  
+  if (filters.groceryTier) {
+    if (filters.groceryTier === 'Premium Grocery') {
+      filteredProducts = filteredProducts.filter(p => p.groceryTier === 'Premium');
+    } else if (filters.groceryTier === 'Normal Grocery') {
+      filteredProducts = filteredProducts.filter(p => p.groceryTier === 'Normal');
+    }
+  }
+  
+  if (filters.electronicsType) {
+    filteredProducts = filteredProducts.filter(p => p.electronicsType === filters.electronicsType);
+  }
+
+  if (filters.spiritualType) {
+    filteredProducts = filteredProducts.filter(p => p.spiritualType === filters.spiritualType);
   }
 
   // Apply sorting
@@ -243,7 +276,59 @@ export default function ProductListing({
           <p className="text-slate-500">{filteredProducts.length} Products</p>
         </div>
 
-        {categoryId && subcategories[categoryId] && !isSearch && !isAllCategories && !isOffersPage && (
+        {/* Grocery Homepage Merchandising */}
+        {categoryId === 'grocery' && !subCategoryId && !isSearch && !isAllCategories && !isOffersPage && (
+          <div className="mb-10">
+            <h2 className="text-xl font-black mb-4">Shop Grocery</h2>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+              <button onClick={() => setFilters({...filters, groceryTier: 'Normal Grocery'})} className="flex flex-col items-center justify-center p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-primary hover:shadow-lg transition-all group">
+                <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">🛒</span>
+                <span className="font-bold text-sm text-center">Normal Grocery</span>
+              </button>
+              <button onClick={() => setFilters({...filters, groceryTier: 'Premium Grocery'})} className="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 border border-amber-200 dark:border-amber-800/50 rounded-2xl hover:shadow-lg transition-all group relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-amber-400 to-yellow-500 blur-2xl opacity-20"></div>
+                <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">✨</span>
+                <span className="font-bold text-sm text-center text-amber-900 dark:text-amber-100">Premium Grocery</span>
+              </button>
+              <button onClick={() => navigate('/products/grocery/fruits-vegetables')} className="flex flex-col items-center justify-center p-6 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/50 rounded-2xl hover:shadow-lg transition-all group">
+                <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">🥬</span>
+                <span className="font-bold text-sm text-center text-emerald-900 dark:text-emerald-100">Fresh Fruits & Veg</span>
+              </button>
+              <button onClick={() => navigate('/products/grocery/dairy-bakery')} className="flex flex-col items-center justify-center p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-2xl hover:shadow-lg transition-all group">
+                <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">🥛</span>
+                <span className="font-bold text-sm text-center text-blue-900 dark:text-blue-100">Dairy & Bakery</span>
+              </button>
+              <button onClick={() => navigate('/products/offers')} className="flex flex-col items-center justify-center p-6 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/50 rounded-2xl hover:shadow-lg transition-all group">
+                <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">🏷️</span>
+                <span className="font-bold text-sm text-center text-rose-900 dark:text-rose-100">Deals</span>
+              </button>
+            </div>
+            
+            {/* Grocery Quick Tier Filter */}
+            <div className="flex gap-4 border-b border-slate-200 dark:border-slate-800 pb-px mb-6">
+              <button 
+                onClick={() => setFilters({...filters, groceryTier: ''})}
+                className={`pb-4 px-2 font-bold text-sm transition-colors border-b-2 ${!filters.groceryTier ? 'border-primary text-primary' : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-300'}`}
+              >
+                All
+              </button>
+              <button 
+                onClick={() => setFilters({...filters, groceryTier: 'Normal Grocery'})}
+                className={`pb-4 px-2 font-bold text-sm transition-colors border-b-2 ${filters.groceryTier === 'Normal Grocery' ? 'border-primary text-primary' : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-300'}`}
+              >
+                Normal Grocery
+              </button>
+              <button 
+                onClick={() => setFilters({...filters, groceryTier: 'Premium Grocery'})}
+                className={`pb-4 px-2 font-bold text-sm transition-colors border-b-2 ${filters.groceryTier === 'Premium Grocery' ? 'border-amber-500 text-amber-600 dark:text-amber-400' : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-300'}`}
+              >
+                Premium Grocery
+              </button>
+            </div>
+          </div>
+        )}
+
+        {categoryId && subcategories[categoryId] && categoryId !== 'grocery' && !isSearch && !isAllCategories && !isOffersPage && (
           <div className="mb-8">
             <h2 className="text-lg font-bold mb-4">Quick Categories</h2>
             <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-none snap-x">

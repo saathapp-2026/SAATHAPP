@@ -42,6 +42,14 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
               <span className="bg-gradient-to-r from-amber-500 to-yellow-400 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide shadow-sm flex items-center gap-1">
                 <Star size={10} className="fill-white text-white" /> Premium
               </span>
+            ) : product.groceryTier === 'Premium' ? (
+              <span className="bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border border-amber-200 dark:border-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide shadow-sm flex items-center gap-1">
+                <Star size={10} className="fill-amber-500 text-amber-500" /> Premium Grocery
+              </span>
+            ) : product.groceryTier === 'Normal' ? (
+              <span className="text-slate-500 dark:text-slate-400 text-[10px] font-medium px-2 py-0.5 uppercase tracking-wide flex items-center gap-1">
+                Normal Grocery
+              </span>
             ) : product.productTier === 'NORMAL' ? (
               <span className="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide shadow-sm flex items-center gap-1">
                 Normal
@@ -52,9 +60,9 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
                 New
               </span>
             )}
-            {product.isBestseller && (
-              <span className="bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400 text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide">
-                Bestseller
+            {product.promotion?.active && (
+              <span className="bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide shadow-sm flex items-center gap-1">
+                {product.promotion.type.replace(/_/g, ' ')} • {product.promotion.discount} OFF
               </span>
             )}
           </div>

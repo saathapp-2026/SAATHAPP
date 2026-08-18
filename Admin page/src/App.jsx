@@ -1320,6 +1320,8 @@ const MODULE_FORMS = {
       { name: "price", label: "Price", type: "text", required: true, section: "business" },
       { name: "stock", label: "Stock Quantity", type: "text", required: true, section: "business" },
       { name: "groceryTier", label: "Grocery Tier", type: "select", options: ["NORMAL", "PREMIUM"], default: "NORMAL", section: "business", condition: (values) => values.category?.toLowerCase() === "grocery" },
+      { name: "electronicsType", label: "Electronics Type", type: "select", options: ["Mobile", "Laptop", "TV", "Accessories", "Other"], section: "business", condition: (values) => values.category?.toLowerCase() === "electronics" },
+      { name: "spiritualType", label: "Spiritual Type", type: "select", options: ["Puja Samagri", "Idols", "Books", "Prasad", "Other"], section: "business", condition: (values) => values.category?.toLowerCase() === "spiritual-puja" },
       { name: "productTier", label: "Product Tier", type: "select", options: ["NORMAL", "PREMIUM"], default: "NORMAL", section: "business" },
       { name: "availabilityMode", label: "Availability Mode", type: "select", options: ["REGULAR", "LIMITED"], default: "REGULAR", section: "business" },
       { name: "productionQuantity", label: "Production Quantity", type: "text", section: "premium", condition: (values) => values.productTier === "PREMIUM" },
@@ -1329,7 +1331,10 @@ const MODULE_FORMS = {
       { name: "craftsmanship", label: "Craftsmanship", type: "text", section: "premium", condition: (values) => values.productTier === "PREMIUM" },
       { name: "packaging", label: "Packaging", type: "text", section: "premium", condition: (values) => values.productTier === "PREMIUM" },
       { name: "warranty", label: "Warranty", type: "text", section: "premium", condition: (values) => values.productTier === "PREMIUM" },
-      { name: "status", label: "Status", type: "select", options: ["Active", "Draft", "Suspended"], default: "Active", section: "business" },
+      { name: "status", label: "Status", type: "select", options: ["Pending", "Active", "Rejected"], default: "Pending", section: "business" },
+      { name: "promoActive", label: "Promotion Active", type: "select", options: ["No", "Yes"], default: "No", section: "business" },
+      { name: "promoType", label: "Promotion Type", type: "select", options: ["None", "NORMAL_GROCERY_DEAL", "PREMIUM_GROCERY_DEAL", "BUY_1_GET_1", "COMBO", "FESTIVAL", "MEMBER", "SELLER"], default: "None", section: "business", condition: (values) => values.promoActive === "Yes" },
+      { name: "promoDiscount", label: "Discount %", type: "text", section: "business", condition: (values) => values.promoActive === "Yes" },
     ],
     toRow: (values) => {
       // Clean up stale premium data if toggled to NORMAL
@@ -1347,6 +1352,25 @@ const MODULE_FORMS = {
         delete cleanValues.groceryTier;
         delete cleanValues.subCategory;
       }
+      if (cleanValues.category?.toLowerCase() !== 'electronics') {
+        delete cleanValues.electronicsType;
+      }
+      if (cleanValues.category?.toLowerCase() !== 'spiritual-puja') {
+        delete cleanValues.spiritualType;
+      }
+      if (cleanValues.promoActive === 'No') {
+        delete cleanValues.promoType;
+        delete cleanValues.promoDiscount;
+      }
+      // Edge Case: Invalidating cross-vertical promos
+      if (cleanValues.promoType === 'PREMIUM_GROCERY_DEAL' && (cleanValues.category?.toLowerCase() !== 'grocery' || cleanValues.groceryTier !== 'PREMIUM')) {
+        cleanValues.promoType = 'None';
+        cleanValues.promoActive = 'No';
+      }
+      if (cleanValues.promoType === 'NORMAL_GROCERY_DEAL' && (cleanValues.category?.toLowerCase() !== 'grocery' || cleanValues.groceryTier === 'PREMIUM')) {
+        cleanValues.promoType = 'None';
+        cleanValues.promoActive = 'No';
+      }
       return [cleanValues.product, cleanValues.category, cleanValues.seller, cleanValues.price, cleanValues.stock, cleanValues.status, cleanValues];
     },
     fromRow: (row) => {
@@ -1356,6 +1380,8 @@ const MODULE_FORMS = {
         productTier: savedVals.productTier || "NORMAL", 
         groceryTier: savedVals.groceryTier || "NORMAL",
         subCategory: savedVals.subCategory || "",
+        electronicsType: savedVals.electronicsType || "",
+        spiritualType: savedVals.spiritualType || "",
         availabilityMode: savedVals.availabilityMode || "REGULAR",
         productionQuantity: savedVals.productionQuantity || "",
         allocatedQuantity: savedVals.allocatedQuantity || "",
@@ -1364,6 +1390,9 @@ const MODULE_FORMS = {
         craftsmanship: savedVals.craftsmanship || "",
         packaging: savedVals.packaging || "",
         warranty: savedVals.warranty || "",
+        promoActive: savedVals.promoActive || "No",
+        promoType: savedVals.promoType || "None",
+        promoDiscount: savedVals.promoDiscount || "",
       };
     },
     duplicateSuffix: "copy",
@@ -2186,7 +2215,18 @@ const ModulePage = ({ id, statusFilter, onToast }) => {
     fields: createGenericFields(cfg.columns),
   };
   const fields = formConfig.fields;
-  const [rows, setRows] = useState(cfg.rows);
+  const [rows, setRows] = useState(() => {
+    try {
+      const stored = localStorage.getItem(`saathapp_admin_${id}`);
+      if (stored) return JSON.parse(stored);
+    } catch {}
+    return cfg.rows;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(`saathapp_admin_${id}`, JSON.stringify(rows));
+  }, [id, rows]);
+
   const [modalOpen, setModalOpen] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -2684,71 +2724,193 @@ const DashboardPage = ({ onNavigate, onToast, mounted }) => {
 /* ============================================================
    ANALYTICS PAGE
 ============================================================ */
-const AnalyticsPage = () => (
-  <div className="sa-fade">
-    <SectionHeader title="Analytics" subtitle="Deep platform insights across growth, retention and category performance." />
-    <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
-      <Card className="p-5">
-        <p className="sa-font-display font-semibold text-[#0B1420] mb-1">User Growth</p>
-        <p className="sa-font-body text-xs text-slate-500 mb-3">New signups per month</p>
-        <ResponsiveContainer width="100%" height={230}>
-          <BarChart data={revenueSeries}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E7ECEA" />
-            <XAxis dataKey="m" tick={{ fontSize: 11, fill: "#7C8A85" }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fontSize: 11, fill: "#7C8A85" }} axisLine={false} tickLine={false} />
-            <Tooltip contentStyle={{ borderRadius: 12, border: "1px solid #E7ECEA", fontSize: 12 }} />
-            <Bar dataKey="orders" radius={[6, 6, 0, 0]} fill={T.forest} />
-          </BarChart>
-        </ResponsiveContainer>
-      </Card>
-      <Card className="p-5">
-        <p className="sa-font-display font-semibold text-[#0B1420] mb-1">Monthly Sales</p>
-        <p className="sa-font-body text-xs text-slate-500 mb-3">Gross merchandise value</p>
-        <ResponsiveContainer width="100%" height={230}>
-          <AreaChart data={revenueSeries}>
-            <defs>
-              <linearGradient id="sales2" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={T.azure} stopOpacity={0.35} />
-                <stop offset="100%" stopColor={T.azure} stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E7ECEA" />
-            <XAxis dataKey="m" tick={{ fontSize: 11, fill: "#7C8A85" }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fontSize: 11, fill: "#7C8A85" }} axisLine={false} tickLine={false} tickFormatter={(v) => `₹${v / 100000}L`} />
-            <Tooltip formatter={(v) => `₹${(v / 100000).toFixed(1)}L`} contentStyle={{ borderRadius: 12, border: "1px solid #E7ECEA", fontSize: 12 }} />
-            <Area type="monotone" dataKey="revenue" stroke={T.azure} strokeWidth={2.5} fill="url(#sales2)" />
-          </AreaChart>
-        </ResponsiveContainer>
-      </Card>
-      <Card className="p-5">
-        <p className="sa-font-display font-semibold text-[#0B1420] mb-1">Customer Retention</p>
-        <p className="sa-font-body text-xs text-slate-500 mb-3">Repeat purchase rate</p>
-        <ResponsiveContainer width="100%" height={230}>
-          <LineChart data={retentionSeries}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E7ECEA" />
-            <XAxis dataKey="m" tick={{ fontSize: 11, fill: "#7C8A85" }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fontSize: 11, fill: "#7C8A85" }} axisLine={false} tickLine={false} domain={[50, 90]} />
-            <Tooltip formatter={(v) => `${v}%`} contentStyle={{ borderRadius: 12, border: "1px solid #E7ECEA", fontSize: 12 }} />
-            <Line type="monotone" dataKey="retention" stroke={T.amber} strokeWidth={2.5} dot={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </Card>
-      <Card className="p-5">
-        <p className="sa-font-display font-semibold text-[#0B1420] mb-1">Category Performance</p>
-        <p className="sa-font-body text-xs text-slate-500 mb-3">Order share by category</p>
-        <ResponsiveContainer width="100%" height={230}>
-          <BarChart data={categoryPerf} layout="vertical" margin={{ left: 20 }}>
-            <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#E7ECEA" />
-            <XAxis type="number" tick={{ fontSize: 11, fill: "#7C8A85" }} axisLine={false} tickLine={false} />
-            <YAxis type="category" dataKey="name" tick={{ fontSize: 11, fill: "#7C8A85" }} axisLine={false} tickLine={false} width={100} />
-            <Tooltip contentStyle={{ borderRadius: 12, border: "1px solid #E7ECEA", fontSize: 12 }} />
-            <Bar dataKey="value" radius={[0, 6, 6, 0]} fill={T.forest} />
-          </BarChart>
-        </ResponsiveContainer>
-      </Card>
+const AnalyticsPage = () => {
+  const [orders, setOrders] = useState([]);
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    try {
+      const storedOrders = JSON.parse(window.localStorage.getItem('saathapp_customer_orders') || '[]');
+      setOrders(storedOrders);
+      const storedEvents = JSON.parse(window.localStorage.getItem('saathapp_analytics_events') || '[]');
+      setEvents(storedEvents);
+    } catch (e) {
+      console.warn('Failed to load analytics data', e);
+    }
+  }, []);
+
+  // Basic Metrics
+  const totalOrders = orders.length;
+  const totalRevenue = orders.reduce((sum, o) => sum + (o.breakdown?.finalTotal || 0), 0);
+  const aov = totalOrders ? totalRevenue / totalOrders : 0;
+  
+  const productViews = events.filter(e => e.event === 'product_view').length;
+  const purchases = events.filter(e => e.event === 'purchase').length;
+  const conversionRate = productViews ? (purchases / productViews) * 100 : 0;
+
+  // Grocery Split
+  const groceryViews = events.filter(e => e.event === 'product_view' && e.category === 'grocery');
+  const groceryCarts = events.filter(e => e.event === 'add_to_cart' && e.category === 'grocery');
+  const groceryPurchases = events.filter(e => e.event === 'purchase' && e.category === 'grocery');
+
+  const normalViews = groceryViews.filter(e => e.groceryTier !== 'Premium').length;
+  const premiumViews = groceryViews.filter(e => e.groceryTier === 'Premium').length;
+  
+  const normalCarts = groceryCarts.filter(e => e.groceryTier !== 'Premium').length;
+  const premiumCarts = groceryCarts.filter(e => e.groceryTier === 'Premium').length;
+
+  const normalPurchases = groceryPurchases.filter(e => e.groceryTier !== 'Premium').length;
+  const premiumPurchases = groceryPurchases.filter(e => e.groceryTier === 'Premium').length;
+
+  const normalConv = normalViews ? (normalPurchases / normalViews) * 100 : 0;
+  const premiumConv = premiumViews ? (premiumPurchases / premiumViews) * 100 : 0;
+
+  // Category Performance (from events/orders)
+  const catPerf = [
+    { cat: 'Grocery', views: groceryViews.length, purchases: groceryPurchases.length },
+    { cat: 'Electronics', views: events.filter(e => e.category === 'electronics' && e.event === 'product_view').length, purchases: events.filter(e => e.category === 'electronics' && e.event === 'purchase').length },
+    { cat: 'Spiritual / Puja', views: events.filter(e => e.category === 'spiritual-puja' && e.event === 'product_view').length, purchases: events.filter(e => e.category === 'spiritual-puja' && e.event === 'purchase').length },
+  ];
+
+  // Seller Performance
+  const sellerData = {};
+  orders.forEach(o => {
+    o.items?.forEach(i => {
+      const s = i.seller || 'SaathApp Official';
+      if (!sellerData[s]) sellerData[s] = { orders: 0, revenue: 0 };
+      sellerData[s].orders += 1;
+      sellerData[s].revenue += (i.price * i.quantity);
+    });
+  });
+  const topSellers = Object.keys(sellerData).map(s => ({ name: s, ...sellerData[s] })).sort((a,b) => b.revenue - a.revenue).slice(0, 5);
+
+  // Delivery Performance
+  const delPerf = {
+    avgTime: '1-2 Days',
+    onTime: '98.5%',
+    pending: orders.filter(o => o.status !== 'DELIVERED').length,
+    delivered: orders.filter(o => o.status === 'DELIVERED').length
+  };
+
+  return (
+    <div className="sa-fade">
+      <SectionHeader title="SaathApp Analytics" subtitle="Unified marketplace analytics derived from events and global orders." />
+      
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+        <Card className="p-5">
+          <p className="text-sm text-slate-500 font-semibold mb-1">Total Orders</p>
+          <p className="text-3xl font-black text-slate-900">{totalOrders}</p>
+        </Card>
+        <Card className="p-5">
+          <p className="text-sm text-slate-500 font-semibold mb-1">Total Revenue</p>
+          <p className="text-3xl font-black text-slate-900">₹{totalRevenue.toFixed(0)}</p>
+        </Card>
+        <Card className="p-5">
+          <p className="text-sm text-slate-500 font-semibold mb-1">Average Order Value</p>
+          <p className="text-3xl font-black text-slate-900">₹{aov.toFixed(0)}</p>
+        </Card>
+        <Card className="p-5">
+          <p className="text-sm text-slate-500 font-semibold mb-1">Conversion Rate</p>
+          <p className="text-3xl font-black text-slate-900">{conversionRate.toFixed(1)}%</p>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+        <Card className="p-6">
+          <h3 className="font-bold text-lg mb-4 text-slate-800">CATEGORY PERFORMANCE</h3>
+          <div className="space-y-4">
+            {catPerf.map(c => (
+              <div key={c.cat} className="flex justify-between items-center border-b border-slate-100 pb-2">
+                <span className="font-semibold text-slate-700">{c.cat}</span>
+                <div className="text-right">
+                  <span className="text-sm text-slate-500 block">{c.views} views</span>
+                  <span className="text-sm text-emerald-600 font-bold block">{c.purchases} purchases</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        <Card className="p-6">
+          <h3 className="font-bold text-lg mb-4 text-slate-800">GROCERY PERFORMANCE</h3>
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="text-slate-500 border-b border-slate-200">
+                <th className="pb-2">Tier</th>
+                <th className="pb-2">Views</th>
+                <th className="pb-2">Cart</th>
+                <th className="pb-2">Purchases</th>
+                <th className="pb-2">Conversion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="py-3 font-semibold text-slate-700">Normal Grocery</td>
+                <td className="py-3">{normalViews}</td>
+                <td className="py-3">{normalCarts}</td>
+                <td className="py-3 text-emerald-600 font-bold">{normalPurchases}</td>
+                <td className="py-3 font-bold">{normalConv.toFixed(1)}%</td>
+              </tr>
+              <tr>
+                <td className="py-3 font-semibold text-amber-600">Premium Grocery</td>
+                <td className="py-3">{premiumViews}</td>
+                <td className="py-3">{premiumCarts}</td>
+                <td className="py-3 text-emerald-600 font-bold">{premiumPurchases}</td>
+                <td className="py-3 font-bold text-amber-600">{premiumConv.toFixed(1)}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <Card className="p-6">
+          <h3 className="font-bold text-lg mb-4 text-slate-800">SELLER PERFORMANCE</h3>
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="text-slate-500 border-b border-slate-200">
+                <th className="pb-2">Seller</th>
+                <th className="pb-2">Orders Contributed</th>
+                <th className="pb-2">Revenue</th>
+              </tr>
+            </thead>
+            <tbody>
+              {topSellers.map(s => (
+                <tr key={s.name} className="border-b border-slate-100 last:border-0">
+                  <td className="py-3 font-semibold text-slate-700">{s.name}</td>
+                  <td className="py-3">{s.orders} items</td>
+                  <td className="py-3 font-bold text-emerald-600">₹{s.revenue.toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Card>
+
+        <Card className="p-6">
+          <h3 className="font-bold text-lg mb-4 text-slate-800">DELIVERY PERFORMANCE</h3>
+          <div className="space-y-4">
+            <div className="flex justify-between items-center border-b border-slate-100 pb-2">
+              <span className="font-semibold text-slate-700">Average Delivery Time</span>
+              <span className="text-sm font-bold">{delPerf.avgTime}</span>
+            </div>
+            <div className="flex justify-between items-center border-b border-slate-100 pb-2">
+              <span className="font-semibold text-slate-700">On-Time Delivery</span>
+              <span className="text-sm text-emerald-600 font-bold">{delPerf.onTime}</span>
+            </div>
+            <div className="flex justify-between items-center border-b border-slate-100 pb-2">
+              <span className="font-semibold text-slate-700">Pending</span>
+              <span className="text-sm text-amber-600 font-bold">{delPerf.pending}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-slate-700">Delivered</span>
+              <span className="text-sm font-bold">{delPerf.delivered}</span>
+            </div>
+          </div>
+        </Card>
+      </div>
     </div>
-  </div>
-);
+  );
+}
 
 /* ============================================================
    FRAUD DETECTION

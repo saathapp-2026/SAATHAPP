@@ -8,6 +8,7 @@ import SignupPage from './pages/Signup';
 import ProfilePage from './pages/Profile';
 import CartPage from './pages/Cart';
 import OrdersPage from './pages/Orders';
+import OrderConfirmationPage from './pages/OrderConfirmation';
 import WishlistPage from './pages/Wishlist';
 import SettingsPage from './pages/Settings';
 import EditProfilePage from './pages/EditProfile';
@@ -131,7 +132,15 @@ export default function App() {
   const [isGpsLoading, setIsGpsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-
+  
+  const [orders, setOrders] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = window.localStorage.getItem('saathapp_customer_orders');
+      if (saved) return JSON.parse(saved);
+    }
+    return [];
+  });
+  const [latestOrder, setLatestOrder] = useState(null);
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
   }, [darkMode]);
@@ -181,11 +190,16 @@ export default function App() {
   }, [cartItems]);
 
   const handleAddToCart = (product, change) => {
-    if (change > 0 && product.category === 'spiritual-puja') {
-      trackEvent('spiritual_add_to_cart', {
-        product_id: product.id,
-        product_name: product.name,
-        quantity_added: change
+    if (change > 0) {
+      trackEvent('add_to_cart', {
+        productId: product.id,
+        name: product.name,
+        category: product.category,
+        quantity_added: change,
+        price: product.price,
+        ...(product.groceryTier && { groceryTier: product.groceryTier }),
+        ...(product.electronicsType && { electronicsType: product.electronicsType }),
+        ...(product.spiritualType && { spiritualType: product.spiritualType })
       });
     }
     
@@ -219,6 +233,79 @@ export default function App() {
       return prev;
     });
   };
+
+  const handleCheckoutProcess = (orderBreakdown) => {
+    // 1. Generate Order Record (BEFORE inventory decrement)
+    const newOrder = {
+      orderId: `SAATH${Math.floor(100000 + Math.random() * 900000)}`,
+      date: new Date().toISOString(),
+      customer: user ? user.name : 'Guest Customer',
+      items: cartItems.map(item => ({
+        id: item.id,
+        name: item.name,
+        category: item.category,
+        quantity: item.quantity,
+        price: item.price,
+        groceryTier: item.groceryTier || null,
+        electronicsType: item.electronicsType || null,
+        spiritualType: item.spiritualType || null,
+        seller: item.brand || 'SaathApp Official',
+        image: item.image
+      })),
+      breakdown: orderBreakdown,
+      deliveryAddress: location || "Connaught Place, Central Delhi",
+      estimatedDelivery: "1-2 Days",
+      payment: { method: "Wallet/UPI", status: "SUCCESS" },
+      status: "CONFIRMED"
+    };
+
+    // Save to local state & storage
+    const updatedOrders = [newOrder, ...orders];
+    setOrders(updatedOrders);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('saathapp_customer_orders', JSON.stringify(updatedOrders));
+    }
+
+    setLatestOrder(newOrder);
+
+    // 2. Deduct stock in memory
+    cartItems.forEach(cartItem => {
+      const prod = products.find(p => p.id === cartItem.id);
+      if (prod && typeof prod.stock === 'number') {
+        prod.stock = Math.max(0, prod.stock - cartItem.quantity);
+      }
+      const saathProd = mockSaathAppProducts.find(p => p.id === cartItem.id);
+      if (saathProd && typeof saathProd.stock === 'number') {
+        saathProd.stock = Math.max(0, saathProd.stock - cartItem.quantity);
+      }
+    });
+
+    // 3. Deduct stock in Admin LocalStorage so it syncs back
+    if (typeof window !== 'undefined') {
+      try {
+        const adminProductsJson = window.localStorage.getItem('saathapp_admin_products');
+        if (adminProductsJson) {
+          const adminProducts = JSON.parse(adminProductsJson);
+          cartItems.forEach(cartItem => {
+            const adminRow = adminProducts.find(row => row[6] && row[6].product === cartItem.name);
+            if (adminRow) {
+              const currentStock = parseInt(adminRow[6].stock || 0);
+              const newStock = Math.max(0, currentStock - cartItem.quantity);
+              adminRow[6].stock = String(newStock);
+              adminRow[4] = String(newStock);
+            }
+          });
+          window.localStorage.setItem('saathapp_admin_products', JSON.stringify(adminProducts));
+        }
+      } catch (e) {
+        console.warn('Could not update admin inventory', e);
+      }
+    }
+
+    setCartItems([]);
+    setIsCartOpen(false);
+  };
+
 
   const getCartQuantity = (productId) => {
     const item = cartItems.find((entry) => entry.id === productId);
@@ -1296,24 +1383,7 @@ export default function App() {
         onServiceBook={(service) => {
           alert(`Booking created for: ${service.name}. Starting scheduler flow.`);
         }}
-        onCheckout={() => {
-          // Mutate inventory
-          cartItems.forEach(cartItem => {
-            const prod = products.find(p => p.id === cartItem.id);
-            if (prod && typeof prod.stock === 'number') {
-              prod.stock = Math.max(0, prod.stock - cartItem.quantity);
-            }
-            // also check saathAppProducts if needed
-            const saathProd = mockSaathAppProducts.find(p => p.id === cartItem.id);
-            if (saathProd && typeof saathProd.stock === 'number') {
-              saathProd.stock = Math.max(0, saathProd.stock - cartItem.quantity);
-            }
-          });
-
-          alert(`Checkout completed for total amount ₹${cartTotal}! Thank you for using SaathApp.`);
-          setCartItems([]);
-          setIsCartOpen(false);
-        }}
+        onCheckout={() => handleCheckoutProcess(cartTotal)}
         onCloseCart={() => setIsCartOpen(false)}
         onCloseQuickView={() => {}}
         onCloseVoiceModal={() => setIsVoiceModalOpen(false)}
@@ -1418,39 +1488,38 @@ export default function App() {
         cartItems={cartItems} 
         cartTotal={cartTotal} 
         onUpdateQuantity={handleAddToCart}
-        onCheckout={() => {
-          let hasSpiritual = false;
-          // Mutate inventory
-          cartItems.forEach(cartItem => {
-            if (cartItem.category === 'spiritual-puja') {
-              hasSpiritual = true;
-            }
-            const prod = products.find(p => p.id === cartItem.id);
-            if (prod && typeof prod.stock === 'number') {
-              prod.stock = Math.max(0, prod.stock - cartItem.quantity);
-            }
-            const saathProd = mockSaathAppProducts.find(p => p.id === cartItem.id);
-            if (saathProd && typeof saathProd.stock === 'number') {
-              saathProd.stock = Math.max(0, saathProd.stock - cartItem.quantity);
-            }
+        onCheckout={(orderBreakdown) => {
+          // Fire Unified Analytics Events
+          cartItems.forEach(item => {
+            const payload = {
+              productId: item.id,
+              name: item.name,
+              category: item.category,
+              quantity: item.quantity,
+              price: item.price,
+              seller: item.brand || 'SaathApp Official',
+              ...(item.groceryTier && { groceryTier: item.groceryTier }),
+              ...(item.electronicsType && { electronicsType: item.electronicsType }),
+              ...(item.spiritualType && { spiritualType: item.spiritualType })
+            };
+            trackEvent('checkout', payload);
+            trackEvent('purchase', payload);
           });
           
-          if (hasSpiritual) {
-            trackEvent('spiritual_checkout', { items: cartItems.length, total: cartTotal });
-            trackEvent('spiritual_purchase', { items: cartItems.length, total: cartTotal });
-          }
-          
-          alert(`Checkout completed for total amount ₹${cartTotal}! Thank you for using SaathApp.`);
-          setCartItems([]);
-          setActivePage('home');
+          handleCheckoutProcess(orderBreakdown);
+          setActivePage('order-confirmation');
         }}
         onBack={() => setActivePage('home')} 
       />
     );
   }
 
+  if (activePage === 'order-confirmation') {
+    return <OrderConfirmationPage order={latestOrder} onBack={() => setActivePage('home')} onViewOrders={() => setActivePage('orders')} />;
+  }
+
   if (activePage === 'orders') {
-    return <OrdersPage onBack={() => setActivePage('home')} />;
+    return <OrdersPage orders={orders} onBack={() => setActivePage('home')} />;
   }
 
   if (activePage === 'wishlist') {
@@ -1548,23 +1617,7 @@ export default function App() {
       onServiceBook={(service) => {
         alert(`Booking created for: ${service.name}. Starting scheduler flow.`);
       }}
-      onCheckout={() => {
-        // Mutate inventory
-        cartItems.forEach(cartItem => {
-          const prod = products.find(p => p.id === cartItem.id);
-          if (prod && typeof prod.stock === 'number') {
-            prod.stock = Math.max(0, prod.stock - cartItem.quantity);
-          }
-          const saathProd = mockSaathAppProducts.find(p => p.id === cartItem.id);
-          if (saathProd && typeof saathProd.stock === 'number') {
-            saathProd.stock = Math.max(0, saathProd.stock - cartItem.quantity);
-          }
-        });
-
-        alert(`Checkout completed for total amount ₹${cartTotal}! Thank you for using SaathApp.`);
-        setCartItems([]);
-        setIsCartOpen(false);
-      }}
+      onCheckout={() => handleCheckoutProcess(cartTotal)}
       onCloseCart={() => setIsCartOpen(false)}
       onCloseQuickView={() => {}}
       onCloseVoiceModal={() => setIsVoiceModalOpen(false)}

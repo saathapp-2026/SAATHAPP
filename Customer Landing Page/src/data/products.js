@@ -16,6 +16,11 @@ export const products = [
     stock: 50,
     brand: 'Daawat',
     isOffer: true,
+    promotion: {
+      type: 'PREMIUM_GROCERY_DEAL',
+      discount: '15%',
+      active: true
+    }
   },
   {
     id: 'g2',
@@ -32,7 +37,12 @@ export const products = [
     reviews: 300,
     stock: 100,
     brand: 'Aashirvaad',
-    isOffer: false,
+    isOffer: true,
+    promotion: {
+      type: 'NORMAL_GROCERY_DEAL',
+      discount: '20%',
+      active: true
+    }
   },
   {
     id: 'g3',
@@ -82,8 +92,13 @@ export const products = [
     rating: 4.7,
     reviews: 90,
     stock: 150,
-    brand: 'Madhur',
-    isOffer: false,
+    brand: 'ABC Store',
+    isOffer: true,
+    promotion: {
+      type: 'SELLER',
+      discount: '10%',
+      active: true
+    }
   },
   {
     id: 'g6',
@@ -102,6 +117,45 @@ export const products = [
     brand: 'Tata Tea',
     isOffer: true,
   },
+  {
+    id: 'sg1',
+    name: 'SaathApp Premium Atta',
+    category: 'grocery',
+    groceryTier: 'Premium',
+    subCategory: 'rice-atta-grains',
+    description: '100% MP Sharbati wheat atta 5kg.',
+    price: 350,
+    originalPrice: 400,
+    discount: '12%',
+    image: '',
+    rating: 4.9,
+    reviews: 150,
+    stock: 200,
+    brand: 'SaathApp Official',
+    isOffer: true,
+  },
+  {
+    id: 'sg2',
+    name: 'SaathApp Classic Spices Combo',
+    category: 'grocery',
+    groceryTier: 'Normal',
+    subCategory: 'spices-masala',
+    description: 'Turmeric, Chilli, Coriander powder 200g each.',
+    price: 180,
+    originalPrice: 220,
+    discount: '18%',
+    image: '',
+    rating: 4.6,
+    reviews: 85,
+    stock: 120,
+    brand: 'SaathApp Official',
+    isOffer: true,
+    promotion: {
+      type: 'MEMBER',
+      discount: '30%',
+      active: true
+    }
+  },
 
   // Electronics
   {
@@ -118,6 +172,7 @@ export const products = [
     stock: 20,
     brand: 'JBL',
     isOffer: true,
+    electronicsType: 'Accessories',
   },
   {
     id: 'e2',
@@ -131,8 +186,14 @@ export const products = [
     rating: 4.3,
     reviews: 200,
     stock: 45,
-    brand: 'boAt',
+    brand: 'ABC Store',
     isOffer: true,
+    promotion: {
+      type: 'SELLER',
+      discount: '10%',
+      active: true
+    },
+    electronicsType: 'Accessories',
   },
   {
     id: 'e3',
@@ -148,6 +209,7 @@ export const products = [
     stock: 100,
     brand: 'Philips',
     isOffer: false,
+    electronicsType: 'Other',
   },
   {
     id: 'e4',
@@ -163,6 +225,7 @@ export const products = [
     stock: 60,
     brand: 'Mi',
     isOffer: false,
+    electronicsType: 'Accessories',
   },
 
   // Mobiles
@@ -330,6 +393,7 @@ export const products = [
     name: 'Brass Ganesh Murti',
     category: 'spiritual-puja',
     subCategory: 'idols-murtis',
+    spiritualType: 'Idols',
     description: 'Beautifully crafted brass Ganesh idol for your home.',
     price: 899,
     originalPrice: 1299,
@@ -351,6 +415,7 @@ export const products = [
     name: 'Premium Agarbatti',
     category: 'spiritual-puja',
     subCategory: 'agarbatti-dhoop',
+    spiritualType: 'Puja Samagri',
     description: 'Natural sandalwood incense sticks.',
     price: 99,
     originalPrice: 150,
@@ -370,6 +435,7 @@ export const products = [
     name: 'Brass Diya',
     category: 'spiritual-puja',
     subCategory: 'diyas-lamps',
+    spiritualType: 'Puja Samagri',
     description: 'Traditional brass diya for daily puja.',
     price: 499,
     originalPrice: 699,
@@ -390,6 +456,7 @@ export const products = [
     name: 'Diwali Puja Kit',
     category: 'spiritual-puja',
     subCategory: 'puja-kits',
+    spiritualType: 'Other',
     festival: 'diwali',
     description: 'Complete kit for Diwali puja essentials.',
     price: 299,
@@ -401,6 +468,11 @@ export const products = [
     stock: 150,
     brand: 'SaathApp Official',
     isOffer: true,
+    promotion: {
+      type: 'FESTIVAL',
+      discount: '25%',
+      active: true
+    },
     sellers: [
       { id: 's5', name: 'SaathApp Warehouse', location: { lat: 28.3949, lng: 77.3110 }, stock: 150 } // Faridabad (~28 km) - 1-2 days
     ]
@@ -410,6 +482,7 @@ export const products = [
     name: 'Pure Camphor (Kapoor)',
     category: 'spiritual-puja',
     subCategory: 'puja-samagri',
+    spiritualType: 'Puja Samagri',
     festival: 'navratri',
     description: '100% pure camphor for daily aarti and puja.',
     price: 150,
@@ -480,3 +553,76 @@ export const subcategories = {
     { id: 'premium-grocery', name: 'Premium Grocery', image: '' }
   ]
 };
+
+// Sync with Admin Dashboard localStorage if available
+if (typeof window !== 'undefined') {
+  try {
+    const adminProducts = window.localStorage.getItem('saathapp_admin_products');
+    if (adminProducts) {
+      const parsedRows = JSON.parse(adminProducts);
+      parsedRows.forEach((row, index) => {
+        const data = row[6] || {};
+        // Check if it's already in products
+        const existingIndex = products.findIndex(p => p.name === data.product);
+        
+        let gTier = 'Normal';
+        if (data.groceryTier) {
+          gTier = data.groceryTier.toLowerCase() === 'premium' ? 'Premium' : 'Normal';
+        }
+
+        const promoActive = data.promoActive === 'Yes';
+        const promoType = data.promoType && data.promoType !== 'None' ? data.promoType : null;
+        let validPromo = promoActive && promoType;
+        
+        // Evaluate condition on client side just in case (e.g. mock override)
+        if (validPromo) {
+          if (promoType === 'PREMIUM_GROCERY_DEAL' && (data.category?.toLowerCase() !== 'grocery' || gTier !== 'Premium')) validPromo = false;
+          if (promoType === 'NORMAL_GROCERY_DEAL' && (data.category?.toLowerCase() !== 'grocery' || gTier === 'Premium')) validPromo = false;
+        }
+
+        const mappedProduct = {
+          id: existingIndex >= 0 ? products[existingIndex].id : `admin-${Date.now()}-${index}`,
+          name: data.product,
+          category: data.category?.toLowerCase() || 'grocery',
+          groceryTier: gTier,
+          subCategory: data.subCategory || '',
+          electronicsType: data.electronicsType || '',
+          spiritualType: data.spiritualType || '',
+          description: data.description || 'Admin updated product',
+          price: Number(String(data.price || '').replace(/[^0-9.]/g, '') || 0),
+          originalPrice: Number(String(data.price || '').replace(/[^0-9.]/g, '') || 0) * 1.2,
+          discount: '',
+          image: existingIndex >= 0 ? products[existingIndex].image : '',
+          rating: existingIndex >= 0 ? products[existingIndex].rating : 4.5,
+          reviews: existingIndex >= 0 ? products[existingIndex].reviews : 0,
+          stock: Number(String(data.stock || '').replace(/[^0-9]/g, '') || 10),
+          brand: data.seller || (existingIndex >= 0 ? products[existingIndex].brand : 'Admin'),
+          isOffer: validPromo,
+          promotion: validPromo ? {
+            type: promoType,
+            discount: data.promoDiscount || '',
+            active: true
+          } : null
+        };
+        mappedProduct.discount = mappedProduct.promotion ? mappedProduct.promotion.discount : '';
+
+        const isActive = data.status === 'Active' || data.status === 'Live';
+
+        if (existingIndex >= 0) {
+          if (isActive) {
+            // Overwrite existing mock product
+            products[existingIndex] = { ...products[existingIndex], ...mappedProduct };
+          } else {
+            // Remove it if it's pending/rejected
+            products.splice(existingIndex, 1);
+          }
+        } else if (isActive && data.product && data.category) {
+          // Add new active product
+          products.unshift(mappedProduct);
+        }
+      });
+    }
+  } catch (e) {
+    console.warn('Could not sync admin products', e);
+  }
+}
