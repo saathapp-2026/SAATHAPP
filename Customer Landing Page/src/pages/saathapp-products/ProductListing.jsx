@@ -6,8 +6,32 @@ import ProductGrid from '../../components/saathapp-product/ProductGrid';
 import ProductFilters from '../../components/saathapp-product/ProductFilters';
 import { products, categories, subcategories, festivals } from '../../data/products';
 import { mockSaathAppProducts } from '../../data/saathAppProducts';
-import { ChevronRight, Home, Sparkles } from 'lucide-react';
+import { MASTER_CATEGORIES, getCategoryByIdOrSlug, getDynamicProductCount } from '../../config/categoryConfig';
+import {
+  ChevronRight, Home, Leaf, Smartphone, Cross, Shirt, Package, Hammer, Wrench,
+  BookOpen, Footprints, Gift, Sparkles, Sprout, HardHat, Car, Flame, ShoppingBag
+} from 'lucide-react';
 import { trackEvent } from '../../utils/analytics';
+
+// Icon Map for Category Cards per PDF Spec Visual Language
+const CATEGORY_ICON_MAP = {
+  grocery: Leaf,
+  electronics: Smartphone,
+  mobiles: Smartphone,
+  'medicine-healthcare': Cross,
+  fashion: Shirt,
+  'household-items': Package,
+  hardware: Hammer,
+  services: Wrench,
+  'books-stationery': BookOpen,
+  footwear: Footprints,
+  gifts: Gift,
+  saathapp: Sparkles,
+  agriculture: Sprout,
+  construction: HardHat,
+  vehicles: Car,
+  'spiritual-puja': Flame
+};
 
 export default function ProductListing({
   cartCount,
@@ -35,9 +59,15 @@ export default function ProductListing({
   let subCategoryId = null;
 
   if (pathParts[0] === 'products') {
-    if (pathParts[1]) categoryId = pathParts[1];
+    if (pathParts[1] && pathParts[1] !== 'all' && pathParts[1] !== 'search') {
+      categoryId = pathParts[1];
+    }
     if (pathParts[2]) subCategoryId = pathParts[2];
   }
+
+  const isSearch = pathParts[1] === 'search' || !!searchQuery;
+  const isOffersPage = pathParts[1] === 'offers';
+  const isAllCategories = pathParts[1] === 'all' || (!categoryId && !festivalFilter && !isSearch && !isOffersPage);
 
   React.useEffect(() => {
     if (categoryId && categoryId !== 'all') {
@@ -50,26 +80,23 @@ export default function ProductListing({
     }
   }, [categoryId, subCategoryId, festivalFilter, searchQuery]);
 
-  const isSearch = categoryId === 'search';
-  const isOffersPage = categoryId === 'offers';
-  const isAllCategories = categoryId === 'all' || (!categoryId && !festivalFilter);
-
-  if (isSearch || categoryId === 'all') categoryId = null;
-
-  const categoryInfo = categories.find(c => c.id === categoryId);
+  const categoryInfo = getCategoryByIdOrSlug(categoryId) || (categories ? categories.find(c => c.id === categoryId) : null);
   const subCategoryInfo = categoryId && subCategoryId && subcategories[categoryId] ? subcategories[categoryId].find(s => s.id === subCategoryId) : null;
 
   let title = 'All Products';
   let seoTitle = 'Buy Products Online | SaathApp';
   
   if (isSearch) {
-    title = `Search Results for "${searchQuery}"`;
+    title = `Search Results for "${searchQuery || ''}"`;
     seoTitle = title;
   } else if (isOffersPage) {
     title = 'Special Offers';
     seoTitle = title;
+  } else if (isAllCategories) {
+    title = 'All Categories';
+    seoTitle = 'All Marketplace Categories | SaathApp';
   } else if (festivalFilter) {
-    const fest = festivals.find(f => f.id === festivalFilter);
+    const fest = festivals ? festivals.find(f => f.id === festivalFilter) : null;
     title = fest ? `${fest.name} Collection` : 'Festival Collection';
     seoTitle = `${title} | SaathApp`;
   } else if (subCategoryInfo) {
@@ -83,7 +110,6 @@ export default function ProductListing({
       ? `Spiritual & Puja Items Online | SaathApp`
       : `${categoryInfo.name} | SaathApp Official`;
   }
-  
   React.useEffect(() => {
     document.title = seoTitle;
     
@@ -105,16 +131,16 @@ export default function ProductListing({
     rating: '',
     type: ''
   });
-  
+
   const [sort, setSort] = useState('popular');
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simulate network request
+  // Network simulation
   React.useEffect(() => {
     setIsLoading(true);
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 400);
+    }, 300);
     return () => clearTimeout(timer);
   }, [categoryId, filters, sort, isOffersPage, isAllCategories, searchQuery, festivalFilter]);
 
@@ -168,8 +194,6 @@ export default function ProductListing({
     if (subCategoryId) {
       filteredProducts = filteredProducts.filter(p => p.subCategory === subCategoryId);
     }
-  }
-
   if (festivalFilter) {
     filteredProducts = filteredProducts.filter(p => p.festival === festivalFilter);
   }
@@ -225,6 +249,18 @@ export default function ProductListing({
   else if (sort === 'price-high') filteredProducts.sort((a, b) => b.price - a.price);
   else if (sort === 'rating') filteredProducts.sort((a, b) => (b.rating || 0) - (a.rating || 0));
 
+  // Handle sidebar category filter selection
+  const handleSidebarCategoryChange = (catId) => {
+    if (catId === 'all') {
+      navigate('/products');
+    } else if (catId === 'gift-set') {
+      navigate('/products/gift-set');
+    } else if (catId === 'services') {
+      navigate('/services');
+    } else {
+      navigate(`/products/${catId}`);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
@@ -242,17 +278,19 @@ export default function ProductListing({
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
       />
-      
+
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-          <button onClick={() => navigate('/')} className="hover:text-primary flex items-center gap-1"><Home size={12} /> Home</button>
+          <button onClick={() => navigate('/')} className="hover:text-emerald-500 flex items-center gap-1">
+            <Home size={12} /> Home
+          </button>
           <ChevronRight size={12} />
-          <button onClick={() => navigate('/products')} className="hover:text-primary">Products</button>
+          <button onClick={() => navigate('/products')} className="hover:text-emerald-500">Categories</button>
           {categoryId && (
             <>
               <ChevronRight size={12} />
-              <button onClick={() => navigate(`/products/${categoryId}`)} className={`${subCategoryId ? 'hover:text-primary' : 'text-slate-800 dark:text-slate-300'}`}>
+              <button onClick={() => navigate(`/products/${categoryId}`)} className={`${subCategoryId ? 'hover:text-primary' : 'text-slate-800 dark:text-slate-300 font-bold'}`}>
                 {categoryInfo ? categoryInfo.name : categoryId}
               </button>
             </>
@@ -260,20 +298,22 @@ export default function ProductListing({
           {subCategoryId && (
             <>
               <ChevronRight size={12} />
-              <span className="text-slate-800 dark:text-slate-300">{subCategoryInfo ? subCategoryInfo.name : subCategoryId}</span>
+              <span className="text-slate-800 dark:text-slate-300 font-bold">{subCategoryInfo ? subCategoryInfo.name : subCategoryId}</span>
             </>
           )}
           {isOffersPage && (
             <>
               <ChevronRight size={12} />
-              <span className="text-slate-800 dark:text-slate-300">Offers</span>
+              <span className="text-slate-800 dark:text-slate-300 font-bold">Offers</span>
             </>
           )}
         </div>
 
         <div className="mb-6">
-          <h1 className="text-3xl font-black mb-2">{title}</h1>
-          <p className="text-slate-500">{filteredProducts.length} Products</p>
+          <h1 className="text-3xl font-black mb-1">{title}</h1>
+          <p className="text-xs text-slate-500 font-semibold">
+            {isAllCategories ? '16 Marketplace Verticals' : `${filteredProducts.length} Products`}
+          </p>
         </div>
 
         {/* Grocery Homepage Merchandising */}
@@ -379,66 +419,74 @@ export default function ProductListing({
           </div>
         )}
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
           {/* Filters Sidebar */}
           <aside className="w-full lg:w-64 shrink-0">
-            <ProductFilters 
-              filters={filters} 
-              setFilters={setFilters} 
-              activeCategory={categoryId} 
-              onCategoryChange={(cat) => navigate(cat === 'all' ? '/products' : `/products/${cat}`)} 
+            <ProductFilters
+              filters={filters}
+              setFilters={setFilters}
+              activeCategory={categoryId || (isAllCategories ? 'all' : '')}
+              onCategoryChange={handleSidebarCategoryChange}
             />
           </aside>
-          
-          {/* Product Grid & Sort */}
-          <div className="flex-1">
+
+          {/* Main Content Area */}
+          <div className="flex-1 w-full">
             {isAllCategories ? (
+              /* ALL CATEGORIES 4x4 GRID (Matching PDF Screenshots Page 12 & Page 23-24) */
               <div>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                  {categories.map(cat => (
-                    <div 
-                      key={cat.id} 
-                      onClick={() => navigate(`/products/${cat.id}`)}
-                      className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:border-primary hover:shadow-lg transition-all group aspect-square"
-                    >
-                      <div className="w-16 h-16 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <span className="text-2xl">{cat.id === 'grocery' ? '🥬' : cat.id === 'electronics' ? '📱' : cat.id === 'fashion' ? '👕' : '🛍️'}</span>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-5 sm:gap-6">
+                  {MASTER_CATEGORIES.map(cat => {
+                    const IconComponent = CATEGORY_ICON_MAP[cat.id] || ShoppingBag;
+                    const dynamicCount = getDynamicProductCount(products, cat.id);
+
+                    return (
+                      <div
+                        key={cat.id}
+                        onClick={() => navigate(cat.url)}
+                        className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:border-emerald-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group aspect-square"
+                      >
+                        <div className="w-16 h-16 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
+                          <IconComponent size={28} />
+                        </div>
+                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                          {cat.name}
+                        </h3>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 font-medium">
+                          {dynamicCount} Products
+                        </p>
                       </div>
-                      <h3 className="font-bold text-lg">{cat.name}</h3>
-                      <p className="text-xs text-slate-500 mt-2">{products.filter(p => p.category === cat.id).length} Products</p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             ) : (
+              /* CATEGORY SPECIFIC PRODUCT LISTING GRID */
               <>
-                <div className="flex items-center justify-between mb-6 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
-                  <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">Showing {filteredProducts.length} results</span>
+                <div className="flex items-center justify-between mb-6 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs">
+                  <span className="text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-400">
+                    Showing <span className="text-emerald-600 font-extrabold">{filteredProducts.length}</span> results
+                  </span>
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-slate-500">Sort by:</span>
-                    <select 
+                    <span className="text-xs font-medium text-slate-500">Sort by:</span>
+                    <select
                       value={sort}
                       onChange={(e) => setSort(e.target.value)}
-                      className="bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-sm font-semibold py-1.5 px-3 outline-none focus:ring-2 focus:ring-primary"
+                      className="bg-slate-100 dark:bg-slate-800 border-none rounded-xl text-xs font-bold py-2 px-3 outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"
                     >
-                      <option value="popular">Popular</option>
-                      <option value="price-low">Price: Low to High</option>
-                      <option value="price-high">Price: High to Low</option>
+                      <option value="popular">Popularity</option>
+                      <option value="price_low">Price: Low to High</option>
+                      <option value="price_high">Price: High to Low</option>
                       <option value="rating">Rating</option>
-                      <option value="newest">Newest First</option>
                     </select>
                   </div>
                 </div>
-                
-                {filteredProducts.length > 0 || isLoading ? (
-                  <ProductGrid products={filteredProducts} onAddToCart={handleAddToCart} isLoading={isLoading} />
-                ) : (
-                  <div className="flex flex-col items-center justify-center py-20 text-center">
-                    <span className="text-6xl mb-4">🔍</span>
-                    <h3 className="text-xl font-bold mb-2">No products found</h3>
-                    <p className="text-slate-500 max-w-sm">We couldn't find any products matching your selected filters. Try adjusting them.</p>
-                  </div>
-                )}
+
+                <ProductGrid
+                  products={filteredProducts}
+                  isLoading={isLoading}
+                  onAddToCart={handleAddToCart}
+                />
               </>
             )}
           </div>

@@ -71,26 +71,19 @@ export const WIZARD_STEPS = [
   { id: 8, key: 'preview', label: 'Preview' },
 ];
 
+import { MASTER_CATEGORIES, GIFT_SET_CATEGORY } from '../categoryConfig';
+
 export const PRODUCT_CATEGORIES = [
-  {
-    id: 'grocery',
-    label: 'Grocery & Staples',
-    sub: ['Oils & Ghee', 'Rice & Grains', 'Spices', 'Flour & Atta', 'Pulses'],
-  },
+  ...MASTER_CATEGORIES.map(c => ({
+    id: c.id,
+    label: c.name,
+    sub: c.subcategories || [],
+    isOfficialOnly: !!c.isOfficialOnly
+  })),
   {
     id: 'fmcg',
     label: 'FMCG & Personal Care',
     sub: ['Personal Care', 'Home Care', 'Beverages', 'Snacks', 'Dairy'],
-  },
-  {
-    id: 'electronics',
-    label: 'Electronics',
-    sub: ['Mobiles', 'Accessories', 'Appliances', 'Audio'],
-  },
-  {
-    id: 'fashion',
-    label: 'Fashion',
-    sub: ['Men', 'Women', 'Kids', 'Footwear'],
   },
   {
     id: 'home',
@@ -98,10 +91,11 @@ export const PRODUCT_CATEGORIES = [
     sub: ['Cookware', 'Storage', 'Furnishings', 'Decor'],
   },
   {
-    id: 'spiritual-puja',
-    label: 'Spiritual / Puja Items',
-    sub: ['Puja Samagri', 'Diyas & Lamps', 'Agarbatti & Dhoop', 'Puja Essentials', 'Idols & Murtis', 'Rudraksha & Mala', 'Religious Books', 'Festival Essentials', 'Puja Kits & Combos', 'Spiritual Gifts'],
-  },
+    id: GIFT_SET_CATEGORY.id,
+    label: GIFT_SET_CATEGORY.name,
+    sub: GIFT_SET_CATEGORY.subcategories,
+    isMarketplaceOpen: true
+  }
 ];
 
 export const GST_SLABS = [0, 5, 12, 18, 28];

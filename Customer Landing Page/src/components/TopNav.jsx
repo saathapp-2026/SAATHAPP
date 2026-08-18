@@ -1,20 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
-const navItems = [
-  { name: 'All Categories', path: '/products' },
-  { name: 'Grocery', path: '/products/grocery' },
-  { name: 'Electronics', path: '/products/electronics' },
-  { name: 'Mobiles', path: '/products/mobiles' },
-  { name: 'Fashion', path: '/products/fashion' },
-  { name: 'Home & Kitchen', path: '/products/home-kitchen' },
-  { name: 'Hardware', path: '/products/hardware' },
-  { name: 'Services', path: '/services' },
-  { name: 'Spiritual / Puja', path: '/products/spiritual-puja', isNew: true },
-  { name: 'SaathApp Product', path: '/products/saathapp', isNew: true },
-  // { name: 'Offers', path: '/offers', icon: 'Offers' },
-  { name: 'SAATHAPP PLUS', path: '/plus', isNew: true, isPlus: true },
-];
+import { HEADER_NAV_ITEMS } from '../config/categoryConfig';
 
 export default function TopNav() {
   const location = useLocation();
@@ -35,7 +21,7 @@ export default function TopNav() {
             HOME
           </Link>
 
-          {navItems.map((item) => {
+          {HEADER_NAV_ITEMS.map((item) => {
             const isActive = item.path === '/products'
               ? (location.pathname === '/products' || location.pathname === '/products/')
               : location.pathname.startsWith(item.path);

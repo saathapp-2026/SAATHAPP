@@ -1,5 +1,5 @@
 import React from 'react';
-import { categories } from '../../data/products';
+import { MASTER_CATEGORIES, GIFT_SET_CATEGORY } from '../../config/categoryConfig';
 
 export default function ProductFilters({ filters, setFilters, activeCategory, onCategoryChange }) {
   
@@ -10,39 +10,41 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
     }));
   };
 
+  // Combine Master 16 Categories + Gift Set for sidebar category filter list
+  const sidebarCategoryList = [
+    { id: 'all', name: 'All Products' },
+    ...MASTER_CATEGORIES.map(c => ({ id: c.id, name: c.name })),
+    { id: 'gift-set', name: GIFT_SET_CATEGORY.name }
+  ];
+
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 space-y-8">
+    <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-800 space-y-6 shadow-2xs">
       
       {/* Category Filter */}
       <div>
-        <h3 className="font-bold mb-4 uppercase text-xs tracking-wider text-slate-400">Category</h3>
-        <ul className="space-y-3">
-          <li>
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input 
-                type="radio" 
-                name="category" 
-                checked={activeCategory === 'all' || !activeCategory} 
-                onChange={() => onCategoryChange('all')}
-                className="accent-primary" 
-              />
-              <span className={`text-sm ${activeCategory === 'all' || !activeCategory ? 'font-bold text-primary' : 'text-slate-600 dark:text-slate-300'}`}>All Products</span>
-            </label>
-          </li>
-          {categories.map(cat => (
-            <li key={cat.id}>
-              <label className="flex items-center gap-3 cursor-pointer">
-                <input 
-                  type="radio" 
-                  name="category" 
-                  checked={activeCategory === cat.id} 
-                  onChange={() => onCategoryChange(cat.id)}
-                  className="accent-primary" 
-                />
-                <span className={`text-sm ${activeCategory === cat.id ? 'font-bold text-primary' : 'text-slate-600 dark:text-slate-300'}`}>{cat.name}</span>
-              </label>
-            </li>
-          ))}
+        <h3 className="font-extrabold mb-3 uppercase text-xs tracking-wider text-slate-400">Category</h3>
+        <ul className="space-y-2 max-h-80 overflow-y-auto pr-1">
+          {sidebarCategoryList.map(cat => {
+            const isSelected = activeCategory === cat.id || (!activeCategory && cat.id === 'all');
+            return (
+              <li key={cat.id}>
+                <label className="flex items-center gap-3 cursor-pointer group">
+                  <input 
+                    type="radio" 
+                    name="category" 
+                    checked={isSelected} 
+                    onChange={() => onCategoryChange(cat.id)}
+                    className="accent-emerald-500" 
+                  />
+                  <span className={`text-xs transition-colors ${
+                    isSelected ? 'font-black text-emerald-600 dark:text-emerald-400' : 'text-slate-600 dark:text-slate-300 group-hover:text-emerald-500'
+                  }`}>
+                    {cat.name}
+                  </span>
+                </label>
+              </li>
+            );
+          })}
         </ul>
       </div>
 
@@ -50,8 +52,8 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
 
       {/* Price Filter */}
       <div>
-        <h3 className="font-bold mb-4 uppercase text-xs tracking-wider text-slate-400">Price</h3>
-        <ul className="space-y-3">
+        <h3 className="font-extrabold mb-3 uppercase text-xs tracking-wider text-slate-400">Price</h3>
+        <ul className="space-y-2.5 text-xs">
           {['Under ₹199', '₹199 - ₹499', '₹500 - ₹999', '₹1,000+'].map(price => (
             <li key={price}>
               <label className="flex items-center gap-3 cursor-pointer group">
@@ -59,9 +61,9 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
                   type="checkbox" 
                   checked={filters.priceRange === price}
                   onChange={() => handleFilterChange('priceRange', price)}
-                  className="rounded text-primary focus:ring-primary accent-primary" 
+                  className="rounded text-emerald-500 focus:ring-emerald-500 accent-emerald-500" 
                 />
-                <span className="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">{price}</span>
+                <span className="text-slate-600 dark:text-slate-300 group-hover:text-emerald-500 transition-colors">{price}</span>
               </label>
             </li>
           ))}
@@ -72,8 +74,8 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
 
       {/* Availability */}
       <div>
-        <h3 className="font-bold mb-4 uppercase text-xs tracking-wider text-slate-400">Availability</h3>
-        <ul className="space-y-3">
+        <h3 className="font-extrabold mb-3 uppercase text-xs tracking-wider text-slate-400">Availability</h3>
+        <ul className="space-y-2.5 text-xs">
           {['In Stock', 'Fast Delivery'].map(avail => (
             <li key={avail}>
               <label className="flex items-center gap-3 cursor-pointer group">
@@ -81,9 +83,9 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
                   type="checkbox" 
                   checked={filters.availability === avail}
                   onChange={() => handleFilterChange('availability', avail)}
-                  className="rounded text-primary focus:ring-primary accent-primary" 
+                  className="rounded text-emerald-500 focus:ring-emerald-500 accent-emerald-500" 
                 />
-                <span className="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">{avail}</span>
+                <span className="text-slate-600 dark:text-slate-300 group-hover:text-emerald-500 transition-colors">{avail}</span>
               </label>
             </li>
           ))}
@@ -94,8 +96,8 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
 
       {/* Rating */}
       <div>
-        <h3 className="font-bold mb-4 uppercase text-xs tracking-wider text-slate-400">Rating</h3>
-        <ul className="space-y-3">
+        <h3 className="font-extrabold mb-3 uppercase text-xs tracking-wider text-slate-400">Rating</h3>
+        <ul className="space-y-2.5 text-xs">
           {['4★ & above', '3★ & above'].map(rating => (
             <li key={rating}>
               <label className="flex items-center gap-3 cursor-pointer group">
@@ -103,9 +105,9 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
                   type="checkbox" 
                   checked={filters.rating === rating}
                   onChange={() => handleFilterChange('rating', rating)}
-                  className="rounded text-primary focus:ring-primary accent-primary" 
+                  className="rounded text-emerald-500 focus:ring-emerald-500 accent-emerald-500" 
                 />
-                <span className="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">{rating}</span>
+                <span className="text-slate-600 dark:text-slate-300 group-hover:text-emerald-500 transition-colors">{rating}</span>
               </label>
             </li>
           ))}
@@ -116,24 +118,23 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
 
       {/* Product Type */}
       <div>
-        <h3 className="font-bold mb-4 uppercase text-xs tracking-wider text-slate-400">Product Type</h3>
-        <ul className="space-y-3">
-          {['Official Merchandise', 'SaathApp Essentials', 'Private Label', 'Corporate'].map(type => (
+        <h3 className="font-extrabold mb-3 uppercase text-xs tracking-wider text-slate-400">Product Type</h3>
+        <ul className="space-y-2.5 text-xs">
+          {['Official Merchandise', 'SaathApp Essentials'].map(type => (
             <li key={type}>
               <label className="flex items-center gap-3 cursor-pointer group">
                 <input 
                   type="checkbox" 
                   checked={filters.type === type}
                   onChange={() => handleFilterChange('type', type)}
-                  className="rounded text-primary focus:ring-primary accent-primary" 
+                  className="rounded text-emerald-500 focus:ring-emerald-500 accent-emerald-500" 
                 />
-                <span className="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">{type}</span>
+                <span className="text-slate-600 dark:text-slate-300 group-hover:text-emerald-500 transition-colors">{type}</span>
               </label>
             </li>
           ))}
         </ul>
       </div>
-
       {activeCategory === 'grocery' && (
         <>
           <div className="h-px bg-slate-100 dark:bg-slate-800" />
@@ -261,7 +262,6 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
           </div>
         </>
       )}
-
     </div>
   );
 }

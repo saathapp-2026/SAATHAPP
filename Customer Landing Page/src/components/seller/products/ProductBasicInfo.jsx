@@ -61,9 +61,17 @@ export default function ProductBasicInfo({
               className="flex-1"
             >
               <option value="">Select category</option>
-              {PRODUCT_CATEGORIES.map((c) => (
-                <option key={c.id} value={c.id}>{c.label}</option>
-              ))}
+              {PRODUCT_CATEGORIES.map((c) => {
+                // Lock SaathApp Official category unless seller is SAATHAPP_OWNED
+                if (c.isOfficialOnly && value?.sellerType !== 'SAATHAPP_OWNED') {
+                  return null;
+                }
+                return (
+                  <option key={c.id} value={c.id}>
+                    {c.label} {c.id === 'gift-set' ? '🎁 (Open Marketplace)' : ''}
+                  </option>
+                );
+              })}
             </TextSelect>
             <button
               type="button"

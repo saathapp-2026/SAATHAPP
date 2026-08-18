@@ -75,6 +75,8 @@ import BulkOrders from './pages/saathapp-products/BulkOrders';
 import TopNav from './components/TopNav';
 import SaathAppPlusPage from './pages/SaathAppPlusPage';
 import MembershipDashboardPage from './pages/MembershipDashboardPage';
+import GiftSetPage from './pages/GiftSetPage';
+import AdminCategoryManagement from './pages/admin/AdminCategoryManagement';
 
 export default function App() {
   const routerLocation = useLocation();
@@ -622,6 +624,52 @@ export default function App() {
       />
     );
   }
+
+  if (routerLocation.pathname === '/products/gift-set' || routerLocation.pathname === '/products/gift-set/' || routerLocation.pathname === '/gift-set' || routerLocation.pathname === '/gift-set/') {
+    return (
+      <GiftSetPage
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/products/search');
+        }}
+        onLogin={() => { setAuthView('login'); navigate('/login'); }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        handleAddToCart={handleAddToCart}
+      />
+    );
+  }
+
+  if (routerLocation.pathname === '/admin/categories' || routerLocation.pathname === '/admin/categories/') {
+    return (
+      <AdminCategoryManagement
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/products/search');
+        }}
+        onLogin={() => { setAuthView('login'); navigate('/login'); }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
+    );
+  }
+
   const isServiceListing = routerLocation.pathname === '/services' || routerLocation.pathname === '/services/';
   
   if (isServiceListing) {
@@ -707,7 +755,7 @@ export default function App() {
 
   const isOffers = routerLocation.pathname === '/offers';
   const isAllCategories = routerLocation.pathname === '/products' || routerLocation.pathname === '/products/';
-  const isProductListing = (routerLocation.pathname.startsWith('/products/') && routerLocation.pathname !== '/products/saathapp' && routerLocation.pathname !== '/products/saathapp/') || isOffers || isAllCategories;
+  const isProductListing = (routerLocation.pathname.startsWith('/products/') && routerLocation.pathname !== '/products/saathapp' && routerLocation.pathname !== '/products/saathapp/' && !routerLocation.pathname.startsWith('/products/gift-set')) || isOffers || isAllCategories;
 
   if (isProductListing) {
     return (

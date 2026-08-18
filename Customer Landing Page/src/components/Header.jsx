@@ -45,7 +45,7 @@ export default function Header({
   const navigate = useNavigate();
 
   const popularSearches = [
-    'Electrician', 'Plumber', 'Electricals', 'Hardware', 'AC Servicing', 'Groceries'
+    'Gift Set', 'Notebooks', 'Slippers', 'Household Items', 'Diya & Puja', 'Groceries', 'Mobiles', 'Hardware'
   ];
 
   const recentSearches = [];
@@ -57,20 +57,22 @@ export default function Header({
       setSuggestions([]);
       return;
     }
-    
     const allNames = new Set([
+      'Gift Set', 'Chocolate Gift Box', 'Notebooks & Registers', 'School Supplies',
+      'Slippers & Sandals', 'Sports Shoes', 'Household Cleaning Items', 'Laundry Detergent',
+      'Diya & Lamps', 'Puja Samagri', 'Electrician Service', 'Groceries & Atta',
+      '5G Mobiles', 'Hardware Tools', 'SaathApp Official Merchandise',
       'Electrician', 'Plumber', 'Hardware', 'AC Servicing', 'Grocery', 'Spiritual Puja', 'Murtis', 'Diyas'
     ]);
     
     // Add product names
-    products.forEach(p => allNames.add(p.name));
-    mockSaathAppProducts.forEach(p => allNames.add(p.name));
+    if (products) products.forEach(p => p.name && allNames.add(p.name));
+    if (mockSaathAppProducts) mockSaathAppProducts.forEach(p => p.name && allNames.add(p.name));
     
     // Add subcategories
-    Object.values(subcategories).flat().forEach(sub => allNames.add(sub.name));
+    if (subcategories) Object.values(subcategories).flat().forEach(sub => sub.name && allNames.add(sub.name));
     
     const terms = Array.from(allNames);
-    
     const filtered = terms.filter(t => t.toLowerCase().includes(q)).slice(0, 8);
     setSuggestions(filtered);
   }, [searchQuery]);

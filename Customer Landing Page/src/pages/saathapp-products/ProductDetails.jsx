@@ -36,6 +36,8 @@ export default function ProductDetails({
   
   const [quantity, setQuantity] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState(null);
+  const [activeTab, setActiveTab] = useState('description');
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   React.useEffect(() => {
     if (product) {
@@ -71,6 +73,13 @@ export default function ProductDetails({
       </div>
     );
   }
+
+  // Gallery Images Array (uses product images or fallback gallery)
+  const galleryImages = product.images && product.images.length > 0
+    ? product.images
+    : [product.image, product.image, product.image, product.image].filter(Boolean);
+
+  const currentMainImage = galleryImages[selectedImageIndex] || product.image;
 
   // Mock variants for demo purposes based on category
   const variants = product.category === 't-shirts-apparel' ? {
@@ -151,22 +160,32 @@ export default function ProductDetails({
                <button className="absolute top-4 right-4 p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur rounded-full hover:text-rose-500 transition-colors shadow-sm">
                  <Heart size={20} />
                </button>
-               {product.image ? (
-                 <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
+               {currentMainImage ? (
+                 <img src={currentMainImage} alt={product.name} className="w-full h-full object-contain transition-all duration-300" />
                ) : (
                  <span className="text-8xl">🛍️</span>
                )}
             </div>
             <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
-              {[1, 2, 3, 4].map(idx => (
-                <div key={idx} className={`w-20 h-24 shrink-0 bg-white dark:bg-slate-900 border-2 rounded-xl flex items-center justify-center cursor-pointer transition-colors ${idx === 1 ? 'border-primary' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300'}`}>
-                  {product.image ? (
-                     <img src={product.image} alt="Thumbnail" loading="lazy" className="w-full h-full object-contain p-2" />
-                  ) : (
-                     <span className="text-2xl">🛍️</span>
-                  )}
-                </div>
-              ))}
+              {[0, 1, 2, 3].map((idx) => {
+                const imgUrl = galleryImages[idx] || product.image;
+                const isSelected = selectedImageIndex === idx;
+                return (
+                  <div
+                    key={idx}
+                    onClick={() => setSelectedImageIndex(idx)}
+                    className={`w-20 h-24 shrink-0 bg-white dark:bg-slate-900 border-2 rounded-xl flex items-center justify-center cursor-pointer transition-all ${
+                      isSelected ? 'border-primary ring-2 ring-primary/20 scale-105' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300'
+                    }`}
+                  >
+                    {imgUrl ? (
+                      <img src={imgUrl} alt={`Thumbnail ${idx + 1}`} loading="lazy" className="w-full h-full object-contain p-2" />
+                    ) : (
+                      <span className="text-2xl">🛍️</span>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -205,8 +224,14 @@ export default function ProductDetails({
               </div>
               <div className="flex items-end gap-3 mb-2">
                 <span className="text-4xl font-black">₹{product.price}</span>
-                <span className="text-lg text-slate-400 line-through font-semibold">₹{product.price + 200}</span>
-                <span className="text-sm font-bold text-green-600 dark:text-green-400 mb-1">Save ₹200 (25% Off)</span>
+                {product.originalPrice ? (
+                  <span className="text-lg text-slate-400 line-through font-semibold">₹{product.originalPrice}</span>
+                ) : (
+                  <span className="text-lg text-slate-400 line-through font-semibold">₹{product.price + 200}</span>
+                )}
+                <span className="text-sm font-bold text-green-600 dark:text-green-400 mb-1">
+                  {product.discount ? `${product.discount} Off` : 'Save ₹200 (25% Off)'}
+                </span>
               </div>
               <p className="text-sm text-slate-500 mb-4">Inclusive of all taxes</p>
               
@@ -394,55 +419,120 @@ export default function ProductDetails({
               </div>
             </div>
 
-            {/* Product Details Tabs (Simple View) */}
+            {/* Product Details Tabs */}
             <div className="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-slate-900">
               <div className="flex items-center border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
-                <button className="flex-1 py-3 text-sm font-bold text-primary border-b-2 border-primary">Description</button>
-                <button className="flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-800">Specifications</button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('description')}
+                  className={`flex-1 py-3 text-sm transition-colors cursor-pointer ${
+                    activeTab === 'description'
+                      ? 'font-bold text-primary border-b-2 border-primary'
+                      : 'font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                  }`}
+                >
+                  Description
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('specifications')}
+                  className={`flex-1 py-3 text-sm transition-colors cursor-pointer ${
+                    activeTab === 'specifications'
+                      ? 'font-bold text-primary border-b-2 border-primary'
+                      : 'font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                  }`}
+                >
+                  Specifications
+                </button>
               </div>
-              <div className="p-6">
-                <h4 className="font-bold mb-3">Product Description</h4>
-                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-                  {product.description || `Premium quality ${product.name.toLowerCase()} designed for maximum comfort and durability. This is an official SaathApp merchandise product, guaranteed to meet our high quality standards. Perfect for daily use or as a thoughtful gift.`}
-                </p>
-                <ul className="list-disc pl-5 text-sm text-slate-600 dark:text-slate-400 space-y-2">
-                  <li>Official SaathApp branding</li>
-                  <li>Premium materials used</li>
-                  <li>Durable and long-lasting</li>
-                  <li>Includes authenticity tag</li>
-                </ul>
 
-                {product.productTier === 'PREMIUM' ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 bg-amber-50/50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-900/30 rounded-2xl mt-6">
-                    <div className="space-y-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-amber-600/70 dark:text-amber-500/70">Materials</span>
-                      <p className="font-medium text-slate-800 dark:text-slate-200">{product.materials || 'Premium Grade'}</p>
-                    </div>
-                    <div className="space-y-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-amber-600/70 dark:text-amber-500/70">Craftsmanship</span>
-                      <p className="font-medium text-slate-800 dark:text-slate-200">{product.craftsmanship || 'Expertly Crafted'}</p>
-                    </div>
-                    <div className="space-y-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-amber-600/70 dark:text-amber-500/70">Packaging</span>
-                      <p className="font-medium text-slate-800 dark:text-slate-200">{product.packaging || 'Signature Box'}</p>
-                    </div>
-                    <div className="space-y-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-amber-600/70 dark:text-amber-500/70">Warranty</span>
-                      <p className="font-medium text-slate-800 dark:text-slate-200">{product.warranty || 'Limited Warranty'}</p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 mt-6">
-                    <h3 className="font-bold text-lg mb-4">Specifications</h3>
-                    <ul className="space-y-4">
-                      {Object.entries(product.specifications || {}).map(([key, value]) => (
-                        <li key={key} className="flex gap-4">
-                          <span className="w-1/3 text-slate-500 text-sm font-medium">{key}</span>
-                          <span className="w-2/3 text-slate-800 dark:text-slate-200 text-sm">{value}</span>
-                        </li>
-                      ))}
+              {/* Tab Content */}
+              <div className="p-6">
+                {activeTab === 'description' ? (
+                  <>
+                    <h4 className="font-bold mb-3">Product Description</h4>
+                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                      {product.description || `Premium quality ${product.name.toLowerCase()} designed for maximum comfort and durability. This is an official SaathApp merchandise product, guaranteed to meet our high quality standards. Perfect for daily use or as a thoughtful gift.`}
+                    </p>
+                    <ul className="list-disc pl-5 text-sm text-slate-600 dark:text-slate-400 space-y-2">
+                      <li>Official SaathApp branding</li>
+                      <li>Premium quality materials</li>
+                      <li>Durable and long-lasting</li>
+                      <li>Includes authenticity tag</li>
                     </ul>
-                  </div>
+
+                    {product.productTier === 'PREMIUM' && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 bg-amber-50/50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-900/30 rounded-2xl mt-6">
+                        <div className="space-y-2">
+                          <span className="text-xs font-bold uppercase tracking-wider text-amber-600/70 dark:text-amber-500/70">Materials</span>
+                          <p className="font-medium text-slate-800 dark:text-slate-200">{product.materials || 'Premium Grade'}</p>
+                        </div>
+                        <div className="space-y-2">
+                          <span className="text-xs font-bold uppercase tracking-wider text-amber-600/70 dark:text-amber-500/70">Craftsmanship</span>
+                          <p className="font-medium text-slate-800 dark:text-slate-200">{product.craftsmanship || 'Expertly Crafted'}</p>
+                        </div>
+                        <div className="space-y-2">
+                          <span className="text-xs font-bold uppercase tracking-wider text-amber-600/70 dark:text-amber-500/70">Packaging</span>
+                          <p className="font-medium text-slate-800 dark:text-slate-200">{product.packaging || 'Signature Box'}</p>
+                        </div>
+                        <div className="space-y-2">
+                          <span className="text-xs font-bold uppercase tracking-wider text-amber-600/70 dark:text-amber-500/70">Warranty</span>
+                          <p className="font-medium text-slate-800 dark:text-slate-200">{product.warranty || 'Limited Warranty'}</p>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <h4 className="font-bold mb-3">Technical Specifications</h4>
+                    <div className="space-y-2.5 text-sm mb-6">
+                      <div className="flex border-b border-slate-100 dark:border-slate-800 pb-2">
+                        <span className="w-1/3 text-slate-500 font-medium">Brand</span>
+                        <span className="w-2/3 font-bold text-slate-800 dark:text-slate-200">{product.brand || 'SaathApp Official'}</span>
+                      </div>
+                      <div className="flex border-b border-slate-100 dark:border-slate-800 pb-2">
+                        <span className="w-1/3 text-slate-500 font-medium">Category</span>
+                        <span className="w-2/3 font-bold text-slate-800 dark:text-slate-200 capitalize">{product.category ? product.category.replace('-', ' ') : 'General'}</span>
+                      </div>
+                      {product.subCategory && (
+                        <div className="flex border-b border-slate-100 dark:border-slate-800 pb-2">
+                          <span className="w-1/3 text-slate-500 font-medium">Subcategory</span>
+                          <span className="w-2/3 font-bold text-slate-800 dark:text-slate-200">{product.subCategory}</span>
+                        </div>
+                      )}
+                      <div className="flex border-b border-slate-100 dark:border-slate-800 pb-2">
+                        <span className="w-1/3 text-slate-500 font-medium">Item SKU / ID</span>
+                        <span className="w-2/3 font-mono text-xs font-bold text-slate-700 dark:text-slate-300">{product.id}</span>
+                      </div>
+                      <div className="flex border-b border-slate-100 dark:border-slate-800 pb-2">
+                        <span className="w-1/3 text-slate-500 font-medium">Availability</span>
+                        <span className="w-2/3 font-bold text-green-600 dark:text-green-400">In Stock ({product.stock || 50} units)</span>
+                      </div>
+                      <div className="flex border-b border-slate-100 dark:border-slate-800 pb-2">
+                        <span className="w-1/3 text-slate-500 font-medium">Seller Type</span>
+                        <span className="w-2/3 font-bold text-slate-800 dark:text-slate-200">{product.sellerType || 'Verified Partner'}</span>
+                      </div>
+                      <div className="flex pb-1">
+                        <span className="w-1/3 text-slate-500 font-medium">Delivery</span>
+                        <span className="w-2/3 font-bold text-slate-800 dark:text-slate-200">{product.deliveryType || 'Standard Fast Delivery'}</span>
+                      </div>
+                    </div>
+
+                    {product.specifications && Object.keys(product.specifications).length > 0 && (
+                      <div className="bg-slate-50 dark:bg-slate-900 rounded-2xl p-6">
+                        <h3 className="font-bold text-lg mb-4">Additional Details</h3>
+                        <ul className="space-y-4">
+                          {Object.entries(product.specifications).map(([key, value]) => (
+                            <li key={key} className="flex gap-4">
+                              <span className="w-1/3 text-slate-500 text-sm font-medium">{key}</span>
+                              <span className="w-2/3 text-slate-800 dark:text-slate-200 text-sm">{value}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </>
+                )}
                 )}
               </div>
             </div>
