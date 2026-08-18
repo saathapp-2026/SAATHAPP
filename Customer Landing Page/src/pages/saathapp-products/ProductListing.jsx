@@ -194,6 +194,8 @@ export default function ProductListing({
     if (subCategoryId) {
       filteredProducts = filteredProducts.filter(p => p.subCategory === subCategoryId);
     }
+  }
+
   if (festivalFilter) {
     filteredProducts = filteredProducts.filter(p => p.festival === festivalFilter);
   }
