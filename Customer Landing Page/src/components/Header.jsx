@@ -39,6 +39,7 @@ export default function Header({
   const { canInstall, isInstalled, installApp } = usePWA();
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isCustomerMenuOpen, setIsCustomerMenuOpen] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const searchRef = useRef(null);
@@ -128,60 +129,23 @@ export default function Header({
 
               {/* Mobile Right Action Icons */}
               <div className="flex items-center gap-2">
+                {/* Theme Toggle */}
+                <button
+                  onClick={toggleDarkMode}
+                  className="p-1.5 rounded-full text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                >
+                  {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+                </button>
+
                 {/* SaathApp Product */}
                 <motion.button
                   onClick={() => navigate('/products/saathapp')}
                   whileTap={{ scale: 0.95 }}
-                  className="p-1 rounded-full text-primary hover:bg-primary/5 transition-colors shrink-0"
+                  className="p-1.5 rounded-full text-primary hover:bg-primary/5 transition-colors shrink-0"
                   title="SaathApp Products"
                 >
-                  <span className="text-xl">🛍️</span>
+                  <Sparkles size={18} className="text-[#6C3BFF]" />
                 </motion.button>
-
-                {/* Cart Button */}
-                <motion.button
-                  onClick={onCartClick}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label={t('my_cart') || 'Cart'}
-                  title={t('my_cart') || 'Cart'}
-                  className="relative p-1.5 rounded-btn bg-gradient-primary text-white shadow-sm flex items-center justify-center"
-                >
-                  <ShoppingCart size={17} />
-                  <AnimatePresence>
-                    {cartCount > 0 && (
-                      <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
-                        className="absolute -top-1.5 -right-1.5 bg-secondary-dark text-white border border-primary font-bold text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-xs"
-                      >
-                        {cartCount}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </motion.button>
-
-                {/* Profile Icon */}
-                <button
-                  onClick={() => navigate('/profile')}
-                  className="w-7 h-7 rounded-full bg-slate-200 overflow-hidden border border-slate-300 flex items-center justify-center text-theme-secondary shrink-0"
-                  title="Open profile"
-                >
-                  {user?.photo ? (
-                    <img src={user.photo} alt={user.name || 'Profile'} className="w-full h-full object-cover" />
-                  ) : (
-                    <span className="text-xs font-black">{(user?.name || 'U').charAt(0).toUpperCase()}</span>
-                  )}
-                </button>
-
-                {/* Hamburger Menu Toggle */}
-                <button
-                  onClick={() => setIsCustomerMenuOpen(true)}
-                  className="p-1.5 text-theme-secondary hover:bg-page  transition-colors rounded-btn cursor-pointer"
-                  title="Open menu"
-                >
-                  <Menu size={18} />
-                </button>
               </div>
             </div>
 
@@ -666,9 +630,13 @@ export default function Header({
                       key={item.tab}
                       onClick={() => {
                         setIsCustomerMenuOpen(false);
-                        navigate('/customer/dashboard', { state: { activeTab: item.tab } });
+                        if (item.tab === 'cart') {
+                          if (onCartClick) onCartClick();
+                        } else {
+                          navigate('/customer/dashboard', { state: { activeTab: item.tab } });
+                        }
                       }}
-                      className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-left transition-all cursor-pointer text-theme-secondary hover:bg-page  hover:text-[#6C3BFF] dark:hover:text-white"
+                      className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-left transition-all cursor-pointer text-theme-secondary hover:bg-page hover:text-[#6C3BFF] dark:hover:text-white"
                     >
                       <Icon size={16} />
                       <span>{item.label}</span>
@@ -679,7 +647,7 @@ export default function Header({
                 <button
                   onClick={() => {
                     setIsCustomerMenuOpen(false);
-                    if (onLogout) onLogout();
+                    setShowLogoutConfirm(true);
                   }}
                   className="w-full flex items-center gap-3 px-4 py-3 mt-4 rounded-xl text-xs font-black uppercase tracking-wider text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-955/20 text-left transition-all cursor-pointer"
                 >
@@ -689,6 +657,49 @@ export default function Header({
               </div>
             </motion.div>
           </>
+        )}
+      </AnimatePresence>
+
+      {/* Logout Confirmation Modal */}
+      <AnimatePresence>
+        {showLogoutConfirm && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-sm">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="w-full max-w-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl text-center space-y-4"
+            >
+              <div className="w-12 h-12 rounded-full bg-rose-50 dark:bg-rose-500/10 text-rose-500 border border-rose-200/50 dark:border-rose-500/20 flex items-center justify-center mx-auto">
+                <LogOut size={22} className="ml-0.5" />
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-wider">Logout</h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold leading-relaxed">
+                  Are you sure you want to logout?
+                </p>
+              </div>
+              <div className="flex gap-3 justify-center text-xs pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowLogoutConfirm(false)}
+                  className="w-full py-3 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl font-bold uppercase cursor-pointer transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowLogoutConfirm(false);
+                    if (onLogout) onLogout();
+                  }}
+                  className="w-full py-3 bg-rose-500 hover:bg-rose-600 active:scale-[0.98] text-white rounded-xl font-bold uppercase cursor-pointer transition-all shadow-sm"
+                >
+                  Logout
+                </button>
+              </div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </>

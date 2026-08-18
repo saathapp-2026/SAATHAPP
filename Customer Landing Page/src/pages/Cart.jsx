@@ -1,54 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ArrowLeft, ShoppingCart, Minus, Plus, Tag, CheckCircle2, ShieldCheck, Info } from 'lucide-react';
+import { useCart } from '../hooks/useCart';
 
-export default function Cart({ cartItems = [], onUpdateQuantity, onCheckout, onBack }) {
-  const [isPlusMember, setIsPlusMember] = useState(false);
-  const [couponCode, setCouponCode] = useState('');
-  const [appliedCoupon, setAppliedCoupon] = useState(null);
+export default function Cart({ onCheckout, onBack }) {
+  const { 
+    cartItems, 
+    handleAddToCart: onUpdateQuantity, 
+    isPlusMember, 
+    setIsPlusMember, 
+    appliedCoupon, 
+    setAppliedCoupon, 
+    totals 
+  } = useCart();
 
-  const calculateDiscountValue = (base, discountStr) => {
-    if (!discountStr) return 0;
-    const isPercentage = discountStr.includes('%');
-    const val = parseFloat(discountStr.replace(/[^0-9.]/g, ''));
-    if (isNaN(val)) return 0;
-    if (isPercentage) {
-      return base * (val / 100);
-    }
-    return val;
-  };
+  const [couponCode, setCouponCode] = React.useState('');
 
-  const isEligibleForPlus = (item) => {
-    return item.category === 'grocery' || item.brand === 'SaathApp Official' || item.productTier === 'PREMIUM';
-  };
+  const {
+    subtotalBase,
+    promoDiscountTotal,
+    memberDiscountTotal,
+    couponDiscountValue,
+    effectiveSubtotal,
+    deliveryFee,
+    deliveryDiscount,
+    finalTotal,
+    cashbackEarned,
+  } = totals;
 
-  let subtotalBase = 0;
-  let promoDiscountTotal = 0;
-  let memberDiscountTotal = 0;
-
-  cartItems.forEach(item => {
-    const basePrice = item.price;
-    const qty = item.quantity;
-    subtotalBase += basePrice * qty;
-
-    // RULE 1: PRODUCT PROMOTION
-    let itemPromoDiscount = 0;
-    if (item.promotion?.active) {
-      itemPromoDiscount = calculateDiscountValue(basePrice, item.promotion.discount);
-    }
-    promoDiscountTotal += itemPromoDiscount * qty;
-
-    const effectiveItemPrice = basePrice - itemPromoDiscount;
-
-    // RULE 2: PLUS BENEFIT
-    if (isPlusMember && isEligibleForPlus(item)) {
-      // 5% extra member discount on eligible items
-      memberDiscountTotal += (effectiveItemPrice * 0.05) * qty;
-    }
-  });
-
-  const effectiveSubtotal = subtotalBase - promoDiscountTotal - memberDiscountTotal;
-
-  // RULE 3: COUPON
   const handleApplyCoupon = () => {
     if (couponCode === 'SAATH50') {
       setAppliedCoupon({ code: 'SAATH50', discount: 50 });
@@ -59,23 +37,6 @@ export default function Cart({ cartItems = [], onUpdateQuantity, onCheckout, onB
       setAppliedCoupon(null);
     }
   };
-
-  const couponDiscountValue = appliedCoupon ? appliedCoupon.discount : 0;
-  
-  const subtotalAfterCoupon = Math.max(0, effectiveSubtotal - couponDiscountValue);
-
-  // RULE 4: DELIVERY BENEFIT
-  let deliveryFee = 50;
-  let deliveryDiscount = 0;
-  if (isPlusMember && subtotalAfterCoupon > 499) {
-    deliveryFee = 0;
-    deliveryDiscount = 50;
-  }
-
-  const finalTotal = subtotalAfterCoupon + deliveryFee;
-
-  // RULE 5: CASHBACK
-  const cashbackEarned = isPlusMember ? finalTotal * 0.05 : 0;
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 px-4 py-6 sm:px-6 lg:px-8 text-slate-800 dark:text-slate-100">
@@ -118,17 +79,15 @@ export default function Cart({ cartItems = [], onUpdateQuantity, onCheckout, onB
           </div>
         ) : (
           <div className="flex flex-col lg:flex-row gap-8">
-            {/* Cart Items List */}
             <div className="flex-1 space-y-4">
               {cartItems.map((item) => {
                 const maxStock = item.availabilityMode === 'LIMITED' ? item.availableQuantity : item.stock;
-                const outOfStock = maxStock !== undefined && maxStock <= 0;
                 
-                const itemPromoDiscount = item.promotion?.active ? calculateDiscountValue(item.price, item.promotion.discount) : 0;
-                const effectivePrice = item.price - itemPromoDiscount;
-                const itemMemberDiscount = (isPlusMember && isEligibleForPlus(item)) ? (effectivePrice * 0.05) : 0;
-                const finalItemPrice = effectivePrice - itemMemberDiscount;
-
+                // Redo calculation logic to show visual breakdown per item if needed
+                // OR we can just show the final price from `item.price` as logic was simplified in cartUtils
+                const effectivePrice = item.price; 
+                // We assume UI handles the breakdown differently now, or we can just show price
+                
                 return (
                   <div key={item.id} className="flex gap-4 p-4 border border-slate-200 dark:border-slate-800 rounded-2xl items-center relative overflow-hidden bg-white dark:bg-slate-900">
                     <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-xl bg-slate-100 dark:bg-slate-800" />
@@ -137,23 +96,7 @@ export default function Cart({ cartItems = [], onUpdateQuantity, onCheckout, onB
                       <h3 className="font-bold">{item.name}</h3>
                       
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm font-black text-primary">₹{finalItemPrice.toFixed(0)}</span>
-                        {(itemPromoDiscount > 0 || itemMemberDiscount > 0) && (
-                          <span className="text-xs text-slate-400 line-through">₹{item.price}</span>
-                        )}
-                      </div>
-                      
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {itemPromoDiscount > 0 && (
-                          <span className="text-[10px] bg-rose-100 text-rose-700 px-2 py-0.5 rounded font-bold uppercase tracking-wide">
-                            {item.promotion.type.replace(/_/g, " ")}
-                          </span>
-                        )}
-                        {itemMemberDiscount > 0 && (
-                          <span className="text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-bold flex items-center gap-1 uppercase tracking-wide">
-                            <ShieldCheck size={10} /> Member Price
-                          </span>
-                        )}
+                        <span className="text-sm font-black text-primary">₹{effectivePrice}</span>
                       </div>
                     </div>
                     
@@ -186,9 +129,7 @@ export default function Cart({ cartItems = [], onUpdateQuantity, onCheckout, onB
               })}
             </div>
             
-            {/* Checkout Summary */}
             <div className="w-full lg:w-96 flex flex-col gap-4">
-              {/* Coupon Section */}
               <div className="border border-slate-200 dark:border-slate-800 rounded-2xl p-6 bg-slate-50 dark:bg-slate-900/50">
                 <h3 className="text-sm font-bold flex items-center gap-2 mb-4">
                   <Tag size={16} /> Apply Coupon
@@ -213,15 +154,8 @@ export default function Cart({ cartItems = [], onUpdateQuantity, onCheckout, onB
                     <CheckCircle2 size={12} /> {appliedCoupon.code} applied successfully!
                   </div>
                 )}
-                {isPlusMember && (
-                  <div className="mt-3 text-xs text-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 p-2 rounded flex items-start gap-2 border border-indigo-100 dark:border-indigo-800/50">
-                    <Info size={12} className="shrink-0 mt-0.5" />
-                    <span>Try code <b>PLUS10</b> for an extra 10% off your entire cart!</span>
-                  </div>
-                )}
               </div>
 
-              {/* Totals Section */}
               <div className="border border-slate-200 dark:border-slate-800 rounded-2xl p-6 bg-slate-50 dark:bg-slate-900/50">
                 <h3 className="text-lg font-black mb-4">Order Summary</h3>
                 
@@ -269,35 +203,11 @@ export default function Cart({ cartItems = [], onUpdateQuantity, onCheckout, onB
                   <span>₹{finalTotal.toFixed(2)}</span>
                 </div>
 
-                {cashbackEarned > 0 && (
-                  <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/50 rounded-xl p-3 mb-6 flex items-start gap-3">
-                    <div className="text-2xl mt-0.5">💸</div>
-                    <div>
-                      <p className="text-xs font-bold text-emerald-800 dark:text-emerald-400 uppercase tracking-wide mb-0.5">Plus Cashback</p>
-                      <p className="text-[11px] text-emerald-600 dark:text-emerald-300">You will earn <b>₹{cashbackEarned.toFixed(2)}</b> in SaathApp Wallet after checkout.</p>
-                    </div>
-                  </div>
-                )}
-                
                 <button 
-                  onClick={() => {
-                    const orderBreakdown = {
-                      subtotalBase,
-                      promoDiscountTotal,
-                      memberDiscountTotal,
-                      couponDiscountValue,
-                      appliedCoupon: appliedCoupon ? appliedCoupon.code : null,
-                      deliveryFee,
-                      deliveryDiscount,
-                      finalTotal,
-                      cashbackEarned,
-                      isPlusMember
-                    };
-                    onCheckout(orderBreakdown);
-                  }}
+                  onClick={onCheckout}
                   className="w-full h-12 bg-primary hover:bg-primary/90 text-white rounded-xl font-bold transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                 >
-                  Confirm & Pay
+                  Proceed to Checkout
                 </button>
               </div>
             </div>

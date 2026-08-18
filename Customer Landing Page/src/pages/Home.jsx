@@ -125,13 +125,15 @@ export default function Home({
           onBecomeSeller={() => document.getElementById('partner-section')?.scrollIntoView({ behavior: 'smooth' })}
         />
 
-        <Categories
-          activeCategory={selectedCategory}
-          onCategorySelect={(cat) => {
-            setSelectedCategory(cat);
-            document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-        />
+        <div id="categories-section">
+          <Categories
+            activeCategory={selectedCategory}
+            onCategorySelect={(cat) => {
+              setSelectedCategory(cat);
+              document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          />
+        </div>
 
         <FlashDeals onAddToCart={handleAddToCart} onQuickView={setQuickViewProduct} cartItems={cartItems} />
 
@@ -166,33 +168,11 @@ export default function Home({
 
       <Footer />
 
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-t border-slate-200/60 dark:border-slate-850 px-4 py-2 flex items-center justify-around shadow-premium">
-        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex flex-col items-center gap-0.5 text-primary">
-          <HomeIcon size={20} />
-          <span className="text-[9px] font-black uppercase">Home</span>
-        </button>
-        <button onClick={() => document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' })} className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-primary transition-colors">
-          <Grid size={20} />
-          <span className="text-[9px] font-black uppercase">Store</span>
-        </button>
-        <button onClick={() => document.getElementById('services-section')?.scrollIntoView({ behavior: 'smooth' })} className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-primary transition-colors">
-          <Briefcase size={20} />
-          <span className="text-[9px] font-black uppercase">Services</span>
-        </button>
-        <button onClick={() => setIsCartOpen(true)} className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-primary transition-colors relative">
-          <ShoppingCart size={20} />
-          {cartCount > 0 && (
-            <span className="absolute -top-1.5 -right-1.5 bg-danger text-white border border-white font-extrabold text-[8px] w-4.5 h-4.5 rounded-full flex items-center justify-center">
-              {cartCount}
-            </span>
-          )}
-          <span className="text-[9px] font-black uppercase">Cart</span>
-        </button>
-      </div>
+
 
       {cartCount > 0 && !isCartOpen && (
         <motion.div initial={{ scale: 0, y: 50 }} animate={{ scale: 1, y: 0 }} className="hidden md:block fixed bottom-6 right-6 z-40">
-          <button onClick={() => setIsCartOpen(true)} className="flex items-center gap-3 bg-gradient-primary text-white py-3.5 px-6 rounded-full shadow-premium hover:shadow-glow-primary transition-all font-black text-sm cursor-pointer">
+          <button onClick={onCartPage} className="flex items-center gap-3 bg-gradient-primary text-white py-3.5 px-6 rounded-full shadow-premium hover:shadow-glow-primary transition-all font-black text-sm cursor-pointer">
             <div className="relative">
               <ShoppingCart size={18} />
               <span className="absolute -top-2.5 -right-2 bg-secondary text-slate-900 border border-primary font-black text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center">

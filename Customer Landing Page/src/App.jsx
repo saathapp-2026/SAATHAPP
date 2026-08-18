@@ -7,6 +7,9 @@ import LoginPage from './pages/Login';
 import SignupPage from './pages/Signup';
 import ProfilePage from './pages/Profile';
 import CartPage from './pages/Cart';
+import CheckoutPage from './pages/Checkout';
+import MobileBottomNav from "./components/customer/MobileBottomNav";
+import { useCart } from './hooks/useCart';
 import OrdersPage from './pages/Orders';
 import OrderConfirmationPage from './pages/OrderConfirmation';
 import WishlistPage from './pages/Wishlist';
@@ -78,19 +81,13 @@ import MembershipDashboardPage from './pages/MembershipDashboardPage';
 import GiftSetPage from './pages/GiftSetPage';
 import AdminCategoryManagement from './pages/admin/AdminCategoryManagement';
 
-export default function App() {
+function AppContent() {
   const routerLocation = useLocation();
   const navigate = useNavigate();
   const initialAuthSession = typeof window !== 'undefined' ? getStoredAuthSession() : null;
-  const [cartItems, setCartItems] = useState(() => {
-    if (typeof window === 'undefined') return [];
-    try {
-      const stored = window.localStorage.getItem('saathapp-cart');
-      return stored ? JSON.parse(stored) : [];
-    } catch {
-      return [];
-    }
-  });
+  const { cartItems, totals, clearCart, handleAddToCart, getCartQuantity } = useCart();
+  const cartCount = totals.itemCount;
+  const cartTotal = totals.finalTotal;
   const [location, setLocation] = useState('Green Park, New Delhi');
   const [pincode, setPincode] = useState('110016');
   const [savedAddresses, setSavedAddresses] = useState(() => {
@@ -185,64 +182,13 @@ export default function App() {
     }
   }, [selectedAddress]);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('saathapp-cart', JSON.stringify(cartItems));
-    }
-  }, [cartItems]);
-
-  const handleAddToCart = (product, change) => {
-    if (change > 0) {
-      trackEvent('add_to_cart', {
-        productId: product.id,
-        name: product.name,
-        category: product.category,
-        quantity_added: change,
-        price: product.price,
-        ...(product.groceryTier && { groceryTier: product.groceryTier }),
-        ...(product.electronicsType && { electronicsType: product.electronicsType }),
-        ...(product.spiritualType && { spiritualType: product.spiritualType })
-      });
-    }
-    
-    setCartItems((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
-      
-      const isLimited = product.availabilityMode === 'LIMITED';
-      const maxStock = isLimited ? product.availableQuantity : product.stock;
-      
-      if (existing) {
-        let nextQty = existing.quantity + change;
-        
-        // Enforce max stock
-        if (maxStock !== undefined && nextQty > maxStock) {
-          nextQty = maxStock;
-        }
-        
-        if (nextQty <= 0) {
-          return prev.filter((item) => item.id !== product.id);
-        }
-        return prev.map((item) => (item.id === product.id ? { ...item, quantity: nextQty } : item));
-      }
-      
-      if (change > 0) {
-        let newQty = change;
-        if (maxStock !== undefined && newQty > maxStock) {
-          newQty = maxStock;
-        }
-        return [...prev, { ...product, quantity: newQty }];
-      }
-      return prev;
-    });
-  };
-
-  const handleCheckoutProcess = (orderBreakdown) => {
+  const handleCheckoutProcess = (orderBreakdown, address, delivery, payment, checkoutCartItems) => {
     // 1. Generate Order Record (BEFORE inventory decrement)
     const newOrder = {
       orderId: `SAATH${Math.floor(100000 + Math.random() * 900000)}`,
       date: new Date().toISOString(),
       customer: user ? user.name : 'Guest Customer',
-      items: cartItems.map(item => ({
+      items: checkoutCartItems.map(item => ({
         id: item.id,
         name: item.name,
         category: item.category,
@@ -255,9 +201,9 @@ export default function App() {
         image: item.image
       })),
       breakdown: orderBreakdown,
-      deliveryAddress: location || "Connaught Place, Central Delhi",
-      estimatedDelivery: "1-2 Days",
-      payment: { method: "Wallet/UPI", status: "SUCCESS" },
+      deliveryAddress: address || location || "Connaught Place, Central Delhi",
+      estimatedDelivery: delivery === 'express' ? 'Under 30 mins' : '1-2 Days',
+      payment: { method: payment || "UPI", status: "SUCCESS" },
       status: "CONFIRMED"
     };
 
@@ -270,8 +216,25 @@ export default function App() {
 
     setLatestOrder(newOrder);
 
+    // 1.5 Fire Unified Analytics Events
+    checkoutCartItems.forEach(item => {
+      const payload = {
+        productId: item.id,
+        name: item.name,
+        category: item.category,
+        quantity: item.quantity,
+        price: item.price,
+        seller: item.brand || 'SaathApp Official',
+        ...(item.groceryTier && { groceryTier: item.groceryTier }),
+        ...(item.electronicsType && { electronicsType: item.electronicsType }),
+        ...(item.spiritualType && { spiritualType: item.spiritualType })
+      };
+      trackEvent('checkout', payload);
+      trackEvent('purchase', payload);
+    });
+
     // 2. Deduct stock in memory
-    cartItems.forEach(cartItem => {
+    checkoutCartItems.forEach(cartItem => {
       const prod = products.find(p => p.id === cartItem.id);
       if (prod && typeof prod.stock === 'number') {
         prod.stock = Math.max(0, prod.stock - cartItem.quantity);
@@ -288,7 +251,7 @@ export default function App() {
         const adminProductsJson = window.localStorage.getItem('saathapp_admin_products');
         if (adminProductsJson) {
           const adminProducts = JSON.parse(adminProductsJson);
-          cartItems.forEach(cartItem => {
+          checkoutCartItems.forEach(cartItem => {
             const adminRow = adminProducts.find(row => row[6] && row[6].product === cartItem.name);
             if (adminRow) {
               const currentStock = parseInt(adminRow[6].stock || 0);
@@ -299,19 +262,46 @@ export default function App() {
           });
           window.localStorage.setItem('saathapp_admin_products', JSON.stringify(adminProducts));
         }
+
+        // 4. Sync Order to Admin Orders Table
+        const adminOrdersJson = window.localStorage.getItem('saathapp_admin_orders');
+        let adminOrders = [];
+        if (adminOrdersJson) {
+           adminOrders = JSON.parse(adminOrdersJson);
+        } else {
+           adminOrders = [
+             ["ORD-99120", "Ravi Kumar", "₹420", "Mysuru", "Today", "Delivered", {}],
+             ["ORD-99121", "Aisha Fernandes", "₹1,280", "Mumbai", "Today", "Processing", {}]
+           ]; // Initial mock from Admin config
+        }
+        
+        // City parsing from address
+        let city = "New Delhi";
+        if (newOrder.deliveryAddress) {
+          const parts = newOrder.deliveryAddress.split(',');
+          if (parts.length > 1) {
+            city = parts[parts.length - 1].trim();
+          }
+        }
+
+        const adminOrderRow = [
+          newOrder.orderId,
+          newOrder.customer,
+          `₹${newOrder.breakdown.finalTotal.toFixed(2)}`,
+          city,
+          "Today",
+          "Processing",
+          { items: newOrder.items, breakdown: newOrder.breakdown }
+        ];
+        adminOrders.unshift(adminOrderRow);
+        window.localStorage.setItem('saathapp_admin_orders', JSON.stringify(adminOrders));
+
       } catch (e) {
-        console.warn('Could not update admin inventory', e);
+        console.warn('Could not update admin sync', e);
       }
     }
 
-    setCartItems([]);
     setIsCartOpen(false);
-  };
-
-
-  const getCartQuantity = (productId) => {
-    const item = cartItems.find((entry) => entry.id === productId);
-    return item ? item.quantity : 0;
   };
 
   const handleGPSDetect = () => {
@@ -416,8 +406,7 @@ export default function App() {
     }, 2500);
   };
 
-  const cartTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
 
   const handleLogin = async ({ identifier, password, _mode }) => {
     const result = await authenticateUser(users, { identifier, password });
@@ -494,12 +483,50 @@ export default function App() {
   if (!authReady) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white font-sans">
-        <div className="flex flex-col items-center gap-3">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-500"></div>
-          <span className="text-xs font-bold text-slate-400">Loading SaathApp...</span>
+        <div className="flex flex-col items-center gap-4 animate-fade-up">
+          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <p className="font-bold tracking-wider">LOADING SAATHAPP</p>
         </div>
       </div>
     );
+  }
+
+  // Legacy activePage overrides (priority)
+  if (activePage === 'cart' || routerLocation.pathname === '/cart') {
+    return (
+      <CartPage 
+        onCheckout={() => { setActivePage('checkout'); navigate('/checkout'); }}
+        onBack={() => { setActivePage('home'); navigate('/'); }} 
+      />
+    );
+  }
+
+  if (activePage === 'checkout' || routerLocation.pathname === '/checkout') {
+    return (
+      <CheckoutPage 
+        onBack={() => { setActivePage('cart'); navigate('/cart'); }} 
+        onConfirmOrder={(data) => {
+          handleCheckoutProcess(data.orderBreakdown, data.address, data.deliveryMethod, data.paymentMethod, cartItems);
+          clearCart();
+          setActivePage('order-confirmation');
+          navigate('/order-confirmation');
+        }} 
+      />
+    );
+  }
+
+  if (activePage === 'order-confirmation' || routerLocation.pathname === '/order-confirmation') {
+    return (
+      <OrderConfirmationPage 
+        order={latestOrder} 
+        onBack={() => { setActivePage('home'); navigate('/'); }} 
+        onViewOrders={() => { setActivePage('orders'); navigate('/orders'); }} 
+      />
+    );
+  }
+
+  if (activePage === 'orders' || routerLocation.pathname === '/orders') {
+    return <OrdersPage orders={orders} onBack={() => { setActivePage('home'); navigate('/'); }} />;
   }
 
   const trustRoutes = ['/verified-sellers', '/secure-online-payments', '/privacy-protected', '/customer-support'];
@@ -563,7 +590,7 @@ export default function App() {
       <SaathAppPlusPage
         cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         onSearch={(query) => {
           setSearchQuery(query);
@@ -586,7 +613,7 @@ export default function App() {
       <MembershipDashboardPage
         cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         onSearch={(query) => {
           setSearchQuery(query);
@@ -608,7 +635,7 @@ export default function App() {
       <BulkOrders
         cartCount={cartCount}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         onSearch={(query) => {
           setSearchQuery(query);
@@ -677,7 +704,7 @@ export default function App() {
       <ServiceListing
         cartCount={cartCount}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         onSearch={(query) => {
           setSearchQuery(query);
@@ -701,7 +728,7 @@ export default function App() {
       <ServiceBookingConfirmation
         cartCount={cartCount}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -718,7 +745,7 @@ export default function App() {
       <ServiceBookingFlow
         cartCount={cartCount}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -736,7 +763,7 @@ export default function App() {
       <ServiceDetails
         cartCount={cartCount}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         onSearch={(query) => {
           setSearchQuery(query);
@@ -762,7 +789,7 @@ export default function App() {
       <ProductListing
         cartCount={cartCount}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         onSearch={(query) => {
           setSearchQuery(query);
@@ -788,7 +815,7 @@ export default function App() {
       <SaathAppProductHome
         cartCount={cartCount}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         onSearch={(query) => {
           setSearchQuery(query);
@@ -811,7 +838,7 @@ export default function App() {
       <SaathAppTierListing
         cartCount={cartCount}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         onSearch={(query) => {
           setSearchQuery(query);
@@ -834,7 +861,7 @@ export default function App() {
       <ProductDetails
         cartCount={cartCount}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         onSearch={(query) => {
           setSearchQuery(query);
@@ -880,7 +907,7 @@ export default function App() {
     return (
       <FranchisePage
         cartCount={cartCount}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         location={location}
         onLocationClick={() => setIsLocationModalOpen(true)}
         onSearch={(query) => {
@@ -932,11 +959,12 @@ export default function App() {
         isGpsLoading={isGpsLoading}
         isListening={isListening}
         isUploading={isUploading}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         isAuthenticated={isAuthenticated}
         user={user}
         onProfile={() => navigate('/profile')}
+        onLogout={handleLogout}
         onCartPage={() => {
           setActivePage('cart');
           navigate('/');
@@ -996,7 +1024,7 @@ export default function App() {
         isGpsLoading={isGpsLoading}
         isListening={isListening}
         isUploading={isUploading}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         onSearch={(query) => {
           setSearchQuery(query);
@@ -1017,6 +1045,7 @@ export default function App() {
         isAuthenticated={isAuthenticated}
         user={user}
         onProfile={() => navigate('/profile')}
+        onLogout={handleLogout}
         onCartPage={() => {
           setActivePage('cart');
           navigate('/');
@@ -1068,7 +1097,7 @@ export default function App() {
         isGpsLoading={isGpsLoading}
         isListening={isListening}
         isUploading={isUploading}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         onSearch={(query) => {
           setSearchQuery(query);
@@ -1089,6 +1118,7 @@ export default function App() {
         isAuthenticated={isAuthenticated}
         user={user}
         onProfile={() => navigate('/profile')}
+        onLogout={handleLogout}
         onCartPage={() => {
           setActivePage('cart');
           navigate('/');
@@ -1220,7 +1250,7 @@ export default function App() {
       <DeliveryPartnerPortalPage
         cartCount={cartCount}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -1229,6 +1259,7 @@ export default function App() {
         onLogin={() => navigate('/login')}
         onSignup={() => navigate('/signup')}
         onProfile={() => navigate('/profile')}
+        onLogout={handleLogout}
         onCartPage={() => {
           setActivePage('cart');
           navigate('/');
@@ -1251,7 +1282,7 @@ export default function App() {
       <WholesalePortalPage
         cartCount={cartCount}
         location={location}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -1260,6 +1291,7 @@ export default function App() {
         onLogin={() => navigate('/login')}
         onSignup={() => navigate('/signup')}
         onProfile={() => navigate('/profile')}
+        onLogout={handleLogout}
         onCartPage={() => {
           setActivePage('cart');
           navigate('/');
@@ -1363,19 +1395,20 @@ export default function App() {
         isGpsLoading={isGpsLoading}
         isListening={isListening}
         isUploading={isUploading}
-        onCartClick={() => setIsCartOpen(true)}
+        onCartClick={() => setActivePage('cart')}
         onLocationClick={() => setIsLocationModalOpen(true)}
         isAuthenticated={isAuthenticated}
         user={user}
         onLogin={() => {
           setAuthView('login');
-          setActivePage('login');
+          navigate('/login');
         }}
         onSignup={() => {
           setAuthView('signup');
-          setActivePage('signup');
+          navigate('/signup');
         }}
         onProfile={() => navigate('/profile')}
+        onLogout={handleLogout}
         onCartPage={() => setActivePage('cart')}
         onOrdersPage={() => setActivePage('orders')}
         onWishlistPage={() => setActivePage('wishlist')}
@@ -1438,7 +1471,7 @@ export default function App() {
         onCloseImageModal={() => setIsImageModalOpen(false)}
         onCloseLocationModal={() => setIsLocationModalOpen(false)}
         setSelectedCategory={setSelectedCategory}
-        setCartItems={setCartItems}
+
         getCartQuantity={getCartQuantity}
         handleAddToCart={handleAddToCart}
         setIsCartOpen={setIsCartOpen}
@@ -1530,45 +1563,6 @@ export default function App() {
     return <OurStoryPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
-  if (activePage === 'cart') {
-    return (
-      <CartPage 
-        cartItems={cartItems} 
-        cartTotal={cartTotal} 
-        onUpdateQuantity={handleAddToCart}
-        onCheckout={(orderBreakdown) => {
-          // Fire Unified Analytics Events
-          cartItems.forEach(item => {
-            const payload = {
-              productId: item.id,
-              name: item.name,
-              category: item.category,
-              quantity: item.quantity,
-              price: item.price,
-              seller: item.brand || 'SaathApp Official',
-              ...(item.groceryTier && { groceryTier: item.groceryTier }),
-              ...(item.electronicsType && { electronicsType: item.electronicsType }),
-              ...(item.spiritualType && { spiritualType: item.spiritualType })
-            };
-            trackEvent('checkout', payload);
-            trackEvent('purchase', payload);
-          });
-          
-          handleCheckoutProcess(orderBreakdown);
-          setActivePage('order-confirmation');
-        }}
-        onBack={() => setActivePage('home')} 
-      />
-    );
-  }
-
-  if (activePage === 'order-confirmation') {
-    return <OrderConfirmationPage order={latestOrder} onBack={() => setActivePage('home')} onViewOrders={() => setActivePage('orders')} />;
-  }
-
-  if (activePage === 'orders') {
-    return <OrdersPage orders={orders} onBack={() => setActivePage('home')} />;
-  }
 
   if (activePage === 'wishlist') {
     return <WishlistPage onBack={() => setActivePage('home')} />;
@@ -1597,19 +1591,20 @@ export default function App() {
       isGpsLoading={isGpsLoading}
       isListening={isListening}
       isUploading={isUploading}
-      onCartClick={() => setIsCartOpen(true)}
+      onCartClick={() => setActivePage('cart')}
       onLocationClick={() => setIsLocationModalOpen(true)}
       isAuthenticated={isAuthenticated}
       user={user}
       onLogin={() => {
         setAuthView('login');
-        setActivePage('login');
+        navigate('/login');
       }}
       onSignup={() => {
         setAuthView('signup');
-        setActivePage('signup');
+        navigate('/signup');
       }}
       onProfile={() => navigate('/profile')}
+        onLogout={handleLogout}
       onCartPage={() => setActivePage('cart')}
       onOrdersPage={() => setActivePage('orders')}
       onWishlistPage={() => setActivePage('wishlist')}
@@ -1672,7 +1667,7 @@ export default function App() {
       onCloseImageModal={() => setIsImageModalOpen(false)}
       onCloseLocationModal={() => setIsLocationModalOpen(false)}
       setSelectedCategory={setSelectedCategory}
-      setCartItems={setCartItems}
+
       getCartQuantity={getCartQuantity}
       handleAddToCart={handleAddToCart}
       setIsCartOpen={setIsCartOpen}
@@ -1690,5 +1685,14 @@ export default function App() {
       handleImageSearch={handleImageSearch}
       onLogout={handleLogout}
     />
+  );
+}
+
+export default function App() {
+  return (
+    <div className="pb-[72px] md:pb-0 min-h-screen">
+      <AppContent />
+      <MobileBottomNav />
+    </div>
   );
 }

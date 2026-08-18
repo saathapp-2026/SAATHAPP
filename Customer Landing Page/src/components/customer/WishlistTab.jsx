@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingCart, Trash2 } from 'lucide-react';
+import { ShoppingCart, Trash2, Heart } from 'lucide-react';
 
 export default function WishlistTab({ wishlist, setWishlist, cart, setCart }) {
   const handleMoveToCart = (item) => {

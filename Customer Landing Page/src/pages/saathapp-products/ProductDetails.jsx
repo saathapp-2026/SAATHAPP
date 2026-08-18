@@ -325,16 +325,16 @@ export default function ProductDetails({
             )}
 
             {/* Quantity & Add to Cart */}
-            <div className="flex items-center gap-4 mb-8">
-              <div className="flex items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden h-14">
+            <div className="flex items-center gap-2 sm:gap-4 mb-8">
+              <div className="flex items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden h-14 shrink-0">
                 <button 
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
-                  className="w-12 h-full flex items-center justify-center font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50"
+                  className="w-10 sm:w-12 h-full flex items-center justify-center font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50"
                 >
                   -
                 </button>
-                <div className="w-12 h-full flex items-center justify-center font-black bg-slate-50 dark:bg-slate-800/50">
+                <div className="w-10 sm:w-12 h-full flex items-center justify-center font-black bg-slate-50 dark:bg-slate-800/50">
                   {quantity}
                 </div>
                 <button 
@@ -343,7 +343,7 @@ export default function ProductDetails({
                     setQuantity(max !== undefined ? Math.min(max, quantity + 1) : quantity + 1);
                   }}
                   disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
-                  className="w-12 h-full flex items-center justify-center font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50"
+                  className="w-10 sm:w-12 h-full flex items-center justify-center font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50"
                 >
                   +
                 </button>
@@ -351,13 +351,13 @@ export default function ProductDetails({
               <button 
                 onClick={() => handleAddToCart(product, quantity)}
                 disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
-                className={`flex-1 h-14 rounded-xl flex items-center justify-center gap-2 font-black text-lg transition-all transform active:scale-[0.98] ${
+                className={`flex-1 h-14 rounded-xl flex items-center justify-center gap-2 font-black text-sm sm:text-lg transition-all transform active:scale-[0.98] ${
                   (product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0))
                   ? 'bg-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-800 dark:text-slate-500'
                   : 'bg-gradient-primary hover:bg-gradient-primary/90 text-white shadow-glow-primary'
                 }`}
               >
-                <ShoppingCart size={20} />
+                <ShoppingCart size={20} className="hidden sm:block" />
                 {(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'Sold Out' : 'Add to Cart'}
               </button>
             </div>

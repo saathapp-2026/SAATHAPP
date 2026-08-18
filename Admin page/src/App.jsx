@@ -1403,6 +1403,29 @@ const MODULE_FORMS = {
       { label: "Delete", onClick: () => handlers.delete(rowObj), destructive: true },
     ],
   },
+  orders: {
+    entity: "Order",
+    fields: [
+      { name: "orderId", label: "Order ID", type: "text", required: true },
+      { name: "customer", label: "Customer", type: "text", required: true },
+      { name: "amount", label: "Amount", type: "text", required: true },
+      { name: "city", label: "City", type: "text", required: true },
+      { name: "date", label: "Date", type: "text", required: true },
+      { name: "status", label: "Status", type: "select", options: ["Processing", "Packed", "Shipped", "Delivered"], default: "Processing" },
+      { name: "itemsJson", label: "Order Items (JSON)", type: "textarea", section: "details" },
+      { name: "breakdownJson", label: "Payment Breakdown (JSON)", type: "textarea", section: "details" }
+    ],
+    toRow: (values) => [values.orderId, values.customer, values.amount, values.city, values.date, values.status, { items: JSON.parse(values.itemsJson || "[]"), breakdown: JSON.parse(values.breakdownJson || "{}") }],
+    fromRow: (row) => ({
+      orderId: row[0], customer: row[1], amount: row[2], city: row[3], date: row[4], status: row[5],
+      itemsJson: JSON.stringify(row[6]?.items || [], null, 2),
+      breakdownJson: JSON.stringify(row[6]?.breakdown || {}, null, 2)
+    }),
+    rowActions: (rowObj, handlers) => [
+      { label: "View Details", onClick: () => handlers.view(rowObj), icon: Eye },
+      { label: "Delete", onClick: () => handlers.delete(rowObj), destructive: true },
+    ],
+  },
 };
 
 const mergeSteps = (fields) => {

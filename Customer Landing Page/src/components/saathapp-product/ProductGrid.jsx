@@ -2,9 +2,11 @@ import React from 'react';
 import { ShoppingCart, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ProductCardSkeleton from './ProductCardSkeleton';
+import { useCart } from '../../hooks/useCart';
 
 export default function ProductGrid({ products, onAddToCart, isLoading = false }) {
   const navigate = useNavigate();
+  const { getCartQuantity } = useCart();
 
   if (isLoading) {
     return (
@@ -23,6 +25,7 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
         const isPremium = product.productTier === 'PREMIUM';
         const isLimited = product.availabilityMode === 'LIMITED';
         const isSoldOut = isLimited ? (product.availableQuantity <= 0) : (product.stock !== undefined && product.stock <= 0);
+        const qty = getCartQuantity(product.id);
 
         return (
         <div key={product.id} className={`flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-4 border transition-all group ${isPremium ? 'border-amber-200 dark:border-amber-900/50 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)]' : 'border-slate-100 dark:border-slate-800 hover:shadow-lg'}`}>
@@ -112,20 +115,32 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
           </div>
 
           {/* Add to Cart */}
-          <button 
-            disabled={isSoldOut}
-            onClick={() => onAddToCart && onAddToCart(product, 1)}
-            className={`w-full py-2 rounded-xl flex items-center justify-center gap-2 font-bold text-sm border-2 transition-colors ${
-              isSoldOut 
-                ? 'bg-slate-100 border-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-800 dark:border-slate-700 dark:text-slate-500' 
-                : isPremium
-                  ? 'text-amber-600 border-amber-600/20 hover:border-amber-600 hover:bg-amber-50 dark:text-amber-400 dark:border-amber-400/20 dark:hover:bg-amber-900/20'
-                  : 'text-primary border-primary/20 hover:border-primary hover:bg-primary/5'
-            }`}
-          >
-            <ShoppingCart size={16} />
-            {isSoldOut ? 'Sold Out' : 'Add to Cart'}
-          </button>
+          {qty > 0 ? (
+            <div className={`w-full py-2 rounded-xl flex items-center justify-between px-4 font-bold text-sm transition-colors ${
+              isPremium 
+                ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-400' 
+                : 'bg-primary text-white shadow-lg shadow-primary/30'
+            }`}>
+              <button onClick={() => onAddToCart && onAddToCart(product, -1)} className="text-xl w-6 hover:scale-110 active:scale-95 transition-transform">-</button>
+              <span>{qty}</span>
+              <button onClick={() => onAddToCart && onAddToCart(product, 1)} className="text-xl w-6 hover:scale-110 active:scale-95 transition-transform">+</button>
+            </div>
+          ) : (
+            <button 
+              disabled={isSoldOut}
+              onClick={() => onAddToCart && onAddToCart(product, 1)}
+              className={`w-full py-2 rounded-xl flex items-center justify-center gap-2 font-bold text-sm border-2 transition-colors ${
+                isSoldOut 
+                  ? 'bg-slate-100 border-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-800 dark:border-slate-700 dark:text-slate-500' 
+                  : isPremium
+                    ? 'text-amber-600 border-amber-600/20 hover:border-amber-600 hover:bg-amber-50 dark:text-amber-400 dark:border-amber-400/20 dark:hover:bg-amber-900/20'
+                    : 'text-primary border-primary/20 hover:border-primary hover:bg-primary/5'
+              }`}
+            >
+              <ShoppingCart size={16} />
+              {isSoldOut ? 'Sold Out' : 'Add to Cart'}
+            </button>
+          )}
         </div>
         );
       })}

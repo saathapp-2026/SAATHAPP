@@ -142,7 +142,7 @@ export default function Profile({ user, onBack, onLogout }) {
     initMockDB(user);
     setProfile(JSON.parse(localStorage.getItem('saath_profile') || '{}'));
     setWalletBalance(parseFloat(localStorage.getItem('saath_wallet_balance') || '0.00'));
-    setOrders(JSON.parse(localStorage.getItem('saath_orders') || '[]'));
+    setOrders(JSON.parse(localStorage.getItem('saathapp_customer_orders') || '[]'));
     setTransactions(JSON.parse(localStorage.getItem('saath_transactions') || '[]'));
     setAddresses(JSON.parse(localStorage.getItem('saath_addresses') || '[]'));
     setBookings(JSON.parse(localStorage.getItem('saath_bookings') || '[]'));
@@ -482,19 +482,17 @@ export default function Profile({ user, onBack, onLogout }) {
                           </div>
                           <div className="space-y-2">
                             {orders.slice(0, 2).map((order) => (
-                              <div key={order.id} className="flex items-center justify-between p-3 bg-surface border border-slate-200 dark:border-slate-800 rounded-xl text-xs shadow-sm">
+                              <div key={order.orderId} className="flex items-center justify-between p-3 bg-surface border border-slate-200 dark:border-slate-800 rounded-xl text-xs shadow-sm">
                                 <div className="flex items-center gap-2">
-                                  <span className="text-lg w-8 h-8 rounded-lg bg-page dark:bg-slate-950 flex items-center justify-center border border-slate-200 dark:border-slate-800">{order.thumbnail}</span>
+                                  <span className="text-lg w-8 h-8 rounded-lg bg-page dark:bg-slate-950 flex items-center justify-center border border-slate-200 dark:border-slate-800">🛍️</span>
                                   <div>
-                                    <p className="font-bold text-slate-900 dark:text-slate-100 truncate max-w-[120px] sm:max-w-none">{order.items.join(', ')}</p>
-                                    <p className="text-[9px] text-slate-500 dark:text-slate-400 font-semibold">{order.date}</p>
+                                    <p className="font-bold text-slate-900 dark:text-slate-100 truncate max-w-[120px] sm:max-w-none">{order.items?.map(i => i.name).join(', ') || 'Various Items'}</p>
+                                    <p className="text-[9px] text-slate-500 dark:text-slate-400 font-semibold">{new Date(order.date).toLocaleDateString()}</p>
                                   </div>
                                 </div>
                                 <span className={`px-2 py-0.5 rounded-full font-bold text-[8px] uppercase ${
-                                  order.status === 'Delivered' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' :
-                                  order.status === 'In Transit' ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400' :
-                                  order.status === 'Cancelled' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
-                                }`}>{order.status}</span>
+                                  order.payment?.status === 'Success' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
+                                }`}>{order.payment?.status || 'Pending'}</span>
                               </div>
                             ))}
                           </div>
@@ -634,39 +632,37 @@ export default function Profile({ user, onBack, onLogout }) {
 
                     <div className="space-y-4">
                       {orders.map((order) => (
-                        <div key={order.id} className="border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm text-xs">
+                        <div key={order.orderId} className="border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm text-xs">
                           {/* Top row */}
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 gap-2">
                             <div>
-                              <p className="font-mono text-slate-500 dark:text-slate-400">Order ID: <span className="font-bold text-slate-900 dark:text-white">{order.id}</span></p>
-                              <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 font-semibold">Placed on {order.date}</p>
+                              <p className="font-mono text-slate-500 dark:text-slate-400">Order ID: <span className="font-bold text-slate-900 dark:text-white">{order.orderId}</span></p>
+                              <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 font-semibold">Placed on {new Date(order.date).toLocaleDateString()}</p>
                             </div>
                             <span className={`self-start sm:self-auto px-2.5 py-1 rounded-full font-bold text-[10px] uppercase tracking-wider ${
-                              order.status === 'Delivered' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' :
-                              order.status === 'In Transit' ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400' :
-                              order.status === 'Cancelled' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
-                            }`}>{order.status}</span>
+                              order.payment?.status === 'Success' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
+                            }`}>{order.payment?.status || 'Pending'}</span>
                           </div>
 
                           {/* Body thumbnails */}
                           <div className="flex items-center gap-4">
-                            <span className="text-2xl w-12 h-12 bg-page dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-center shrink-0">{order.thumbnail}</span>
+                            <span className="text-2xl w-12 h-12 bg-page dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-center shrink-0">🛍️</span>
                             <div className="space-y-1">
-                              <p className="font-black text-slate-900 dark:text-slate-100 text-sm leading-none">{order.items.join(', ')}</p>
-                              <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">Total Invoice Amount: ₹{order.total.toFixed(2)}</p>
+                              <p className="font-black text-slate-900 dark:text-slate-100 text-sm leading-none">{order.items?.map(i => i.name).join(', ') || 'Various Items'}</p>
+                              <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">Total Invoice Amount: ₹{order.breakdown?.finalTotal?.toFixed(2) || '0.00'}</p>
                             </div>
                           </div>
 
                           {/* Bottom controls */}
                           <div className="flex flex-wrap gap-2.5 pt-2 justify-end">
                             <button
-                              onClick={() => alert(`Simulating invoice download for ${order.id}`)}
+                              onClick={() => alert(`Simulating invoice download for ${order.orderId}`)}
                               className="px-4.5 py-2 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl text-slate-700 dark:text-slate-300 font-black uppercase tracking-wider cursor-pointer"
                             >
                               Download Invoice
                             </button>
                             <button
-                              onClick={() => alert(`Re-ordering products in ${order.id}`)}
+                              onClick={() => alert(`Re-ordering products in ${order.orderId}`)}
                               className="px-5 py-2 bg-[#6C3BFF] hover:bg-[#6C3BFF]/90 text-white rounded-xl font-black uppercase tracking-wider cursor-pointer shadow-sm"
                             >
                               Order Again

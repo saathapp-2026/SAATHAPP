@@ -11,6 +11,8 @@ import { PWAProvider } from './context/PWAContext.jsx';
 import { MembershipProvider } from './context/MembershipContext.jsx';
 import PWAInstallModal from './components/PWAInstallModal.jsx';
 
+import { CartProvider } from './context/CartContext.jsx';
+
 // Handle Vite dynamic import preload errors (e.g., stale deployment chunks)
 window.addEventListener('vite:preloadError', async (event) => {
   const lastReload = parseInt(sessionStorage.getItem('chunk-error-last-reload') || '0', 10);
@@ -55,8 +57,10 @@ createRoot(document.getElementById('root')).render(
           <LanguageProvider>
             <PWAProvider>
               <MembershipProvider>
-                <App />
-                <PWAInstallModal />
+                <CartProvider>
+                  <App />
+                  <PWAInstallModal />
+                </CartProvider>
               </MembershipProvider>
             </PWAProvider>
           </LanguageProvider>
