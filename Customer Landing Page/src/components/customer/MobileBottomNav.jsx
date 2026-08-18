@@ -11,7 +11,7 @@ export default function MobileBottomNav() {
 
   const navItems = [
     { label: 'Home', icon: Home, path: '/' },
-    { label: 'Categories', icon: LayoutGrid, path: '/#categories' },
+    { label: 'Categories', icon: LayoutGrid, path: '/products' },
     { label: 'Search', icon: Search, path: '/#search' },
     { label: 'Cart', icon: ShoppingBag, path: '/cart', badge: cartCount },
     { label: 'Profile', icon: User, path: '/profile' }

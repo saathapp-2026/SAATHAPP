@@ -6,9 +6,9 @@ export default function TopNav() {
   const location = useLocation();
 
   return (
-    <div className="hidden sm:block w-full border-t border-theme-border text-theme-secondary text-[10px] sm:text-[10.5px] md:text-[11px] lg:text-xs font-semibold uppercase tracking-tight sm:tracking-normal lg:tracking-wider py-2 transition-colors relative z-40">
-      <div className="w-full px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between md:justify-center w-full gap-1.5 sm:gap-2.5 md:gap-3.5 lg:gap-4.5 xl:gap-6">
+    <div className="block w-full border-t border-theme-border text-theme-secondary text-[10px] sm:text-[10.5px] md:text-[11px] lg:text-xs font-semibold uppercase tracking-tight sm:tracking-normal lg:tracking-wider py-2 transition-colors relative z-40 overflow-x-auto scrollbar-none">
+      <div className="w-full px-3 sm:px-6 lg:px-8 min-w-max">
+        <div className="flex items-center justify-start md:justify-center w-full gap-4 sm:gap-2.5 md:gap-3.5 lg:gap-4.5 xl:gap-6">
           
           <Link
             to="/"
