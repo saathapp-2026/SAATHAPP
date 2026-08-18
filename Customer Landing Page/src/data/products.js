@@ -4,6 +4,8 @@ export const products = [
     id: 'g1',
     name: 'Basmati Rice',
     category: 'grocery',
+    groceryTier: 'Premium',
+    subCategory: 'rice-atta-grains',
     description: 'Premium long grain basmati rice.',
     price: 350,
     originalPrice: 400,
@@ -19,6 +21,8 @@ export const products = [
     id: 'g2',
     name: 'Aashirvaad Atta',
     category: 'grocery',
+    groceryTier: 'Normal',
+    subCategory: 'rice-atta-grains',
     description: 'Whole wheat atta 5kg.',
     price: 250,
     originalPrice: 280,
@@ -34,6 +38,8 @@ export const products = [
     id: 'g3',
     name: 'Sunflower Cooking Oil',
     category: 'grocery',
+    groceryTier: 'Normal',
+    subCategory: 'edible-oils-ghee',
     description: '1L pouch.',
     price: 150,
     originalPrice: 180,
@@ -49,6 +55,8 @@ export const products = [
     id: 'g4',
     name: 'Toor Dal',
     category: 'grocery',
+    groceryTier: 'Normal',
+    subCategory: 'dal-pulses',
     description: 'Unpolished 1kg.',
     price: 160,
     originalPrice: 160,
@@ -64,6 +72,8 @@ export const products = [
     id: 'g5',
     name: 'Sugar',
     category: 'grocery',
+    groceryTier: 'Normal',
+    subCategory: 'spices-masala',
     description: 'Refined sugar 1kg.',
     price: 50,
     originalPrice: 55,
@@ -79,6 +89,8 @@ export const products = [
     id: 'g6',
     name: 'Tea',
     category: 'grocery',
+    groceryTier: 'Premium',
+    subCategory: 'beverages',
     description: 'Premium tea leaves 500g.',
     price: 200,
     originalPrice: 220,
@@ -312,9 +324,122 @@ export const products = [
     brand: 'SaathApp Official',
     isOffer: false,
   },
+  // Spiritual / Puja Items
+  {
+    id: 'sp1',
+    name: 'Brass Ganesh Murti',
+    category: 'spiritual-puja',
+    subCategory: 'idols-murtis',
+    description: 'Beautifully crafted brass Ganesh idol for your home.',
+    price: 899,
+    originalPrice: 1299,
+    discount: '30%',
+    image: '',
+    rating: 4.8,
+    reviews: 120,
+    stock: 25,
+    brand: 'ABC Puja Store',
+    isOffer: true,
+    sellers: [
+      { id: 's1', name: 'Delhi Spirituals', location: { lat: 28.6320, lng: 77.2150 }, stock: 0 }, // CP (~0.2 km) - Out of stock
+      { id: 's2', name: 'ABC Puja Store', location: { lat: 28.5562, lng: 77.2056 }, stock: 25 },  // Green Park (~8.5 km) - 30-45 mins
+      { id: 's3', name: 'Karma Hub', location: { lat: 28.6100, lng: 77.2300 }, stock: 5 }         // India Gate (~3 km) - 30-45 mins
+    ]
+  },
+  {
+    id: 'sp2',
+    name: 'Premium Agarbatti',
+    category: 'spiritual-puja',
+    subCategory: 'agarbatti-dhoop',
+    description: 'Natural sandalwood incense sticks.',
+    price: 99,
+    originalPrice: 150,
+    discount: '34%',
+    image: '',
+    rating: 4.6,
+    reviews: 450,
+    stock: 200,
+    brand: 'Cycle',
+    isOffer: false,
+    sellers: [
+      { id: 's4', name: 'Cycle Store', location: { lat: 28.5200, lng: 77.2000 }, stock: 200 }     // Saket (~13 km) - 1-2 days
+    ]
+  },
+  {
+    id: 'sp3',
+    name: 'Brass Diya',
+    category: 'spiritual-puja',
+    subCategory: 'diyas-lamps',
+    description: 'Traditional brass diya for daily puja.',
+    price: 499,
+    originalPrice: 699,
+    discount: '28%',
+    image: '',
+    rating: 4.7,
+    reviews: 85,
+    stock: 50,
+    brand: 'ABC Puja Store',
+    isOffer: true,
+    sellers: [
+      { id: 's2', name: 'ABC Puja Store', location: { lat: 28.5562, lng: 77.2056 }, stock: 50 },  // Green Park (~8.5 km)
+      { id: 's1', name: 'Delhi Spirituals', location: { lat: 28.6320, lng: 77.2150 }, stock: 10 } // CP (~0.2 km) - Best!
+    ]
+  },
+  {
+    id: 'sp4',
+    name: 'Diwali Puja Kit',
+    category: 'spiritual-puja',
+    subCategory: 'puja-kits',
+    festival: 'diwali',
+    description: 'Complete kit for Diwali puja essentials.',
+    price: 299,
+    originalPrice: 400,
+    discount: '25%',
+    image: '',
+    rating: 4.9,
+    reviews: 320,
+    stock: 150,
+    brand: 'SaathApp Official',
+    isOffer: true,
+    sellers: [
+      { id: 's5', name: 'SaathApp Warehouse', location: { lat: 28.3949, lng: 77.3110 }, stock: 150 } // Faridabad (~28 km) - 1-2 days
+    ]
+  },
+  {
+    id: 'sp5',
+    name: 'Pure Camphor (Kapoor)',
+    category: 'spiritual-puja',
+    subCategory: 'puja-samagri',
+    festival: 'navratri',
+    description: '100% pure camphor for daily aarti and puja.',
+    price: 150,
+    originalPrice: 200,
+    discount: '25%',
+    image: '',
+    rating: 4.8,
+    reviews: 210,
+    stock: 300,
+    brand: 'Patanjali',
+    isOffer: false,
+    sellers: [
+      { id: 's6', name: 'Patanjali CP', location: { lat: 28.6330, lng: 77.2180 }, stock: 300 }      // CP (~0.3 km) - 30-45 mins
+    ]
+  }
+];
+
+export const festivals = [
+  { id: 'diwali', name: 'Diwali', description: 'Festival of Lights & Laxmi Puja' },
+  { id: 'navratri', name: 'Navratri', description: '9 Days of Maa Durga Worship' },
+  { id: 'janmashtami', name: 'Janmashtami', description: 'Birth of Lord Krishna' },
+  { id: 'ganesh-chaturthi', name: 'Ganesh Chaturthi', description: 'Welcome Lord Ganesha' },
+  { id: 'mahashivratri', name: 'Mahashivratri', description: 'The Great Night of Shiva' },
+  { id: 'ram-navami', name: 'Ram Navami', description: 'Birth of Lord Rama' },
+  { id: 'chhath-puja', name: 'Chhath Puja', description: 'Worship of the Sun God' },
+  { id: 'other', name: 'Other Festivals', description: 'More Festival Collections' }
 ];
 
 export const categories = [
+  { id: 'spiritual-puja', name: 'Spiritual / Puja Items' },
   { id: 'grocery', name: 'Grocery' },
   { id: 'electronics', name: 'Electronics' },
   { id: 'mobiles', name: 'Mobiles' },
@@ -323,3 +448,35 @@ export const categories = [
   { id: 'hardware', name: 'Hardware' },
   { id: 'saathapp', name: 'Saathapp Product' },
 ];
+
+export const subcategories = {
+  'spiritual-puja': [
+    { id: 'puja-samagri', name: 'Puja Samagri', image: '' },
+    { id: 'diyas-lamps', name: 'Diyas & Lamps', image: '' },
+    { id: 'agarbatti-dhoop', name: 'Agarbatti & Dhoop', image: '' },
+    { id: 'puja-essentials', name: 'Puja Essentials', image: '' },
+    { id: 'idols-murtis', name: 'Idols & Murtis', image: '' },
+    { id: 'rudraksha-mala', name: 'Rudraksha & Mala', image: '' },
+    { id: 'religious-books', name: 'Religious Books', image: '' },
+    { id: 'festival-essentials', name: 'Festival Essentials', image: '' },
+    { id: 'puja-kits', name: 'Puja Kits & Combos', image: '' },
+    { id: 'spiritual-gifts', name: 'Spiritual Gifts', image: '' }
+  ],
+  'grocery': [
+    { id: 'fruits-vegetables', name: 'Fruits & Vegetables', image: '' },
+    { id: 'dairy-bakery', name: 'Dairy & Bakery', image: '' },
+    { id: 'rice-atta-grains', name: 'Rice, Atta & Grains', image: '' },
+    { id: 'dal-pulses', name: 'Dal & Pulses', image: '' },
+    { id: 'edible-oils-ghee', name: 'Edible Oils & Ghee', image: '' },
+    { id: 'spices-masala', name: 'Spices & Masala', image: '' },
+    { id: 'snacks-biscuits', name: 'Snacks & Biscuits', image: '' },
+    { id: 'beverages', name: 'Beverages', image: '' },
+    { id: 'packaged-food', name: 'Packaged Food', image: '' },
+    { id: 'dry-fruits-nuts', name: 'Dry Fruits & Nuts', image: '' },
+    { id: 'breakfast-cereals', name: 'Breakfast & Cereals', image: '' },
+    { id: 'instant-ready-to-eat', name: 'Instant & Ready-to-Eat', image: '' },
+    { id: 'sweets', name: 'Sweets', image: '' },
+    { id: 'regional-local-foods', name: 'Regional / Local Foods', image: '' },
+    { id: 'premium-grocery', name: 'Premium Grocery', image: '' }
+  ]
+};

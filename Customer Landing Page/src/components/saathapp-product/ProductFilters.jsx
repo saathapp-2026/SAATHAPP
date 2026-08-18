@@ -134,6 +134,66 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
         </ul>
       </div>
 
+      {activeCategory === 'spiritual-puja' && (
+        <>
+          <div className="h-px bg-slate-100 dark:bg-slate-800" />
+          
+          {/* Spiritual Filters */}
+          <div>
+            <h3 className="font-bold mb-4 uppercase text-xs tracking-wider text-slate-400">Deity</h3>
+            <ul className="space-y-3 mb-6">
+              {['Ganesh', 'Lakshmi', 'Shiva', 'Hanuman', 'Krishna', 'Durga'].map(deity => (
+                <li key={deity}>
+                  <label className="flex items-center gap-3 cursor-pointer group">
+                    <input 
+                      type="checkbox" 
+                      checked={filters.deity === deity}
+                      onChange={() => handleFilterChange('deity', deity)}
+                      className="rounded text-primary focus:ring-primary accent-primary" 
+                    />
+                    <span className="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">{deity}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+            
+            <h3 className="font-bold mb-4 uppercase text-xs tracking-wider text-slate-400">Material</h3>
+            <ul className="space-y-3 mb-6">
+              {['Brass', 'Marble', 'Resin', 'Clay', 'Metal'].map(mat => (
+                <li key={mat}>
+                  <label className="flex items-center gap-3 cursor-pointer group">
+                    <input 
+                      type="checkbox" 
+                      checked={filters.material === mat}
+                      onChange={() => handleFilterChange('material', mat)}
+                      className="rounded text-primary focus:ring-primary accent-primary" 
+                    />
+                    <span className="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">{mat}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="font-bold mb-4 uppercase text-xs tracking-wider text-slate-400">Occasion</h3>
+            <ul className="space-y-3">
+              {['Daily Puja', 'Diwali', 'Navratri', 'Janmashtami', 'Gifting'].map(occ => (
+                <li key={occ}>
+                  <label className="flex items-center gap-3 cursor-pointer group">
+                    <input 
+                      type="checkbox" 
+                      checked={filters.occasion === occ}
+                      onChange={() => handleFilterChange('occasion', occ)}
+                      className="rounded text-primary focus:ring-primary accent-primary" 
+                    />
+                    <span className="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">{occ}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
+
     </div>
   );
 }

@@ -10,6 +10,7 @@ const navItems = [
   { name: 'Home & Kitchen', path: '/products/home-kitchen' },
   { name: 'Hardware', path: '/products/hardware' },
   { name: 'Services', path: '/services' },
+  { name: 'Spiritual / Puja', path: '/products/spiritual-puja', isNew: true },
   { name: 'SaathApp Product', path: '/products/saathapp', isNew: true },
   { name: 'Offers', path: '/offers', icon: 'Offers' },
   { name: 'SAATHAPP PLUS', path: '/plus', isNew: true, isPlus: true },

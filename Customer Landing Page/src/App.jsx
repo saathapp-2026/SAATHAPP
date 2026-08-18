@@ -23,6 +23,7 @@ import AboutPage from './pages/About';
 import ServiceWarrantyPage from './pages/ServiceWarranty';
 import OurStoryPage from './pages/OurStory';
 import DeliveryPartnerAgreementPage from './pages/DeliveryPartnerAgreement';
+import { trackEvent } from './utils/analytics';
 import TermsOfServicePage from './pages/TermsOfService';
 import PrivacyPolicyPublicPage from './pages/PrivacyPolicyPublic';
 import ServiceWarrantyPolicyPage from './pages/ServiceWarrantyPolicy';
@@ -46,6 +47,8 @@ import ProfessionalTermsPage from './pages/professional/TermsAndConditions';
 import AdvertisementsPage from './pages/AdvertisementsPage';
 import CreateAdvertisementPage from './pages/CreateAdvertisementPage';
 import { ProfessionalOnboardingProvider } from './context/ProfessionalOnboardingContext';
+import { products } from './data/products';
+import { mockSaathAppProducts } from './data/saathAppProducts';
 import WorkerLoginPage from './pages/worker/Login';
 import WorkerRegisterPage from './pages/worker/Register';
 import ProfessionalDashboardPage from './pages/professional/Dashboard';
@@ -60,6 +63,7 @@ import DeliveryPartnerPortalPage from "./pages/delivery/DeliveryPartnerPortalPag
 import SellerRoutes from './pages/seller/SellerRoutes';
 import { getStoredUsers, registerUser, authenticateUser, getStoredAuthSession, saveAuthSession, clearAuthSession, isSessionValid, getStoredPartnerSession, clearPartnerSession } from './services/authService';
 import SaathAppProductHome from './pages/saathapp-products/SaathAppProductHome';
+import SaathAppTierListing from './pages/saathapp-products/SaathAppTierListing';
 import ProductListing from './pages/saathapp-products/ProductListing';
 import ServiceListing from './pages/saathapp-products/ServiceListing';
 import ServiceDetails from './pages/saathapp-products/ServiceDetails';
@@ -75,7 +79,15 @@ export default function App() {
   const routerLocation = useLocation();
   const navigate = useNavigate();
   const initialAuthSession = typeof window !== 'undefined' ? getStoredAuthSession() : null;
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    if (typeof window === 'undefined') return [];
+    try {
+      const stored = window.localStorage.getItem('saathapp-cart');
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
   const [location, setLocation] = useState('Green Park, New Delhi');
   const [pincode, setPincode] = useState('110016');
   const [savedAddresses, setSavedAddresses] = useState(() => {
@@ -162,18 +174,47 @@ export default function App() {
     }
   }, [selectedAddress]);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('saathapp-cart', JSON.stringify(cartItems));
+    }
+  }, [cartItems]);
+
   const handleAddToCart = (product, change) => {
+    if (change > 0 && product.category === 'spiritual-puja') {
+      trackEvent('spiritual_add_to_cart', {
+        product_id: product.id,
+        product_name: product.name,
+        quantity_added: change
+      });
+    }
+    
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
+      
+      const isLimited = product.availabilityMode === 'LIMITED';
+      const maxStock = isLimited ? product.availableQuantity : product.stock;
+      
       if (existing) {
-        const nextQty = existing.quantity + change;
+        let nextQty = existing.quantity + change;
+        
+        // Enforce max stock
+        if (maxStock !== undefined && nextQty > maxStock) {
+          nextQty = maxStock;
+        }
+        
         if (nextQty <= 0) {
           return prev.filter((item) => item.id !== product.id);
         }
         return prev.map((item) => (item.id === product.id ? { ...item, quantity: nextQty } : item));
       }
+      
       if (change > 0) {
-        return [...prev, { ...product, quantity: 1 }];
+        let newQty = change;
+        if (maxStock !== undefined && newQty > maxStock) {
+          newQty = maxStock;
+        }
+        return [...prev, { ...product, quantity: newQty }];
       }
       return prev;
     });
@@ -592,6 +633,7 @@ export default function App() {
           setSearchQuery(query);
           navigate('/products/search'); // updated search path
         }}
+        searchQuery={searchQuery}
         onLogin={() => { setAuthView('login'); navigate('/login'); }}
         onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
         onLogout={handleLogout}
@@ -606,9 +648,32 @@ export default function App() {
     );
   }
 
-  if (routerLocation.pathname === '/products/saathapp' || routerLocation.pathname === '/products/saathapp/') {
+  if (routerLocation.pathname === '/products/saathapp' || routerLocation.pathname === '/products/saathapp/' || routerLocation.pathname === '/saathapp-products' || routerLocation.pathname === '/saathapp-products/') {
     return (
       <SaathAppProductHome
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/products/search');
+        }}
+        onLogin={() => { setAuthView('login'); navigate('/login'); }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        handleAddToCart={handleAddToCart}
+      />
+    );
+  }
+
+  if (routerLocation.pathname.startsWith('/saathapp-products/normal') || routerLocation.pathname.startsWith('/saathapp-products/premium')) {
+    return (
+      <SaathAppTierListing
         cartCount={cartCount}
         location={location}
         onCartClick={() => setIsCartOpen(true)}
@@ -1232,6 +1297,19 @@ export default function App() {
           alert(`Booking created for: ${service.name}. Starting scheduler flow.`);
         }}
         onCheckout={() => {
+          // Mutate inventory
+          cartItems.forEach(cartItem => {
+            const prod = products.find(p => p.id === cartItem.id);
+            if (prod && typeof prod.stock === 'number') {
+              prod.stock = Math.max(0, prod.stock - cartItem.quantity);
+            }
+            // also check saathAppProducts if needed
+            const saathProd = mockSaathAppProducts.find(p => p.id === cartItem.id);
+            if (saathProd && typeof saathProd.stock === 'number') {
+              saathProd.stock = Math.max(0, saathProd.stock - cartItem.quantity);
+            }
+          });
+
           alert(`Checkout completed for total amount ₹${cartTotal}! Thank you for using SaathApp.`);
           setCartItems([]);
           setIsCartOpen(false);
@@ -1335,7 +1413,40 @@ export default function App() {
   }
 
   if (activePage === 'cart') {
-    return <CartPage onBack={() => setActivePage('home')} />;
+    return (
+      <CartPage 
+        cartItems={cartItems} 
+        cartTotal={cartTotal} 
+        onUpdateQuantity={handleAddToCart}
+        onCheckout={() => {
+          let hasSpiritual = false;
+          // Mutate inventory
+          cartItems.forEach(cartItem => {
+            if (cartItem.category === 'spiritual-puja') {
+              hasSpiritual = true;
+            }
+            const prod = products.find(p => p.id === cartItem.id);
+            if (prod && typeof prod.stock === 'number') {
+              prod.stock = Math.max(0, prod.stock - cartItem.quantity);
+            }
+            const saathProd = mockSaathAppProducts.find(p => p.id === cartItem.id);
+            if (saathProd && typeof saathProd.stock === 'number') {
+              saathProd.stock = Math.max(0, saathProd.stock - cartItem.quantity);
+            }
+          });
+          
+          if (hasSpiritual) {
+            trackEvent('spiritual_checkout', { items: cartItems.length, total: cartTotal });
+            trackEvent('spiritual_purchase', { items: cartItems.length, total: cartTotal });
+          }
+          
+          alert(`Checkout completed for total amount ₹${cartTotal}! Thank you for using SaathApp.`);
+          setCartItems([]);
+          setActivePage('home');
+        }}
+        onBack={() => setActivePage('home')} 
+      />
+    );
   }
 
   if (activePage === 'orders') {
@@ -1438,6 +1549,18 @@ export default function App() {
         alert(`Booking created for: ${service.name}. Starting scheduler flow.`);
       }}
       onCheckout={() => {
+        // Mutate inventory
+        cartItems.forEach(cartItem => {
+          const prod = products.find(p => p.id === cartItem.id);
+          if (prod && typeof prod.stock === 'number') {
+            prod.stock = Math.max(0, prod.stock - cartItem.quantity);
+          }
+          const saathProd = mockSaathAppProducts.find(p => p.id === cartItem.id);
+          if (saathProd && typeof saathProd.stock === 'number') {
+            saathProd.stock = Math.max(0, saathProd.stock - cartItem.quantity);
+          }
+        });
+
         alert(`Checkout completed for total amount ₹${cartTotal}! Thank you for using SaathApp.`);
         setCartItems([]);
         setIsCartOpen(false);

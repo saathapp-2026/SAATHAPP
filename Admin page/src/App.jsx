@@ -414,6 +414,7 @@ const MODULES = {
     rows: [
       ["Copper Wire 2.5mm (90m)", "Electricals", "QuickFix Hardware", "₹1,899", "412", "Active"],
       ["Organic Toor Dal 1kg", "Grocery", "Green Basket", "₹186", "1,204", "Active"],
+      ["Brass Ganesh Murti", "Spiritual / Puja Items", "ABC Puja Store", "₹899", "25", "Pending Review"],
       ["Cordless Drill Machine", "Tools", "UrbanCraft Store", "₹3,450", "0", "Draft"],
     ],
   },
@@ -428,9 +429,11 @@ const MODULES = {
     ],
     columns: ["Category", "Parent", "Products", "SEO", "Status"],
     rows: [
-      ["Home Services", "—", "8,420", "Complete", "Active"],
-      ["Electricians", "Home Services", "1,120", "Complete", "Active"],
+      ["Electricals", "-", "4,120", "Complete", "Active"],
+      ["Grocery", "-", "12,980", "Complete", "Active"],
+      ["Spiritual / Puja Items", "-", "45", "Complete", "Active"],
       ["Fresh Produce", "Grocery", "3,980", "Incomplete", "Active"],
+      ["Cables & Wires", "Electricals", "840", "Complete", "Active"],
     ],
   },
   orders: {
@@ -1112,7 +1115,7 @@ const ActionMenu = ({ actions, open, onClose }) => {
   );
 };
 
-const buildReviewRows = (fields, values) => fields.map((field) => ({ label: field.label, value: String(values[field.name] ?? "-") }));
+const buildReviewRows = (fields, values) => fields.filter(f => !f.condition || f.condition(values)).map((field) => ({ label: field.label, value: String(values[field.name] || "-") }));
 
 const ViewDialog = ({ open, title, fields, values, onClose }) => {
   if (!open) return null;
@@ -1141,19 +1144,26 @@ const ViewDialog = ({ open, title, fields, values, onClose }) => {
 
 const EntityFormModal = ({ open, title, fields, values, onChange, onClose, onSave, loading, step, setStep, steps, validationErrors }) => {
   if (!open) return null;
-  const currentStep = steps[step];
+  const filteredSteps = steps.map(s => ({
+    ...s,
+    fields: s.fields ? s.fields.filter(f => !f.condition || f.condition(values)) : undefined
+  })).filter(s => !s.fields || s.fields.length > 0);
+  
+  const currentStepIndex = Math.min(step, filteredSteps.length - 1);
+  const currentStep = filteredSteps[currentStepIndex];
+  
   return (
     <Modal
-      title={`${title} ${step === steps.length - 1 ? "Review" : ""}`}
+      title={`${title} ${currentStepIndex === filteredSteps.length - 1 ? "Review" : ""}`}
       open={open}
       onClose={onClose}
       footer={(
         <div className="flex items-center justify-between gap-3 flex-wrap">
-          <div className="flex gap-2 text-xs text-slate-500">Step {step + 1} of {steps.length}</div>
+          <div className="flex gap-2 text-xs text-slate-500">Step {currentStepIndex + 1} of {filteredSteps.length}</div>
           <div className="flex gap-3">
-            {step > 0 && <button type="button" onClick={() => setStep((s) => Math.max(0, s - 1))} className="px-4 py-2 rounded-xl border border-slate-300 bg-white text-slate-700">Back</button>}
-            <button type="button" onClick={step < steps.length - 1 ? () => setStep((s) => Math.min(steps.length - 1, s + 1)) : onSave} disabled={loading} className="px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-60">
-              {loading ? "Saving..." : step < steps.length - 1 ? "Next" : "Create"}
+            {currentStepIndex > 0 && <button type="button" onClick={() => setStep((s) => Math.max(0, s - 1))} className="px-4 py-2 rounded-xl border border-slate-300 bg-white text-slate-700">Back</button>}
+            <button type="button" onClick={currentStepIndex < filteredSteps.length - 1 ? () => setStep((s) => Math.min(filteredSteps.length - 1, s + 1)) : onSave} disabled={loading} className="px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-60">
+              {loading ? "Saving..." : currentStepIndex < filteredSteps.length - 1 ? "Next" : "Create"}
             </button>
           </div>
         </div>
@@ -1161,13 +1171,15 @@ const EntityFormModal = ({ open, title, fields, values, onChange, onClose, onSav
     >
       <div className="space-y-5">
         <div className="flex flex-wrap gap-2 text-xs text-slate-500">
-          {steps.map((stepInfo, i) => (
-            <div key={stepInfo.label} className={`rounded-full px-3 py-1 ${i === step ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}`}>{stepInfo.label}</div>
+          {filteredSteps.map((stepInfo, i) => (
+            <div key={stepInfo.label} className={`rounded-full px-3 py-1 ${i === currentStepIndex ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}`}>{stepInfo.label}</div>
           ))}
         </div>
         {currentStep.fields ? (
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {currentStep.fields.map((field) => {
+              if (field.condition && !field.condition(values)) return null;
+              
               if (field.type === "textarea") {
                 return (
                   <label key={field.name} className="space-y-2 text-sm text-slate-700">
@@ -1298,13 +1310,77 @@ const MODULE_FORMS = {
       { label: "Delete", onClick: () => handlers.delete(rowObj), destructive: true },
     ],
   },
+  products: {
+    entity: "Product",
+    fields: [
+      { name: "product", label: "Product Name", required: true, section: "basic" },
+      { name: "category", label: "Category", required: true, section: "basic" },
+      { name: "subCategory", label: "Subcategory", type: "text", section: "basic", condition: (values) => values.category?.toLowerCase() === "grocery" },
+      { name: "seller", label: "Seller", required: true, section: "basic" },
+      { name: "price", label: "Price", type: "text", required: true, section: "business" },
+      { name: "stock", label: "Stock Quantity", type: "text", required: true, section: "business" },
+      { name: "groceryTier", label: "Grocery Tier", type: "select", options: ["NORMAL", "PREMIUM"], default: "NORMAL", section: "business", condition: (values) => values.category?.toLowerCase() === "grocery" },
+      { name: "productTier", label: "Product Tier", type: "select", options: ["NORMAL", "PREMIUM"], default: "NORMAL", section: "business" },
+      { name: "availabilityMode", label: "Availability Mode", type: "select", options: ["REGULAR", "LIMITED"], default: "REGULAR", section: "business" },
+      { name: "productionQuantity", label: "Production Quantity", type: "text", section: "premium", condition: (values) => values.productTier === "PREMIUM" },
+      { name: "allocatedQuantity", label: "Allocated Quantity", type: "text", section: "premium", condition: (values) => values.productTier === "PREMIUM" },
+      { name: "batchId", label: "Batch ID", type: "text", section: "premium", condition: (values) => values.productTier === "PREMIUM" },
+      { name: "materials", label: "Materials", type: "text", section: "premium", condition: (values) => values.productTier === "PREMIUM" },
+      { name: "craftsmanship", label: "Craftsmanship", type: "text", section: "premium", condition: (values) => values.productTier === "PREMIUM" },
+      { name: "packaging", label: "Packaging", type: "text", section: "premium", condition: (values) => values.productTier === "PREMIUM" },
+      { name: "warranty", label: "Warranty", type: "text", section: "premium", condition: (values) => values.productTier === "PREMIUM" },
+      { name: "status", label: "Status", type: "select", options: ["Active", "Draft", "Suspended"], default: "Active", section: "business" },
+    ],
+    toRow: (values) => {
+      // Clean up stale premium data if toggled to NORMAL
+      const cleanValues = { ...values };
+      if (cleanValues.productTier === 'NORMAL') {
+        delete cleanValues.productionQuantity;
+        delete cleanValues.allocatedQuantity;
+        delete cleanValues.batchId;
+        delete cleanValues.materials;
+        delete cleanValues.craftsmanship;
+        delete cleanValues.packaging;
+        delete cleanValues.warranty;
+      }
+      if (cleanValues.category?.toLowerCase() !== 'grocery') {
+        delete cleanValues.groceryTier;
+        delete cleanValues.subCategory;
+      }
+      return [cleanValues.product, cleanValues.category, cleanValues.seller, cleanValues.price, cleanValues.stock, cleanValues.status, cleanValues];
+    },
+    fromRow: (row) => {
+      const savedVals = row[6] || {};
+      return { 
+        product: row[0], category: row[1], seller: row[2], price: row[3], stock: row[4], status: row[5], 
+        productTier: savedVals.productTier || "NORMAL", 
+        groceryTier: savedVals.groceryTier || "NORMAL",
+        subCategory: savedVals.subCategory || "",
+        availabilityMode: savedVals.availabilityMode || "REGULAR",
+        productionQuantity: savedVals.productionQuantity || "",
+        allocatedQuantity: savedVals.allocatedQuantity || "",
+        batchId: savedVals.batchId || "",
+        materials: savedVals.materials || "",
+        craftsmanship: savedVals.craftsmanship || "",
+        packaging: savedVals.packaging || "",
+        warranty: savedVals.warranty || "",
+      };
+    },
+    duplicateSuffix: "copy",
+    rowActions: (rowObj, handlers) => [
+      { label: "View", onClick: () => handlers.view(rowObj), icon: Eye },
+      { label: "Edit", onClick: () => handlers.edit(rowObj), icon: CheckSquare },
+      { label: rowObj.data[5] === "Active" ? "Draft" : "Publish", onClick: () => handlers.toggleStatus(rowObj), icon: ShieldCheck, destructive: rowObj.data[5] === "Active" },
+      { label: "Delete", onClick: () => handlers.delete(rowObj), destructive: true },
+    ],
+  },
 };
 
 const mergeSteps = (fields) => {
   const sections = Array.from(new Set(fields.map((field) => field.section || "basic")));
   return [
     ...sections.map((section) => ({
-      label: section === "basic" ? "Basic Info" : section === "business" ? "Business Details" : section,
+      label: section === "basic" ? "Basic Info" : section === "business" ? "Business Details" : section === "premium" ? "Premium Details" : section,
       fields: fields.filter((field) => (field.section || "basic") === section),
     })),
     { label: "Review", review: (values) => buildReviewRows(fields, values) },

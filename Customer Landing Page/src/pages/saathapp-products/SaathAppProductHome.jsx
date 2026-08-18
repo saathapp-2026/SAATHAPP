@@ -50,6 +50,53 @@ export default function SaathAppProductHome({
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-12">
         <ProductHero />
         
+        <section className="mb-12">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold mb-2">Designed for Every You</h2>
+            <p className="text-slate-600 dark:text-slate-400">Discover our two exclusive collections.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Normal Products Card */}
+            <div 
+              onClick={() => navigate('/saathapp-products/normal')}
+              className="group cursor-pointer rounded-2xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div className="h-48 bg-slate-100 dark:bg-slate-800 flex items-center justify-center p-6 text-center">
+                <div className="text-5xl mb-2">👕</div>
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold mb-2">NORMAL PRODUCTS</h3>
+                <p className="text-lg font-medium text-slate-700 dark:text-slate-300 mb-4">Made for Everyone.</p>
+                <p className="text-slate-600 dark:text-slate-400 mb-6">Affordable, reliable and quality-assured products designed for everyday use.</p>
+                <button className="bg-primary text-white px-6 py-3 rounded-lg font-semibold w-full sm:w-auto hover:bg-primary/90 transition-colors">
+                  Explore Normal Products
+                </button>
+              </div>
+            </div>
+
+            {/* Premium Products Card */}
+            <div 
+              onClick={() => navigate('/saathapp-products/premium')}
+              className="group cursor-pointer rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 to-black dark:from-slate-800 dark:to-black border border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-white"
+            >
+              <div className="h-48 bg-white/5 flex items-center justify-center p-6 text-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-yellow-500/10 opacity-50"></div>
+                <div className="text-5xl mb-2 relative z-10">✨</div>
+              </div>
+              <div className="p-8 relative z-10">
+                <div className="flex items-center gap-2 mb-2">
+                  <h3 className="text-2xl font-bold text-amber-400">PREMIUM PRODUCTS</h3>
+                </div>
+                <p className="text-lg font-medium text-slate-300 mb-4">Made for Those Who Value More.</p>
+                <p className="text-slate-400 mb-6">Superior materials, refined design and genuinely limited availability.</p>
+                <button className="bg-amber-500 text-slate-900 px-6 py-3 rounded-lg font-semibold w-full sm:w-auto hover:bg-amber-400 transition-colors">
+                  Explore Premium Products
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        
         <section>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold">Shop by Category</h2>

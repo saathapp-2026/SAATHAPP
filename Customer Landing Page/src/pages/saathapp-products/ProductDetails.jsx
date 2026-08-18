@@ -4,7 +4,11 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import OfficialBadge from '../../components/saathapp-product/OfficialBadge';
 import { products, categories } from '../../data/products';
+import { mockSaathAppProducts, saathAppCategories } from '../../data/saathAppProducts';
 import { ChevronRight, Home, Star, Heart, ShoppingCart, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
+
+import { trackEvent } from '../../utils/analytics';
+import ProductGrid from '../../components/saathapp-product/ProductGrid';
 
 export default function ProductDetails({
   cartCount,
@@ -25,15 +29,36 @@ export default function ProductDetails({
   const pathParts = routerLocation.pathname.split('/');
   const slug = pathParts[pathParts.length - 1];
   const navigate = useNavigate();
-  const product = products.find(p => p.id === slug || p.slug === slug);
+  
+  // Look in both normal products and mockSaathAppProducts
+  const product = products.find(p => p.id === slug || p.slug === slug) 
+               || mockSaathAppProducts.find(p => p.id === slug || p.slug === slug);
   
   const [quantity, setQuantity] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState(null);
 
   React.useEffect(() => {
     if (product) {
-      document.title = `${product.name} | SaathApp Official`;
+      document.title = product.category === 'spiritual-puja' 
+        ? `${product.name} | Spiritual & Puja Items Online | SaathApp` 
+        : `${product.name} | SaathApp Official`;
+        
+      if (product.category === 'spiritual-puja') {
+        trackEvent('spiritual_product_view', {
+          product_id: product.id,
+          product_name: product.name,
+          subcategory: product.subCategory
+        });
+      }
     }
+  }, [product]);
+
+  // Recommended products (Personalized mock)
+  const recommendedProducts = React.useMemo(() => {
+    if (!product) return [];
+    return products
+      .filter(p => p.category === product.category && p.id !== product.id)
+      .slice(0, 4);
   }, [product]);
 
   if (!product) {
@@ -52,6 +77,41 @@ export default function ProductDetails({
   } : product.category === 'bottles' ? {
     capacity: ['500ml', '750ml', '1L']
   } : null;
+
+  // Hyperlocal logic mock
+  const CUSTOMER_LOCATION = { lat: 28.6315, lng: 77.2167 }; // Connaught Place, New Delhi
+
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+  };
+
+  const getETA = (dist) => {
+    if (dist <= 3) return '30–45 min';
+    if (dist <= 7) return '45–60 min';
+    return '1–2 days';
+  };
+
+  let bestSeller = null;
+  if (product?.sellers && product.sellers.length > 0) {
+    const availableSellers = product.sellers
+      .filter(s => s.stock >= quantity)
+      .map(s => {
+        const dist = calculateDistance(CUSTOMER_LOCATION.lat, CUSTOMER_LOCATION.lng, s.location.lat, s.location.lng);
+        return { ...s, distance: dist, eta: getETA(dist) };
+      })
+      .sort((a, b) => a.distance - b.distance);
+    
+    if (availableSellers.length > 0) {
+      bestSeller = availableSellers[0];
+    }
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
@@ -111,7 +171,19 @@ export default function ProductDetails({
           {/* Product Info */}
           <div className="w-full md:w-1/2 flex flex-col">
             <div className="mb-4">
-              <OfficialBadge className="mb-3" />
+              {product.productTier === 'PREMIUM' ? (
+                <div className="mb-3 inline-flex items-center gap-1 bg-gradient-to-r from-amber-500 to-yellow-400 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide shadow-sm">
+                  <Star size={12} className="fill-white" /> Premium Limited Edition
+                </div>
+              ) : product.brand === 'SaathApp Official' ? (
+                <div className="mb-3 inline-flex items-center gap-1 bg-gradient-to-r from-blue-600 to-blue-400 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide shadow-sm">
+                  ✓ SaathApp Official
+                </div>
+              ) : (
+                <div className="mb-3 inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide border border-slate-200 dark:border-slate-700">
+                  Verified Seller
+                </div>
+              )}
               <h1 className="text-3xl lg:text-4xl font-black mb-2 leading-tight">{product.name}</h1>
               <div className="flex items-center gap-4 text-sm mb-4">
                 <div className="flex items-center gap-1 text-amber-500 font-bold">
@@ -119,9 +191,15 @@ export default function ProductDetails({
                   {product.rating}
                 </div>
                 <div className="text-primary font-semibold underline cursor-pointer">{product.reviews} Reviews</div>
-                <div className="text-green-600 dark:text-green-400 font-bold flex items-center gap-1">
-                  <ShieldCheck size={14} /> In Stock
-                </div>
+                {product.availabilityMode === 'LIMITED' ? (
+                  <div className="text-amber-600 dark:text-amber-400 font-bold flex items-center gap-1">
+                    <ShieldCheck size={14} /> {product.availableQuantity <= 0 ? 'Sold Out' : `Limited Stock: ${product.availableQuantity} left`}
+                  </div>
+                ) : (
+                  <div className="text-green-600 dark:text-green-400 font-bold flex items-center gap-1">
+                    <ShieldCheck size={14} /> {(product.stock !== undefined && product.stock <= 0) ? 'Out of Stock' : 'In Stock'}
+                  </div>
+                )}
               </div>
               <div className="flex items-end gap-3 mb-2">
                 <span className="text-4xl font-black">₹{product.price}</span>
@@ -186,7 +264,8 @@ export default function ProductDetails({
               <div className="flex items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden h-14">
                 <button 
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-12 h-full flex items-center justify-center font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                  disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
+                  className="w-12 h-full flex items-center justify-center font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50"
                 >
                   -
                 </button>
@@ -194,33 +273,75 @@ export default function ProductDetails({
                   {quantity}
                 </div>
                 <button 
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="w-12 h-full flex items-center justify-center font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                  onClick={() => {
+                    const max = product.availabilityMode === 'LIMITED' ? product.availableQuantity : product.stock;
+                    setQuantity(max !== undefined ? Math.min(max, quantity + 1) : quantity + 1);
+                  }}
+                  disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
+                  className="w-12 h-full flex items-center justify-center font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50"
                 >
                   +
                 </button>
               </div>
               <button 
                 onClick={() => handleAddToCart(product, quantity)}
-                className="flex-1 h-14 bg-gradient-primary hover:bg-gradient-primary/90 text-white rounded-xl flex items-center justify-center gap-2 font-black text-lg shadow-glow-primary transition-all transform active:scale-[0.98]"
+                disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
+                className={`flex-1 h-14 rounded-xl flex items-center justify-center gap-2 font-black text-lg transition-all transform active:scale-[0.98] ${
+                  (product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0))
+                  ? 'bg-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-800 dark:text-slate-500'
+                  : 'bg-gradient-primary hover:bg-gradient-primary/90 text-white shadow-glow-primary'
+                }`}
               >
                 <ShoppingCart size={20} />
-                Add to Cart
+                {(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'Sold Out' : 'Add to Cart'}
               </button>
             </div>
 
             {/* Delivery Info */}
             <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 mb-8">
               <div className="flex flex-col gap-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center shrink-0">
-                    <Truck size={20} />
+                {bestSeller ? (
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center shrink-0">
+                      <Truck size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-sm mb-1 flex items-center gap-2">
+                        Delivery available 
+                        <span className="text-[10px] bg-green-500 text-white px-1.5 py-0.5 rounded-sm uppercase tracking-wider">✓ In Stock</span>
+                      </h4>
+                      <p className="text-xs text-slate-500 mb-1">
+                        From <span className="font-semibold text-slate-700 dark:text-slate-300">{bestSeller.name}</span> ({bestSeller.distance.toFixed(1)} km away)
+                      </p>
+                      <p className="text-sm font-black text-green-600 dark:text-green-400">
+                        Arrives in {bestSeller.eta}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-sm mb-1">Fast Delivery</h4>
-                    <p className="text-xs text-slate-500">Delivery in 2-3 business days to your location.</p>
+                ) : product?.sellers ? (
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                      <Truck size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-sm mb-1">Out of Local Stock</h4>
+                      <p className="text-xs text-slate-500 mb-1">No nearby sellers have requested quantity.</p>
+                      <p className="text-sm font-black text-slate-700 dark:text-slate-300">
+                        Delivery in 1–2 days
+                      </p>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center shrink-0">
+                      <Truck size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-sm mb-1">Fast Delivery</h4>
+                      <p className="text-xs text-slate-500">Delivery in 2-3 business days to your location.</p>
+                    </div>
+                  </div>
+                )}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
                     <RotateCcw size={20} />
@@ -242,7 +363,7 @@ export default function ProductDetails({
               <div className="p-6">
                 <h4 className="font-bold mb-3">Product Description</h4>
                 <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-                  Premium quality {product.name.toLowerCase()} designed for maximum comfort and durability. This is an official SaathApp merchandise product, guaranteed to meet our high quality standards. Perfect for daily use or as a thoughtful gift.
+                  {product.description || `Premium quality ${product.name.toLowerCase()} designed for maximum comfort and durability. This is an official SaathApp merchandise product, guaranteed to meet our high quality standards. Perfect for daily use or as a thoughtful gift.`}
                 </p>
                 <ul className="list-disc pl-5 text-sm text-slate-600 dark:text-slate-400 space-y-2">
                   <li>Official SaathApp branding</li>
@@ -250,25 +371,76 @@ export default function ProductDetails({
                   <li>Durable and long-lasting</li>
                   <li>Includes authenticity tag</li>
                 </ul>
+
+                {product.productTier === 'PREMIUM' ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 bg-amber-50/50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-900/30 rounded-2xl mt-6">
+                    <div className="space-y-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-amber-600/70 dark:text-amber-500/70">Materials</span>
+                      <p className="font-medium text-slate-800 dark:text-slate-200">{product.materials || 'Premium Grade'}</p>
+                    </div>
+                    <div className="space-y-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-amber-600/70 dark:text-amber-500/70">Craftsmanship</span>
+                      <p className="font-medium text-slate-800 dark:text-slate-200">{product.craftsmanship || 'Expertly Crafted'}</p>
+                    </div>
+                    <div className="space-y-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-amber-600/70 dark:text-amber-500/70">Packaging</span>
+                      <p className="font-medium text-slate-800 dark:text-slate-200">{product.packaging || 'Signature Box'}</p>
+                    </div>
+                    <div className="space-y-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-amber-600/70 dark:text-amber-500/70">Warranty</span>
+                      <p className="font-medium text-slate-800 dark:text-slate-200">{product.warranty || 'Limited Warranty'}</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 mt-6">
+                    <h3 className="font-bold text-lg mb-4">Specifications</h3>
+                    <ul className="space-y-4">
+                      {Object.entries(product.specifications || {}).map(([key, value]) => (
+                        <li key={key} className="flex gap-4">
+                          <span className="w-1/3 text-slate-500 text-sm font-medium">{key}</span>
+                          <span className="w-2/3 text-slate-800 dark:text-slate-200 text-sm">{value}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
 
           </div>
         </div>
+
+        {/* Personalized Recommendations */}
+        {recommendedProducts.length > 0 && (
+          <div className="mt-16 mb-8">
+            <h2 className="text-2xl font-black mb-6 flex items-center gap-2">
+              <Star className="text-amber-500 fill-amber-500" size={24} /> 
+              Recommended For You
+            </h2>
+            <ProductGrid products={recommendedProducts} onAddToCart={handleAddToCart} />
+          </div>
+        )}
       </main>
 
       {/* Sticky Mobile Add to Cart */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 p-4 pb-safe flex items-center gap-4 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
         <div className="flex-1 flex flex-col">
           <span className="text-lg font-black leading-none mb-0.5">₹{product.price * quantity}</span>
-          <span className="text-[10px] text-green-600 dark:text-green-400 font-bold uppercase tracking-wide">In Stock</span>
+          <span className={`text-[10px] font-bold uppercase tracking-wide ${(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'text-red-500' : 'text-green-600 dark:text-green-400'}`}>
+            {(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'Sold Out' : 'In Stock'}
+          </span>
         </div>
         <button 
           onClick={() => handleAddToCart(product, quantity)}
-          className="flex-[2] h-12 bg-gradient-primary text-white rounded-xl flex items-center justify-center gap-2 font-black shadow-glow-primary active:scale-[0.98] transition-transform"
+          disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
+          className={`flex-[2] h-12 rounded-xl flex items-center justify-center gap-2 font-black shadow-glow-primary active:scale-[0.98] transition-transform ${
+            (product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0))
+              ? 'bg-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-800 dark:text-slate-500'
+              : 'bg-gradient-primary text-white hover:bg-gradient-primary/90'
+          }`}
         >
           <ShoppingCart size={18} />
-          Add to Cart
+          {(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'Sold Out' : 'Add to Cart'}
         </button>
       </div>
 

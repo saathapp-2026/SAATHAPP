@@ -4,7 +4,7 @@ import {
   Zap, Hammer, HardHat, Wrench, ShoppingCart, Tractor, 
   Car, Home, Sofa, Smartphone, Flame, Droplet, Newspaper, ChevronRight, ChevronLeft
 } from 'lucide-react';
-// Removed mockData dependency
+import { categories as mockCategories } from '../data/mockData';
 
 // Map icon string name to Lucide Component
 const iconMap = {
@@ -13,15 +13,7 @@ const iconMap = {
 };
 
 export default function Categories({ onCategorySelect, activeCategory }) {
-  const [categories, setCategories] = useState(Array.from({ length: 7 }, (_, i) => ({
-    id: `placeholder-${i}`,
-    name: '\u00A0',
-    tagline: '\u00A0',
-    iconName: '',
-    image: '',
-    gradient: 'from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900',
-    textColor: 'text-slate-500'
-  })));
+  const [categories, setCategories] = useState(mockCategories);
   const scrollContainerRef = useRef(null);
 
   const scroll = (direction) => {

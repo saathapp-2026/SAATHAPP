@@ -8,6 +8,8 @@ import { useLanguage } from '../context/LanguageContext';
 import { getCustomerMenu } from '../config/customerMenu';
 import { useTheme } from "../context/ThemeContext";
 import TopNav from './TopNav';
+import { products, subcategories } from '../data/products';
+import { mockSaathAppProducts } from '../data/saathAppProducts';
 
 export default function Header({
   cartCount,
@@ -48,17 +50,28 @@ export default function Header({
 
   const recentSearches = [];
 
-  // Simulated live suggestion generator
+  // Intelligent live suggestion generator
   useEffect(() => {
-    if (searchQuery.trim() === '') {
+    const q = searchQuery.toLowerCase().trim();
+    if (q === '') {
       setSuggestions([]);
       return;
     }
-    const terms = [
-      'Electrician', 'Plumbing Service', 'Hardware Tools', 'AC Servicing',
-      'Painting Service', 'Grocery Store', 'Electrical Parts'
-    ];
-    const filtered = terms.filter(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const allNames = new Set([
+      'Electrician', 'Plumber', 'Hardware', 'AC Servicing', 'Grocery', 'Spiritual Puja', 'Murtis', 'Diyas'
+    ]);
+    
+    // Add product names
+    products.forEach(p => allNames.add(p.name));
+    mockSaathAppProducts.forEach(p => allNames.add(p.name));
+    
+    // Add subcategories
+    Object.values(subcategories).flat().forEach(sub => allNames.add(sub.name));
+    
+    const terms = Array.from(allNames);
+    
+    const filtered = terms.filter(t => t.toLowerCase().includes(q)).slice(0, 8);
     setSuggestions(filtered);
   }, [searchQuery]);
 
@@ -185,7 +198,7 @@ export default function Header({
             </button>
 
             {/* Mobile Row 3: Full-width Search Bar */}
-            <div ref={searchRef} className="relative z-40 w-full">
+            <div ref={searchRef} className="relative z-[60] w-full">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
                 <div className="relative w-full">
                   <input
@@ -349,7 +362,7 @@ export default function Header({
             </button>
 
             {/* Desktop Search Bar */}
-            <div ref={searchRef} className="flex-1 max-w-[380px] md:max-w-[400px] relative z-40">
+            <div ref={searchRef} className="flex-1 max-w-[380px] md:max-w-[400px] relative z-[60]">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
                 <div className="relative w-full">
                   <input

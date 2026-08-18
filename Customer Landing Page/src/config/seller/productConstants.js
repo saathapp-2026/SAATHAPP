@@ -97,6 +97,11 @@ export const PRODUCT_CATEGORIES = [
     label: 'Home & Kitchen',
     sub: ['Cookware', 'Storage', 'Furnishings', 'Decor'],
   },
+  {
+    id: 'spiritual-puja',
+    label: 'Spiritual / Puja Items',
+    sub: ['Puja Samagri', 'Diyas & Lamps', 'Agarbatti & Dhoop', 'Puja Essentials', 'Idols & Murtis', 'Rudraksha & Mala', 'Religious Books', 'Festival Essentials', 'Puja Kits & Combos', 'Spiritual Gifts'],
+  },
 ];
 
 export const GST_SLABS = [0, 5, 12, 18, 28];

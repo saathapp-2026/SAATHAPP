@@ -2,6 +2,16 @@ import { ShieldCheck, Users, Truck, Brain } from 'lucide-react';
 
 export const categories = [
   {
+    id: 'spiritual-puja',
+    name: 'Spiritual / Puja',
+    tagline: 'Puja Samagri & Idols',
+    iconName: 'Flame',
+    gradient: 'bg-gradient-card-orange',
+    textColor: 'text-orange-700',
+    popular: true,
+    image: '',
+  },
+  {
     id: 'electricals',
     name: 'Electricals',
     tagline: 'Electricians & Parts',
