@@ -1,6 +1,7 @@
 /**
  * Master Category Data & Architecture Config for SaathApp
  * Single source of truth for all 16 marketplace categories + Gift Set marketplace vertical.
+ * Fully aligned with SaathApp Category System Restructuring Spec PDF (Pages 1–27).
  */
 
 import {
@@ -8,6 +9,43 @@ import {
   Footprints, Gift, Sparkles, Sprout, HardHat, Car, Flame, ShoppingBag, Box
 } from 'lucide-react';
 
+/**
+ * Category Schema / Data Model (PDF Page 21)
+ * @typedef {Object} CategorySchema
+ * @property {string} id - Unique identifier (e.g. 'household-items')
+ * @property {string} name - Display Name (e.g. 'Household Items')
+ * @property {string} slug - URL slug (e.g. 'household-items')
+ * @property {string} url - SEO-friendly route URL
+ * @property {string} iconName - Lucide icon component name
+ * @property {string} visualDesc - Visual icon description per PDF spec
+ * @property {string} [description] - Extended category description
+ * @property {string} [parentCategory] - Optional parent category for hierarchy
+ * @property {number} [sortOrder] - 1-indexed display order (1 to 16)
+ * @property {boolean} [isActive] - Active status flag
+ * @property {boolean} [isFeatured] - Featured status flag
+ * @property {boolean} [isOfficialOnly] - Restricted to SAATHAPP_OWNED sellers if true
+ * @property {string[]} subcategories - Array of subcategory names
+ * @property {string} [createdAt] - ISO creation date string
+ */
+
+// Category Alias Map for Zero Data Loss Migration (e.g., old "Home & Kitchen" → "Household Items")
+export const CATEGORY_ALIASES = {
+  'home-kitchen': 'household-items',
+  'home': 'household-items',
+  'household': 'household-items',
+  'gifts': 'gifts',
+  'gift-set': 'gift-set',
+  'books': 'books-stationery',
+  'stationery': 'books-stationery',
+  'shoes': 'footwear',
+  'shoes-slippers-sandals': 'footwear',
+  'medicine': 'medicine-healthcare',
+  'healthcare': 'medicine-healthcare',
+  'spiritual': 'spiritual-puja',
+  'puja': 'spiritual-puja'
+};
+
+// Exact 16 Master Categories in 4x4 Grid Order per PDF Spec (Pages 12, 13, 23, 24)
 export const MASTER_CATEGORIES = [
   // ROW 1
   {
@@ -17,9 +55,14 @@ export const MASTER_CATEGORIES = [
     url: '/products/grocery',
     iconName: 'Leaf',
     visualDesc: 'Leaf / grocery basket',
+    sortOrder: 1,
+    isActive: true,
+    isFeatured: true,
     subcategories: [
       'Oils & Ghee', 'Rice & Grains', 'Spices & Masalas', 'Flour & Atta',
-      'Pulses & Dals', 'Dry Fruits & Nuts', 'Beverages', 'Snacks & Packaged Food'
+      'Pulses & Dals', 'Dry Fruits & Nuts', 'Beverages', 'Snacks & Packaged Food',
+      'Fruits & Vegetables', 'Dairy & Bakery', 'Sweets', 'Regional / Local Foods',
+      'Premium Grocery'
     ]
   },
   {
@@ -29,6 +72,9 @@ export const MASTER_CATEGORIES = [
     url: '/products/electronics',
     iconName: 'Smartphone',
     visualDesc: 'Smartphone / device',
+    sortOrder: 2,
+    isActive: true,
+    isFeatured: true,
     subcategories: [
       'Laptops & Computers', 'Audio & Headphones', 'Smart Wearables',
       'Cameras & Accessories', 'Computer Accessories', 'Home Appliances'
@@ -41,6 +87,9 @@ export const MASTER_CATEGORIES = [
     url: '/products/mobiles',
     iconName: 'Smartphone',
     visualDesc: 'Smartphone',
+    sortOrder: 3,
+    isActive: true,
+    isFeatured: true,
     subcategories: [
       '5G Smartphones', 'Budget Smartphones', 'Refurbished Phones',
       'Mobile Covers & Cases', 'Chargers & Cables', 'Power Banks'
@@ -53,6 +102,9 @@ export const MASTER_CATEGORIES = [
     url: '/products/medicine-healthcare',
     iconName: 'Cross',
     visualDesc: 'Medical cross',
+    sortOrder: 4,
+    isActive: true,
+    isFeatured: false,
     subcategories: [
       'OTC Medicines', 'Vitamins & Supplements', 'First Aid & Surgical',
       'Personal Hygiene', 'Health Monitors', 'Ayurveda & Wellness'
@@ -67,6 +119,9 @@ export const MASTER_CATEGORIES = [
     url: '/products/fashion',
     iconName: 'Shirt',
     visualDesc: 'T-shirt',
+    sortOrder: 5,
+    isActive: true,
+    isFeatured: true,
     subcategories: [
       "Men's Wear", "Women's Wear", "Kids' Wear", 'Innerwear & Sleepwear',
       'Watches & Accessories', 'Bags & Luggage'
@@ -79,6 +134,10 @@ export const MASTER_CATEGORIES = [
     url: '/products/household-items',
     iconName: 'Package',
     visualDesc: 'Cleaning basket',
+    sortOrder: 6,
+    isActive: true,
+    isFeatured: true,
+    description: 'Everyday household essentials, cleaning supplies, and kitchen utilities.',
     subcategories: [
       'Cleaning Supplies', 'Laundry', 'Kitchen Utilities', 'Storage & Organization',
       'Bathroom Essentials', 'Home Care', 'Disposables', 'Household Tools',
@@ -92,6 +151,9 @@ export const MASTER_CATEGORIES = [
     url: '/products/hardware',
     iconName: 'Tools',
     visualDesc: 'Tools',
+    sortOrder: 7,
+    isActive: true,
+    isFeatured: false,
     subcategories: [
       'Power Tools', 'Hand Tools', 'Fasteners & Screws', 'Plumbing Supplies',
       'Electrical Fittings', 'Paints & Adhesives', 'Safety Gear'
@@ -104,6 +166,9 @@ export const MASTER_CATEGORIES = [
     url: '/services',
     iconName: 'Wrench',
     visualDesc: 'Service / tools icon',
+    sortOrder: 8,
+    isActive: true,
+    isFeatured: true,
     subcategories: [
       'Electrical Repairs', 'Plumbing Services', 'Appliance Repair',
       'Home Cleaning', 'Painting & Renovation', 'Pest Control'
@@ -118,6 +183,9 @@ export const MASTER_CATEGORIES = [
     url: '/products/books-stationery',
     iconName: 'BookOpen',
     visualDesc: 'Books + pen',
+    sortOrder: 9,
+    isActive: true,
+    isFeatured: false,
     subcategories: [
       'School Supplies', 'Office Supplies', 'Notebooks', 'Registers',
       'Pens & Pencils', 'Art & Craft', 'Exam Supplies', 'Files & Folders',
@@ -131,6 +199,9 @@ export const MASTER_CATEGORIES = [
     url: '/products/footwear',
     iconName: 'Footprints',
     visualDesc: 'Shoe',
+    sortOrder: 10,
+    isActive: true,
+    isFeatured: false,
     subcategories: [
       "Men's Footwear", "Women's Footwear", "Kids' Footwear", 'Sports Shoes',
       'Casual Shoes', 'Formal Shoes', 'Slippers', 'Sandals', 'School Shoes'
@@ -143,6 +214,9 @@ export const MASTER_CATEGORIES = [
     url: '/products/gifts',
     iconName: 'Gift',
     visualDesc: 'Gift box',
+    sortOrder: 11,
+    isActive: true,
+    isFeatured: true,
     subcategories: [
       'Birthday Gifts', 'Anniversary Gifts', 'Wedding Gifts', 'Festival Gifts',
       'Corporate Gifts', 'Personalized Gifts', 'Gift Hampers',
@@ -156,7 +230,10 @@ export const MASTER_CATEGORIES = [
     url: '/products/saathapp',
     iconName: 'Sparkles',
     visualDesc: 'SaathApp brand mark',
-    isOfficialOnly: true,
+    sortOrder: 12,
+    isActive: true,
+    isFeatured: true,
+    isOfficialOnly: true, // Only SAATHAPP_OWNED sellers can list under this category
     subcategories: [
       'Official Apparel', 'SaathApp Accessories', 'SaathApp Essentials',
       'Exclusive Merch', 'SaathApp Special Editions'
@@ -171,6 +248,9 @@ export const MASTER_CATEGORIES = [
     url: '/products/agriculture',
     iconName: 'Sprout',
     visualDesc: 'Green leaves',
+    sortOrder: 13,
+    isActive: true,
+    isFeatured: false,
     subcategories: [
       'Seeds & Plant Spores', 'Fertilizers & Bio-Inputs', 'Pesticides & Insecticides',
       'Farming Tools & Equipment', 'Irrigation Systems', 'Animal Feed'
@@ -183,6 +263,9 @@ export const MASTER_CATEGORIES = [
     url: '/products/construction',
     iconName: 'HardHat',
     visualDesc: 'Helmet',
+    sortOrder: 14,
+    isActive: true,
+    isFeatured: false,
     subcategories: [
       'Cement & Concrete', 'Steel & Rebars', 'Bricks & Blocks',
       'Building Chemicals', 'Roofing & Cladding', 'Scaffolding & Safety'
@@ -195,6 +278,9 @@ export const MASTER_CATEGORIES = [
     url: '/products/vehicles',
     iconName: 'Car',
     visualDesc: 'Car',
+    sortOrder: 15,
+    isActive: true,
+    isFeatured: false,
     subcategories: [
       'E-Rickshaws & Auto Parts', 'Two Wheeler Spare Parts', 'Car Accessories',
       'Helmets & Riding Gear', 'Batteries & Lubricants', 'Tyres & Tubes'
@@ -207,6 +293,9 @@ export const MASTER_CATEGORIES = [
     url: '/products/spiritual-puja',
     iconName: 'Flame',
     visualDesc: 'Diya',
+    sortOrder: 16,
+    isActive: true,
+    isFeatured: true,
     subcategories: [
       'Puja Samagri', 'Diyas & Lamps', 'Agarbatti & Dhoop', 'Puja Essentials',
       'Idols & Murtis', 'Rudraksha & Mala', 'Religious Books',
@@ -222,7 +311,7 @@ export const GIFT_SET_CATEGORY = {
   slug: 'gift-set',
   url: '/products/gift-set',
   iconName: 'Gift',
-  isMarketplaceOpen: true, // Any seller can list here
+  isMarketplaceOpen: true, // Any verified seller can list here
   subcategories: [
     'Chocolate Gift Sets', 'Stationery Gift Sets', 'Flower Gift Sets',
     'Sweets & Mithai Boxes', 'Clothes Gift Sets', 'Glass & Cup Sets',
@@ -258,34 +347,48 @@ export const GIFT_SET_CATEGORY = {
   ]
 };
 
-// Header navigation bar list (Exact PDF specified order & contents)
+// Compact Header Navigation Bar List (Exact PDF Specified Order & Contents - Page 13)
 export const HEADER_NAV_ITEMS = [
   { name: 'All Categories', path: '/products' },
   { name: 'Grocery', path: '/products/grocery' },
   { name: 'Electronics', path: '/products/electronics' },
   { name: 'Mobiles', path: '/products/mobiles' },
   { name: 'Fashion', path: '/products/fashion' },
-  { name: 'Home & Kitchen', path: '/products/home-kitchen' },
   { name: 'Household Items', path: '/products/household-items' },
   { name: 'Hardware', path: '/products/hardware' },
   { name: 'Services', path: '/services' },
-  { name: 'Spiritual / Puja', path: '/products/spiritual-puja', isNew: true },
   { name: 'Gift Set', path: '/products/gift-set', isNew: true },
   { name: 'SaathApp Product', path: '/products/saathapp', isNew: true },
   { name: 'SAATHAPP PLUS', path: '/plus', isNew: true, isPlus: true }
 ];
 
-// Helper to get category details by slug or id
+// Helper to get category details by slug, id, or legacy alias
 export function getCategoryByIdOrSlug(idOrSlug) {
-  if (idOrSlug === 'gift-set') return GIFT_SET_CATEGORY;
-  return MASTER_CATEGORIES.find(c => c.id === idOrSlug || c.slug === idOrSlug);
+  if (!idOrSlug) return null;
+  const canonicalId = CATEGORY_ALIASES[idOrSlug] || idOrSlug;
+  if (canonicalId === 'gift-set') return GIFT_SET_CATEGORY;
+  return MASTER_CATEGORIES.find(c => c.id === canonicalId || c.slug === canonicalId);
 }
 
-// Compute dynamic live product counts from product list
+// Compute dynamic live product counts from product list (Data-Driven per PDF Page 20)
 export function getDynamicProductCount(productsList, categoryIdOrSlug) {
   if (!productsList || !Array.isArray(productsList)) return 0;
-  if (categoryIdOrSlug === 'gift-set') {
-    return productsList.filter(p => p.category === 'gift-set' || p.vertical === 'GIFT_SET').length;
+  const canonicalId = CATEGORY_ALIASES[categoryIdOrSlug] || categoryIdOrSlug;
+
+  if (canonicalId === 'gift-set' || canonicalId === 'gifts') {
+    return productsList.filter(p => 
+      p.category === 'gift-set' || p.category === 'gifts' || p.vertical === 'GIFT_SET'
+    ).length;
   }
-  return productsList.filter(p => p.category === categoryIdOrSlug).length;
+
+  if (canonicalId === 'household-items') {
+    return productsList.filter(p => 
+      p.category === 'household-items' || p.category === 'home-kitchen' || p.category === 'home'
+    ).length;
+  }
+
+  return productsList.filter(p => {
+    const pCat = CATEGORY_ALIASES[p.category] || p.category;
+    return pCat === canonicalId;
+  }).length;
 }

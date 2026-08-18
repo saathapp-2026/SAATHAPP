@@ -780,6 +780,13 @@ function AppContent() {
     );
   }
 
+  // 301 SEO & Alias Redirect for renamed legacy categories (e.g. Home & Kitchen -> Household Items)
+  if (routerLocation.pathname.startsWith('/products/home-kitchen')) {
+    const redirectPath = routerLocation.pathname.replace('/products/home-kitchen', '/products/household-items');
+    navigate(redirectPath, { replace: true });
+    return null;
+  }
+
   const isOffers = routerLocation.pathname === '/offers';
   const isAllCategories = routerLocation.pathname === '/products' || routerLocation.pathname === '/products/';
   const isProductListing = (routerLocation.pathname.startsWith('/products/') && routerLocation.pathname !== '/products/saathapp' && routerLocation.pathname !== '/products/saathapp/' && !routerLocation.pathname.startsWith('/products/gift-set')) || isOffers || isAllCategories;

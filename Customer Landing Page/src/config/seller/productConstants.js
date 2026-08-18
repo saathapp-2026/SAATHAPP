@@ -86,11 +86,6 @@ export const PRODUCT_CATEGORIES = [
     sub: ['Personal Care', 'Home Care', 'Beverages', 'Snacks', 'Dairy'],
   },
   {
-    id: 'home',
-    label: 'Home & Kitchen',
-    sub: ['Cookware', 'Storage', 'Furnishings', 'Decor'],
-  },
-  {
     id: GIFT_SET_CATEGORY.id,
     label: GIFT_SET_CATEGORY.name,
     sub: GIFT_SET_CATEGORY.subcategories,

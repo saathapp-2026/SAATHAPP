@@ -134,6 +134,7 @@ export default function ProductListing({
 
   const [sort, setSort] = useState('popular');
   const [isLoading, setIsLoading] = useState(true);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   // Network simulation
   React.useEffect(() => {
@@ -421,14 +422,31 @@ export default function ProductListing({
           </div>
         )}
 
+        {/* Mobile Filter Toggle */}
+        <div className="lg:hidden mb-4 flex items-center justify-between bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs">
+          <span className="text-xs font-bold text-slate-700 dark:text-slate-200">
+            {isAllCategories ? 'All 16 Marketplace Categories' : `${filteredProducts.length} Products`}
+          </span>
+          <button
+            onClick={() => setShowMobileFilters(!showMobileFilters)}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-extrabold cursor-pointer hover:bg-emerald-500/20 transition-colors"
+          >
+            <span>⚙️ Filters</span>
+            <span className="text-[10px]">{showMobileFilters ? '▲ Hide' : '▼ Show'}</span>
+          </button>
+        </div>
+
         <div className="flex flex-col lg:flex-row gap-8 items-start">
-          {/* Filters Sidebar */}
-          <aside className="w-full lg:w-64 shrink-0">
+          {/* Filters Sidebar (Collapsible on mobile screens) */}
+          <aside className={`w-full lg:w-64 shrink-0 ${showMobileFilters ? 'block mb-6' : 'hidden lg:block'}`}>
             <ProductFilters
               filters={filters}
               setFilters={setFilters}
               activeCategory={categoryId || (isAllCategories ? 'all' : '')}
-              onCategoryChange={handleSidebarCategoryChange}
+              onCategoryChange={(catId) => {
+                setShowMobileFilters(false);
+                handleSidebarCategoryChange(catId);
+              }}
             />
           </aside>
 
@@ -437,7 +455,7 @@ export default function ProductListing({
             {isAllCategories ? (
               /* ALL CATEGORIES 4x4 GRID (Matching PDF Screenshots Page 12 & Page 23-24) */
               <div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-5 sm:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                   {MASTER_CATEGORIES.map(cat => {
                     const IconComponent = CATEGORY_ICON_MAP[cat.id] || ShoppingBag;
                     const dynamicCount = getDynamicProductCount(products, cat.id);
