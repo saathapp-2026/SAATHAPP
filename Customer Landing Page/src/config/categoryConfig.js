@@ -272,7 +272,6 @@ export const HEADER_NAV_ITEMS = [
   { name: 'Spiritual / Puja', path: '/products/spiritual-puja', isNew: true },
   { name: 'Gift Set', path: '/products/gift-set', isNew: true },
   { name: 'SaathApp Product', path: '/products/saathapp', isNew: true },
-  { name: 'Offers', path: '/offers', icon: 'Offers' },
   { name: 'SAATHAPP PLUS', path: '/plus', isNew: true, isPlus: true }
 ];
 
