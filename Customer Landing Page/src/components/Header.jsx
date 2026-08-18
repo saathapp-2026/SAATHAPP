@@ -625,6 +625,25 @@ export default function Header({
 
               {/* Drawer Navigation Items */}
               <div className="flex-1 overflow-y-auto p-4 space-y-1">
+                {/* SaathApp Plus Highlight Item */}
+                <button
+                  onClick={() => {
+                    setIsCustomerMenuOpen(false);
+                    navigate('/plus');
+                  }}
+                  className="w-full flex items-center justify-between px-4 py-3 mb-2 rounded-xl text-xs font-black uppercase tracking-wider text-left transition-all cursor-pointer bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 hover:border-amber-500"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-amber-500 text-sm">✦</span>
+                    <span className="font-extrabold bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
+                      SaathApp Plus
+                    </span>
+                  </div>
+                  <span className="bg-amber-500 text-white text-[9px] px-2 py-0.5 rounded-full font-black">
+                    NEW
+                  </span>
+                </button>
+
                 {getCustomerMenu(t).map((item) => {
                   const Icon = item.icon;
                   return (

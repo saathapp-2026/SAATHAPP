@@ -8,6 +8,7 @@ import ErrorBoundary from './components/ErrorBoundary.jsx';
 import { ThemeProvider } from './context/ThemeContext.jsx';
 import { LanguageProvider } from './context/LanguageContext.jsx';
 import { PWAProvider } from './context/PWAContext.jsx';
+import { MembershipProvider } from './context/MembershipContext.jsx';
 import PWAInstallModal from './components/PWAInstallModal.jsx';
 
 // Handle Vite dynamic import preload errors (e.g., stale deployment chunks)
@@ -53,8 +54,10 @@ createRoot(document.getElementById('root')).render(
         <ThemeProvider>
           <LanguageProvider>
             <PWAProvider>
-              <App />
-              <PWAInstallModal />
+              <MembershipProvider>
+                <App />
+                <PWAInstallModal />
+              </MembershipProvider>
             </PWAProvider>
           </LanguageProvider>
         </ThemeProvider>

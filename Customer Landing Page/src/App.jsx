@@ -68,6 +68,8 @@ import ServiceBookingConfirmation from './pages/saathapp-products/ServiceBooking
 import ProductDetails from './pages/saathapp-products/ProductDetails';
 import BulkOrders from './pages/saathapp-products/BulkOrders';
 import TopNav from './components/TopNav';
+import SaathAppPlusPage from './pages/SaathAppPlusPage';
+import MembershipDashboardPage from './pages/MembershipDashboardPage';
 
 export default function App() {
   const routerLocation = useLocation();
@@ -398,6 +400,9 @@ export default function App() {
     routerLocation.pathname === '/franchise' ||
     routerLocation.pathname === '/advertise' ||
     routerLocation.pathname === '/advertise/create' ||
+    routerLocation.pathname === '/plus' ||
+    routerLocation.pathname === '/membership' ||
+    routerLocation.pathname === '/account/membership' ||
     partnerRoutes.includes(routerLocation.pathname) ||
     trustRoutes.includes(routerLocation.pathname) ||
     isSellerRoute;
@@ -416,6 +421,56 @@ export default function App() {
 
   if (isSellerRoute) {
     return <SellerRoutes />;
+  }
+
+  if (routerLocation.pathname === '/membership') {
+    navigate('/plus');
+    return null;
+  }
+
+  if (routerLocation.pathname === '/plus' || routerLocation.pathname === '/plus/') {
+    return (
+      <SaathAppPlusPage
+        cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/saathapp-products/search');
+        }}
+        onLogin={() => { setAuthView('login'); navigate('/login'); }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
+      />
+    );
+  }
+
+  if (routerLocation.pathname === '/account/membership') {
+    return (
+      <MembershipDashboardPage
+        cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+        location={location}
+        onCartClick={() => setIsCartOpen(true)}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/saathapp-products/search');
+        }}
+        onLogin={() => { setAuthView('login'); navigate('/login'); }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
+    );
   }
 
   if (routerLocation.pathname === '/saathapp-products/bulk-orders') {

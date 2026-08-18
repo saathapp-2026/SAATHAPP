@@ -11,6 +11,7 @@ import ServiceSection from '../components/ServiceSection';
 import Advertisements from '../components/Advertisements';
 import LiveStats from '../components/LiveStats';
 import BecomePartner from '../components/BecomePartner';
+import SaathAppPlusHomeSection from '../components/plus/SaathAppPlusHomeSection';
 
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
@@ -150,6 +151,8 @@ export default function Home({
         <div id="services-section">
           <ServiceSection onBookService={onServiceBook} />
         </div>
+
+        <SaathAppPlusHomeSection />
 
         <Advertisements />
         <LiveStats />
