@@ -41,8 +41,14 @@ const InstallPWAButton = ({ className, children }) => {
     }
 
     if (!installPrompt) {
-      // Installation unavailable (iOS or unsupported)
-      alert('To install, tap the Share icon in your browser and select "Add to Home Screen".');
+      // Fallback: Directly download the Android APK if PWA prompt isn't available
+      console.log('PWA prompt unavailable, falling back to direct APK download.');
+      const link = document.createElement('a');
+      link.href = '/SaathApp-Demo.apk';
+      link.download = 'SaathApp.apk';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
       return;
     }
 
@@ -61,17 +67,6 @@ const InstallPWAButton = ({ className, children }) => {
     return (
       <button className={buttonClass}>
         {children || "Open SaathApp"}
-      </button>
-    );
-  }
-
-  if (!installPrompt && !isSupported) {
-    return (
-      <button 
-        onClick={() => alert("To install the SaathApp PWA, use Chrome/Edge and select 'Install' from the URL bar, or 'Add to Home Screen' on mobile Safari.")}
-        className={buttonClass}
-      >
-        {children || "Install SaathApp"}
       </button>
     );
   }
