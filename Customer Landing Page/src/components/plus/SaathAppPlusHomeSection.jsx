@@ -14,8 +14,8 @@ export default function SaathAppPlusHomeSection() {
         viewport={{ once: true }}
         className="relative overflow-hidden rounded-[32px] p-5 lg:p-6 bg-white border border-gray-100 shadow-sm flex flex-col justify-center h-full"
       >
-        <div className="relative z-10 flex flex-col items-center justify-center gap-4">
-          <div className="space-y-3 text-center lg:text-left flex-1 flex flex-col justify-center">
+        <div className="relative z-10 flex flex-col items-center justify-center gap-4 h-full">
+          <div className="space-y-3 text-center lg:text-left flex-1 flex flex-col justify-center w-full">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-600 dark:text-amber-400 text-[9px] font-black uppercase tracking-wider w-fit mx-auto lg:mx-0">
               <Crown size={12} className="text-amber-500 animate-pulse" />
               <span>SAATHAPP PLUS MEMBERSHIP</span>
@@ -50,10 +50,10 @@ export default function SaathAppPlusHomeSection() {
             </div>
           </div>
 
-          <div className="shrink-0 text-center w-full mt-2">
+          <div className="shrink-0 text-center w-full mt-auto">
             <button
               onClick={() => navigate('/plus')}
-              className="w-full lg:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white font-black text-[11px] uppercase tracking-wider shadow-lg hover:shadow-amber-500/30 transition-all flex items-center justify-center gap-2.5 cursor-pointer mx-auto"
+              className="w-full mt-auto bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white font-black py-2.5 rounded-xl uppercase tracking-wider shadow-sm hover:shadow-amber-500/30 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
             >
               <Crown size={14} />
               <span>EXPLORE PLUS PLANS</span>
