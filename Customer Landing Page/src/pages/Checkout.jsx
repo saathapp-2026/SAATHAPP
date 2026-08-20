@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, MapPin, Truck, CreditCard, CheckCircle2, Plus } from 'lucide-react';
 import { useCart } from '../hooks/useCart';
+import { useLocationContext } from '../context/LocationContext';
 
 export default function Checkout({ onBack, onConfirmOrder }) {
   const { cartItems, totals } = useCart();
+  const { savedAddresses, handleSaveAddress } = useLocationContext();
   const [step, setStep] = useState(1);
-  const [addresses, setAddresses] = useState(['Home - Green Park, New Delhi', 'Office - Connaught Place, Central Delhi']);
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [newAddress, setNewAddress] = useState('');
-  const [selectedAddress, setSelectedAddress] = useState('Home - Green Park, New Delhi');
+  const [selectedAddress, setSelectedAddress] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('standard');
   const [paymentMethod, setPaymentMethod] = useState('upi');
+  const [paymentError, setPaymentError] = useState('');
+
+  useEffect(() => {
+    if (savedAddresses.length > 0 && !selectedAddress) {
+      setSelectedAddress(savedAddresses[0].label);
+    }
+  }, [savedAddresses, selectedAddress]);
 
   const handleAddNewAddress = () => {
     if (newAddress.trim()) {
-      setAddresses([...addresses, newAddress.trim()]);
+      const addressObj = {
+        id: `checkout-${Date.now()}`,
+        label: newAddress.trim(),
+        fullAddress: newAddress.trim(),
+        pincode: '000000'
+      };
+      handleSaveAddress(addressObj);
       setSelectedAddress(newAddress.trim());
       setNewAddress('');
       setIsAddingAddress(false);
@@ -34,8 +48,6 @@ export default function Checkout({ onBack, onConfirmOrder }) {
 
   const handleNext = () => setStep(s => Math.min(s + 1, 4));
   const handlePrev = () => setStep(s => Math.max(s - 1, 1));
-
-  const [paymentError, setPaymentError] = useState('');
 
   const handleConfirm = () => {
     const isDevMockEnabled = import.meta.env.VITE_ENABLE_DEV_MOCK_LOGIN === 'true';
@@ -87,14 +99,16 @@ export default function Checkout({ onBack, onConfirmOrder }) {
           {step === 1 && (
             <div className="space-y-4">
               <h2 className="text-xl font-bold mb-4">Select Delivery Address</h2>
-              {addresses.map(addr => (
-                <label key={addr} className={`flex items-start gap-3 p-4 border rounded-xl cursor-pointer transition-colors ${selectedAddress === addr ? 'border-primary bg-primary/5' : 'border-slate-200 dark:border-slate-800 hover:border-primary/50'}`}>
-                  <input type="radio" name="address" checked={selectedAddress === addr} onChange={() => setSelectedAddress(addr)} className="mt-1" />
+              {savedAddresses.length > 0 ? savedAddresses.map(addr => (
+                <label key={addr.id} className={`flex items-start gap-3 p-4 border rounded-xl cursor-pointer transition-colors ${selectedAddress === addr.label ? 'border-primary bg-primary/5' : 'border-slate-200 dark:border-slate-800 hover:border-primary/50'}`}>
+                  <input type="radio" name="address" checked={selectedAddress === addr.label} onChange={() => setSelectedAddress(addr.label)} className="mt-1" />
                   <div>
-                    <p className="font-semibold">{addr}</p>
+                    <p className="font-semibold">{addr.label}</p>
                   </div>
                 </label>
-              ))}
+              )) : (
+                <p className="text-sm text-slate-500 mb-4">No saved addresses found. Please add a new one below.</p>
+              )}
 
               {!isAddingAddress ? (
                 <button onClick={() => setIsAddingAddress(true)} className="flex items-center gap-2 text-primary font-bold mt-4 hover:bg-primary/5 px-4 py-3 rounded-xl transition-colors border border-dashed border-primary/40 w-full justify-center">

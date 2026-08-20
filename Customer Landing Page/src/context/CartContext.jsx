@@ -1,30 +1,35 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { trackEvent } from '../utils/analytics';
 import { calculateCartTotals } from '../utils/cartUtils';
+import { getCart, saveCart, getSavedForLater, saveSavedForLater } from '../services/cartService';
+import { getStoredAuthSession, isSessionValid } from '../services/authService';
 import { products } from '../data/products';
 import { mockSaathAppProducts } from '../data/saathAppProducts';
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(() => {
-    if (typeof window === 'undefined') return [];
-    try {
-      const stored = window.localStorage.getItem('saathapp_cart');
-      return stored ? JSON.parse(stored) : [];
-    } catch {
-      return [];
-    }
-  });
-
+  const [cartItems, setCartItems] = useState(getCart());
+  const [savedItems, setSavedItems] = useState(getSavedForLater());
   const [isPlusMember, setIsPlusMember] = useState(false);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('saathapp_cart', JSON.stringify(cartItems));
+    saveCart(cartItems);
+    
+    // Save to user-specific cart if logged in
+    const session = getStoredAuthSession();
+    if (session && isSessionValid(session)) {
+       const userCartKey = `saathapp_cart_${session.user.id}`;
+       if (typeof window !== 'undefined') {
+          window.localStorage.setItem(userCartKey, JSON.stringify(cartItems));
+       }
     }
   }, [cartItems]);
+
+  useEffect(() => {
+    saveSavedForLater(savedItems);
+  }, [savedItems]);
 
   const handleAddToCart = (product, change) => {
     if (change > 0) {
@@ -71,14 +76,35 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const removeItem = (productId) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== productId));
+  };
+
+  const moveToSavedForLater = (product) => {
+    removeItem(product.id);
+    setSavedItems((prev) => {
+      if (prev.find(item => item.id === product.id)) return prev;
+      return [...prev, product];
+    });
+  };
+
+  const moveToCart = (product) => {
+    setSavedItems((prev) => prev.filter((item) => item.id !== product.id));
+    handleAddToCart(product, 1);
+  };
+
   const getCartQuantity = (productId) => {
     const item = cartItems.find((entry) => entry.id === productId);
     return item ? item.quantity : 0;
   };
 
-  const clearCart = () => {
+  const clearCartState = () => {
     setCartItems([]);
     setAppliedCoupon(null);
+  };
+  
+  const setCartState = (items) => {
+    setCartItems(items);
   };
 
   const totals = calculateCartTotals(cartItems, isPlusMember, appliedCoupon);
@@ -86,9 +112,14 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider value={{
       cartItems,
+      savedItems,
       handleAddToCart,
+      removeItem,
+      moveToSavedForLater,
+      moveToCart,
       getCartQuantity,
-      clearCart,
+      clearCart: clearCartState,
+      setCartState,
       isPlusMember,
       setIsPlusMember,
       appliedCoupon,

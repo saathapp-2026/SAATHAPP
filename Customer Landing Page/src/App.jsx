@@ -37,6 +37,7 @@ import DeliveryAgentLandingPage from './pages/DeliveryAgentLanding';
 import FaqPage from './pages/Faq';
 import LocationPage from './pages/LocationPage';
 import AddAddressPage from './pages/AddAddressPage';
+import SearchPage from './pages/SearchPage';
 import ServiceProfessionalPage from './pages/ServiceProfessional';
 import FranchisePage from './pages/FranchisePage';
 import CustomerPortalPage from './pages/customer/CustomerPortal';
@@ -84,33 +85,18 @@ import { ShoppingJourneyProvider } from './context/ShoppingJourneyContext';
 import ShoppingJourneyDashboard from './pages/ShoppingJourney/Dashboard';
 import MyJourney from './pages/ShoppingJourney/MyJourney';
 import MyRewards from './pages/ShoppingJourney/MyRewards';
+import { mergeGuestCart } from './services/cartService';
+
+import { useLocationContext } from './context/LocationContext';
+
 function AppContent() {
   const routerLocation = useLocation();
   const navigate = useNavigate();
   const initialAuthSession = typeof window !== 'undefined' ? getStoredAuthSession() : null;
-  const { cartItems, totals, clearCart, handleAddToCart, getCartQuantity } = useCart();
+  const { cartItems, totals, clearCart, handleAddToCart, getCartQuantity, setCartState } = useCart();
   const cartCount = totals.itemCount;
   const cartTotal = totals.finalTotal;
-  const [location, setLocation] = useState('Green Park, New Delhi');
-  const [pincode, setPincode] = useState('110016');
-  const [savedAddresses, setSavedAddresses] = useState(() => {
-    if (typeof window === 'undefined') return [];
-    try {
-      const stored = window.localStorage.getItem('saathapp-addresses');
-      return stored ? JSON.parse(stored) : [];
-    } catch {
-      return [];
-    }
-  });
-  const [selectedAddress, setSelectedAddress] = useState(() => {
-    if (typeof window === 'undefined') return null;
-    try {
-      const stored = window.localStorage.getItem('saathapp-selected-address');
-      return stored ? JSON.parse(stored) : null;
-    } catch {
-      return null;
-    }
-  });
+  const { location, setLocation, pincode, setPincode, savedAddresses, selectedAddress, handleGPSDetect, handleUseCurrentLocation, handleSaveAddress, handleSelectAddress, handleDeleteAddress, isGpsLoading } = useLocationContext();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const { resolvedTheme, setTheme } = useTheme();
@@ -131,7 +117,6 @@ function AppContent() {
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
-  const [isGpsLoading, setIsGpsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   
@@ -172,18 +157,6 @@ function AppContent() {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, [routerLocation.pathname]);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('saathapp-addresses', JSON.stringify(savedAddresses));
-    }
-  }, [savedAddresses]);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('saathapp-selected-address', JSON.stringify(selectedAddress));
-    }
-  }, [selectedAddress]);
 
   const handleCheckoutProcess = (orderBreakdown, address, delivery, payment, checkoutCartItems) => {
     // 1. Generate Order Record (BEFORE inventory decrement)
@@ -307,86 +280,6 @@ function AppContent() {
     setIsCartOpen(false);
   };
 
-  const handleGPSDetect = () => {
-    setIsGpsLoading(true);
-    setTimeout(() => {
-      setLocation('Connaught Place, Central Delhi');
-      setPincode('110001');
-      setIsGpsLoading(false);
-      setIsLocationModalOpen(false);
-    }, 2000);
-  };
-
-  const handleUseCurrentLocation = () => {
-    if (!navigator.geolocation) {
-      alert('Geolocation is not supported in this browser.');
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        try {
-          const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}`);
-          const data = await response.json();
-          const address = data?.address || {};
-          const area = address.suburb || address.neighbourhood || address.village || address.city || 'Current location';
-          const city = address.city || address.town || address.village || area;
-          const state = address.state || 'State';
-          const pincode = address.postcode || '000000';
-          const label = `${area}, ${city}, ${state} - ${pincode}`;
-          const nextAddress = {
-            id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-            title: 'Current Location',
-            label,
-            fullAddress: data?.display_name || label,
-            area,
-            city,
-            state,
-            pincode,
-            phoneNumber: '',
-            receiverName: '',
-            addressType: 'Home',
-            source: 'gps',
-            createdAt: new Date().toISOString(),
-          };
-          setSavedAddresses((prev) => [nextAddress, ...prev]);
-          setSelectedAddress(nextAddress);
-          setLocation(label);
-          setPincode(pincode);
-          if (routerLocation.pathname === '/location/add') {
-            navigate('/location');
-          }
-        } catch {
-          alert('Unable to resolve the current location right now.');
-        }
-      },
-      () => {
-        alert('Location permission was denied. You can still add a location manually.');
-      },
-      { enableHighAccuracy: true, timeout: 10000 }
-    );
-  };
-
-  const handleSaveAddress = (address) => {
-    setSavedAddresses((prev) => [address, ...prev]);
-    setSelectedAddress(address);
-    setLocation(address.label);
-    setPincode(address.pincode || '000000');
-    navigate('/location');
-  };
-
-  const handleSelectAddress = (address) => {
-    setSelectedAddress(address);
-    setLocation(address.label);
-    setPincode(address.pincode || '000000');
-    navigate('/');
-  };
-
-  const handleDeleteAddress = (addressId) => {
-    setSavedAddresses((prev) => prev.filter((address) => address.id !== addressId));
-    setSelectedAddress((prev) => (prev?.id === addressId ? null : prev));
-  };
-
   const handleVoiceSearch = () => {
     setIsListening(true);
     setTimeout(() => {
@@ -411,12 +304,16 @@ function AppContent() {
 
 
 
-  
   const handleLogin = (response) => {
     // response is { user, token }
     setUser(response.user);
     setIsAuthenticated(true);
     saveAuthSession(response.user);
+    
+    // Merge cart
+    const mergedCart = mergeGuestCart(response.user.id || response.user.email, cartItems);
+    setCartState(mergedCart);
+    
     setAuthView('home');
     setActivePage('home');
     setErrorMessage('');
@@ -442,6 +339,11 @@ function AppContent() {
     setUsers(result.users);
     setUser(result.user);
     setIsAuthenticated(true);
+    
+    // Merge cart
+    const mergedCart = mergeGuestCart(result.user.id || result.user.email, cartItems);
+    setCartState(mergedCart);
+    
     setAuthView('home');
     setActivePage('home');
     setErrorMessage('');
@@ -452,6 +354,7 @@ function AppContent() {
       navigate('/');
     }
   };
+
 
   const handleLogout = () => {
     clearAuthSession();
@@ -497,7 +400,10 @@ function AppContent() {
   if (activePage === 'checkout' || routerLocation.pathname === '/checkout') {
     if (!isAuthenticated) {
       if (typeof window !== 'undefined') {
-        setTimeout(() => navigate('/login', { state: { from: '/checkout' } }), 0);
+        setTimeout(() => {
+          setActivePage('login');
+          navigate('/login', { state: { from: '/checkout' } });
+        }, 0);
       }
       return null;
     }
@@ -529,7 +435,10 @@ function AppContent() {
   if (activePage === 'orders' || routerLocation.pathname === '/orders') {
     if (!isAuthenticated) {
       if (typeof window !== 'undefined') {
-        setTimeout(() => navigate('/login', { state: { from: '/orders' } }), 0);
+        setTimeout(() => {
+          setActivePage('login');
+          navigate('/login', { state: { from: '/orders' } });
+        }, 0);
       }
       return null;
     }
@@ -1362,13 +1271,8 @@ function AppContent() {
   if (routerLocation.pathname === '/location') {
     return (
       <LocationPage
-        savedAddresses={savedAddresses}
-        selectedAddress={selectedAddress}
         onBack={() => navigate('/')}
         onAddAddress={() => navigate('/location/add')}
-        onSelectAddress={handleSelectAddress}
-        onDeleteAddress={handleDeleteAddress}
-        onUseCurrentLocation={handleUseCurrentLocation}
       />
     );
   }
@@ -1377,8 +1281,6 @@ function AppContent() {
     return (
       <AddAddressPage
         onBack={() => navigate('/location')}
-        onSaveAddress={handleSaveAddress}
-        onUseCurrentLocation={handleUseCurrentLocation}
       />
     );
   }
@@ -1398,6 +1300,10 @@ function AppContent() {
 
   if (routerLocation.pathname === '/signup') {
     return <SignupPage onLogin={() => navigate('/login')} onSignup={handleSignup} />;
+  }
+
+  if (routerLocation.pathname === '/search') {
+    return <SearchPage />;
   }
 
   if (routerLocation.pathname === '/') {
@@ -1505,7 +1411,7 @@ function AppContent() {
         setIsLocationModalOpen={setIsLocationModalOpen}
         setLocation={setLocation}
         setPincode={setPincode}
-        setIsGpsLoading={setIsGpsLoading}
+
         setIsListening={setIsListening}
         setIsUploading={setIsUploading}
         handleGPSDetect={handleGPSDetect}
@@ -1641,7 +1547,7 @@ function AppContent() {
       toggleDarkMode={toggleDarkMode}
       onVoiceSearchClick={() => setIsVoiceModalOpen(true)}
       onImageSearchClick={() => setIsImageModalOpen(true)}
-      onDetectGPS={handleGPSDetect}
+      onDetectGPS={() => handleGPSDetect(() => setIsLocationModalOpen(false))}
       onAddToCart={handleAddToCart}
       onQuickView={() => {}}
       onCategorySelect={(category) => {
@@ -1702,10 +1608,10 @@ function AppContent() {
       setIsLocationModalOpen={setIsLocationModalOpen}
       setLocation={setLocation}
       setPincode={setPincode}
-      setIsGpsLoading={setIsGpsLoading}
+
       setIsListening={setIsListening}
       setIsUploading={setIsUploading}
-      handleGPSDetect={handleGPSDetect}
+      handleGPSDetect={() => handleGPSDetect(() => setIsLocationModalOpen(false))}
       handleVoiceSearch={handleVoiceSearch}
       handleImageSearch={handleImageSearch}
       onLogout={handleLogout}

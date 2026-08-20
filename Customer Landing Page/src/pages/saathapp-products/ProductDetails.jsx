@@ -9,6 +9,7 @@ import { ChevronRight, Home, Star, Heart, ShoppingCart, ShieldCheck, Truck, Rota
 
 import { trackEvent } from '../../utils/analytics';
 import ProductGrid from '../../components/saathapp-product/ProductGrid';
+import { useLocationContext } from '../../context/LocationContext';
 
 export default function ProductDetails({
   cartCount,
@@ -38,6 +39,8 @@ export default function ProductDetails({
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [activeTab, setActiveTab] = useState('description');
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const { pincode } = useLocationContext();
+  const [recentlyViewed, setRecentlyViewed] = useState([]);
 
   React.useEffect(() => {
     if (product) {
@@ -54,10 +57,26 @@ export default function ProductDetails({
         ...(product.electronicsType && { electronicsType: product.electronicsType }),
         ...(product.spiritualType && { spiritualType: product.spiritualType })
       });
+      // Track recently viewed
+      const stored = window.localStorage.getItem('saathapp_recently_viewed');
+      let recent = stored ? JSON.parse(stored) : [];
+      recent = recent.filter(id => id !== product.id);
+      recent.unshift(product.id);
+      recent = recent.slice(0, 8); // keep last 8
+      window.localStorage.setItem('saathapp_recently_viewed', JSON.stringify(recent));
+      
+      const allProducts = [...products, ...mockSaathAppProducts];
+      const hydratedRecent = recent.map(id => allProducts.find(p => p.id === id)).filter(Boolean);
+      setRecentlyViewed(hydratedRecent);
     }
   }, [product]);
 
-  // Recommended products (Personalized mock)
+  // Derived Pricing
+  const sellingPrice = product?.price || 0;
+  const mrp = product?.originalPrice || Math.round(sellingPrice * 1.25);
+  const discountPercent = product?.discount ? product.discount : Math.round(((mrp - sellingPrice) / mrp) * 100);
+
+  // Recommended products (Frequently Bought Together)
   const recommendedProducts = React.useMemo(() => {
     if (!product) return [];
     return products
@@ -89,38 +108,22 @@ export default function ProductDetails({
     capacity: ['500ml', '750ml', '1L']
   } : null;
 
-  // Hyperlocal logic mock
-  const CUSTOMER_LOCATION = { lat: 28.6315, lng: 77.2167 }; // Connaught Place, New Delhi
-
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // km
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-              Math.sin(dLon/2) * Math.sin(dLon/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    return R * c;
+  // Delivery ETA Logic
+  const fastDeliveryPincodes = ['110001', '400001', '560001', '600001', '700001'];
+  const getETA = () => {
+    if (product?.availabilityMode === 'LIMITED' && product?.availableQuantity <= 0) return 'Sold Out';
+    if (fastDeliveryPincodes.includes(pincode)) {
+      return 'Blink Delivery in 10 mins';
+    }
+    return 'Standard 1-Day Delivery';
   };
-
-  const getETA = (dist) => {
-    if (dist <= 3) return '30–45 min';
-    if (dist <= 7) return '45–60 min';
-    return '1–2 days';
-  };
+  const deliveryETA = getETA();
 
   let bestSeller = null;
   if (product?.sellers && product.sellers.length > 0) {
-    const availableSellers = product.sellers
-      .filter(s => s.stock >= quantity)
-      .map(s => {
-        const dist = calculateDistance(CUSTOMER_LOCATION.lat, CUSTOMER_LOCATION.lng, s.location.lat, s.location.lng);
-        return { ...s, distance: dist, eta: getETA(dist) };
-      })
-      .sort((a, b) => a.distance - b.distance);
-    
+    const availableSellers = product.sellers.filter(s => s.stock >= quantity);
     if (availableSellers.length > 0) {
-      bestSeller = availableSellers[0];
+      bestSeller = { ...availableSellers[0], distance: 1.2, eta: deliveryETA };
     }
   }
 
@@ -223,14 +226,10 @@ export default function ProductDetails({
                 )}
               </div>
               <div className="flex items-end gap-3 mb-2">
-                <span className="text-4xl font-black">₹{product.price}</span>
-                {product.originalPrice ? (
-                  <span className="text-lg text-slate-400 line-through font-semibold">₹{product.originalPrice}</span>
-                ) : (
-                  <span className="text-lg text-slate-400 line-through font-semibold">₹{product.price + 200}</span>
-                )}
+                <span className="text-4xl font-black">₹{sellingPrice}</span>
+                <span className="text-lg text-slate-400 line-through font-semibold">₹{mrp}</span>
                 <span className="text-sm font-bold text-green-600 dark:text-green-400 mb-1">
-                  {product.discount ? `${product.discount} Off` : 'Save ₹200 (25% Off)'}
+                  {discountPercent}% OFF
                 </span>
               </div>
               <p className="text-sm text-slate-500 mb-4">Inclusive of all taxes</p>
@@ -354,11 +353,25 @@ export default function ProductDetails({
                 className={`flex-1 h-14 rounded-xl flex items-center justify-center gap-2 font-black text-sm sm:text-lg transition-all transform active:scale-[0.98] ${
                   (product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0))
                   ? 'bg-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-800 dark:text-slate-500'
-                  : 'bg-gradient-primary hover:bg-gradient-primary/90 text-white shadow-glow-primary'
+                  : 'bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700'
                 }`}
               >
                 <ShoppingCart size={20} className="hidden sm:block" />
-                {(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'Sold Out' : 'Add to Cart'}
+                Add to Cart
+              </button>
+              <button 
+                onClick={() => {
+                  handleAddToCart(product, quantity);
+                  navigate('/checkout');
+                }}
+                disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
+                className={`flex-1 h-14 rounded-xl flex items-center justify-center gap-2 font-black text-sm sm:text-lg transition-all transform active:scale-[0.98] ${
+                  (product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0))
+                  ? 'bg-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-800 dark:text-slate-500'
+                  : 'bg-gradient-primary hover:bg-gradient-primary/90 text-white shadow-glow-primary'
+                }`}
+              >
+                {(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'Sold Out' : 'Buy Now'}
               </button>
             </div>
 
@@ -539,37 +552,54 @@ export default function ProductDetails({
           </div>
         </div>
 
-        {/* Personalized Recommendations */}
+        {/* Cross Selling UI */}
         {recommendedProducts.length > 0 && (
           <div className="mt-16 mb-8">
             <h2 className="text-2xl font-black mb-6 flex items-center gap-2">
               <Star className="text-amber-500 fill-amber-500" size={24} /> 
-              Recommended For You
+              Frequently Bought Together
             </h2>
             <ProductGrid products={recommendedProducts} onAddToCart={handleAddToCart} />
           </div>
         )}
+
+        {recentlyViewed.length > 1 && (
+          <div className="mt-12 mb-12">
+            <h2 className="text-xl font-black mb-6 flex items-center gap-2 text-slate-800 dark:text-white">
+              Recently Viewed
+            </h2>
+            <ProductGrid products={recentlyViewed.filter(p => p.id !== product.id)} onAddToCart={handleAddToCart} />
+          </div>
+        )}
       </main>
 
-      {/* Sticky Mobile Add to Cart */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 p-4 pb-safe flex items-center gap-4 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
-        <div className="flex-1 flex flex-col">
-          <span className="text-lg font-black leading-none mb-0.5">₹{product.price * quantity}</span>
-          <span className={`text-[10px] font-bold uppercase tracking-wide ${(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'text-red-500' : 'text-green-600 dark:text-green-400'}`}>
-            {(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'Sold Out' : 'In Stock'}
-          </span>
-        </div>
+      {/* Sticky Mobile Add to Cart & Buy Now */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 p-3 pb-safe flex items-center gap-3 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
         <button 
           onClick={() => handleAddToCart(product, quantity)}
           disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
-          className={`flex-[2] h-12 rounded-xl flex items-center justify-center gap-2 font-black shadow-glow-primary active:scale-[0.98] transition-transform ${
+          className={`flex-1 h-12 rounded-xl flex items-center justify-center gap-2 font-black transition-transform ${
+            (product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0))
+              ? 'bg-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-800 dark:text-slate-500'
+              : 'bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 active:scale-[0.98]'
+          }`}
+        >
+          <ShoppingCart size={18} />
+          Add to Cart
+        </button>
+        <button 
+          onClick={() => {
+            handleAddToCart(product, quantity);
+            navigate('/checkout');
+          }}
+          disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
+          className={`flex-1 h-12 rounded-xl flex items-center justify-center gap-2 font-black shadow-glow-primary active:scale-[0.98] transition-transform ${
             (product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0))
               ? 'bg-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-800 dark:text-slate-500'
               : 'bg-gradient-primary text-white hover:bg-gradient-primary/90'
           }`}
         >
-          <ShoppingCart size={18} />
-          {(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'Sold Out' : 'Add to Cart'}
+          {(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'Sold Out' : 'Buy Now'}
         </button>
       </div>
 

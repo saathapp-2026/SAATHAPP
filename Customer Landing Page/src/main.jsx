@@ -11,8 +11,8 @@ import { LanguageProvider } from './context/LanguageContext.jsx';
 import { PWAProvider } from './context/PWAContext.jsx';
 import { MembershipProvider } from './context/MembershipContext.jsx';
 import PWAInstallModal from './components/PWAInstallModal.jsx';
-
 import { CartProvider } from './context/CartContext.jsx';
+import { LocationProvider } from './context/LocationContext.jsx';
 
 // Handle Vite dynamic import preload errors (e.g., stale deployment chunks)
 window.addEventListener('vite:preloadError', async (event) => {
@@ -58,10 +58,12 @@ createRoot(document.getElementById('root')).render(
           <LanguageProvider>
             <PWAProvider>
               <MembershipProvider>
-                <CartProvider>
-                  <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || 'missing-client-id'}><App /></GoogleOAuthProvider>
-                  <PWAInstallModal />
-                </CartProvider>
+                <LocationProvider>
+                  <CartProvider>
+                    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || 'missing-client-id'}><App /></GoogleOAuthProvider>
+                    <PWAInstallModal />
+                  </CartProvider>
+                </LocationProvider>
               </MembershipProvider>
             </PWAProvider>
           </LanguageProvider>

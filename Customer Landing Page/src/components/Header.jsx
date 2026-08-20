@@ -11,10 +11,11 @@ import TopNav from './TopNav';
 import { products, subcategories } from '../data/products';
 import { mockSaathAppProducts } from '../data/saathAppProducts';
 
+import { useLocationContext } from '../context/LocationContext';
+
 export default function Header({
   cartCount,
   onCartClick,
-  location,
   _onLocationClick,
   _onLocationChange,
   onSearch,
@@ -31,7 +32,7 @@ export default function Header({
   onVoiceSearchClick,
   onImageSearchClick
 }) {
-  
+  const { location } = useLocationContext();
   const { resolvedTheme, setTheme } = useTheme();
   const darkMode = resolvedTheme === "dark";
   const toggleDarkMode = () => setTheme(darkMode ? "light" : "dark");
@@ -49,7 +50,35 @@ export default function Header({
     'Gift Set', 'Notebooks', 'Slippers', 'Household Items', 'Diya & Puja', 'Groceries', 'Mobiles', 'Hardware'
   ];
 
-  const recentSearches = [];
+  const [recentSearches, setRecentSearches] = useState(() => {
+    try {
+      const stored = window.localStorage.getItem('saathapp_recent_searches');
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const saveRecentSearch = (term) => {
+    if (!term) return;
+    const filtered = recentSearches.filter(s => s.toLowerCase() !== term.toLowerCase());
+    const newRecent = [term, ...filtered].slice(0, 5);
+    setRecentSearches(newRecent);
+    window.localStorage.setItem('saathapp_recent_searches', JSON.stringify(newRecent));
+  };
+
+  const removeRecentSearch = (e, term) => {
+    e.stopPropagation();
+    const newRecent = recentSearches.filter(s => s !== term);
+    setRecentSearches(newRecent);
+    window.localStorage.setItem('saathapp_recent_searches', JSON.stringify(newRecent));
+  };
+
+  const executeSearch = (term) => {
+    saveRecentSearch(term);
+    setIsSearchFocused(false);
+    navigate(`/search?q=${encodeURIComponent(term)}`);
+  };
 
   // Intelligent live suggestion generator
   useEffect(() => {
@@ -92,8 +121,7 @@ export default function Header({
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      onSearch(searchQuery);
-      setIsSearchFocused(false);
+      executeSearch(searchQuery.trim());
     }
   };
 
@@ -208,26 +236,29 @@ export default function Header({
                   >
                     {searchQuery.trim() === '' ? (
                       <div className="p-4">
-                        <div className="mb-3">
-                          <span className="text-[10px] font-bold text-theme-secondary uppercase tracking-wider flex items-center gap-1.5 mb-2">
-                            <History size={12} /> Recent Searches
-                          </span>
-                          <div className="flex flex-wrap gap-1.5">
-                            {recentSearches.map((term, i) => (
-                              <button
-                                key={i}
-                                onClick={() => {
-                                  setSearchQuery(term);
-                                  onSearch(term);
-                                  setIsSearchFocused(false);
-                                }}
-                                className="text-[11px] font-medium text-theme-secondary bg-page py-1 px-2.5 rounded-full transition-colors"
-                              >
-                                {term}
-                              </button>
-                            ))}
+                        {recentSearches.length > 0 && (
+                          <div className="mb-4">
+                            <span className="text-[10px] font-bold text-theme-secondary uppercase tracking-wider flex items-center justify-between mb-2">
+                              <span className="flex items-center gap-1.5"><History size={12} /> Recent Searches</span>
+                              <button onClick={(e) => { e.stopPropagation(); setRecentSearches([]); window.localStorage.removeItem('saathapp_recent_searches'); }} className="text-primary hover:underline text-[9px]">Clear all</button>
+                            </span>
+                            <div className="flex flex-wrap gap-1.5">
+                              {recentSearches.map((term, i) => (
+                                <div key={i} className="flex items-center bg-page hover:bg-slate-200 py-0.5 px-2.5 rounded-full transition-colors">
+                                  <button
+                                    onClick={() => executeSearch(term)}
+                                    className="text-[11px] font-medium text-theme-secondary mr-1"
+                                  >
+                                    {term}
+                                  </button>
+                                  <button onClick={(e) => removeRecentSearch(e, term)} className="text-theme-secondary hover:text-red-500">
+                                    <X size={10} />
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
                           </div>
-                        </div>
+                        )}
 
                         <div>
                           <span className="text-[10px] font-bold text-theme-secondary uppercase tracking-wider flex items-center gap-1.5 mb-2">
@@ -237,11 +268,7 @@ export default function Header({
                             {popularSearches.map((term, i) => (
                               <button
                                 key={i}
-                                onClick={() => {
-                                  setSearchQuery(term);
-                                  onSearch(term);
-                                  setIsSearchFocused(false);
-                                }}
+                                onClick={() => executeSearch(term)}
                                 className="text-[11px] font-medium text-theme-secondary bg-page border border-theme-border py-1 px-2.5 rounded-full flex items-center gap-1 transition-all"
                               >
                                 <Sparkles size={10} className="text-amber-500" />
@@ -257,11 +284,7 @@ export default function Header({
                           suggestions.map((suggestion, i) => (
                             <button
                               key={i}
-                              onClick={() => {
-                                setSearchQuery(suggestion);
-                                onSearch(suggestion);
-                                setIsSearchFocused(false);
-                              }}
+                              onClick={() => executeSearch(suggestion)}
                               className="w-full px-4 py-2.5 text-xs font-medium text-theme-secondary hover:bg-page  flex items-center gap-2.5 transition-colors border-b border-theme-border last:border-b-0"
                             >
                               <Search size={13} className="text-theme-secondary shrink-0" />
@@ -372,26 +395,29 @@ export default function Header({
                   >
                     {searchQuery.trim() === '' ? (
                       <div className="p-5">
-                        <div className="mb-4">
-                          <span className="text-xs font-bold text-theme-secondary uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
-                            <History size={13} /> Recent Searches
-                          </span>
-                          <div className="flex flex-wrap gap-2">
-                            {recentSearches.map((term, i) => (
-                              <button
-                                key={i}
-                                onClick={() => {
-                                  setSearchQuery(term);
-                                  onSearch(term);
-                                  setIsSearchFocused(false);
-                                }}
-                                className="text-xs font-medium text-theme-secondary bg-page hover:bg-slate-200  py-1.5 px-3 rounded-full transition-colors"
-                              >
-                                {term}
-                              </button>
-                            ))}
+                        {recentSearches.length > 0 && (
+                          <div className="mb-4">
+                            <span className="text-xs font-bold text-theme-secondary uppercase tracking-wider flex items-center justify-between mb-2.5">
+                              <span className="flex items-center gap-1.5"><History size={13} /> Recent Searches</span>
+                              <button onClick={(e) => { e.stopPropagation(); setRecentSearches([]); window.localStorage.removeItem('saathapp_recent_searches'); }} className="text-primary hover:underline text-[10px]">Clear all</button>
+                            </span>
+                            <div className="flex flex-wrap gap-2">
+                              {recentSearches.map((term, i) => (
+                                <div key={i} className="flex items-center bg-page hover:bg-slate-200 py-1 px-3 rounded-full transition-colors">
+                                  <button
+                                    onClick={() => executeSearch(term)}
+                                    className="text-xs font-medium text-theme-secondary mr-2"
+                                  >
+                                    {term}
+                                  </button>
+                                  <button onClick={(e) => removeRecentSearch(e, term)} className="text-theme-secondary hover:text-red-500">
+                                    <X size={12} />
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
                           </div>
-                        </div>
+                        )}
 
                         <div>
                           <span className="text-xs font-bold text-theme-secondary uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
@@ -401,11 +427,7 @@ export default function Header({
                             {popularSearches.map((term, i) => (
                               <button
                                 key={i}
-                                onClick={() => {
-                                  setSearchQuery(term);
-                                  onSearch(term);
-                                  setIsSearchFocused(false);
-                                }}
+                                onClick={() => executeSearch(term)}
                                 className="text-xs font-medium text-theme-secondary bg-page border border-theme-border hover:bg-primary/5 hover:border-primary/30 dark:hover:bg-primary/10 py-1.5 px-3 rounded-full flex items-center gap-1 transition-all"
                               >
                                 <Sparkles size={11} className="text-amber-500" />
@@ -421,11 +443,7 @@ export default function Header({
                           suggestions.map((suggestion, i) => (
                             <button
                               key={i}
-                              onClick={() => {
-                                setSearchQuery(suggestion);
-                                onSearch(suggestion);
-                                setIsSearchFocused(false);
-                              }}
+                              onClick={() => executeSearch(suggestion)}
                               className="w-full px-4.5 py-3 text-sm font-medium text-theme-secondary hover:bg-page  flex items-center gap-3 transition-colors border-b border-theme-border last:border-b-0"
                             >
                               <Search size={14} className="text-theme-secondary shrink-0" />
