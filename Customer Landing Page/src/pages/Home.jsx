@@ -12,6 +12,7 @@ import Advertisements from '../components/Advertisements';
 import LiveStats from '../components/LiveStats';
 import BecomePartner from '../components/BecomePartner';
 import SaathAppPlusHomeSection from '../components/plus/SaathAppPlusHomeSection';
+import ShopMoreHomePromo from '../components/ShoppingJourney/ShopMoreHomePromo';
 
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
@@ -125,12 +126,19 @@ export default function Home({
           onBecomeSeller={() => document.getElementById('partner-section')?.scrollIntoView({ behavior: 'smooth' })}
         />
 
+
+
         <div id="categories-section">
           <Categories
             activeCategory={selectedCategory}
             onCategorySelect={(cat) => {
-              setSelectedCategory(cat);
-              document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+              if (cat === 'all') {
+                navigate('/products');
+              } else if (cat === 'services') {
+                navigate('/services');
+              } else {
+                navigate(`/products/${cat}`);
+              }
             }}
           />
         </div>
@@ -154,7 +162,12 @@ export default function Home({
           <ServiceSection onBookService={onServiceBook} />
         </div>
 
-        <SaathAppPlusHomeSection />
+        <div className="w-full px-4 sm:px-6 py-12">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-10">
+            <SaathAppPlusHomeSection />
+            <ShopMoreHomePromo />
+          </div>
+        </div>
 
         <Advertisements />
         <LiveStats />

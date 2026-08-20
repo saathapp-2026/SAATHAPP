@@ -80,7 +80,10 @@ import SaathAppPlusPage from './pages/SaathAppPlusPage';
 import MembershipDashboardPage from './pages/MembershipDashboardPage';
 import GiftSetPage from './pages/GiftSetPage';
 import AdminCategoryManagement from './pages/admin/AdminCategoryManagement';
-
+import { ShoppingJourneyProvider } from './context/ShoppingJourneyContext';
+import ShoppingJourneyDashboard from './pages/ShoppingJourney/Dashboard';
+import MyJourney from './pages/ShoppingJourney/MyJourney';
+import MyRewards from './pages/ShoppingJourney/MyRewards';
 function AppContent() {
   const routerLocation = useLocation();
   const navigate = useNavigate();
@@ -408,31 +411,20 @@ function AppContent() {
 
 
 
-  const handleLogin = async ({ identifier, password, _mode }) => {
-    const result = await authenticateUser(users, { identifier, password });
-    if (!result.success) {
-      if (result.reason === 'not_found') {
-        setErrorMessage('Account not found. Please sign up to continue.');
-        setAuthView('login');
-      } else {
-        setErrorMessage('Incorrect password. Please try again or use Forgot Password.');
-      }
-      return;
-    }
-
-    setUsers((prev) => prev.map((entry) => (entry.id === result.user.id ? { ...entry, lastLogin: new Date().toISOString() } : entry)));
-    setUser(result.user);
+  
+  const handleLogin = (response) => {
+    // response is { user, token }
+    setUser(response.user);
     setIsAuthenticated(true);
+    saveAuthSession(response.user);
     setAuthView('home');
     setActivePage('home');
     setErrorMessage('');
     
-    if (routerLocation.pathname === '/customer/dashboard' || routerLocation.pathname === '/profile' || routerLocation.state?.from === '/customer/dashboard') {
-      navigate('/customer/dashboard');
-    } else {
-      navigate('/');
-    }
+    const returnTo = routerLocation.state?.from || '/';
+    navigate(returnTo, { replace: true });
   };
+
 
   const handleSignup = async (form) => {
     const result = await registerUser(users, {
@@ -501,8 +493,16 @@ function AppContent() {
     );
   }
 
+
   if (activePage === 'checkout' || routerLocation.pathname === '/checkout') {
+    if (!isAuthenticated) {
+      if (typeof window !== 'undefined') {
+        setTimeout(() => navigate('/login', { state: { from: '/checkout' } }), 0);
+      }
+      return null;
+    }
     return (
+
       <CheckoutPage 
         onBack={() => { setActivePage('cart'); navigate('/cart'); }} 
         onConfirmOrder={(data) => {
@@ -525,7 +525,14 @@ function AppContent() {
     );
   }
 
+
   if (activePage === 'orders' || routerLocation.pathname === '/orders') {
+    if (!isAuthenticated) {
+      if (typeof window !== 'undefined') {
+        setTimeout(() => navigate('/login', { state: { from: '/orders' } }), 0);
+      }
+      return null;
+    }
     return <OrdersPage orders={orders} onBack={() => { setActivePage('home'); navigate('/'); }} />;
   }
 
@@ -578,6 +585,16 @@ function AppContent() {
 
   if (isSellerRoute) {
     return <SellerRoutes />;
+  }
+
+  if (routerLocation.pathname === '/shopping-journey') {
+    return <ShoppingJourneyDashboard />;
+  }
+  if (routerLocation.pathname === '/shopping-journey/my-journey') {
+    return <MyJourney />;
+  }
+  if (routerLocation.pathname === '/shopping-journey/my-rewards') {
+    return <MyRewards />;
   }
 
   if (routerLocation.pathname === '/membership') {
@@ -1502,15 +1519,16 @@ function AppContent() {
   const currentSession = getStoredAuthSession();
   const hasValidSession = Boolean(currentSession && isSessionValid(currentSession) && isAuthenticated && user);
 
-  const isProtectedPath = routerLocation.pathname === '/profile' || routerLocation.pathname === '/customer/dashboard';
-  const protectedActivePages = ['edit-profile', 'wallet', 'rewards', 'addresses', 'notifications', 'payment', 'cart', 'orders', 'wishlist', 'settings'];
-  const isProtectedActivePage = protectedActivePages.includes(activePage);
 
-  if ((isProtectedPath || isProtectedActivePage || !isPublicRoute) && !hasValidSession) {
-    return <LoginPage onLogin={handleLogin} onSignup={() => navigate('/signup')} onForgotPassword={() => navigate('/login')} onOtpLogin={() => navigate('/login')} error={errorMessage} />;
-  }
+
 
   if (routerLocation.pathname === '/profile' || routerLocation.pathname === '/customer/dashboard') {
+    if (!isAuthenticated) {
+      if (typeof window !== 'undefined') {
+        setTimeout(() => navigate('/login', { state: { from: routerLocation.pathname } }), 0);
+      }
+      return null;
+    }
     return <ProfilePage user={user} onBack={() => navigate('/')} onLogout={handleLogout} onNavigate={(view) => {
       if (view === 'about') {
         navigate('/about');
@@ -1697,9 +1715,11 @@ function AppContent() {
 
 export default function App() {
   return (
-    <div className="pb-[72px] md:pb-0 min-h-screen">
-      <AppContent />
-      <MobileBottomNav />
-    </div>
+    <ShoppingJourneyProvider>
+      <div className="pb-[72px] md:pb-0 min-h-screen">
+        <AppContent />
+        <MobileBottomNav />
+      </div>
+    </ShoppingJourneyProvider>
   );
 }

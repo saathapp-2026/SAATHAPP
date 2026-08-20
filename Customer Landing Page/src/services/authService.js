@@ -303,3 +303,80 @@ export function updatePartnerStatus(partners, partnerId, status) {
   return nextPartners;
 }
 
+
+
+// --- Genuine Customer Authentication ---
+export class AuthConfigurationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'AuthConfigurationError';
+  }
+}
+
+const isDevMockEnabled = import.meta.env.VITE_ENABLE_DEV_MOCK_LOGIN === 'true';
+
+function getAuthApiUrl() {
+  const url = import.meta.env.VITE_AUTH_API_URL;
+  if (!url) {
+    throw new AuthConfigurationError('VITE_AUTH_API_URL is missing. Please configure your backend API for authentication.');
+  }
+  return url;
+}
+
+export async function requestRealOtp(phone) {
+  if (isDevMockEnabled) {
+    console.warn("DEV MOCK MODE: Faking OTP request for", phone);
+    return new Promise(resolve => setTimeout(() => resolve({ success: true }), 1000));
+  }
+  const apiUrl = getAuthApiUrl();
+  const response = await fetch(`${apiUrl}/api/auth/otp/send`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ phone: `+91${phone}` })
+  });
+  if (!response.ok) {
+    throw new Error('Failed to request OTP');
+  }
+  return response.json();
+}
+
+export async function verifyRealOtp(phone, otp) {
+  if (isDevMockEnabled) {
+    console.warn("DEV MOCK MODE: Faking OTP verification");
+    return new Promise(resolve => setTimeout(() => resolve({
+      user: { id: 'dev-user-1', name: 'Developer User', phone, role: 'customer' },
+      token: 'mock-jwt-token-123'
+    }), 1500));
+  }
+  const apiUrl = getAuthApiUrl();
+  const response = await fetch(`${apiUrl}/api/auth/otp/verify`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ phone: `+91${phone}`, otp })
+  });
+  if (!response.ok) {
+    throw new Error('Invalid or expired OTP');
+  }
+  return response.json(); // Expected to return { user, token }
+}
+
+export async function authenticateWithGoogle(googleCredential) {
+  if (isDevMockEnabled) {
+    console.warn("DEV MOCK MODE: Faking Google Auth");
+    return new Promise(resolve => setTimeout(() => resolve({
+      user: { id: 'dev-google-1', name: 'Google Dev User', email: 'dev@example.com', role: 'customer' },
+      token: 'mock-google-jwt-123'
+    }), 1500));
+  }
+  const apiUrl = getAuthApiUrl();
+  const response = await fetch(`${apiUrl}/api/auth/google`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ credential: googleCredential })
+  });
+  if (!response.ok) {
+    throw new Error('Google authentication failed');
+  }
+  return response.json(); // Expected to return { user, token }
+}
+

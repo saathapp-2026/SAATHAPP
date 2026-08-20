@@ -35,7 +35,15 @@ export default function Checkout({ onBack, onConfirmOrder }) {
   const handleNext = () => setStep(s => Math.min(s + 1, 4));
   const handlePrev = () => setStep(s => Math.max(s - 1, 1));
 
+  const [paymentError, setPaymentError] = useState('');
+
   const handleConfirm = () => {
+    const isDevMockEnabled = import.meta.env.VITE_ENABLE_DEV_MOCK_LOGIN === 'true';
+    if (paymentMethod !== 'cod' && !import.meta.env.VITE_PAYMENT_GATEWAY_KEY && !isDevMockEnabled) {
+      setPaymentError("Payment Configuration Error: VITE_PAYMENT_GATEWAY_KEY is missing. Real payment gateways cannot be initialized. Please configure your payment provider in .env.local or select Cash on Delivery.");
+      return;
+    }
+    setPaymentError('');
     onConfirmOrder({
       address: selectedAddress,
       deliveryMethod,
@@ -110,7 +118,7 @@ export default function Checkout({ onBack, onConfirmOrder }) {
               )}
 
               <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3">
-                <button onClick={handleNext} className="w-full sm:w-auto px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors">Continue to Delivery</button>
+                <button disabled={!selectedAddress} onClick={handleNext} className="w-full sm:w-auto px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors disabled:bg-slate-300 disabled:cursor-not-allowed dark:disabled:bg-slate-700">Continue to Delivery</button>
               </div>
             </div>
           )}
@@ -213,6 +221,11 @@ export default function Checkout({ onBack, onConfirmOrder }) {
                 </div>
               </div>
 
+              {paymentError && (
+                <div className="p-4 rounded-xl bg-red-50 text-red-600 border border-red-200 text-sm font-semibold">
+                  {paymentError}
+                </div>
+              )}
               <div className="mt-8 flex flex-col-reverse sm:flex-row justify-between gap-3 pt-4">
                 <button onClick={handlePrev} className="w-full sm:w-auto px-6 py-3 border border-slate-300 rounded-xl font-bold hover:bg-slate-50 transition-colors dark:hover:bg-slate-800">Back</button>
                 <button onClick={handleConfirm} className="w-full sm:w-auto px-8 py-3 bg-emerald-600 text-white rounded-xl font-black hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-500/20 hover:scale-[1.02]">

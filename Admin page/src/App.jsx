@@ -19,6 +19,12 @@ import {
 } from "recharts";
 import { generateReport } from "./utils/export/generateReport.js";
 
+// Shopping Journey Imports
+import ShoppingJourneyDashboard from './pages/ShoppingJourneyManager/Dashboard';
+import MilestoneConfig from './pages/ShoppingJourneyManager/MilestoneConfig';
+import WinnerSelection from './pages/ShoppingJourneyManager/WinnerSelection';
+import Fulfillment from './pages/ShoppingJourneyManager/Fulfillment';
+import { Gift, Award, Trophy, Box } from "lucide-react";
 /* ============================================================
    DESIGN TOKENS
    Forest green + azure blue + amber accent, glass surfaces on a
@@ -177,6 +183,10 @@ const NAV_SECTIONS = [
     label: "Growth",
     items: [
       { id: "marketing_cms", label: "Marketing & CMS", icon: Megaphone },
+      { id: "shopping_journey_dashboard", label: "Shopping Journey", icon: Gift },
+      { id: "shopping_journey_milestones", label: "Milestones Config", icon: Award },
+      { id: "shopping_journey_winners", label: "Winner Selection", icon: Trophy },
+      { id: "shopping_journey_fulfillment", label: "Rewards Fulfillment", icon: Box },
     ],
   },
   {
@@ -306,6 +316,10 @@ const ROUTE_PREFIX_TO_MODULE = {
   "/inventory": "inventory",
   "/payments-finance": "payments_finance",
   "/marketing-cms": "marketing_cms",
+  "/shopping-journey-dashboard": "shopping_journey_dashboard",
+  "/shopping-journey-milestones": "shopping_journey_milestones",
+  "/shopping-journey-winners": "shopping_journey_winners",
+  "/shopping-journey-fulfillment": "shopping_journey_fulfillment",
   "/support-operations": "support_ops",
   "/trust-safety": "trust_safety",
   "/system": "system",
@@ -3717,6 +3731,10 @@ export default function App() {
       case "inventory": return <InventoryWrapper onToast={pushToast} />;
       case "payments_finance": return <PaymentsFinancePage onToast={pushToast} />;
       case "marketing_cms": return <MarketingCMSPage onToast={pushToast} />;
+      case "shopping_journey_dashboard": return <ShoppingJourneyDashboard />;
+      case "shopping_journey_milestones": return <MilestoneConfig />;
+      case "shopping_journey_winners": return <WinnerSelection />;
+      case "shopping_journey_fulfillment": return <Fulfillment />;
       case "support_ops": return <SupportOpsPage onToast={pushToast} />;
       case "trust_safety": return <TrustSafetyPage onToast={pushToast} />;
       case "system": return <SystemPage onToast={pushToast} />;

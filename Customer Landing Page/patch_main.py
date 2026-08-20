@@ -1,13 +1,13 @@
-import re
+import os
 
-with open('src/main.jsx', 'r') as f:
+file_path = "src/main.jsx"
+with open(file_path, "r") as f:
     content = f.read()
 
-import_statement = "import { CartProvider } from './context/CartContext.jsx';\n"
-if "CartProvider" not in content:
-    content = content.replace("import { MembershipProvider }", import_statement + "import { MembershipProvider }")
-    content = content.replace("<MembershipProvider>", "<MembershipProvider>\n                <CartProvider>")
-    content = content.replace("</MembershipProvider>", "</CartProvider>\n              </MembershipProvider>")
+content = content.replace("import App from './App.jsx';", "import App from './App.jsx';\nimport { GoogleOAuthProvider } from '@react-oauth/google';")
+content = content.replace("<App />", "<GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || 'missing-client-id'}><App /></GoogleOAuthProvider>")
 
-with open('src/main.jsx', 'w') as f:
+with open(file_path, "w") as f:
     f.write(content)
+
+print("Patched main.jsx")
