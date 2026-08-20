@@ -163,7 +163,7 @@ export default function Home({
         </div>
 
         <div className="w-full px-4 sm:px-6 py-12">
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-10 items-start">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-10">
             <SaathAppPlusHomeSection />
             <ShopMoreHomePromo />
           </div>

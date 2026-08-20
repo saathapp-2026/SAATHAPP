@@ -7,12 +7,12 @@ export default function SaathAppPlusHomeSection() {
   const navigate = useNavigate();
 
   return (
-    <section className="w-full">
+    <section className="w-full h-full">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-[32px] p-5 lg:p-6 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/15 border-2 border-amber-500/40 shadow-xl flex flex-col justify-center"
+        className="relative overflow-hidden rounded-[32px] p-5 lg:p-6 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/15 border-2 border-amber-500/40 shadow-xl flex flex-col justify-center h-full"
       >
         {/* Background Sparkles / Decorative Circles */}
         <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-amber-500/10 blur-2xl pointer-events-none" />
