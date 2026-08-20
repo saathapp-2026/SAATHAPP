@@ -7,7 +7,7 @@ export default function ShopMoreHomePromo() {
   const navigate = useNavigate();
   
   return (
-    <div className="w-full h-full bg-white rounded-[32px] p-5 lg:p-6 border border-gray-100 shadow-sm flex flex-col">
+    <div className="w-full bg-white rounded-[32px] p-5 lg:p-6 border border-gray-100 shadow-sm flex flex-col">
       <div className="flex items-center gap-2 px-3.5 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-700 text-[10px] font-black uppercase tracking-wider w-fit mb-4">
         <span className="mr-1 text-sm">🎁</span> SHOP MORE, WIN MORE
       </div>
@@ -39,7 +39,7 @@ export default function ShopMoreHomePromo() {
       
       <button 
         onClick={() => navigate('/shopping-journey')}
-        className="w-full mt-auto bg-[#00a86b] text-white font-bold py-3 rounded-xl hover:bg-green-700 transition-colors shadow-sm flex items-center justify-center text-xs"
+        className="w-full mt-4 bg-[#00a86b] text-white font-bold py-3 rounded-xl hover:bg-green-700 transition-colors shadow-sm flex items-center justify-center text-xs"
       >
         VIEW MY JOURNEY &rarr;
       </button>

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import InstallPWAButton from '../../components/PWA/InstallPWAButton';
-import { Gift, ShoppingBag, Trophy, Users, Smartphone, Wallet, Shirt, Flame, Check, Star, ShieldCheck, Sparkles, Info, ArrowRight, Percent } from 'lucide-react';
+import { Gift, ShoppingBag, Trophy, Users, Smartphone, Wallet, Shirt, Flame, Check, Star, ShieldCheck, Sparkles, Info, ArrowRight, Percent, X, FileText } from 'lucide-react';
 
 const ShoppingJourneyDashboard = () => {
   const navigate = useNavigate();
+  const [showTermsModal, setShowTermsModal] = useState(false);
 
   return (
     <div className="min-h-screen bg-white pb-16 font-sans">
@@ -17,7 +18,7 @@ const ShoppingJourneyDashboard = () => {
           <div className="font-extrabold text-gray-900 flex items-center text-lg">
             <span className="mr-2 text-xl text-red-500">🎁</span> Shop More, Win More
           </div>
-          <button onClick={() => alert("How it Works:\n1. Shop regularly\n2. Maintain your streak\n3. Unlock rewards!")} className="text-sm font-bold text-green-600 hover:text-green-700">
+          <button onClick={() => setShowTermsModal(true)} className="text-sm font-bold text-green-600 hover:text-green-700">
             How it works ?
           </button>
         </div>
@@ -425,12 +426,135 @@ const ShoppingJourneyDashboard = () => {
             <div className="w-4 h-4 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center mr-2 text-[10px]"><Info size={10}/></div>
             Rewards are given based on your shopping streak and activity. Terms & Conditions apply.
           </div>
-          <button onClick={() => alert("Terms and Conditions: \n\n1. Maintain your streak to keep rewards.\n2. Fraudulent activities lead to disqualification.")} className="hover:text-gray-900 flex items-center shrink-0 transition-colors">
+          <button onClick={() => setShowTermsModal(true)} className="hover:text-gray-900 flex items-center shrink-0 transition-colors">
             Learn More <ArrowRight size={12} className="ml-1" />
           </button>
         </div>
         
       </main>
+
+      {/* Terms & Conditions Modal Overlay */}
+      {showTermsModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-[32px] w-full max-w-3xl shadow-2xl relative animate-in fade-in zoom-in duration-200 my-auto">
+            <button 
+              onClick={() => setShowTermsModal(false)}
+              className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors"
+            >
+              <X size={16} />
+            </button>
+            
+            <div className="p-8 sm:p-10">
+              {/* Header */}
+              <div className="flex flex-col items-center text-center mb-8">
+                <div className="w-12 h-12 rounded-full bg-green-50 text-green-500 border border-green-100 flex items-center justify-center mb-4">
+                  <ShieldCheck size={24} />
+                </div>
+                <h2 className="text-2xl font-black text-gray-900 mb-2">Terms & Conditions</h2>
+                <p className="text-sm text-gray-500 font-medium">Please read the terms carefully</p>
+              </div>
+              
+              {/* Badges/Tabs */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-8 max-w-lg mx-auto">
+                <div className="flex-1 bg-green-50 border border-green-100 rounded-xl py-3 flex justify-center items-center gap-2 text-green-600 font-bold text-sm">
+                  <Info size={16} /> How it works
+                </div>
+                <div className="flex-1 border border-gray-100 rounded-xl py-3 flex justify-center items-center gap-2 text-gray-500 font-bold text-sm bg-gray-50">
+                  <FileText size={16} /> Terms & Conditions
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8 mb-8">
+                {/* Left Column */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-5">How it works</h3>
+                  <ul className="space-y-5">
+                    <li className="flex gap-4">
+                      <div className="w-6 h-6 shrink-0 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold mt-0.5">1</div>
+                      <div>
+                        <h4 className="font-bold text-gray-900 text-sm mb-1 leading-tight">Shop regularly</h4>
+                        <p className="text-xs text-gray-500 font-medium leading-relaxed">Place orders on any day. Every successful order counts as a shopping day.</p>
+                      </div>
+                    </li>
+                    <li className="flex gap-4">
+                      <div className="w-6 h-6 shrink-0 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold mt-0.5">2</div>
+                      <div>
+                        <h4 className="font-bold text-gray-900 text-sm mb-1 leading-tight">Maintain your streak</h4>
+                        <p className="text-xs text-gray-500 font-medium leading-relaxed">Shop on more days to build your streak and reach exciting milestones.</p>
+                      </div>
+                    </li>
+                    <li className="flex gap-4">
+                      <div className="w-6 h-6 shrink-0 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold mt-0.5">3</div>
+                      <div>
+                        <h4 className="font-bold text-gray-900 text-sm mb-1 leading-tight">Unlock rewards!</h4>
+                        <p className="text-xs text-gray-500 font-medium leading-relaxed">Hit milestones to unlock rewards, free items, merchandise & more.</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Right Column */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-5">Terms & Conditions</h3>
+                  <ul className="space-y-4">
+                    <li className="flex gap-3 items-start">
+                      <div className="w-4 h-4 shrink-0 rounded-full bg-green-50 text-green-500 border border-green-100 flex items-center justify-center mt-0.5">
+                        <Check size={10} strokeWidth={3} />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium leading-relaxed">Maintain your streak to keep rewards.</p>
+                    </li>
+                    <li className="flex gap-3 items-start">
+                      <div className="w-4 h-4 shrink-0 rounded-full bg-green-50 text-green-500 border border-green-100 flex items-center justify-center mt-0.5">
+                        <Check size={10} strokeWidth={3} />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium leading-relaxed">Fraudulent activities lead to disqualification.</p>
+                    </li>
+                    <li className="flex gap-3 items-start">
+                      <div className="w-4 h-4 shrink-0 rounded-full bg-green-50 text-green-500 border border-green-100 flex items-center justify-center mt-0.5">
+                        <Check size={10} strokeWidth={3} />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium leading-relaxed">Cancelled, returned or fraudulent orders will not be counted.</p>
+                    </li>
+                    <li className="flex gap-3 items-start">
+                      <div className="w-4 h-4 shrink-0 rounded-full bg-green-50 text-green-500 border border-green-100 flex items-center justify-center mt-0.5">
+                        <Check size={10} strokeWidth={3} />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium leading-relaxed">Rewards are subject to availability and may change at any time.</p>
+                    </li>
+                    <li className="flex gap-3 items-start">
+                      <div className="w-4 h-4 shrink-0 rounded-full bg-green-50 text-green-500 border border-green-100 flex items-center justify-center mt-0.5">
+                        <Check size={10} strokeWidth={3} />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium leading-relaxed">SaathApp reserves the right to modify or withdraw the program at any time.</p>
+                    </li>
+                    <li className="flex gap-3 items-start">
+                      <div className="w-4 h-4 shrink-0 rounded-full bg-green-50 text-green-500 border border-green-100 flex items-center justify-center mt-0.5">
+                        <Check size={10} strokeWidth={3} />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium leading-relaxed">Other terms as per SaathApp policy.</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              {/* Footer Area */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6 border-t border-gray-100">
+                <div className="flex items-center text-green-600 text-xs font-bold">
+                  <ShieldCheck size={16} className="mr-2" />
+                  By participating, you agree to the above terms and conditions.
+                </div>
+                <button 
+                  onClick={() => setShowTermsModal(false)}
+                  className="w-full sm:w-auto bg-[#00a86b] hover:bg-green-700 text-white font-bold py-3.5 px-10 rounded-xl transition-colors text-sm shadow-sm"
+                >
+                  Got it
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

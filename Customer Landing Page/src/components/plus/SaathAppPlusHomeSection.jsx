@@ -7,18 +7,18 @@ export default function SaathAppPlusHomeSection() {
   const navigate = useNavigate();
 
   return (
-    <section className="w-full h-full">
+    <section className="w-full">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-[32px] p-6 lg:p-8 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/15 border-2 border-amber-500/40 shadow-xl h-full flex flex-col justify-center"
+        className="relative overflow-hidden rounded-[32px] p-5 lg:p-6 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/15 border-2 border-amber-500/40 shadow-xl flex flex-col justify-center"
       >
         {/* Background Sparkles / Decorative Circles */}
         <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-amber-500/10 blur-2xl pointer-events-none" />
         <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-orange-500/10 blur-2xl pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col items-center justify-center gap-6 h-full">
+        <div className="relative z-10 flex flex-col items-center justify-center gap-4">
           <div className="space-y-3 text-center lg:text-left flex-1 flex flex-col justify-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-600 dark:text-amber-400 text-[10px] font-black uppercase tracking-wider w-fit mx-auto lg:mx-0">
               <Crown size={12} className="text-amber-500 animate-pulse" />
