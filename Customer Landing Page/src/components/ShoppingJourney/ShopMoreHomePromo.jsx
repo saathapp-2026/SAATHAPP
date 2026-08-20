@@ -15,7 +15,7 @@ export default function ShopMoreHomePromo() {
       {/* Title & Install Banner */}
       <div className="flex-1 flex flex-col justify-center gap-3 mb-4">
         <div>
-          <h2 className="text-xl lg:text-2xl font-black text-gray-900 mb-1">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-gray-900 mt-1 mb-1">
             Shop More, <span className="text-green-600">Win More</span>
           </h2>
           <p className="text-[11px] text-gray-600 font-medium leading-relaxed">
@@ -37,9 +37,10 @@ export default function ShopMoreHomePromo() {
       
       <button 
         onClick={() => navigate('/shopping-journey')}
-        className="w-full mt-auto bg-[#00a86b] text-white font-bold py-2.5 rounded-xl hover:bg-green-700 transition-colors shadow-sm flex items-center justify-center text-[11px]"
+        className="w-full mt-auto bg-[#00a86b] text-white font-black text-[11px] uppercase tracking-wider py-2.5 rounded-xl hover:bg-green-700 transition-colors shadow-sm flex items-center justify-center gap-2"
       >
-        VIEW MY JOURNEY &rarr;
+        <span>VIEW MY JOURNEY</span>
+        <span className="text-sm leading-none">&rarr;</span>
       </button>
     </div>
   );

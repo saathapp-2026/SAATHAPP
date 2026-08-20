@@ -21,7 +21,7 @@ export default function SaathAppPlusHomeSection() {
               <span>SAATHAPP PLUS MEMBERSHIP</span>
             </div>
 
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black uppercase text-theme tracking-tight mt-1">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-theme mt-1 mb-1">
               Unlock More with <br className="hidden lg:block"/><span className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 bg-clip-text text-transparent">SaathApp Plus</span>
             </h2>
 
