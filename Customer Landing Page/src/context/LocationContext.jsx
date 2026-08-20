@@ -73,7 +73,7 @@ export function LocationProvider({ children }) {
       setLocation('Connaught Place, Central Delhi');
       setPincode('110001');
       setIsGpsLoading(false);
-      if (onComplete) onComplete();
+      if (typeof onComplete === 'function') onComplete();
     }, 2000);
   };
 
@@ -124,8 +124,8 @@ export function LocationProvider({ children }) {
           if (routerLocation.pathname === '/location/add') {
             navigate('/location');
           }
-          if (onComplete) onComplete();
-        } catch {
+          if (typeof onComplete === 'function') onComplete();
+        } catch (error) {
           toast.error('Unable to resolve the current location right now.');
         } finally {
           setIsGpsLoading(false);
@@ -162,14 +162,14 @@ export function LocationProvider({ children }) {
               if (routerLocation.pathname === '/location/add') {
                 navigate('/location');
               }
-              if (onComplete) onComplete();
+              if (typeof onComplete === 'function') onComplete();
               toast.success('Location detected via network.');
             } else {
               toast.error('Network detection failed. Please add manually.');
             }
           }
         } catch (e) {
-          toast.error('Location permission was denied. You can still add a location manually.');
+          toast.error('Unable to detect location automatically. Please add a location manually.');
         } finally {
           setIsGpsLoading(false);
         }
