@@ -76,6 +76,7 @@ export default function Categories({ onCategorySelect, activeCategory }) {
           {MASTER_CATEGORIES.map((category, index) => {
             const IconComponent = ICON_COMPONENTS[category.id] || ShoppingBag;
             const isActive = activeCategory === category.id;
+            const isGrocery = category.id === 'grocery';
             
             return (
               <motion.div
@@ -92,8 +93,16 @@ export default function Categories({ onCategorySelect, activeCategory }) {
                     : 'border-slate-200/80 dark:border-slate-800 shadow-2xs hover:border-emerald-400 hover:shadow-md'
                 }`}
               >
-                <div className="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <IconComponent size={26} />
+                <div className="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform overflow-hidden">
+                  {category.image ? (
+                    <img 
+                      src={category.image} 
+                      alt={category.name} 
+                      className="w-full h-full object-cover rounded-2xl" 
+                    />
+                  ) : (
+                    <IconComponent size={26} />
+                  )}
                 </div>
 
                 {/* Text title */}

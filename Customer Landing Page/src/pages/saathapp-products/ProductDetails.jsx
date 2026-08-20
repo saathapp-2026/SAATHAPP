@@ -29,11 +29,11 @@ export default function ProductDetails({
   const pathParts = routerLocation.pathname.split('/');
   const slug = pathParts[pathParts.length - 1];
   const navigate = useNavigate();
-  
+
   // Look in both normal products and mockSaathAppProducts
-  const product = products.find(p => p.id === slug || p.slug === slug) 
-               || mockSaathAppProducts.find(p => p.id === slug || p.slug === slug);
-  
+  const product = products.find(p => p.id === slug || p.slug === slug)
+    || mockSaathAppProducts.find(p => p.id === slug || p.slug === slug);
+
   const [quantity, setQuantity] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [activeTab, setActiveTab] = useState('description');
@@ -41,10 +41,10 @@ export default function ProductDetails({
 
   React.useEffect(() => {
     if (product) {
-      document.title = product.category === 'spiritual-puja' 
-        ? `${product.name} | Spiritual & Puja Items Online | SaathApp` 
+      document.title = product.category === 'spiritual-puja'
+        ? `${product.name} | Spiritual & Puja Items Online | SaathApp`
         : `${product.name} | SaathApp Official`;
-        
+
       trackEvent('product_view', {
         productId: product.id,
         name: product.name,
@@ -96,10 +96,10 @@ export default function ProductDetails({
     const R = 6371; // km
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-              Math.sin(dLon/2) * Math.sin(dLon/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   };
 
@@ -118,7 +118,7 @@ export default function ProductDetails({
         return { ...s, distance: dist, eta: getETA(dist) };
       })
       .sort((a, b) => a.distance - b.distance);
-    
+
     if (availableSellers.length > 0) {
       bestSeller = availableSellers[0];
     }
@@ -140,7 +140,7 @@ export default function ProductDetails({
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
       />
-      
+
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-8">
@@ -157,14 +157,14 @@ export default function ProductDetails({
           {/* Image Gallery */}
           <div className="w-full md:w-1/2 lg:w-5/12 flex flex-col gap-4">
             <div className="w-full aspect-[4/5] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden flex items-center justify-center p-8 relative">
-               <button className="absolute top-4 right-4 p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur rounded-full hover:text-rose-500 transition-colors shadow-sm">
-                 <Heart size={20} />
-               </button>
-               {currentMainImage ? (
-                 <img src={currentMainImage} alt={product.name} className="w-full h-full object-contain transition-all duration-300" />
-               ) : (
-                 <span className="text-8xl">🛍️</span>
-               )}
+              <button className="absolute top-4 right-4 p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur rounded-full hover:text-rose-500 transition-colors shadow-sm">
+                <Heart size={20} />
+              </button>
+              {currentMainImage ? (
+                <img src={currentMainImage} alt={product.name} className="w-full h-full object-contain transition-all duration-300" />
+              ) : (
+                <span className="text-8xl">🛍️</span>
+              )}
             </div>
             <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
               {[0, 1, 2, 3].map((idx) => {
@@ -174,9 +174,8 @@ export default function ProductDetails({
                   <div
                     key={idx}
                     onClick={() => setSelectedImageIndex(idx)}
-                    className={`w-20 h-24 shrink-0 bg-white dark:bg-slate-900 border-2 rounded-xl flex items-center justify-center cursor-pointer transition-all ${
-                      isSelected ? 'border-primary ring-2 ring-primary/20 scale-105' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300'
-                    }`}
+                    className={`w-20 h-24 shrink-0 bg-white dark:bg-slate-900 border-2 rounded-xl flex items-center justify-center cursor-pointer transition-all ${isSelected ? 'border-primary ring-2 ring-primary/20 scale-105' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300'
+                      }`}
                   >
                     {imgUrl ? (
                       <img src={imgUrl} alt={`Thumbnail ${idx + 1}`} loading="lazy" className="w-full h-full object-contain p-2" />
@@ -234,7 +233,7 @@ export default function ProductDetails({
                 </span>
               </div>
               <p className="text-sm text-slate-500 mb-4">Inclusive of all taxes</p>
-              
+
               {product.promotion?.active && (
                 <div className="bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/50 p-4 rounded-xl mb-6">
                   <div className="flex items-center gap-2 mb-1">
@@ -327,7 +326,7 @@ export default function ProductDetails({
             {/* Quantity & Add to Cart */}
             <div className="flex items-center gap-2 sm:gap-4 mb-8">
               <div className="flex items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden h-14 shrink-0">
-                <button 
+                <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
                   className="w-10 sm:w-12 h-full flex items-center justify-center font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50"
@@ -337,7 +336,7 @@ export default function ProductDetails({
                 <div className="w-10 sm:w-12 h-full flex items-center justify-center font-black bg-slate-50 dark:bg-slate-800/50">
                   {quantity}
                 </div>
-                <button 
+                <button
                   onClick={() => {
                     const max = product.availabilityMode === 'LIMITED' ? product.availableQuantity : product.stock;
                     setQuantity(max !== undefined ? Math.min(max, quantity + 1) : quantity + 1);
@@ -348,14 +347,13 @@ export default function ProductDetails({
                   +
                 </button>
               </div>
-              <button 
+              <button
                 onClick={() => handleAddToCart(product, quantity)}
                 disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
-                className={`flex-1 h-14 rounded-xl flex items-center justify-center gap-2 font-black text-sm sm:text-lg transition-all transform active:scale-[0.98] ${
-                  (product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0))
-                  ? 'bg-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-800 dark:text-slate-500'
-                  : 'bg-gradient-primary hover:bg-gradient-primary/90 text-white shadow-glow-primary'
-                }`}
+                className={`flex-1 h-14 rounded-xl flex items-center justify-center gap-2 font-black text-sm sm:text-lg transition-all transform active:scale-[0.98] ${(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0))
+                    ? 'bg-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-800 dark:text-slate-500'
+                    : 'bg-gradient-primary hover:bg-gradient-primary/90 text-white shadow-glow-primary'
+                  }`}
               >
                 <ShoppingCart size={20} className="hidden sm:block" />
                 {(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'Sold Out' : 'Add to Cart'}
@@ -372,7 +370,7 @@ export default function ProductDetails({
                     </div>
                     <div>
                       <h4 className="font-bold text-sm mb-1 flex items-center gap-2">
-                        Delivery available 
+                        Delivery available
                         <span className="text-[10px] bg-green-500 text-white px-1.5 py-0.5 rounded-sm uppercase tracking-wider">✓ In Stock</span>
                       </h4>
                       <p className="text-xs text-slate-500 mb-1">
@@ -425,22 +423,20 @@ export default function ProductDetails({
                 <button
                   type="button"
                   onClick={() => setActiveTab('description')}
-                  className={`flex-1 py-3 text-sm transition-colors cursor-pointer ${
-                    activeTab === 'description'
+                  className={`flex-1 py-3 text-sm transition-colors cursor-pointer ${activeTab === 'description'
                       ? 'font-bold text-primary border-b-2 border-primary'
                       : 'font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
-                  }`}
+                    }`}
                 >
                   Description
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveTab('specifications')}
-                  className={`flex-1 py-3 text-sm transition-colors cursor-pointer ${
-                    activeTab === 'specifications'
+                  className={`flex-1 py-3 text-sm transition-colors cursor-pointer ${activeTab === 'specifications'
                       ? 'font-bold text-primary border-b-2 border-primary'
                       : 'font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
-                  }`}
+                    }`}
                 >
                   Specifications
                 </button>
@@ -543,7 +539,7 @@ export default function ProductDetails({
         {recommendedProducts.length > 0 && (
           <div className="mt-16 mb-8">
             <h2 className="text-2xl font-black mb-6 flex items-center gap-2">
-              <Star className="text-amber-500 fill-amber-500" size={24} /> 
+              <Star className="text-amber-500 fill-amber-500" size={24} />
               Recommended For You
             </h2>
             <ProductGrid products={recommendedProducts} onAddToCart={handleAddToCart} />
@@ -559,14 +555,13 @@ export default function ProductDetails({
             {(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'Sold Out' : 'In Stock'}
           </span>
         </div>
-        <button 
+        <button
           onClick={() => handleAddToCart(product, quantity)}
           disabled={product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)}
-          className={`flex-[2] h-12 rounded-xl flex items-center justify-center gap-2 font-black shadow-glow-primary active:scale-[0.98] transition-transform ${
-            (product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0))
+          className={`flex-[2] h-12 rounded-xl flex items-center justify-center gap-2 font-black shadow-glow-primary active:scale-[0.98] transition-transform ${(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0))
               ? 'bg-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-800 dark:text-slate-500'
               : 'bg-gradient-primary text-white hover:bg-gradient-primary/90'
-          }`}
+            }`}
         >
           <ShoppingCart size={18} />
           {(product.availabilityMode === 'LIMITED' ? product.availableQuantity <= 0 : (product.stock !== undefined && product.stock <= 0)) ? 'Sold Out' : 'Add to Cart'}
