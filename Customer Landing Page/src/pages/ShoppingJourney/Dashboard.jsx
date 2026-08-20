@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import InstallPWAButton from '../../components/PWA/InstallPWAButton';
 import { Gift, ShoppingBag, Trophy, Users, Smartphone, Wallet, Shirt, Flame, Check, Star, ShieldCheck, Sparkles, Info, ArrowRight, Percent, X, FileText } from 'lucide-react';
+import KnowMoreModal from '../../components/ShoppingJourney/KnowMoreModal';
 
 const ShoppingJourneyDashboard = () => {
   const navigate = useNavigate();
   const [showTermsModal, setShowTermsModal] = useState(false);
+  const [isKnowMoreOpen, setIsKnowMoreOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-white pb-16 font-sans">
@@ -82,7 +84,10 @@ const ShoppingJourneyDashboard = () => {
               </div>
             </div>
             
-            <button className="bg-[#00a86b] hover:bg-green-700 text-white text-xs font-bold py-2.5 px-6 rounded-full transition-colors shadow-sm flex items-center">
+            <button 
+              onClick={() => setIsKnowMoreOpen(true)}
+              className="bg-[#00a86b] hover:bg-green-700 text-white text-xs font-bold py-2.5 px-6 rounded-full transition-colors shadow-sm flex items-center"
+            >
               Know More <ArrowRight size={14} className="ml-1" />
             </button>
           </div>
@@ -432,6 +437,8 @@ const ShoppingJourneyDashboard = () => {
         </div>
         
       </main>
+
+      <KnowMoreModal isOpen={isKnowMoreOpen} onClose={() => setIsKnowMoreOpen(false)} />
 
       {/* Terms & Conditions Modal Overlay */}
       {showTermsModal && (
