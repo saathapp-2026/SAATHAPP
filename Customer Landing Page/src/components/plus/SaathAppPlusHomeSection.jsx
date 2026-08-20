@@ -20,50 +20,50 @@ export default function SaathAppPlusHomeSection() {
 
         <div className="relative z-10 flex flex-col items-center justify-center gap-4">
           <div className="space-y-3 text-center lg:text-left flex-1 flex flex-col justify-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-600 dark:text-amber-400 text-[10px] font-black uppercase tracking-wider w-fit mx-auto lg:mx-0">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-600 dark:text-amber-400 text-[9px] font-black uppercase tracking-wider w-fit mx-auto lg:mx-0">
               <Crown size={12} className="text-amber-500 animate-pulse" />
               <span>SAATHAPP PLUS MEMBERSHIP</span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase text-theme tracking-tight mt-2">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black uppercase text-theme tracking-tight mt-1">
               Unlock More with <br className="hidden lg:block"/><span className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 bg-clip-text text-transparent">SaathApp Plus</span>
             </h2>
 
-            <p className="text-xs text-theme-secondary font-medium leading-relaxed max-w-md mx-auto lg:mx-0">
+            <p className="text-[11px] text-theme-secondary font-medium leading-relaxed max-w-md mx-auto lg:mx-0">
               Enjoy unlimited free deliveries, priority support, instant checkout discounts, and exclusive festival benefits. Starting at just <strong className="text-amber-500 font-extrabold">₹99/month</strong>.
             </p>
 
             {/* Feature Badges */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-2">
-              <div className="px-2.5 py-1 rounded-xl bg-surface border border-theme-border text-[10px] font-bold text-theme flex items-center gap-1.5 shadow-sm">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1">
+              <div className="px-2.5 py-1 rounded-xl bg-surface border border-theme-border text-[9px] font-bold text-theme flex items-center gap-1.5 shadow-sm">
                 <Truck size={12} className="text-emerald-500" />
                 <span>Free Deliveries</span>
               </div>
-              <div className="px-2.5 py-1 rounded-xl bg-surface border border-theme-border text-[10px] font-bold text-theme flex items-center gap-1.5 shadow-sm">
+              <div className="px-2.5 py-1 rounded-xl bg-surface border border-theme-border text-[9px] font-bold text-theme flex items-center gap-1.5 shadow-sm">
                 <Zap size={12} className="text-amber-500" />
                 <span>Faster Slot</span>
               </div>
-              <div className="px-2.5 py-1 rounded-xl bg-surface border border-theme-border text-[10px] font-bold text-theme flex items-center gap-1.5 shadow-sm">
+              <div className="px-2.5 py-1 rounded-xl bg-surface border border-theme-border text-[9px] font-bold text-theme flex items-center gap-1.5 shadow-sm">
                 <Tag size={12} className="text-purple-500" />
                 <span>Coupons</span>
               </div>
-              <div className="px-2.5 py-1 rounded-xl bg-surface border border-theme-border text-[10px] font-bold text-theme flex items-center gap-1.5 shadow-sm">
+              <div className="px-2.5 py-1 rounded-xl bg-surface border border-theme-border text-[9px] font-bold text-theme flex items-center gap-1.5 shadow-sm">
                 <Sparkles size={12} className="text-rose-500" />
                 <span>Perks</span>
               </div>
             </div>
           </div>
 
-          <div className="shrink-0 text-center w-full mt-4">
+          <div className="shrink-0 text-center w-full mt-2">
             <button
               onClick={() => navigate('/plus')}
-              className="w-full lg:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white font-black text-xs uppercase tracking-wider shadow-lg hover:shadow-amber-500/30 transition-all flex items-center justify-center gap-2.5 cursor-pointer mx-auto"
+              className="w-full lg:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white font-black text-[11px] uppercase tracking-wider shadow-lg hover:shadow-amber-500/30 transition-all flex items-center justify-center gap-2.5 cursor-pointer mx-auto"
             >
-              <Crown size={16} />
+              <Crown size={14} />
               <span>EXPLORE PLUS PLANS</span>
-              <ArrowRight size={14} />
+              <ArrowRight size={12} />
             </button>
-            <p className="text-[10px] text-theme-secondary font-medium mt-2">
+            <p className="text-[9px] text-theme-secondary font-medium mt-2">
               5 Tiers available · Cancel anytime
             </p>
           </div>
