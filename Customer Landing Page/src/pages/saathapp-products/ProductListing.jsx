@@ -12,6 +12,11 @@ import {
   BookOpen, Footprints, Gift, Sparkles, Sprout, HardHat, Car, Flame, ShoppingBag
 } from 'lucide-react';
 import { trackEvent } from '../../utils/analytics';
+import normalGroceryImg from '../../assets/grocery/normal-grocery.jpg';
+import premiumGroceryImg from '../../assets/grocery/premium-grocery.jpg';
+import dairyBakeryImg from '../../assets/grocery/dairy-bakery.jpg';
+import fruitsVegImg from '../../assets/grocery/fruits-veg.jpg';
+import dealsImg from '../../assets/grocery/deals.jpg';
 
 // Icon Map for Category Cards per PDF Spec Visual Language
 const CATEGORY_ICON_MAP = {
@@ -324,26 +329,40 @@ export default function ProductListing({
           <div className="mb-10">
             <h2 className="text-xl font-black mb-4">Shop Grocery</h2>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-              <button onClick={() => setFilters({...filters, groceryTier: 'Normal Grocery'})} className="flex flex-col items-center justify-center p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-primary hover:shadow-lg transition-all group">
-                <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">🛒</span>
-                <span className="font-bold text-sm text-center">Normal Grocery</span>
+              <button onClick={() => setFilters({...filters, groceryTier: 'Normal Grocery'})} className="flex flex-col items-center justify-start p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-primary hover:shadow-lg transition-all group h-full">
+                <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-slate-50 dark:bg-slate-800">
+                  <img src={normalGroceryImg} alt="Normal Grocery" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <span className="font-bold text-sm text-center text-slate-800 dark:text-slate-200">Normal Grocery</span>
+                <span className="text-[10px] text-slate-500 mt-1 text-center">Daily essentials for your home</span>
               </button>
-              <button onClick={() => setFilters({...filters, groceryTier: 'Premium Grocery'})} className="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 border border-amber-200 dark:border-amber-800/50 rounded-2xl hover:shadow-lg transition-all group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-amber-400 to-yellow-500 blur-2xl opacity-20"></div>
-                <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">✨</span>
+              <button onClick={() => setFilters({...filters, groceryTier: 'Premium Grocery'})} className="flex flex-col items-center justify-start p-4 bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 border border-amber-200 dark:border-amber-800/50 rounded-2xl hover:shadow-lg transition-all group relative h-full">
+                <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-amber-100/50 dark:bg-amber-800/20">
+                  <img src={premiumGroceryImg} alt="Premium Grocery" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
                 <span className="font-bold text-sm text-center text-amber-900 dark:text-amber-100">Premium Grocery</span>
+                <span className="text-[10px] text-amber-700/70 dark:text-amber-400/70 mt-1 text-center">Premium quality products</span>
               </button>
-              <button onClick={() => navigate('/products/grocery/fruits-vegetables')} className="flex flex-col items-center justify-center p-6 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/50 rounded-2xl hover:shadow-lg transition-all group">
-                <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">🥬</span>
+              <button onClick={() => navigate('/products/grocery/fruits-vegetables')} className="flex flex-col items-center justify-start p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
+                <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-emerald-100/50 dark:bg-emerald-800/20">
+                  <img src={fruitsVegImg} alt="Fresh Fruits & Veg" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
                 <span className="font-bold text-sm text-center text-emerald-900 dark:text-emerald-100">Fresh Fruits & Veg</span>
+                <span className="text-[10px] text-emerald-700/70 dark:text-emerald-400/70 mt-1 text-center">Farm fresh & handpicked</span>
               </button>
-              <button onClick={() => navigate('/products/grocery/dairy-bakery')} className="flex flex-col items-center justify-center p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-2xl hover:shadow-lg transition-all group">
-                <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">🥛</span>
+              <button onClick={() => navigate('/products/grocery/dairy-bakery')} className="flex flex-col items-center justify-start p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
+                <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-blue-100/50 dark:bg-blue-800/20">
+                  <img src={dairyBakeryImg} alt="Dairy & Bakery" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
                 <span className="font-bold text-sm text-center text-blue-900 dark:text-blue-100">Dairy & Bakery</span>
+                <span className="text-[10px] text-blue-700/70 dark:text-blue-400/70 mt-1 text-center">Milk, bread, butter and more</span>
               </button>
-              <button onClick={() => navigate('/products/offers')} className="flex flex-col items-center justify-center p-6 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/50 rounded-2xl hover:shadow-lg transition-all group">
-                <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">🏷️</span>
+              <button onClick={() => navigate('/products/offers')} className="flex flex-col items-center justify-start p-4 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
+                <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-rose-100/50 dark:bg-rose-800/20">
+                  <img src={dealsImg} alt="Deals" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
                 <span className="font-bold text-sm text-center text-rose-900 dark:text-rose-100">Deals</span>
+                <span className="text-[10px] text-rose-700/70 dark:text-rose-400/70 mt-1 text-center">Best offers & discounts</span>
               </button>
             </div>
             
