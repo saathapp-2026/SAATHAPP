@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Gift, Wallet, ShoppingBag, Percent, Shirt, Trophy, Check, Smartphone, Download, Star, Sparkles, HelpCircle, Activity } from 'lucide-react';
+import InstallPWAButton from '../PWA/InstallPWAButton';
 
 export default function KnowMoreModal({ isOpen, onClose }) {
   const [activeTab, setActiveTab] = useState('overview');
@@ -318,9 +319,9 @@ export default function KnowMoreModal({ isOpen, onClose }) {
             </div>
             
             <div className="flex flex-col items-center gap-2">
-              <button className="bg-[#00a86b] hover:bg-green-700 text-white font-bold py-3 px-8 rounded-xl flex items-center gap-2 shadow-sm transition-colors text-sm">
+              <InstallPWAButton className="bg-[#00a86b] hover:bg-green-700 text-white font-bold py-3 px-8 rounded-xl flex items-center gap-2 shadow-sm transition-colors text-sm">
                 <Download size={16} /> Install SaathApp
-              </button>
+              </InstallPWAButton>
               <span className="text-[10px] text-gray-500 font-medium">It's free and easy!</span>
             </div>
           </div>

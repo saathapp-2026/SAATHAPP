@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const InstallPWAButton = () => {
+const InstallPWAButton = ({ className, children }) => {
   const [installPrompt, setInstallPrompt] = useState(null);
   const [isInstalled, setIsInstalled] = useState(false);
   const [isSupported, setIsSupported] = useState(true);
@@ -54,10 +54,13 @@ const InstallPWAButton = () => {
     }
   };
 
+  const defaultClasses = "bg-green-600 text-white font-medium py-2 px-6 rounded-lg hover:bg-green-700 w-full md:w-auto shadow-md";
+  const buttonClass = className || defaultClasses;
+
   if (isInstalled) {
     return (
-      <button className="bg-green-600 text-white font-medium py-2 px-6 rounded-lg hover:bg-green-700 w-full md:w-auto">
-        Open SaathApp
+      <button className={buttonClass}>
+        {children || "Open SaathApp"}
       </button>
     );
   }
@@ -66,9 +69,9 @@ const InstallPWAButton = () => {
     return (
       <button 
         onClick={() => alert("To install the SaathApp PWA, use Chrome/Edge and select 'Install' from the URL bar, or 'Add to Home Screen' on mobile Safari.")}
-        className="bg-green-600 text-white font-medium py-2 px-6 rounded-lg w-full md:w-auto shadow-md"
+        className={buttonClass}
       >
-        Install SaathApp
+        {children || "Install SaathApp"}
       </button>
     );
   }
@@ -76,9 +79,9 @@ const InstallPWAButton = () => {
   return (
     <button 
       onClick={handleInstallClick}
-      className="bg-green-600 text-white font-medium py-2 px-6 rounded-lg hover:bg-green-700 w-full md:w-auto"
+      className={buttonClass}
     >
-      ↓ Install SaathApp
+      {children || "↓ Install SaathApp"}
     </button>
   );
 };
