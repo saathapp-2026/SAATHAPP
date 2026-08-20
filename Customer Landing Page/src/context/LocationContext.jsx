@@ -131,9 +131,48 @@ export function LocationProvider({ children }) {
           setIsGpsLoading(false);
         }
       },
-      () => {
-        toast.error('Location permission was denied. You can still add a location manually.');
-        setIsGpsLoading(false);
+      async () => {
+        toast('GPS denied, falling back to network detection...', { icon: '📡' });
+        try {
+          const response = await fetch('https://get.geojs.io/v1/ip/geo.json');
+          if (response.ok) {
+            const data = await response.json();
+            if (data && data.city && data.region) {
+              const label = `${data.city}, ${data.region}`;
+              const nextAddress = {
+                id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+                title: 'Network Location',
+                label,
+                fullAddress: label,
+                area: data.city,
+                city: data.city,
+                state: data.region,
+                pincode: '000000',
+                phoneNumber: '',
+                receiverName: '',
+                addressType: 'Home',
+                source: 'network',
+                createdAt: new Date().toISOString(),
+              };
+              setSavedAddresses((prev) => [nextAddress, ...prev]);
+              setSelectedAddress(nextAddress);
+              setLocation(label);
+              setPincode('000000');
+              
+              if (routerLocation.pathname === '/location/add') {
+                navigate('/location');
+              }
+              if (onComplete) onComplete();
+              toast.success('Location detected via network.');
+            } else {
+              toast.error('Network detection failed. Please add manually.');
+            }
+          }
+        } catch (e) {
+          toast.error('Location permission was denied. You can still add a location manually.');
+        } finally {
+          setIsGpsLoading(false);
+        }
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
