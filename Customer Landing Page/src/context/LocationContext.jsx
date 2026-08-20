@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation as useRouterLocation } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const LocationContext = createContext();
 
@@ -43,6 +44,29 @@ export function LocationProvider({ children }) {
     }
   }, [selectedAddress]);
 
+  // Live IP-based Location Detection on First Load
+  useEffect(() => {
+    if (!selectedAddress) {
+      const detectLocation = async () => {
+        try {
+          const response = await fetch('https://get.geojs.io/v1/ip/geo.json');
+          if (response.ok) {
+            const data = await response.json();
+            if (data && data.city && data.region) {
+              const label = `${data.city}, ${data.region}`;
+              setLocation(label);
+              // We don't save it to `selectedAddress` array so we don't pollute saved addresses, 
+              // but we set the top-level location text so the user sees their live city.
+            }
+          }
+        } catch (e) {
+          console.error("IP Live Detection failed", e);
+        }
+      };
+      detectLocation();
+    }
+  }, [selectedAddress]);
+
   const handleGPSDetect = (onComplete) => {
     setIsGpsLoading(true);
     setTimeout(() => {
@@ -55,7 +79,7 @@ export function LocationProvider({ children }) {
 
   const handleUseCurrentLocation = (onComplete) => {
     if (!navigator.geolocation) {
-      alert('Geolocation is not supported in this browser.');
+      toast.error('Geolocation is not supported in this browser.');
       return;
     }
 
@@ -102,13 +126,13 @@ export function LocationProvider({ children }) {
           }
           if (onComplete) onComplete();
         } catch {
-          alert('Unable to resolve the current location right now.');
+          toast.error('Unable to resolve the current location right now.');
         } finally {
           setIsGpsLoading(false);
         }
       },
       () => {
-        alert('Location permission was denied. You can still add a location manually.');
+        toast.error('Location permission was denied. You can still add a location manually.');
         setIsGpsLoading(false);
       },
       { enableHighAccuracy: true, timeout: 10000 }

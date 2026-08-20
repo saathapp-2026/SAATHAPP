@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTheme } from "./context/ThemeContext";
+import { Toaster } from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SplashScreen from './pages/SplashScreen';
 import HomePage from './pages/Home';
@@ -1623,6 +1624,7 @@ export default function App() {
   return (
     <ShoppingJourneyProvider>
       <div className="pb-[72px] md:pb-0 min-h-screen">
+        <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
         <AppContent />
         <MobileBottomNav />
       </div>
