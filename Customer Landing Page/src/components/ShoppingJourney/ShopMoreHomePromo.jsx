@@ -25,8 +25,7 @@ export default function ShopMoreHomePromo() {
         
         <div className="bg-gray-50 p-3.5 rounded-2xl border border-gray-100 flex items-center justify-between gap-3">
           <div className="flex-1">
-            <h4 className="text-[11px] font-bold text-gray-900 mb-0.5">Get the full SaathApp experience</h4>
-            <p className="text-[9px] text-gray-500 mb-2">Track your journey, rewards & challenges on the app.</p>
+            <h4 className="text-[11px] font-bold text-gray-900 mb-2">Get the full SaathApp experience</h4>
             <div className="scale-[0.85] origin-left">
               <InstallPWAButton />
             </div>

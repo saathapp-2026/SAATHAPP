@@ -59,9 +59,6 @@ export default function SaathAppPlusHomeSection() {
               <span>EXPLORE PLUS PLANS</span>
               <ArrowRight size={12} />
             </button>
-            <p className="text-[9px] text-theme-secondary font-medium mt-2">
-              5 Tiers available · Cancel anytime
-            </p>
           </div>
         </div>
       </motion.div>
