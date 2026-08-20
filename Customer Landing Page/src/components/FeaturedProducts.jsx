@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Heart, Eye, ShoppingCart } from 'lucide-react';
@@ -11,6 +12,7 @@ export default function FeaturedProducts({
   setSelectedCategory,
   searchQuery = ''
 }) {
+  const navigate = useNavigate();
   const [featuredProducts, setFeaturedProducts] = useState(Array.from({ length: 8 }, (_, i) => ({
     id: `placeholder-${i}`,
     name: '\u00A0',
@@ -155,7 +157,7 @@ export default function FeaturedProducts({
                       <Heart size={14} fill={isWishlisted ? "currentColor" : "none"} />
                     </motion.button>
                     <motion.button 
-                      onClick={() => onQuickView(product)}
+                      onClick={() => navigate(`/product/${product.slug || product.id}`)}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       className="w-7.5 h-7.5 rounded-full bg-white/95 text-slate-400 hover:text-primary flex items-center justify-center shadow-md border border-slate-100"
@@ -167,7 +169,7 @@ export default function FeaturedProducts({
 
                   {/* Product Image & Info */}
                   <div>
-                    <div className="w-full aspect-square rounded-card overflow-hidden bg-page mb-3 relative flex items-center justify-center">
+                    <div onClick={() => navigate(`/product/${product.slug || product.id}`)} className="cursor-pointer w-full aspect-square rounded-card overflow-hidden bg-page mb-3 relative flex items-center justify-center">
                       {product.image && (
                         <img 
                           src={product.image} 

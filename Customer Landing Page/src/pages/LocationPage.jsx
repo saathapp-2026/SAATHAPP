@@ -1,32 +1,36 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { ArrowLeft, Search, MapPin, Plus, Navigation, Trash2, CheckCircle2 } from 'lucide-react';
 
 function buildLabelFromResult(result) {
   const address = result?.address || {};
-  const area = address.suburb || address.neighbourhood || address.village || address.city_district || address.city || 'Current location';
-  const city = address.city || address.town || address.village || area;
-  const state = address.state || 'State';
-  const pincode = address.postcode || '000000';
-  return `${area}, ${city}, ${state} - ${pincode}`;
+  let area = address.suburb || address.neighbourhood || address.village || address.city_district || address.city;
+  if (!area) {
+    area = result?.display_name ? result.display_name.split(',')[0] : 'Unknown Area';
+  }
+  const city = address.city || address.town || address.county || '';
+  const state = address.state || '';
+  const pincode = address.postcode || '';
+  
+  const parts = [area];
+  if (city && city !== area) parts.push(city);
+  if (state && state !== city) parts.push(state);
+  
+  const base = parts.join(', ');
+  return pincode ? `${base} - ${pincode}` : base;
 }
 
-export default function LocationPage({
-  savedAddresses = [],
-  selectedAddress = null,
-  onBack,
-  onAddAddress,
-  onSelectAddress,
-  onDeleteAddress,
-  onUseCurrentLocation,
-}) {
+import { useLocationContext } from '../context/LocationContext';
+
+export default function LocationPage({ onBack, onAddAddress }) {
+  const { savedAddresses, selectedAddress, handleSelectAddress: onSelectAddress, handleDeleteAddress: onDeleteAddress, handleUseCurrentLocation: onUseCurrentLocation } = useLocationContext();
+
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSearch = async (event) => {
-    event.preventDefault();
-    const trimmed = query.trim();
+  const performSearch = async (searchQuery) => {
+    const trimmed = searchQuery.trim();
     if (!trimmed) {
       setResults([]);
       return;
@@ -35,7 +39,7 @@ export default function LocationPage({
     setLoading(true);
     setError('');
     try {
-      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&q=${encodeURIComponent(trimmed)}`);
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=5&q=${encodeURIComponent(trimmed)}`);
       if (!response.ok) {
         throw new Error('Search failed');
       }
@@ -49,6 +53,23 @@ export default function LocationPage({
     } finally {
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (query.trim().length >= 3) {
+        performSearch(query);
+      } else {
+        setResults([]);
+        setError('');
+      }
+    }, 500); // 500ms debounce
+    return () => clearTimeout(timer);
+  }, [query]);
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    performSearch(query);
   };
 
   const handleSelectSuggestion = (result) => {

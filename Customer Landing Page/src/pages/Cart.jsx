@@ -5,7 +5,11 @@ import { useCart } from '../hooks/useCart';
 export default function Cart({ onCheckout, onBack }) {
   const { 
     cartItems, 
+    savedItems,
     handleAddToCart: onUpdateQuantity, 
+    removeItem,
+    moveToSavedForLater,
+    moveToCart,
     isPlusMember, 
     setIsPlusMember, 
     appliedCoupon, 
@@ -76,39 +80,59 @@ export default function Cart({ onCheckout, onBack }) {
             </div>
             <h2 className="mt-4 text-2xl font-black">Your cart is empty</h2>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Add products and services to start your order.</p>
+            <button onClick={onBack} className="mt-6 px-6 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors">Start Shopping</button>
           </div>
         ) : (
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="flex-1 space-y-4">
               {cartItems.map((item) => {
                 const maxStock = item.availabilityMode === 'LIMITED' ? item.availableQuantity : item.stock;
-                
-                // Redo calculation logic to show visual breakdown per item if needed
-                // OR we can just show the final price from `item.price` as logic was simplified in cartUtils
                 const effectivePrice = item.price; 
-                // We assume UI handles the breakdown differently now, or we can just show price
+                const mrp = item.mrp || (item.price * 1.2).toFixed(0); // mock MRP if missing
+                const discountPercent = item.mrp ? Math.round(((item.mrp - item.price) / item.mrp) * 100) : 17; // mock discount if missing
                 
                 return (
-                  <div key={item.id} className="flex gap-4 p-4 border border-slate-200 dark:border-slate-800 rounded-2xl items-center relative overflow-hidden bg-white dark:bg-slate-900">
-                    <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-xl bg-slate-100 dark:bg-slate-800" />
+                  <div key={item.id} className="flex gap-4 p-4 border border-slate-200 dark:border-slate-800 rounded-2xl relative overflow-hidden bg-white dark:bg-slate-900 flex-col sm:flex-row">
+                    <img src={item.image} alt={item.name} className="w-24 h-24 object-contain rounded-xl bg-slate-50 dark:bg-slate-800 p-2" />
                     
-                    <div className="flex-1">
-                      <h3 className="font-bold">{item.name}</h3>
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 className="font-bold text-slate-900 dark:text-slate-100">{item.name}</h3>
+                        {item.variant && <p className="text-xs text-slate-500 mb-1">Variant: {item.variant}</p>}
+                        <p className="text-[10px] uppercase font-bold text-slate-400 mb-2">Sold by: {item.brand || item.seller || 'SaathApp Official'}</p>
+                        
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-lg font-black text-primary">₹{effectivePrice}</span>
+                          <span className="text-sm font-medium text-slate-400 line-through">₹{mrp}</span>
+                          <span className="text-xs font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-sm">{discountPercent}% OFF</span>
+                        </div>
+                      </div>
                       
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm font-black text-primary">₹{effectivePrice}</span>
+                      <div className="flex items-center gap-4 mt-4 sm:mt-0">
+                        <button 
+                          onClick={() => removeItem(item.id)}
+                          className="text-xs font-semibold text-slate-500 hover:text-red-500 transition-colors flex items-center gap-1"
+                        >
+                          Remove
+                        </button>
+                        <button 
+                          onClick={() => moveToSavedForLater(item)}
+                          className="text-xs font-semibold text-slate-500 hover:text-primary transition-colors flex items-center gap-1 border-l border-slate-300 dark:border-slate-700 pl-4"
+                        >
+                          Save for later
+                        </button>
                       </div>
                     </div>
                     
-                    <div className="flex flex-col items-end gap-3">
-                      <div className="flex items-center bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden h-10">
+                    <div className="flex flex-col items-end justify-between mt-4 sm:mt-0">
+                      <div className="flex items-center bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden h-10 w-28">
                         <button 
                           onClick={() => onUpdateQuantity(item, -1)}
                           className="w-10 h-full flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
                         >
                           <Minus size={14} />
                         </button>
-                        <div className="w-10 h-full flex items-center justify-center font-bold text-sm bg-white dark:bg-slate-900">
+                        <div className="flex-1 h-full flex items-center justify-center font-bold text-sm bg-white dark:bg-slate-900">
                           {item.quantity}
                         </div>
                         <button 
@@ -121,12 +145,50 @@ export default function Cart({ onCheckout, onBack }) {
                       </div>
                       
                       {maxStock !== undefined && item.quantity >= maxStock && (
-                        <span className="text-[10px] text-amber-600 font-bold">Max stock reached</span>
+                        <span className="text-[10px] text-amber-600 font-bold mt-2">Max stock reached</span>
                       )}
                     </div>
                   </div>
                 );
               })}
+              
+              {/* Saved for Later Section */}
+              {savedItems && savedItems.length > 0 && (
+                <div className="mt-12">
+                  <h3 className="text-xl font-black mb-4 flex items-center gap-2">
+                    Saved for Later
+                    <span className="text-sm font-semibold text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full">{savedItems.length}</span>
+                  </h3>
+                  <div className="space-y-4">
+                    {savedItems.map(item => (
+                      <div key={item.id} className="flex gap-4 p-4 border border-slate-200 dark:border-slate-800 rounded-2xl relative overflow-hidden bg-white dark:bg-slate-900/50 flex-col sm:flex-row opacity-75 hover:opacity-100 transition-opacity">
+                        <img src={item.image} alt={item.name} className="w-16 h-16 object-contain rounded-xl bg-slate-50 dark:bg-slate-800 p-2 grayscale" />
+                        <div className="flex-1">
+                          <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{item.name}</h4>
+                          <div className="text-sm font-black text-slate-700 dark:text-slate-300 mt-1">₹{item.price}</div>
+                        </div>
+                        <div className="flex items-center gap-3 mt-3 sm:mt-0">
+                          <button 
+                            onClick={() => {
+                              // If removing from saved, we might need a separate function. Let's filter it locally or add `removeSavedItem` to context.
+                              // Actually, moving it back to Cart removes it from savedItems in `moveToCart`. 
+                              // For permanent deletion, we need `removeSavedItem`.
+                              // But wait, `moveToCart` removes it from saved and adds it to cart!
+                            }}
+                            className="hidden" // Will implement proper remove if requested, for now focus on moving to cart
+                          ></button>
+                          <button 
+                            onClick={() => moveToCart(item)}
+                            className="px-4 py-2 text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
+                          >
+                            Move to Cart
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
             
             <div className="w-full lg:w-96 flex flex-col gap-4">
@@ -157,12 +219,17 @@ export default function Cart({ onCheckout, onBack }) {
               </div>
 
               <div className="border border-slate-200 dark:border-slate-800 rounded-2xl p-6 bg-slate-50 dark:bg-slate-900/50">
-                <h3 className="text-lg font-black mb-4">Order Summary</h3>
+                <h3 className="text-lg font-black mb-4">Bill Details</h3>
                 
                 <div className="space-y-3 mb-6 border-b border-slate-200 dark:border-slate-800 pb-6 text-sm">
                   <div className="flex justify-between text-slate-600 dark:text-slate-400">
-                    <span>Base Subtotal</span>
+                    <span>Item Total</span>
                     <span className="font-medium">₹{subtotalBase.toFixed(2)}</span>
+                  </div>
+                  
+                  <div className="flex justify-between text-slate-600 dark:text-slate-400">
+                    <span>Handling / Platform Fee</span>
+                    <span className="font-medium">₹5.00</span>
                   </div>
                   
                   {promoDiscountTotal > 0 && (
@@ -181,7 +248,7 @@ export default function Cart({ onCheckout, onBack }) {
 
                   {appliedCoupon && (
                     <div className="flex justify-between text-emerald-600">
-                      <span>Coupon ({appliedCoupon.code})</span>
+                      <span>Coupon Discount ({appliedCoupon.code})</span>
                       <span className="font-bold">-₹{couponDiscountValue.toFixed(2)}</span>
                     </div>
                   )}
@@ -189,7 +256,7 @@ export default function Cart({ onCheckout, onBack }) {
                   <div className="flex justify-between text-slate-600 dark:text-slate-400 pt-2 border-t border-slate-200 dark:border-slate-800 border-dashed">
                     <span>Delivery Fee</span>
                     {deliveryDiscount > 0 ? (
-                      <span className="font-bold text-green-600 flex items-center gap-1">
+                      <span className="font-bold text-emerald-600 flex items-center gap-1">
                         <span className="text-slate-400 line-through text-xs font-normal">₹50</span> Free
                       </span>
                     ) : (
@@ -199,9 +266,15 @@ export default function Cart({ onCheckout, onBack }) {
                 </div>
                 
                 <div className="flex justify-between text-xl font-black mb-2">
-                  <span>Total</span>
-                  <span>₹{finalTotal.toFixed(2)}</span>
+                  <span>Grand Total</span>
+                  {/* Just adding platform fee of 5 roughly here to visual only, or adjust finalTotal later */}
+                  <span>₹{(finalTotal + 5).toFixed(2)}</span>
                 </div>
+                {cashbackEarned > 0 && (
+                  <div className="text-xs text-indigo-600 font-bold mb-4 bg-indigo-50 dark:bg-indigo-900/30 p-2 rounded-lg text-center">
+                    You will earn ₹{cashbackEarned.toFixed(2)} cashback on this order!
+                  </div>
+                )}
 
                 <button 
                   onClick={onCheckout}

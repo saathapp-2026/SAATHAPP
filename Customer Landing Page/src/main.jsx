@@ -4,14 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import './i18n/i18n.js';
 import App from './App.jsx';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 import { ThemeProvider } from './context/ThemeContext.jsx';
 import { LanguageProvider } from './context/LanguageContext.jsx';
 import { PWAProvider } from './context/PWAContext.jsx';
 import { MembershipProvider } from './context/MembershipContext.jsx';
 import PWAInstallModal from './components/PWAInstallModal.jsx';
-
 import { CartProvider } from './context/CartContext.jsx';
+import { LocationProvider } from './context/LocationContext.jsx';
 
 // Handle Vite dynamic import preload errors (e.g., stale deployment chunks)
 window.addEventListener('vite:preloadError', async (event) => {
@@ -57,10 +58,12 @@ createRoot(document.getElementById('root')).render(
           <LanguageProvider>
             <PWAProvider>
               <MembershipProvider>
-                <CartProvider>
-                  <App />
-                  <PWAInstallModal />
-                </CartProvider>
+                <LocationProvider>
+                  <CartProvider>
+                    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || 'missing-client-id'}><App /></GoogleOAuthProvider>
+                    <PWAInstallModal />
+                  </CartProvider>
+                </LocationProvider>
               </MembershipProvider>
             </PWAProvider>
           </LanguageProvider>

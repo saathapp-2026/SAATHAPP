@@ -19,7 +19,10 @@ const initialForm = {
   imagePreview: '',
 };
 
-export default function AddAddressPage({ onBack, onSaveAddress, onUseCurrentLocation }) {
+import { useLocationContext } from '../context/LocationContext';
+
+export default function AddAddressPage({ onBack }) {
+  const { handleSaveAddress: onSaveAddress, handleUseCurrentLocation: onUseCurrentLocation } = useLocationContext();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [imageFileName, setImageFileName] = useState('');

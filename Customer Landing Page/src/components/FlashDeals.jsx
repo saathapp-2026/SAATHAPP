@@ -1,9 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Timer, ShoppingCart, Heart, Eye, Star, Flame } from 'lucide-react';
 // Removed mockData dependency
 
 export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
+  const navigate = useNavigate();
   const [flashDeals, setFlashDeals] = useState(Array.from({ length: 5 }, (_, i) => ({
     id: `placeholder-${i}`,
     name: '\u00A0',
@@ -101,7 +103,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                     <Heart size={14} />
                   </motion.button>
                   <motion.button 
-                    onClick={() => onQuickView(deal)}
+                    onClick={() => navigate(`/product/${deal.slug || deal.id}`)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     className="w-7.5 h-7.5 rounded-full bg-white/95 text-slate-400 hover:text-primary flex items-center justify-center shadow-md border border-slate-100"
@@ -113,7 +115,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
 
                 {/* Product Image & Meta */}
                 <div>
-                  <div className="w-full aspect-square rounded-card overflow-hidden bg-page mb-3 relative flex items-center justify-center">
+                  <div onClick={() => navigate(`/product/${deal.slug || deal.id}`)} className="cursor-pointer w-full aspect-square rounded-card overflow-hidden bg-page mb-3 relative flex items-center justify-center">
                     {deal.image && (
                       <img 
                         src={deal.image} 
