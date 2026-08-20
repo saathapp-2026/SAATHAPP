@@ -336,16 +336,127 @@ export default function KnowMoreModal({ isOpen, onClose }) {
             </>
           )}
 
-          {activeTab !== 'overview' && (
-            <div className="bg-white rounded-2xl p-12 shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center h-full min-h-[300px]">
-              <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 mb-4">
-                <Sparkles size={24} />
+          {activeTab === 'milestones' && (
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 animate-in fade-in duration-300">
+              <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900 mb-6">
+                <Trophy className="text-yellow-500" size={20} /> Your Journey Milestones
+              </h3>
+              <div className="space-y-4 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-green-500 before:to-gray-200">
+                {[
+                  { day: 7, title: "Starter Bonus", reward: "₹25 Cash Reward", desc: "Instantly credited to your wallet for completing your first week of regular shopping.", icon: <Wallet size={18}/>, color: "text-green-600", bg: "bg-green-100" },
+                  { day: 15, title: "Shopper's Delight", reward: "Free Grocery Item", desc: "Claim a free everyday essential up to ₹49 on your next checkout.", icon: <ShoppingBag size={18}/>, color: "text-orange-500", bg: "bg-orange-100" },
+                  { day: 30, title: "Super Saver", reward: "₹99 Cash Reward", desc: "A whole month of loyalty! Enjoy a flat ₹99 credited to your SaathApp Wallet.", icon: <Percent size={18}/>, color: "text-purple-600", bg: "bg-purple-100" },
+                  { day: 60, title: "Brand Ambassador", reward: "Exclusive Merchandise", desc: "Show off your loyalty with premium SaathApp branded T-shirts and Mugs.", icon: <Shirt size={18}/>, color: "text-blue-500", bg: "bg-blue-100" },
+                  { day: 90, title: "Ultimate Champion", reward: "Premium Surprise Reward", desc: "Unlock our highest tier. Gain entry into the mega draw and win high-value rewards!", icon: <Trophy size={18}/>, color: "text-yellow-600", bg: "bg-yellow-100" }
+                ].map((m, idx) => (
+                  <div key={idx} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-white bg-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                      <span className={`font-black text-sm ${m.color}`}>{m.day}D</span>
+                    </div>
+                    <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] p-4 rounded-2xl border border-gray-100 bg-gray-50 shadow-sm hover:shadow-md transition-shadow">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${m.bg} ${m.color}`}>
+                          {m.icon}
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-gray-900 text-sm">{m.title}</h4>
+                          <p className={`text-xs font-bold ${m.color}`}>{m.reward}</p>
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-600 leading-relaxed">{m.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">More Details Coming Soon</h3>
-              <p className="text-sm text-gray-500 max-w-sm">We're working on adding detailed information for the {activeTab} section. Check back later!</p>
-              <button onClick={() => setActiveTab('overview')} className="mt-6 px-6 py-2 bg-green-50 text-green-700 font-bold rounded-lg hover:bg-green-100 transition-colors">
-                Back to Overview
-              </button>
+            </div>
+          )}
+
+          {activeTab === 'rewards' && (
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 animate-in fade-in duration-300">
+              <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900 mb-6">
+                <Gift className="text-green-500" size={20} /> Reward Categories
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="p-5 rounded-2xl bg-green-50/50 border border-green-100">
+                  <div className="w-10 h-10 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-4"><Wallet size={20}/></div>
+                  <h4 className="font-bold text-gray-900 mb-2">Instant Wallet Cash</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed">Directly credited to your SaathApp Wallet. You can apply this cash to instantly reduce the total amount on any of your future grocery orders. No minimum spend required!</p>
+                </div>
+                <div className="p-5 rounded-2xl bg-orange-50/50 border border-orange-100">
+                  <div className="w-10 h-10 bg-orange-100 text-orange-500 rounded-xl flex items-center justify-center mb-4"><ShoppingBag size={20}/></div>
+                  <h4 className="font-bold text-gray-900 mb-2">Free Everyday Groceries</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed">Unlock coupons that allow you to add essential items like milk, bread, or snacks absolutely free of charge to your delivery cart during checkout.</p>
+                </div>
+                <div className="p-5 rounded-2xl bg-purple-50/50 border border-purple-100">
+                  <div className="w-10 h-10 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4"><Percent size={20}/></div>
+                  <h4 className="font-bold text-gray-900 mb-2">Exclusive Partner Coupons</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed">Receive massive discount codes for top brands, local partner restaurants, and exclusive festival deals that aren't available to regular shoppers.</p>
+                </div>
+                <div className="p-5 rounded-2xl bg-blue-50/50 border border-blue-100">
+                  <div className="w-10 h-10 bg-blue-100 text-blue-500 rounded-xl flex items-center justify-center mb-4"><Shirt size={20}/></div>
+                  <h4 className="font-bold text-gray-900 mb-2">SaathApp Merchandise</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed">Exclusive physical gifts delivered right to your door! Win high-quality branded T-shirts, coffee mugs, caps, and reusable eco-friendly shopping bags.</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'monthly' && (
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 animate-in fade-in duration-300">
+              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-6 sm:p-10 text-center border border-yellow-100 mb-8 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-200/40 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-orange-200/40 rounded-full blur-3xl"></div>
+                <Trophy size={48} className="text-yellow-500 mx-auto mb-4 relative z-10" />
+                <h3 className="text-2xl font-black text-gray-900 mb-2 relative z-10">The Mega Monthly Draw</h3>
+                <p className="text-sm text-gray-700 max-w-lg mx-auto relative z-10">
+                  Every order you place increases your chances in our monthly lucky draw! At the end of every month, we select our most active shoppers for massive surprise rewards.
+                </p>
+              </div>
+
+              <h4 className="font-bold text-gray-900 mb-4 px-2">Recent Monthly Grand Prizes</h4>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-2">
+                <div className="border border-gray-100 rounded-xl p-4 text-center bg-gray-50">
+                  <Smartphone size={24} className="text-blue-500 mx-auto mb-2"/>
+                  <div className="font-bold text-xs text-gray-900">Smartphones</div>
+                </div>
+                <div className="border border-gray-100 rounded-xl p-4 text-center bg-gray-50">
+                  <Wallet size={24} className="text-green-500 mx-auto mb-2"/>
+                  <div className="font-bold text-xs text-gray-900">₹1,000 Vouchers</div>
+                </div>
+                <div className="border border-gray-100 rounded-xl p-4 text-center bg-gray-50">
+                  <Star size={24} className="text-yellow-500 mx-auto mb-2"/>
+                  <div className="font-bold text-xs text-gray-900">Gold Coins</div>
+                </div>
+                <div className="border border-gray-100 rounded-xl p-4 text-center bg-gray-50">
+                  <Gift size={24} className="text-purple-500 mx-auto mb-2"/>
+                  <div className="font-bold text-xs text-gray-900">Premium Appliances</div>
+                </div>
+              </div>
+              <div className="mt-6 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+                Winners announced on the 1st of every month!
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'faqs' && (
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 animate-in fade-in duration-300">
+              <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900 mb-6">
+                <HelpCircle className="text-blue-500" size={20} /> Frequently Asked Questions
+              </h3>
+              <div className="space-y-4">
+                {[
+                  { q: "How do I participate in the Shopping Journey?", a: "Just start shopping! Every day you place a successful order on SaathApp, it adds to your active shopping streak automatically. No sign-up required." },
+                  { q: "Do I lose my streak if I don't shop for a day?", a: "No! Your journey is based on cumulative active shopping days. However, shopping regularly unlocks bonuses much faster and increases your odds in the Monthly Draw." },
+                  { q: "How do I claim my cash rewards?", a: "Once you hit a cash milestone (like the 30-Day ₹99 reward), the amount is instantly credited to your SaathApp Wallet and will automatically apply to your next checkout." },
+                  { q: "What happens when I reach the 90-Day milestone?", a: "You unlock the 'Ultimate Champion' status! You'll receive a premium surprise reward and your journey resets with a permanent multiplier badge, giving you better odds for future Monthly Draws." },
+                  { q: "Are the rewards transferable to my bank account?", a: "Cash rewards and coupons are strictly limited for use within the SaathApp platform and cannot be withdrawn to a bank account." }
+                ].map((faq, idx) => (
+                  <div key={idx} className="p-4 rounded-xl border border-gray-100 bg-gray-50">
+                    <h4 className="font-bold text-sm text-gray-900 mb-2">{faq.q}</h4>
+                    <p className="text-xs text-gray-600 leading-relaxed">{faq.a}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
