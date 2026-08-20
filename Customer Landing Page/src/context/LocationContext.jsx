@@ -123,6 +123,8 @@ export function LocationProvider({ children }) {
           
           if (routerLocation.pathname === '/location/add') {
             navigate('/location');
+          } else if (routerLocation.pathname === '/location') {
+            navigate('/');
           }
           if (typeof onComplete === 'function') onComplete();
           toast.success('Exact location detected successfully!', { icon: '📍' });
@@ -163,6 +165,8 @@ export function LocationProvider({ children }) {
               
               if (routerLocation.pathname === '/location/add') {
                 navigate('/location');
+              } else if (routerLocation.pathname === '/location') {
+                navigate('/');
               }
               if (typeof onComplete === 'function') onComplete();
               toast.success('Exact location detected successfully!', { icon: '📍' });
