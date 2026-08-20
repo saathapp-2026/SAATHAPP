@@ -108,26 +108,6 @@ export default function ProductDetails({
     capacity: ['500ml', '750ml', '1L']
   } : null;
 
-<<<<<<< HEAD
-  // Hyperlocal logic mock
-  const CUSTOMER_LOCATION = { lat: 28.6315, lng: 77.2167 }; // Connaught Place, New Delhi
-
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // km
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
-  };
-
-  const getETA = (dist) => {
-    if (dist <= 3) return '30–45 min';
-    if (dist <= 7) return '45–60 min';
-    return '1–2 days';
-=======
   // Delivery ETA Logic
   const fastDeliveryPincodes = ['110001', '400001', '560001', '600001', '700001'];
   const getETA = () => {
@@ -136,24 +116,12 @@ export default function ProductDetails({
       return 'Blink Delivery in 10 mins';
     }
     return 'Standard 1-Day Delivery';
->>>>>>> 72749937a016dd3115413ae73bacdca962828fad
   };
   const deliveryETA = getETA();
 
   let bestSeller = null;
   if (product?.sellers && product.sellers.length > 0) {
-<<<<<<< HEAD
-    const availableSellers = product.sellers
-      .filter(s => s.stock >= quantity)
-      .map(s => {
-        const dist = calculateDistance(CUSTOMER_LOCATION.lat, CUSTOMER_LOCATION.lng, s.location.lat, s.location.lng);
-        return { ...s, distance: dist, eta: getETA(dist) };
-      })
-      .sort((a, b) => a.distance - b.distance);
-
-=======
     const availableSellers = product.sellers.filter(s => s.stock >= quantity);
->>>>>>> 72749937a016dd3115413ae73bacdca962828fad
     if (availableSellers.length > 0) {
       bestSeller = { ...availableSellers[0], distance: 1.2, eta: deliveryETA };
     }
