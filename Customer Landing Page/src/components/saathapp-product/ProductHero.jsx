@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, ShieldCheck, Truck, RotateCcw, CreditCard } from 'lucide-react';
 import OfficialBadge from './OfficialBadge';
+import productHeroImg from '../../assets/product-hero-banner.png';
 
 export default function ProductHero() {
   return (
@@ -60,22 +61,16 @@ export default function ProductHero() {
       {/* Hero Image (placeholder representation of multiple items like mock) */}
       <div className="relative z-10 w-full md:w-1/2 p-8 flex justify-center items-center">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="relative w-full max-w-md aspect-square rounded-2xl bg-slate-800/50 border border-slate-700/50 flex flex-wrap justify-center content-center gap-4 p-6 overflow-hidden"
+          className="relative w-full max-w-md rounded-2xl bg-slate-950/40 border border-slate-700/50 overflow-hidden flex items-center justify-center p-2"
         >
-          {/* Abstract representations of hero products */}
-          <div className="w-32 h-40 bg-slate-800 rounded-xl shadow-lg border border-slate-700 flex flex-col items-center justify-center -rotate-6 transform hover:rotate-0 transition-transform">
-             <div className="w-16 h-20 bg-slate-900 rounded-lg mb-2"></div>
-             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Backpack</span>
-          </div>
-          <div className="w-24 h-24 bg-slate-800 rounded-full shadow-lg border border-slate-700 flex flex-col items-center justify-center rotate-12 transform hover:rotate-0 transition-transform">
-             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Cap</span>
-          </div>
-          <div className="w-20 h-48 bg-slate-800 rounded-full shadow-lg border border-slate-700 flex flex-col items-center justify-center -rotate-12 transform hover:rotate-0 transition-transform">
-             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Bottle</span>
-          </div>
+          <img
+            src={productHeroImg}
+            alt="SaathApp Official Merchandise Collection"
+            className="w-full h-full object-contain rounded-xl"
+          />
         </motion.div>
       </div>
     </div>

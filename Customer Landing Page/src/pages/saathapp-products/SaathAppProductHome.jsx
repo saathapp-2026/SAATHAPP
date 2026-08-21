@@ -8,6 +8,8 @@ import ProductGrid from '../../components/saathapp-product/ProductGrid';
 import BulkOrderBanner from '../../components/saathapp-product/BulkOrderBanner';
 import TrustBadges from '../../components/saathapp-product/TrustBadges';
 import { mockSaathAppProducts, saathAppCategories } from '../../data/saathAppProducts';
+import premiumBannerImg from '../../assets/premium-products-banner.png';
+import normalBannerImg from '../../assets/normal-products-banner.png';
 
 export default function SaathAppProductHome({
   cartCount,
@@ -61,8 +63,12 @@ export default function SaathAppProductHome({
               onClick={() => navigate('/saathapp-products/normal')}
               className="group cursor-pointer rounded-2xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
             >
-              <div className="h-48 bg-slate-100 dark:bg-slate-800 flex items-center justify-center p-6 text-center">
-                <div className="text-5xl mb-2">👕</div>
+              <div className="h-[340px] bg-slate-100 dark:bg-slate-800 flex items-center justify-center relative overflow-hidden">
+                <img
+                  src={normalBannerImg}
+                  alt="Normal Products Showcase"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
               <div className="p-8">
                 <h3 className="text-2xl font-bold mb-2">NORMAL PRODUCTS</h3>
@@ -79,9 +85,12 @@ export default function SaathAppProductHome({
               onClick={() => navigate('/saathapp-products/premium')}
               className="group cursor-pointer rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 to-black dark:from-slate-800 dark:to-black border border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-white"
             >
-              <div className="h-48 bg-white/5 flex items-center justify-center p-6 text-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-yellow-500/10 opacity-50"></div>
-                <div className="text-5xl mb-2 relative z-10">✨</div>
+              <div className="h-[340px] bg-slate-900 flex items-center justify-center relative overflow-hidden">
+                <img
+                  src={premiumBannerImg}
+                  alt="Premium Products Showcase"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
               <div className="p-8 relative z-10">
                 <div className="flex items-center gap-2 mb-2">

@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Send, ShieldCheck, MapPin, Phone, Mail, Globe } from 'lucide-react';
 import SaathAppLogo from '../assets/saathapp-logo.jpeg';
+import UpiLogo from '../assets/upi.png';
+import RuPayLogo from '../assets/rupay.png';
+import VisaLogo from '../assets/visa.png';
+import MastercardLogo from '../assets/mastercard.png';
+import NetBankingLogo from '../assets/netbanking.png';
+import CodLogo from '../assets/cod.png';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -427,13 +433,13 @@ export default function Footer() {
             <div className="text-[10px] sm:text-xs font-extrabold text-theme-secondary uppercase tracking-wider">
               Supported Payment Methods
             </div>
-            <div className="flex flex-wrap gap-2 text-[10px] sm:text-[11px] font-bold text-theme-secondary justify-center">
-              <span className="px-2.5 py-1 rounded bg-surface/60 border border-theme-border/30">UPI</span>
-              <span className="px-2.5 py-1 rounded bg-surface/60 border border-theme-border/30">RuPay</span>
-              <span className="px-2.5 py-1 rounded bg-surface/60 border border-theme-border/30">Visa</span>
-              <span className="px-2.5 py-1 rounded bg-surface/60 border border-theme-border/30">Mastercard</span>
-              <span className="px-2.5 py-1 rounded bg-surface/60 border border-theme-border/30">Net Banking</span>
-              <span className="px-2.5 py-1 rounded bg-surface/60 border border-theme-border/30">Cash on Delivery (where available)</span>
+            <div className="flex flex-wrap gap-2 text-[10px] sm:text-[11px] font-bold text-theme-secondary justify-center items-center">
+              <img src={UpiLogo} alt="UPI" className="h-6 w-10 object-contain rounded bg-white border border-theme-border/30" />
+              <img src={RuPayLogo} alt="RuPay" className="h-6 w-10 object-contain rounded bg-white border border-theme-border/30" />
+              <img src={VisaLogo} alt="Visa" className="h-6 w-10 object-contain rounded bg-white border border-theme-border/30" />
+              <img src={MastercardLogo} alt="Mastercard" className="h-6 w-10 object-contain rounded bg-white border border-theme-border/30" />
+              <img src={NetBankingLogo} alt="Net Banking" className="h-6 w-10 object-contain rounded bg-white border border-theme-border/30" />
+              <img src={CodLogo} alt="Cash on Delivery" className="h-6 w-10 object-contain rounded bg-white border border-theme-border/30" />
             </div>
           </div>
         </div>

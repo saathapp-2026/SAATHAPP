@@ -1,27 +1,26 @@
+import tShirtsApparelIcon from '../assets/cat-tshirts-apparel.png';
+import capsIcon from '../assets/cat-caps.png';
+import bagsIcon from '../assets/cat-bags.png';
+import bottlesIcon from '../assets/cat-bottles.png';
+import mugsIcon from '../assets/cat-mugs.png';
+import diariesIcon from '../assets/cat-diaries.png';
+import pensIcon from '../assets/cat-pens.png';
+import penStandIcon from '../assets/cat-pen-stand.png';
+import idCardsIcon from '../assets/cat-id-cards.png';
+import officeEssentialsIcon from '../assets/cat-office-essentials.png';
+
 export const saathAppCategories = [
   // Normal
-  { id: 't-shirts-apparel', name: 'T-Shirts & Apparel', emoji: '👕' },
-  { id: 'caps', name: 'Caps', emoji: '🧢' },
-  { id: 'bags', name: 'Bags', emoji: '🎒' },
-  { id: 'school-bags', name: 'School Bags', emoji: '🎒' },
-  { id: 'bottles', name: 'Bottles', emoji: '🍾' },
-  { id: 'mugs', name: 'Mugs', emoji: '☕' },
-  { id: 'diaries', name: 'Diaries', emoji: '📔' },
-  { id: 'pens', name: 'Pens', emoji: '🖊️' },
-  { id: 'pen-stand', name: 'Pen Stand', emoji: '🏺' },
-  { id: 'id-cards', name: 'ID Cards', emoji: '🪪' },
-  { id: 'office-essentials', name: 'Office Essentials', emoji: '📎' },
-  { id: 'lifestyle', name: 'Lifestyle', emoji: '🛋️' },
-  { id: 'other', name: 'Other', emoji: '📦' },
-
-  // Premium
-  { id: 'premium-apparel', name: 'Premium Apparel', emoji: '👔' },
-  { id: 'premium-bags', name: 'Premium Bags', emoji: '💼' },
-  { id: 'premium-accessories', name: 'Premium Accessories', emoji: '⌚' },
-  { id: 'premium-lifestyle', name: 'Premium Lifestyle', emoji: '🛋️' },
-  { id: 'premium-technology', name: 'Premium Technology', emoji: '🎧' },
-  { id: 'premium-gift-sets', name: 'Premium Gift Sets', emoji: '🎁' },
-  { id: 'limited-collections', name: 'Limited Collections', emoji: '✨' },
+  { id: 't-shirts-apparel', name: 'T-Shirts & Apparel', icon: tShirtsApparelIcon, emoji: '👕' },
+  { id: 'caps', name: 'Caps', icon: capsIcon, emoji: '🧢' },
+  { id: 'bags', name: 'Bags', icon: bagsIcon, emoji: '🎒' },
+  { id: 'bottles', name: 'Bottles', icon: bottlesIcon, emoji: '🍾' },
+  { id: 'mugs', name: 'Mugs', icon: mugsIcon, emoji: '☕' },
+  { id: 'diaries', name: 'Diaries', icon: diariesIcon, emoji: '📔' },
+  { id: 'pens', name: 'Pens', icon: pensIcon, emoji: '🖊️' },
+  { id: 'pen-stand', name: 'Pen Stand', icon: penStandIcon, emoji: '🏺' },
+  { id: 'id-cards', name: 'ID Cards', icon: idCardsIcon, emoji: '🪪' },
+  { id: 'office-essentials', name: 'Office Essentials', icon: officeEssentialsIcon, emoji: '📎' },
 ];
 
 export const mockSaathAppProducts = [
