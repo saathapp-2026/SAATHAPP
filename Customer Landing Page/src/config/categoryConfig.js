@@ -324,7 +324,7 @@ export const MASTER_CATEGORIES = [
     slug: 'saathpack',
     url: '/products/saathpack/landing',
     iconName: 'Package',
-    image: '/images/categories/household.png', // Or whatever image fits
+    image: '/images/saathpack/saathapp_corrugated_box.jpg',
     visualDesc: 'Package',
     sortOrder: 17,
     isActive: true,
@@ -387,7 +387,7 @@ export const HEADER_NAV_ITEMS = [
   { name: 'Fashion', path: '/products/fashion' },
   { name: 'Household Items', path: '/products/household-items' },
   { name: 'Hardware', path: '/products/hardware' },
-  { name: 'Services', path: '/products/services' },
+  { name: 'Services', path: '/products/services/service' },
   { name: 'Gift Set', path: '/products/gift-set', isNew: true },
   { name: 'SaathApp Product', path: '/products/saathapp', isNew: true },
   { name: 'SAATHPACK', path: '/products/saathpack/landing', isNew: true },

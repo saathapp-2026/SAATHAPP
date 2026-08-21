@@ -50,6 +50,15 @@ export default function SaathAppProductHome({
       />
       
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-12">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+          <button onClick={() => navigate('/')} className="hover:text-primary flex items-center gap-1">Home</button>
+          <span>/</span>
+          <button onClick={() => navigate('/products')} className="hover:text-primary flex items-center gap-1">Categories</button>
+          <span>/</span>
+          <span className="text-slate-800 dark:text-slate-300">SaathApp Product</span>
+        </div>
+
         <ProductHero />
         
         <section className="mb-12">

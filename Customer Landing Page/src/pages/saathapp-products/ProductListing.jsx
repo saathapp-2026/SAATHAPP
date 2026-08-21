@@ -353,7 +353,7 @@ export default function ProductListing({
               </button>
               <button onClick={() => navigate('/products/grocery/meat-chicken')} className="flex flex-col items-center justify-start p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-red-100/50 dark:bg-red-800/20">
-                  <img src={meatChickenImg} alt="Meat / Chicken" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img src={meatChickenImg} alt="Meat / Chicken" className="w-full h-full object-cover scale-[1.2] group-hover:scale-[1.3] transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-red-900 dark:text-red-100">Meat / Chicken</span>
                 <span className="text-[10px] text-red-700/70 dark:text-red-400/70 mt-1 text-center">Fresh & hygienic cuts</span>
