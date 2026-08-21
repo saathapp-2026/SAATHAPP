@@ -169,6 +169,7 @@ const NAV_SECTIONS = [
     label: "Catalog & Orders",
     items: [
       { id: "products_categories", label: "Products & Categories", icon: Package },
+      { id: "saathpack_management", label: "SaathPack Management", icon: Box },
       { id: "orders", label: "Orders", icon: ShoppingCart },
       { id: "inventory", label: "Inventory", icon: Warehouse },
     ],
@@ -217,7 +218,7 @@ const ROLES = ["Founder", "Super Admin", "Admin", "HR", "Finance", "Operations",
 const ROLE_ACCESS = {
   Founder: null, // null = all
   "Super Admin": null,
-  Admin: ["dashboard", "analytics_reports", "users", "sellers", "professionals", "workers", "vendors", "delivery", "products_categories", "orders", "inventory", "payments_finance", "marketing_cms", "support_ops", "trust_safety", "system", "settings"],
+  Admin: ["dashboard", "analytics_reports", "users", "sellers", "professionals", "workers", "vendors", "delivery", "products_categories", "saathpack_management", "orders", "inventory", "payments_finance", "marketing_cms", "support_ops", "trust_safety", "system", "settings"],
   HR: ["dashboard", "hr", "tasks", "chat", "meetings"],
   Finance: ["dashboard", "payments_finance", "payments", "finance", "reports", "coupons"],
   Operations: ["dashboard", "orders", "inventory", "delivery", "workers", "vendors", "tasks"],
@@ -258,6 +259,7 @@ const ID_TO_PATH = {
   vendors: "/wholesale-partners",
   delivery: "/delivery-partners",
   products_categories: "/products-categories",
+  saathpack_management: "/saathpack-management",
   products: "/products-categories/products",
   categories: "/products-categories/categories",
   orders: "/orders",
@@ -312,6 +314,7 @@ const ROUTE_PREFIX_TO_MODULE = {
   "/wholesale-partners": "vendors",
   "/delivery-partners": "delivery",
   "/products-categories": "products_categories",
+  "/saathpack-management": "saathpack_management",
   "/orders": "orders",
   "/inventory": "inventory",
   "/payments-finance": "payments_finance",
@@ -448,6 +451,61 @@ const MODULES = {
       ["Spiritual / Puja Items", "-", "45", "Complete", "Active"],
       ["Fresh Produce", "Grocery", "3,980", "Incomplete", "Active"],
       ["Cables & Wires", "Electricals", "840", "Complete", "Active"],
+    ],
+  },
+  saathpack_dashboard: {
+    title: "SaathPack Dashboard", subtitle: "Total Orders, Pending Procurement, Manufacturing, Quality Check, Ready for Dispatch, In Transit, Delivered.",
+    primaryAction: "Refresh",
+    kpis: [
+      { label: "Live SKUs", value: "8", delta: "0", up: true },
+      { label: "Pending Procurement", value: "24", delta: "+3", up: false },
+      { label: "Orders Today", value: "15", delta: "+2", up: true },
+      { label: "Avg Delivery", value: "6.5 Days", delta: "-0.5", up: true },
+    ],
+    columns: ["Total Orders", "Pending Procurement", "Manufacturing", "Quality Check", "Ready for Dispatch", "In Transit", "Delivered"],
+    rows: [
+      ["120", "24", "15", "8", "12", "30", "415"],
+    ],
+  },
+  saathpack_products: {
+    title: "SaathPack Products", subtitle: "Manage B2B packaging supplies catalogue.",
+    primaryAction: "Add Product",
+    kpis: [
+      { label: "Live SKUs", value: "8", delta: "0", up: true },
+    ],
+    columns: ["Product", "Pack Size", "MOQ", "Pricing", "Specifications", "Status"],
+    rows: [
+      ["SaathApp Paper Bag (Medium)", "100 pcs", "100", "₹499", "Kraft Paper, 32x22x28 cm", "Active"],
+      ["SaathApp Carton Box", "10 pcs", "10", "₹399", "Corrugated, 18x12x12 inch", "Active"],
+      ["Aluminium Foil Roll", "1 Roll", "1", "₹249", "18 inch x 72 Meter", "Active"],
+    ],
+  },
+  saathpack_manufacturers: {
+    title: "Manufacturers / Suppliers", subtitle: "B2B suppliers for SaathPack packaging.",
+    primaryAction: "Add Supplier",
+    kpis: [
+      { label: "Active Suppliers", value: "4", delta: "+1", up: true },
+    ],
+    columns: ["Manufacturer", "Product Supplied", "Capacity", "Rate", "Lead Time", "Quality Rating"],
+    rows: [
+      ["Packly Packaging Co.", "Paper Bags", "50,000/month", "₹6.50", "3 days", "4.8"],
+      ["BoxIt India", "Corrugated Boxes", "20,000/month", "₹35.00", "5 days", "4.6"],
+      ["WrapFlex", "Foil & Wraps", "10,000/month", "₹180.00", "2 days", "4.9"],
+    ],
+  },
+  saathpack_orders: {
+    title: "SaathPack Orders", subtitle: "Track wholesale orders through the fulfillment workflow.",
+    primaryAction: "Export Orders",
+    kpis: [
+      { label: "Orders Today", value: "15", delta: "+2", up: true },
+      { label: "Pending Procurement", value: "24", delta: "+3", up: false },
+    ],
+    columns: ["Order ID", "Business", "Total", "Items", "Status", "Delivery"],
+    rows: [
+      ["SP-391204", "Green Basket", "₹4,990", "10 Packs", "Procurement", "Pending"],
+      ["SP-841922", "UrbanCraft Store", "₹2,490", "2 Rolls", "Dispatch", "On Time"],
+      ["SP-119284", "QuickFix Hardware", "₹14,950", "30 Packs", "QC", "Delayed"],
+      ["SP-991201", "Sunrise Foods", "₹1,245", "5 Packs", "Delivered", "Completed"],
     ],
   },
   orders: {
@@ -3281,6 +3339,15 @@ const AnalyticsReportsPage = ({ onToast }) => {
   );
 };
 
+const SaathPackManagementPage = ({ onToast }) => (
+  <GenericWrapper basePath="/saathpack-management" defaultTab="dashboard" onToast={onToast} tabs={{
+    dashboard: { label: "Dashboard", id: "saathpack_dashboard" },
+    products: { label: "Products", id: "saathpack_products" },
+    manufacturers: { label: "Manufacturers", id: "saathpack_manufacturers" },
+    orders: { label: "Orders", id: "saathpack_orders" },
+  }} />
+);
+
 const ProductsCategoriesPage = ({ onToast }) => (
   <GenericWrapper basePath="/products-categories" defaultTab="products" onToast={onToast} tabs={{
     products: { label: "All Products", id: "products" },
@@ -3727,6 +3794,7 @@ export default function App() {
       case "vendors": return <VendorsWrapper onToast={pushToast} />;
       case "delivery": return <DeliveryWrapper onToast={pushToast} />;
       case "products_categories": return <ProductsCategoriesPage onToast={pushToast} />;
+      case "saathpack_management": return <SaathPackManagementPage onToast={pushToast} />;
       case "orders": return <OrdersWrapper onToast={pushToast} />;
       case "inventory": return <InventoryWrapper onToast={pushToast} />;
       case "payments_finance": return <PaymentsFinancePage onToast={pushToast} />;

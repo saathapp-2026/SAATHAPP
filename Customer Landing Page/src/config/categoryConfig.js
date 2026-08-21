@@ -78,8 +78,13 @@ export const MASTER_CATEGORIES = [
     isActive: true,
     isFeatured: true,
     subcategories: [
-      'Laptops & Computers', 'Audio & Headphones', 'Smart Wearables',
-      'Cameras & Accessories', 'Computer Accessories', 'Home Appliances'
+      '💡 Lights & Bulbs', '🔘 Switches & Sockets', '🌀 Fans',
+      '❄️ Air Conditioners', '🌬️ Air Coolers', '🔥 Heaters',
+      '🚿 Geysers', '⚡ Wires & Cables', '🔌 Extension Boards & Plugs',
+      '🔋 Inverters & Batteries', '📺 Televisions', '📡 DTH & Set-Top Boxes',
+      '📹 CCTV & Security', '🔔 Doorbells', '🏠 Smart Home Electronics',
+      '🍳 Kitchen Appliances', '🧹 Cleaning Appliances', '☕ Small Home Appliances',
+      '🧊 Refrigerators & Freezers', '🧺 Washing Machines'
     ]
   },
   {
