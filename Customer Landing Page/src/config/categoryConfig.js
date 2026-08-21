@@ -221,7 +221,7 @@ export const MASTER_CATEGORIES = [
     id: 'gifts',
     name: 'Gifts Items',
     slug: 'gifts',
-    url: '/products/gifts',
+    url: '/products/gift-set',
     iconName: 'Gift',
     image: '/images/categories/gifts.png',
     visualDesc: 'Gift box',
