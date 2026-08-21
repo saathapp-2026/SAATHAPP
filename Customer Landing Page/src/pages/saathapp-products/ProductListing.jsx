@@ -31,7 +31,7 @@ const CATEGORY_ICON_MAP = {
   services: Wrench,
   'books-stationery': BookOpen,
   footwear: Footprints,
-  gifts: Gift,
+  'gift-set': Gift,
   saathapp: Sparkles,
   agriculture: Sprout,
   construction: HardHat,

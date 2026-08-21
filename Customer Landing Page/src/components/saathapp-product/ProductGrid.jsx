@@ -77,9 +77,7 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
           >
             {product.image ? (
               <img src={product.image} alt={product.name} loading="lazy" className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform" />
-            ) : (
-              <span className="text-4xl">🛍️</span>
-            )}
+            ) : null}
           </div>
 
           {/* Info */}

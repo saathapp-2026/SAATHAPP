@@ -21,83 +21,8 @@ export default function SaathPackLandingPage({
   toggleDarkMode
 }) {
   const navigate = useNavigate();
-  const [authStatus, setAuthStatus] = useState('checking'); // 'checking', 'unauthenticated', 'unauthorized', 'authorized'
+  // Bypassed auth guards as requested
 
-  useEffect(() => {
-    // 1. Check Seller Session First
-    const sellerSession = getStoredSellerAuth();
-    if (sellerSession && isSellerSessionValid(sellerSession)) {
-      setAuthStatus('authorized');
-      return;
-    }
-
-    // 2. Check Customer Session
-    const customerSession = typeof window !== 'undefined' ? window.sessionStorage.getItem('saathapp-auth-session') : null;
-    if (customerSession) {
-      // They are logged in as customer, but not as a seller (since seller check failed above)
-      setAuthStatus('unauthorized');
-    } else {
-      setAuthStatus('unauthenticated');
-    }
-  }, []);
-
-  if (authStatus === 'checking') {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  // Guard: Not logged in at all
-  if (authStatus === 'unauthenticated') {
-    return (
-      <div className="min-h-screen bg-slate-50 p-4 flex flex-col items-center pt-20">
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 max-w-md w-full text-center">
-          <Package className="w-16 h-16 text-primary mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-slate-800 mb-2">SaathPack Access</h2>
-          <p className="text-slate-600 mb-6">
-            SaathPack is exclusively available for registered SaathApp businesses, sellers, vendors, partners and franchisees.
-          </p>
-          <div className="flex flex-col gap-3">
-            <button 
-              onClick={() => navigate('/seller/login')}
-              className="w-full bg-primary text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors"
-            >
-              <LogIn className="w-5 h-5" /> Login
-            </button>
-            <button 
-              onClick={() => navigate('/seller/register')}
-              className="w-full bg-slate-100 text-slate-700 py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-slate-200 transition-colors"
-            >
-              <UserPlus className="w-5 h-5" /> Register as Business
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Guard: Logged in as normal customer, not a seller
-  if (authStatus === 'unauthorized') {
-    return (
-      <div className="min-h-screen bg-slate-50 p-4 flex flex-col items-center pt-20">
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 max-w-md w-full text-center">
-          <AlertCircle className="w-16 h-16 text-amber-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-slate-800 mb-2">Business Account Required</h2>
-          <p className="text-slate-600 mb-6">
-            SaathPack is available only to registered SaathApp sellers, vendors, suppliers, partners and franchisees. No ordering capability for standard accounts.
-          </p>
-          <button 
-            onClick={() => navigate('/seller/login')}
-            className="w-full bg-primary text-white py-3 rounded-lg font-bold hover:bg-primary/90 transition-colors"
-          >
-            Switch to Business Account
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   // Fully Authorized View
   const categories = [
