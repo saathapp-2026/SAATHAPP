@@ -55,9 +55,10 @@ export const calculateCartTotals = (cartItems, isPlusMember = false, appliedCoup
   const subtotalAfterCoupon = Math.max(0, effectiveSubtotal - couponDiscountValue);
 
   // RULE 4: DELIVERY BENEFIT
-  let deliveryFee = 50;
+  const hasProducts = cartItems.some(item => item.type !== 'service');
+  let deliveryFee = hasProducts ? 50 : 0;
   let deliveryDiscount = 0;
-  if (isPlusMember && subtotalAfterCoupon > 499) {
+  if (hasProducts && isPlusMember && subtotalAfterCoupon > 499) {
     deliveryFee = 0;
     deliveryDiscount = 50;
   }

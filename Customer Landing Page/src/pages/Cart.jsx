@@ -98,8 +98,23 @@ export default function Cart({ onCheckout, onBack }) {
                     <div className="flex-1 flex flex-col justify-between">
                       <div>
                         <h3 className="font-bold text-slate-900 dark:text-slate-100">{item.name}</h3>
-                        {item.variant && <p className="text-xs text-slate-500 mb-1">Variant: {item.variant}</p>}
-                        <p className="text-[10px] uppercase font-bold text-slate-400 mb-2">Sold by: {item.brand || item.seller || 'SaathApp Official'}</p>
+                        {item.type === 'service' ? (
+                          <div className="text-xs text-slate-600 dark:text-slate-400 mb-2 space-y-1 mt-1 bg-slate-50 dark:bg-slate-800 p-2 rounded-lg border border-slate-100 dark:border-slate-700">
+                            <p><span className="font-semibold text-slate-700 dark:text-slate-300">Date:</span> {item.serviceDate}</p>
+                            <p><span className="font-semibold text-slate-700 dark:text-slate-300">Time:</span> {item.serviceTime}</p>
+                            <p className="truncate"><span className="font-semibold text-slate-700 dark:text-slate-300">Address:</span> {item.address}</p>
+                            {item.instructions && <p className="truncate"><span className="font-semibold text-slate-700 dark:text-slate-300">Note:</span> {item.instructions}</p>}
+                            <p className="text-[10px] uppercase font-bold text-primary mt-1 cursor-pointer hover:underline" onClick={() => {
+                              // We can simulate an edit by removing and navigating back, or just tell the user this is for demo.
+                              alert('Editing service details will open the booking flow modal.');
+                            }}>Edit Booking Details</p>
+                          </div>
+                        ) : (
+                          <>
+                            {item.variant && <p className="text-xs text-slate-500 mb-1">Variant: {item.variant}</p>}
+                            <p className="text-[10px] uppercase font-bold text-slate-400 mb-2">Sold by: {item.brand || item.seller || 'SaathApp Official'}</p>
+                          </>
+                        )}
                         
                         <div className="flex items-center gap-2 mb-1">
                           <span className="text-lg font-black text-primary">₹{effectivePrice}</span>
@@ -260,7 +275,7 @@ export default function Cart({ onCheckout, onBack }) {
                         <span className="text-slate-400 line-through text-xs font-normal">₹50</span> Free
                       </span>
                     ) : (
-                      <span className="font-medium">₹50.00</span>
+                      <span className="font-medium">₹{deliveryFee.toFixed(2)}</span>
                     )}
                   </div>
                 </div>

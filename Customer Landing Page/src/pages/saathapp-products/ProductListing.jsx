@@ -17,6 +17,7 @@ import premiumGroceryImg from '../../assets/grocery/premium-grocery.jpg';
 import dairyBakeryImg from '../../assets/grocery/dairy-bakery.jpg';
 import fruitsVegImg from '../../assets/grocery/fruits-veg.jpg';
 import dealsImg from '../../assets/grocery/deals.jpg';
+import meatChickenImg from '../../assets/grocery/meat-chicken.jpg';
 
 // Icon Map for Category Cards per PDF Spec Visual Language
 const CATEGORY_ICON_MAP = {
@@ -264,7 +265,7 @@ export default function ProductListing({
     } else if (catId === 'gift-set') {
       navigate('/products/gift-set');
     } else if (catId === 'services') {
-      navigate('/services');
+      navigate('/products/services');
     } else {
       navigate(`/products/${catId}`);
     }
@@ -328,7 +329,7 @@ export default function ProductListing({
         {categoryId === 'grocery' && !subCategoryId && !isSearch && !isAllCategories && !isOffersPage && (
           <div className="mb-10">
             <h2 className="text-xl font-black mb-4">Shop Grocery</h2>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+            <div className="grid grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
               <button onClick={() => setFilters({...filters, groceryTier: 'Normal Grocery'})} className="flex flex-col items-center justify-start p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-primary hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-slate-50 dark:bg-slate-800">
                   <img src={normalGroceryImg} alt="Normal Grocery" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
@@ -349,6 +350,13 @@ export default function ProductListing({
                 </div>
                 <span className="font-bold text-sm text-center text-emerald-900 dark:text-emerald-100">Fresh Fruits & Veg</span>
                 <span className="text-[10px] text-emerald-700/70 dark:text-emerald-400/70 mt-1 text-center">Farm fresh & handpicked</span>
+              </button>
+              <button onClick={() => navigate('/products/grocery/meat-chicken')} className="flex flex-col items-center justify-start p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
+                <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-red-100/50 dark:bg-red-800/20">
+                  <img src={meatChickenImg} alt="Meat / Chicken" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <span className="font-bold text-sm text-center text-red-900 dark:text-red-100">Meat / Chicken</span>
+                <span className="text-[10px] text-red-700/70 dark:text-red-400/70 mt-1 text-center">Fresh & hygienic cuts</span>
               </button>
               <button onClick={() => navigate('/products/grocery/dairy-bakery')} className="flex flex-col items-center justify-start p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-blue-100/50 dark:bg-blue-800/20">

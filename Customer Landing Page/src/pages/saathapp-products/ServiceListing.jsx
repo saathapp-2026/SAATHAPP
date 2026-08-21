@@ -113,7 +113,7 @@ export default function ServiceListing({
                     animate={{ opacity: 1, y: 0 }}
                     key={service.id} 
                     className="bg-surface border border-theme-border rounded-2xl shadow-sm overflow-hidden hover:shadow-premium hover:-translate-y-1 transition-all flex flex-col group cursor-pointer"
-                    onClick={() => navigate(`/services/${service.id}`)}
+                    onClick={() => navigate(`/products/services/service/${service.id}`)}
                   >
                     <div className="h-48 bg-slate-200 dark:bg-slate-800 relative overflow-hidden flex items-center justify-center">
                        {service.image ? (
@@ -152,7 +152,7 @@ export default function ServiceListing({
                           <p className="text-xl font-black text-slate-900 dark:text-white">₹{service.startingPrice}</p>
                         </div>
                         <button 
-                          onClick={(e) => { e.stopPropagation(); navigate(`/services/${service.id}`); }}
+                          onClick={(e) => { e.stopPropagation(); navigate(`/products/services/service/${service.id}`); }}
                           className="bg-primary text-white px-4 py-2 rounded-btn font-black text-xs uppercase tracking-wider hover:bg-primary-dark transition-colors"
                         >
                           Book Now

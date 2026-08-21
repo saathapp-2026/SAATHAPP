@@ -69,6 +69,7 @@ const OrdersLayout = lazy(() => import('./dashboard/OrdersLayout'));
 const WalletLayout = lazy(() => import('./dashboard/WalletLayout'));
 const MarketingLayout = lazy(() => import('./dashboard/MarketingLayout'));
 const AnalyticsLayout = lazy(() => import('./dashboard/AnalyticsLayout'));
+const LazySaathPackOrders = lazy(() => import('./dashboard/SaathPackOrdersPage'));
 
 import { SellerProfilePlaceholder, BankDetailsPlaceholder, AccountSettingsPlaceholder } from './dashboard/ProfilePlaceholders';
 import { SettlementsPlaceholder, WithdrawalsPlaceholder, StatementPlaceholder } from './dashboard/WalletPlaceholders';
@@ -287,6 +288,7 @@ export default function SellerRoutes() {
             
             <Route path="orders" element={<SuspenseWrap><OrdersLayout /></SuspenseWrap>}>
               <Route path="list" element={<SuspenseWrap><LazyOrders /></SuspenseWrap>} />
+              <Route path="saathpack" element={<SuspenseWrap><LazySaathPackOrders /></SuspenseWrap>} />
               <Route path="invoices" element={<SuspenseWrap><LazyInvoices /></SuspenseWrap>} />
             </Route>
 

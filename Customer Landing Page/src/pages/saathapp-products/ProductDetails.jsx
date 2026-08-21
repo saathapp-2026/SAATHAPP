@@ -88,7 +88,7 @@ export default function ProductDetails({
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
         <h2 className="text-2xl font-bold mb-4">Product Not Found</h2>
-        <button onClick={() => navigate('/saathapp-products')} className="text-primary hover:underline">Return to Shop</button>
+        <button onClick={() => navigate('/products/saathapp')} className="text-primary hover:underline">Return to Shop</button>
       </div>
     );
   }

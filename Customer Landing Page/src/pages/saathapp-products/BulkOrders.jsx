@@ -41,7 +41,7 @@ export default function BulkOrders({
           </div>
           <h1 className="text-3xl font-black mb-4">Quote Request Received</h1>
           <p className="text-slate-500 mb-8 max-w-md">Thank you for your interest in SaathApp corporate products. Our B2B team will review your request and get back to you with a custom quote within 24 hours.</p>
-          <button onClick={() => navigate('/saathapp-products')} className="px-8 py-3 bg-gradient-primary text-white rounded-xl font-bold shadow-glow-primary hover:scale-105 transition-transform">
+          <button onClick={() => navigate('/products/saathapp')} className="px-8 py-3 bg-gradient-primary text-white rounded-xl font-bold shadow-glow-primary hover:scale-105 transition-transform">
             Return to Store
           </button>
         </main>
@@ -72,7 +72,7 @@ export default function BulkOrders({
         <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-8">
           <button onClick={() => navigate('/')} className="hover:text-primary flex items-center gap-1"><Home size={12} /> Home</button>
           <ChevronRight size={12} />
-          <button onClick={() => navigate('/saathapp-products')} className="hover:text-primary">SaathApp Products</button>
+          <button onClick={() => navigate('/products/saathapp')} className="hover:text-primary">SaathApp Products</button>
           <ChevronRight size={12} />
           <span className="text-slate-800 dark:text-slate-300">Bulk & Corporate Orders</span>
         </div>

@@ -25,7 +25,7 @@ export default function ServiceBookingConfirmation({
         <Header cartCount={cartCount} onCartClick={onCartClick} location={location} onLocationClick={onLocationClick} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <h1 className="text-3xl font-black mb-4 text-slate-800 dark:text-slate-100">Booking Session Expired</h1>
-          <button onClick={() => navigate('/services')} className="bg-primary text-white px-6 py-3 rounded-btn font-bold">Return to Services</button>
+          <button onClick={() => navigate('/products/services')} className="bg-primary text-white px-6 py-3 rounded-btn font-bold">Return to Services</button>
         </main>
       </div>
     );
@@ -118,7 +118,7 @@ export default function ServiceBookingConfirmation({
                 View My Bookings
               </button>
               <button 
-                onClick={() => navigate('/services')}
+                onClick={() => navigate('/products/services')}
                 className="w-full sm:w-auto bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
               >
                 <ArrowLeft size={16} /> Back to Services

@@ -135,7 +135,7 @@ export default function Home({
               if (cat === 'all') {
                 navigate('/products');
               } else if (cat === 'services') {
-                navigate('/services');
+                navigate('/products/services');
               } else {
                 navigate(`/products/${cat}`);
               }

@@ -58,7 +58,7 @@ export default function SaathAppProductHome({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Normal Products Card */}
             <div 
-              onClick={() => navigate('/saathapp-products/normal')}
+              onClick={() => navigate('/products/saathapp/normal')}
               className="group cursor-pointer rounded-2xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
             >
               <div className="h-48 bg-slate-100 dark:bg-slate-800 flex items-center justify-center p-6 text-center">
@@ -76,7 +76,7 @@ export default function SaathAppProductHome({
 
             {/* Premium Products Card */}
             <div 
-              onClick={() => navigate('/saathapp-products/premium')}
+              onClick={() => navigate('/products/saathapp/premium')}
               className="group cursor-pointer rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 to-black dark:from-slate-800 dark:to-black border border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-white"
             >
               <div className="h-48 bg-white/5 flex items-center justify-center p-6 text-center relative overflow-hidden">
@@ -100,13 +100,13 @@ export default function SaathAppProductHome({
         <section>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold">Shop by Category</h2>
-            <button onClick={() => navigate('/saathapp-products/all')} className="text-sm font-semibold text-primary hover:underline">
+            <button onClick={() => navigate('/products/saathapp/all')} className="text-sm font-semibold text-primary hover:underline">
               View All
             </button>
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
             {saathAppCategories.map((cat) => (
-              <ProductCategoryCard key={cat.id} category={cat} onClick={() => navigate(`/saathapp-products/category/${cat.id}`)} />
+              <ProductCategoryCard key={cat.id} category={cat} onClick={() => navigate(`/products/saathapp/category/${cat.id}`)} />
             ))}
           </div>
         </section>
@@ -116,10 +116,10 @@ export default function SaathAppProductHome({
             <div>
               <h3 className="font-bold text-lg mb-4">Categories</h3>
               <ul className="space-y-3">
-                <li><button onClick={() => navigate('/saathapp-products/all')} className="text-primary font-semibold text-sm">All Products</button></li>
+                <li><button onClick={() => navigate('/products/saathapp/all')} className="text-primary font-semibold text-sm">All Products</button></li>
                 {saathAppCategories.map((cat) => (
                   <li key={cat.id}>
-                    <button onClick={() => navigate(`/saathapp-products/category/${cat.id}`)} className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">
+                    <button onClick={() => navigate(`/products/saathapp/category/${cat.id}`)} className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">
                       {cat.name}
                     </button>
                   </li>

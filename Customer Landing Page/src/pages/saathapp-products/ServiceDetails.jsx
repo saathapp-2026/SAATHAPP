@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { services, serviceCategories } from '../../data/services';
@@ -19,7 +19,10 @@ export default function ServiceDetails({
   darkMode,
   toggleDarkMode,
 }) {
-  const { id } = useParams();
+  const routerLocation = useLocation();
+  const pathParts = routerLocation.pathname.split('/');
+  // URL is /products/services/service/:id
+  const id = pathParts[pathParts.length - 1];
   const navigate = useNavigate();
   const [service, setService] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -63,7 +66,7 @@ export default function ServiceDetails({
         <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <h1 className="text-3xl font-black text-slate-800 dark:text-slate-100 mb-4">Service Not Found</h1>
           <p className="text-slate-500 mb-8">The service you are looking for does not exist or has been removed.</p>
-          <button onClick={() => navigate('/services')} className="bg-primary text-white px-6 py-3 rounded-btn font-bold">Browse Services</button>
+          <button onClick={() => navigate('/products/services')} className="bg-primary text-white px-6 py-3 rounded-btn font-bold">Browse Services</button>
         </main>
       </div>
     );
@@ -93,9 +96,9 @@ export default function ServiceDetails({
         <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-500 mb-6 uppercase tracking-wider">
           <button onClick={() => navigate('/')} className="hover:text-primary flex items-center gap-1"><Home size={12} /> Home</button>
           <ChevronRight size={12} />
-          <button onClick={() => navigate('/services')} className="hover:text-primary">Services</button>
+          <button onClick={() => navigate('/products/services')} className="hover:text-primary">Services</button>
           <ChevronRight size={12} />
-          <button onClick={() => navigate(`/services?category=${service.category}`)} className="hover:text-primary">{categoryName}</button>
+          <button onClick={() => navigate(`/products/services?category=${service.category}`)} className="hover:text-primary">{categoryName}</button>
           <ChevronRight size={12} />
           <span className="text-slate-800 dark:text-slate-300">{service.name}</span>
         </div>
@@ -144,7 +147,7 @@ export default function ServiceDetails({
               <p className="text-sm text-slate-500 font-medium mb-6">Price may vary depending on the exact scope of work.</p>
               
               <button 
-                onClick={() => navigate(`/services/book/${service.id}`)}
+                onClick={() => navigate(`/products/services/book/${service.id}`)}
                 className="w-full md:w-auto bg-gradient-primary text-white px-10 py-4 rounded-xl font-black text-sm uppercase tracking-wider shadow-premium hover:shadow-glow-primary transition-all flex items-center justify-center gap-2"
               >
                 <ShieldCheck size={20} />
@@ -189,7 +192,7 @@ export default function ServiceDetails({
       {/* Mobile Sticky Book Button */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-t border-slate-200/60 dark:border-slate-850 p-4 shadow-premium">
          <button 
-           onClick={() => navigate(`/services/book/${service.id}`)}
+           onClick={() => navigate(`/products/services/book/${service.id}`)}
            className="w-full bg-gradient-primary text-white py-4 rounded-xl font-black text-sm uppercase tracking-wider shadow-premium"
          >
            Book Now - ₹{service.startingPrice}

@@ -52,9 +52,9 @@ export default function SaathAppTierListing({
 
   // Handle tier filter changes to redirect to correct route
   const handleTypeChange = (type) => {
-    if (type === 'Normal') navigate('/saathapp-products/normal');
-    else if (type === 'Premium') navigate('/saathapp-products/premium');
-    else if (type === 'All') navigate('/saathapp-products');
+    if (type === 'Normal') navigate('/products/saathapp/normal');
+    else if (type === 'Premium') navigate('/products/saathapp/premium');
+    else if (type === 'All') navigate('/products/saathapp');
   };
 
   let filteredProducts = mockSaathAppProducts.filter(p => p.productTier === tier);
@@ -88,7 +88,7 @@ export default function SaathAppTierListing({
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-          <button onClick={() => navigate('/saathapp-products')} className="hover:text-primary flex items-center gap-1">SaathApp Products</button>
+          <button onClick={() => navigate('/products/saathapp')} className="hover:text-primary flex items-center gap-1">SaathApp Products</button>
           <ChevronRight size={12} />
           <span className="text-slate-800 dark:text-slate-300">{title}</span>
           {activeCategoryId !== 'all' && (
@@ -139,7 +139,7 @@ export default function SaathAppTierListing({
                 <h4 className="text-sm font-semibold text-slate-500 mb-3 uppercase tracking-wider">Categories</h4>
                 <div className="space-y-2">
                   <button 
-                    onClick={() => navigate(`/saathapp-products/${tier.toLowerCase()}`)}
+                    onClick={() => navigate(`/products/saathapp/${tier.toLowerCase()}`)}
                     className={`block text-sm ${activeCategoryId === 'all' ? 'font-bold text-primary' : 'text-slate-600 dark:text-slate-400 hover:text-primary'}`}
                   >
                     All {title}
@@ -147,7 +147,7 @@ export default function SaathAppTierListing({
                   {availableCategories.map(cat => (
                     <button 
                       key={cat.id}
-                      onClick={() => navigate(`/saathapp-products/${tier.toLowerCase()}/${cat.id}`)}
+                      onClick={() => navigate(`/products/saathapp/${tier.toLowerCase()}/${cat.id}`)}
                       className={`block text-sm text-left ${activeCategoryId === cat.id ? 'font-bold text-primary' : 'text-slate-600 dark:text-slate-400 hover:text-primary'}`}
                     >
                       {cat.name}
@@ -189,7 +189,7 @@ export default function SaathAppTierListing({
                     : "We're preparing something great for you."}
                 </p>
                 <button 
-                  onClick={() => navigate(isPremium ? '/saathapp-products/normal' : '/saathapp-products')}
+                  onClick={() => navigate(isPremium ? '/products/saathapp/normal' : '/products/saathapp')}
                   className="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary/90"
                 >
                   {isPremium ? 'Explore Normal Products' : 'Explore SaathApp Products'}
