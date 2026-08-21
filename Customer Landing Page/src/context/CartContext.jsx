@@ -31,7 +31,7 @@ export const CartProvider = ({ children }) => {
     saveSavedForLater(savedItems);
   }, [savedItems]);
 
-  const handleAddToCart = (product, change) => {
+  const handleAddToCart = (product, change = 1) => {
     if (change > 0) {
       trackEvent('add_to_cart', {
         productId: product.id,

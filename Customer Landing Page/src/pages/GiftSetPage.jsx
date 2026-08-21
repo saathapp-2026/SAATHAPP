@@ -12,6 +12,19 @@ import Pagination from '../components/common/Pagination';
 import { products } from '../data/products';
 import { GIFT_SET_CATEGORY } from '../config/categoryConfig';
 
+// Import newly added category images
+import allGiftsImg from '../assets/gifts/all-gifts.png';
+import flowersImg from '../assets/gifts/flowers.jpg';
+import chocolatesImg from '../assets/gifts/chocolates.jpg';
+import sweetsImg from '../assets/gifts/sweets.jpg';
+import dryFruitsImg from '../assets/gifts/dry-fruits.jpg';
+import stationeryImg from '../assets/gifts/stationery.png';
+import crockeryImg from '../assets/gifts/crockery.jpg';
+import clothesImg from '../assets/gifts/clothes.png';
+import perfumesImg from '../assets/gifts/perfumes.jpg';
+import glassCupImg from '../assets/gifts/glass-cup.jpg';
+import personalizedImg from '../assets/gifts/personalized.jpg';
+
 const ITEMS_PER_PAGE = 12;
 
 const SUBCATEGORY_ICONS = {
@@ -485,17 +498,17 @@ export default function GiftSetPage({
         <div className="mb-8">
           <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
             {[
-              { id: 'All', label: 'All', icon: '🎁' },
-              { id: 'Chocolate', label: 'Chocolate', icon: '🍫' },
-              { id: 'Flower', label: 'Flowers', icon: '💐' },
-              { id: 'Sweets', label: 'Sweets', icon: '🍬' },
-              { id: 'Dry Fruit', label: 'Dry Fruits', icon: '🥜' },
-              { id: 'Stationery', label: 'Stationery', icon: '✏️' },
-              { id: 'Crockery', label: 'Crockery', icon: '🍵' },
-              { id: 'Clothes', label: 'Clothes', icon: '👔' },
-              { id: 'Perfume', label: 'Perfume', icon: '✨' },
-              { id: 'Glass & Cup', label: 'Glass & Cup', icon: '☕' },
-              { id: 'Personalized', label: 'Personalized', icon: '🖼️' },
+              { id: 'All', label: 'All', icon: '🎁', image: allGiftsImg },
+              { id: 'Chocolate', label: 'Chocolate', icon: '🍫', image: chocolatesImg },
+              { id: 'Flower', label: 'Flowers', icon: '💐', image: flowersImg },
+              { id: 'Sweets', label: 'Sweets', icon: '🍬', image: sweetsImg },
+              { id: 'Dry Fruit', label: 'Dry Fruits', icon: '🥜', image: dryFruitsImg },
+              { id: 'Stationery', label: 'Stationery', icon: '✏️', image: stationeryImg },
+              { id: 'Crockery', label: 'Crockery', icon: '🍵', image: crockeryImg },
+              { id: 'Clothes', label: 'Clothes', icon: '👔', image: clothesImg },
+              { id: 'Perfume', label: 'Perfume', icon: '✨', image: perfumesImg },
+              { id: 'Glass & Cup', label: 'Glass & Cup', icon: '☕', image: glassCupImg },
+              { id: 'Personalized', label: 'Personalized', icon: '🖼️', image: personalizedImg },
             ].map(cat => {
               const active = selectedSubCategory === cat.id;
               return (
@@ -508,7 +521,13 @@ export default function GiftSetPage({
                       : 'bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-rose-400 hover:shadow-xs font-semibold'
                   }`}
                 >
-                  <span className="text-2xl">{cat.icon}</span>
+                  {cat.image ? (
+                    <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-slate-50 dark:bg-slate-800">
+                      <img src={cat.image} alt={cat.label} className="w-full h-full object-cover" />
+                    </div>
+                  ) : (
+                    <span className="text-2xl h-8 flex items-center justify-center">{cat.icon}</span>
+                  )}
                   <span className="text-[11px] tracking-tight whitespace-nowrap">{cat.label}</span>
                 </button>
               );

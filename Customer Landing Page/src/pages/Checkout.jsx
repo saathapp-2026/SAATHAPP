@@ -46,8 +46,22 @@ export default function Checkout({ onBack, onConfirmOrder }) {
     );
   }
 
-  const handleNext = () => setStep(s => Math.min(s + 1, 4));
-  const handlePrev = () => setStep(s => Math.max(s - 1, 1));
+  const hasProducts = cartItems.some(item => item.type !== 'service');
+  const hasServices = cartItems.some(item => item.type === 'service');
+
+  const handleNext = () => {
+    setStep(s => {
+      if (s === 1 && !hasProducts) return 3; // Skip Delivery if no products
+      return Math.min(s + 1, 4);
+    });
+  };
+  
+  const handlePrev = () => {
+    setStep(s => {
+      if (s === 3 && !hasProducts) return 1; // Skip Delivery if no products
+      return Math.max(s - 1, 1);
+    });
+  };
 
   const handleConfirm = () => {
     const isDevMockEnabled = import.meta.env.VITE_ENABLE_DEV_MOCK_LOGIN === 'true';
@@ -81,7 +95,7 @@ export default function Checkout({ onBack, onConfirmOrder }) {
           
           {[
             { num: 1, label: 'Address', icon: MapPin },
-            { num: 2, label: 'Delivery', icon: Truck },
+            ...(hasProducts ? [{ num: 2, label: 'Delivery', icon: Truck }] : []),
             { num: 3, label: 'Payment', icon: CreditCard },
             { num: 4, label: 'Confirm', icon: CheckCircle2 }
           ].map((s) => (

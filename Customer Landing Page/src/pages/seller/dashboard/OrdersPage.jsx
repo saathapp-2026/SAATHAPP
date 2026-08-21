@@ -476,6 +476,13 @@ export default function OrdersPage() {
           </button>
           <button
             type="button"
+            onClick={() => window.location.href = '/seller/dashboard/orders/saathpack'}
+            className="px-3.5 py-2 rounded-lg text-sm font-semibold border border-primary text-primary bg-primary/5 hover:bg-primary/10"
+          >
+            SaathPack Orders
+          </button>
+          <button
+            type="button"
             onClick={() => setShowAnalytics((v) => !v)}
             className="px-3.5 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-surface hover:bg-page"
           >

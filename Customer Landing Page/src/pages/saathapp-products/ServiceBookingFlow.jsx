@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { services } from '../../data/services';
 import { ChevronRight, Calendar, Clock, MapPin, ChevronLeft, CheckCircle2 } from 'lucide-react';
+
+import { useCart } from '../../hooks/useCart';
 
 export default function ServiceBookingFlow({
   cartCount,
@@ -16,9 +18,13 @@ export default function ServiceBookingFlow({
   toggleDarkMode,
   savedAddresses
 }) {
-  const { id } = useParams();
+  const routerLocation = useLocation();
+  const pathParts = routerLocation.pathname.split('/');
+  // URL is /products/services/book/:id
+  const id = pathParts[pathParts.length - 1];
   const navigate = useNavigate();
   const [service, setService] = useState(null);
+  const { handleAddToCart } = useCart();
   
   const [step, setStep] = useState(1);
   const [selectedDate, setSelectedDate] = useState('');
@@ -45,7 +51,7 @@ export default function ServiceBookingFlow({
       setAvailableDates(dates);
       setSelectedDate(dates[0].val);
     } else {
-      navigate('/services');
+      navigate('/products/services');
     }
   }, [id, navigate]);
 
@@ -59,26 +65,31 @@ export default function ServiceBookingFlow({
     } else if (step === 2 && selectedAddress) {
       setStep(3);
     } else if (step === 3) {
-      // Create mock booking
-      const newBooking = {
-        id: `#SA${Math.floor(100000 + Math.random() * 900000)}`,
+      // Add to global cart instead of direct booking
+      const serviceCartItem = {
+        id: `service_${service.id}_${Date.now()}`,
+        type: 'service',
         serviceId: service.id,
-        service: service.name,
-        serviceName: service.name,
-        date: selectedDate,
-        time: selectedTime,
+        name: service.name,
+        image: service.image,
+        category: 'services',
+        price: service.startingPrice + 20, // Including convenience fee
+        originalPrice: service.startingPrice + 20,
+        discount: 0,
+        quantity: 1,
+        
+        serviceDate: selectedDate,
+        serviceTime: selectedTime,
         address: selectedAddress,
-        status: 'Scheduled',
-        total: service.startingPrice + 20,
-        price: service.startingPrice + 20,
+        instructions: instructions,
+        
         provider: 'To be assigned',
-        createdAt: new Date().toISOString()
+        duration: 'Standard',
+        availability: 'Available'
       };
       
-      const existing = JSON.parse(localStorage.getItem('saath_bookings') || '[]');
-      localStorage.setItem('saath_bookings', JSON.stringify([newBooking, ...existing]));
-      
-      navigate('/services/booking-confirmed', { state: { booking: newBooking } });
+      handleAddToCart(serviceCartItem, 1);
+      navigate('/cart');
     }
   };
 
@@ -88,7 +99,7 @@ export default function ServiceBookingFlow({
       
       <main className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 md:pb-10">
         <div className="flex items-center gap-4 mb-8">
-          <button onClick={() => step === 1 ? navigate(`/services/${service.id}`) : setStep(step - 1)} className="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors">
+          <button onClick={() => step === 1 ? navigate(`/products/services/service/${service.id}`) : setStep(step - 1)} className="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors">
             <ChevronLeft size={20} />
           </button>
           <h1 className="text-2xl font-black uppercase tracking-wider text-slate-900 dark:text-white">Book Service</h1>

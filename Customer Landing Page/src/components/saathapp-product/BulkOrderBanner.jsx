@@ -19,7 +19,7 @@ export default function BulkOrderBanner() {
         </div>
       </div>
       <button 
-        onClick={() => navigate('/saathapp-products/bulk-orders')}
+        onClick={() => navigate('/products/saathapp/bulk-orders')}
         className="shrink-0 px-6 py-2.5 rounded-xl border border-green-600 text-green-700 dark:text-green-400 font-bold hover:bg-green-600 hover:text-white transition-colors"
       >
         Request a Quote
