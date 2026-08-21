@@ -5,6 +5,14 @@ import { ShoppingBag, ShoppingCart, Package, Box, MapPin, Truck, CheckCircle2, C
 import { saathPackProducts } from '../../data/saathPackProducts';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import paperBagsImg from '../../assets/saathpack-paper-bags.png';
+import deliveryBagsImg from '../../assets/saathpack-delivery-bags.png';
+import pouchesImg from '../../assets/saathpack-pouches.png';
+import corrugatedBoxesImg from '../../assets/saathpack-corrugated-boxes.png';
+import cartonBoxesImg from '../../assets/saathpack-carton-boxes.png';
+import foilWrapsImg from '../../assets/saathpack-foil-wraps.png';
+import tapesLabelsImg from '../../assets/saathpack-tapes-labels.png';
+import otherSuppliesImg from '../../assets/saathpack-other-supplies.png';
 
 export default function SaathPackLandingPage({
   cartCount,
@@ -26,14 +34,14 @@ export default function SaathPackLandingPage({
 
   // Fully Authorized View
   const categories = [
-    { name: 'Paper Bags', desc: 'All sizes', img: '/images/saathpack/saathapp_paper_bag.jpg' },
-    { name: 'Delivery Bags', desc: 'All types', img: '/images/saathpack/saathapp_delivery_bag.jpg' },
-    { name: 'Pouches', desc: 'Kraft, Standup, Ziplock & more', img: '/images/saathpack/saathapp_standup_pouch.jpg' },
-    { name: 'Corrugated Boxes', desc: 'All sizes', img: '/images/saathpack/saathapp_corrugated_box.jpg' },
-    { name: 'Carton Boxes', desc: 'All sizes', img: '/images/saathpack/saathapp_carton_box.jpg' },
-    { name: 'Foil & Wraps', desc: 'Foil, Butter Paper, Cling Film & more', img: '/images/saathpack/aluminium_foil_roll.jpg' },
-    { name: 'Tapes & Labels', desc: 'Tapes, Labels, Stickers & more', img: '/images/saathpack/saathapp_bopp_tape.jpg' },
-    { name: 'Other Supplies', desc: 'Bubble Wrap, Strapping & more', img: '/images/saathpack/bubble_wrap_roll.jpg' },
+    { name: 'Paper Bags', desc: 'All sizes', img: paperBagsImg || '/images/saathpack/saathapp_paper_bag.jpg' },
+    { name: 'Delivery Bags', desc: 'All types', img: deliveryBagsImg || '/images/saathpack/saathapp_delivery_bag.jpg' },
+    { name: 'Pouches', desc: 'Kraft, Standup, Ziplock & more', img: pouchesImg || '/images/saathpack/saathapp_standup_pouch.jpg' },
+    { name: 'Corrugated Boxes', desc: 'All sizes', img: corrugatedBoxesImg || '/images/saathpack/saathapp_corrugated_box.jpg' },
+    { name: 'Carton Boxes', desc: 'All sizes', img: cartonBoxesImg || '/images/saathpack/saathapp_carton_box.jpg' },
+    { name: 'Foil & Wraps', desc: 'Foil, Butter Paper, Cling Film & more', img: foilWrapsImg || '/images/saathpack/aluminium_foil_roll.jpg' },
+    { name: 'Tapes & Labels', desc: 'Tapes, Labels, Stickers & more', img: tapesLabelsImg || '/images/saathpack/saathapp_bopp_tape.jpg' },
+    { name: 'Other Supplies', desc: 'Bubble Wrap, Strapping & more', img: otherSuppliesImg || '/images/saathpack/bubble_wrap_roll.jpg' },
   ];
 
   return (
@@ -224,8 +232,13 @@ export default function SaathPackLandingPage({
                 onClick={() => navigate(`/saathpack/products?category=${encodeURIComponent(cat.name)}`)}
                 className="bg-white border border-slate-100 rounded-xl p-3 flex flex-col items-center text-center cursor-pointer hover:border-primary hover:shadow-md transition-all group"
               >
-                <div className="w-full aspect-square mb-4 p-2">
-                  <img src={cat.img} alt={cat.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform mix-blend-multiply" />
+                <div className="w-full aspect-square mb-4 p-2 overflow-hidden rounded-lg">
+                  <img 
+                    src={cat.img} 
+                    alt={cat.name} 
+                    className="w-full h-full group-hover:scale-105 transition-transform rounded-lg" 
+                    style={{ width: '100%', height: '100%', objectFit: (typeof cat.img === 'string' && cat.img.startsWith('http')) ? 'contain' : 'cover' }} 
+                  />
                 </div>
                 <h3 className="font-bold text-slate-900 text-sm group-hover:text-primary transition-colors">{cat.name}</h3>
                 <p className="text-xs text-slate-500 mt-1 mb-4 h-8 flex items-center justify-center">{cat.desc}</p>

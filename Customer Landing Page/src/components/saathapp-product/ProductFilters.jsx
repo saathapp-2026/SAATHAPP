@@ -17,6 +17,8 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
     { id: 'gift-set', name: GIFT_SET_CATEGORY.name }
   ];
 
+  const isFootwear = activeCategory === 'footwear' || activeCategory === 'shoes-slippers-sandals' || activeCategory === 'shoes';
+
   return (
     <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-800 space-y-6 shadow-2xs">
       
@@ -48,6 +50,31 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
         </ul>
       </div>
 
+      {/* Gender / Age Filter for Footwear */}
+      {isFootwear && (
+        <>
+          <div className="h-px bg-slate-100 dark:bg-slate-800" />
+          <div>
+            <h3 className="font-extrabold mb-3 uppercase text-xs tracking-wider text-slate-400">Gender / Age</h3>
+            <ul className="space-y-2.5 text-xs">
+              {['Men', 'Women', 'Boys', 'Girls', 'Kids', 'Babies'].map(gender => (
+                <li key={gender}>
+                  <label className="flex items-center gap-3 cursor-pointer group">
+                    <input 
+                      type="checkbox" 
+                      checked={filters.gender === gender}
+                      onChange={() => handleFilterChange('gender', gender)}
+                      className="rounded text-emerald-500 focus:ring-emerald-500 accent-emerald-500" 
+                    />
+                    <span className="text-slate-600 dark:text-slate-300 group-hover:text-emerald-500 transition-colors">{gender}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
+
       <div className="h-px bg-slate-100 dark:bg-slate-800" />
 
       {/* Price Filter */}
@@ -69,6 +96,91 @@ export default function ProductFilters({ filters, setFilters, activeCategory, on
           ))}
         </ul>
       </div>
+
+      {/* Additional Footwear Filters (Size, Colour, Brand, Usage) below Price */}
+      {isFootwear && (
+        <>
+          <div className="h-px bg-slate-100 dark:bg-slate-800" />
+          <div>
+            <h3 className="font-extrabold mb-3 uppercase text-xs tracking-wider text-slate-400">Size</h3>
+            <ul className="space-y-2.5 text-xs">
+              {['UK6', 'UK7', 'UK8', 'UK9', 'UK10'].map(size => (
+                <li key={size}>
+                  <label className="flex items-center gap-3 cursor-pointer group">
+                    <input 
+                      type="checkbox" 
+                      checked={filters.shoeSize === size}
+                      onChange={() => handleFilterChange('shoeSize', size)}
+                      className="rounded text-emerald-500 focus:ring-emerald-500 accent-emerald-500" 
+                    />
+                    <span className="text-slate-600 dark:text-slate-300 group-hover:text-emerald-500 transition-colors">{size}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="h-px bg-slate-100 dark:bg-slate-800" />
+          <div>
+            <h3 className="font-extrabold mb-3 uppercase text-xs tracking-wider text-slate-400">Colour</h3>
+            <ul className="space-y-2.5 text-xs">
+              {['Black', 'White', 'Brown', 'Blue', 'Red'].map(color => (
+                <li key={color}>
+                  <label className="flex items-center gap-3 cursor-pointer group">
+                    <input 
+                      type="checkbox" 
+                      checked={filters.shoeColor === color}
+                      onChange={() => handleFilterChange('shoeColor', color)}
+                      className="rounded text-emerald-500 focus:ring-emerald-500 accent-emerald-500" 
+                    />
+                    <span className="text-slate-600 dark:text-slate-300 group-hover:text-emerald-500 transition-colors">{color}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="h-px bg-slate-100 dark:bg-slate-800" />
+          <div>
+            <h3 className="font-extrabold mb-3 uppercase text-xs tracking-wider text-slate-400">Brand</h3>
+            <ul className="space-y-2.5 text-xs">
+              {['Nike', 'Adidas', 'Puma', 'Bata'].map(brand => (
+                <li key={brand}>
+                  <label className="flex items-center gap-3 cursor-pointer group">
+                    <input 
+                      type="checkbox" 
+                      checked={filters.shoeBrand === brand}
+                      onChange={() => handleFilterChange('shoeBrand', brand)}
+                      className="rounded text-emerald-500 focus:ring-emerald-500 accent-emerald-500" 
+                    />
+                    <span className="text-slate-600 dark:text-slate-300 group-hover:text-emerald-500 transition-colors">{brand}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="h-px bg-slate-100 dark:bg-slate-800" />
+          <div>
+            <h3 className="font-extrabold mb-3 uppercase text-xs tracking-wider text-slate-400">Usage</h3>
+            <ul className="space-y-2.5 text-xs">
+              {['Running', 'Casual', 'Formal', 'Sports'].map(usage => (
+                <li key={usage}>
+                  <label className="flex items-center gap-3 cursor-pointer group">
+                    <input 
+                      type="checkbox" 
+                      checked={filters.shoeUsage === usage}
+                      onChange={() => handleFilterChange('shoeUsage', usage)}
+                      className="rounded text-emerald-500 focus:ring-emerald-500 accent-emerald-500" 
+                    />
+                    <span className="text-slate-600 dark:text-slate-300 group-hover:text-emerald-500 transition-colors">{usage}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
 
       <div className="h-px bg-slate-100 dark:bg-slate-800" />
 
