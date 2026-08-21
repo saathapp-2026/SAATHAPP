@@ -109,14 +109,14 @@ export default function SaathPackLandingPage({
 
   // Fully Authorized View
   const categories = [
-    { name: 'Paper Bags', desc: 'All sizes', img: paperBagsImg },
-    { name: 'Delivery Bags', desc: 'All types', img: deliveryBagsImg },
-    { name: 'Pouches', desc: 'Kraft, Standup, Ziplock & more', img: pouchesImg },
-    { name: 'Corrugated Boxes', desc: 'All sizes', img: corrugatedBoxesImg },
-    { name: 'Carton Boxes', desc: 'All sizes', img: cartonBoxesImg },
-    { name: 'Foil & Wraps', desc: 'Foil, Butter Paper, Cling Film & more', img: foilWrapsImg },
-    { name: 'Tapes & Labels', desc: 'Tapes, Labels, Stickers & more', img: tapesLabelsImg },
-    { name: 'Other Supplies', desc: 'Bubble Wrap, Strapping & more', img: otherSuppliesImg },
+    { name: 'Paper Bags', desc: 'All sizes', img: paperBagsImg || '/images/saathpack/saathapp_paper_bag.jpg' },
+    { name: 'Delivery Bags', desc: 'All types', img: deliveryBagsImg || '/images/saathpack/saathapp_delivery_bag.jpg' },
+    { name: 'Pouches', desc: 'Kraft, Standup, Ziplock & more', img: pouchesImg || '/images/saathpack/saathapp_standup_pouch.jpg' },
+    { name: 'Corrugated Boxes', desc: 'All sizes', img: corrugatedBoxesImg || '/images/saathpack/saathapp_corrugated_box.jpg' },
+    { name: 'Carton Boxes', desc: 'All sizes', img: cartonBoxesImg || '/images/saathpack/saathapp_carton_box.jpg' },
+    { name: 'Foil & Wraps', desc: 'Foil, Butter Paper, Cling Film & more', img: foilWrapsImg || '/images/saathpack/aluminium_foil_roll.jpg' },
+    { name: 'Tapes & Labels', desc: 'Tapes, Labels, Stickers & more', img: tapesLabelsImg || '/images/saathpack/saathapp_bopp_tape.jpg' },
+    { name: 'Other Supplies', desc: 'Bubble Wrap, Strapping & more', img: otherSuppliesImg || '/images/saathpack/bubble_wrap_roll.jpg' },
   ];
 
   return (
@@ -135,8 +135,19 @@ export default function SaathPackLandingPage({
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
       />
+      <div className="max-w-7xl mx-auto px-4 pt-4 pb-2">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+          <button onClick={() => navigate('/')} className="hover:text-primary flex items-center gap-1">Home</button>
+          <span>/</span>
+          <button onClick={() => navigate('/products')} className="hover:text-primary flex items-center gap-1">Categories</button>
+          <span>/</span>
+          <span className="text-slate-800 dark:text-slate-300">SaathPack</span>
+        </div>
+      </div>
+      
       {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 pt-8 pb-12">
+      <div className="max-w-7xl mx-auto px-4 pt-4 pb-12">
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           {/* Left Content */}
           <div className="flex-1">
@@ -207,7 +218,7 @@ export default function SaathPackLandingPage({
           <div className="flex-1 relative flex justify-center items-center">
             {/* Using a placeholder for the actual composition image in the design */}
             <img 
-              src="https://placehold.co/600x500/e2d1c3/3a291f?text=SaathPack+Products" 
+              src="/images/saathpack/saathpack-hero-composition.jpg" 
               alt="SaathPack Products" 
               className="w-full max-w-lg object-contain mix-blend-multiply" 
             />

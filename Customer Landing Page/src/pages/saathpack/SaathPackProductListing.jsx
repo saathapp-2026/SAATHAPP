@@ -113,10 +113,14 @@ export default function SaathPackProductListing({
       {/* Top Header Section */}
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-[1400px] mx-auto px-4 lg:px-8 py-6">
-          <div className="text-xs text-slate-500 mb-4">
+          <div className="text-xs text-slate-500 mb-4 uppercase tracking-wider font-semibold">
             <span className="cursor-pointer hover:text-primary" onClick={() => navigate('/')}>Home</span> 
             <ChevronRight className="inline w-3 h-3 mx-1" /> 
-            <span className="cursor-pointer hover:text-primary font-semibold text-slate-800" onClick={() => navigate('/products/saathpack/landing')}>SaathPack</span>
+            <span className="cursor-pointer hover:text-primary" onClick={() => navigate('/products')}>Categories</span> 
+            <ChevronRight className="inline w-3 h-3 mx-1" /> 
+            <span className="cursor-pointer hover:text-primary" onClick={() => navigate('/products/saathpack/landing')}>SaathPack</span>
+            <ChevronRight className="inline w-3 h-3 mx-1" /> 
+            <span className="text-slate-800">Products</span>
           </div>
           
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">

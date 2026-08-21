@@ -2521,6 +2521,28 @@ export const festivals = [
 ];
 
 export const subcategories = {
+  'electronics': [
+    { id: 'lights-bulbs', name: '💡 Lights & Bulbs', image: '' },
+    { id: 'switches-sockets', name: '🔘 Switches & Sockets', image: '' },
+    { id: 'fans', name: '🌀 Fans', image: '' },
+    { id: 'air-conditioners', name: '❄️ Air Conditioners', image: '' },
+    { id: 'air-coolers', name: '🌬️ Air Coolers', image: '' },
+    { id: 'heaters', name: '🔥 Heaters', image: '' },
+    { id: 'geysers', name: '🚿 Geysers', image: '' },
+    { id: 'wires-cables', name: '⚡ Wires & Cables', image: '' },
+    { id: 'extension-boards-plugs', name: '🔌 Extension Boards & Plugs', image: '' },
+    { id: 'inverters-batteries', name: '🔋 Inverters & Batteries', image: '' },
+    { id: 'televisions', name: '📺 Televisions', image: '' },
+    { id: 'dth-set-top-boxes', name: '📡 DTH & Set-Top Boxes', image: '' },
+    { id: 'cctv-security', name: '📹 CCTV & Security', image: '' },
+    { id: 'doorbells', name: '🔔 Doorbells', image: '' },
+    { id: 'smart-home', name: '🏠 Smart Home Electronics', image: '' },
+    { id: 'kitchen-appliances', name: '🍳 Kitchen Appliances', image: '' },
+    { id: 'cleaning-appliances', name: '🧹 Cleaning Appliances', image: '' },
+    { id: 'small-home-appliances', name: '☕ Small Home Appliances', image: '' },
+    { id: 'refrigerators-freezers', name: '🧊 Refrigerators & Freezers', image: '' },
+    { id: 'washing-machines', name: '🧺 Washing Machines', image: '' }
+  ],
   'spiritual-puja': [
     { id: 'puja-samagri', name: 'Puja Samagri', image: '' },
     { id: 'diyas-lamps', name: 'Diyas & Lamps', image: '' },

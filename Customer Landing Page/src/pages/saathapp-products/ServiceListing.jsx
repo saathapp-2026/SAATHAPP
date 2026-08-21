@@ -62,6 +62,8 @@ export default function ServiceListing({
         <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6 uppercase tracking-wider">
           <button onClick={() => navigate('/')} className="hover:text-primary flex items-center gap-1"><Home size={12} /> Home</button>
           <ChevronRight size={12} />
+          <button onClick={() => navigate('/products')} className="hover:text-primary flex items-center gap-1">Categories</button>
+          <ChevronRight size={12} />
           <span className="text-slate-800 dark:text-slate-300">Services</span>
         </div>
 
