@@ -328,6 +328,36 @@ export const MASTER_CATEGORIES = [
     ]
   },
   {
+    id: 'furniture',
+    name: 'Furniture',
+    slug: 'furniture',
+    url: '/products/furniture',
+    iconName: 'Box',
+    image: '/images/categories/furniture.png',
+    visualDesc: 'Furniture items',
+    sortOrder: 17,
+    isActive: true,
+    isFeatured: false,
+    subcategories: [
+      'Living Room', 'Bedroom', 'Office Furniture', 'Outdoor Furniture', 'Home Decor'
+    ]
+  },
+  {
+    id: 'beauty-products',
+    name: 'Beauty Products',
+    slug: 'beauty-products',
+    url: '/products/beauty-products',
+    iconName: 'Sparkles',
+    image: '/images/categories/beauty-products.png',
+    visualDesc: 'Beauty products',
+    sortOrder: 18,
+    isActive: true,
+    isFeatured: false,
+    subcategories: [
+      'Skincare', 'Haircare', 'Makeup', 'Fragrances', 'Men\'s Grooming'
+    ]
+  },
+  {
     id: 'saathpack',
     name: 'SAATHPACK',
     slug: 'saathpack',
@@ -335,7 +365,7 @@ export const MASTER_CATEGORIES = [
     iconName: 'Package',
     image: '/images/saathpack/saathapp_corrugated_box.jpg',
     visualDesc: 'Package',
-    sortOrder: 17,
+    sortOrder: 19,
     isActive: true,
     isFeatured: true,
     subcategories: [
@@ -393,10 +423,19 @@ export const HEADER_NAV_ITEMS = [
   { name: 'Grocery', path: '/products/grocery' },
   { name: 'Electronics', path: '/products/electronics' },
   { name: 'Mobiles', path: '/products/mobiles' },
+  { name: 'Medicine & Healthcare', path: '/products/medicine-healthcare' },
   { name: 'Fashion', path: '/products/fashion' },
   { name: 'Household Items', path: '/products/household-items' },
   { name: 'Hardware', path: '/products/hardware' },
   { name: 'Services', path: '/products/services/service' },
+  { name: 'Book & Stationery', path: '/products/book-stationery' },
+  { name: 'Shoes, Slippers & Sandals', path: '/products/shoes-footwear' },
+  { name: 'Agriculture', path: '/products/agriculture' },
+  { name: 'Construction', path: '/products/construction' },
+  { name: 'Vehicles', path: '/products/vehicles' },
+  { name: 'Spiritual / Puja', path: '/products/spiritual-puja' },
+  { name: 'Furniture', path: '/products/furniture' },
+  { name: 'Beauty Products', path: '/products/beauty-products' },
   { name: 'Gift Set', path: '/products/gift-set', isNew: true },
   { name: 'SaathApp Product', path: '/products/saathapp', isNew: true },
   { name: 'SAATHPACK', path: '/products/saathpack/landing', isNew: true },

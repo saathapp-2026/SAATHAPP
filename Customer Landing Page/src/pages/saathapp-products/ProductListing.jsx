@@ -3,13 +3,12 @@ import { useParams, useNavigate, useLocation as useReactLocation } from 'react-r
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ProductGrid from '../../components/saathapp-product/ProductGrid';
-import ProductFilters from '../../components/saathapp-product/ProductFilters';
 import { products, categories, subcategories, festivals } from '../../data/products';
 import { mockSaathAppProducts } from '../../data/saathAppProducts';
 import { MASTER_CATEGORIES, getCategoryByIdOrSlug, getDynamicProductCount } from '../../config/categoryConfig';
 import {
   ChevronLeft, ChevronRight, Home, Leaf, Smartphone, Cross, Shirt, Package, Hammer, Wrench,
-  BookOpen, Footprints, Gift, Sparkles, Sprout, HardHat, Car, Flame, ShoppingBag
+  BookOpen, Footprints, Gift, Sparkles, Sprout, HardHat, Car, Flame, ShoppingBag, Box
 } from 'lucide-react';
 import { trackEvent } from '../../utils/analytics';
 import normalGroceryImg from '../../assets/grocery/normal-grocery.jpg';
@@ -18,6 +17,13 @@ import dairyBakeryImg from '../../assets/grocery/dairy-bakery.jpg';
 import fruitsVegImg from '../../assets/grocery/fruits-veg.jpg';
 import dealsImg from '../../assets/grocery/deals.jpg';
 import meatChickenImg from '../../assets/grocery/meat-chicken.jpg';
+import dryFruitsImg from '../../assets/grocery/dry-fruits.jpg';
+import snacksImg from '../../assets/grocery/snacks.jpg';
+import sweetsImg from '../../assets/grocery/sweets.jpg';
+import iceCreamsImg from '../../assets/grocery/ice-creams.png';
+import biscuitsImg from '../../assets/grocery/biscuits.png';
+import coldDrinksImg from '../../assets/grocery/cold-drinks.jpg';
+
 
 const FASHION_SUBCATEGORY_CARDS = [
   { id: 't-shirts', name: 'T-Shirts', emoji: '👕', iconSrc: '/assets/fashion/tshirts-icon.png' },
@@ -162,13 +168,9 @@ const MEDICINE_SUBCATEGORY_CARDS = [
   { id: 'surgical-supplies', name: 'Surgical & Medical Supplies', emoji: '💉', iconSrc: '/assets/medicine/surgical-icon.png' },
   { id: 'oral-care', name: 'Oral Care', emoji: '🦷', iconSrc: '/assets/medicine/oral-care-icon.png' },
   { id: 'eye-care', name: 'Eye Care & Vision', emoji: '👓', iconSrc: '/assets/medicine/eye-care-icon.png' },
-  { id: 'masks-protection', name: 'Masks & Protective Care', emoji: '😷', iconSrc: '/assets/medicine/masks-icon.png' },
   { id: 'womens-healthcare', name: 'Women\'s Healthcare', emoji: '👩', iconSrc: '/assets/medicine/womens-healthcare-icon.png' },
-  { id: 'elderly-care', name: 'Elderly Care', emoji: '👴', iconSrc: '/assets/medicine/elderly-care-icon.png' },
   { id: 'wellness-recovery', name: 'Wellness & Recovery', emoji: '🧘', iconSrc: '/assets/medicine/wellness-icon.png' },
   { id: 'disinfectants-sanitization', name: 'Disinfectants & Sanitization', emoji: '🧼', iconSrc: '/assets/medicine/disinfectants-icon.png' },
-  { id: 'mobility-accessibility', name: 'Mobility & Accessibility', emoji: '🧑‍🦽', iconSrc: '/assets/medicine/mobility-icon.png' },
-  { id: 'diagnostic-testing', name: 'Diagnostic & Testing Products', emoji: '🧪', iconSrc: '/assets/medicine/diagnostic-icon.png' },
 ];
 
 const VEHICLES_SUBCATEGORY_CARDS = [
@@ -226,8 +228,6 @@ const HARDWARE_SUBCATEGORY_CARDS = [
   { id: 'screwdrivers-tool-sets', name: 'Screwdrivers & Tool Sets', emoji: '🪛', iconSrc: '/assets/hardware/screwdrivers-icon.png' },
   { id: 'hammers-cutting-tools', name: 'Hammers & Cutting Tools', emoji: '🔨', iconSrc: '/assets/hardware/hammers-icon.png' },
   { id: 'tool-boxes-storage', name: 'Tool Boxes & Storage', emoji: '🧰', iconSrc: '/assets/hardware/tool-boxes-icon.png' },
-  { id: 'door-window-hardware', name: 'Door & Window Hardware', emoji: '🚪', iconSrc: '/assets/hardware/door-hardware-icon.png' },
-  { id: 'cabinet-furniture-hardware', name: 'Cabinet & Furniture Hardware', emoji: '🪟', iconSrc: '/assets/hardware/cabinet-hardware-icon.png' },
   { id: 'building-hardware', name: 'Building Hardware', emoji: '🧱', iconSrc: '/assets/hardware/building-hardware-icon.png' },
   { id: 'ladders-safety-equipment', name: 'Ladders & Safety Equipment', emoji: '🪜', iconSrc: '/assets/hardware/ladders-icon.png' },
   { id: 'adhesives-sealants', name: 'Adhesives & Sealants', emoji: '🧴', iconSrc: '/assets/hardware/adhesives-icon.png' },
@@ -357,7 +357,9 @@ const CATEGORY_ICON_MAP = {
   agriculture: Sprout,
   construction: HardHat,
   vehicles: Car,
-  'spiritual-puja': Flame
+  'spiritual-puja': Flame,
+  furniture: Box,
+  'beauty-products': Sparkles
 };
 
 export default function ProductListing({
@@ -687,12 +689,54 @@ export default function ProductListing({
                 <span className="font-bold text-sm text-center text-blue-900 dark:text-blue-100">Dairy & Bakery</span>
                 <span className="text-[10px] text-blue-700/70 dark:text-blue-400/70 mt-1 text-center">Milk, bread, butter and more</span>
               </button>
+              <button onClick={() => navigate('/products/grocery/dry-fruits')} className="flex flex-col items-center justify-start p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
+                <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-orange-100/50 dark:bg-orange-800/20">
+                  <img src={dryFruitsImg} alt="Dry Fruits" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <span className="font-bold text-sm text-center text-orange-900 dark:text-orange-100">Dry Fruits</span>
+                <span className="text-[10px] text-orange-700/70 dark:text-orange-400/70 mt-1 text-center">Premium nuts & dates</span>
+              </button>
               <button onClick={() => navigate('/products/offers')} className="flex flex-col items-center justify-start p-4 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-rose-100/50 dark:bg-rose-800/20">
                   <img src={dealsImg} alt="Deals" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-rose-900 dark:text-rose-100">Deals</span>
                 <span className="text-[10px] text-rose-700/70 dark:text-rose-400/70 mt-1 text-center">Best offers & discounts</span>
+              </button>
+              <button onClick={() => navigate('/products/grocery/snacks-packaged-food')} className="flex flex-col items-center justify-start p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
+                <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-yellow-100/50 dark:bg-yellow-800/20">
+                  <img src={snacksImg} alt="Snacks" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <span className="font-bold text-sm text-center text-yellow-900 dark:text-yellow-100">Snacks</span>
+                <span className="text-[10px] text-yellow-700/70 dark:text-yellow-400/70 mt-1 text-center">Chips & Namkeen</span>
+              </button>
+              <button onClick={() => navigate('/products/grocery/sweets')} className="flex flex-col items-center justify-start p-4 bg-pink-50 dark:bg-pink-900/20 border border-pink-200 dark:border-pink-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
+                <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-pink-100/50 dark:bg-pink-800/20">
+                  <img src={sweetsImg} alt="Sweets" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <span className="font-bold text-sm text-center text-pink-900 dark:text-pink-100">Sweets</span>
+                <span className="text-[10px] text-pink-700/70 dark:text-pink-400/70 mt-1 text-center">Traditional Mithai</span>
+              </button>
+              <button onClick={() => navigate('/products/grocery/ice-creams')} className="flex flex-col items-center justify-start p-4 bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
+                <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-cyan-100/50 dark:bg-cyan-800/20">
+                  <img src={iceCreamsImg} alt="Ice Creams" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <span className="font-bold text-sm text-center text-cyan-900 dark:text-cyan-100">Ice Creams</span>
+                <span className="text-[10px] text-cyan-700/70 dark:text-cyan-400/70 mt-1 text-center">Frozen treats</span>
+              </button>
+              <button onClick={() => navigate('/products/grocery/biscuits')} className="flex flex-col items-center justify-start p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
+                <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-amber-100/50 dark:bg-amber-800/20">
+                  <img src={biscuitsImg} alt="Biscuits" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <span className="font-bold text-sm text-center text-amber-900 dark:text-amber-100">Biscuits</span>
+                <span className="text-[10px] text-amber-700/70 dark:text-amber-400/70 mt-1 text-center">Cookies & Rusks</span>
+              </button>
+              <button onClick={() => navigate('/products/grocery/beverages')} className="flex flex-col items-center justify-start p-4 bg-sky-50 dark:bg-sky-900/20 border border-sky-200 dark:border-sky-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
+                <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-sky-100/50 dark:bg-sky-800/20">
+                  <img src={coldDrinksImg} alt="Cold Drinks" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <span className="font-bold text-sm text-center text-sky-900 dark:text-sky-100">Cold Drinks</span>
+                <span className="text-[10px] text-sky-700/70 dark:text-sky-400/70 mt-1 text-center">Sodas & Juices</span>
               </button>
             </div>
 
@@ -911,33 +955,7 @@ export default function ProductListing({
           </div>
         )}
 
-        {/* Mobile Filter Toggle */}
-        <div className="lg:hidden mb-4 flex items-center justify-between bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs">
-          <span className="text-xs font-bold text-slate-700 dark:text-slate-200">
-            {isAllCategories ? 'All 16 Marketplace Categories' : `${filteredProducts.length} Products`}
-          </span>
-          <button
-            onClick={() => setShowMobileFilters(!showMobileFilters)}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-extrabold cursor-pointer hover:bg-emerald-500/20 transition-colors"
-          >
-            <span>⚙️ Filters</span>
-            <span className="text-[10px]">{showMobileFilters ? '▲ Hide' : '▼ Show'}</span>
-          </button>
-        </div>
-
         <div className="flex flex-col lg:flex-row gap-8 items-start">
-          {/* Filters Sidebar (Collapsible on mobile screens) */}
-          <aside className={`w-full lg:w-64 shrink-0 ${showMobileFilters ? 'block mb-6' : 'hidden lg:block'}`}>
-            <ProductFilters
-              filters={filters}
-              setFilters={setFilters}
-              activeCategory={categoryId || (isAllCategories ? 'all' : '')}
-              onCategoryChange={(catId) => {
-                setShowMobileFilters(false);
-                handleSidebarCategoryChange(catId);
-              }}
-            />
-          </aside>
 
           {/* Main Content Area */}
           <div className="flex-1 w-full">

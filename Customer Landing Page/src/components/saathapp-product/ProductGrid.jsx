@@ -75,9 +75,7 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
             className="w-full aspect-square bg-slate-50 dark:bg-slate-800 rounded-xl mb-4 cursor-pointer relative overflow-hidden flex items-center justify-center"
             onClick={() => navigate(`/product/${product.slug || product.id}`)}
           >
-            {product.image ? (
-              <img src={product.image} alt={product.name} loading="lazy" className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform" />
-            ) : null}
+            {/* Image removed as requested */}
           </div>
 
           {/* Info */}
@@ -108,7 +106,7 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
             </div>
             
             <div className="text-lg font-black text-slate-800 dark:text-white mb-4">
-              ₹{product.price}
+              ₹0
             </div>
           </div>
 

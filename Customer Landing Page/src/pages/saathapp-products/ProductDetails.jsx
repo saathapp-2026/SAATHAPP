@@ -72,9 +72,9 @@ export default function ProductDetails({
   }, [product]);
 
   // Derived Pricing
-  const sellingPrice = product?.price || 0;
-  const mrp = product?.originalPrice || Math.round(sellingPrice * 1.25);
-  const discountPercent = product?.discount ? product.discount : Math.round(((mrp - sellingPrice) / mrp) * 100);
+  const sellingPrice = 0;
+  const mrp = 0;
+  const discountPercent = 0;
 
   // Recommended products (Frequently Bought Together)
   const recommendedProducts = React.useMemo(() => {
@@ -164,7 +164,7 @@ export default function ProductDetails({
                 <Heart size={20} />
               </button>
               {currentMainImage ? (
-                <img src={currentMainImage} alt={product.name} className="w-full h-full object-contain transition-all duration-300" />
+                {/* Image removed as requested */}
               ) : (
                 null
               )}
@@ -181,7 +181,7 @@ export default function ProductDetails({
                       }`}
                   >
                     {imgUrl ? (
-                      <img src={imgUrl} alt={`Thumbnail ${idx + 1}`} loading="lazy" className="w-full h-full object-contain p-2" />
+                      {/* Thumbnail Image removed as requested */}
                     ) : (
                       null
                     )}
