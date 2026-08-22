@@ -138,7 +138,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
 
       {/* Main slide display with AnimatePresence */}
       <div className="relative w-full h-full">
-        <AnimatePresence initial={false} custom={direction} mode="wait">
+        <AnimatePresence initial={false} custom={direction} mode="popLayout">
           <motion.div
             key={currentSlide}
             custom={direction}
