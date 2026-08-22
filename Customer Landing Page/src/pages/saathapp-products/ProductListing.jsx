@@ -81,18 +81,18 @@ const AGRICULTURE_SUBCATEGORY_CARDS = [
   { id: 'farming-tools', name: 'Farming Tools', emoji: '🌾', iconSrc: '/assets/agriculture/farming-tools-icon.png' },
   { id: 'agricultural-machinery', name: 'Agricultural Machinery', emoji: '🚜', iconSrc: '/assets/agriculture/machinery-icon.png' },
   { id: 'nursery-gardening', name: 'Nursery & Gardening', emoji: '🪴', iconSrc: '/assets/agriculture/nursery-icon.png' },
-  { id: 'plant-growth-products', name: 'Plant Growth Products', emoji: '🌱', iconSrc: '/assets/agriculture/plant-growth-icon.png' },
-  { id: 'harvesting-post-harvest', name: 'Harvesting & Post-Harvest', emoji: '🧺', iconSrc: '/assets/agriculture/harvesting-icon.png' },
-  { id: 'grains-crop-storage', name: 'Grains & Crop Storage', emoji: '🌾', iconSrc: '/assets/agriculture/storage-icon.png' },
-  { id: 'agricultural-containers', name: 'Agricultural Containers', emoji: '🪣', iconSrc: '/assets/agriculture/containers-icon.png' },
-  { id: 'animal-feed-cattle-care', name: 'Animal Feed & Cattle Care', emoji: '🐄', iconSrc: '/assets/agriculture/cattle-care-icon.png' },
-  { id: 'poultry-farming-supplies', name: 'Poultry Farming Supplies', emoji: '🐔', iconSrc: '/assets/agriculture/poultry-icon.png' },
-  { id: 'beekeeping-supplies', name: 'Beekeeping Supplies', emoji: '🐝', iconSrc: '/assets/agriculture/beekeeping-icon.png' },
-  { id: 'organic-farming-products', name: 'Organic Farming Products', emoji: '🌱', iconSrc: '/assets/agriculture/organic-icon.png' },
-  { id: 'farm-safety-equipment', name: 'Farm Safety Equipment', emoji: '🧤', iconSrc: '/assets/agriculture/safety-icon.png' },
-  { id: 'agricultural-packaging', name: 'Agricultural Packaging', emoji: '📦', iconSrc: '/assets/agriculture/packaging-icon.png' },
-  { id: 'farm-monitoring-equipment', name: 'Farm Monitoring & Equipment', emoji: '🌡️', iconSrc: '/assets/agriculture/monitoring-icon.png' },
-  { id: 'agricultural-spare-parts', name: 'Agricultural Spare Parts', emoji: '🔧', iconSrc: '/assets/agriculture/spare-parts-icon.png' },
+  { id: 'grains-crop-storage', name: 'Grains & Crop Storage', emoji: '🌾', iconSrc: '/assets/agriculture/storage-icon.jpg' },
+  { id: 'cattle-feed', name: 'Cattle Feed', emoji: '🐄', iconSrc: '/assets/agriculture/cattle-feed-icon.jpg' },
+  { id: 'poultry-feed', name: 'Poultry Feed', emoji: '🐔', iconSrc: '/assets/agriculture/poultry-feed-icon.jpg' },
+  { id: 'beekeeping-feed', name: 'Beekeeping Feed', emoji: '🐝', iconSrc: '/assets/agriculture/beekeeping-feed-icon.jpg' },
+  { id: 'fish-feed', name: 'Fish Feed', emoji: '🐟', iconSrc: '/assets/agriculture/fish-feed-icon.jpg' },
+  { id: 'sheep-feed', name: 'Sheep Feed', emoji: '🐑', iconSrc: '/assets/agriculture/sheep-feed-icon.jpg' },
+  { id: 'duck-feed', name: 'Duck Feed', emoji: '🦆', iconSrc: '/assets/agriculture/duck-feed-icon.jpg' },
+  { id: 'goat-feed', name: 'Goat Feed', emoji: '🐐', iconSrc: '/assets/agriculture/goat-feed-icon.jpg' },
+  { id: 'horse-food', name: 'Horse Food', emoji: '🐴', iconSrc: '/assets/agriculture/horse-food-icon.jpg' },
+  { id: 'dog-food', name: 'Dog Food', emoji: '🐶', iconSrc: '/assets/agriculture/dog-food-icon.jpg' },
+  { id: 'cat-food', name: 'Cat Food', emoji: '🐱', iconSrc: '/assets/agriculture/cat-food-icon.jpg' },
+  { id: 'agricultural-packaging', name: 'Agricultural Packaging', emoji: '📦', iconSrc: '/assets/agriculture/packaging-icon.jpg' },
 ];
 
 const HOUSEHOLD_SUBCATEGORY_CARDS = [
@@ -125,11 +125,9 @@ const FOOTWEAR_SUBCATEGORY_CARDS = [
   { id: 'flats', name: 'Flats', emoji: '🥿', iconSrc: '/assets/footwear/flats-icon.png' },
   { id: 'loafers', name: 'Loafers', emoji: '👞', iconSrc: '/assets/footwear/loafers-icon.png' },
   { id: 'baby-footwear', name: 'Baby Footwear', emoji: '👶', iconSrc: '/assets/footwear/baby-footwear-icon.png' },
-  { id: 'home-bathroom-slippers', name: 'Home & Bathroom Slippers', emoji: '🏠', iconSrc: '/assets/footwear/bathroom-slippers-icon.png' },
   { id: 'work-safety-shoes', name: 'Work & Safety Shoes', emoji: '🥾', iconSrc: '/assets/footwear/safety-shoes-icon.png' },
   { id: 'ethnic-footwear', name: 'Ethnic & Traditional Footwear', emoji: '🩰', iconSrc: '/assets/footwear/ethnic-footwear-icon.png' },
   { id: 'school-shoes', name: 'School Shoes', emoji: '🦶', iconSrc: '/assets/footwear/school-shoes-icon.png' },
-  { id: 'outdoor-sandals', name: 'Outdoor & Casual Sandals', emoji: '🏖️', iconSrc: '/assets/footwear/outdoor-sandals-icon.png' },
   { id: 'socks-accessories', name: 'Socks & Footwear Accessories', emoji: '🧦', iconSrc: '/assets/footwear/socks-accessories-icon.png' },
 ];
 
@@ -801,7 +799,7 @@ export default function ProductListing({
         )}
 
         {/* Footwear Horizontal Subcategory Cards Strip */}
-        {(categoryId === 'footwear' || categoryId === 'shoes-slippers-sandals' || categoryId === 'shoes') && !subCategoryId && !isSearch && !isAllCategories && !isOffersPage && (
+        {(categoryId === 'footwear' || categoryId === 'shoes-slippers-sandals' || categoryId === 'shoes' || categoryId === 'shoes-footwear') && !subCategoryId && !isSearch && !isAllCategories && !isOffersPage && (
           <SubcategoryScrollStrip
             items={FOOTWEAR_SUBCATEGORY_CARDS}
             activeSubcategoryId={filters.footwearSubcategory}
@@ -858,7 +856,7 @@ export default function ProductListing({
           />
         )}
 
-        {categoryId && subcategories[categoryId] && categoryId !== 'grocery' && categoryId !== 'fashion' && categoryId !== 'construction' && categoryId !== 'agriculture' && categoryId !== 'household-items' && categoryId !== 'home-kitchen' && categoryId !== 'household' && categoryId !== 'footwear' && categoryId !== 'shoes-slippers-sandals' && categoryId !== 'shoes' && categoryId !== 'electronics' && categoryId !== 'medicine-healthcare' && categoryId !== 'medicine' && categoryId !== 'healthcare' && categoryId !== 'vehicles' && categoryId !== 'book-stationery' && categoryId !== 'books-stationery' && categoryId !== 'stationery' && categoryId !== 'hardware' && categoryId !== 'mobiles' && categoryId !== 'mobile' && !isSearch && !isAllCategories && !isOffersPage && (
+        {categoryId && subcategories[categoryId] && categoryId !== 'grocery' && categoryId !== 'fashion' && categoryId !== 'construction' && categoryId !== 'agriculture' && categoryId !== 'household-items' && categoryId !== 'home-kitchen' && categoryId !== 'household' && categoryId !== 'footwear' && categoryId !== 'shoes-slippers-sandals' && categoryId !== 'shoes' && categoryId !== 'shoes-footwear' && categoryId !== 'electronics' && categoryId !== 'medicine-healthcare' && categoryId !== 'medicine' && categoryId !== 'healthcare' && categoryId !== 'vehicles' && categoryId !== 'book-stationery' && categoryId !== 'books-stationery' && categoryId !== 'stationery' && categoryId !== 'hardware' && categoryId !== 'mobiles' && categoryId !== 'mobile' && !isSearch && !isAllCategories && !isOffersPage && (
           <div className="mb-8">
             <h2 className="text-lg font-bold mb-4">Quick Categories</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
