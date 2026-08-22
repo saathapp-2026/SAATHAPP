@@ -352,7 +352,9 @@ export default function SaathPackProductListing({
                   className="relative aspect-[4/3] bg-white cursor-pointer p-6 flex items-center justify-center border-b border-slate-50"
                   onClick={() => navigate(`/products/saathpack/product/${product.id}`)}
                 >
-                  <img src={product.image || 'https://placehold.co/400x300/e2d1c3/3a291f?text=Product'} alt={product.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 mix-blend-multiply" />
+                  {product.image ? (
+                    <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 mix-blend-multiply" />
+                  ) : null}
                   
                   {product.isBestSeller && (
                     <div className="absolute top-3 left-3 bg-[#249942] text-white text-[9px] font-black px-2.5 py-1 rounded-sm uppercase tracking-wider shadow-sm flex items-center gap-1">

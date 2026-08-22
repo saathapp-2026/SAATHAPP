@@ -60,7 +60,7 @@ export default function Advertisements() {
         {/* Banner Frame */}
         <div className="relative rounded-card overflow-hidden shadow-soft border border-slate-200/50 dark:border-slate-800 min-h-[160px] sm:min-h-[180px] flex items-center">
           
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             <motion.div
               key={currentIndex}
               initial={{ opacity: 0, scale: 0.98 }}

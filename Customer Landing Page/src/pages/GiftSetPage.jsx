@@ -803,11 +803,13 @@ export default function GiftSetPage({
                     <div>
                       {/* Product Image */}
                       <div className="w-full h-48 bg-slate-100 dark:bg-slate-800 relative overflow-hidden">
-                        <img
-                          src={p.image}
-                          alt={p.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
+                        {p.image ? (
+                          <img
+                            src={p.image}
+                            alt={p.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        ) : null}
                       </div>
 
                       {/* Details */}

@@ -33,7 +33,7 @@ export const CATEGORY_ALIASES = {
   'home-kitchen': 'household-items',
   'home': 'household-items',
   'household': 'household-items',
-  'gifts': 'gifts',
+  'gifts': 'gift-set',
   'gift-set': 'gift-set',
   'books': 'books-stationery',
   'stationery': 'books-stationery',
@@ -223,9 +223,9 @@ export const MASTER_CATEGORIES = [
     ]
   },
   {
-    id: 'gifts',
-    name: 'Gifts Items',
-    slug: 'gifts',
+    id: 'gift-set',
+    name: 'Gift Set',
+    slug: 'gift-set',
     url: '/products/gift-set',
     iconName: 'Gift',
     image: '/images/categories/gifts.png',
@@ -234,9 +234,13 @@ export const MASTER_CATEGORIES = [
     isActive: true,
     isFeatured: true,
     subcategories: [
-      'Birthday Gifts', 'Anniversary Gifts', 'Wedding Gifts', 'Festival Gifts',
-      'Corporate Gifts', 'Personalized Gifts', 'Gift Hampers',
-      'Flowers & Gift Combos', 'Premium Gifts'
+      'Chocolate Gift Sets', 'Stationery Gift Sets', 'Flower Gift Sets',
+      'Sweets & Mithai Boxes', 'Clothes Gift Sets', 'Glass & Cup Sets',
+      'Crockery Gift Sets', 'Ceramic Gift Sets', 'Dry Fruit Gift Sets',
+      'Beauty & Wellness Gift Sets', 'Perfume Gift Sets', 'Kids Gift Sets',
+      'Birthday Gift Sets', 'Wedding Gift Sets', 'Anniversary Gift Sets',
+      'Festival Gift Sets', 'Corporate Gift Sets', 'Personalized Gift Sets',
+      'Custom Gift Hampers'
     ]
   },
   {

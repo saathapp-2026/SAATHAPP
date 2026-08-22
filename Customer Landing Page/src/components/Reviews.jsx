@@ -64,7 +64,7 @@ export default function Reviews() {
               No customer reviews yet. Be the first to share your experience!
             </div>
           ) : (
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="popLayout">
               <motion.div
                 key={activeIndex}
                 initial={{ opacity: 0, scale: 0.95 }}

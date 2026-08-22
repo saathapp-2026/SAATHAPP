@@ -166,7 +166,7 @@ export default function ProductDetails({
               {currentMainImage ? (
                 <img src={currentMainImage} alt={product.name} className="w-full h-full object-contain transition-all duration-300" />
               ) : (
-                <span className="text-8xl">🛍️</span>
+                null
               )}
             </div>
             <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
@@ -183,7 +183,7 @@ export default function ProductDetails({
                     {imgUrl ? (
                       <img src={imgUrl} alt={`Thumbnail ${idx + 1}`} loading="lazy" className="w-full h-full object-contain p-2" />
                     ) : (
-                      <span className="text-2xl">🛍️</span>
+                      null
                     )}
                   </div>
                 );

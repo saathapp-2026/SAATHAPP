@@ -66,7 +66,9 @@ export default function SaathPackProductDetails({
           <div className="grid grid-cols-1 md:grid-cols-2">
             {/* Image Section */}
             <div className="bg-slate-100 p-8 flex items-center justify-center">
-              <img src={product.image} alt={product.name} className="max-w-full rounded-xl shadow-lg" />
+              {product.image ? (
+                <img src={product.image} alt={product.name} className="max-w-full rounded-xl shadow-lg" />
+              ) : null}
             </div>
 
             {/* Details Section */}
