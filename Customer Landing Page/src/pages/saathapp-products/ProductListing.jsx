@@ -97,18 +97,10 @@ const HOUSEHOLD_SUBCATEGORY_CARDS = [
   { id: 'dustbins-waste-bins', name: 'Dustbins & Waste Bins', emoji: '🗑️', iconSrc: '/assets/household/dustbins-icon.png' },
   { id: 'floor-toilet-cleaners', name: 'Floor & Toilet Cleaners', emoji: '🧴', iconSrc: '/assets/household/floor-cleaners-icon.png' },
   { id: 'detergents-laundry', name: 'Detergents & Laundry', emoji: '🧼', iconSrc: '/assets/household/detergents-icon.png' },
-  { id: 'cleaning-supplies', name: 'Cleaning Supplies', emoji: '🧽', iconSrc: '/assets/household/cleaning-supplies-icon.png' },
-  { id: 'bathroom-essentials', name: 'Bathroom Essentials', emoji: '🪥', iconSrc: '/assets/household/bathroom-icon.png' },
-  { id: 'storage-organizers', name: 'Storage & Organizers', emoji: '🧺', iconSrc: '/assets/household/storage-icon.png' },
   { id: 'kitchen-utility', name: 'Kitchen Utility', emoji: '🍽️', iconSrc: '/assets/household/kitchen-utility-icon.png' },
-  { id: 'containers-jars', name: 'Containers & Jars', emoji: '🥣', iconSrc: '/assets/household/containers-icon.png' },
   { id: 'brushes-scrubbers', name: 'Brushes & Scrubbers', emoji: '🧹', iconSrc: '/assets/household/brushes-icon.png' },
   { id: 'tissues-paper', name: 'Tissues & Household Paper', emoji: '🧻', iconSrc: '/assets/household/tissues-icon.png' },
-  { id: 'glass-surface-cleaners', name: 'Glass & Surface Cleaners', emoji: '🪟', iconSrc: '/assets/household/glass-cleaners-icon.png' },
-  { id: 'cleaning-gloves-safety', name: 'Cleaning Gloves & Safety', emoji: '🧤', iconSrc: '/assets/household/gloves-icon.png' },
-  { id: 'laundry-baskets', name: 'Laundry Baskets & Hampers', emoji: '🧺', iconSrc: '/assets/household/laundry-baskets-icon.png' },
   { id: 'hangers-cloth-drying', name: 'Hangers & Cloth Drying', emoji: '🪢', iconSrc: '/assets/household/hangers-icon.png' },
-  { id: 'home-linen', name: 'Home Linen', emoji: '🛏️', iconSrc: '/assets/household/home-linen-icon.png' },
   { id: 'home-utility-essentials', name: 'Home Utility & Essentials', emoji: '🕯️', iconSrc: '/assets/household/utility-essentials-icon.png' },
 ];
 
