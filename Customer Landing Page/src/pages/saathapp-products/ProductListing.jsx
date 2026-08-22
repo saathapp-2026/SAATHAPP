@@ -314,17 +314,15 @@ function SubcategoryScrollStrip({ items, activeSubcategoryId, onSelectSubcategor
               <div
                 key={cat.id}
                 onClick={() => onSelectSubcategory(cat.id)}
-                className={`flex-none min-w-[105px] sm:min-w-[120px] max-w-[130px] flex flex-col items-center cursor-pointer group snap-start p-4 rounded-2xl bg-white dark:bg-slate-900 border transition-all duration-200 ease-out shrink-0 ${
-                  isSelected
-                    ? 'border-emerald-500 ring-2 ring-emerald-500/30 shadow-md -translate-y-1 bg-emerald-50/20 dark:bg-emerald-950/20'
-                    : 'border-slate-200/90 dark:border-slate-800/90 shadow-[0_2px_8px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.3)] hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)] hover:border-emerald-500'
-                }`}
+                className={`flex-none min-w-[105px] sm:min-w-[120px] max-w-[130px] flex flex-col items-center cursor-pointer group snap-start p-4 rounded-2xl bg-white dark:bg-slate-900 border transition-all duration-200 ease-out shrink-0 ${isSelected
+                  ? 'border-emerald-500 ring-2 ring-emerald-500/30 shadow-md -translate-y-1 bg-emerald-50/20 dark:bg-emerald-950/20'
+                  : 'border-slate-200/90 dark:border-slate-800/90 shadow-[0_2px_8px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.3)] hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)] hover:border-emerald-500'
+                  }`}
               >
-                <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl p-2 flex items-center justify-center transition-all duration-200 mb-3 overflow-hidden relative border border-emerald-100/80 dark:border-emerald-900/40 group-hover:scale-105 ${
-                  isSelected
-                    ? 'bg-[#DCF2E3] dark:bg-emerald-900/50 border-emerald-300 dark:border-emerald-700'
-                    : 'bg-[#EAF7EF] dark:bg-emerald-950/40 group-hover:bg-[#DCF2E3] dark:group-hover:bg-emerald-900/50'
-                }`}>
+                <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl p-2 flex items-center justify-center transition-all duration-200 mb-3 overflow-hidden relative border border-emerald-100/80 dark:border-emerald-900/40 group-hover:scale-105 ${isSelected
+                  ? 'bg-[#DCF2E3] dark:bg-emerald-900/50 border-emerald-300 dark:border-emerald-700'
+                  : 'bg-[#EAF7EF] dark:bg-emerald-950/40 group-hover:bg-[#DCF2E3] dark:group-hover:bg-emerald-900/50'
+                  }`}>
                   <span className="text-3.5xl sm:text-[42px] select-none flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200">{cat.emoji}</span>
                   <img
                     src={cat.iconSrc}
@@ -333,9 +331,8 @@ function SubcategoryScrollStrip({ items, activeSubcategoryId, onSelectSubcategor
                     onError={(e) => { e.currentTarget.style.display = 'none'; }}
                   />
                 </div>
-                <span className={`text-xs sm:text-sm font-extrabold text-center transition-colors line-clamp-2 leading-snug tracking-tight ${
-                  isSelected ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400'
-                }`}>
+                <span className={`text-xs sm:text-sm font-extrabold text-center transition-colors line-clamp-2 leading-snug tracking-tight ${isSelected ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400'
+                  }`}>
                   {cat.name}
                 </span>
               </div>
@@ -397,6 +394,7 @@ export default function ProductListing({
   const reactLocation = useReactLocation();
   const searchParams = new URLSearchParams(reactLocation.search);
   const festivalFilter = searchParams.get('festival');
+  const festivalScrollRef = React.useRef(null);
 
   const pathParts = reactLocation.pathname.split('/').filter(Boolean);
   let categoryId = null;
@@ -833,17 +831,26 @@ export default function ProductListing({
         {categoryId && subcategories[categoryId] && categoryId !== 'grocery' && categoryId !== 'fashion' && categoryId !== 'construction' && categoryId !== 'agriculture' && categoryId !== 'household-items' && categoryId !== 'home-kitchen' && categoryId !== 'household' && categoryId !== 'footwear' && categoryId !== 'shoes-slippers-sandals' && categoryId !== 'shoes' && categoryId !== 'electronics' && categoryId !== 'medicine-healthcare' && categoryId !== 'medicine' && categoryId !== 'healthcare' && categoryId !== 'vehicles' && categoryId !== 'book-stationery' && categoryId !== 'books-stationery' && categoryId !== 'stationery' && categoryId !== 'hardware' && categoryId !== 'mobiles' && categoryId !== 'mobile' && !isSearch && !isAllCategories && !isOffersPage && (
           <div className="mb-8">
             <h2 className="text-lg font-bold mb-4">Quick Categories</h2>
-            <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-none snap-x">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
               {subcategories[categoryId].map(sub => (
                 <button
                   key={sub.id}
                   onClick={() => navigate(`/products/${categoryId}/${sub.id}`)}
-                  className={`flex-none px-6 py-3 rounded-full text-sm font-bold border transition-all snap-start ${subCategoryId === sub.id
-                      ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30'
-                      : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary'
+                  className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-all ${subCategoryId === sub.id
+                    ? 'bg-emerald-50 border-emerald-500 shadow-md ring-2 ring-emerald-500/20'
+                    : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-emerald-300 hover:shadow-md'
                     }`}
                 >
-                  {sub.name}
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-2 overflow-hidden ${sub.image ? '' : (subCategoryId === sub.id ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-400')}`}>
+                    {sub.image ? (
+                      <img src={sub.image} alt={sub.name} className="w-full h-full object-cover rounded-xl" />
+                    ) : (
+                      <span className="text-[10px] font-medium text-slate-400 dark:text-slate-500">Image</span>
+                    )}
+                  </div>
+                  <span className={`text-xs font-bold text-center ${subCategoryId === sub.id ? 'text-emerald-700 dark:text-emerald-400' : 'text-slate-700 dark:text-slate-300'}`}>
+                    {sub.name}
+                  </span>
                 </button>
               ))}
             </div>
@@ -852,29 +859,68 @@ export default function ProductListing({
 
         {/* Festival Engine Integration */}
         {(categoryId === 'spiritual-puja' || festivalFilter) && (
-          <div className="mb-8">
+          <div className="mb-8 relative group/festivals">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <Sparkles className="text-amber-500" size={20} />
               Shop by Festival
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-              {festivals.map(fest => (
-                <button
-                  key={fest.id}
-                  onClick={() => navigate(`/products/spiritual-puja?festival=${fest.id}`)}
-                  className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-all ${festivalFilter === fest.id
+
+            <div className="relative">
+              {/* Left Scroll Chevron Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  if (festivalScrollRef.current) {
+                    festivalScrollRef.current.scrollBy({ left: -280, behavior: 'smooth' });
+                  }
+                }}
+                className="absolute -left-3.5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-amber-500 hover:bg-amber-600 text-white shadow-md flex items-center justify-center transition-all opacity-0 group-hover/festivals:opacity-100 focus:opacity-100 hover:scale-105 active:scale-95 cursor-pointer"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft size={18} />
+              </button>
+
+              {/* Horizontal Scrollable Container */}
+              <div
+                ref={festivalScrollRef}
+                className="flex gap-4 overflow-x-auto pb-4 pt-1.5 px-1.5 snap-x scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              >
+                {festivals.map(fest => (
+                  <button
+                    key={fest.id}
+                    onClick={() => navigate(`/products/spiritual-puja?festival=${fest.id}`)}
+                    className={`flex-none w-[115px] sm:w-[130px] flex flex-col items-center justify-center p-4 rounded-2xl border transition-all snap-start ${festivalFilter === fest.id
                       ? 'bg-amber-50 border-amber-500 shadow-md ring-2 ring-amber-500/20'
                       : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-amber-300 hover:shadow-md'
-                    }`}
-                >
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 ${festivalFilter === fest.id ? 'bg-amber-100 text-amber-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'}`}>
-                    <Sparkles size={20} />
-                  </div>
-                  <span className={`text-xs font-bold text-center ${festivalFilter === fest.id ? 'text-amber-700' : 'text-slate-700 dark:text-slate-300'}`}>
-                    {fest.name}
-                  </span>
-                </button>
-              ))}
+                      }`}
+                  >
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 overflow-hidden ${fest.image ? '' : (festivalFilter === fest.id ? 'bg-amber-100 text-amber-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-500')}`}>
+                      {fest.image ? (
+                        <img src={fest.image} alt={fest.name} className="w-full h-full object-cover rounded-full" />
+                      ) : (
+                        <Sparkles size={20} />
+                      )}
+                    </div>
+                    <span className={`text-xs font-bold text-center ${festivalFilter === fest.id ? 'text-amber-700' : 'text-slate-700 dark:text-slate-300'}`}>
+                      {fest.name}
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Right Scroll Chevron Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  if (festivalScrollRef.current) {
+                    festivalScrollRef.current.scrollBy({ left: 280, behavior: 'smooth' });
+                  }
+                }}
+                className="absolute -right-3.5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-amber-500 hover:bg-amber-600 text-white shadow-md flex items-center justify-center transition-all opacity-0 group-hover/festivals:opacity-100 focus:opacity-100 hover:scale-105 active:scale-95 cursor-pointer"
+                aria-label="Scroll right"
+              >
+                <ChevronRight size={18} />
+              </button>
             </div>
           </div>
         )}

@@ -2510,14 +2510,18 @@ export const categories = MASTER_CATEGORIES.map(c => ({
 }));
 
 export const festivals = [
-  { id: 'diwali', name: 'Diwali', description: 'Festival of Lights & Laxmi Puja' },
-  { id: 'navratri', name: 'Navratri', description: '9 Days of Maa Durga Worship' },
-  { id: 'janmashtami', name: 'Janmashtami', description: 'Birth of Lord Krishna' },
-  { id: 'ganesh-chaturthi', name: 'Ganesh Chaturthi', description: 'Welcome Lord Ganesha' },
-  { id: 'mahashivratri', name: 'Mahashivratri', description: 'The Great Night of Shiva' },
-  { id: 'ram-navami', name: 'Ram Navami', description: 'Birth of Lord Rama' },
-  { id: 'chhath-puja', name: 'Chhath Puja', description: 'Worship of the Sun God' },
-  { id: 'other', name: 'Other Festivals', description: 'More Festival Collections' }
+  { id: 'diwali', name: 'Diwali', description: 'Festival of Lights & Laxmi Puja', image: '/assets/festivals/diwali.jpg' },
+  { id: 'navratri', name: 'Navratri', description: '9 Days of Maa Durga Worship', image: '/assets/festivals/navratri.jpg' },
+  { id: 'janmashtami', name: 'Janmashtami', description: 'Birth of Lord Krishna', image: '/assets/festivals/janmashtami.jpg' },
+  { id: 'ganesh-chaturthi', name: 'Ganesh Chaturthi', description: 'Welcome Lord Ganesha', image: '/assets/festivals/ganesh-chaturthi.jpg' },
+  { id: 'mahashivratri', name: 'Mahashivratri', description: 'The Great Night of Shiva', image: '/assets/festivals/mahashivratri.jpg' },
+  { id: 'ram-navami', name: 'Ram Navami', description: 'Birth of Lord Rama', image: '/assets/festivals/ram-navami.jpg' },
+  { id: 'chhath-puja', name: 'Chhath Puja', description: 'Worship of the Sun God', image: '/assets/festivals/chhath-puja.jpg' },
+  { id: 'holi', name: 'Holi', description: 'Festival of Colors', image: '/assets/festivals/holi.jpg' },
+  { id: 'raksha-bandhan', name: 'Raksha Bandhan', description: 'Celebration of Sibling Bond', image: '/assets/festivals/raksha-bandhan.jpg' },
+  { id: 'christmas', name: 'Christmas', description: 'Joyful Holiday Celebrations', image: '/assets/festivals/christmas.jpg' },
+  { id: 'eid', name: 'Eid', description: 'Festival of Peace & Gratitude', image: '/assets/festivals/eid.jpg' },
+  { id: 'other', name: 'Other Festivals', description: 'More Festival Collections', image: '/assets/festivals/other-festivals.jpg' }
 ];
 
 export const subcategories = {
@@ -2544,16 +2548,14 @@ export const subcategories = {
     { id: 'washing-machines', name: '🧺 Washing Machines', image: '' }
   ],
   'spiritual-puja': [
-    { id: 'puja-samagri', name: 'Puja Samagri', image: '' },
-    { id: 'diyas-lamps', name: 'Diyas & Lamps', image: '' },
-    { id: 'agarbatti-dhoop', name: 'Agarbatti & Dhoop', image: '' },
-    { id: 'puja-essentials', name: 'Puja Essentials', image: '' },
-    { id: 'idols-murtis', name: 'Idols & Murtis', image: '' },
-    { id: 'rudraksha-mala', name: 'Rudraksha & Mala', image: '' },
-    { id: 'religious-books', name: 'Religious Books', image: '' },
-    { id: 'festival-essentials', name: 'Festival Essentials', image: '' },
-    { id: 'puja-kits', name: 'Puja Kits & Combos', image: '' },
-    { id: 'spiritual-gifts', name: 'Spiritual Gifts', image: '' }
+    { id: 'puja-samagri', name: 'Puja Samagri', image: '/assets/spiritual/pooja-samagri.jpg' },
+    { id: 'diyas-lamps', name: 'Diyas & Lamps', image: '/assets/spiritual/diyas-lamps.png' },
+    { id: 'agarbatti-dhoop', name: 'Agarbatti & Dhoop', image: '/assets/spiritual/agarbatti-dhoop.png' },
+    { id: 'puja-essentials', name: 'Puja Essentials', image: '/assets/spiritual/puja-essentials.jpg' },
+    { id: 'idols-murtis', name: 'Idols & Murtis', image: '/assets/spiritual/idols-murtis.png' },
+    { id: 'rudraksha-mala', name: 'Rudraksha & Mala', image: '/assets/spiritual/rudraksha-mala.jpg' },
+    { id: 'religious-books', name: 'Religious Books', image: '/assets/spiritual/religious-books.jpg' },
+    { id: 'festive-decor', name: 'Festive Decor', image: '/assets/spiritual/festive-decor.jpg' }
   ],
   'grocery': [
     { id: 'fruits-vegetables', name: 'Fruits & Vegetables', image: '' },

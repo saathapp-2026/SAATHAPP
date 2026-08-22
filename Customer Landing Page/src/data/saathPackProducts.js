@@ -1,16 +1,3 @@
-import paperBag from '../../public/images/saathpack/saathapp_paper_bag.jpg';
-import deliveryBag from '../../public/images/saathpack/saathapp_delivery_bag.jpg';
-import standupPouch from '../../public/images/saathpack/saathapp_standup_pouch.jpg';
-import corrugatedBox from '../../public/images/saathpack/saathapp_corrugated_box.jpg';
-import cartonBox from '../../public/images/saathpack/saathapp_carton_box.jpg';
-import foilRoll from '../../public/images/saathpack/aluminium_foil_roll.jpg';
-import boppTape from '../../public/images/saathpack/saathapp_bopp_tape.jpg';
-import bubbleWrap from '../../public/images/saathpack/bubble_wrap_roll.jpg';
-import foodBox from '../../public/images/saathpack/saathapp_food_box.jpg';
-import kraftTape from '../../public/images/saathpack/kraft_paper_tape.jpg';
-import thermalLabels from '../../public/images/saathpack/thermal_shipping_labels.jpg';
-import stretchFilm from '../../public/images/saathpack/saathapp_stretch_film.jpg';
-
 export const saathPackProducts = [
   {
     id: 'sp-101',
@@ -21,7 +8,7 @@ export const saathPackProducts = [
     sizeBucket: 'Medium',
     packSize: 100,
     price: 499,
-    image: paperBag,
+    image: '/images/saathpack/saathapp_paper_bag.jpg',
     rating: 4.8,
     reviews: 124,
     delivery: '5-10 days',
@@ -36,7 +23,7 @@ export const saathPackProducts = [
     sizeBucket: 'Medium',
     packSize: 100,
     price: 359,
-    image: deliveryBag,
+    image: '/images/saathpack/saathapp_delivery_bag.jpg',
     rating: 4.5,
     reviews: 89,
     delivery: '5-10 days',
@@ -51,7 +38,7 @@ export const saathPackProducts = [
     sizeBucket: 'Small',
     packSize: 100,
     price: 449,
-    image: standupPouch,
+    image: '/images/saathpack/saathapp_standup_pouch.jpg',
     rating: 4.7,
     reviews: 56,
     delivery: '5-10 days',
@@ -66,7 +53,7 @@ export const saathPackProducts = [
     sizeBucket: 'Large',
     packSize: 10,
     price: 299,
-    image: corrugatedBox,
+    image: '/images/saathpack/saathapp_corrugated_box.jpg',
     rating: 4.9,
     reviews: 210,
     delivery: '5-10 days'
@@ -80,7 +67,7 @@ export const saathPackProducts = [
     sizeBucket: 'Extra Large',
     packSize: 10,
     price: 399,
-    image: cartonBox,
+    image: '/images/saathpack/saathapp_carton_box.jpg',
     rating: 4.6,
     reviews: 145,
     delivery: '5-10 days'
@@ -94,7 +81,7 @@ export const saathPackProducts = [
     sizeBucket: 'All Sizes',
     packSize: 1, // 1 Roll
     price: 249,
-    image: foilRoll,
+    image: '/images/saathpack/aluminium_foil_roll.jpg',
     rating: 4.8,
     reviews: 320,
     delivery: '5-10 days'
@@ -108,7 +95,7 @@ export const saathPackProducts = [
     sizeBucket: 'All Sizes',
     packSize: 6, // Pack of 6
     price: 199,
-    image: boppTape,
+    image: '/images/saathpack/saathapp_bopp_tape.jpg',
     rating: 4.7,
     reviews: 412,
     delivery: '5-10 days'
@@ -122,7 +109,7 @@ export const saathPackProducts = [
     sizeBucket: 'All Sizes',
     packSize: 1, // 1 Roll
     price: 349,
-    image: bubbleWrap,
+    image: '/images/saathpack/bubble_wrap_roll.jpg',
     rating: 4.9,
     reviews: 180,
     delivery: '5-10 days'
@@ -136,7 +123,7 @@ export const saathPackProducts = [
     sizeBucket: 'Small',
     packSize: 50,
     price: 249,
-    image: foodBox,
+    image: '/images/saathpack/saathapp_food_box.jpg',
     rating: 4.8,
     reviews: 95,
     delivery: '5-10 days'
@@ -150,7 +137,7 @@ export const saathPackProducts = [
     sizeBucket: 'All Sizes',
     packSize: 6,
     price: 179,
-    image: kraftTape,
+    image: '/images/saathpack/kraft_paper_tape.jpg',
     rating: 4.6,
     reviews: 215,
     delivery: '5-10 days'
@@ -164,7 +151,7 @@ export const saathPackProducts = [
     sizeBucket: 'All Sizes',
     packSize: 500,
     price: 399,
-    image: thermalLabels,
+    image: '/images/saathpack/thermal_shipping_labels.jpg',
     rating: 4.9,
     reviews: 340,
     delivery: '5-10 days'
@@ -178,7 +165,7 @@ export const saathPackProducts = [
     sizeBucket: 'All Sizes',
     packSize: 1, // 1 Roll
     price: 699,
-    image: stretchFilm,
+    image: '/images/saathpack/saathapp_stretch_film.jpg',
     rating: 4.7,
     reviews: 120,
     delivery: '5-10 days'
