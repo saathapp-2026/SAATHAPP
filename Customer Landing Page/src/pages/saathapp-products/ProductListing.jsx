@@ -50,26 +50,20 @@ const FASHION_SUBCATEGORY_CARDS = [
 ];
 
 const CONSTRUCTION_SUBCATEGORY_CARDS = [
-  { id: 'cement', name: 'Cement', emoji: '🪨', iconSrc: '/assets/construction/cement-icon.png' },
-  { id: 'bricks-blocks', name: 'Bricks & Blocks', emoji: '🧱', iconSrc: '/assets/construction/bricks-icon.png' },
+  { id: 'cement', name: 'Cement', emoji: '🪨', iconSrc: '/assets/construction/cement-icon.jpg' },
+  { id: 'bricks-blocks', name: 'Bricks & Blocks', emoji: '🧱', iconSrc: '/assets/construction/bricks-icon.jpg' },
   { id: 'steel-tmt', name: 'Steel & TMT Bars', emoji: '🔩', iconSrc: '/assets/construction/steel-icon.png' },
   { id: 'sand-aggregates', name: 'Sand & Aggregates', emoji: '🏖️', iconSrc: '/assets/construction/sand-icon.png' },
   { id: 'tiles-flooring', name: 'Tiles & Flooring', emoji: '🧱', iconSrc: '/assets/construction/tiles-icon.png' },
-  { id: 'paints-finishes', name: 'Paints & Wall Finishes', emoji: '🎨', iconSrc: '/assets/construction/paints-icon.png' },
+  { id: 'paints-finishes', name: 'Paints & Wall Finishes', emoji: '🎨', iconSrc: '/assets/construction/paints-icon.jpg' },
   { id: 'doors-windows', name: 'Doors & Windows', emoji: '🚪', iconSrc: '/assets/construction/doors-icon.png' },
-  { id: 'construction-tools', name: 'Construction Tools & Equipment', emoji: '🔧', iconSrc: '/assets/construction/tools-icon.png' },
+  { id: 'construction-tools', name: 'Construction Tools & Equipment', emoji: '🔧', iconSrc: '/assets/construction/tools-icon.jpg' },
   { id: 'glass-glazing', name: 'Glass & Glazing', emoji: '🪟', iconSrc: '/assets/construction/glass-icon.png' },
-  { id: 'ladders-scaffolding', name: 'Ladders & Scaffolding', emoji: '🪜', iconSrc: '/assets/construction/ladders-icon.png' },
   { id: 'safety-equipment', name: 'Safety Equipment', emoji: '🦺', iconSrc: '/assets/construction/safety-icon.png' },
-  { id: 'plumbing-materials', name: 'Plumbing Materials', emoji: '💧', iconSrc: '/assets/construction/plumbing-icon.png' },
-  { id: 'electrical-materials', name: 'Electrical Construction Materials', emoji: '⚡', iconSrc: '/assets/construction/electrical-icon.png' },
-  { id: 'wood-boards', name: 'Wood & Boards', emoji: '🪵', iconSrc: '/assets/construction/wood-icon.png' },
-  { id: 'roofing-materials', name: 'Roofing Materials', emoji: '🧱', iconSrc: '/assets/construction/roofing-icon.png' },
-  { id: 'false-ceiling-interior', name: 'False Ceiling & Interior Materials', emoji: '🏠', iconSrc: '/assets/construction/ceiling-icon.png' },
+  { id: 'wood-boards', name: 'Wood & Boards', emoji: '🪵', iconSrc: '/assets/construction/wood-icon.jpg' },
+  { id: 'false-ceiling-interior', name: 'False Ceiling & Interior Materials', emoji: '🏠', iconSrc: '/assets/construction/ceiling-icon.jpg' },
   { id: 'adhesives-chemicals', name: 'Adhesives, Sealants & Chemicals', emoji: '🧴', iconSrc: '/assets/construction/adhesives-icon.png' },
-  { id: 'fasteners-hardware', name: 'Nails, Screws & Fasteners', emoji: '🔨', iconSrc: '/assets/construction/fasteners-icon.png' },
-  { id: 'sanitary-materials', name: 'Sanitary & Bathroom Materials', emoji: '🛁', iconSrc: '/assets/construction/sanitary-icon.png' },
-  { id: 'construction-fittings', name: 'Construction Hardware & Fittings', emoji: '🏗️', iconSrc: '/assets/construction/fittings-icon.png' },
+  { id: 'construction-fittings', name: 'Construction Hardware & Machinery', emoji: '🏗️', iconSrc: '/assets/construction/fittings-icon.jpg' },
 ];
 
 const AGRICULTURE_SUBCATEGORY_CARDS = [
@@ -174,22 +168,18 @@ const MEDICINE_SUBCATEGORY_CARDS = [
 const VEHICLES_SUBCATEGORY_CARDS = [
   { id: 'bikes-motorcycles', name: 'Bikes & Motorcycles', emoji: '🏍️', iconSrc: '/assets/vehicles/bikes-icon.png' },
   { id: 'scooters', name: 'Scooters', emoji: '🛵', iconSrc: '/assets/vehicles/scooters-icon.png' },
-  { id: 'cars', name: 'Cars', emoji: '🚗', iconSrc: '/assets/vehicles/cars-icon.png' },
+  { id: 'cars', name: 'Cars', emoji: '🚗', iconSrc: '/assets/vehicles/cars-icon.jpg' },
   { id: 'auto-rickshaws', name: 'Auto Rickshaws', emoji: '🛺', iconSrc: '/assets/vehicles/auto-rickshaws-icon.png' },
   { id: 'commercial-vehicles', name: 'Commercial Vehicles', emoji: '🚚', iconSrc: '/assets/vehicles/commercial-vehicles-icon.png' },
   { id: 'tyres-tubes', name: 'Tyres & Tubes', emoji: '🛞', iconSrc: '/assets/vehicles/tyres-tubes-icon.png' },
   { id: 'helmets-riding-gear', name: 'Helmets & Riding Gear', emoji: '🪖', iconSrc: '/assets/vehicles/helmets-icon.png' },
   { id: 'vehicle-parts-spares', name: 'Vehicle Parts & Spares', emoji: '🔧', iconSrc: '/assets/vehicles/spares-icon.png' },
   { id: 'tractors-utility-vehicles', name: 'Tractors & Utility Vehicles', emoji: '🚜', iconSrc: '/assets/vehicles/tractors-icon.png' },
-  { id: 'batteries', name: 'Batteries', emoji: '🔋', iconSrc: '/assets/vehicles/batteries-icon.png' },
-  { id: 'tools-garage-equipment', name: 'Tools & Garage Equipment', emoji: '🛠️', iconSrc: '/assets/vehicles/garage-tools-icon.png' },
+  { id: 'batteries', name: 'EV Batteries', emoji: '🔋', iconSrc: '/assets/vehicles/batteries-icon.png' },
+  { id: 'tools-garage-equipment', name: 'Tools & Garage Equipment', emoji: '🛠️', iconSrc: '/assets/vehicles/garage-tools-icon.jpg' },
   { id: 'lights-electrical-accessories', name: 'Lights & Electrical Accessories', emoji: '💡', iconSrc: '/assets/vehicles/lights-accessories-icon.png' },
   { id: 'engine-oil-lubricants', name: 'Engine Oil & Lubricants', emoji: '🛢️', iconSrc: '/assets/vehicles/lubricants-icon.png' },
-  { id: 'car-bike-care', name: 'Car & Bike Care', emoji: '🧼', iconSrc: '/assets/vehicles/vehicle-care-icon.png' },
-  { id: 'vehicle-electronics', name: 'Vehicle Electronics & Accessories', emoji: '📱', iconSrc: '/assets/vehicles/electronics-accessories-icon.png' },
   { id: 'seat-covers-interior', name: 'Seat Covers & Interior Accessories', emoji: '🪑', iconSrc: '/assets/vehicles/interior-accessories-icon.png' },
-  { id: 'safety-security-accessories', name: 'Safety & Security Accessories', emoji: '🛡️', iconSrc: '/assets/vehicles/safety-security-icon.png' },
-  { id: 'parking-utility-accessories', name: 'Parking & Utility Accessories', emoji: '🅿️', iconSrc: '/assets/vehicles/parking-accessories-icon.png' },
 ];
 
 const BOOKS_STATIONERY_SUBCATEGORY_CARDS = [
@@ -250,6 +240,29 @@ const MOBILES_SUBCATEGORY_CARDS = [
   { id: 'printers-accessories', name: 'Printers & Accessories', emoji: '🖨️', iconSrc: '/assets/mobiles/printers-icon.png' },
   { id: 'cameras-accessories', name: 'Cameras & Accessories', emoji: '🎥', iconSrc: '/assets/mobiles/cameras-icon.png' },
   { id: 'smart-gadgets', name: 'Smart Gadgets', emoji: '🕶️', iconSrc: '/assets/mobiles/smart-gadgets-icon.png' },
+];
+
+
+const FURNITURE_SUBCATEGORY_CARDS = [
+  { id: 'sofas-couches', name: 'Sofas & Couches', emoji: '🛋️', iconSrc: '/assets/furniture/sofa-icon.png' },
+  { id: 'beds', name: 'Beds & Bed Frames', emoji: '🛏️', iconSrc: '/assets/furniture/bed-icon.png' },
+  { id: 'mattresses', name: 'Mattresses', emoji: '🛏️', iconSrc: '/assets/furniture/mattress-icon.png' },
+  { id: 'wardrobes-almirahs', name: 'Wardrobes & Almirahs', emoji: '🚪', iconSrc: '/assets/furniture/wardrobe-icon.png' },
+  { id: 'tables', name: 'Tables', emoji: '🪑', iconSrc: '/assets/furniture/table-icon.png' },
+  { id: 'chairs', name: 'Chairs', emoji: '🪑', iconSrc: '/assets/furniture/chair-icon.png' },
+  { id: 'dining-sets', name: 'Dining Tables & Sets', emoji: '🍽️', iconSrc: '/assets/furniture/dining-icon.png' },
+  { id: 'office-furniture', name: 'Office Furniture', emoji: '🏢', iconSrc: '/assets/furniture/office-icon.png' },
+];
+
+const BEAUTY_SUBCATEGORY_CARDS = [
+  { id: 'makeup', name: 'Makeup', emoji: '💄', iconSrc: '/assets/beauty/makeup-icon.png' },
+  { id: 'skincare', name: 'Skincare', emoji: '🧴', iconSrc: '/assets/beauty/skincare-icon.png' },
+  { id: 'hair-care', name: 'Hair Care', emoji: '💇‍♀️', iconSrc: '/assets/beauty/hair-icon.png' },
+  { id: 'face-care', name: 'Face Care', emoji: '💆‍♀️', iconSrc: '/assets/beauty/face-icon.png' },
+  { id: 'body-care', name: 'Body Care', emoji: '🧼', iconSrc: '/assets/beauty/body-icon.png' },
+  { id: 'bath-shower', name: 'Bath & Shower', emoji: '🛁', iconSrc: '/assets/beauty/bath-icon.png' },
+  { id: 'fragrances-perfumes', name: 'Fragrances & Perfumes', emoji: '✨', iconSrc: '/assets/beauty/perfume-icon.png' },
+  { id: 'mens-grooming', name: "Men's Grooming", emoji: '🪒', iconSrc: '/assets/beauty/grooming-icon.png' },
 ];
 
 function SubcategoryScrollStrip({ items, activeSubcategoryId, onSelectSubcategory }) {
@@ -856,7 +869,25 @@ export default function ProductListing({
           />
         )}
 
-        {categoryId && subcategories[categoryId] && categoryId !== 'grocery' && categoryId !== 'fashion' && categoryId !== 'construction' && categoryId !== 'agriculture' && categoryId !== 'household-items' && categoryId !== 'home-kitchen' && categoryId !== 'household' && categoryId !== 'footwear' && categoryId !== 'shoes-slippers-sandals' && categoryId !== 'shoes' && categoryId !== 'shoes-footwear' && categoryId !== 'electronics' && categoryId !== 'medicine-healthcare' && categoryId !== 'medicine' && categoryId !== 'healthcare' && categoryId !== 'vehicles' && categoryId !== 'book-stationery' && categoryId !== 'books-stationery' && categoryId !== 'stationery' && categoryId !== 'hardware' && categoryId !== 'mobiles' && categoryId !== 'mobile' && !isSearch && !isAllCategories && !isOffersPage && (
+        
+        {/* Furniture Horizontal Subcategory Cards Strip */}
+        {categoryId === 'furniture' && !subCategoryId && !isSearch && !isAllCategories && !isOffersPage && (
+          <SubcategoryScrollStrip
+            items={FURNITURE_SUBCATEGORY_CARDS}
+            activeSubcategoryId={filters.furnitureSubcategory}
+            onSelectSubcategory={(id) => setFilters(prev => ({ ...prev, furnitureSubcategory: prev.furnitureSubcategory === id ? '' : id }))}
+          />
+        )}
+        {/* Beauty Horizontal Subcategory Cards Strip */}
+        {(categoryId === 'beauty' || categoryId === 'beauty-products') && !subCategoryId && !isSearch && !isAllCategories && !isOffersPage && (
+          <SubcategoryScrollStrip
+            items={BEAUTY_SUBCATEGORY_CARDS}
+            activeSubcategoryId={filters.beautySubcategory}
+            onSelectSubcategory={(id) => setFilters(prev => ({ ...prev, beautySubcategory: prev.beautySubcategory === id ? '' : id }))}
+          />
+        )}
+
+        {categoryId && subcategories[categoryId] && categoryId !== 'grocery' && categoryId !== 'fashion' && categoryId !== 'construction' && categoryId !== 'agriculture' && categoryId !== 'household-items' && categoryId !== 'home-kitchen' && categoryId !== 'household' && categoryId !== 'footwear' && categoryId !== 'shoes-slippers-sandals' && categoryId !== 'shoes' && categoryId !== 'shoes-footwear' && categoryId !== 'electronics' && categoryId !== 'medicine-healthcare' && categoryId !== 'medicine' && categoryId !== 'healthcare' && categoryId !== 'vehicles' && categoryId !== 'book-stationery' && categoryId !== 'books-stationery' && categoryId !== 'stationery' && categoryId !== 'hardware' && categoryId !== 'mobiles' && categoryId !== 'mobile' && categoryId !== 'furniture' && categoryId !== 'beauty' && categoryId !== 'beauty-products' && !isSearch && !isAllCategories && !isOffersPage && (
           <div className="mb-8">
             <h2 className="text-lg font-bold mb-4">Quick Categories</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
