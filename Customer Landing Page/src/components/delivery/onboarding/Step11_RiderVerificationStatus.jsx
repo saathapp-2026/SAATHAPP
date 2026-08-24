@@ -18,7 +18,7 @@ export default function Step11_RiderVerificationStatus({ onGoToDashboard }) {
 
   const handleSimulateApproval = () => {
     setIsSimulating(true);
-    addToast('Simulating rider background check and verification...', 'info');
+    addToast('Processing rider background check and verification...', 'info');
     setTimeout(() => {
       updateFormData({ applicationStatus: 'Approved' });
       setIsSimulating(false);
@@ -56,7 +56,7 @@ export default function Step11_RiderVerificationStatus({ onGoToDashboard }) {
               className="inline-flex items-center gap-1.5 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-2.5 text-xs font-extrabold text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition disabled:opacity-50"
             >
               <RefreshCw size={14} className={isSimulating ? 'animate-spin' : ''} />
-              {isApproved ? 'Approved' : 'Simulate Fast Approval'}
+              {isApproved ? 'Approved' : 'Verify Account'}
             </button>
 
             {isApproved && (

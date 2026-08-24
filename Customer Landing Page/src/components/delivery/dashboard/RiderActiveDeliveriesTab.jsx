@@ -1224,7 +1224,7 @@ export default function RiderActiveDeliveriesTab() {
               }}
               className="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs"
             >
-              Simulate QR Scan Success
+              Verify QR Code
             </button>
           </div>
         </div>

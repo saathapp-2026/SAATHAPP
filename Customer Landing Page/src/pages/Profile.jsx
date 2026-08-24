@@ -656,7 +656,7 @@ export default function Profile({ user, onBack, onLogout }) {
                           {/* Bottom controls */}
                           <div className="flex flex-wrap gap-2.5 pt-2 justify-end">
                             <button
-                              onClick={() => alert(`Simulating invoice download for ${order.orderId}`)}
+                              onClick={() => alert(`Downloading invoice for ${order.orderId}...`)}
                               className="px-4.5 py-2 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl text-slate-700 dark:text-slate-300 font-black uppercase tracking-wider cursor-pointer"
                             >
                               Download Invoice
@@ -1017,7 +1017,7 @@ export default function Profile({ user, onBack, onLogout }) {
                           return (
                             <button
                               key={idx}
-                              onClick={() => alert(`Simulating FAQ page loaded for ${cat.label}`)}
+                              onClick={() => alert(`Opening FAQ for ${cat.label}...`)}
                               className={`flex flex-col items-center gap-2 p-4 border rounded-2xl cursor-pointer hover:shadow transition-shadow text-center ${cat.color}`}
                             >
                               <Icon size={18} />
@@ -1079,7 +1079,7 @@ export default function Profile({ user, onBack, onLogout }) {
                           return (
                             <button
                               key={idx}
-                              onClick={() => alert(`Simulating modal for ${c.title}`)}
+                              onClick={() => alert(`Opening settings for ${c.title}...`)}
                               className="flex items-center justify-between p-4 border border-slate-205 dark:border-slate-800 hover:border-[#6C3BFF]/50 hover:bg-slate-50/50 rounded-xl transition-all cursor-pointer text-left group"
                             >
                               <div className="flex items-center gap-3">

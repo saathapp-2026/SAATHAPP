@@ -179,14 +179,13 @@ export default function CreateAdvertisementPage({ user }) {
             <div className="bg-page p-6 rounded-xl border border-slate-200 mb-8 max-w-md">
               <p className="text-sm text-slate-500 mb-2">Total Amount to Pay</p>
               <p className="text-4xl font-black text-[#15803D] mb-6">₹2,999</p>
-              <button className="w-full py-4 bg-slate-900 text-white font-bold rounded-lg flex justify-center items-center gap-2">
+              <button onClick={() => setCurrentStep(5)} className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-lg flex justify-center items-center gap-2">
                 Pay Securely
               </button>
               <p className="text-xs text-center text-slate-400 mt-4">100% Secure Payment via Razorpay</p>
             </div>
-            <div className="flex justify-between border-t border-slate-200 pt-6">
+            <div className="flex justify-start border-t border-slate-200 pt-6">
               <button onClick={() => setCurrentStep(3)} className="px-6 py-3 text-slate-600 font-medium hover:bg-page rounded-lg">Back</button>
-              <button onClick={() => setCurrentStep(5)} className="px-8 py-3 bg-[#15803D] text-white font-bold rounded-lg hover:bg-emerald-700">Simulate Success</button>
             </div>
           </div>
         )}

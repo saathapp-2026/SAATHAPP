@@ -45,17 +45,6 @@ export default function WelcomeKitTracking({ membership, onUpdate }) {
           <Package size={20} className="text-amber-500" />
           <h3 className="font-bold text-lg">Welcome Kit Status</h3>
         </div>
-        {!isDelivered && (
-          <button
-            type="button"
-            onClick={handleAdvance}
-            disabled={advancing}
-            className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-600 font-medium hover:bg-amber-500/20 disabled:opacity-50 transition-colors"
-          >
-            <RefreshCw size={12} className={advancing ? 'animate-spin' : ''} />
-            {advancing ? 'Updating...' : 'Simulate Next Step'}
-          </button>
-        )}
       </div>
 
       <div className="flex items-center justify-between mb-6">
@@ -104,7 +93,7 @@ export default function WelcomeKitTracking({ membership, onUpdate }) {
       {kit.status === 'preparing' && (
         <p className="text-sm text-slate-500 mt-4 flex items-center gap-2 p-3 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20">
           <Truck size={16} className="text-amber-500" />
-          Your complimentary Welcome Business Kit is being prepared. Use &quot;Simulate Next Step&quot; to preview tracking updates.
+          Your complimentary Welcome Business Kit is being prepared.
         </p>
       )}
 

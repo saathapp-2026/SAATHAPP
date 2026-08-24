@@ -240,7 +240,7 @@ export default function BookingCard({
                       <span>Start Job Verification</span>
                     </span>
                     <span className="text-[9px] bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 rounded-full font-black">
-                      Code: {booking.otp} (For simulation check)
+                      Code: {booking.otp}
                     </span>
                   </div>
                   
