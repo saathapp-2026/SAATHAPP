@@ -109,7 +109,7 @@ export default function ServiceDetails({
             <div className="bg-surface border border-theme-border rounded-2xl overflow-hidden shadow-sm sticky top-24">
               <div className="aspect-[4/3] bg-slate-200 dark:bg-slate-800 flex items-center justify-center relative">
                 {service.image ? (
-                  <img src={service.image} alt={service.name} className="w-full h-full object-cover" />
+                  <img src={service.image} alt={service.name} className="w-full h-full object-contain p-1.5" />
                 ) : null}
                 <div className="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm px-3 py-1.5 rounded-md text-[10px] font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 shadow-sm border border-slate-200 dark:border-slate-800">
                   {categoryName}

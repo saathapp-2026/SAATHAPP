@@ -207,7 +207,7 @@ export default function ServiceBookingFlow({
                 <div className="space-y-4">
                   <div className="flex items-start gap-4 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
                     <div className="w-16 h-16 bg-slate-200 dark:bg-slate-800 rounded-lg overflow-hidden shrink-0">
-                       {service.image ? <img src={service.image} alt="" className="w-full h-full object-cover"/> : <div className="w-full h-full flex items-center justify-center text-2xl">🛠️</div>}
+                       {service.image ? <img src={service.image} alt="" className="w-full h-full object-contain p-1"/> : <div className="w-full h-full flex items-center justify-center text-2xl">🛠️</div>}
                     </div>
                     <div>
                       <h4 className="font-bold text-slate-900 dark:text-white mb-1">{service.name}</h4>
