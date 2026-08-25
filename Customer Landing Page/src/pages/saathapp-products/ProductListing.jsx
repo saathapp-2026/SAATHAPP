@@ -1027,21 +1027,25 @@ export default function ProductListing({
                       <div
                         key={cat.id}
                         onClick={() => navigate(cat.url)}
-                        className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:border-emerald-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group aspect-square"
+                        className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl flex flex-col cursor-pointer hover:border-emerald-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group aspect-square overflow-hidden"
                       >
-                        <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs overflow-hidden">
+                        <div className="w-full flex-1 flex items-center justify-center overflow-hidden">
                           {cat.image ? (
-                            <img src={cat.image} alt={cat.name} className="w-full h-full object-cover rounded-2xl" />
+                            <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                           ) : (
-                            <IconComponent size={28} />
+                            <div className="w-full h-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                              <IconComponent size={48} className="group-hover:scale-110 transition-transform duration-500" />
+                            </div>
                           )}
                         </div>
-                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                          {cat.name}
-                        </h3>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 font-medium">
-                          {dynamicCount} Products
-                        </p>
+                        <div className="p-3 sm:p-4 flex flex-col items-center justify-center text-center shrink-0 bg-white dark:bg-slate-900 z-10">
+                          <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-1">
+                            {cat.name}
+                          </h3>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 font-medium">
+                            {dynamicCount} Products
+                          </p>
+                        </div>
                       </div>
                     );
                   })}
