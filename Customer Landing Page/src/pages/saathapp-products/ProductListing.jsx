@@ -1031,7 +1031,7 @@ export default function ProductListing({
                       >
                         <div className="w-full flex-1 flex items-center justify-center overflow-hidden">
                           {cat.image ? (
-                            <img src={`${cat.image}?v=2`} alt={cat.name} className="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform duration-500" />
+                            <img src={`${cat.image}?v=4`} alt={cat.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
                           ) : (
                             <div className="w-full h-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
                               <IconComponent size={48} className="group-hover:scale-110 transition-transform duration-500" />

@@ -236,7 +236,7 @@ export default function SaathPackLandingPage({
                   <img 
                     src={cat.img} 
                     alt={cat.name} 
-                    className="w-full h-full group-hover:scale-105 transition-transform rounded-lg" 
+                    className="w-full h-full group-hover:scale-105 transition-transform rounded-lg mix-blend-multiply" 
                     style={{ width: '100%', height: '100%', objectFit: (typeof cat.img === 'string' && cat.img.startsWith('http')) ? 'contain' : 'cover' }} 
                   />
                 </div>
