@@ -128,7 +128,7 @@ export default function Header({
   return (
     <>
       <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shadow-sm">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
 
           {/* ========================================================= */}
           {/* MOBILE HEADER */}
@@ -188,22 +188,26 @@ export default function Header({
                   <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-rose-500 rounded-full border-2 border-white dark:border-slate-900" />
                 </button>
 
-                <button
-                  onClick={installApp}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold text-slate-700 dark:text-slate-300 bg-transparent border border-slate-200 dark:border-slate-700 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer shrink-0"
-                >
-                  <Download size={14} />
-                  <span>Install</span>
-                </button>
+                {canInstall && !isInstalled && (
+                  <button
+                    onClick={installApp}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold text-slate-700 dark:text-slate-300 bg-transparent border border-slate-200 dark:border-slate-700 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer shrink-0"
+                  >
+                    <Download size={14} />
+                    <span>Install</span>
+                  </button>
+                )}
 
                 <button
                   onClick={onCartClick}
                   className="relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0"
                 >
                   <ShoppingCart size={22} />
-                  <span className="absolute -top-1.5 -right-1.5 bg-[#16a34a] text-white font-bold text-[10px] min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-950">
-                    {cartCount > 0 ? cartCount : 2}
-                  </span>
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 bg-[#16a34a] text-white font-bold text-[10px] min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-950">
+                      {cartCount}
+                    </span>
+                  )}
                 </button>
 
                 <button
@@ -355,7 +359,7 @@ export default function Header({
             </div>
 
             {/* Desktop Search Bar */}
-            <div ref={searchRef} className="flex-1 max-w-[480px] relative z-[60] mx-4">
+            <div ref={searchRef} className="flex-1 max-w-4xl relative z-[60] mx-6">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
                 <div className="relative w-full">
                   <input
@@ -467,9 +471,11 @@ export default function Header({
                 title="Cart"
               >
                 <ShoppingCart size={26} />
-                <span className="absolute -top-2 -right-2 bg-[#16a34a] text-white font-bold text-[11px] min-w-[20px] h-[20px] px-1 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-950">
-                  {cartCount > 0 ? cartCount : 2}
-                </span>
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-[#16a34a] text-white font-bold text-[11px] min-w-[20px] h-[20px] px-1 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-950">
+                    {cartCount}
+                  </span>
+                )}
               </button>
 
               <button
