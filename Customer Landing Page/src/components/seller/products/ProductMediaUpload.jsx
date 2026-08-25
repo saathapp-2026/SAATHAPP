@@ -166,7 +166,7 @@ function ImageSlot({ item, label, onRemove, onReplace, large, disabled }) {
     >
       {hasImage ? (
         <>
-          <img src={item.url} alt={item.name || label} className="absolute inset-0 h-full w-full object-cover" />
+          <img src={item.url} alt={item.name || label} className="absolute inset-0 h-full w-full object-contain p-1.5" />
           {typeof item.progress === 'number' && item.progress < 100 && (
             <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-200/80 z-10">
               <div className="h-full bg-emerald-500 transition-all" style={{ width: `${item.progress}%` }} />

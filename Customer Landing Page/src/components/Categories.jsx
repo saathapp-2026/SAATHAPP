@@ -98,7 +98,7 @@ export default function Categories({ onCategorySelect, activeCategory }) {
                     <img 
                       src={category.image} 
                       alt={category.name} 
-                      className="w-full h-full object-cover rounded-2xl" 
+                      className="w-full h-full object-contain p-1.5 rounded-2xl" 
                     />
                   ) : (
                     <IconComponent size={26} />

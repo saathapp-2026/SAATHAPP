@@ -120,7 +120,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                       <img 
                         src={deal.image} 
                         alt={deal.name} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
                       />
                     )}
                     

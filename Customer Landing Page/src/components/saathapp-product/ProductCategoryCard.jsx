@@ -8,7 +8,7 @@ export default function ProductCategoryCard({ category, onClick }) {
     >
       <div className="w-14 h-14 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-primary/5 transition-colors overflow-hidden">
         {category.icon ? (
-          <img src={category.icon} alt={category.name} className="w-full h-full object-cover rounded-full" />
+          <img src={category.icon} alt={category.name} className="w-full h-full object-contain p-1.5 rounded-full" />
         ) : (
           <span className="text-2xl">{category.emoji || '🛍️'}</span>
         )}

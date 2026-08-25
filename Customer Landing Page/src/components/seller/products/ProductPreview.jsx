@@ -34,7 +34,7 @@ function collectImages(media = {}) {
 function ImageFrame({ image, className = '' }) {
   const hasUrl = image?.url && (image.url.startsWith('data:') || image.url.startsWith('http') || image.url.startsWith('blob:'));
   if (hasUrl) {
-    return <img src={image.url} alt={image.name || 'Product'} className={`object-cover ${className}`} />;
+    return <img src={image.url} alt={image.name || 'Product'} className={`object-contain p-1.5 ${className}`} />;
   }
   // Seed / metadata-only image — show branded placeholder with filename
   if (image) {

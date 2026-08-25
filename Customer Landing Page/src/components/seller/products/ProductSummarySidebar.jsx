@@ -34,7 +34,7 @@ export default function ProductSummarySidebar({ draft, errors = {} }) {
       <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface overflow-hidden">
         <div className="aspect-[4/3] bg-gradient-to-br from-amber-50 to-orange-100 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center overflow-hidden">
           {draft.media?.mainImage?.url?.startsWith('data:') || draft.media?.mainImage?.url?.startsWith('blob:') || draft.media?.mainImage?.url?.startsWith('http') ? (
-            <img src={draft.media.mainImage.url} alt="" className="h-full w-full object-cover" />
+            <img src={draft.media.mainImage.url} alt="" className="h-full w-full object-contain p-1.5" />
           ) : draft.media?.mainImage ? (
             <div className="flex flex-col items-center gap-1 px-3 text-center">
               <span className="h-12 w-12 rounded-xl bg-white/80 flex items-center justify-center text-lg font-bold text-emerald-600">

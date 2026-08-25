@@ -523,7 +523,7 @@ export default function GiftSetPage({
                 >
                   {cat.image ? (
                     <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-slate-50 dark:bg-slate-800">
-                      <img src={cat.image} alt={cat.label} className="w-full h-full object-cover" />
+                      <img src={cat.image} alt={cat.label} className="w-full h-full object-contain p-1" />
                     </div>
                   ) : (
                     <span className="text-2xl h-8 flex items-center justify-center">{cat.icon}</span>
@@ -807,7 +807,7 @@ export default function GiftSetPage({
                           <img
                             src={p.image}
                             alt={p.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                           />
                         ) : null}
                       </div>
