@@ -634,7 +634,7 @@ export default function ProductListing({
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-page dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
       <Header
         cartCount={cartCount}
         onCartClick={onCartClick}

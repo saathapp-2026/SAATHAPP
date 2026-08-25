@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Mic, ShoppingCart, Sun, Moon, Bell, Sparkles, Flame, History, MapPin, ChevronDown, Menu, X, LogOut, Download } from 'lucide-react';
+import { Search, Mic, Zap, User, ShoppingCart, Sun, Moon, Bell, Sparkles, Flame, History, MapPin, ChevronDown, Menu, X, LogOut, Download } from 'lucide-react';
 import { usePWA } from '../context/PWAContext';
 import SaathAppLogo from '../assets/saathapp-logo.jpeg';
 import { useLanguage } from '../context/LanguageContext';
@@ -127,104 +127,124 @@ export default function Header({
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-surface/95 backdrop-blur-md border-b border-theme-border shadow-xs">
-        <div className="w-full px-3 sm:px-6 lg:px-8">
+      <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ========================================================= */}
-          {/* MOBILE HEADER (Blinkit / Swiggy / Zomato style for < sm) */}
+          {/* MOBILE HEADER */}
           {/* ========================================================= */}
-          <div className="flex flex-col gap-2 py-2 sm:hidden">
-            {/* Mobile Row 1: Logo (Left) + Primary Actions: Cart, Profile, Hamburger Menu (Right) */}
-            <div className="flex items-center justify-between">
-              <Link
-                to="/"
-                onClick={(event) => {
-                  if (window.location.pathname === '/') {
-                    event.preventDefault();
-                    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                  }
-                }}
-                aria-label="Go to Home"
-              >
-                <div className="h-7 w-24 cursor-pointer">
-                  <img
-                    src={SaathAppLogo}
-                    alt="SaathApp Logo"
-                    className="h-full w-full object-contain"
-                  />
-                </div>
-              </Link>
+          <div className="flex flex-col gap-3 py-3 sm:hidden">
+            {/* Top Row: Logo, Location, Icons (Horizontally scrollable) */}
+            <div className="flex items-center justify-between gap-3 overflow-x-auto no-scrollbar pb-1 -mx-2 px-2">
+              {/* Left Group: Logo & Location */}
+              <div className="flex items-center gap-3 shrink-0">
+                <Link
+                  to="/"
+                  onClick={(event) => {
+                    if (window.location.pathname === '/') {
+                      event.preventDefault();
+                      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+                    }
+                  }}
+                  aria-label="Go to Home"
+                  className="shrink-0"
+                >
+                  <div className="h-7 w-[90px] cursor-pointer">
+                    <img
+                      src={SaathAppLogo}
+                      alt="SaathApp Logo"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                </Link>
 
-              {/* Mobile Right Action Icons */}
-              <div className="flex items-center gap-2">
-                {/* Theme Toggle */}
+                <button
+                  type="button"
+                  onClick={() => navigate('/location')}
+                  className="flex flex-col items-start justify-center cursor-pointer shrink-0 ml-1"
+                >
+                  <div className="flex items-center gap-1 text-slate-900 dark:text-white font-black text-sm tracking-tight">
+                    <Zap size={14} className="fill-slate-900 dark:fill-white text-slate-900 dark:text-white" />
+                    <span>20 min</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-slate-700 dark:text-slate-300 mt-0.5">
+                    <span className="max-w-[120px] truncate text-[11px] font-medium text-slate-900 dark:text-white">{location || 'Green Park, New Delhi'}</span>
+                    <ChevronDown size={14} className="text-slate-500" />
+                  </div>
+                </button>
+              </div>
+
+              {/* Right Group: Icons */}
+              <div className="flex items-center gap-4 shrink-0 ml-auto">
                 <button
                   onClick={toggleDarkMode}
-                  className="p-1.5 rounded-full text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  className="text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0"
                 >
-                  {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+                  {darkMode ? <Sun size={20} className="text-amber-400" /> : <Moon size={20} />}
                 </button>
 
-                {/* SaathApp Product */}
-                <motion.button
-                  onClick={() => navigate('/products/saathapp')}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-1.5 rounded-full text-primary hover:bg-primary/5 transition-colors shrink-0"
-                  title="SaathApp Products"
+                <button className="relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0">
+                  <Bell size={20} />
+                  <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-rose-500 rounded-full border-2 border-white dark:border-slate-900" />
+                </button>
+
+                <button
+                  onClick={installApp}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold text-slate-700 dark:text-slate-300 bg-transparent border border-slate-200 dark:border-slate-700 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer shrink-0"
                 >
-                  <Sparkles size={18} className="text-[#6C3BFF]" />
-                </motion.button>
+                  <Download size={14} />
+                  <span>Install</span>
+                </button>
+
+                <button
+                  onClick={onCartClick}
+                  className="relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0"
+                >
+                  <ShoppingCart size={22} />
+                  <span className="absolute -top-1.5 -right-1.5 bg-[#16a34a] text-white font-bold text-[10px] min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-950">
+                    {cartCount > 0 ? cartCount : 2}
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => navigate('/profile')}
+                  className="text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0 flex items-center justify-center"
+                >
+                  {user?.photo ? (
+                    <img src={user.photo} alt={user.name || 'Profile'} className="w-7 h-7 rounded-full object-cover border border-slate-300" />
+                  ) : (
+                    <User size={22} />
+                  )}
+                </button>
+
+                <button
+                  onClick={() => setIsCustomerMenuOpen(true)}
+                  className="text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0"
+                >
+                  <Menu size={24} />
+                </button>
               </div>
             </div>
 
-            {/* Mobile Row 2: Deliver To (Single Compact Line) */}
-            <button
-              type="button"
-              onClick={() => navigate('/location')}
-              className="flex items-center gap-1.5 text-theme-secondary text-xs font-semibold py-0.5 hover:opacity-80 text-left cursor-pointer"
-            >
-              <MapPin size={14} className="text-primary shrink-0" />
-              <span className="text-theme-secondary font-bold uppercase text-[9px] tracking-wider shrink-0">Deliver to:</span>
-              <span className="truncate text-xs font-bold text-theme max-w-[200px]">
-                {location || 'Select Location...'}
-              </span>
-              <ChevronDown size={13} className="text-theme-secondary shrink-0" />
-            </button>
-
-            {/* Mobile Row 3: Full-width Search Bar */}
+            {/* Mobile Row 2: Full-width Search Bar */}
             <div ref={searchRef} className="relative z-[60] w-full">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
                 <div className="relative w-full">
                   <input
                     type="text"
-                    placeholder={t('search') + '...'}
+                    placeholder='Search for "banana"'
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="w-full h-9 pl-9 pr-9 rounded-btn border border-theme-border bg-surface text-theme placeholder-theme-secondary  focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-xs text-xs"
+                    className="w-full h-11 pl-10 pr-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm"
                   />
-
-                  {/* Search Icon */}
-                  <div className="absolute left-2.5 top-1/2 -translate-y-1/2 text-theme-secondary">
-                    <Search size={15} />
-                  </div>
-
-                  {/* Voice Search trigger */}
-                  <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
-                    <motion.button
-                      type="button"
-                      onClick={onVoiceSearchClick}
-                      whileHover={{ scale: 1.1, color: '#1565C0' }}
-                      className="p-1 text-theme-secondary hover:text-accent rounded-full hover:bg-page  transition-all"
-                      title="Voice Search"
-                    >
-                      <Mic size={15} />
-                    </motion.button>
+                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500">
+                    <Search size={18} />
                   </div>
                 </div>
               </form>
 
-              {/* Suggestions Dropdown */}
+              {/* Suggestions Dropdown (Mobile) */}
               <AnimatePresence>
                 {isSearchFocused && (
                   <motion.div
@@ -232,47 +252,34 @@ export default function Header({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute left-0 right-0 mt-2 bg-surface/95 backdrop-blur-xl border border-theme-border rounded-card shadow-premium overflow-hidden z-50 text-left"
+                    className="absolute left-0 right-0 mt-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden z-50 text-left"
                   >
                     {searchQuery.trim() === '' ? (
                       <div className="p-4">
                         {recentSearches.length > 0 && (
                           <div className="mb-4">
-                            <span className="text-[10px] font-bold text-theme-secondary uppercase tracking-wider flex items-center justify-between mb-2">
+                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between mb-2">
                               <span className="flex items-center gap-1.5"><History size={12} /> Recent Searches</span>
                               <button onClick={(e) => { e.stopPropagation(); setRecentSearches([]); window.localStorage.removeItem('saathapp_recent_searches'); }} className="text-primary hover:underline text-[9px]">Clear all</button>
                             </span>
                             <div className="flex flex-wrap gap-1.5">
                               {recentSearches.map((term, i) => (
-                                <div key={i} className="flex items-center bg-page hover:bg-slate-200 py-0.5 px-2.5 rounded-full transition-colors">
-                                  <button
-                                    onClick={() => executeSearch(term)}
-                                    className="text-[11px] font-medium text-theme-secondary mr-1"
-                                  >
-                                    {term}
-                                  </button>
-                                  <button onClick={(e) => removeRecentSearch(e, term)} className="text-theme-secondary hover:text-red-500">
-                                    <X size={10} />
-                                  </button>
+                                <div key={i} className="flex items-center bg-slate-100 dark:bg-slate-800 py-1 px-2.5 rounded-full transition-colors">
+                                  <button onClick={() => executeSearch(term)} className="text-[11px] font-medium text-slate-600 dark:text-slate-300 mr-1">{term}</button>
+                                  <button onClick={(e) => removeRecentSearch(e, term)} className="text-slate-400 hover:text-red-500"><X size={10} /></button>
                                 </div>
                               ))}
                             </div>
                           </div>
                         )}
-
                         <div>
-                          <span className="text-[10px] font-bold text-theme-secondary uppercase tracking-wider flex items-center gap-1.5 mb-2">
+                          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5 mb-2">
                             <Flame size={12} className="text-amber-500" /> Popular Searches
                           </span>
                           <div className="flex flex-wrap gap-1.5">
                             {popularSearches.map((term, i) => (
-                              <button
-                                key={i}
-                                onClick={() => executeSearch(term)}
-                                className="text-[11px] font-medium text-theme-secondary bg-page border border-theme-border py-1 px-2.5 rounded-full flex items-center gap-1 transition-all"
-                              >
-                                <Sparkles size={10} className="text-amber-500" />
-                                {term}
+                              <button key={i} onClick={() => executeSearch(term)} className="text-[11px] font-medium text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 py-1 px-2.5 rounded-full flex items-center gap-1 transition-all">
+                                <Sparkles size={10} className="text-amber-500" />{term}
                               </button>
                             ))}
                           </div>
@@ -282,17 +289,13 @@ export default function Header({
                       <div className="py-2 max-h-64 overflow-y-auto">
                         {suggestions.length > 0 ? (
                           suggestions.map((suggestion, i) => (
-                            <button
-                              key={i}
-                              onClick={() => executeSearch(suggestion)}
-                              className="w-full px-4 py-2.5 text-xs font-medium text-theme-secondary hover:bg-page  flex items-center gap-2.5 transition-colors border-b border-theme-border last:border-b-0"
-                            >
-                              <Search size={13} className="text-theme-secondary shrink-0" />
+                            <button key={i} onClick={() => executeSearch(suggestion)} className="w-full px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center gap-2.5 transition-colors border-b border-slate-100 dark:border-slate-800 last:border-b-0">
+                              <Search size={13} className="text-slate-400 shrink-0" />
                               <span>{suggestion}</span>
                             </button>
                           ))
                         ) : (
-                          <div className="px-4 py-2.5 text-xs text-theme-secondary italic">
+                          <div className="px-4 py-2.5 text-xs text-slate-500 italic">
                             No direct match. Press Enter to search "{searchQuery}"
                           </div>
                         )}
@@ -305,11 +308,11 @@ export default function Header({
           </div>
 
           {/* ========================================================= */}
-          {/* DESKTOP & TABLET HEADER (Preserved 100% for sm: and above) */}
+          {/* DESKTOP & TABLET HEADER */}
           {/* ========================================================= */}
-          <div className="hidden sm:flex items-center justify-between h-[72px] gap-4 py-1.5">
-            {/* Logo */}
-            <div className="flex items-center gap-3 shrink-0">
+          <div className="hidden sm:flex items-center justify-between h-[84px] gap-6 py-2">
+            {/* Logo & Location */}
+            <div className="flex items-center gap-8 shrink-0">
               <Link
                 to="/"
                 onClick={(event) => {
@@ -323,7 +326,7 @@ export default function Header({
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="h-10 w-32 cursor-pointer"
+                  className="h-10 w-[140px] cursor-pointer"
                 >
                   <img
                     src={SaathAppLogo}
@@ -332,58 +335,44 @@ export default function Header({
                   />
                 </motion.div>
               </Link>
+
+              {/* Deliver To */}
+              <button
+                type="button"
+                onClick={() => navigate('/location')}
+                className="flex flex-col items-start gap-0.5 cursor-pointer shrink-0 mt-1"
+              >
+                <div className="flex items-center gap-1.5 text-slate-900 dark:text-white font-black text-lg tracking-tight">
+                  <Zap size={18} className="fill-slate-900 dark:fill-white text-slate-900 dark:text-white" />
+                  <span>20 minutes</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">DELIVER TO</span>
+                  <span className="max-w-[180px] truncate text-xs font-semibold text-slate-900 dark:text-white">{location || 'Green Park, New Delhi'}</span>
+                  <ChevronDown size={14} className="text-slate-500" />
+                </div>
+              </button>
             </div>
 
-            {/* Deliver To */}
-            <button
-              type="button"
-              onClick={() => navigate('/location')}
-              className="flex items-center gap-2 rounded-btn border border-theme-border bg-page px-3 py-2 text-theme-secondary shadow-xs transition hover:shadow-sm/90 cursor-pointer shrink-0"
-            >
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary dark:text-primary-light shrink-0">
-                <MapPin size={15} />
-              </div>
-              <div className="text-left">
-                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-secondary">Deliver to</div>
-                <div className="max-w-[150px] md:max-w-[200px] truncate text-xs sm:text-sm font-semibold text-theme">{location || 'Select Location...'}</div>
-              </div>
-              <ChevronDown size={14} className="text-theme-secondary shrink-0" />
-            </button>
-
             {/* Desktop Search Bar */}
-            <div ref={searchRef} className="flex-1 max-w-[380px] md:max-w-[400px] relative z-[60]">
+            <div ref={searchRef} className="flex-1 max-w-[480px] relative z-[60] mx-4">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
                 <div className="relative w-full">
                   <input
                     type="text"
-                    placeholder={t('search') + '...'}
+                    placeholder='Search for "banana"'
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="w-full h-11 pl-10 pr-10 rounded-btn border border-theme-border bg-surface text-theme placeholder-theme-secondary  focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
+                    className="w-full h-11 pl-11 pr-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
                   />
-
-                  {/* Search Icon */}
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-theme-secondary">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
                     <Search size={18} />
-                  </div>
-
-                  {/* Voice Search trigger */}
-                  <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                    <motion.button
-                      type="button"
-                      onClick={onVoiceSearchClick}
-                      whileHover={{ scale: 1.1, color: '#1565C0' }}
-                      className="p-1.5 text-theme-secondary hover:text-accent rounded-full hover:bg-page  transition-all"
-                      title="Voice Search"
-                    >
-                      <Mic size={18} />
-                    </motion.button>
                   </div>
                 </div>
               </form>
 
-              {/* Suggestions Dropdown */}
+              {/* Suggestions Dropdown (Desktop) */}
               <AnimatePresence>
                 {isSearchFocused && (
                   <motion.div
@@ -391,28 +380,21 @@ export default function Header({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute left-0 right-0 mt-2 bg-surface/95 backdrop-blur-xl border border-theme-border rounded-card shadow-premium overflow-hidden z-50 text-left"
+                    className="absolute left-0 right-0 mt-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden z-50 text-left"
                   >
                     {searchQuery.trim() === '' ? (
                       <div className="p-5">
                         {recentSearches.length > 0 && (
                           <div className="mb-4">
-                            <span className="text-xs font-bold text-theme-secondary uppercase tracking-wider flex items-center justify-between mb-2.5">
+                            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between mb-2.5">
                               <span className="flex items-center gap-1.5"><History size={13} /> Recent Searches</span>
                               <button onClick={(e) => { e.stopPropagation(); setRecentSearches([]); window.localStorage.removeItem('saathapp_recent_searches'); }} className="text-primary hover:underline text-[10px]">Clear all</button>
                             </span>
                             <div className="flex flex-wrap gap-2">
                               {recentSearches.map((term, i) => (
-                                <div key={i} className="flex items-center bg-page hover:bg-slate-200 py-1 px-3 rounded-full transition-colors">
-                                  <button
-                                    onClick={() => executeSearch(term)}
-                                    className="text-xs font-medium text-theme-secondary mr-2"
-                                  >
-                                    {term}
-                                  </button>
-                                  <button onClick={(e) => removeRecentSearch(e, term)} className="text-theme-secondary hover:text-red-500">
-                                    <X size={12} />
-                                  </button>
+                                <div key={i} className="flex items-center bg-slate-100 dark:bg-slate-800 py-1 px-3 rounded-full transition-colors">
+                                  <button onClick={() => executeSearch(term)} className="text-xs font-medium text-slate-700 dark:text-slate-300 mr-2">{term}</button>
+                                  <button onClick={(e) => removeRecentSearch(e, term)} className="text-slate-400 hover:text-red-500"><X size={12} /></button>
                                 </div>
                               ))}
                             </div>
@@ -420,18 +402,13 @@ export default function Header({
                         )}
 
                         <div>
-                          <span className="text-xs font-bold text-theme-secondary uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
+                          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
                             <Flame size={13} className="text-amber-500" /> Popular Searches
                           </span>
                           <div className="flex flex-wrap gap-2">
                             {popularSearches.map((term, i) => (
-                              <button
-                                key={i}
-                                onClick={() => executeSearch(term)}
-                                className="text-xs font-medium text-theme-secondary bg-page border border-theme-border hover:bg-primary/5 hover:border-primary/30 dark:hover:bg-primary/10 py-1.5 px-3 rounded-full flex items-center gap-1 transition-all"
-                              >
-                                <Sparkles size={11} className="text-amber-500" />
-                                {term}
+                              <button key={i} onClick={() => executeSearch(term)} className="text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 py-1.5 px-3 rounded-full flex items-center gap-1 transition-all">
+                                <Sparkles size={11} className="text-amber-500" />{term}
                               </button>
                             ))}
                           </div>
@@ -441,17 +418,13 @@ export default function Header({
                       <div className="py-2.5 max-h-80 overflow-y-auto">
                         {suggestions.length > 0 ? (
                           suggestions.map((suggestion, i) => (
-                            <button
-                              key={i}
-                              onClick={() => executeSearch(suggestion)}
-                              className="w-full px-4.5 py-3 text-sm font-medium text-theme-secondary hover:bg-page  flex items-center gap-3 transition-colors border-b border-theme-border last:border-b-0"
-                            >
-                              <Search size={14} className="text-theme-secondary shrink-0" />
+                            <button key={i} onClick={() => executeSearch(suggestion)} className="w-full px-4.5 py-3 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center gap-3 transition-colors border-b border-slate-100 dark:border-slate-800 last:border-b-0">
+                              <Search size={14} className="text-slate-400 shrink-0" />
                               <span>{suggestion}</span>
                             </button>
                           ))
                         ) : (
-                          <div className="px-4 py-3 text-sm text-theme-secondary italic">
+                          <div className="px-4 py-3 text-sm text-slate-500 italic">
                             No direct match. Press Enter to search "{searchQuery}"
                           </div>
                         )}
@@ -463,106 +436,59 @@ export default function Header({
             </div>
 
             {/* Desktop Actions */}
-            <div className="flex items-center gap-2.5 shrink-0">
-              
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={() => navigate('/products/saathapp')}
-                className="px-3.5 py-1.5 rounded-btn text-primary hover:bg-primary/5 transition-colors shrink-0 flex items-center justify-center gap-1.5 border border-primary/20"
-                title="SaathApp Products"
-              >
-                <span className="text-lg leading-none">🛍️</span>
-                <span className="text-xs font-bold hidden lg:block">SaathApp Products</span>
-              </motion.button>
-
+            <div className="flex items-center gap-5 shrink-0">
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={toggleDarkMode}
-                className="p-2 rounded-btn text-theme-secondary hover:text-theme-secondary  hover:bg-page  transition-colors shrink-0"
+                className="text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0"
                 title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
               >
-                {darkMode ? <Sun size={20} className="text-amber-400" /> : <Moon size={20} />}
+                {darkMode ? <Sun size={24} className="text-amber-400" /> : <Moon size={24} />}
               </motion.button>
 
-              <button className="relative p-2 rounded-btn text-theme-secondary hover:text-theme-secondary  hover:bg-page  transition-colors shrink-0">
-                <Bell size={20} />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-danger rounded-full" />
+              <button className="relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0">
+                <Bell size={24} />
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-rose-500 rounded-full border-2 border-white dark:border-slate-900" />
               </button>
 
-              {/* Install App Button */}
               {canInstall && !isInstalled && (
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
+                <button
                   onClick={installApp}
-                  className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-surface rounded-btn transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-transparent border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer shrink-0"
                 >
-                  <Download size={14} />
-                  <span className="hidden sm:inline">Install App</span>
-                  <span className="sm:hidden">Install</span>
-                </motion.button>
+                  <Download size={16} />
+                  <span>Install App</span>
+                </button>
               )}
 
-              {!isAuthenticated && (
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  onClick={onLogin}
-                  className="hidden md:flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-theme-secondary bg-surface/80 hover:bg-page/70  border border-theme-border rounded-btn transition-all"
-                >
-                  <span>{t('login')}</span>
-                </motion.button>
-              )}
-
-              {!isAuthenticated && (
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  onClick={onSignup}
-                  className="hidden md:flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-white bg-gradient-primary hover:bg-gradient-primary/95 rounded-btn shadow-glow-primary transition-all"
-                >
-                  <span>{t('signup')}</span>
-                </motion.button>
-              )}
-
-              <motion.button
+              <button
                 onClick={onCartClick}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label={t('my_cart') || 'Cart'}
-                title={t('my_cart') || 'Cart'}
-                className="relative p-2 rounded-btn bg-gradient-primary hover:bg-gradient-primary/95 text-white shadow-glow-primary transition-all select-none flex items-center justify-center shrink-0"
+                className="relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0"
+                title="Cart"
               >
-                <ShoppingCart size={20} />
-                <AnimatePresence>
-                  {cartCount > 0 && (
-                    <motion.span
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                      className="absolute -top-1.5 -right-1.5 bg-secondary-dark text-white border border-primary font-bold text-[9px] w-5 h-5 rounded-full flex items-center justify-center shadow-sm"
-                    >
-                      {cartCount}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.button>
+                <ShoppingCart size={26} />
+                <span className="absolute -top-2 -right-2 bg-[#16a34a] text-white font-bold text-[11px] min-w-[20px] h-[20px] px-1 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-950">
+                  {cartCount > 0 ? cartCount : 2}
+                </span>
+              </button>
 
               <button
                 onClick={() => navigate('/profile')}
-                className="w-9 h-9 rounded-full bg-slate-200 overflow-hidden cursor-pointer border border-slate-300 flex items-center justify-center text-theme-secondary shrink-0"
-                title="Open profile"
+                className="text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0 flex items-center justify-center"
               >
                 {user?.photo ? (
-                  <img src={user.photo} alt={user.name || 'Profile'} className="w-full h-full object-cover" />
+                  <img src={user.photo} alt={user.name || 'Profile'} className="w-8 h-8 rounded-full object-cover border border-slate-300" />
                 ) : (
-                  <span className="text-sm font-black">{(user?.name || 'U').charAt(0).toUpperCase()}</span>
+                  <User size={26} />
                 )}
               </button>
 
               <button
                 onClick={() => setIsCustomerMenuOpen(true)}
-                className="p-2 text-theme-secondary hover:text-theme-secondary  hover:bg-page  transition-colors rounded-btn cursor-pointer shrink-0"
+                className="text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0"
                 title="Open customer dashboard menu"
               >
-                <Menu size={20} />
+                <Menu size={28} />
               </button>
             </div>
           </div>
