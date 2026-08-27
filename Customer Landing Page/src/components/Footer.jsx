@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Send, ShieldCheck, MapPin, Phone, Mail, Globe } from 'lucide-react';
+import { Send, ShieldCheck, MapPin, Phone, Mail, Globe, Gift } from 'lucide-react';
 import SaathAppLogo from '../assets/saathapp-logo.jpeg';
 import UpiLogo from '../assets/upi.png';
 import RuPayLogo from '../assets/rupay.png';
@@ -8,10 +8,12 @@ import VisaLogo from '../assets/visa.png';
 import MastercardLogo from '../assets/mastercard.png';
 import NetBankingLogo from '../assets/netbanking.png';
 import CodLogo from '../assets/cod.png';
+import ReferralModal from './ReferralModal';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [isReferralModalOpen, setIsReferralModalOpen] = useState(false);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -95,6 +97,18 @@ export default function Footer() {
                     <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.53 3.5 12 3.5 12 3.5s-7.53 0-9.388.555A3.003 3.003 0 0 0 .502 6.163C0 8.07 0 12 0 12s0 3.93.502 5.837a3.003 3.003 0 0 0 2.11 2.108C4.47 20.5 12 20.5 12 20.5s7.53 0 9.388-.555a3.003 3.003 0 0 0 2.11-2.108C24 15.93 24 12 24 12s0-3.93-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                   </svg>
                 </a>
+              </div>
+
+              {/* Refer Someone Now Button (Navigates to /refer) */}
+              <div className="pt-1 pb-1">
+                <Link
+                  to="/refer"
+                  onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-extrabold text-xs sm:text-sm rounded-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer group"
+                >
+                  <Gift size={15} className="group-hover:rotate-12 transition-transform shrink-0" />
+                  <span>Refer Someone Now →</span>
+                </Link>
               </div>
 
               {/* Certs list */}
@@ -229,6 +243,15 @@ export default function Footer() {
                         className="hover:text-theme transition-colors"
                       >
                         Service Warranty
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/refer"
+                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+                        className="hover:text-theme transition-colors flex items-center gap-1 font-bold text-emerald-600 dark:text-emerald-400"
+                      >
+                        <span>Referral Program</span>
                       </Link>
                     </li>
                     <li>
@@ -445,6 +468,11 @@ export default function Footer() {
         </div>
 
       </div>
+
+      <ReferralModal
+        isOpen={isReferralModalOpen}
+        onClose={() => setIsReferralModalOpen(false)}
+      />
     </footer>
   );
 }
