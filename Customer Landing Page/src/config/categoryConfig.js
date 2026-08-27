@@ -448,6 +448,7 @@ export const HEADER_NAV_ITEMS = [
   { name: 'Book & Stationery', path: '/products/book-stationery' },
   { name: 'Shoes, Slippers & Sandals', path: '/products/footwear' },
   { name: 'Agriculture', path: '/products/agriculture' },
+  { name: 'Pottery', path: '/products/pottery' },
   { name: 'Construction', path: '/products/construction' },
   { name: 'Vehicles', path: '/products/vehicles' },
   { name: 'Spiritual / Puja', path: '/products/spiritual-puja' },
