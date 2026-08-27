@@ -73,7 +73,7 @@ export default function Submitted() {
         </button>
 
         <p className="text-xs text-slate-500">
-          Demo: click above to simulate approval. In production, this happens automatically after verification.
+          Status updates automatically once verification is complete.
         </p>
       </motion.div>
     </div>

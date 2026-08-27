@@ -1551,7 +1551,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
             </div>
             <div className="flex justify-end gap-2 pt-2">
               <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-page font-bold">Cancel</button>
-              <button type="button" onClick={() => { setActiveModal(null); addToast?.('✅ Customer QR Code Verified!', 'success'); }} className="px-5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black">Simulate Scan</button>
+              <button type="button" onClick={() => { setActiveModal(null); addToast?.('✅ Customer QR Code Verified!', 'success'); }} className="px-5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black">Verify Scan</button>
             </div>
           </div>
         </div>

@@ -54,23 +54,6 @@ export default function Cart({ onCheckout, onBack }) {
             <h1 className="text-2xl font-black">Your Cart</h1>
             <div className="text-sm font-semibold text-slate-500">{cartItems.length} items</div>
           </div>
-          
-          <div className="flex items-center gap-3 bg-indigo-50 dark:bg-indigo-900/20 p-3 rounded-xl border border-indigo-100 dark:border-indigo-800/50">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white">
-              <ShieldCheck size={20} />
-            </div>
-            <div>
-              <p className="font-bold text-sm text-indigo-900 dark:text-indigo-100">Simulate SaathApp Plus</p>
-              <p className="text-xs text-indigo-600 dark:text-indigo-300">Toggle membership benefits</p>
-            </div>
-            <label className="relative inline-flex items-center cursor-pointer ml-4">
-              <input type="checkbox" className="sr-only peer" checked={isPlusMember} onChange={(e) => {
-                setIsPlusMember(e.target.checked);
-                if (!e.target.checked && appliedCoupon?.code === 'PLUS10') setAppliedCoupon(null);
-              }} />
-              <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
-            </label>
-          </div>
         </div>
 
         {cartItems.length === 0 ? (

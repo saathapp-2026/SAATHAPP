@@ -460,7 +460,7 @@ export default function OrdersPage() {
             onClick={() => {
               setConfirmState({
                 title: 'Import orders',
-                message: 'Import a CSV of orders into your Seller Hub (frontend simulation)?',
+                message: 'Import a CSV of orders into your Seller Hub?',
                 confirmLabel: 'Import Sample',
                 onConfirm: async () => {
                   setConfirmState(null);

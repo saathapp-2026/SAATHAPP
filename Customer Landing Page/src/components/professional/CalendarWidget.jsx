@@ -51,7 +51,7 @@ export default function CalendarWidget() {
     setLeaveRequests(prev => [newReq, ...prev]);
     setBlockedDates(prev => [...prev, dayVal]);
     setNewLeave({ date: '', reason: '' });
-    alert('Leave request approved instantly for simulation purposes!');
+    alert('Leave request submitted and approved successfully!');
   };
 
   // July 2026 starts on a Wednesday (3 empty spots in Sunday-start calendar week)

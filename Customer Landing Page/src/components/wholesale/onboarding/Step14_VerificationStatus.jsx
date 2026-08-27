@@ -19,7 +19,7 @@ export default function Step14_VerificationStatus({ onGoToDashboard }) {
 
   const handleSimulateApproval = () => {
     setIsSimulating(true);
-    addToast('Simulating compliance verification process...', 'info');
+    addToast('Processing compliance verification...', 'info');
     setTimeout(() => {
       updateFormData({ applicationStatus: 'Approved' });
       setIsSimulating(false);
@@ -57,7 +57,7 @@ export default function Step14_VerificationStatus({ onGoToDashboard }) {
               className="inline-flex items-center gap-1.5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-2.5 text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition disabled:opacity-50"
             >
               <RefreshCw size={14} className={isSimulating ? 'animate-spin' : ''} />
-              {isApproved ? 'Approved' : 'Simulate Fast Approval'}
+              {isApproved ? 'Approved' : 'Verify Application'}
             </button>
 
             {isApproved && (

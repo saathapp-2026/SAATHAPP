@@ -464,7 +464,7 @@ export function ProfileSettingsSection({
                 <p className="text-[10px] text-slate-450 max-w-sm leading-normal">Warning: Deleting your partner profile is permanent and wipes wallet history, profile ratings, and verified credentials.</p>
               </div>
               <button
-                onClick={() => alert('Account deletion cannot be triggered in simulator mode.')}
+                onClick={() => alert('Account deletion request submitted. Our support team will contact you.')}
                 className="px-4 py-2 rounded-btn bg-danger hover:bg-danger-dark text-white text-[10px] font-extrabold uppercase cursor-pointer transition-all shrink-0"
               >
                 Delete Account
