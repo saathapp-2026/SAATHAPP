@@ -2683,18 +2683,6 @@ products.push(
 
 // Add Pottery to subcategories
 subcategories['pottery'] = [
-  { id: 'mugs', name: 'Mugs' },
-  { id: 'jugs', name: 'Jugs' },
-  { id: 'glasses', name: 'Glasses' },
-  { id: 'kulhad', name: 'Kulhad' },
-  { id: 'bowls', name: 'Bowls' },
-  { id: 'plates', name: 'Plates' },
-  { id: 'matka', name: 'Matka' },
-  { id: 'handi', name: 'Handi' },
-  { id: 'diya', name: 'Diya' },
-  { id: 'decorative-pottery', name: 'Decorative Pottery' },
-  { id: 'raw-materials', name: 'Raw Materials' },
-  { id: 'pottery-supplies', name: 'Pottery Making Supplies' },
   { id: 'pottery-clay', name: 'Pottery Clay', image: '/images/pottery/pottery-clay.jpg' },
   { id: 'terracotta-clay', name: 'Terracotta Clay', image: '/images/pottery/terracotta-clay.jpg' },
   { id: 'white-kaolin-clay', name: 'White & Kaolin Clay', image: '/images/pottery/white-kaolin-clay.jpg' },
