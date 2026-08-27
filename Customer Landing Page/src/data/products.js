@@ -2694,5 +2694,47 @@ subcategories['pottery'] = [
   { id: 'diya', name: 'Diya' },
   { id: 'decorative-pottery', name: 'Decorative Pottery' },
   { id: 'raw-materials', name: 'Raw Materials' },
-  { id: 'pottery-supplies', name: 'Pottery Making Supplies' }
+  { id: 'pottery-supplies', name: 'Pottery Making Supplies' },
+  { id: 'pottery-clay', name: 'Pottery Clay', image: '/images/pottery/pottery-clay.jpg' },
+  { id: 'terracotta-clay', name: 'Terracotta Clay', image: '/images/pottery/terracotta-clay.jpg' },
+  { id: 'white-kaolin-clay', name: 'White & Kaolin Clay', image: '/images/pottery/white-kaolin-clay.jpg' },
+  { id: 'black-red-clay', name: 'Black & Red Clay', image: '/images/pottery/black-red-clay.jpg' },
+  { id: 'fire-stoneware', name: 'Fire Stoneware', image: '/images/pottery/fire-stoneware.jpg' }
 ];
+
+// Dummy Pottery Materials Products
+products.push(
+  {
+    id: 'pottery-clay-1',
+    name: 'Natural Pottery Clay',
+    category: 'pottery',
+    subCategory: 'Pottery Clay',
+    price: 150,
+    rating: 4.5,
+    reviews: 10,
+    image: '/images/pottery/pottery-clay.jpg',
+    description: 'High quality natural pottery clay.'
+  },
+  {
+    id: 'terracotta-clay-1',
+    name: 'Terracotta Clay Pack',
+    category: 'pottery',
+    subCategory: 'Terracotta Clay',
+    price: 200,
+    rating: 4.7,
+    reviews: 5,
+    image: '/images/pottery/terracotta-clay.jpg',
+    description: 'Premium terracotta clay for crafting.'
+  },
+  {
+    id: 'white-kaolin-1',
+    name: 'White Kaolin Clay Powder',
+    category: 'pottery',
+    subCategory: 'White & Kaolin Clay',
+    price: 300,
+    rating: 4.9,
+    reviews: 20,
+    image: '/images/pottery/white-kaolin-clay.jpg',
+    description: 'Pure white kaolin clay.'
+  }
+);

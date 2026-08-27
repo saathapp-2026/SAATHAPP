@@ -386,7 +386,8 @@ export const MASTER_CATEGORIES = [
     isFeatured: false,
     subcategories: [
       'Raw Materials', 'Pottery Making Supplies', 'Finished Pottery Products',
-      'Mugs', 'Jugs', 'Glasses', 'Kulhad', 'Bowls', 'Plates', 'Matka', 'Handi', 'Diya', 'Decorative Pottery'
+      'Mugs', 'Jugs', 'Glasses', 'Kulhad', 'Bowls', 'Plates', 'Matka', 'Handi', 'Diya', 'Decorative Pottery',
+      'Pottery Clay', 'Terracotta Clay', 'White & Kaolin Clay', 'Black & Red Clay', 'Fire Stoneware'
     ]
   }
 ];
