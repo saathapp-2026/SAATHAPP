@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Search, Filter, Download, Eye, CheckCircle2, Truck, RefreshCw, XCircle, ArrowUpDown, FileSpreadsheet, X, Printer, Check } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
-import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
+import saathAppLogo from '../../../assets/saathapp-logo.png';
 
 import InvoicesTab from './InvoicesTab';
 
@@ -122,7 +122,7 @@ export default function OrdersTab() {
       <body>
         <div class="header">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <img src="${window.location.origin}/src/assets/saathapp-logo.jpeg" class="logo-img" alt="SaathApp" onerror="this.style.display='none'" />
+            <img src="${window.location.origin}/src/assets/saathapp-logo.png" class="logo-img" alt="SaathApp" onerror="this.style.display='none'" />
             <div>
               <div class="title">TAX INVOICE</div>
               <div style="font-size: 12px; color: #64748b;">${sellerName}</div>

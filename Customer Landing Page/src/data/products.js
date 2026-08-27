@@ -2643,3 +2643,40 @@ if (typeof window !== 'undefined') {
     console.warn('Could not sync admin products', e);
   }
 }
+
+// Dummy Pottery Products
+products.push(
+  {
+    id: 'pottery-1',
+    name: 'Handcrafted Ceramic Mug',
+    category: 'pottery',
+    subCategory: 'Mugs & Cups',
+    price: 350,
+    rating: 4.8,
+    reviews: 12,
+    image: '/images/categories/pottery.jpg',
+    description: 'Beautifully crafted ceramic mug for your daily tea or coffee.'
+  },
+  {
+    id: 'pottery-2',
+    name: 'Earthenware Serving Bowl',
+    category: 'pottery',
+    subCategory: 'Bowls',
+    price: 450,
+    rating: 4.6,
+    reviews: 8,
+    image: '/images/categories/pottery.jpg',
+    description: 'Traditional earthenware serving bowl.'
+  },
+  {
+    id: 'pottery-3',
+    name: 'Terracotta Water Jug',
+    category: 'pottery',
+    subCategory: 'Mugs & Cups',
+    price: 550,
+    rating: 4.9,
+    reviews: 24,
+    image: '/images/categories/pottery.jpg',
+    description: 'Natural cooling terracotta water jug.'
+  }
+);

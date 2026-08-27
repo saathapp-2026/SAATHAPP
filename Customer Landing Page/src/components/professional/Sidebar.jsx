@@ -5,7 +5,9 @@ import {
   FileCheck, User, LifeBuoy, Settings, LogOut, ShieldCheck, ArrowUpRight, TrendingUp, X,
   Crown, Package, Wrench, Briefcase, ScrollText, IndianRupee, ClipboardList
 } from 'lucide-react';
-import SaathAppLogo from '../../assets/saathapp-logo.jpeg';
+import SaathAppLogo from '../../assets/saathapp-logo.png';
+import ThemeLogo from '../ThemeLogo';
+import SaathAppLogoDark from '../../assets/saathapp-logo-dark.png';
 
 export default function Sidebar({
   activeTab,
@@ -52,7 +54,7 @@ export default function Sidebar({
         <div className="flex flex-col p-6 border-b border-slate-100 dark:border-slate-800/60">
           <div className="flex items-center justify-between mb-6">
             <div className="h-10 w-36">
-              <img src={SaathAppLogo} alt="SaathApp Logo" className="h-full w-full object-contain" />
+              <ThemeLogo />
             </div>
             <button
               className="lg:hidden text-slate-400 hover:text-slate-600 cursor-pointer"

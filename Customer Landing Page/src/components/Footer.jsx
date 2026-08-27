@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Send, ShieldCheck, MapPin, Phone, Mail, Globe } from 'lucide-react';
-import SaathAppLogo from '../assets/saathapp-logo.jpeg';
+import { Send, ShieldCheck, MapPin, Phone, Mail, Globe, ChevronDown } from 'lucide-react';
+import SaathAppLogo from '../assets/saathapp-logo.png';
+import ThemeLogo from './ThemeLogo';
+import SaathAppLogoDark from '../assets/saathapp-logo-dark.png';
 import UpiLogo from '../assets/upi.png';
 import RuPayLogo from '../assets/rupay.png';
 import VisaLogo from '../assets/visa.png';
@@ -12,6 +14,14 @@ import CodLogo from '../assets/cod.png';
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [expandedSections, setExpandedSections] = useState({});
+
+  const toggleSection = (section) => {
+    setExpandedSections((prev) => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -24,7 +34,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-footer text-theme-secondary pt-4 pb-8 border-t border-theme-border text-left">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="saath-container">
 
         {/* Main Segment: Logo Block (Left) + Links Grid Columns (Right) in Same Row */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 pt-4 pb-10 border-b border-theme-border">
@@ -33,11 +43,7 @@ export default function Footer() {
           <div className="lg:col-span-3 flex flex-col justify-between h-full space-y-4">
             <div className="space-y-4">
               <div className="h-12 w-48">
-                <img
-                  src={SaathAppLogo}
-                  alt="SaathApp Logo"
-                  className="h-full w-full object-contain"
-                />
+                <ThemeLogo />
               </div>
               <p
                 className="text-xs sm:text-sm text-theme-secondary max-w-sm font-medium leading-relaxed [text-wrap:balance]"
@@ -106,241 +112,123 @@ export default function Footer() {
           </div>
 
           {/* Footer columns (Right side) */}
-          <div className="lg:col-span-9 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 items-stretch">
+          <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-0 lg:gap-8 items-stretch mt-8 lg:mt-0 border-t border-theme-border lg:border-none">
 
             {/* Col 1 */}
-            <div>
-              <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-4.5">Company</h4>
-              <ul className="space-y-3 text-xs font-semibold">
-                <li>
-                  <Link
-                    to="/about"
-                    onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-theme transition-colors"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/our-story"
-                    onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-theme transition-colors"
-                  >
-                    Our Story
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    href="https://www.saathappnova.co.in/careers"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-theme transition-colors"
-                  >
-                    Careers
-                  </a>
-                </li>
-              </ul>
+            <div className="border-b border-theme-border lg:border-none py-4 lg:py-0">
+              <button 
+                onClick={() => toggleSection('company')}
+                className="flex items-center justify-between w-full lg:cursor-default lg:pointer-events-none"
+              >
+                <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-0 lg:mb-4.5">Company</h4>
+                <ChevronDown size={16} className={`lg:hidden transition-transform text-theme-secondary ${expandedSections.company ? 'rotate-180' : ''}`} />
+              </button>
+              <div className={`mt-4 lg:mt-0 ${expandedSections.company ? 'block' : 'hidden lg:block'}`}>
+                <ul className="space-y-3 text-xs font-semibold">
+                  <li>
+                    <Link to="/about" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">
+                      About Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/our-story" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">
+                      Our Story
+                    </Link>
+                  </li>
+                  <li>
+                    <a href="https://www.saathappnova.co.in/careers" target="_blank" rel="noopener noreferrer" className="hover:text-theme transition-colors">
+                      Careers
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             {/* Col 2 */}
-            <div>
-              <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-4.5">Business</h4>
-              <ul className="space-y-3 text-xs font-semibold">
-                <li><Link to="/seller" className="hover:text-theme transition-colors">Become Seller</Link></li>
-                <li>
-                  <Link
-                    to="/franchise"
-                    onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-theme transition-colors"
-                  >
-                    Become a Franchise Partner
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/wholesale"
-                    onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-theme transition-colors"
-                  >
-                    Become a Wholesale
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/service-professional"
-                    onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-theme transition-colors"
-                  >
-                    Become Service Professional
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/become-delivery-partner"
-                    onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-theme transition-colors"
-                  >
-                    Become Delivery Partner
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/advertise"
-                    onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                    className="hover:text-theme transition-colors"
-                  >
-                    Advertise With Us
-                  </Link>
-                </li>
-              </ul>
+            <div className="border-b border-theme-border lg:border-none py-4 lg:py-0">
+              <button 
+                onClick={() => toggleSection('business')}
+                className="flex items-center justify-between w-full lg:cursor-default lg:pointer-events-none"
+              >
+                <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-0 lg:mb-4.5">Business</h4>
+                <ChevronDown size={16} className={`lg:hidden transition-transform text-theme-secondary ${expandedSections.business ? 'rotate-180' : ''}`} />
+              </button>
+              <div className={`mt-4 lg:mt-0 ${expandedSections.business ? 'block' : 'hidden lg:block'}`}>
+                <ul className="space-y-3 text-xs font-semibold">
+                  <li><Link to="/seller" className="hover:text-theme transition-colors">Become Seller</Link></li>
+                  <li><Link to="/franchise" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Become a Franchise Partner</Link></li>
+                  <li><Link to="/wholesale" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Become a Wholesale</Link></li>
+                  <li><Link to="/service-professional" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Become Service Professional</Link></li>
+                  <li><Link to="/become-delivery-partner" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Become Delivery Partner</Link></li>
+                  <li><Link to="/advertise" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Advertise With Us</Link></li>
+                </ul>
+              </div>
             </div>
 
             {/* Middle Group: Support, Legal, Trust + Newsletter directly below */}
-            <div className="col-span-2 md:col-span-3 lg:col-span-3 flex flex-col justify-between h-full space-y-4">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
+            <div className="md:col-span-3 lg:col-span-3 flex flex-col justify-between h-full">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 lg:gap-8">
                 {/* Col 3: Support */}
-                <div>
-                  <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-4.5">Support</h4>
-                  <ul className="space-y-3 text-xs font-semibold">
-                    <li>
-                      <Link
-                        to="/help-support"
-                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-theme transition-colors"
-                      >
-                        Help & Support
-                      </Link>
-                    </li>
-                    <li>
-                      <a
-                        href="https://www.saathappnova.co.in/contact"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-theme transition-colors"
-                      >
-                        Contact Us
-                      </a>
-                    </li>
-                    <li>
-                      <Link
-                        to="/service-warranty"
-                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-theme transition-colors"
-                      >
-                        Service Warranty
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/faq"
-                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-theme transition-colors"
-                      >
-                        FAQ
-                      </Link>
-                    </li>
-                  </ul>
+                <div className="border-b border-theme-border lg:border-none py-4 lg:py-0">
+                  <button 
+                    onClick={() => toggleSection('support')}
+                    className="flex items-center justify-between w-full lg:cursor-default lg:pointer-events-none"
+                  >
+                    <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-0 lg:mb-4.5">Support</h4>
+                    <ChevronDown size={16} className={`lg:hidden transition-transform text-theme-secondary ${expandedSections.support ? 'rotate-180' : ''}`} />
+                  </button>
+                  <div className={`mt-4 lg:mt-0 ${expandedSections.support ? 'block' : 'hidden lg:block'}`}>
+                    <ul className="space-y-3 text-xs font-semibold">
+                      <li><Link to="/help-support" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Help & Support</Link></li>
+                      <li><a href="https://www.saathappnova.co.in/contact" target="_blank" rel="noopener noreferrer" className="hover:text-theme transition-colors">Contact Us</a></li>
+                      <li><Link to="/service-warranty" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Service Warranty</Link></li>
+                      <li><Link to="/faq" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">FAQ</Link></li>
+                    </ul>
+                  </div>
                 </div>
 
                 {/* Col 4: Legal */}
-                <div>
-                  <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-4.5">Legal</h4>
-                  <ul className="space-y-3 text-xs font-semibold">
-                    <li>
-                      <Link
-                        to="/privacy-policy"
-                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-theme transition-colors"
-                      >
-                        Privacy Policy
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/terms-of-service"
-                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-theme transition-colors"
-                      >
-                        Terms of Service
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/seller-policy"
-                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-theme transition-colors"
-                      >
-                        Seller Policy
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/delivery-partner-agreement"
-                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-theme transition-colors"
-                      >
-                        Delivery Partner Agreement
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/refund-cancellation-policy"
-                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-theme transition-colors"
-                      >
-                        Refund & Cancellation Policy
-                      </Link>
-                    </li>
-                  </ul>
+                <div className="border-b border-theme-border lg:border-none py-4 lg:py-0">
+                  <button 
+                    onClick={() => toggleSection('legal')}
+                    className="flex items-center justify-between w-full lg:cursor-default lg:pointer-events-none"
+                  >
+                    <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-0 lg:mb-4.5">Legal</h4>
+                    <ChevronDown size={16} className={`lg:hidden transition-transform text-theme-secondary ${expandedSections.legal ? 'rotate-180' : ''}`} />
+                  </button>
+                  <div className={`mt-4 lg:mt-0 ${expandedSections.legal ? 'block' : 'hidden lg:block'}`}>
+                    <ul className="space-y-3 text-xs font-semibold">
+                      <li><Link to="/privacy-policy" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Privacy Policy</Link></li>
+                      <li><Link to="/terms-of-service" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Terms of Service</Link></li>
+                      <li><Link to="/seller-policy" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Seller Policy</Link></li>
+                      <li><Link to="/delivery-partner-agreement" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Delivery Partner Agreement</Link></li>
+                      <li><Link to="/refund-cancellation-policy" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Refund & Cancellation Policy</Link></li>
+                    </ul>
+                  </div>
                 </div>
 
                 {/* Col 5: Trust */}
-                <div>
-                  <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-4.5">Trust</h4>
-                  <ul className="space-y-3 text-xs font-semibold">
-                    <li>
-                      <Link
-                        to="/verified-sellers"
-                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-theme transition-colors"
-                      >
-                        Verified Sellers
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/secure-online-payments"
-                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-theme transition-colors"
-                      >
-                        Secure Online Payments
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/privacy-protected"
-                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-theme transition-colors"
-                      >
-                        Privacy Protected
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/customer-support"
-                        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-                        className="hover:text-theme transition-colors"
-                      >
-                        Customer Support
-                      </Link>
-                    </li>
-                  </ul>
+                <div className="border-b border-theme-border lg:border-none py-4 lg:py-0">
+                  <button 
+                    onClick={() => toggleSection('trust')}
+                    className="flex items-center justify-between w-full lg:cursor-default lg:pointer-events-none"
+                  >
+                    <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-0 lg:mb-4.5">Trust</h4>
+                    <ChevronDown size={16} className={`lg:hidden transition-transform text-theme-secondary ${expandedSections.trust ? 'rotate-180' : ''}`} />
+                  </button>
+                  <div className={`mt-4 lg:mt-0 ${expandedSections.trust ? 'block' : 'hidden lg:block'}`}>
+                    <ul className="space-y-3 text-xs font-semibold">
+                      <li><Link to="/verified-sellers" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Verified Sellers</Link></li>
+                      <li><Link to="/secure-online-payments" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Secure Online Payments</Link></li>
+                      <li><Link to="/privacy-protected" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Privacy Protected</Link></li>
+                      <li><Link to="/customer-support" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} className="hover:text-theme transition-colors">Customer Support</Link></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
-              {/* Newsletter Box (Bottom edge aligned with Contact Us column) */}
-              <div className="space-y-3.5 mt-auto pt-4">
+              {/* Newsletter Box (Bottom edge aligned) */}
+              <div className="space-y-3.5 mt-8 lg:mt-auto pt-4 lg:border-t-0 border-t border-theme-border">
                 <h4 className="text-sm font-extrabold text-theme uppercase tracking-wider">
                   Subscribe to our local deals newsletter
                 </h4>
@@ -366,56 +254,64 @@ export default function Footer() {
             </div>
 
             {/* Col 6 */}
-            <div>
-              <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-4.5">Contact Us</h4>
-              <ul className="space-y-4 text-xs font-semibold text-theme-secondary text-left">
-                <li className="flex items-start gap-2.5">
-                  <MapPin size={14} className="text-primary shrink-0 mt-1" />
-                  <div>
-                    <span className="block text-theme font-bold mb-0.5">Company Regd. Office:</span>
-                    <span className="leading-relaxed">
-                      Bhatahar, Tharthari,<br />
-                      Nalanda, Bihar – 801307<br />
-                      India
-                    </span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <Mail size={14} className="text-primary shrink-0 mt-0.5" />
-                  <div>
-                    <span className="block text-theme font-bold mb-0.5">Help & Support:</span>
-                    <a href="mailto:support@saathapp.in" className="hover:text-theme transition-colors break-all">support@saathapp.in</a>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <Mail size={14} className="text-primary shrink-0 mt-0.5" />
-                  <div>
-                    <span className="block text-theme font-bold mb-0.5">Company:</span>
-                    <a href="mailto:company@saathapp.in" className="hover:text-theme transition-colors break-all">company@saathapp.in</a>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <Phone size={14} className="text-primary shrink-0 mt-0.5" />
-                  <div>
-                    <span className="block text-theme font-bold mb-0.5">Contact:</span>
-                    <span>+91 9128842027</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <Globe size={14} className="text-primary shrink-0 mt-0.5" />
-                  <div>
-                    <span className="block text-theme font-bold mb-0.5">Official Website:</span>
-                    <a
-                      href="https://www.saathappnova.co.in"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-theme transition-colors break-all"
-                    >
-                      www.saathappnova.co.in
-                    </a>
-                  </div>
-                </li>
-              </ul>
+            <div className="border-b border-theme-border lg:border-none py-4 lg:py-0">
+              <button 
+                onClick={() => toggleSection('contact')}
+                className="flex items-center justify-between w-full lg:cursor-default lg:pointer-events-none"
+              >
+                <h4 className="text-xs font-black text-theme uppercase tracking-wider mb-0 lg:mb-4.5">Contact Us</h4>
+                <ChevronDown size={16} className={`lg:hidden transition-transform text-theme-secondary ${expandedSections.contact ? 'rotate-180' : ''}`} />
+              </button>
+              <div className={`mt-4 lg:mt-0 ${expandedSections.contact ? 'block' : 'hidden lg:block'}`}>
+                <ul className="space-y-4 text-xs font-semibold text-theme-secondary text-left">
+                  <li className="flex items-start gap-2.5">
+                    <MapPin size={14} className="text-primary shrink-0 mt-1" />
+                    <div>
+                      <span className="block text-theme font-bold mb-0.5">Company Regd. Office:</span>
+                      <span className="leading-relaxed">
+                        Bhatahar, Tharthari,<br />
+                        Nalanda, Bihar – 801307<br />
+                        India
+                      </span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Mail size={14} className="text-primary shrink-0 mt-0.5" />
+                    <div>
+                      <span className="block text-theme font-bold mb-0.5">Help & Support:</span>
+                      <a href="mailto:support@saathapp.in" className="hover:text-theme transition-colors break-all">support@saathapp.in</a>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Mail size={14} className="text-primary shrink-0 mt-0.5" />
+                    <div>
+                      <span className="block text-theme font-bold mb-0.5">Company:</span>
+                      <a href="mailto:company@saathapp.in" className="hover:text-theme transition-colors break-all">company@saathapp.in</a>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Phone size={14} className="text-primary shrink-0 mt-0.5" />
+                    <div>
+                      <span className="block text-theme font-bold mb-0.5">Contact:</span>
+                      <span>+91 9128842027</span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Globe size={14} className="text-primary shrink-0 mt-0.5" />
+                    <div>
+                      <span className="block text-theme font-bold mb-0.5">Official Website:</span>
+                      <a
+                        href="https://www.saathappnova.co.in"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-theme transition-colors break-all"
+                      >
+                        www.saathappnova.co.in
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
 
           </div>

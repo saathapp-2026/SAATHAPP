@@ -10,16 +10,16 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-          <ProductCardSkeleton key={n} />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-6">
+        {[...Array(12)].map((_, i) => (
+          <ProductCardSkeleton key={i} />
         ))}
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-6">
       {products.map((product) => {
         if (!product) return null;
         const isPremium = product.productTier === 'PREMIUM';

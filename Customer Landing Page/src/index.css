@@ -170,6 +170,7 @@
     --bg-modal: #0a0f24;
   }
 
+
   body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-page);
@@ -374,4 +375,35 @@ html.dark footer {
   max-width: 1440px;
   width: min(1440px, calc(100% - 80px));
   margin-inline: auto;
+}
+
+/* 
+ * Global Responsive Container Configuration
+ * Replaces scattered utility classes with a unified, mathematical layout constraint 
+ */
+.saath-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  /* Mobile (Default): 12px padding on each side (calc(100% - 24px) equivalent content width) */
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+/* Tablet / Laptop: 20px padding on each side (calc(100% - 40px) equivalent content width) */
+@media (min-width: 768px) {
+  .saath-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* Large Desktop: 32px padding on each side, max width locks at 1440px */
+@media (min-width: 1200px) {
+  .saath-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
 }

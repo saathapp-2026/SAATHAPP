@@ -372,6 +372,21 @@ export const MASTER_CATEGORIES = [
     subcategories: [
       'Packaging Supplies', 'Delivery Bags', 'Boxes', 'Tapes'
     ]
+  },
+  {
+    id: 'pottery',
+    name: 'Pottery',
+    slug: 'pottery',
+    url: '/products/pottery',
+    iconName: 'Box',
+    image: '/images/categories/pottery.jpg',
+    visualDesc: 'Pottery items',
+    sortOrder: 20,
+    isActive: true,
+    isFeatured: false,
+    subcategories: [
+      'Mugs & Cups', 'Bowls', 'Plates', 'Vases', 'Cookware'
+    ]
   }
 ];
 
@@ -440,6 +455,7 @@ export const HEADER_NAV_ITEMS = [
   { name: 'Gift Set', path: '/products/gift-set', isNew: true },
   { name: 'SaathApp Product', path: '/products/saathapp', isNew: true },
   { name: 'SAATHPACK', path: '/products/saathpack/landing', isNew: true },
+  { name: 'Pottery', path: '/products/pottery', isNew: true },
   { name: 'SAATHAPP PLUS', path: '/plus', isNew: true, isPlus: true }
 ];
 

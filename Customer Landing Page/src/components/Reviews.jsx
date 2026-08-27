@@ -48,7 +48,7 @@ export default function Reviews() {
         </>
       )}
 
-      <div className="w-full px-4 sm:px-6 relative text-center">
+      <div className="saath-container relative text-center">
         
         {/* Title */}
         <div className="mb-10">

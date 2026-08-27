@@ -47,7 +47,7 @@ export default function NearbyShops({ onShopSelect }) {
         <ChevronRight size={16} />
       </button>
 
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="saath-container">
         
         {/* Section Title with custom scroll buttons */}
         <div className="flex items-center justify-between mb-8">

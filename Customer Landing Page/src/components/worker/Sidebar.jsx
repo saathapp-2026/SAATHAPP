@@ -5,7 +5,9 @@ import {
   FileCheck, User, LifeBuoy, Settings, LogOut, ShieldCheck, X,
   ClipboardCheck, DollarSign, Activity
 } from 'lucide-react';
-import SaathAppLogo from '../../assets/saathapp-logo.jpeg';
+import SaathAppLogo from '../../assets/saathapp-logo.png';
+import ThemeLogo from '../ThemeLogo';
+import SaathAppLogoDark from '../../assets/saathapp-logo-dark.png';
 
 const menuItems = [
   { id: 'dashboard', name: 'Dashboard', icon: LayoutDashboard },
@@ -57,7 +59,7 @@ export default function Sidebar({
         <div className="flex flex-col p-5 border-b border-slate-200/50 dark:border-slate-800/60">
           <div className="flex items-center justify-between mb-5">
             <div className="h-9 w-32">
-              <img src={SaathAppLogo} alt="SaathApp" className="h-full w-full object-contain" />
+              <> <img src={SaathAppLogo} alt="SaathApp" className="h-full w-full object-contain dark:hidden" /> <img src={SaathAppLogoDark} alt="SaathApp" className="h-full w-full object-contain hidden dark:block" /> </>
             </div>
             <button
               type="button"

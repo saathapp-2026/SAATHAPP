@@ -25,7 +25,7 @@ export default function DownloadApp() {
         <div className="absolute w-80 h-80 rounded-full bg-accent/20 blur-3xl -bottom-10 -right-10" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="saath-container relative z-10">
         <div className="bg-gradient-primary rounded-card text-white p-8 md:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative overflow-hidden shadow-premium">
           
           {/* Glass Overlay Details */}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Receipt, Download, Eye, FileText, FileSpreadsheet, FileCode, ChevronDown, X, Check, Printer, ExternalLink, Sparkles } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
-import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
+import saathAppLogo from '../../../assets/saathapp-logo.png';
 
 export default function InvoicesTab() {
   const { addToast, formData } = useWholesale ? useWholesale() : { addToast: console.log, formData: {} };
@@ -105,7 +105,7 @@ export default function InvoicesTab() {
       <body>
         <div class="header">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <img src="${window.location.origin}/src/assets/saathapp-logo.jpeg" class="logo-img" alt="SaathApp Logo" onerror="this.style.display='none'" />
+            <img src="${window.location.origin}/src/assets/saathapp-logo.png" class="logo-img" alt="SaathApp Logo" onerror="this.style.display='none'" />
             <div>
               <div class="title">B2B TAX INVOICE</div>
               <div style="font-size: 12px; color: #64748b;">${seller}</div>

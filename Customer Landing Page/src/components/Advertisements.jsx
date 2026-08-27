@@ -28,7 +28,7 @@ export default function Advertisements() {
   if (!active) {
     return (
       <section className="py-10 bg-surface border-b border-slate-100  relative w-full">
-        <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="saath-container">
           <div className="relative rounded-card overflow-hidden shadow-soft border border-dashed border-slate-300 min-h-[160px] sm:min-h-[180px] flex items-center justify-center bg-page text-slate-400 text-sm font-medium">
             No active advertisements.
           </div>
@@ -55,7 +55,7 @@ export default function Advertisements() {
         <ChevronRight size={16} />
       </button>
 
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="saath-container">
         
         {/* Banner Frame */}
         <div className="relative rounded-card overflow-hidden shadow-soft border border-slate-200/50 dark:border-slate-800 min-h-[160px] sm:min-h-[180px] flex items-center">

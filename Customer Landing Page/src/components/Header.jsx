@@ -3,11 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Mic, Zap, User, ShoppingCart, Sun, Moon, Bell, Sparkles, Flame, History, MapPin, ChevronDown, Menu, X, LogOut, Download } from 'lucide-react';
 import { usePWA } from '../context/PWAContext';
-import SaathAppLogo from '../assets/saathapp-logo.jpeg';
+import ThemeLogo from './ThemeLogo';
 import { useLanguage } from '../context/LanguageContext';
 import { getCustomerMenu } from '../config/customerMenu';
 import { useTheme } from "../context/ThemeContext";
 import TopNav from './TopNav';
+
 import { products, subcategories } from '../data/products';
 import { mockSaathAppProducts } from '../data/saathAppProducts';
 
@@ -128,75 +129,32 @@ export default function Header({
   return (
     <>
       <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shadow-sm">
-        <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="saath-container">
 
           {/* ========================================================= */}
           {/* MOBILE HEADER */}
           {/* ========================================================= */}
           <div className="flex flex-col gap-3 py-3 sm:hidden">
-            {/* Top Row: Logo, Location, Icons (Horizontally scrollable) */}
+            {/* Top Row: Logo & Icons */}
             <div className="flex items-center justify-between gap-3 overflow-x-auto no-scrollbar pb-1 -mx-2 px-2">
-              {/* Left Group: Logo & Location */}
-              <div className="flex items-center gap-3 shrink-0">
-                <Link
-                  to="/"
-                  onClick={(event) => {
-                    if (window.location.pathname === '/') {
-                      event.preventDefault();
-                      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                    }
-                  }}
-                  aria-label="Go to Home"
-                  className="shrink-0"
-                >
-                  <div className="h-7 w-[90px] cursor-pointer">
-                    <img
-                      src={SaathAppLogo}
-                      alt="SaathApp Logo"
-                      className="h-full w-full object-contain"
-                    />
-                  </div>
-                </Link>
-
-                <button
-                  type="button"
-                  onClick={() => navigate('/location')}
-                  className="flex flex-col items-start justify-center cursor-pointer shrink-0 ml-1"
-                >
-                  <div className="flex items-center gap-1 text-slate-900 dark:text-white font-black text-sm tracking-tight">
-                    <Zap size={14} className="fill-slate-900 dark:fill-white text-slate-900 dark:text-white" />
-                    <span>20 min</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-slate-700 dark:text-slate-300 mt-0.5">
-                    <span className="max-w-[120px] truncate text-[11px] font-medium text-slate-900 dark:text-white">{location || 'Green Park, New Delhi'}</span>
-                    <ChevronDown size={14} className="text-slate-500" />
-                  </div>
-                </button>
-              </div>
+              <Link
+                to="/"
+                onClick={(event) => {
+                  if (window.location.pathname === '/') {
+                    event.preventDefault();
+                    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+                  }
+                }}
+                aria-label="Go to Home"
+                className="shrink-0"
+              >
+                <div className="h-7 w-24 cursor-pointer">
+                  <ThemeLogo />
+                </div>
+              </Link>
 
               {/* Right Group: Icons */}
               <div className="flex items-center gap-4 shrink-0 ml-auto">
-                <button
-                  onClick={toggleDarkMode}
-                  className="text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0"
-                >
-                  {darkMode ? <Sun size={20} className="text-amber-400" /> : <Moon size={20} />}
-                </button>
-
-                <button className="relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0">
-                  <Bell size={20} />
-                  <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-rose-500 rounded-full border-2 border-white dark:border-slate-900" />
-                </button>
-
-                {canInstall && !isInstalled && (
-                  <button
-                    onClick={installApp}
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold text-slate-700 dark:text-slate-300 bg-transparent border border-slate-200 dark:border-slate-700 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer shrink-0"
-                  >
-                    <Download size={14} />
-                    <span>Install</span>
-                  </button>
-                )}
 
                 <button
                   onClick={onCartClick}
@@ -230,7 +188,25 @@ export default function Header({
               </div>
             </div>
 
-            {/* Mobile Row 2: Full-width Search Bar */}
+            {/* Mobile Row 2: Delivery */}
+            <div className="px-2">
+              <button
+                type="button"
+                onClick={() => navigate('/location')}
+                className="flex flex-col items-start justify-center cursor-pointer"
+              >
+                <div className="flex items-center gap-1 text-slate-900 dark:text-white font-black text-sm tracking-tight">
+                  <Zap size={14} className="fill-slate-900 dark:fill-white text-slate-900 dark:text-white" />
+                  <span>20 min</span>
+                </div>
+                <div className="flex items-center gap-1 text-slate-700 dark:text-slate-300 mt-0.5">
+                  <span className="truncate text-[11px] font-medium text-slate-900 dark:text-white">{location || 'Green Park, New Delhi'}</span>
+                  <ChevronDown size={14} className="text-slate-500" />
+                </div>
+              </button>
+            </div>
+
+            {/* Mobile Row 3: Full-width Search Bar */}
             <div ref={searchRef} className="relative z-[60] w-full">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
                 <div className="relative w-full">
@@ -314,9 +290,9 @@ export default function Header({
           {/* ========================================================= */}
           {/* DESKTOP & TABLET HEADER */}
           {/* ========================================================= */}
-          <div className="hidden sm:flex items-center justify-between h-[84px] gap-6 py-2">
+          <div className="hidden sm:flex items-center justify-between h-[84px] gap-4 xl:gap-6 py-2">
             {/* Logo & Location */}
-            <div className="flex items-center gap-8 shrink-0">
+            <div className="flex items-center gap-4 xl:gap-8 shrink-0">
               <Link
                 to="/"
                 onClick={(event) => {
@@ -330,13 +306,9 @@ export default function Header({
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="h-10 w-[140px] cursor-pointer"
+                  className="h-10 w-36 cursor-pointer"
                 >
-                  <img
-                    src={SaathAppLogo}
-                    alt="SaathApp Logo"
-                    className="h-full w-full object-contain"
-                  />
+                  <ThemeLogo />
                 </motion.div>
               </Link>
 
@@ -359,7 +331,7 @@ export default function Header({
             </div>
 
             {/* Desktop Search Bar */}
-            <div ref={searchRef} className="flex-1 max-w-4xl relative z-[60] mx-6">
+            <div ref={searchRef} className="flex-1 relative z-[60] mx-4 lg:mx-8">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
                 <div className="relative w-full">
                   <input
@@ -440,7 +412,7 @@ export default function Header({
             </div>
 
             {/* Desktop Actions */}
-            <div className="flex items-center gap-5 shrink-0">
+            <div className="flex items-center gap-3 xl:gap-5 shrink-0">
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={toggleDarkMode}

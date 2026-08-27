@@ -22,7 +22,7 @@ import {
   User
 } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
-import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
+import saathAppLogo from '../../../assets/saathapp-logo.png';
 
 export const SIDEBAR_ITEMS = [
   { id: 'overview', label: 'Dashboard', icon: LayoutDashboard, badge: null },

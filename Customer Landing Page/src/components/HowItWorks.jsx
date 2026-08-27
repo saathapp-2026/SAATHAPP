@@ -10,7 +10,7 @@ export default function HowItWorks() {
 
   return (
     <section className="py-12 bg-surface border-b border-slate-100 ">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="saath-container">
         
         {/* Title */}
         <div className="text-center max-w-xl mx-auto mb-10">

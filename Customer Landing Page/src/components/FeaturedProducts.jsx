@@ -78,30 +78,50 @@ export default function FeaturedProducts({
 
   return (
     <section className="py-12 bg-surface border-b border-slate-100 ">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="saath-container">
         
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-          <div className="text-left">
-            <span className="text-xs font-extrabold text-primary tracking-wider uppercase block">Saath Assured Store</span>
-            <h2 className="text-2xl font-black text-slate-900 dark:text-white mt-0.5">Featured Super-Store Products</h2>
+        {/* Section Header & See All */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-6 sm:mb-8 gap-4 sm:gap-6">
+          <div className="flex items-end justify-between gap-2 w-full lg:w-auto">
+            <div className="text-left flex-1 min-w-0">
+              <span className="text-[10px] sm:text-xs font-extrabold text-primary tracking-wider uppercase block truncate">Saath Assured Store</span>
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-0.5 truncate">Featured Products</h2>
+            </div>
+            
+            {/* Mobile/Tablet See All */}
+            <button 
+              onClick={() => navigate('/products')}
+              className="lg:hidden text-[11px] sm:text-sm font-bold text-primary flex items-center gap-1 shrink-0 mb-1 hover:underline active:text-primary-dark transition-colors"
+            >
+              See All <span className="text-lg leading-none mb-0.5">›</span>
+            </button>
           </div>
 
-          {/* Filter Tab Buttons */}
-          <div className="flex flex-wrap gap-2">
-            {filterTabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setSelectedCategory(tab.id)}
-                className={`text-xs font-bold py-2 px-4 rounded-btn border transition-all cursor-pointer ${
-                  selectedCategory === tab.id
-                    ? 'bg-primary border-primary text-white shadow-glow-primary'
-                    : 'bg-page border-slate-200/60 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-page'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            {/* Filter Tab Buttons */}
+            <div className="flex flex-wrap gap-2">
+              {filterTabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setSelectedCategory(tab.id)}
+                  className={`text-[10px] sm:text-xs font-bold py-1.5 sm:py-2 px-3 sm:px-4 rounded-btn border transition-all cursor-pointer ${
+                    selectedCategory === tab.id
+                      ? 'bg-primary border-primary text-white shadow-glow-primary'
+                      : 'bg-page border-slate-200/60 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-page'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Desktop See All */}
+            <button 
+              onClick={() => navigate('/products')}
+              className="hidden lg:flex text-sm font-bold text-primary items-center gap-1 shrink-0 hover:underline active:text-primary-dark transition-colors"
+            >
+              See All <span className="text-xl leading-none mb-0.5">›</span>
+            </button>
           </div>
         </div>
 
@@ -113,7 +133,7 @@ export default function FeaturedProducts({
         ) : (
           <motion.div 
             layout 
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-6"
           >
             <AnimatePresence mode="popLayout">
               {filteredProducts.map((product) => {

@@ -105,9 +105,9 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
   const IconComponent = current.icon;
 
   return (
-    <section className="relative w-full overflow-hidden bg-slate-950 min-h-[500px] md:min-h-[550px] lg:min-h-[600px] flex items-center">
-      
-      {/* Background shape particles */}
+    <section className="relative saath-container py-4 sm:py-6 lg:py-8">
+      {/* Main Container Card */}
+      <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-950 min-h-[500px] sm:min-h-[400px] lg:min-h-[550px] flex items-center shadow-2xl">
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-10 opacity-30">
         <div className="absolute w-96 h-96 rounded-full bg-gradient-to-tr from-primary/30 to-transparent blur-3xl -top-20 -left-20 animate-blob-1" />
         <div className="absolute w-96 h-96 rounded-full bg-gradient-to-br from-accent/30 to-transparent blur-3xl -bottom-20 -right-20 animate-blob-2" />
@@ -147,9 +147,9 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
             animate="center"
             exit="exit"
             transition={{ x: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.3 } }}
-            className={`w-full h-full bg-gradient-to-r ${current.color} text-white flex items-center py-16 md:py-20 lg:py-24`}
+            className={`w-full h-full bg-gradient-to-r ${current.color} text-white flex items-center py-10 sm:py-12 md:py-14 lg:py-20`}
           >
-            <div className="w-full px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="w-full px-5 sm:px-8 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-6 lg:gap-12 items-center">
               
               {/* Left Side: Slide Text Information */}
               <div className="lg:col-span-7 text-left space-y-6 z-20">
@@ -240,7 +240,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                   initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
-                  className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-card overflow-hidden border-4 border-white/10 shadow-2xl bg-slate-900"
+                  className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-card overflow-hidden border-4 border-white/10 shadow-2xl bg-slate-900 mx-auto lg:mx-0"
                 >
                   {/* Image with gradient mask overlay */}
                   {current.image && (
@@ -307,6 +307,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
         </button>
       </div>
 
+      </div>
     </section>
   );
 }

@@ -397,7 +397,8 @@ const CATEGORY_ICON_MAP = {
   vehicles: Car,
   'spiritual-puja': Flame,
   furniture: Box,
-  'beauty-products': Sparkles
+  'beauty-products': Sparkles,
+  pottery: Box
 };
 
 export default function ProductListing({

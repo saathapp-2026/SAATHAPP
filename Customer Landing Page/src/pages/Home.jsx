@@ -9,7 +9,7 @@ import FeaturedProducts from '../components/FeaturedProducts';
 import NearbyShops from '../components/NearbyShops';
 import ServiceSection from '../components/ServiceSection';
 import Advertisements from '../components/Advertisements';
-import LiveStats from '../components/LiveStats';
+
 import BecomePartner from '../components/BecomePartner';
 import SaathAppPlusHomeSection from '../components/plus/SaathAppPlusHomeSection';
 import ShopMoreHomePromo from '../components/ShoppingJourney/ShopMoreHomePromo';
@@ -88,7 +88,7 @@ export default function Home({
   const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen flex flex-col justify-between overflow-x-hidden bg-background text-slate-800 dark:text-slate-100 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col justify-between overflow-x-hidden bg-page dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
       <Header
         cartCount={cartCount}
         onCartClick={onCartClick}
@@ -120,13 +120,12 @@ export default function Home({
       />
 
       <main className="flex-1">
+        
         <HeroSection
           onShopNow={() => document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' })}
           onBookService={() => document.getElementById('services-section')?.scrollIntoView({ behavior: 'smooth' })}
           onBecomeSeller={() => document.getElementById('partner-section')?.scrollIntoView({ behavior: 'smooth' })}
         />
-
-
 
         <div id="categories-section">
           <Categories
@@ -162,7 +161,7 @@ export default function Home({
           <ServiceSection onBookService={onServiceBook} />
         </div>
 
-        <div className="w-full px-4 sm:px-6 py-12">
+        <div className="saath-container py-12">
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-10">
             <SaathAppPlusHomeSection />
             <ShopMoreHomePromo />
@@ -170,7 +169,7 @@ export default function Home({
         </div>
 
         <Advertisements />
-        <LiveStats />
+
 
         <div id="partner-section">
           <BecomePartner onBecomePartnerSelect={onBecomePartnerSelect} />

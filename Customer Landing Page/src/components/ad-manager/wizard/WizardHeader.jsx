@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bell, HelpCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import logoUrl from '../../../assets/saathapp-logo.jpeg';
+import logoUrl from '../../../assets/saathapp-logo.png';
 
 const NAV_ITEMS = [
   { label: 'Marketing', path: '/seller/marketing', active: true }

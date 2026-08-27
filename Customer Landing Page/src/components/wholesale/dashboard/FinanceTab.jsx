@@ -7,7 +7,7 @@ import {
   Sliders, Plus, CreditCard, FileCode, Archive, Printer, Mail, FileJson
 } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
-import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
+import saathAppLogo from '../../../assets/saathapp-logo.png';
 
 export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, onCloseWithdrawModal: externalCloseWithdraw, onSelectTab }) {
   const { formData, dashboardData, addToast } = useWholesale ? useWholesale() : { formData: {}, dashboardData: { kpis: { walletBalance: 875000 } }, addToast: console.log };
@@ -200,7 +200,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
       <body>
         <div class="header">
           <div class="logo-box">
-            <img src="${window.location.origin}/src/assets/saathapp-logo.jpeg" class="logo-img" alt="SaathApp Logo" onerror="this.style.display='none'" />
+            <img src="${window.location.origin}/src/assets/saathapp-logo.png" class="logo-img" alt="SaathApp Logo" onerror="this.style.display='none'" />
             <div>
               <div class="brand-title">SaathApp Wholesale</div>
               <div class="report-name">Official Tax Report (${gstReportType})</div>
