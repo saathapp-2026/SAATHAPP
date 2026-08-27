@@ -2648,35 +2648,51 @@ if (typeof window !== 'undefined') {
 products.push(
   {
     id: 'pottery-1',
-    name: 'Handcrafted Ceramic Mug',
+    name: 'Clay Mug',
     category: 'pottery',
-    subCategory: 'Mugs & Cups',
-    price: 350,
+    subCategory: 'Mugs',
+    price: 150,
     rating: 4.8,
     reviews: 12,
     image: '/images/categories/pottery.jpg',
-    description: 'Beautifully crafted ceramic mug for your daily tea or coffee.'
+    description: 'Handmade मिट्टी का मग'
   },
   {
     id: 'pottery-2',
-    name: 'Earthenware Serving Bowl',
+    name: 'Clay Jug',
     category: 'pottery',
-    subCategory: 'Bowls',
-    price: 450,
+    subCategory: 'Jugs',
+    price: 350,
     rating: 4.6,
     reviews: 8,
     image: '/images/categories/pottery.jpg',
-    description: 'Traditional earthenware serving bowl.'
+    description: 'Traditional मिट्टी का घड़ा/jug'
   },
   {
     id: 'pottery-3',
-    name: 'Terracotta Water Jug',
+    name: 'Clay Glass',
     category: 'pottery',
-    subCategory: 'Mugs & Cups',
-    price: 550,
+    subCategory: 'Glasses',
+    price: 80,
     rating: 4.9,
     reviews: 24,
     image: '/images/categories/pottery.jpg',
-    description: 'Natural cooling terracotta water jug.'
+    description: 'Handmade मिट्टी का गिलास'
   }
 );
+
+// Add Pottery to subcategories
+subcategories['pottery'] = [
+  { id: 'mugs', name: 'Mugs' },
+  { id: 'jugs', name: 'Jugs' },
+  { id: 'glasses', name: 'Glasses' },
+  { id: 'kulhad', name: 'Kulhad' },
+  { id: 'bowls', name: 'Bowls' },
+  { id: 'plates', name: 'Plates' },
+  { id: 'matka', name: 'Matka' },
+  { id: 'handi', name: 'Handi' },
+  { id: 'diya', name: 'Diya' },
+  { id: 'decorative-pottery', name: 'Decorative Pottery' },
+  { id: 'raw-materials', name: 'Raw Materials' },
+  { id: 'pottery-supplies', name: 'Pottery Making Supplies' }
+];

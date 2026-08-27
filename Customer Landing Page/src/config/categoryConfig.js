@@ -385,7 +385,8 @@ export const MASTER_CATEGORIES = [
     isActive: true,
     isFeatured: false,
     subcategories: [
-      'Mugs & Cups', 'Bowls', 'Plates', 'Vases', 'Cookware'
+      'Raw Materials', 'Pottery Making Supplies', 'Finished Pottery Products',
+      'Mugs', 'Jugs', 'Glasses', 'Kulhad', 'Bowls', 'Plates', 'Matka', 'Handi', 'Diya', 'Decorative Pottery'
     ]
   }
 ];
@@ -455,7 +456,6 @@ export const HEADER_NAV_ITEMS = [
   { name: 'Gift Set', path: '/products/gift-set', isNew: true },
   { name: 'SaathApp Product', path: '/products/saathapp', isNew: true },
   { name: 'SAATHPACK', path: '/products/saathpack/landing', isNew: true },
-  { name: 'Pottery', path: '/products/pottery', isNew: true },
   { name: 'SAATHAPP PLUS', path: '/plus', isNew: true, isPlus: true }
 ];
 
