@@ -2699,7 +2699,12 @@ subcategories['pottery'] = [
   { id: 'terracotta-clay', name: 'Terracotta Clay', image: '/images/pottery/terracotta-clay.jpg' },
   { id: 'white-kaolin-clay', name: 'White & Kaolin Clay', image: '/images/pottery/white-kaolin-clay.jpg' },
   { id: 'black-red-clay', name: 'Black & Red Clay', image: '/images/pottery/black-red-clay.jpg' },
-  { id: 'fire-stoneware', name: 'Fire Stoneware', image: '/images/pottery/fire-stoneware.jpg' }
+  { id: 'fire-stoneware', name: 'Fire Stoneware', image: '/images/pottery/fire-stoneware.jpg' },
+  { id: 'modeling-craft-clay', name: 'Modeling & Craft Clay', image: '/images/pottery/modeling-craft-clay.jpg' },
+  { id: 'natural-mud-soil', name: 'Natural Mud & Soil', image: '/images/pottery/natural-mud-soil.jpg' },
+  { id: 'clay-powder-granules', name: 'Clay Powder & Granules', image: '/images/pottery/clay-powder-granules.jpg' },
+  { id: 'ready-mix-pottery-clay', name: 'Ready Mix Pottery Clay', image: '/images/pottery/ready-mix-pottery-clay.jpg' },
+  { id: 'grog-clay-additives', name: 'Grog & Clay Additives', image: '/images/pottery/grog-clay-additives.jpg' }
 ];
 
 // Dummy Pottery Materials Products
