@@ -388,7 +388,8 @@ export const MASTER_CATEGORIES = [
       'Raw Materials', 'Pottery Making Supplies', 'Finished Pottery Products',
       'Mugs', 'Jugs', 'Glasses', 'Kulhad', 'Bowls', 'Plates', 'Matka', 'Handi', 'Diya', 'Decorative Pottery',
       'Pottery Clay', 'Terracotta Clay', 'White & Kaolin Clay', 'Black & Red Clay', 'Fire Stoneware',
-      'Modeling & Craft Clay', 'Natural Mud & Soil', 'Clay Powder & Granules', 'Ready Mix Pottery Clay', 'Grog & Clay Additives'
+      'Modeling & Craft Clay', 'Natural Mud & Soil', 'Clay Powder & Granules', 'Ready Mix Pottery Clay', 'Grog & Clay Additives',
+      'Glaze & Ceramic Materials', 'Other Pottery Products'
     ]
   }
 ];

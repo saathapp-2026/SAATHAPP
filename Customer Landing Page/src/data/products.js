@@ -2704,7 +2704,9 @@ subcategories['pottery'] = [
   { id: 'natural-mud-soil', name: 'Natural Mud & Soil', image: '/images/pottery/natural-mud-soil.jpg' },
   { id: 'clay-powder-granules', name: 'Clay Powder & Granules', image: '/images/pottery/clay-powder-granules.jpg' },
   { id: 'ready-mix-pottery-clay', name: 'Ready Mix Pottery Clay', image: '/images/pottery/ready-mix-pottery-clay.jpg' },
-  { id: 'grog-clay-additives', name: 'Grog & Clay Additives', image: '/images/pottery/grog-clay-additives.jpg' }
+  { id: 'grog-clay-additives', name: 'Grog & Clay Additives', image: '/images/pottery/grog-clay-additives.jpg' },
+  { id: 'glaze-ceramic-materials', name: 'Glaze & Ceramic Materials', image: '/images/pottery/glaze-ceramic-materials.jpg' },
+  { id: 'other-pottery-products', name: 'Other Pottery Products', image: '/images/pottery/other-pottery-products.jpg' }
 ];
 
 // Dummy Pottery Materials Products
