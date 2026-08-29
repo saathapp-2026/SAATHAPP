@@ -23,8 +23,21 @@ export default function Step9_BankSettlement({ onNext, onPrev }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.accountName || !formData.accountName.trim()) {
+      addToast('Please enter bank account holder name', 'error');
+      return;
+    }
+    if (!formData.accountNumber || !formData.accountNumber.trim()) {
+      addToast('Please enter bank account number', 'error');
+      return;
+    }
     if (formData.accountNumber !== formData.confirmAccountNumber) {
       addToast('Account numbers do not match!', 'error');
+      return;
+    }
+    const cleanIfsc = (formData.ifscCode || '').trim();
+    if (cleanIfsc.length !== 11) {
+      addToast('Please enter a valid 11-character IFSC code', 'error');
       return;
     }
     addToast('Bank & settlement details saved!', 'success');

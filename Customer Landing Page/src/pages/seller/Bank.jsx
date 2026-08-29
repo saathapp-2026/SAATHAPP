@@ -4,7 +4,7 @@ import OnboardingLayout from '../../components/seller/OnboardingLayout';
 import { useOnboarding } from '../../context/SellerOnboardingContext';
 
 const inputClass =
-  'w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500';
+  'w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 [&>option]:bg-slate-900 [&>option]:text-white';
 
 export default function Bank() {
   const navigate = useNavigate();
@@ -52,9 +52,9 @@ export default function Bank() {
           <div>
             <label className="block text-sm text-slate-400 mb-1.5">Settlement Preference</label>
             <select name="settlementPreference" defaultValue={bank.settlementPreference} className={inputClass}>
-              <option value="weekly">Weekly</option>
-              <option value="biweekly">Bi-weekly</option>
-              <option value="monthly">Monthly</option>
+              <option value="weekly" className="bg-slate-900 text-white">Weekly</option>
+              <option value="biweekly" className="bg-slate-900 text-white">Bi-weekly</option>
+              <option value="monthly" className="bg-slate-900 text-white">Monthly</option>
             </select>
           </div>
         </div>

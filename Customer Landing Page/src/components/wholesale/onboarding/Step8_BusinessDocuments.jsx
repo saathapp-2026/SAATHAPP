@@ -7,14 +7,14 @@ export const REQUIRED_DOCUMENTS = [
   { id: 'aadhaar', name: 'Aadhaar Card of Owner', req: true },
   { id: 'pan', name: 'Business / Owner PAN Card', req: true },
   { id: 'gst', name: 'GSTIN Certificate', req: true },
-  { id: 'tradeLicense', name: 'Trade License', req: true },
-  { id: 'companyRegistration', name: 'Company Registration / COI', req: true },
+  { id: 'tradeLicense', name: 'Trade License', req: false },
+  { id: 'companyRegistration', name: 'Company Registration / COI', req: false },
   { id: 'fssai', name: 'FSSAI License (Food / FMCG)', req: false },
   { id: 'msme', name: 'MSME / Udyam Certificate', req: false },
   { id: 'iec', name: 'IEC Code (Import / Export)', req: false },
   { id: 'warehousePhotos', name: 'Warehouse & Storage Photos', req: true },
   { id: 'factoryPhotos', name: 'Factory / Plant Photos', req: false },
-  { id: 'businessLogo', name: 'Business Logo', req: true },
+  { id: 'businessLogo', name: 'Business Logo', req: false },
   { id: 'ownerSelfie', name: 'Owner Photo / Selfie with ID', req: true },
 ];
 
@@ -39,6 +39,16 @@ export default function Step8_BusinessDocuments({ onNext, onPrev }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const missingDocs = REQUIRED_DOCUMENTS.filter((doc) => {
+      if (!doc.req) return false;
+      const d = formData.documents?.[doc.id];
+      if (!d) return true;
+      return !(d.status === 'Uploaded' || d.status === 'Verified' || Boolean(d.fileName));
+    });
+    if (missingDocs.length > 0) {
+      addToast(`Please upload required documents: ${missingDocs.map((d) => d.name).join(', ')}`, 'error');
+      return;
+    }
     addToast('All business documents submitted!', 'success');
     onNext();
   };

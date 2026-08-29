@@ -97,6 +97,16 @@ export default function FranchisePage({
       toast.error('Please fill in all required fields marked with *');
       return;
     }
+    const cleanPhone = formData.phone.replace(/\D/g, '');
+    if (cleanPhone.length !== 10) {
+      toast.error('Please enter a valid 10-digit mobile number.');
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      toast.error('Please enter a valid email address.');
+      return;
+    }
 
     setIsSubmitting(true);
     setTimeout(() => {

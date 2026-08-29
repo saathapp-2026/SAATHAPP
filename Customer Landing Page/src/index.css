@@ -375,3 +375,20 @@ html.dark footer {
   width: min(1440px, calc(100% - 80px));
   margin-inline: auto;
 }
+
+/* Fix native select option dropdown popup rendering in dark mode & dark forms */
+select option {
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+html.dark select option {
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+html:not(.dark) select:not(.text-white):not([class*="text-white"]):not([class*="bg-white/5"]):not([class*="bg-slate"]) option {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+

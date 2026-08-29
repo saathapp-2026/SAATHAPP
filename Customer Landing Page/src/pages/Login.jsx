@@ -27,7 +27,7 @@ export default function Login({ onLogin, onSignup, onBack, error }) {
 
   const handlePhoneSubmit = async (e) => {
     e.preventDefault();
-    if (phone.replace(/\D/g, '').length < 10) {
+    if (phone.replace(/\D/g, '').length !== 10) {
       setLocalError('Please enter a valid 10-digit phone number.');
       return;
     }

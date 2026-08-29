@@ -4,7 +4,7 @@ import OnboardingLayout from '../../components/seller/OnboardingLayout';
 import { useOnboarding } from '../../context/SellerOnboardingContext';
 
 const inputClass =
-  'w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500';
+  'w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 [&>option]:bg-slate-900 [&>option]:text-white';
 
 export default function Tax() {
   const navigate = useNavigate();
@@ -40,9 +40,9 @@ export default function Tax() {
         <div>
           <label className="block text-sm text-slate-400 mb-1.5">Invoice Preference</label>
           <select name="invoicePreference" defaultValue={tax.invoicePreference} className={inputClass}>
-            <option value="digital">Digital Invoice</option>
-            <option value="physical">Physical Invoice</option>
-            <option value="both">Both</option>
+            <option value="digital" className="bg-slate-900 text-white">Digital Invoice</option>
+            <option value="physical" className="bg-slate-900 text-white">Physical Invoice</option>
+            <option value="both" className="bg-slate-900 text-white">Both</option>
           </select>
         </div>
 

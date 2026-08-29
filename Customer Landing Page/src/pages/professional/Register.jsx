@@ -98,6 +98,16 @@ export default function ProfessionalRegisterPage() {
       setError('Please fill in all required fields.');
       return;
     }
+    const cleanPhone = formData.phone.replace(/\D/g, '');
+    if (cleanPhone.length !== 10) {
+      setError('Please enter a valid 10-digit mobile number.');
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      setError('Please enter a valid email address.');
+      return;
+    }
     
     // Check if we already created an account in this session
     if (data.meta?.partnerId) {
@@ -161,6 +171,11 @@ export default function ProfessionalRegisterPage() {
       setError('Please fill in your service location.');
       return;
     }
+    const cleanPin = locationData.pincode.replace(/\D/g, '');
+    if (cleanPin.length !== 6) {
+      setError('Please enter a valid 6-digit PIN code.');
+      return;
+    }
     setError('');
     updateSection('serviceLocation', locationData);
     setStep(3);
@@ -211,7 +226,7 @@ export default function ProfessionalRegisterPage() {
   const stepLabels = ['Account & Business Profile', 'Service Location', 'KYC & Terms'];
   const progressWidth = step === 1 ? 'w-1/3' : step === 2 ? 'w-2/3' : 'w-full';
   const inputClass = 'w-full bg-white/5 border border-white/10 rounded-btn py-3 px-4 text-xs font-medium text-white focus:border-indigo-500 outline-none';
-  const selectClass = 'w-full bg-slate-900 border border-white/10 rounded-btn py-3 px-3 text-xs font-medium text-white focus:border-indigo-500 outline-none';
+  const selectClass = 'w-full bg-slate-900 border border-white/10 rounded-btn py-3 px-3 text-xs font-medium text-white focus:border-indigo-500 outline-none [&>option]:bg-slate-900 [&>option]:text-white';
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white relative px-4 py-8 overflow-hidden">

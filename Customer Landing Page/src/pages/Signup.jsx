@@ -8,11 +8,17 @@ export default function Signup({ onLogin, onSignup, onBack }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (isLoading) return;
     if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) {
-      setError('Please fill all fields.');
+      setError('Please fill all required fields.');
       return;
     }
-    if (form.phone.replace(/\D/g, '').length < 10) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email.trim())) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+    if (form.phone.replace(/\D/g, '').length !== 10) {
       setError('Please enter a valid 10-digit phone number.');
       return;
     }
@@ -106,7 +112,8 @@ export default function Signup({ onLogin, onSignup, onBack }) {
             <div className="pt-4">
               <button 
                 type="submit" 
-                className="w-full bg-[#6C3BFF] hover:bg-[#582cd6] active:scale-[0.98] text-white font-black py-4 rounded-xl transition-all flex items-center justify-center gap-2 tracking-wider"
+                disabled={isLoading}
+                className="w-full bg-[#6C3BFF] hover:bg-[#582cd6] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed text-white font-black py-4 rounded-xl transition-all flex items-center justify-center gap-2 tracking-wider"
               >
                 Create Account <ChevronRight size={18} />
               </button>

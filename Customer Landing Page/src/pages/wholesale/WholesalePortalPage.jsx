@@ -42,43 +42,157 @@ function WholesalePortalInner(props) {
     setActiveTab,
   } = useWholesale();
 
-  // URL Path Matching
+  const validateWholesaleStep = (stepId) => {
+    switch (stepId) {
+      case 1:
+        return { valid: true };
+      case 2: {
+        const cleanMobile = (formData.mobileNumber || '').replace(/\D/g, '');
+        if (cleanMobile.length > 0 && cleanMobile.length !== 10) {
+          return { valid: false, error: 'Step 2 (Auth & OTP): Valid 10-digit mobile number required' };
+        }
+        return { valid: true };
+      }
+      case 3: {
+        if (!formData.fullName || !formData.fullName.trim()) {
+          return { valid: false, error: 'Step 3 (Owner Details): Please enter full owner name' };
+        }
+        const cleanMobile = (formData.ownerMobile || '').replace(/\D/g, '');
+        if (cleanMobile.length !== 10) {
+          return { valid: false, error: 'Step 3 (Owner Details): Valid 10-digit owner mobile number required' };
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!formData.ownerEmail || !emailRegex.test(formData.ownerEmail.trim())) {
+          return { valid: false, error: 'Step 3 (Owner Details): Valid official email address required' };
+        }
+        return { valid: true };
+      }
+      case 4: {
+        if (!formData.businessName || !formData.businessName.trim()) {
+          return { valid: false, error: 'Step 4 (Business Info): Please enter business name' };
+        }
+        const capVal = formData.businessCapital ?? 2500000;
+        if (Number(capVal) < 1000000) {
+          return { valid: false, error: 'Step 4 (Business Info): Minimum business capital of ₹10,00,000 required' };
+        }
+        return { valid: true };
+      }
+      case 5: {
+        if (!formData.registeredAddress || !formData.registeredAddress.trim()) {
+          return { valid: false, error: 'Step 5 (Address): Please enter registered business address' };
+        }
+        const cleanPin = (formData.pincode || '').replace(/\D/g, '');
+        if (cleanPin.length !== 6) {
+          return { valid: false, error: 'Step 5 (Address): Valid 6-digit PIN code required' };
+        }
+        return { valid: true };
+      }
+      case 8: {
+        const CORE_REQUIRED_DOCS = ['aadhaar', 'pan', 'gst', 'warehousePhotos', 'ownerSelfie'];
+        const missing = CORE_REQUIRED_DOCS.filter((id) => {
+          const doc = formData.documents?.[id];
+          if (!doc) return true;
+          return !(doc.status === 'Uploaded' || doc.status === 'Verified' || Boolean(doc.fileName));
+        });
+        if (missing.length > 0) {
+          return { valid: false, error: 'Step 8 (Documents Vault): Please upload all required documents' };
+        }
+        return { valid: true };
+      }
+      case 9: {
+        const holderName = (formData.accountHolderName || formData.accountName || '').trim();
+        if (!holderName) {
+          return { valid: false, error: 'Step 9 (Bank & Settlement): Bank account holder name required' };
+        }
+        if (!formData.accountNumber || !formData.accountNumber.trim()) {
+          return { valid: false, error: 'Step 9 (Bank & Settlement): Bank account number required' };
+        }
+        if (formData.accountNumber !== formData.confirmAccountNumber) {
+          return { valid: false, error: 'Step 9 (Bank & Settlement): Bank account numbers do not match' };
+        }
+        const cleanIfsc = (formData.ifscCode || '').trim();
+        if (cleanIfsc.length !== 11) {
+          return { valid: false, error: 'Step 9 (Bank & Settlement): Valid 11-character IFSC code required' };
+        }
+        return { valid: true };
+      }
+      case 13: {
+        if (!formData.acceptedTerms) {
+          return { valid: false, error: 'Step 13 (Terms & Review): Please accept the Wholesaler Legal Terms & Conditions' };
+        }
+        return { valid: true };
+      }
+      default:
+        return { valid: true };
+    }
+  };
+
+  // URL Path Matching & Direct Route Access Guard
   useEffect(() => {
     document.title = 'Become a Wholesale Partner | SaathApp Enterprise';
     const path = location.pathname.toLowerCase();
+    let targetStep = 1;
 
     if (path.includes('/dashboard')) {
-      setCurrentStep(15); // Dashboard mode
+      targetStep = 15;
     } else if (path.includes('/status')) {
-      setCurrentStep(14);
+      targetStep = 14;
     } else if (path.includes('/review')) {
-      setCurrentStep(13);
+      targetStep = 13;
     } else if (path.includes('/membership')) {
-      setCurrentStep(12);
+      targetStep = 12;
     } else if (path.includes('/fee')) {
-      setCurrentStep(11);
+      targetStep = 11;
     } else if (path.includes('/operations')) {
-      setCurrentStep(10);
+      targetStep = 10;
     } else if (path.includes('/bank')) {
-      setCurrentStep(9);
+      targetStep = 9;
     } else if (path.includes('/documents')) {
-      setCurrentStep(8);
+      targetStep = 8;
     } else if (path.includes('/products')) {
-      setCurrentStep(7);
+      targetStep = 7;
     } else if (path.includes('/coverage')) {
-      setCurrentStep(6);
+      targetStep = 6;
     } else if (path.includes('/address')) {
-      setCurrentStep(5);
+      targetStep = 5;
     } else if (path.includes('/business')) {
-      setCurrentStep(4);
+      targetStep = 4;
     } else if (path.includes('/register')) {
-      setCurrentStep(3);
+      targetStep = 3;
     } else if (path.includes('/login')) {
-      setCurrentStep(2);
+      targetStep = 2;
     }
+
+    if (targetStep > 1 && targetStep < 15) {
+      for (let s = 1; s < targetStep; s++) {
+        const check = validateWholesaleStep(s);
+        if (!check.valid) {
+          const validPath = STEPS_CONFIG.find((item) => item.id === s)?.path || '/wholesale';
+          setCurrentStep(s);
+          if (location.pathname !== validPath) {
+            navigate(validPath, { replace: true });
+          }
+          addToast(check.error, 'error');
+          return;
+        }
+      }
+    }
+
+    setCurrentStep(targetStep);
   }, [location.pathname]);
 
   const handleSelectStep = (stepId) => {
+    // If forward jump, validate all intermediate steps
+    if (stepId > currentStep) {
+      for (let s = currentStep; s < stepId; s++) {
+        const check = validateWholesaleStep(s);
+        if (!check.valid) {
+          addToast(check.error, 'error');
+          return;
+        }
+      }
+    }
+    // Backward navigation or valid forward step
     setCurrentStep(stepId);
     const target = STEPS_CONFIG.find((s) => s.id === stepId);
     if (target) {

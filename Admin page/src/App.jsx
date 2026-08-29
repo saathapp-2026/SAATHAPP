@@ -1220,10 +1220,10 @@ const EntityFormModal = ({ open, title, fields, values, onChange, onClose, onSav
     ...s,
     fields: s.fields ? s.fields.filter(f => !f.condition || f.condition(values)) : undefined
   })).filter(s => !s.fields || s.fields.length > 0);
-  
+
   const currentStepIndex = Math.min(step, filteredSteps.length - 1);
   const currentStep = filteredSteps[currentStepIndex];
-  
+
   return (
     <Modal
       title={`${title} ${currentStepIndex === filteredSteps.length - 1 ? "Review" : ""}`}
@@ -1251,7 +1251,7 @@ const EntityFormModal = ({ open, title, fields, values, onChange, onClose, onSav
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {currentStep.fields.map((field) => {
               if (field.condition && !field.condition(values)) return null;
-              
+
               if (field.type === "textarea") {
                 return (
                   <label key={field.name} className="space-y-2 text-sm text-slate-700">
@@ -1447,9 +1447,9 @@ const MODULE_FORMS = {
     },
     fromRow: (row) => {
       const savedVals = row[6] || {};
-      return { 
-        product: row[0], category: row[1], seller: row[2], price: row[3], stock: row[4], status: row[5], 
-        productTier: savedVals.productTier || "NORMAL", 
+      return {
+        product: row[0], category: row[1], seller: row[2], price: row[3], stock: row[4], status: row[5],
+        productTier: savedVals.productTier || "NORMAL",
         groceryTier: savedVals.groceryTier || "NORMAL",
         subCategory: savedVals.subCategory || "",
         electronicsType: savedVals.electronicsType || "",
@@ -1993,7 +1993,7 @@ const UsersPage = ({ onToast }) => {
   const [tab, setTab] = useState("all");
   const [rows, setRows] = useState(config.rows);
   const [nextInviteId, setNextInviteId] = useState(1);
-  
+
   const tabs = {
     all: { label: "All Customers" },
     pending: { label: "Pending KYC" },
@@ -2314,7 +2314,7 @@ const ModulePage = ({ id, statusFilter, onToast }) => {
     try {
       const stored = localStorage.getItem(`saathapp_admin_${id}`);
       if (stored) return JSON.parse(stored);
-    } catch {}
+    } catch { }
     return cfg.rows;
   });
 
@@ -2838,7 +2838,7 @@ const AnalyticsPage = () => {
   const totalOrders = orders.length;
   const totalRevenue = orders.reduce((sum, o) => sum + (o.breakdown?.finalTotal || 0), 0);
   const aov = totalOrders ? totalRevenue / totalOrders : 0;
-  
+
   const productViews = events.filter(e => e.event === 'product_view').length;
   const purchases = events.filter(e => e.event === 'purchase').length;
   const conversionRate = productViews ? (purchases / productViews) * 100 : 0;
@@ -2850,7 +2850,7 @@ const AnalyticsPage = () => {
 
   const normalViews = groceryViews.filter(e => e.groceryTier !== 'Premium').length;
   const premiumViews = groceryViews.filter(e => e.groceryTier === 'Premium').length;
-  
+
   const normalCarts = groceryCarts.filter(e => e.groceryTier !== 'Premium').length;
   const premiumCarts = groceryCarts.filter(e => e.groceryTier === 'Premium').length;
 
@@ -2877,7 +2877,7 @@ const AnalyticsPage = () => {
       sellerData[s].revenue += (i.price * i.quantity);
     });
   });
-  const topSellers = Object.keys(sellerData).map(s => ({ name: s, ...sellerData[s] })).sort((a,b) => b.revenue - a.revenue).slice(0, 5);
+  const topSellers = Object.keys(sellerData).map(s => ({ name: s, ...sellerData[s] })).sort((a, b) => b.revenue - a.revenue).slice(0, 5);
 
   // Delivery Performance
   const delPerf = {
@@ -2890,7 +2890,7 @@ const AnalyticsPage = () => {
   return (
     <div className="sa-fade">
       <SectionHeader title="SaathApp Analytics" subtitle="Unified marketplace analytics derived from events and global orders." />
-      
+
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
         <Card className="p-5">
           <p className="text-sm text-slate-500 font-semibold mb-1">Total Orders</p>
@@ -3747,7 +3747,7 @@ export default function App() {
     return list ? new Set(list) : null;
   }, [role]);
 
-  
+
 
   const navigate = (id) => {
     if (id === "__logout") { setAuthed(false); setActive("dashboard"); routerNavigate('/dashboard'); return; }

@@ -50,6 +50,10 @@ export default function Checkout({ onBack, onConfirmOrder }) {
   const hasServices = cartItems.some(item => item.type === 'service');
 
   const handleNext = () => {
+    if (step === 1 && !selectedAddress) {
+      toast.error('Please select or add a delivery address to proceed.');
+      return;
+    }
     setStep(s => {
       if (s === 1 && !hasProducts) return 3; // Skip Delivery if no products
       return Math.min(s + 1, 4);

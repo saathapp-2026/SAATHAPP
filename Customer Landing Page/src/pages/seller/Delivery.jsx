@@ -4,7 +4,7 @@ import OnboardingLayout from '../../components/seller/OnboardingLayout';
 import { useOnboarding } from '../../context/SellerOnboardingContext';
 
 const inputClass =
-  'w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500';
+  'w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 [&>option]:bg-slate-900 [&>option]:text-white';
 
 export default function Delivery() {
   const navigate = useNavigate();
@@ -30,20 +30,20 @@ export default function Delivery() {
         <div>
           <label className="block text-sm text-slate-400 mb-1.5">Delivery Mode *</label>
           <select name="mode" defaultValue={delivery.mode} className={inputClass}>
-            <option value="both">Pickup & Delivery</option>
-            <option value="pickup">Pickup Only</option>
-            <option value="delivery">Delivery Only</option>
+            <option value="both" className="bg-slate-900 text-white">Pickup & Delivery</option>
+            <option value="pickup" className="bg-slate-900 text-white">Pickup Only</option>
+            <option value="delivery" className="bg-slate-900 text-white">Delivery Only</option>
           </select>
         </div>
 
         <div>
           <label className="block text-sm text-slate-400 mb-1.5">Delivery Radius *</label>
           <select name="radius" defaultValue={delivery.radius} className={inputClass}>
-            <option value="0-5">0–5 km</option>
-            <option value="5-10">5–10 km</option>
-            <option value="10-20">10–20 km</option>
-            <option value="20-50">20–50 km</option>
-            <option value="50+">50+ km</option>
+            <option value="0-5" className="bg-slate-900 text-white">0–5 km</option>
+            <option value="5-10" className="bg-slate-900 text-white">5–10 km</option>
+            <option value="10-20" className="bg-slate-900 text-white">10–20 km</option>
+            <option value="20-50" className="bg-slate-900 text-white">20–50 km</option>
+            <option value="50+" className="bg-slate-900 text-white">50+ km</option>
           </select>
         </div>
 

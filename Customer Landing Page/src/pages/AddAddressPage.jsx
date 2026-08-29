@@ -54,6 +54,14 @@ export default function AddAddressPage({ onBack }) {
       }
     });
 
+    if (form.pincode && !/^\d{6}$/.test(form.pincode.trim())) {
+      nextErrors.pincode = 'Please enter a valid 6-digit PIN code';
+    }
+
+    if (form.mobileNumber && !/^\d{10}$/.test(form.mobileNumber.replace(/\D/g, ''))) {
+      nextErrors.mobileNumber = 'Please enter a valid 10-digit mobile number';
+    }
+
     if (Object.keys(nextErrors).length) {
       setErrors(nextErrors);
       return;

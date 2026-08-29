@@ -34,37 +34,118 @@ function DeliveryPortalInner(props) {
     setActiveTab,
   } = useDelivery();
 
-  // URL Path Matching
+  const validateDeliveryStep = (stepId) => {
+    switch (stepId) {
+      case 1:
+        return { valid: true };
+      case 2: {
+        const cleanMobile = (formData.mobileNumber || '').replace(/\D/g, '');
+        if (cleanMobile.length > 0 && cleanMobile.length !== 10) {
+          return { valid: false, error: 'Step 2 (Auth & OTP): Valid 10-digit mobile number required' };
+        }
+        return { valid: true };
+      }
+      case 3: {
+        if (!formData.fullName || !formData.fullName.trim()) {
+          return { valid: false, error: 'Step 3 (Rider Profile): Full name required' };
+        }
+        const cleanEmergency = (formData.emergencyContact || '').replace(/\D/g, '');
+        if (cleanEmergency.length !== 10) {
+          return { valid: false, error: 'Step 3 (Rider Profile): Valid 10-digit emergency contact required' };
+        }
+        return { valid: true };
+      }
+      case 4: {
+        if (!formData.city || !formData.city.trim()) {
+          return { valid: false, error: 'Step 4 (Location & Vehicle): City required' };
+        }
+        const cleanPin = (formData.pincode || '').replace(/\D/g, '');
+        if (cleanPin.length !== 6) {
+          return { valid: false, error: 'Step 4 (Location & Vehicle): Valid 6-digit PIN code required' };
+        }
+        return { valid: true };
+      }
+      case 7: {
+        if (!formData.accountHolderName || !formData.accountHolderName.trim()) {
+          return { valid: false, error: 'Step 7 (Bank Payout): Account holder name required' };
+        }
+        if (!formData.accountNumber || !formData.accountNumber.trim()) {
+          return { valid: false, error: 'Step 7 (Bank Payout): Account number required' };
+        }
+        const cleanIfsc = (formData.ifscCode || '').trim();
+        if (cleanIfsc.length !== 11) {
+          return { valid: false, error: 'Step 7 (Bank Payout): Valid 11-character IFSC code required' };
+        }
+        return { valid: true };
+      }
+      case 10: {
+        if (!formData.acceptedTerms) {
+          return { valid: false, error: 'Step 10 (Terms & Agreement): Please accept the Delivery Partner Agreement' };
+        }
+        return { valid: true };
+      }
+      default:
+        return { valid: true };
+    }
+  };
+
+  // URL Path Matching & Route Guard
   useEffect(() => {
     document.title = 'Become a Delivery Partner | SaathApp Rider Network';
     const path = location.pathname.toLowerCase();
+    let targetStep = 1;
 
     if (path.includes('/dashboard')) {
-      setCurrentStep(12); // Rider Dashboard
+      targetStep = 12;
     } else if (path.includes('/status')) {
-      setCurrentStep(11);
+      targetStep = 11;
     } else if (path.includes('/terms')) {
-      setCurrentStep(10);
+      targetStep = 10;
     } else if (path.includes('/equipment')) {
-      setCurrentStep(9);
+      targetStep = 9;
     } else if (path.includes('/fee')) {
-      setCurrentStep(8);
+      targetStep = 8;
     } else if (path.includes('/bank')) {
-      setCurrentStep(7);
+      targetStep = 7;
     } else if (path.includes('/documents')) {
-      setCurrentStep(6);
+      targetStep = 6;
     } else if (path.includes('/categories')) {
-      setCurrentStep(5);
+      targetStep = 5;
     } else if (path.includes('/vehicle')) {
-      setCurrentStep(4);
+      targetStep = 4;
     } else if (path.includes('/profile')) {
-      setCurrentStep(3);
+      targetStep = 3;
     } else if (path.includes('/login')) {
-      setCurrentStep(2);
+      targetStep = 2;
     }
+
+    if (targetStep > 1 && targetStep < 12) {
+      for (let s = 1; s < targetStep; s++) {
+        const check = validateDeliveryStep(s);
+        if (!check.valid) {
+          const validPath = DELIVERY_STEPS_CONFIG.find((item) => item.id === s)?.path || '/become-delivery-partner';
+          setCurrentStep(s);
+          if (location.pathname !== validPath) {
+            navigate(validPath, { replace: true });
+          }
+          return;
+        }
+      }
+    }
+
+    setCurrentStep(targetStep);
   }, [location.pathname]);
 
   const handleSelectStep = (stepId) => {
+    // If forward jump, validate intermediate steps
+    if (stepId > currentStep) {
+      for (let s = currentStep; s < stepId; s++) {
+        const check = validateDeliveryStep(s);
+        if (!check.valid) {
+          return;
+        }
+      }
+    }
     setCurrentStep(stepId);
     const target = DELIVERY_STEPS_CONFIG.find((s) => s.id === stepId);
     if (target) {

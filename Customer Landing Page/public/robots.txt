@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /services
+Allow: /products
+Allow: /refer
+Allow: /faq
+Allow: /privacy-policy
+Allow: /terms-of-service
+Allow: /seller-policy
+Allow: /wholesale
+Allow: /become-delivery-partner
+Allow: /franchise
+
+Disallow: /admin/
+Disallow: /seller/dashboard/
+Disallow: /customer/dashboard/
+Disallow: /professional/dashboard/
+Disallow: /worker/dashboard/
+
+Sitemap: https://www.saathappnova.co.in/sitemap.xml

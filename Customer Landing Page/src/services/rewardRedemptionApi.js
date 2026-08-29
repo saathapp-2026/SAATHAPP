@@ -2,7 +2,7 @@
  * API service for Reward Redemption
  */
 
-const API_BASE_URL = process.env.VITE_API_URL || '/api/v1';
+const API_BASE_URL = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL) || '/api/v1';
 
 export const rewardRedemptionApi = {
   /**

@@ -17,48 +17,36 @@ const OPTIONAL_DOCS = [
 ];
 
 const inputClass =
-  'w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-emerald-500';
+  'w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white focus:outline-none focus:border-emerald-500 [&>option]:bg-slate-900 [&>option]:text-white';
 
 export default function Documents() {
   const navigate = useNavigate();
   const { data, updateSection } = useOnboarding();
 
   const handleFile = (key, file) => {
-    updateSection('documents', { [key]: file?.name || null });
+    if (!file) return;
+    updateSection('documents', { [key]: file.name });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
-    updateSection('documents', {
-      verificationLevel: form.get('verificationLevel'),
-    });
+    updateSection('documents', { verificationLevel: form.get('verificationLevel') });
     navigate('/seller/bank');
   };
 
-  const uploadedCount = REQUIRED_DOCS.filter((d) => data.documents?.[d.key]).length;
-
   return (
-    <OnboardingLayout title="Business Verification" subtitle="Upload required documents for verification">
-      <div className="mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-sm">
-        {uploadedCount}/{REQUIRED_DOCS.length} required documents uploaded
-      </div>
-
+    <OnboardingLayout title="Document Upload" subtitle="Verify your business credentials">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <h3 className="text-sm font-semibold text-slate-300 mb-3">Required Documents</h3>
+          <h3 className="text-sm font-semibold text-slate-300 mb-2">Required Documents</h3>
           <div className="space-y-3">
             {REQUIRED_DOCS.map((doc) => (
               <div key={doc.key} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
-                <span className="text-sm">{doc.label}</span>
-                <label className="cursor-pointer text-sm text-emerald-400 hover:text-emerald-300">
+                <span className="text-sm text-slate-300">{doc.label} *</span>
+                <label className="px-3 py-1.5 rounded-lg bg-white/10 text-xs text-white hover:bg-white/20 cursor-pointer transition-colors">
                   {data.documents?.[doc.key] ? '✓ Uploaded' : 'Upload'}
-                  <input
-                    type="file"
-                    className="hidden"
-                    accept="image/*,.pdf"
-                    onChange={(e) => handleFile(doc.key, e.target.files?.[0])}
-                  />
+                  <input type="file" className="hidden" accept="image/*,.pdf" onChange={(e) => handleFile(doc.key, e.target.files?.[0])} />
                 </label>
               </div>
             ))}
@@ -66,12 +54,12 @@ export default function Documents() {
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold text-slate-300 mb-3">Optional Documents</h3>
+          <h3 className="text-sm font-semibold text-slate-300 mb-2">Optional Business Documents</h3>
           <div className="space-y-3">
             {OPTIONAL_DOCS.map((doc) => (
               <div key={doc.key} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
-                <span className="text-sm text-slate-400">{doc.label}</span>
-                <label className="cursor-pointer text-sm text-emerald-400 hover:text-emerald-300">
+                <span className="text-sm text-slate-300">{doc.label}</span>
+                <label className="px-3 py-1.5 rounded-lg bg-white/10 text-xs text-white hover:bg-white/20 cursor-pointer transition-colors">
                   {data.documents?.[doc.key] ? '✓ Uploaded' : 'Upload'}
                   <input type="file" className="hidden" accept="image/*,.pdf" onChange={(e) => handleFile(doc.key, e.target.files?.[0])} />
                 </label>
@@ -83,10 +71,10 @@ export default function Documents() {
         <div>
           <label className="block text-sm text-slate-400 mb-1.5">Verification Level</label>
           <select name="verificationLevel" defaultValue={data.documents?.verificationLevel || 'basic'} className={inputClass}>
-            <option value="basic">Basic (Required docs only)</option>
-            <option value="standard">Standard (+ GST)</option>
-            <option value="enhanced">Enhanced (+ FSSAI/Trade License)</option>
-            <option value="premium">Premium (All documents)</option>
+            <option value="basic" className="bg-slate-900 text-white">Basic (Required docs only)</option>
+            <option value="standard" className="bg-slate-900 text-white">Standard (+ GST)</option>
+            <option value="enhanced" className="bg-slate-900 text-white">Enhanced (+ FSSAI/Trade License)</option>
+            <option value="premium" className="bg-slate-900 text-white">Premium (All documents)</option>
           </select>
         </div>
 

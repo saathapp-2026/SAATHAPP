@@ -613,7 +613,7 @@ export default function RiderHistoryTab() {
       setTimeout(() => URL.revokeObjectURL(url), 100);
 
       addToast?.(`Completed Deliveries Report (${format.toUpperCase()}) downloaded successfully!`, 'success');
-    } catch (err) {
+    } catch (_err) {
       addToast?.(`Downloaded Completed Deliveries Report (${format.toUpperCase()})!`, 'success');
     }
   };
