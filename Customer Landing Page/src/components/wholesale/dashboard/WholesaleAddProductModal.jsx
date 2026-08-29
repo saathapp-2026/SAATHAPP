@@ -154,7 +154,8 @@ export const INITIAL_FORM_STATE = {
 };
 
 export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduct }) {
-  const { addToast } = useWholesale ? useWholesale() : { addToast: (msg) => alert(msg) };
+  const _wc = useWholesale();
+  const { addToast } = _wc || { addToast: (msg) => alert(msg) };
 
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);

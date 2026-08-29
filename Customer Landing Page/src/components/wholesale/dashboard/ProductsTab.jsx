@@ -18,7 +18,8 @@ export const PRODUCT_SUB_TABS = [
 export const MOCK_PRODUCTS = [];
 
 export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAddModal }) {
-  const { addToast } = useWholesale ? useWholesale() : { addToast: console.log };
+  const _wc = useWholesale();
+  const { addToast } = _wc || { addToast: console.log };
   const [activeSubTab, setActiveSubTab] = useState('All Products');
   const [products, setProducts] = useState(MOCK_PRODUCTS);
   const [searchQuery, setSearchQuery] = useState('');

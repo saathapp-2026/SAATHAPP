@@ -342,38 +342,6 @@ function AppContent() {
   };
 
 
-  const handleSignup = async (form) => {
-    const result = await registerUser(users, {
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      password: form.password,
-    });
-
-    if (!result.success) {
-      setErrorMessage(result.message);
-      return;
-    }
-
-    setUsers(result.users);
-    setUser(result.user);
-    setIsAuthenticated(true);
-
-    // Merge cart
-    const mergedCart = mergeGuestCart(result.user.id || result.user.email, cartItems);
-    setCartState(mergedCart);
-
-    setAuthView('home');
-    setActivePage('home');
-    setErrorMessage('');
-
-    if (routerLocation.pathname === '/customer/dashboard' || routerLocation.pathname === '/profile' || routerLocation.state?.from === '/customer/dashboard') {
-      navigate('/customer/dashboard');
-    } else {
-      navigate('/');
-    }
-  };
-
 
   const handleLogout = () => {
     clearAuthSession();

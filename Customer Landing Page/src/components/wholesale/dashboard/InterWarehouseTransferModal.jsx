@@ -154,7 +154,8 @@ export const INITIAL_TRANSFER_STATE = {
 };
 
 export default function InterWarehouseTransferModal({ isOpen, onClose }) {
-  const { addToast } = useWholesale ? useWholesale() : { addToast: console.log };
+  const _wc = useWholesale();
+  const { addToast } = _wc || { addToast: console.log };
 
   const [activeSection, setActiveSection] = useState(1);
   const [formData, setFormData] = useState(INITIAL_TRANSFER_STATE);

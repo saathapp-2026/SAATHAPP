@@ -4,7 +4,8 @@ import { useWholesale } from '../../../context/WholesaleContext';
 import saathAppLogo from '../../../assets/saathapp-logo.png';
 
 export default function InvoicesTab() {
-  const { addToast, formData } = useWholesale ? useWholesale() : { addToast: console.log, formData: {} };
+  const _wc = useWholesale();
+  const { addToast, formData } = _wc || { addToast: console.log, formData: {} };
 
   const [invoices, setInvoices] = useState([]);
 

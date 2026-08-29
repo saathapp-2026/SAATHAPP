@@ -22,7 +22,8 @@ export const ORDER_STATUS_TABS = [
 export const MOCK_FULL_ORDERS = [];
 
 export default function OrdersTab() {
-  const { addToast, formData } = useWholesale ? useWholesale() : { addToast: console.log, formData: {} };
+  const _wc = useWholesale();
+  const { addToast, formData } = _wc || { addToast: console.log, formData: {} };
   const [activeStatusTab, setActiveStatusTab] = useState('All Orders');
   const [searchQuery, setSearchQuery] = useState('');
   const [orders, setOrders] = useState(MOCK_FULL_ORDERS);

@@ -4,7 +4,8 @@ import { useWholesale } from '../../../context/WholesaleContext';
 import InterWarehouseTransferModal from './InterWarehouseTransferModal';
 
 export default function InventoryTab() {
-  const { formData, addToast } = useWholesale ? useWholesale() : { formData: {}, addToast: console.log };
+  const _wc = useWholesale();
+  const { formData, addToast } = _wc || { formData: {}, addToast: console.log };
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
 
   const warehousesList = formData?.additionalWarehouses || [];

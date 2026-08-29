@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Send, ShieldCheck, MapPin, Phone, Mail, Globe, Gift } from 'lucide-react';
-import SaathAppLogo from '../assets/saathapp-logo.jpeg';
+import SaathAppLogo from '../assets/saathapp-logo.png';
 import UpiLogo from '../assets/upi.png';
 import RuPayLogo from '../assets/rupay.png';
 import VisaLogo from '../assets/visa.png';

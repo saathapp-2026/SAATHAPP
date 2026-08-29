@@ -10,7 +10,8 @@ import { useWholesale } from '../../../context/WholesaleContext';
 import saathAppLogo from '../../../assets/saathapp-logo.png';
 
 export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, onCloseWithdrawModal: externalCloseWithdraw, onSelectTab }) {
-  const { formData, dashboardData, addToast } = useWholesale ? useWholesale() : { formData: {}, dashboardData: { kpis: { walletBalance: 875000 } }, addToast: console.log };
+  const _wc = useWholesale();
+  const { formData, dashboardData, addToast } = _wc || { formData: {}, dashboardData: { kpis: { walletBalance: 875000 } }, addToast: console.log };
 
   // Modal & Dropdown States
   const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false);
