@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate as useRouterNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import {
   LayoutDashboard, Users, Store, Wrench, HardHat, Truck, Package, Tag,
   ShoppingCart, Warehouse, CreditCard, Wallet, Percent, Megaphone,
@@ -2310,17 +2311,42 @@ const ModulePage = ({ id, statusFilter, onToast }) => {
     fields: createGenericFields(cfg.columns),
   };
   const fields = formConfig.fields;
-  const [rows, setRows] = useState(() => {
-    try {
-      const stored = localStorage.getItem(`saathapp_admin_${id}`);
-      if (stored) return JSON.parse(stored);
-    } catch {}
-    return cfg.rows;
-  });
+  const [rows, setRows] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [apiError, setApiError] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem(`saathapp_admin_${id}`, JSON.stringify(rows));
-  }, [id, rows]);
+    setIsLoading(true);
+    setApiError(null);
+    const source = axios.CancelToken.source();
+    
+    // Simulate API fetch delay
+    const fetchTimer = setTimeout(() => {
+      try {
+        const stored = localStorage.getItem(`saathapp_admin_${id}`);
+        if (stored) {
+          setRows(JSON.parse(stored));
+        } else {
+          setRows(cfg.rows);
+        }
+      } catch (err) {
+        setApiError('Unable to load data. Please check your connection.');
+      } finally {
+        setIsLoading(false);
+      }
+    }, 800);
+
+    return () => {
+      clearTimeout(fetchTimer);
+      source.cancel();
+    };
+  }, [id, cfg.rows]);
+
+  useEffect(() => {
+    if (!isLoading && !apiError) {
+      localStorage.setItem(`saathapp_admin_${id}`, JSON.stringify(rows));
+    }
+  }, [id, rows, isLoading, apiError]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
@@ -2501,7 +2527,33 @@ const ModulePage = ({ id, statusFilter, onToast }) => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
         {cfg.kpis.map((k, i) => <KPICard key={k.label} {...k} index={i} />)}
       </div>
-      <DataTable columns={cfg.columns} rows={rows} onToast={onToast} onDeleteRows={removeSelectedRows} rowActions={actions} />
+
+      {isLoading ? (
+        <div className="animate-pulse space-y-4">
+          <div className="h-12 bg-white rounded-xl shadow-sm border border-slate-100 w-full mb-4"></div>
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div key={i} className="h-16 bg-white rounded-xl shadow-sm border border-slate-100 w-full"></div>
+          ))}
+        </div>
+      ) : apiError ? (
+        <div className="bg-red-50 border border-red-200 text-red-700 p-8 rounded-xl text-center space-y-4">
+          <XCircle size={32} className="mx-auto text-red-500" />
+          <h3 className="text-lg font-semibold">{apiError}</h3>
+          <button onClick={() => window.location.reload()} className="px-6 py-2 bg-red-100 text-red-800 rounded-lg hover:bg-red-200 font-medium">
+            Retry
+          </button>
+        </div>
+      ) : rows.length === 0 ? (
+        <div className="bg-white border border-slate-200 rounded-2xl p-16 text-center space-y-4 shadow-sm">
+          <div className="mx-auto w-16 h-16 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center">
+            <Search size={28} />
+          </div>
+          <h3 className="text-xl font-bold text-slate-700">No {cfg.title.toLowerCase()} found</h3>
+          <p className="text-slate-500">There are currently no records to display.</p>
+        </div>
+      ) : (
+        <DataTable columns={cfg.columns} rows={rows} onToast={onToast} onDeleteRows={removeSelectedRows} rowActions={actions} />
+      )}
       <EntityFormModal
         open={modalOpen}
         title={modalTitle}
@@ -3724,7 +3776,12 @@ const Topbar = ({ title, role, setRole, onLogout, collapsed, setCollapsed, setMo
    APP ROOT
 ============================================================ */
 export default function App() {
-  const [authed, setAuthed] = useState(true); // dev: default to signed-in for E2E/testing
+  const [authed, setAuthed] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return Boolean(window.localStorage.getItem('saathapp-admin-session'));
+    }
+    return false;
+  });
   const [active, setActive] = useState("dashboard");
   const [role, setRole] = useState("Founder");
   const [collapsed, setCollapsed] = useState(false);
@@ -3737,10 +3794,21 @@ export default function App() {
   useEffect(() => { const t = setTimeout(() => setMounted(true), 150); return () => clearTimeout(t); }, [authed]);
 
   const pushToast = useCallback((text) => {
-    const id = Date.now() + Math.random();
-    setToasts((t) => [...t, { id, text }]);
-    setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), 2800);
+    const id = Date.now();
+    setToasts(prev => [...prev, { id, text }]);
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id));
+    }, 4000);
   }, []);
+
+  useEffect(() => {
+    const handleAdminSessionExpired = () => {
+      setAuthed(false);
+      pushToast("Your session has expired. Please log in again.");
+    };
+    window.addEventListener('admin-session-expired', handleAdminSessionExpired);
+    return () => window.removeEventListener('admin-session-expired', handleAdminSessionExpired);
+  }, [pushToast]);
 
   const allowedSet = useMemo(() => {
     const list = ROLE_ACCESS[role];
@@ -3750,7 +3818,13 @@ export default function App() {
   
 
   const navigate = (id) => {
-    if (id === "__logout") { setAuthed(false); setActive("dashboard"); routerNavigate('/dashboard'); return; }
+    if (id === "__logout") { 
+      window.localStorage.removeItem('saathapp-admin-session');
+      setAuthed(false); 
+      setActive("dashboard"); 
+      routerNavigate('/dashboard'); 
+      return; 
+    }
     if (allowedSet && !allowedSet.has(id) && id !== "settings") {
       pushToast("Restricted for your current role");
       return;
@@ -3776,7 +3850,11 @@ export default function App() {
     return (
       <div className="w-full min-h-screen">
         <FontStyle />
-        <LoginPage onLogin={() => { setAuthed(true); pushToast("Welcome back, Admin"); }} onToast={pushToast} />
+        <LoginPage onLogin={() => { 
+          window.localStorage.setItem('saathapp-admin-session', 'mock-admin-token');
+          setAuthed(true); 
+          pushToast("Welcome back, Admin"); 
+        }} onToast={pushToast} />
       </div>
     );
   }
