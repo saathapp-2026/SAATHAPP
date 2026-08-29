@@ -340,7 +340,7 @@ export default function MembershipDashboardPage({
                   </button>
                   <button
                     onClick={handleConfirmCancel}
-                    className="w-1/2 py-3 rounded-xl bg-rose-500 text-white font-black text-xs hover:bg-rose-600 transition-colors cursor-pointer"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-1/2 py-3 rounded-xl bg-rose-500 text-white font-black text-xs hover:bg-rose-600 transition-colors cursor-pointer"
                   >
                     Confirm Cancel
                   </button>

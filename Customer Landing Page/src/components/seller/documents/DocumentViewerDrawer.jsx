@@ -42,7 +42,7 @@ export default function DocumentViewerDrawer({
       className="flex justify-end"
       contentClassName="h-full"
     >
-      <aside className="h-full w-full max-w-xl bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
+      <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded h-full w-full max-w-xl bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
         <header className="flex items-start justify-between gap-3 border-b border-slate-200 dark:border-slate-800 px-5 py-4">
           <div className="min-w-0">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50 truncate">{doc.name}</h2>
@@ -60,7 +60,7 @@ export default function DocumentViewerDrawer({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-2 text-slate-500 hover:bg-page"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-lg p-2 text-slate-500 hover:bg-page"
             aria-label="Close viewer"
           >
             <X size={18} />
@@ -179,7 +179,7 @@ function IconBtn({ onClick, icon: Icon, label }) {
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-page"
+      className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-page"
     >
       <Icon size={14} /> {label}
     </button>

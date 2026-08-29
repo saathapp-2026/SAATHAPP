@@ -51,7 +51,7 @@ export default function PlacementDurationSection({ draft, updateDraft }) {
               <span className="text-sm font-semibold text-slate-700">{p.label}</span>
               <input 
                 type="checkbox" 
-                className="hidden" 
+                className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" 
                 checked={(draft.placements || []).includes(p.id)}
                 onChange={() => togglePlacement(p.id)}
               />
@@ -75,7 +75,7 @@ export default function PlacementDurationSection({ draft, updateDraft }) {
               <span className="text-sm font-semibold text-slate-700">{d.label}</span>
               <input 
                 type="radio" 
-                className="hidden" 
+                className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" 
                 checked={draft.duration === d.value}
                 onChange={() => updateDraft({ duration: d.value })}
               />

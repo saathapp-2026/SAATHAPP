@@ -256,7 +256,7 @@ function ReportIssue() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="
+                      className="duration-200 active:scale-[0.98] disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none 
                         w-full h-[52px]
                         rounded-[14px]
                         bg-[#16A34A]

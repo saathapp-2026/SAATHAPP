@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import useScrollLock from '../../hooks/useScrollLock';
+import toast from 'react-hot-toast';
 
 export default function ServicesTab({ _bookings, setBookings, _walletBalance, _setWalletBalance, _transactions, _setTransactions, _orders, _setOrders, setActiveTab }) {
   const [filter, setFilter] = useState('All');
@@ -26,7 +27,7 @@ export default function ServicesTab({ _bookings, setBookings, _walletBalance, _s
 
   const handleConfirmBooking = () => {
     if (!bookingDate) {
-      alert('Please select a preferred date.');
+      toast.success('Please select a preferred date.');
       return;
     }
 
@@ -57,7 +58,7 @@ export default function ServicesTab({ _bookings, setBookings, _walletBalance, _s
     localStorage.setItem('saath_notifications', JSON.stringify([newNotif, ...currentNotifs]));
 
     setShowBookingFormModal(false);
-    alert(`Booking confirmed! You can track it under Bookings.`);
+    toast.success(`Booking confirmed! You can track it under Bookings.`);
     setActiveTab('bookings');
   };
 
@@ -79,8 +80,13 @@ export default function ServicesTab({ _bookings, setBookings, _walletBalance, _s
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search electrician, plumber..."
-            className="w-full pl-9 pr-4 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl text-xs focus:outline-none dark:bg-slate-950 font-semibold"
+            className="w-full pl-9 pr-9 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl text-xs focus:outline-none dark:bg-slate-950 font-semibold"
           />
+          {search && (
+            <button type="button" onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+          )}
         </div>
       </div>
 
@@ -103,10 +109,24 @@ export default function ServicesTab({ _bookings, setBookings, _walletBalance, _s
 
       {/* Services Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {servicesList
-          .filter(s => filter === 'All' || s.category === filter)
-          .filter(s => s.name.toLowerCase().includes(search.toLowerCase()) || s.description.toLowerCase().includes(search.toLowerCase()))
-          .map((srv) => (
+        {(() => {
+          const filtered = servicesList
+            .filter(s => filter === 'All' || s.category === filter)
+            .filter(s => s.name.toLowerCase().includes(search.toLowerCase()) || s.description.toLowerCase().includes(search.toLowerCase()));
+          
+          if (filtered.length === 0) {
+            return (
+              <div className="col-span-1 md:col-span-2 py-10 text-center border border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-955/10">
+                <p className="text-slate-500 font-medium mb-2">No results found for "{search}".</p>
+                {search && (
+                  <button onClick={() => setSearch('')} className="text-sm font-bold text-[#6C3BFF] hover:underline">
+                    Clear Search
+                  </button>
+                )}
+              </div>
+            );
+          }
+          return filtered.map((srv) => (
             <div key={srv.id} className="p-5 bg-slate-50/50 dark:bg-slate-955/10 rounded-2xl border border-slate-205 dark:border-slate-800/80 flex flex-col justify-between gap-4 text-left">
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
@@ -135,7 +155,8 @@ export default function ServicesTab({ _bookings, setBookings, _walletBalance, _s
                 </button>
               </div>
             </div>
-          ))}
+          ));
+        })()}
       </div>
 
       {/* Booking Form Modal Overlay */}
@@ -195,7 +216,7 @@ export default function ServicesTab({ _bookings, setBookings, _walletBalance, _s
               <button
                 type="button"
                 onClick={handleConfirmBooking}
-                className="px-5 py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-bold uppercase cursor-pointer shadow-sm"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-bold uppercase cursor-pointer shadow-sm"
               >
                 Confirm Booking
               </button>

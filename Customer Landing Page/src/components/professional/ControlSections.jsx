@@ -15,6 +15,7 @@ import {
 } from '../../config/professional/membershipPlans';
 import { getWelcomeKitConfig, getWelcomeKitEligibilityStatus } from '../../config/professional/welcomeKitConfig';
 import { getEquipmentConfig } from '../../config/professional/equipmentConfig';
+import toast from 'react-hot-toast';
 import {
   VERIFICATION_DOCUMENTS,
   VERIFICATION_CHECKS,
@@ -230,12 +231,12 @@ export function MembershipSection({ membership, renewalDate, onMembershipChange,
         <div className={`${cardClass} space-y-4`}>
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-black uppercase tracking-wider">Billing History</h3>
-            <button className="text-[10px] font-black uppercase text-primary hover:underline cursor-pointer">Download All Invoices</button>
+            <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-[10px] font-black uppercase text-primary hover:underline cursor-pointer">Download All Invoices</button>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-semibold text-slate-650 dark:text-slate-400">
               <thead>
-                <tr className="border-b border-slate-100 dark:border-slate-800/80 text-[10px] font-black uppercase text-slate-400">
+                <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800/80 text-[10px] font-black uppercase text-slate-400">
                   <th className="pb-3">Invoice ID</th>
                   <th className="pb-3">Date</th>
                   <th className="pb-3">Plan Billed</th>
@@ -245,7 +246,7 @@ export function MembershipSection({ membership, renewalDate, onMembershipChange,
               </thead>
               <tbody className="divide-y divide-slate-50 dark:divide-slate-850">
                 {billingHistory.map((inv) => (
-                  <tr key={inv.id} className="hover:bg-slate-50/50">
+                  <tr key={inv.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-slate-50/50">
                     <td className="py-3 font-bold text-slate-800 dark:text-slate-300">{inv.id}</td>
                     <td className="py-3 text-slate-400">{inv.date}</td>
                     <td className="py-3 font-bold text-primary">{inv.plan}</td>
@@ -384,7 +385,7 @@ export function ProfileSettingsSection({
               <p className="text-[10px] text-slate-450 mt-0.5">Define your geographical service coverage coordinates</p>
             </div>
             <button
-              onClick={() => alert('Update service radius from your onboarding profile when editing is available.')}
+              onClick={() => toast.success('Update service radius from your onboarding profile when editing is available.') }
               className="px-3.5 py-1.5 bg-primary text-white text-xs font-black uppercase rounded-xl cursor-pointer"
             >
               Adjust Radius
@@ -435,7 +436,7 @@ export function ProfileSettingsSection({
               </div>
               <button
                 onClick={toggleDarkMode}
-                className={`w-10 h-6 rounded-full p-1 cursor-pointer transition-colors duration-300 flex items-center ${
+                className={`transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-10 h-6 rounded-full p-1 cursor-pointer transition-colors duration-300 flex items-center ${
                   darkMode ? 'bg-primary' : 'bg-slate-300'
                 }`}
               >
@@ -451,7 +452,7 @@ export function ProfileSettingsSection({
                 <p className="text-[10px] text-slate-450">Receive booking updates via standard mobile SMS alerts.</p>
               </div>
               <button
-                onClick={() => alert('Preferences toggled.')}
+                onClick={() => toast.success('Preferences toggled.') }
                 className="w-10 h-6 rounded-full p-1 cursor-pointer bg-primary flex items-center"
               >
                 <div className="w-4 h-4 bg-white rounded-full shadow-md translate-x-4" />
@@ -464,7 +465,7 @@ export function ProfileSettingsSection({
                 <p className="text-[10px] text-slate-450 max-w-sm leading-normal">Warning: Deleting your partner profile is permanent and wipes wallet history, profile ratings, and verified credentials.</p>
               </div>
               <button
-                onClick={() => alert('Account deletion request submitted. Our support team will contact you.')}
+                onClick={() => toast.success('Account deletion request submitted. Our support team will contact you.') }
                 className="px-4 py-2 rounded-btn bg-danger hover:bg-danger-dark text-white text-[10px] font-extrabold uppercase cursor-pointer transition-all shrink-0"
               >
                 Delete Account
@@ -556,8 +557,8 @@ export function EquipmentSection() {
                 : ` — ₹${Number(i.price).toLocaleString('en-IN')}`}
             </span>
             <span className="flex gap-1 shrink-0">
-              <button type="button" className="px-2 py-1 rounded-md border border-slate-200 text-[9px] font-black uppercase cursor-pointer" onClick={() => alert(`View: ${i.name}`)}>View</button>
-              <button type="button" className="px-2 py-1 rounded-md bg-primary text-white text-[9px] font-black uppercase cursor-pointer" onClick={() => alert(`${rent ? 'Rent' : 'Purchase'} requested: ${i.name}`)}>{rent ? 'Rent' : 'Purchase'}</button>
+              <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-2 py-1 rounded-md border border-slate-200 text-[9px] font-black uppercase cursor-pointer" onClick={() => toast.success(`View: ${i.name}`) }>View</button>
+              <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-2 py-1 rounded-md bg-primary text-white text-[9px] font-black uppercase cursor-pointer" onClick={() => toast.success(`${rent ? 'Rent' : 'Purchase'} requested: ${i.name}`) }>{rent ? 'Rent' : 'Purchase'}</button>
             </span>
           </li>
         ))}
@@ -589,7 +590,7 @@ export function BusinessServicesSection() {
         {equipment.digitalServices.map((i) => (
           <li key={i.id} className="flex items-center justify-between gap-2 text-xs p-2 rounded-lg bg-page dark:bg-slate-950 border border-slate-100 dark:border-slate-800">
             <span className="font-semibold">{i.name} — ₹{Number(i.price).toLocaleString('en-IN')}</span>
-            <button type="button" className="px-2 py-1 rounded-md bg-primary text-white text-[9px] font-black uppercase cursor-pointer" onClick={() => alert(`Service request: ${i.name}`)}>Purchase</button>
+            <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-2 py-1 rounded-md bg-primary text-white text-[9px] font-black uppercase cursor-pointer" onClick={() => toast.success(`Service request: ${i.name}`) }>Purchase</button>
           </li>
         ))}
       </ul>
@@ -614,7 +615,7 @@ export function DocumentsSection({ onboarding, membership, setActiveTab }) {
   const completed = VERIFICATION_DOCUMENTS.filter((d) => docs[d.key]);
   const pending = VERIFICATION_DOCUMENTS.filter((d) => !docs[d.key]);
   
-  const handleUpload = (docName) => alert(`Mock Upload Dialog for ${docName}`);
+  const handleUpload = (docName) => toast.success(`Mock Upload Dialog for ${docName}`);
 
   return (
     <div className="space-y-6 text-left">
@@ -804,7 +805,7 @@ export function HelpSupportModule({
 
               <button
                 type="submit"
-                className="w-full py-2 rounded-btn bg-primary text-white text-[10px] font-black uppercase cursor-pointer transition-all hover:bg-primary-dark"
+                className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-2 rounded-btn bg-primary text-white text-[10px] font-black uppercase cursor-pointer transition-all hover:bg-primary-dark"
               >
                 Submit Support Ticket
               </button>
@@ -848,7 +849,7 @@ export function HelpSupportModule({
           </div>
           <a
             href="tel:1800123456"
-            className="w-full py-1.5 bg-white text-slate-900 text-center font-extrabold text-[10px] uppercase rounded-btn block hover:bg-page shadow-sm transition-colors"
+            className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-1.5 bg-white text-slate-900 text-center font-extrabold text-[10px] uppercase rounded-btn block hover:bg-page shadow-sm transition-colors"
           >
             Call Helpline Now
           </a>

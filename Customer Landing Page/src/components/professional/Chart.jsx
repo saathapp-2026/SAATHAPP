@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, TrendingUp } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function Chart() {
   const [timeframe, setTimeframe] = useState('weekly'); // 'daily', 'weekly', 'monthly', 'yearly'
@@ -81,9 +82,7 @@ export default function Chart() {
     setDownloading(true);
     setTimeout(() => {
       setDownloading(false);
-      alert('Earnings statement downloaded as PDF successfully.');
-    }, 2000);
-  };
+      toast.success('Earnings statement downloaded as PDF successfully.') }, 2000)};
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -268,7 +267,7 @@ export default function Chart() {
           <button
             onClick={handleDownloadReport}
             disabled={downloading}
-            className="flex items-center gap-1.5 text-xs font-black uppercase text-primary hover:text-primary-dark cursor-pointer disabled:opacity-50"
+            className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex items-center gap-1.5 text-xs font-black uppercase text-primary hover:text-primary-dark cursor-pointer disabled:opacity-50"
           >
             {downloading ? (
               <>

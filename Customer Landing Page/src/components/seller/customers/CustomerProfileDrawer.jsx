@@ -50,7 +50,7 @@ export default function CustomerProfileDrawer({
       className="flex justify-end"
       contentClassName="h-full"
     >
-      <aside className="h-full w-full max-w-lg bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
+      <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded h-full w-full max-w-lg bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
         <div className="flex items-start justify-between gap-3 p-4 border-b border-slate-200 dark:border-slate-800">
           <div>
             <h2 className="text-lg font-bold">{customer.name}</h2>
@@ -64,7 +64,7 @@ export default function CustomerProfileDrawer({
               </span>
             </div>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -132,7 +132,7 @@ export default function CustomerProfileDrawer({
                   href={`https://www.google.com/maps?q=${customer.lat},${customer.lng}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-block mt-2 text-xs font-semibold text-emerald-600 hover:underline"
+                  className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded inline-block mt-2 text-xs font-semibold text-emerald-600 hover:underline"
                 >
                   Open location map
                 </a>

@@ -77,7 +77,7 @@ export default function CustomerFilters({
         <button
           type="button"
           onClick={onReset}
-          className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-sm font-medium border border-slate-200 hover:bg-page"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-sm font-medium border border-slate-200 hover:bg-page"
         >
           <RotateCcw size={14} />
           Reset

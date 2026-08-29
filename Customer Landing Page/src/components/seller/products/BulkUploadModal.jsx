@@ -35,14 +35,14 @@ export default function BulkUploadModal({ open, onClose, onImported }) {
 
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center p-4" role="dialog" aria-modal="true">
-      <button type="button" className="absolute inset-0 bg-black/50" aria-label="Close" onClick={onClose} />
+      <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute inset-0 bg-black/50" aria-label="Close" onClick={onClose} />
       <div className="relative w-full max-w-lg rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-4">
         <div className="flex items-start justify-between">
           <div>
             <h2 className="font-bold text-lg">Excel / CSV Bulk Import</h2>
             <p className="text-sm text-slate-500">Upload products from a spreadsheet</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -50,13 +50,13 @@ export default function BulkUploadModal({ open, onClose, onImported }) {
         <button
           type="button"
           onClick={downloadTemplate}
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-600"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-600"
         >
           <Download size={14} /> Download sample template
         </button>
 
         <div
-          className="rounded-xl border-2 border-dashed border-slate-300 p-8 text-center cursor-pointer hover:border-emerald-500"
+          className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] rounded-xl border-2 border-dashed border-slate-300 p-8 text-center cursor-pointer hover:border-emerald-500"
           onClick={() => fileRef.current?.click()}
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => {
@@ -67,7 +67,7 @@ export default function BulkUploadModal({ open, onClose, onImported }) {
           <Upload size={24} className="mx-auto text-slate-400 mb-2" />
           <p className="text-sm font-medium">Drop CSV/Excel export here or click to browse</p>
           <p className="text-xs text-slate-400 mt-1">CSV recommended</p>
-          <input ref={fileRef} type="file" accept=".csv,text/csv" className="hidden" onChange={(e) => handleFile(e.target.files?.[0])} />
+          <input ref={fileRef} type="file" accept=".csv,text/csv" className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" onChange={(e) => handleFile(e.target.files?.[0])} />
         </div>
 
         {loading && <p className="text-sm text-slate-500">Validating & importing…</p>}

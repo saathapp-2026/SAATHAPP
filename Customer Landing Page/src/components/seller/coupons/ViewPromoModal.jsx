@@ -32,7 +32,7 @@ export default function ViewPromoModal({ open, onClose, item, onEdit }) {
             <h2 id="view-promo-title" className="text-lg font-bold">{item.name}</h2>
             <p className="text-xs text-slate-500 mt-0.5 font-mono">{item.code}</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>

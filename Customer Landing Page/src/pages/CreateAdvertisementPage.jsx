@@ -82,8 +82,7 @@ export default function CreateAdvertisementPage({ user }) {
 
   const handleSaveDraft = () => {
     saveAdDraft(draft);
-    toast.success('Draft saved successfully');
-  };
+    toast.success('Draft saved successfully') };
 
   return (
     <div className="min-h-screen bg-page text-theme transition-colors font-sans pb-12">
@@ -117,13 +116,13 @@ export default function CreateAdvertisementPage({ user }) {
                 <div className="flex gap-4">
                   <button 
                     onClick={handleSaveDraft}
-                    className="px-6 py-3 border border-slate-300 text-slate-700 font-medium hover:bg-page rounded-lg transition-colors bg-white shadow-sm"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-6 py-3 border border-slate-300 text-slate-700 font-medium hover:bg-page rounded-lg transition-colors bg-white shadow-sm"
                   >
                     Save Draft
                   </button>
                   <button 
                     onClick={handleNext}
-                    className="px-8 py-3 bg-[#15803D] hover:bg-emerald-700 text-white font-bold rounded-lg shadow-md transition-colors flex items-center gap-2"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-8 py-3 bg-[#15803D] hover:bg-emerald-700 text-white font-bold rounded-lg shadow-md transition-colors flex items-center gap-2"
                   >
                     Save and Continue &rarr;
                   </button>

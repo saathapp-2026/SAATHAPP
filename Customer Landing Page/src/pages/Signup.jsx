@@ -106,7 +106,7 @@ export default function Signup({ onLogin, onSignup, onBack }) {
             <div className="pt-4">
               <button 
                 type="submit" 
-                className="btn-primary"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none btn-primary"
               >
                 Create Account <ChevronRight size={18} />
               </button>

@@ -99,7 +99,7 @@ export default function Step12_OnboardingPayment({ onNext, onPrev }) {
           <button
             type="button"
             onClick={onNext}
-            className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-8 py-3 text-sm font-extrabold text-white"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-6 inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-8 py-3 text-sm font-extrabold text-white"
           >
             Continue to Review
             <ArrowRight size={16} />
@@ -218,7 +218,7 @@ export default function Step12_OnboardingPayment({ onNext, onPrev }) {
               type="button"
               onClick={onPrev}
               disabled={isProcessing}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition disabled:opacity-50"
+              className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition disabled:opacity-50"
             >
               <ArrowLeft size={16} />
               Previous
@@ -226,7 +226,7 @@ export default function Step12_OnboardingPayment({ onNext, onPrev }) {
             <button
               type="submit"
               disabled={isProcessing}
-              className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-extrabold text-white shadow-lg transition hover:scale-[1.02] disabled:opacity-70"
+              className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-extrabold text-white shadow-lg transition hover:scale-[1.02] disabled:opacity-70"
             >
               {isProcessing ? (
                 <>

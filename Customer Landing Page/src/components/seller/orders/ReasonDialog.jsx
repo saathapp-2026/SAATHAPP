@@ -23,6 +23,7 @@ export function ReasonDialog({
       confirmLabel={mode === 'reject' ? 'Reject Order' : 'Cancel Order'}
       danger
       loading={loading}
+      confirmDisabled={reason === 'Custom Reason' && !customReason.trim()}
       onCancel={onCancel}
       onConfirm={() => onConfirm({ reason, customReason: reason === 'Custom Reason' ? customReason : '' })}
     >

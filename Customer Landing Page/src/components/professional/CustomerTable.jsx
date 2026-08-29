@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import { Search, Star, Award, History, User } from 'lucide-react';
+import { EmptyState } from '../common/StateComponents';
 
 export default function CustomerTable() {
   const [search, setSearch] = useState('');
   const [customerTab, setCustomerTab] = useState('all');
   
-  const customers = [];
+  const customers = [
+    { name: 'Amit Sharma', phone: '9876543210', location: 'Andheri West, Mumbai', jobs: 12, rating: 4.8, repeat: true, totalSpending: 4500, lastBooking: '12 Aug 2026', completedServices: 10 },
+    { name: 'Priya Singh', phone: '8765432109', location: 'Bandra East, Mumbai', jobs: 3, rating: 4.5, repeat: false, totalSpending: 1200, lastBooking: '20 Jul 2026', completedServices: 3 },
+    { name: 'Rahul Desai', phone: '7654321098', location: 'Koramangala, Bangalore', jobs: 25, rating: 5.0, repeat: true, totalSpending: 15000, lastBooking: '25 Aug 2026', completedServices: 22 },
+    { name: 'Sneha Gupta', phone: '6543210987', location: 'Indiranagar, Bangalore', jobs: 1, rating: 4.0, repeat: false, totalSpending: 400, lastBooking: '15 Jun 2026', completedServices: 1 },
+    { name: 'Vikram Mehta', phone: '9988776655', location: 'Vasant Kunj, Delhi', jobs: 8, rating: 4.2, repeat: true, totalSpending: 3200, lastBooking: '02 Aug 2026', completedServices: 7 },
+  ];
 
   let filteredCustomers = customers.filter(c => 
     c.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -34,8 +41,16 @@ export default function CustomerTable() {
             placeholder="Search by client or location..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs border border-slate-200/80 dark:border-slate-800 rounded-xl bg-page dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none focus:border-primary/50"
+            className="w-full pl-9 pr-8 py-2 text-xs border border-slate-200/80 dark:border-slate-800 rounded-xl bg-page dark:bg-slate-950 text-slate-700 dark:text-slate-200 outline-none focus:border-primary/50"
           />
+          {search && (
+            <button 
+              onClick={() => setSearch('')} 
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+          )}
         </div>
       </div>
 
@@ -107,7 +122,7 @@ export default function CustomerTable() {
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-left text-xs font-semibold text-slate-650 dark:text-slate-400">
               <thead>
-                <tr className="border-b border-slate-100 dark:border-slate-800/80 text-[10px] font-black uppercase text-slate-400">
+                <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800/80 text-[10px] font-black uppercase text-slate-400">
                   <th className="pb-3">Customer</th>
                   <th className="pb-3">Contact</th>
                   <th className="pb-3">Location</th>
@@ -119,13 +134,20 @@ export default function CustomerTable() {
               <tbody className="divide-y divide-slate-50 dark:divide-slate-850">
                 {filteredCustomers.length === 0 ? (
                   <tr>
-                    <td colSpan="6" className="py-8 text-center text-slate-400">
-                      No customers found.
+                    <td colSpan="6" className="py-4">
+                      <EmptyState 
+                        icon={Search} 
+                        title={search ? `No customers found for "${search}"` : "No customers found"}
+                        description={search ? "Try adjusting your search terms." : "You have no customers yet."}
+                        actionLabel={search ? "Clear Search" : undefined}
+                        onAction={search ? () => setSearch('') : undefined}
+                        className="border-0 shadow-none bg-transparent"
+                      />
                     </td>
                   </tr>
                 ) : (
                   filteredCustomers.map((cust, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
+                  <tr key={idx} className="hover:bg-emerald-50/30 hover:bg-slate-50/50 transition-colors">
                     <td className="py-4">
                       <div className="flex items-center gap-2">
                         <div className="w-7 h-7 rounded-full bg-page flex items-center justify-center font-bold text-[10px] text-slate-600 dark:text-slate-300">
@@ -163,9 +185,14 @@ export default function CustomerTable() {
           {/* Mobile Stacked View */}
           <div className="md:hidden space-y-4">
             {filteredCustomers.length === 0 ? (
-              <div className="p-4 rounded-xl border border-slate-150 dark:border-slate-850 bg-slate-50/50 dark:bg-slate-950/20 text-center text-slate-400 text-sm py-8">
-                No customers found.
-              </div>
+              <EmptyState 
+                icon={Search} 
+                title={search ? `No customers found for "${search}"` : "No customers found"}
+                description={search ? "Try adjusting your search terms." : "You have no customers yet."}
+                actionLabel={search ? "Clear Search" : undefined}
+                onAction={search ? () => setSearch('') : undefined}
+                className="bg-transparent"
+              />
             ) : (
               filteredCustomers.map((cust, idx) => (
               <div 

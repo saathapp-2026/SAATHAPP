@@ -152,7 +152,7 @@ export default function ServiceListing({
                           <p className="text-xl font-black text-slate-900 dark:text-white">₹{service.startingPrice}</p>
                         </div>
                         <button 
-                          onClick={(e) => { e.stopPropagation(); navigate(`/products/services/service/${service.id}`); }}
+                          onClick={(e) => { e.stopPropagation(); navigate(`/products/services/service/${service.id}`) }}
                           className="bg-primary text-white px-4 py-2 rounded-btn font-black text-xs uppercase tracking-wider hover:bg-primary-dark transition-colors"
                         >
                           Book Now

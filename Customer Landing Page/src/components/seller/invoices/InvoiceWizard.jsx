@@ -10,6 +10,7 @@ import {
   UserPlus,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import ConfirmDialog from '../orders/ConfirmDialog';
 import SellerOverlay from '../SellerOverlay';
 import { SELLER_Z } from '../../../config/seller/sellerZIndex';
 import {
@@ -53,6 +54,7 @@ const inputCls =
 export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = null }) {
   const [draft, setDraft] = useState(() => emptyWizardDraft());
   const [dirty, setDirty] = useState(false);
+  const [confirmCancel, setConfirmCancel] = useState(false);
   const [customers, setCustomers] = useState([]);
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
@@ -185,7 +187,10 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
   };
 
   const handleClose = () => {
-    if (dirty && !window.confirm('You have unsaved changes. Leave anyway?')) return;
+    if (dirty) {
+      setConfirmCancel(true);
+      return;
+    }
     onClose?.();
   };
 
@@ -203,8 +208,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
       ...calcLine({ qty: 1, sellingPrice: p.sellingPrice, discount: 0, gstPct: p.gstPct }),
     };
     patch({ items: [...(draft.items || []), item] });
-    toast.success('Item added');
-  };
+    toast.success('Item added') };
 
   const updateItem = (id, changes) => {
     const items = (draft.items || []).map((it) => {
@@ -268,13 +272,13 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
       className="flex justify-end"
       contentClassName="h-full"
     >
-      <aside className="h-full w-full max-w-xl bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
+      <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded h-full w-full max-w-xl bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
         <div className="flex items-start justify-between gap-3 p-4 border-b border-slate-200 dark:border-slate-800">
           <div>
             <h2 className="text-lg font-bold">Create Invoice</h2>
             <p className="text-xs text-slate-500 mt-0.5">Generate new GST invoice for your customer · Step {step}/8</p>
           </div>
-          <button type="button" onClick={handleClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={handleClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -409,8 +413,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                           items: o.items,
                           placeOfSupply: customer?.stateCode || draft.placeOfSupply,
                         });
-                        toast.success('Order items imported');
-                      }}
+                        toast.success('Order items imported') }}
                       className={`w-full text-left rounded-xl border p-3 text-sm ${
                         draft.order?.id === o.id ? 'border-emerald-500 bg-emerald-50/50' : 'border-slate-200'
                       }`}
@@ -676,8 +679,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                       type="button"
                       onClick={() => {
                         window.open(`mailto:${generated.customer?.email || ''}?subject=${encodeURIComponent(generated.number)}`);
-                        toast.success('Email compose opened');
-                      }}
+                        toast.success('Email compose opened') }}
                       className="px-3 py-2 rounded-xl text-sm font-semibold border border-slate-200"
                     >
                       Email
@@ -702,7 +704,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
                     type="button"
                     disabled={saving}
                     onClick={generate}
-                    className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
+                    className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
                   >
                     {saving ? 'Generating…' : 'Generate Invoice'}
                   </button>
@@ -726,34 +728,47 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
         </div>
 
         <div className="sticky bottom-0 flex flex-wrap gap-2 p-4 border-t border-slate-200 dark:border-slate-800 bg-white/95">
-          <button type="button" onClick={handleClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200">
+          <button type="button" onClick={handleClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm border border-slate-200">
             Cancel
           </button>
           {step > 1 && step < 8 && (
-            <button type="button" onClick={goPrev} className="px-4 py-2 rounded-xl text-sm border border-slate-200">
+            <button type="button" onClick={goPrev} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm border border-slate-200">
               Back
             </button>
           )}
-          <button type="button" disabled={saving} onClick={saveDraftNow} className="px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 disabled:opacity-50">
+          <button type="button" disabled={saving} onClick={saveDraftNow} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 disabled:opacity-50">
             Save as Draft
           </button>
           {step < 7 && (
-            <button type="button" onClick={goNext} className="ml-auto px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600">
+            <button type="button" onClick={goNext} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none ml-auto px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600">
               Continue
             </button>
           )}
           {step === 7 && (
-            <button type="button" onClick={() => { patch({ step: 8 }); }} className="ml-auto px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600">
+            <button type="button" onClick={() => { patch({ step: 8 }) }} className="ml-auto px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600">
               Preview & Save
             </button>
           )}
           {step === 8 && generated && (
-            <button type="button" onClick={onClose} className="ml-auto px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white">
+            <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none ml-auto px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white">
               Done
             </button>
           )}
         </div>
       </aside>
+      <ConfirmDialog
+        open={confirmCancel}
+        title="Discard changes?"
+        message="Your unsaved changes will be lost."
+        danger={true}
+        confirmLabel="Discard Changes"
+        cancelLabel="Keep Editing"
+        onCancel={() => setConfirmCancel(false)}
+        onConfirm={() => {
+          setConfirmCancel(false);
+          onClose();
+        }}
+      />
     </SellerOverlay>
   );
 }

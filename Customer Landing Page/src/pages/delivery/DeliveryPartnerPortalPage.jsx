@@ -167,7 +167,7 @@ function DeliveryPortalInner(props) {
                   </button>
                   <a
                     href="#delivery-fee-structure"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
+                    className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
                   >
                     View Onboarding Fee Matrix
                   </a>

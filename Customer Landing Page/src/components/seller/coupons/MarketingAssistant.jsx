@@ -44,7 +44,7 @@ export default function MarketingAssistant({ open, onClose, onUse }) {
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">Mock AI — architecture ready for live models</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -75,8 +75,7 @@ export default function MarketingAssistant({ open, onClose, onUse }) {
                   type="button"
                   onClick={() => {
                     onUse?.({ kind: active, value: r });
-                    toast.success('Suggestion copied to flow');
-                  }}
+                    toast.success('Suggestion copied to flow') }}
                   className="w-full text-left rounded-xl border border-slate-200 px-3 py-2.5 text-sm hover:bg-page"
                 >
                   {r}

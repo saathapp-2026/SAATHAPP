@@ -10,8 +10,10 @@ import { getCustomerMenu } from '../config/customerMenu';
 import ServicesTab from '../components/customer/ServicesTab';
 import WishlistTab from '../components/customer/WishlistTab';
 import CartTab from '../components/customer/CartTab';
+import { useCart } from '../hooks/useCart';
 import PaymentsTab from '../components/customer/PaymentsTab';
 import ReviewsTab from '../components/customer/ReviewsTab';
+import toast from 'react-hot-toast';
 
 // ==========================================
 // 1. LOCAL STORAGE MOCK DATABASE INITIALIZER
@@ -53,7 +55,11 @@ const initMockDB = (user) => {
     }));
   }
   if (!localStorage.getItem('saath_notifications')) {
-    localStorage.setItem('saath_notifications', JSON.stringify([]));
+    localStorage.setItem('saath_notifications', JSON.stringify([
+      { id: 1, title: 'Order Delivered', message: 'Your order #ORD-7892 has been delivered successfully.', time: '2 hours ago', read: false },
+      { id: 2, title: 'Promo Code Available', message: 'Use code SAATH50 to get ₹50 off on your next booking!', time: 'Yesterday', read: true },
+      { id: 3, title: 'Welcome to SaathApp', message: 'Complete your profile to unlock all features.', time: '2 days ago', read: true }
+    ]));
   }
   if (!localStorage.getItem('saath_tickets')) {
     localStorage.setItem('saath_tickets', JSON.stringify([]));
@@ -62,6 +68,7 @@ const initMockDB = (user) => {
 
 export default function Profile({ user, onBack, onLogout }) {
   const location = useLocation();
+  const { cartItems, handleAddToCart, removeItem, clearCart, totals } = useCart();
   const { theme, setTheme } = useTheme();
   const { language, changeLanguage, t } = useLanguage();
   
@@ -72,7 +79,11 @@ export default function Profile({ user, onBack, onLogout }) {
   });
 
   useEffect(() => {
-    if (location.pathname === '/profile') {
+    const params = new URLSearchParams(location.search);
+    const tabParam = params.get('tab');
+    if (tabParam) {
+      setActiveTab(tabParam);
+    } else if (location.pathname === '/profile') {
       setActiveTab('profile');
     } else if (location.pathname === '/customer/dashboard') {
       if (location.state?.activeTab) {
@@ -81,7 +92,7 @@ export default function Profile({ user, onBack, onLogout }) {
         setActiveTab('dashboard');
       }
     }
-  }, [location.pathname, location.state]);
+  }, [location.pathname, location.search, location.state]);
 
   const [profile, setProfile] = useState(null);
   const [walletBalance, setWalletBalance] = useState(0.00);
@@ -95,7 +106,7 @@ export default function Profile({ user, onBack, onLogout }) {
   
   // Custom states for new tabs
   const [wishlist, setWishlist] = useState([]);
-  const [cart, setCart] = useState([]);
+  // Disconnected cart replaced by useCart
   const [reviewsList, setReviewsList] = useState([]);
   const [_servicesFilter, _setServicesFilter] = useState('All');
   const [_servicesSearch, _setServicesSearch] = useState('');
@@ -161,7 +172,6 @@ export default function Profile({ user, onBack, onLogout }) {
       localStorage.setItem('saath_user_reviews', JSON.stringify([]));
     }
     setWishlist(JSON.parse(localStorage.getItem('saath_wishlist') || '[]'));
-    setCart(JSON.parse(localStorage.getItem('saath_cart') || '[]'));
     setReviewsList(JSON.parse(localStorage.getItem('saath_user_reviews') || '[]'));
   };
 
@@ -300,7 +310,7 @@ export default function Profile({ user, onBack, onLogout }) {
         {/* Navigation breadcrumb */}
         <button
           onClick={onBack}
-          className="mb-6 inline-flex items-center gap-2 text-xs font-black uppercase text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mb-6 inline-flex items-center gap-2 text-xs font-black uppercase text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer"
         >
           <ArrowLeft size={14} />
           <span>{t('return_to_homepage')}</span>
@@ -363,14 +373,14 @@ export default function Profile({ user, onBack, onLogout }) {
                   <input
                     type="text"
                     placeholder="Search dashboard..."
-                    className="w-48 xl:w-60 h-9 px-3 pl-8 text-xs bg-page dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-200 dark:border-slate-800 rounded-xl outline-none focus:border-primary"
+                    className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-48 xl:w-60 h-9 px-3 pl-8 text-xs bg-page dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-200 dark:border-slate-800 rounded-xl outline-none focus:border-primary"
                   />
                   <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                 </div>
                 
                 {/* Language button dropdown */}
                 <div className="relative group">
-                  <button className="p-2 bg-page dark:bg-slate-900 hover:bg-slate-200 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer">
+                  <button className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 bg-page dark:bg-slate-900 hover:bg-slate-200 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer">
                     <Globe size={16} className="text-primary" />
                   </button>
                   {/* Hover dropdown list */}
@@ -602,7 +612,7 @@ export default function Profile({ user, onBack, onLogout }) {
                             <button onClick={() => setShowAddMoneyModal(true)} className="py-2.5 px-3 bg-surface hover:bg-page border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
                               💰 Add Wallet Money
                             </button>
-                            <button onClick={() => { setEditingAddress(null); setNewAddressType('Home'); setNewAddressContent(''); setShowAddressModal(true); }} className="py-2.5 px-3 bg-surface hover:bg-page border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
+                            <button onClick={() => { setEditingAddress(null); setNewAddressType('Home'); setNewAddressContent(''); setShowAddressModal(true) }} className="py-2.5 px-3 bg-surface hover:bg-page border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
                               📍 Add New Address
                             </button>
                             <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="py-2.5 px-3 bg-surface hover:bg-page border border-slate-200 dark:border-slate-800 rounded-xl text-center font-bold text-slate-800 dark:text-slate-200 cursor-pointer transition-colors shadow-sm">
@@ -656,13 +666,13 @@ export default function Profile({ user, onBack, onLogout }) {
                           {/* Bottom controls */}
                           <div className="flex flex-wrap gap-2.5 pt-2 justify-end">
                             <button
-                              onClick={() => alert(`Downloading invoice for ${order.orderId}...`)}
+                              onClick={() => toast.success(`Downloading invoice for ${order.orderId}...`) }
                               className="px-4.5 py-2 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl text-slate-700 dark:text-slate-300 font-black uppercase tracking-wider cursor-pointer"
                             >
                               Download Invoice
                             </button>
                             <button
-                              onClick={() => alert(`Re-ordering products in ${order.orderId}`)}
+                              onClick={() => toast.success(`Re-ordering products in ${order.orderId}`) }
                               className="px-5 py-2 bg-[#6C3BFF] hover:bg-[#6C3BFF]/90 text-white rounded-xl font-black uppercase tracking-wider cursor-pointer shadow-sm"
                             >
                               Order Again
@@ -709,13 +719,13 @@ export default function Profile({ user, onBack, onLogout }) {
                           {booking.status === 'Scheduled' && (
                             <div className="flex items-center gap-2 pt-2 text-xs">
                               <button
-                                onClick={() => alert(`Cancel request sent for booking ${booking.id}`)}
+                                onClick={() => toast.success(`Cancel request sent for booking ${booking.id}`) }
                                 className="py-2 px-4 rounded-xl border border-red-200 dark:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-950/20 text-red-600 dark:text-red-400 transition-colors font-bold cursor-pointer"
                               >
                                 Cancel Booking
                               </button>
                               <button
-                                onClick={() => alert(`Reschedule dialog for booking ${booking.id}`)}
+                                onClick={() => toast.success(`Reschedule dialog for booking ${booking.id}`) }
                                 className="py-2 px-4 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-page transition-colors font-bold cursor-pointer"
                               >
                                 Reschedule
@@ -754,16 +764,16 @@ export default function Profile({ user, onBack, onLogout }) {
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                       {[
                         { label: 'Add Money', icon: Plus, action: () => setShowAddMoneyModal(true) },
-                        { label: 'Withdraw', icon: ArrowRight, action: () => alert('Mock: Withdraw payout requested') },
-                        { label: 'Transfer', icon: Globe, action: () => alert('Mock: Recipient transfer opened') },
-                        { label: 'Redeem Voucher', icon: Gift, action: () => alert('Mock: Voucher code sheet opened') }
+                        { label: 'Withdraw', icon: ArrowRight, action: () => toast.success('Mock: Withdraw payout requested') },
+                        { label: 'Transfer', icon: Globe, action: () => toast.success('Mock: Recipient transfer opened') },
+                        { label: 'Redeem Voucher', icon: Gift, action: () => toast.success('Mock: Voucher code sheet opened') }
                       ].map((act, idx) => {
                         const Icon = act.icon;
                         return (
                           <button
                             key={idx}
                             onClick={act.action}
-                            className="flex flex-col items-center gap-2 p-3 bg-page hover:bg-[#6C3BFF]/5 dark:bg-slate-900 dark:hover:bg-[#6C3BFF]/10 rounded-xl border border-slate-200 dark:border-slate-800 transition-colors cursor-pointer text-center"
+                            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex flex-col items-center gap-2 p-3 bg-page hover:bg-[#6C3BFF]/5 dark:bg-slate-900 dark:hover:bg-[#6C3BFF]/10 rounded-xl border border-slate-200 dark:border-slate-800 transition-colors cursor-pointer text-center"
                           >
                             <div className="w-8 h-8 rounded-lg bg-surface text-primary shadow-sm flex items-center justify-center">
                               <Icon size={14} />
@@ -843,8 +853,7 @@ export default function Profile({ user, onBack, onLogout }) {
                             <button
                               onClick={() => {
                                 navigator.clipboard.writeText(coupon.code);
-                                alert(`Coupon code ${coupon.code} copied to clipboard!`);
-                              }}
+                                toast.success(`Coupon code ${coupon.code} copied to clipboard!`) }}
                               className="py-1.5 px-3 bg-surface border border-slate-200 dark:border-slate-800 rounded-lg font-black uppercase text-[10px] text-primary cursor-pointer shadow-sm"
                             >
                               Copy Code
@@ -964,8 +973,10 @@ export default function Profile({ user, onBack, onLogout }) {
                       <h2 className="text-lg font-black text-slate-855 dark:text-white uppercase tracking-wider">{t('notifications')}</h2>
                       <button
                         onClick={() => {
-                          setNotifications(prev => prev.map(n => ({ ...n, read: true })));
-                          alert('All notifications marked as read.');
+                          const updated = notifications.map(n => ({ ...n, read: true }));
+                          setNotifications(updated);
+                          localStorage.setItem('saath_notifications', JSON.stringify(updated));
+                          toast.success('All notifications marked as read.');
                         }}
                         className="text-xs font-black uppercase text-primary hover:underline cursor-pointer"
                       >
@@ -975,14 +986,33 @@ export default function Profile({ user, onBack, onLogout }) {
 
                     <div className="space-y-3">
                       {notifications.map((notif) => (
-                        <div key={notif.id} className={`p-4 border rounded-2xl flex items-start gap-3.5 text-xs text-left transition-all ${
-                          notif.read ? 'bg-slate-50/30 dark:bg-slate-950/10 border-slate-100 dark:border-slate-800' : 'bg-[#6C3BFF]/5 dark:bg-[#6C3BFF]/10 border-primary/20'
+                        <div key={notif.id} onClick={() => {
+                          if (!notif.read) {
+                            const updated = notifications.map(n => n.id === notif.id ? { ...n, read: true } : n);
+                            setNotifications(updated);
+                            localStorage.setItem('saath_notifications', JSON.stringify(updated));
+                          }
+                          if (notif.title.includes('Order')) setActiveTab('orders');
+                          else if (notif.title.includes('Promo')) setActiveTab('wallet');
+                          else if (notif.title.includes('Welcome')) setActiveTab('profile');
+                        }} className={`p-4 border rounded-2xl flex items-start gap-3.5 text-xs text-left cursor-pointer transition-all ${
+                          notif.read ? 'bg-slate-50/30 dark:bg-slate-950/10 border-slate-100 dark:border-slate-800 hover:bg-page' : 'bg-[#6C3BFF]/5 dark:bg-[#6C3BFF]/10 border-primary/20 hover:bg-[#6C3BFF]/10'
                         }`}>
-                          <div className={`w-2.5 h-2.5 rounded-full shrink-0 mt-1.5 ${notif.read ? 'bg-slate-300' : 'bg-[#6C3BFF]'}`} />
-                          <div className="space-y-1">
-                            <div className="flex items-center gap-2">
-                              <p className="font-black text-slate-800 dark:text-slate-200">{notif.title}</p>
-                              <span className="text-[9px] text-slate-400 font-semibold">{notif.time}</span>
+                          <div className={`w-2.5 h-2.5 rounded-full shrink-0 mt-1.5 ${notif.read ? 'bg-slate-300 dark:bg-slate-700' : 'bg-[#6C3BFF]'}`} />
+                          <div className="space-y-1 w-full">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <p className="font-black text-slate-800 dark:text-slate-200">{notif.title}</p>
+                                <span className="text-[9px] text-slate-400 font-semibold">{notif.time}</span>
+                              </div>
+                              <button onClick={(e) => {
+                                e.stopPropagation();
+                                const updated = notifications.filter(n => n.id !== notif.id);
+                                setNotifications(updated);
+                                localStorage.setItem('saath_notifications', JSON.stringify(updated));
+                              }} className="text-slate-400 hover:text-red-500 cursor-pointer p-1">
+                                <Trash2 size={12} />
+                              </button>
                             </div>
                             <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">{notif.message}</p>
                           </div>
@@ -1017,7 +1047,7 @@ export default function Profile({ user, onBack, onLogout }) {
                           return (
                             <button
                               key={idx}
-                              onClick={() => alert(`Opening FAQ for ${cat.label}...`)}
+                              onClick={() => toast.success(`Opening FAQ for ${cat.label}...`) }
                               className={`flex flex-col items-center gap-2 p-4 border rounded-2xl cursor-pointer hover:shadow transition-shadow text-center ${cat.color}`}
                             >
                               <Icon size={18} />
@@ -1036,10 +1066,10 @@ export default function Profile({ user, onBack, onLogout }) {
                       </div>
 
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                        <button onClick={() => alert('Opening live chat...')} className="py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold uppercase tracking-wider cursor-pointer shadow-sm">
+                        <button onClick={() => toast.success('Opening live chat...') } className="py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold uppercase tracking-wider cursor-pointer shadow-sm">
                           Live Chat
                         </button>
-                        <button onClick={() => alert('Opening support ticket...')} className="py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-bold uppercase tracking-wider cursor-pointer shadow-sm">
+                        <button onClick={() => toast.success('Opening support ticket...') } className="py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-bold uppercase tracking-wider cursor-pointer shadow-sm">
                           Raise Ticket
                         </button>
                         <button onClick={() => window.location.assign('mailto:support@saathapp.in')} className="py-2.5 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl text-slate-700 dark:text-slate-350 font-bold uppercase tracking-wider cursor-pointer">
@@ -1079,7 +1109,7 @@ export default function Profile({ user, onBack, onLogout }) {
                           return (
                             <button
                               key={idx}
-                              onClick={() => alert(`Opening settings for ${c.title}...`)}
+                              onClick={() => toast.success(`Opening settings for ${c.title}...`) }
                               className="flex items-center justify-between p-4 border border-slate-205 dark:border-slate-800 hover:border-primary/50 hover:bg-slate-50/50 rounded-xl transition-all cursor-pointer text-left group"
                             >
                               <div className="flex items-center gap-3">
@@ -1250,7 +1280,7 @@ export default function Profile({ user, onBack, onLogout }) {
                               <p className="text-[10px] text-slate-455 mt-1 font-semibold">{item.desc}</p>
                             </div>
                             <button
-                              onClick={() => alert('Mock: Toggle channel state')}
+                              onClick={() => toast.success('Mock: Toggle channel state') }
                               className="relative w-9 h-5 bg-[#6C3BFF] rounded-full cursor-pointer"
                             >
                               <span className="absolute top-0.75 left-0.75 w-3.5 h-3.5 bg-white rounded-full translate-x-4" />
@@ -1263,8 +1293,8 @@ export default function Profile({ user, onBack, onLogout }) {
                     {/* Policy footer links and version */}
                     <div className="pt-6 border-t border-slate-100 dark:border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
                       <div className="flex gap-4 font-bold text-slate-650 dark:text-slate-355">
-                        <button onClick={() => alert('Loading terms...')} className="hover:underline cursor-pointer">Terms & Conditions</button>
-                        <button onClick={() => alert('Loading privacy...')} className="hover:underline cursor-pointer">Privacy Policy</button>
+                        <button onClick={() => toast.success('Loading terms...') } className="hover:underline cursor-pointer">Terms & Conditions</button>
+                        <button onClick={() => toast.success('Loading privacy...') } className="hover:underline cursor-pointer">Privacy Policy</button>
                       </div>
                       <span className="text-slate-400 font-mono">App Version: v2.4.2 (Production)</span>
                     </div>
@@ -1290,15 +1320,14 @@ export default function Profile({ user, onBack, onLogout }) {
                   <WishlistTab
                     wishlist={wishlist}
                     setWishlist={setWishlist}
-                    cart={cart}
-                    setCart={setCart}
+                    handleAddToCart={handleAddToCart}
                   />
                 )}
 
                 {activeTab === 'cart' && (
                   <CartTab
-                    cart={cart}
-                    setCart={setCart}
+                    cart={cartItems}
+                    setCart={() => {}}
                     walletBalance={walletBalance}
                     setWalletBalance={setWalletBalance}
                     orders={orders}
@@ -1306,6 +1335,10 @@ export default function Profile({ user, onBack, onLogout }) {
                     transactions={transactions}
                     setTransactions={setTransactions}
                     setActiveTab={setActiveTab}
+                    handleUpdateQty={handleAddToCart}
+                    handleRemoveItem={removeItem}
+                    clearCart={clearCart}
+                    totals={totals}
                   />
                 )}
 
@@ -1455,7 +1488,7 @@ export default function Profile({ user, onBack, onLogout }) {
                 <button
                   type="button"
                   onClick={handleSaveAddress}
-                  className="px-5 py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-bold uppercase cursor-pointer shadow-sm"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-bold uppercase cursor-pointer shadow-sm"
                 >
                   Save Address
                 </button>
@@ -1539,7 +1572,7 @@ export default function Profile({ user, onBack, onLogout }) {
                 <button
                   type="button"
                   onClick={handleDeleteAccount}
-                  className="w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold uppercase cursor-pointer shadow-sm"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold uppercase cursor-pointer shadow-sm"
                 >
                   Delete Now
                 </button>
@@ -1599,7 +1632,7 @@ function ProfileForm({ profile, onSave }) {
         </div>
         <div>
           <p className="text-xs text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider">Profile Photo</p>
-          <button type="button" onClick={() => alert('Mock: Uploader modal')} className="mt-1 text-primary font-black uppercase text-[10px] hover:underline cursor-pointer">
+          <button type="button" onClick={() => toast.success('Mock: Uploader modal') } className="mt-1 text-primary font-black uppercase text-[10px] hover:underline cursor-pointer">
             Upload New Photo
           </button>
         </div>
@@ -1648,7 +1681,7 @@ function ProfileForm({ profile, onSave }) {
             readOnly
             disabled
             style={inputStyle}
-            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-900 disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm"
+            className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none disabled:bg-slate-50 disabled:cursor-not-allowed w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-900 disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm"
           />
         </div>
 
@@ -1711,7 +1744,7 @@ function ProfileForm({ profile, onSave }) {
             </button>
             <button
               type="submit"
-              className="px-6 py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-black uppercase tracking-wider cursor-pointer shadow-sm"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-6 py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-black uppercase tracking-wider cursor-pointer shadow-sm"
             >
               Save Changes
             </button>

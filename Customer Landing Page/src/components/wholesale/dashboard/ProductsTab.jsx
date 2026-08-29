@@ -79,7 +79,7 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
           <button
             type="button"
             onClick={handleOpenAddModal}
-            className="inline-flex items-center gap-1.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition hover:scale-[1.02] cursor-pointer"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition hover:scale-[1.02] cursor-pointer"
           >
             <Plus size={16} /> Add Product SKU
           </button>
@@ -245,7 +245,7 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
                   {filteredProducts.map((p) => (
-                    <tr key={p.id} className="hover:bg-page transition">
+                    <tr key={p.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-page transition">
                       <td className="p-4 font-mono font-bold text-emerald-600 dark:text-emerald-400">{p.id}</td>
                       <td className="p-4 font-extrabold text-slate-900 dark:text-white">{p.name}</td>
                       <td className="p-4">{p.category}</td>
@@ -316,7 +316,7 @@ export default function ProductsTab({ isAddModalOpen, onCloseAddModal, onOpenAdd
             <div className="mt-5">
               <label className="inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-6 py-3 text-xs font-extrabold text-white cursor-pointer shadow">
                 <Upload size={16} /> Choose Excel File
-                <input type="file" accept=".xlsx,.csv" onChange={handleExcelImport} className="hidden" />
+                <input type="file" accept=".xlsx,.csv" onChange={handleExcelImport} className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" />
               </label>
             </div>
             <button

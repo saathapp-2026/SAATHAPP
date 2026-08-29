@@ -152,7 +152,7 @@ export default function ProfessionalTermsAndConditions() {
           <button
             type="button"
             onClick={handleAcceptContinue}
-            className="flex-1 py-3 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-500 cursor-pointer border-0"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-3 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-500 cursor-pointer border-0"
           >
             Accept & Continue
           </button>

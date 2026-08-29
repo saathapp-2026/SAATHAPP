@@ -76,7 +76,7 @@ export default function HeroSection({ onStartRegistration }) {
               <button
                 type="button"
                 onClick={handleStart}
-                className="group inline-flex items-center justify-center gap-2 rounded-[16px] bg-gradient-to-r from-[#0A8F3D] to-[#087a34] px-7 py-3.5 text-sm font-extrabold text-white shadow-[0_0_20px_rgba(10,143,61,0.35)] transition hover:scale-[1.02] hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                className="transition-all duration-200 active:scale-[0.98] group inline-flex items-center justify-center gap-2 rounded-[16px] bg-gradient-to-r from-[#0A8F3D] to-[#087a34] px-7 py-3.5 text-sm font-extrabold text-white shadow-[0_0_20px_rgba(10,143,61,0.35)] transition hover:scale-[1.02] hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
               >
                 Start Registration
                 <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />

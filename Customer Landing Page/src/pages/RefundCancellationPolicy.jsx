@@ -612,7 +612,7 @@ export default function RefundCancellationPolicyPage() {
         {/* 2-Column Grid Layout for Desktop Sidebar & Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Table of Contents Sticky Sidebar (Desktop) */}
-          <aside className="hidden lg:block lg:col-span-4">
+          <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded hidden lg:block lg:col-span-4">
             <div className="sticky top-24 rounded-3xl border border-slate-200/90 bg-white p-6 shadow-[0_4px_25px_-4px_rgba(0,0,0,0.06)] max-h-[calc(100vh-7rem)] flex flex-col">
               <div className="flex items-center justify-between pb-4 border-b border-slate-100/90 mb-3.5">
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
@@ -708,7 +708,7 @@ export default function RefundCancellationPolicyPage() {
                   <div className="rounded-2xl border border-slate-200/80 bg-white p-4.5 shadow-2xs">
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Email</p>
                     <p className="mt-1.5">
-                      <a href="mailto:support@saathapp.in" className="inline-flex items-center gap-2 font-semibold text-emerald-800 hover:text-emerald-900 hover:underline">
+                      <a href="mailto:support@saathapp.in" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded inline-flex items-center gap-2 font-semibold text-emerald-800 hover:text-emerald-900 hover:underline">
                         <Mail size={16} />
                         <span>support@saathapp.in</span>
                       </a>
@@ -718,7 +718,7 @@ export default function RefundCancellationPolicyPage() {
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Phone</p>
                     <p className="mt-1.5 flex items-center gap-2.5 font-semibold text-slate-800">
                       <Phone size={18} className="shrink-0 text-emerald-700" />
-                      <a href="tel:+919128842027" className="hover:text-emerald-900 hover:underline">
+                      <a href="tel:+919128842027" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded hover:text-emerald-900 hover:underline">
                         +91 9128842027
                       </a>
                     </p>

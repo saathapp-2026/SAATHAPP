@@ -168,10 +168,10 @@ export default function SummarySidebar({ draft, reach, updateDraft }) {
         </div>
         
         <div className="flex border-b border-slate-200">
-          <button className="flex-1 py-3 text-sm font-bold text-[#15803D] border-b-2 border-[#15803D] bg-emerald-50/30">UPI</button>
-          <button className="flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Card</button>
-          <button className="flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Net Banking</button>
-          <button className="flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Wallet</button>
+          <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-3 text-sm font-bold text-[#15803D] border-b-2 border-[#15803D] bg-emerald-50/30">UPI</button>
+          <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Card</button>
+          <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Net Banking</button>
+          <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Wallet</button>
         </div>
 
         <div className="p-5 flex flex-col items-center">

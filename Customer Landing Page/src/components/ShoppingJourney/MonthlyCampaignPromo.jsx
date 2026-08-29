@@ -35,7 +35,7 @@ const MonthlyCampaignPromo = ({ isEligible = true }) => {
         </div>
       </div>
       
-      <button className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg transition-colors">
+      <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg transition-colors">
         View Winners &rarr;
       </button>
     </div>

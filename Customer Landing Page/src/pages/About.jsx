@@ -403,21 +403,21 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
                   <Mail size={16} className="text-emerald-400 shrink-0" />
                   <div>
                     <p className="text-[10px] text-slate-400 font-bold uppercase">Customer Support</p>
-                    <a href="mailto:support@saathapp.in" className="text-sm font-bold hover:underline text-white">support@saathapp.in</a>
+                    <a href="mailto:support@saathapp.in" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-sm font-bold hover:underline text-white">support@saathapp.in</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail size={16} className="text-emerald-400 shrink-0" />
                   <div>
                     <p className="text-[10px] text-slate-400 font-bold uppercase">Company</p>
-                    <a href="mailto:company@saathapp.in" className="text-sm font-bold hover:underline text-white">company@saathapp.in</a>
+                    <a href="mailto:company@saathapp.in" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-sm font-bold hover:underline text-white">company@saathapp.in</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail size={16} className="text-emerald-400 shrink-0" />
                   <div>
                     <p className="text-[10px] text-slate-400 font-bold uppercase">Careers</p>
-                    <a href="mailto:careers@saathapp.in" className="text-sm font-bold hover:underline text-white">careers@saathapp.in</a>
+                    <a href="mailto:careers@saathapp.in" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-sm font-bold hover:underline text-white">careers@saathapp.in</a>
                   </div>
                 </div>
               </div>
@@ -426,7 +426,7 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
                 <span className="flex items-center gap-2"><Phone size={14} className="text-emerald-400" /> +91 9128842027</span>
                 <span className="flex items-center gap-2">
                   <Globe size={14} className="text-emerald-400" /> 
-                  <a href="https://www.saathappnova.co.in" target="_blank" rel="noopener noreferrer" className="hover:underline text-white">
+                  <a href="https://www.saathappnova.co.in" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded hover:underline text-white">
                     www.saathappnova.co.in
                   </a>
                 </span>

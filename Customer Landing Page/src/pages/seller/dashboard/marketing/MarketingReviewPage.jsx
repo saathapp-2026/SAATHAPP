@@ -227,7 +227,7 @@ export default function MarketingReviewPage() {
           </div>
         </div>
 
-        <aside className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-900 p-6 shadow-sm">
+        <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-3xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-900 p-6 shadow-sm">
           <p className="text-xs uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">Review checklist</p>
           <div className="mt-4 space-y-3">
             {checklist.map((item) => (

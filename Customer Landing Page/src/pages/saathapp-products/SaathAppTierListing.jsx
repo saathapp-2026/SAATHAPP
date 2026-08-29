@@ -110,7 +110,7 @@ export default function SaathAppTierListing({
 
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Filters Sidebar */}
-          <aside className="w-full lg:w-64 shrink-0 space-y-6">
+          <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded w-full lg:w-64 shrink-0 space-y-6">
             <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800">
               <h3 className="font-bold mb-4 flex items-center gap-2"><Filter size={16} /> Filters</h3>
               
@@ -122,7 +122,7 @@ export default function SaathAppTierListing({
                       <input 
                         type="radio" 
                         name="productType" 
-                        className="hidden" 
+                        className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" 
                         checked={selectedType === type}
                         onChange={() => handleTypeChange(type)}
                       />

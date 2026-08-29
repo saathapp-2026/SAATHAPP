@@ -558,7 +558,6 @@ export function emptyAdDraft(typeId = 'banner') {
     headline: '',
     subHeadline: '',
     shortDescription: '',
-    description: '',
     campaignId: '',
     offerText: '',
     coupon: '',

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { User, Briefcase, CreditCard, Shield, Check, Edit2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function ProfileCard() {
   const [isEditing, setIsEditing] = useState(false);
@@ -26,8 +27,7 @@ export default function ProfileCard() {
     e.preventDefault();
     setProfile(formData);
     setIsEditing(false);
-    alert('Profile parameters updated successfully.');
-  };
+    toast.success('Profile parameters updated successfully.') };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -77,7 +77,7 @@ export default function ProfileCard() {
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleInputChange}
-                  className="input-field dark:border-slate-800 dark:text-white"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                 />
               ) : (
                 <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 bg-page dark:bg-slate-950 p-3 rounded-xl border border-transparent">
@@ -94,7 +94,7 @@ export default function ProfileCard() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="input-field dark:border-slate-800 dark:text-white"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                 />
               ) : (
                 <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 bg-page dark:bg-slate-955 p-3 rounded-xl border border-transparent">
@@ -111,7 +111,7 @@ export default function ProfileCard() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="input-field dark:border-slate-800 dark:text-white"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                 />
               ) : (
                 <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 bg-page dark:bg-slate-955 p-3 rounded-xl border border-transparent">
@@ -145,7 +145,7 @@ export default function ProfileCard() {
                   name="hourlyRate"
                   value={formData.hourlyRate}
                   onChange={handleInputChange}
-                  className="input-field dark:border-slate-800 dark:text-white"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                 />
               ) : (
                 <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 bg-page dark:bg-slate-955 p-3 rounded-xl border border-transparent">
@@ -162,7 +162,7 @@ export default function ProfileCard() {
                   name="radius"
                   value={formData.radius}
                   onChange={handleInputChange}
-                  className="input-field dark:border-slate-800 dark:text-white"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                 />
               ) : (
                 <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 bg-page dark:bg-slate-955 p-3 rounded-xl border border-transparent">
@@ -189,7 +189,7 @@ export default function ProfileCard() {
                   name="bankName"
                   value={formData.bankName}
                   onChange={handleInputChange}
-                  className="input-field dark:border-slate-800 dark:text-white"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                 />
               ) : (
                 <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 bg-page dark:bg-slate-955 p-3 rounded-xl border border-transparent">
@@ -206,7 +206,7 @@ export default function ProfileCard() {
                   name="accountNo"
                   value={formData.accountNo}
                   onChange={handleInputChange}
-                  className="input-field dark:border-slate-800 dark:text-white"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                 />
               ) : (
                 <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 bg-page dark:bg-slate-955 p-3 rounded-xl border border-transparent">
@@ -223,7 +223,7 @@ export default function ProfileCard() {
                   name="upiId"
                   value={formData.upiId}
                   onChange={handleInputChange}
-                  className="input-field dark:border-slate-800 dark:text-white"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                 />
               ) : (
                 <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 bg-page dark:bg-slate-955 p-3 rounded-xl border border-transparent">
@@ -250,7 +250,7 @@ export default function ProfileCard() {
                   name="emergencyName"
                   value={formData.emergencyName}
                   onChange={handleInputChange}
-                  className="input-field dark:border-slate-800 dark:text-white"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                 />
               ) : (
                 <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 bg-page dark:bg-slate-955 p-3 rounded-xl border border-transparent">
@@ -267,7 +267,7 @@ export default function ProfileCard() {
                   name="emergencyPhone"
                   value={formData.emergencyPhone}
                   onChange={handleInputChange}
-                  className="input-field dark:border-slate-800 dark:text-white"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                 />
               ) : (
                 <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 bg-page dark:bg-slate-955 p-3 rounded-xl border border-transparent">
@@ -283,7 +283,7 @@ export default function ProfileCard() {
           <div className="flex justify-end pt-4 border-t border-slate-100 ">
             <button
               type="submit"
-              className="btn-primary w-full sm:w-auto px-6 cursor-pointer flex items-center justify-center gap-1.5"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none btn-primary w-full sm:w-auto px-6 cursor-pointer flex items-center justify-center gap-1.5"
             >
               <Check size={14} />
               <span>Save Parameters</span>

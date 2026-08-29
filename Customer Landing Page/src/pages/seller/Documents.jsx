@@ -55,7 +55,7 @@ export default function Documents() {
                   {data.documents?.[doc.key] ? '✓ Uploaded' : 'Upload'}
                   <input
                     type="file"
-                    className="hidden"
+                    className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden"
                     accept="image/*,.pdf"
                     onChange={(e) => handleFile(doc.key, e.target.files?.[0])}
                   />
@@ -73,7 +73,7 @@ export default function Documents() {
                 <span className="text-sm text-slate-400">{doc.label}</span>
                 <label className="cursor-pointer text-sm text-emerald-400 hover:text-emerald-300">
                   {data.documents?.[doc.key] ? '✓ Uploaded' : 'Upload'}
-                  <input type="file" className="hidden" accept="image/*,.pdf" onChange={(e) => handleFile(doc.key, e.target.files?.[0])} />
+                  <input type="file" className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" accept="image/*,.pdf" onChange={(e) => handleFile(doc.key, e.target.files?.[0])} />
                 </label>
               </div>
             ))}
@@ -90,7 +90,7 @@ export default function Documents() {
           </select>
         </div>
 
-        <button type="submit" className="w-full py-3 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors">
+        <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-3 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors">
           Continue to Bank Details
         </button>
       </form>

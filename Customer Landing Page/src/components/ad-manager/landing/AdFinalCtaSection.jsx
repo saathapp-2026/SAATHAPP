@@ -85,10 +85,10 @@ export default function AdFinalCtaSection({ onStart }) {
             <div className="flex items-center gap-2">
               <span className="font-bold text-slate-700 dark:text-slate-300">Need Help?</span>
             </div>
-            <a href="tel:+919123456780" className="flex items-center gap-1.5 hover:text-emerald-600 transition-colors">
+            <a href="tel:+919123456780" className="focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded flex items-center gap-1.5 hover:text-emerald-600 transition-colors">
               <span className="font-semibold">+91 9123456780</span>
             </a>
-            <a href="mailto:advertise@saathapp.in" className="flex items-center gap-1.5 hover:text-emerald-600 transition-colors">
+            <a href="mailto:advertise@saathapp.in" className="focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded flex items-center gap-1.5 hover:text-emerald-600 transition-colors">
               <span className="font-semibold">advertise@saathapp.in</span>
             </a>
           </div>

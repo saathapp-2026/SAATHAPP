@@ -2,6 +2,7 @@ import React from 'react';
 import { ShoppingCart, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ProductCardSkeleton from './ProductCardSkeleton';
+import { EmptyState } from '../common/StateComponents';
 import { useCart } from '../../hooks/useCart';
 
 export default function ProductGrid({ products, onAddToCart, isLoading = false }) {
@@ -17,6 +18,18 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
       </div>
     );
   }
+
+  if (products.length === 0) {
+    return (
+      <EmptyState
+        icon={ShoppingCart}
+        title="No products found"
+        description="Try adjusting your filters or search to find what you're looking for."
+      />
+    );
+  }
+
+
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-6">
@@ -72,7 +85,7 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
 
           {/* Image */}
           <div 
-            className="w-full aspect-square bg-slate-50 dark:bg-slate-800 rounded-xl mb-4 cursor-pointer relative overflow-hidden flex items-center justify-center"
+            className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] w-full aspect-square bg-slate-50 dark:bg-slate-800 rounded-xl mb-4 cursor-pointer relative overflow-hidden flex items-center justify-center"
             onClick={() => navigate(`/product/${product.slug || product.id}`)}
           >
             {/* Image removed as requested */}
@@ -80,7 +93,7 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
 
           {/* Info */}
           <div 
-            className="flex-1 cursor-pointer"
+            className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] flex-1 cursor-pointer"
             onClick={() => navigate(`/product/${product.slug || product.id}`)}
           >
             <h3 className="font-bold text-sm text-slate-800 dark:text-slate-100 line-clamp-1 mb-1">{product.name}</h3>

@@ -142,7 +142,7 @@ export default function ReportCatalog({
           <button
             type="button"
             onClick={onToggleAll}
-            className="rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-page bg-surface shadow-sm"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-page bg-surface shadow-sm"
           >
             {showAll ? 'Show Less' : 'View All Reports'}
           </button>

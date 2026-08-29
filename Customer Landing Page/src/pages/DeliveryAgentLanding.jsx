@@ -276,14 +276,14 @@ export default function DeliveryAgentLandingPage() {
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-2xl border border-slate-200 bg-white p-4">
               <p className="text-sm font-black text-slate-900">Email</p>
-              <a href="mailto:support@saathapp.in" className="mt-2 flex items-center gap-2 text-sm text-primary hover:underline">
+              <a href="mailto:support@saathapp.in" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded mt-2 flex items-center gap-2 text-sm text-primary hover:underline">
                 <Mail size={16} />
                 support@saathapp.in
               </a>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-4">
               <p className="text-sm font-black text-slate-900">Phone</p>
-              <a href="tel:+919128842027" className="mt-2 flex items-center gap-2 text-sm text-primary hover:underline">
+              <a href="tel:+919128842027" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded mt-2 flex items-center gap-2 text-sm text-primary hover:underline">
                 <Phone size={16} />
                 +91 9128842027
               </a>

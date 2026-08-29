@@ -35,8 +35,7 @@ export default function PromoAssetWizard({ open, onClose, onSaved, typeId, editI
       const res = await getAiMarketingSuggestion(aiKind);
       const first = res.data?.[0];
       if (first) patch(apply(first));
-      toast.success('AI suggestion applied');
-    } catch {
+      toast.success('AI suggestion applied') } catch {
       toast.error('AI failed');
     } finally {
       setAiBusy(false);
@@ -71,7 +70,7 @@ export default function PromoAssetWizard({ open, onClose, onSaved, typeId, editI
             <h2 id="promo-asset-title" className="text-lg font-bold">{editItem ? 'Edit' : TITLES[kind] || 'Create Promo'}</h2>
             <p className="text-xs text-slate-500 mt-0.5">{type.label}</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -242,7 +241,7 @@ export default function PromoAssetWizard({ open, onClose, onSaved, typeId, editI
         </div>
 
         <div className="flex justify-end gap-2 pt-1">
-          <button type="button" onClick={onClose} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold">
             Cancel
           </button>
           <button type="button" disabled={busy} onClick={() => submit(true)} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold">

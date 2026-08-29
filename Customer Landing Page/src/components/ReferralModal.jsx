@@ -99,7 +99,7 @@ export default function ReferralModal({ isOpen, onClose, user = null }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
+      className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md cursor-pointer active:scale-[0.99] fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
       onClick={(e) => {
         if (e.target === e.currentTarget) handleClose();
       }}
@@ -112,7 +112,7 @@ export default function ReferralModal({ isOpen, onClose, user = null }) {
         <div className="bg-gradient-to-r from-emerald-600 to-teal-700 p-6 text-white relative">
           <button
             onClick={handleClose}
-            className="absolute top-4 right-4 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors cursor-pointer"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute top-4 right-4 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors cursor-pointer"
             aria-label="Close modal"
           >
             <X size={18} />
@@ -150,7 +150,7 @@ export default function ReferralModal({ isOpen, onClose, user = null }) {
               </div>
               <button
                 onClick={handleClose}
-                className="mt-4 px-6 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-btn text-xs font-bold transition-all shadow-md cursor-pointer"
+                className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-4 px-6 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-btn text-xs font-bold transition-all shadow-md cursor-pointer"
               >
                 Close & Return
               </button>
@@ -301,7 +301,7 @@ export default function ReferralModal({ isOpen, onClose, user = null }) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full h-11 bg-primary hover:bg-primary-dark text-white font-extrabold text-xs sm:text-sm rounded-btn transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full h-11 bg-primary hover:bg-primary-dark text-white font-extrabold text-xs sm:text-sm rounded-btn transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   <span>{isSubmitting ? 'Sending...' : 'Send Referral →'}</span>
                   {!isSubmitting && <Send size={14} />}

@@ -39,7 +39,7 @@ export default function MarketingBillingPage() {
             <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50">Invoice and payment dashboard</h2>
             <p className="max-w-2xl text-sm text-slate-500 dark:text-slate-400">View campaign invoices, payment status, wallets and discounts in one place.</p>
           </div>
-          <button type="button" className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700">
+          <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700">
             <CreditCard size={16} /> Add payment method
           </button>
         </div>
@@ -80,8 +80,8 @@ export default function MarketingBillingPage() {
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          <button type="button" className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"><CreditCard size={16} /> Pay now</button>
-          <button type="button" className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-page dark:bg-slate-900 dark:text-slate-200"><Clock3 size={16} /> View invoice</button>
+          <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"><CreditCard size={16} /> Pay now</button>
+          <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-page dark:bg-slate-900 dark:text-slate-200"><Clock3 size={16} /> View invoice</button>
         </div>
       </div>
     </div>

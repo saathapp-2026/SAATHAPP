@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useScrollLock from '../../hooks/useScrollLock';
+import toast from 'react-hot-toast';
 
 export default function ReviewsTab({ bookings, reviewsList, setReviewsList }) {
   const [showReviewFormModal, setShowReviewFormModal] = useState(false);
@@ -11,7 +12,7 @@ export default function ReviewsTab({ bookings, reviewsList, setReviewsList }) {
 
   const handleReviewSubmit = () => {
     if (!reviewText.trim()) {
-      alert('Please write some feedback comments.');
+      toast.success('Please write some feedback comments.');
       return;
     }
 
@@ -29,8 +30,7 @@ export default function ReviewsTab({ bookings, reviewsList, setReviewsList }) {
     setReviewsList(updated);
 
     setShowReviewFormModal(false);
-    alert('Review submitted successfully! Thank you for your feedback.');
-  };
+    toast.success('Review submitted successfully! Thank you for your feedback.') };
 
   const completedBookings = bookings.filter(b => b.status === 'Completed');
   const unreviewedBookings = completedBookings.filter(b => !reviewsList.some(r => r.serviceName === b.service));
@@ -141,7 +141,7 @@ export default function ReviewsTab({ bookings, reviewsList, setReviewsList }) {
               <button
                 type="button"
                 onClick={handleReviewSubmit}
-                className="px-5 py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-bold uppercase cursor-pointer shadow-sm"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white rounded-xl font-bold uppercase cursor-pointer shadow-sm"
               >
                 Submit Review
               </button>

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { X, ChevronLeft, ChevronRight, Sparkles, Search } from 'lucide-react';
 import toast from 'react-hot-toast';
 import SellerOverlay from '../seller/SellerOverlay';
+import ConfirmDialog from '../seller/orders/ConfirmDialog';
 import { SELLER_Z } from '../../config/seller/sellerZIndex';
 import {
   WIZARD_STEPS,
@@ -43,6 +44,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
   const [draft, setDraft] = useState(() => emptyAdDraft(initialTypeId || 'banner'));
   const [busy, setBusy] = useState(false);
   const [dirty, setDirty] = useState(false);
+  const [confirmCancel, setConfirmCancel] = useState(false);
   const [products, setProducts] = useState([]);
   const [productSearch, setProductSearch] = useState('');
   const [previewDevice, setPreviewDevice] = useState('desktop');
@@ -168,7 +170,10 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
   };
 
   const requestClose = () => {
-    if (dirty && !window.confirm('You have unsaved changes. Leave without submitting?')) return;
+    if (dirty) {
+      setConfirmCancel(true);
+      return;
+    }
     onClose?.();
   };
 
@@ -177,8 +182,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
       const res = await getAiAdSuggestion(kind);
       const first = res.data?.[0];
       if (first) patch(apply(first));
-      toast.success('AI suggestion applied');
-    } catch {
+      toast.success('AI suggestion applied') } catch {
       toast.error('AI suggestion failed');
     }
   };
@@ -234,7 +238,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
             <h2 id="ad-wizard-title" className="text-lg font-bold">{editItem ? 'Edit Advertisement' : 'Create Advertisement'}</h2>
             <p className="text-xs text-slate-500 mt-0.5">{type.label} · Step {draft.step}/14 · Draft auto-saves</p>
           </div>
-          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close"><X size={18} /></button>
+          <button type="button" onClick={requestClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-lg hover:bg-page" aria-label="Close"><X size={18} /></button>
         </div>
 
         <div className="px-5 pt-4">
@@ -756,7 +760,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           <div className="flex gap-2">
             <button type="button" disabled={busy} onClick={() => publish({ asDraft: true })} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold">Save Draft</button>
             {draft.step < 14 ? (
-              <button type="button" disabled={!canNext() || busy} onClick={() => { if (!canNext()) { toast.error('Complete required fields'); return; } patch({ step: draft.step + 1 }); }} className="inline-flex items-center gap-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 text-sm font-semibold disabled:opacity-40">
+              <button type="button" disabled={!canNext() || busy} onClick={() => { if (!canNext()) { toast.error('Complete required fields'); return; } patch({ step: draft.step + 1 }) }} className="inline-flex items-center gap-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 text-sm font-semibold disabled:opacity-40">
                 Continue <ChevronRight size={16} />
               </button>
             ) : (
@@ -767,6 +771,19 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           </div>
         </div>
       </div>
+      <ConfirmDialog
+        open={confirmCancel}
+        title="Discard changes?"
+        message="Your unsaved changes will be lost."
+        danger={true}
+        confirmLabel="Discard Changes"
+        cancelLabel="Keep Editing"
+        onCancel={() => setConfirmCancel(false)}
+        onConfirm={() => {
+          setConfirmCancel(false);
+          onClose();
+        }}
+      />
     </SellerOverlay>
   );
 }

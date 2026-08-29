@@ -174,7 +174,7 @@ export default function Home({
 
       {cartCount > 0 && !isCartOpen && (
         <motion.div initial={{ scale: 0, y: 50 }} animate={{ scale: 1, y: 0 }} className="hidden md:block fixed bottom-6 right-6 z-40">
-          <button onClick={onCartPage} className="flex items-center gap-3 bg-gradient-primary text-white py-3.5 px-6 rounded-full shadow-premium hover:shadow-glow-primary transition-all font-black text-sm cursor-pointer">
+          <button onClick={onCartPage} className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex items-center gap-3 bg-gradient-primary text-white py-3.5 px-6 rounded-full shadow-premium hover:shadow-glow-primary transition-all font-black text-sm cursor-pointer">
             <div className="relative">
               <ShoppingCart size={18} />
               <span className="absolute -top-2.5 -right-2 bg-secondary text-slate-900 border border-primary font-black text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center">

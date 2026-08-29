@@ -10,12 +10,43 @@ export default function SellerRegister() {
   const [form, setForm] = useState({ fullName: '', email: '', mobile: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const validateForm = () => {
+    const errs = {};
+    if (!form.fullName.trim()) errs.fullName = 'Full name is required.';
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!form.email.trim()) errs.email = 'Email is required.';
+    else if (!emailRegex.test(form.email)) errs.email = 'Enter a valid email address.';
+    
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!form.mobile.trim()) errs.mobile = 'Mobile number is required.';
+    else if (!phoneRegex.test(form.mobile.replace(/\D/g, ''))) errs.mobile = 'Enter a valid 10-digit mobile number.';
+    
+    if (!form.password) errs.password = 'Password is required.';
+    else if (form.password.length < 6) errs.password = 'Password must be at least 6 characters.';
+
+    setFieldErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'mobile') {
+      const numericVal = value.replace(/[^0-9+]/g, '');
+      setForm((prev) => ({ ...prev, [name]: numericVal }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
+    if (fieldErrors[name]) setFieldErrors(prev => ({...prev, [name]: ''}));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
+    
     setLoading(true);
     setError('');
     try {
@@ -75,10 +106,10 @@ export default function SellerRegister() {
                   name={name}
                   value={form[name]}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
-                  required
+                  className={`duration-200 focus:ring-2 focus:ring-emerald-500/20 w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border text-white placeholder-slate-500 focus:outline-none transition-colors ${fieldErrors[name] ? 'border-red-500/80 focus:border-red-500' : 'border-white/10 focus:border-emerald-500'}`}
                 />
               </div>
+              {fieldErrors[name] && <p className="text-red-400 text-[11px] mt-1.5 ml-1 font-medium">{fieldErrors[name]}</p>}
             </div>
           ))}
 
@@ -91,20 +122,19 @@ export default function SellerRegister() {
                 name="password"
                 value={form.password}
                 onChange={handleChange}
-                className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-emerald-500"
-                required
-                minLength={6}
+                className={`duration-200 focus:ring-2 focus:ring-emerald-500/20 w-full pl-10 pr-10 py-2.5 rounded-xl bg-white/5 border text-white focus:outline-none transition-colors ${fieldErrors.password ? 'border-red-500/80 focus:border-red-500' : 'border-white/10 focus:border-emerald-500'}`}
               />
               <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
+            {fieldErrors.password && <p className="text-red-400 text-[11px] mt-1.5 ml-1 font-medium">{fieldErrors.password}</p>}
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold disabled:opacity-50 transition-all"
+            className="duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold disabled:opacity-50 transition-all"
           >
             {loading ? 'Creating account...' : 'Create Account & Continue'}
           </button>

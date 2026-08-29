@@ -33,7 +33,7 @@ export default function OnboardingPricingSection({ onStartRegistration }) {
           <button
             type="button"
             onClick={onStartRegistration}
-            className="inline-flex items-center justify-center gap-2 rounded-[16px] bg-gradient-to-r from-[#0A8F3D] to-[#087a34] px-8 py-3.5 text-sm font-extrabold text-white shadow-[0_0_20px_rgba(10,143,61,0.35)] transition hover:scale-[1.02]"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center justify-center gap-2 rounded-[16px] bg-gradient-to-r from-[#0A8F3D] to-[#087a34] px-8 py-3.5 text-sm font-extrabold text-white shadow-[0_0_20px_rgba(10,143,61,0.35)] transition hover:scale-[1.02]"
           >
             Start Registration & Pay Onboarding Fee
           </button>

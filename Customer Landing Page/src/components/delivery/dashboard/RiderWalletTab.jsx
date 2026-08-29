@@ -412,7 +412,7 @@ export default function RiderWalletTab() {
           <button
             type="button"
             onClick={handleRefresh}
-            className={`w-[calc(50%-4px)] sm:w-auto px-3 py-2 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 hover:bg-page text-slate-800 dark:text-slate-200 font-extrabold text-xs shadow-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none ${isRefreshing ? 'text-amber-500' : ''}`}
+            className={`duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-[calc(50%-4px)] sm:w-auto px-3 py-2 rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 hover:bg-page text-slate-800 dark:text-slate-200 font-extrabold text-xs shadow-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation select-none ${isRefreshing ? 'text-amber-500' : ''}`}
             title="Refresh Payout Data"
           >
             <RefreshCw size={14} className={isRefreshing ? 'animate-spin text-amber-500' : ''} />
@@ -741,10 +741,10 @@ export default function RiderWalletTab() {
                   </button>
                   {isBankMenuOpen && (
                     <div className="absolute right-0 mt-1 w-44 bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-20 py-1 text-xs font-bold text-slate-700 dark:text-slate-300 sa-rise">
-                      <button type="button" onClick={() => { setActiveModal('addBank'); setIsBankMenuOpen(false); }} className="w-full text-left px-4 py-2 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                      <button type="button" onClick={() => { setActiveModal('addBank'); setIsBankMenuOpen(false) }} className="w-full text-left px-4 py-2 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                         <Edit3 size={13} className="text-sky-500" /> Edit Bank Details
                       </button>
-                      <button type="button" onClick={() => { addToast?.('Re-verifying bank account via penny drop...', 'info'); setIsBankMenuOpen(false); }} className="w-full text-left px-4 py-2 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
+                      <button type="button" onClick={() => { addToast?.('Re-verifying bank account via penny drop...', 'info'); setIsBankMenuOpen(false) }} className="w-full text-left px-4 py-2 hover:bg-page flex items-center gap-2 cursor-pointer active:scale-98 transition">
                         <CheckCircle2 size={13} className="text-emerald-500" /> Verify Account
                       </button>
                     </div>
@@ -1212,7 +1212,7 @@ export default function RiderWalletTab() {
 
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-semibold text-slate-700 dark:text-slate-300">
                 {filteredTransactions.map((txn) => (
-                  <tr key={txn.id} className="hover:bg-page transition">
+                  <tr key={txn.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-page transition">
                     <td className="p-3.5 font-mono font-black text-slate-900 dark:text-white">{txn.id}</td>
                     <td className="p-3.5 font-mono text-[11px] text-slate-500">
                       {txn.date}
@@ -1242,7 +1242,7 @@ export default function RiderWalletTab() {
                       <div className="flex items-center justify-end gap-1.5">
                         <button
                           type="button"
-                          onClick={() => { setSelectedTxn(txn); setActiveModal('txnDetails'); }}
+                          onClick={() => { setSelectedTxn(txn); setActiveModal('txnDetails') }}
                           className="px-2.5 py-1 rounded-xl bg-page hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-extrabold text-[11px] cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation"
                         >
                           Details
@@ -1340,7 +1340,7 @@ export default function RiderWalletTab() {
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-semibold text-slate-700 dark:text-slate-300">
                   {payoutHistory.map((p) => (
-                    <tr key={p.id} className="hover:bg-page transition">
+                    <tr key={p.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-page transition">
                       <td className="p-3 font-mono font-black text-slate-900 dark:text-white">{p.id}</td>
                       <td className="p-3 font-mono font-black text-amber-500 text-sm">₹{p.amount.toLocaleString()}</td>
                       <td className="p-3 font-mono text-slate-500">{p.date}</td>
@@ -1758,7 +1758,7 @@ export default function RiderWalletTab() {
                 <button
                   type="submit"
                   disabled={isWithdrawing}
-                  className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black cursor-pointer shadow active:scale-95 transition-all duration-150 touch-manipulation disabled:opacity-50"
+                  className="duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black cursor-pointer shadow active:scale-95 transition-all duration-150 touch-manipulation disabled:opacity-50"
                 >
                   {isWithdrawing ? 'Transferring...' : 'Confirm Withdrawal'}
                 </button>
@@ -1835,7 +1835,7 @@ export default function RiderWalletTab() {
                 <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2.5 rounded-xl bg-page font-extrabold cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation">
                   Cancel
                 </button>
-                <button type="submit" className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black cursor-pointer shadow active:scale-95 transition-all duration-150 touch-manipulation">
+                <button type="submit" className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black cursor-pointer shadow active:scale-95 transition-all duration-150 touch-manipulation">
                   Save &amp; Verify Penny Drop
                 </button>
               </div>
@@ -1995,7 +1995,7 @@ export default function RiderWalletTab() {
                 <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2.5 rounded-xl bg-page font-extrabold cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation">
                   Cancel
                 </button>
-                <button type="submit" className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black cursor-pointer shadow active:scale-95 transition-all duration-150 touch-manipulation">
+                <button type="submit" className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black cursor-pointer shadow active:scale-95 transition-all duration-150 touch-manipulation">
                   Submit Support Ticket
                 </button>
               </div>
@@ -2145,7 +2145,7 @@ export default function RiderWalletTab() {
                 placeholder="Type your message..."
                 className="flex-1 bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
-              <button type="submit" className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black cursor-pointer active:scale-95 transition">
+              <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black cursor-pointer active:scale-95 transition">
                 Send
               </button>
             </form>

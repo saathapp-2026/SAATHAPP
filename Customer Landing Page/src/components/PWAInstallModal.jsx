@@ -31,7 +31,7 @@ export default function PWAInstallModal() {
             {/* Close Button */}
             <button
               onClick={closeIOSPrompt}
-              className="absolute top-4 right-4 p-2 bg-page hover:bg-slate-200 rounded-full transition-colors z-10"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute top-4 right-4 p-2 bg-page hover:bg-slate-200 rounded-full transition-colors z-10"
               aria-label="Close"
             >
               <X size={18} className="text-slate-500" />
@@ -65,7 +65,7 @@ export default function PWAInstallModal() {
 
               <button
                 onClick={closeIOSPrompt}
-                className="w-full py-3.5 bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-colors text-sm"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-3.5 bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-colors text-sm"
               >
                 Got it
               </button>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Box, Package, Truck, CheckCircle2, XCircle, RefreshCw } from 'lucide-react';
+import { Package, Truck, CheckCircle2, ChevronRight, Filter, Search, ArrowLeft, RefreshCw, XCircle, MapPin, Box, Store, Star } from 'lucide-react';
+import { EmptyState, ErrorState } from '../components/common/StateComponents';
 import { orderApi } from '../services/orderApi';
 import axios from 'axios';
 
@@ -59,7 +60,7 @@ export default function Orders({ onBack }) {
     <div className="min-h-screen bg-page text-theme px-4 py-8 sm:px-6 lg:px-8 transition-colors duration-300 font-sans">
       <div className="mx-auto max-w-5xl rounded-[28px] border border-theme-border bg-surface p-6 shadow-xl">
         <div className="flex items-center gap-4 mb-8">
-          <button onClick={onBack} className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors">
+          <button onClick={onBack} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors">
             <ArrowLeft size={20} />
           </button>
           <h1 className="text-3xl font-black text-slate-900 dark:text-slate-100">My Orders</h1>
@@ -75,21 +76,15 @@ export default function Orders({ onBack }) {
             ))}
           </div>
         ) : error && orders.length === 0 ? (
-          <div className="mt-8 flex flex-col items-center justify-center rounded-[24px] border border-dashed border-rose-300 dark:border-rose-700 bg-rose-50 dark:bg-rose-900/20 px-6 py-16 text-center">
-            <div className="text-rose-500 mb-4"><XCircle size={32} /></div>
-            <h2 className="text-xl font-bold text-rose-700 dark:text-rose-400">{error}</h2>
-            <button onClick={() => window.location.reload()} className="mt-4 flex items-center gap-2 text-sm font-bold bg-white dark:bg-slate-800 px-4 py-2 rounded-lg shadow border hover:bg-slate-50 transition-colors">
-              <RefreshCw size={16} /> Retry
-            </button>
-          </div>
+          <ErrorState title={error} onRetry={() => window.location.reload()} />
         ) : orders.length === 0 ? (
-          <div className="mt-8 flex flex-col items-center justify-center rounded-[24px] border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 px-6 py-16 text-center">
-            <div className="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-amber-100 text-amber-600 mb-4">
-              <Box size={28} />
-            </div>
-            <h2 className="text-2xl font-black text-slate-900 dark:text-slate-100">No orders yet</h2>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Your recent purchases and bookings will appear here.</p>
-          </div>
+          <EmptyState 
+            icon={Box} 
+            title="No orders yet" 
+            description="Your orders will appear here after you place them."
+            actionLabel="Start Shopping"
+            onAction={() => window.location.href = '/'}
+          />
         ) : (
           <div className="space-y-6">
             {orders.map((order) => (
@@ -143,7 +138,7 @@ export default function Orders({ onBack }) {
                   <div className="text-sm text-slate-600 dark:text-slate-400">
                     <span className="font-semibold text-slate-800 dark:text-slate-200">Delivery to:</span> {order.deliveryAddress}
                   </div>
-                  <button className="bg-primary hover:bg-primary/90 active:scale-[0.98] text-white px-6 py-2.5 rounded-xl font-bold transition-all text-sm shadow-md shadow-primary/20">
+                  <button className="duration-200 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none bg-primary hover:bg-primary/90 active:scale-[0.98] text-white px-6 py-2.5 rounded-xl font-bold transition-all text-sm shadow-md shadow-primary/20">
                     Track Order
                   </button>
                 </div>

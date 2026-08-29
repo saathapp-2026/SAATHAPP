@@ -32,7 +32,7 @@ export default function MarketingSchedulerPage() {
             <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50">Manage campaign timing & status</h2>
             <p className="max-w-2xl text-sm text-slate-500 dark:text-slate-400">Schedule ads for immediate launch, custom dates, recurring execution or manual review.</p>
           </div>
-          <button type="button" className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700">
+          <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700">
             <CalendarDays size={16} /> New schedule
           </button>
         </div>
@@ -66,14 +66,14 @@ export default function MarketingSchedulerPage() {
               <tr><td colSpan="7" className="py-10 text-center text-slate-500">Loading...</td></tr>
             ) : schedule.length ? (
               schedule.map((item) => (
-                <tr key={item.id} className="border-b border-slate-100 dark:border-slate-800 hover:bg-page">
+                <tr key={item.id} className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800 hover:bg-page">
                   <td className="px-4 py-4 font-semibold text-slate-900 dark:text-slate-50">{item.name}</td>
                   <td className="px-4 py-4 text-slate-600 dark:text-slate-300">{item.timeline}</td>
                   <td className="px-4 py-4 text-slate-600 dark:text-slate-300">{item.startAt?.slice(0, 10)} → {item.endAt?.slice(0, 10)}</td>
                   <td className="px-4 py-4 text-slate-900 dark:text-slate-100">{formatINR(item.dailyBudget)}/day</td>
                   <td className="px-4 py-4 text-slate-600 dark:text-slate-300">{formatINR(item.remainingBudget)}</td>
                   <td className="px-4 py-4 text-slate-600 dark:text-slate-300">{item.timezone}</td>
-                  <td className="px-4 py-4"><button type="button" className="rounded-2xl bg-page px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-200 dark:text-slate-200">Manage</button></td>
+                  <td className="px-4 py-4"><button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-2xl bg-page px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-200 dark:text-slate-200">Manage</button></td>
                 </tr>
               ))
             ) : (

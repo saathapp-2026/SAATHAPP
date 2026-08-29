@@ -80,10 +80,8 @@ export default function AdvertisementsPage({
           editItem={null}
           onSaved={(data) => {
             if (data?.status === 'submitted') {
-              toast.success(`Campaign '${data.name}' submitted successfully!`);
-            } else if (data?.status === 'running') {
-              toast.success(`Campaign '${data.name}' started successfully!`);
-            }
+              toast.success(`Campaign '${data.name}' submitted successfully!`) } else if (data?.status === 'running') {
+              toast.success(`Campaign '${data.name}' started successfully!`) }
           }}
         />
       </main>

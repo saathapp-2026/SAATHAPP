@@ -283,7 +283,7 @@ export default function DocumentsPage() {
           <button
             type="button"
             onClick={openUpload}
-            className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 text-white px-3.5 py-2 text-sm font-semibold hover:bg-emerald-700"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-xl bg-emerald-600 text-white px-3.5 py-2 text-sm font-semibold hover:bg-emerald-700"
           >
             <Plus size={16} /> Upload Document
           </button>
@@ -299,7 +299,7 @@ export default function DocumentsPage() {
             type="button"
             disabled={verifying}
             onClick={onVerifyStatus}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-surface px-3 py-2 text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-page disabled:opacity-60"
+            className="transition-all duration-200 active:scale-[0.98] disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-surface px-3 py-2 text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-page disabled:opacity-60"
           >
             <RefreshCw size={16} className={verifying ? 'animate-spin' : ''} /> Verify Status
           </button>
@@ -440,8 +440,7 @@ export default function DocumentsPage() {
         }}
         onDownload={(doc) => {
           downloadDocumentBlob(doc);
-          toast.success('Download started');
-        }}
+          toast.success('Download started') }}
         onPrint={() => {
           window.print();
         }}

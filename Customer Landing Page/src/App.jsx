@@ -377,8 +377,8 @@ function AppContent() {
   if (activePage === 'cart' || routerLocation.pathname === '/cart') {
     return (
       <CartPage
-        onCheckout={() => { setActivePage('checkout'); navigate('/checkout'); }}
-        onBack={() => { setActivePage('home'); navigate('/'); }}
+        onCheckout={() => { setActivePage('checkout'); navigate('/checkout') }}
+        onBack={() => { setActivePage('home'); navigate('/') }}
       />
     );
   }
@@ -397,7 +397,7 @@ function AppContent() {
     return (
 
       <CheckoutPage
-        onBack={() => { setActivePage('cart'); navigate('/cart'); }}
+        onBack={() => { setActivePage('cart'); navigate('/cart') }}
         onConfirmOrder={(data) => {
           handleCheckoutProcess(data.orderBreakdown, data.address, data.deliveryMethod, data.paymentMethod, cartItems);
           clearCart();
@@ -412,8 +412,8 @@ function AppContent() {
     return (
       <OrderConfirmationPage
         order={latestOrder}
-        onBack={() => { setActivePage('home'); navigate('/'); }}
-        onViewOrders={() => { setActivePage('orders'); navigate('/orders'); }}
+        onBack={() => { setActivePage('home'); navigate('/') }}
+        onViewOrders={() => { setActivePage('orders'); navigate('/orders') }}
       />
     );
   }
@@ -429,7 +429,7 @@ function AppContent() {
       }
       return null;
     }
-    return <OrdersPage orders={orders} onBack={() => { setActivePage('home'); navigate('/'); }} />;
+    return <OrdersPage orders={orders} onBack={() => { setActivePage('home'); navigate('/') }} />;
   }
 
   const trustRoutes = ['/verified-sellers', '/secure-online-payments', '/privacy-protected', '/customer-support'];
@@ -502,8 +502,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -546,8 +546,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/saathapp/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -569,8 +569,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/saathapp/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -591,8 +591,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/saathapp/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -618,8 +618,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -641,8 +641,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -670,8 +670,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/services');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -744,8 +744,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/services');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -785,8 +785,8 @@ function AppContent() {
           navigate('/products/search'); // updated search path
         }}
         searchQuery={searchQuery}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -815,8 +815,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -838,8 +838,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -859,8 +859,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -880,8 +880,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -916,8 +916,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -939,8 +939,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -1516,14 +1516,11 @@ function AppContent() {
             navigate('/advertise');
             return;
           }
-          alert(`Partner application loading for: ${role}`);
-        }}
+          toast.success(`Partner application loading for: ${role}`) }}
         onShopSelect={(shop) => {
-          alert(`Selected Store: ${shop.name}. Browsing inventory catalog in simulation.`);
-        }}
+          toast.success(`Selected Store: ${shop.name}. Browsing inventory catalog in simulation.`) }}
         onServiceBook={(service) => {
-          alert(`Booking created for: ${service.name}. Starting scheduler flow.`);
-        }}
+          toast.success(`Booking created for: ${service.name}. Starting scheduler flow.`) }}
         onCheckout={() => handleCheckoutProcess(cartTotal)}
         onCloseCart={() => setIsCartOpen(false)}
         onCloseQuickView={() => { }}
@@ -1727,14 +1724,11 @@ function AppContent() {
           navigate('/advertise');
           return;
         }
-        alert(`Partner application loading for: ${role}`);
-      }}
+        toast.success(`Partner application loading for: ${role}`) }}
       onShopSelect={(shop) => {
-        alert(`Selected Store: ${shop.name}. Browsing inventory catalog in simulation.`);
-      }}
+        toast.success(`Selected Store: ${shop.name}. Browsing inventory catalog in simulation.`) }}
       onServiceBook={(service) => {
-        alert(`Booking created for: ${service.name}. Starting scheduler flow.`);
-      }}
+        toast.success(`Booking created for: ${service.name}. Starting scheduler flow.`) }}
       onCheckout={() => handleCheckoutProcess(cartTotal)}
       onCloseCart={() => setIsCartOpen(false)}
       onCloseQuickView={() => { }}

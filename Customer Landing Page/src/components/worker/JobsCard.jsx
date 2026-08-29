@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, MapPin, Calendar, Clock, Phone, Navigation, Play, CheckCircle2, AlertCircle, Camera, RefreshCw } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function JobsCard({
   job,
@@ -171,13 +172,13 @@ export default function JobsCard({
             <div className="flex items-center gap-1.5">
               <a
                 href={`tel:${job.customerPhone}`}
-                className="p-2 bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl text-slate-500"
+                className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:bg-page rounded-xl text-slate-500"
               >
                 <Phone size={14} />
               </a>
               <button
                 type="button"
-                onClick={() => alert(`Navigating to ${job.address}`)}
+                onClick={() => toast.success(`Navigating to ${job.address}`) }
                 className="p-2 bg-blue-50 dark:bg-blue-950/30 border border-blue-200/50 dark:border-blue-900/50 hover:bg-blue-100 rounded-xl text-blue-600"
               >
                 <Navigation size={14} />
@@ -205,7 +206,7 @@ export default function JobsCard({
             
             <a
               href={`tel:${job.customerPhone}`}
-              className="w-full sm:w-auto px-4 py-2 rounded-btn bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:bg-page text-slate-655 dark:text-slate-300 font-extrabold text-xs uppercase flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
+              className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full sm:w-auto px-4 py-2 rounded-btn bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:bg-page text-slate-655 dark:text-slate-300 font-extrabold text-xs uppercase flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
             >
               <Phone size={14} className="text-slate-400" />
               <span>Call customer</span>
@@ -264,7 +265,7 @@ export default function JobsCard({
 
                   <div className="flex flex-wrap gap-3">
                     <button
-                      onClick={() => alert('GPS Travel map routed.')}
+                      onClick={() => toast.success('GPS Travel map routed.') }
                       className="px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-black uppercase flex items-center gap-1.5 cursor-pointer shadow-sm"
                     >
                       <Navigation size={13} />
@@ -306,7 +307,7 @@ export default function JobsCard({
                     />
                     <button
                       type="submit"
-                      className="px-5 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-black uppercase cursor-pointer"
+                      className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-black uppercase cursor-pointer"
                     >
                       Verify & Start Work
                     </button>
@@ -379,7 +380,7 @@ export default function JobsCard({
                     onClick={() => {
                       // Require at least one photo (e.g. before/after)
                       if (!uploadedPhotos.before || !uploadedPhotos.after) {
-                        alert('Please upload both Before and After work photos.');
+                        toast.success('Please upload both Before and After work photos.');
                         return;
                       }
                       setLiveStep(4);

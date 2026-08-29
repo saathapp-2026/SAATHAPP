@@ -40,7 +40,7 @@ export default function DocumentFilters({
         <button
           type="button"
           onClick={onReset}
-          className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-page"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-page"
         >
           <X size={14} />
           Reset

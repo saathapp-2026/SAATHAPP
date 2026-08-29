@@ -13,6 +13,7 @@ export default function DashboardTopNav({
   onLogout,
 }) {
   const { formData, dashboardData, addToast } = useWholesale();
+  const [searchQuery, setSearchQuery] = useState('');
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   return (
@@ -23,7 +24,7 @@ export default function DashboardTopNav({
           <button
             type="button"
             onClick={onToggleMobileSidebar}
-            className="md:hidden p-2 text-slate-600 dark:text-slate-300 rounded-xl hover:bg-page"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none md:hidden p-2 text-slate-600 dark:text-slate-300 rounded-xl hover:bg-page"
           >
             <Menu size={20} />
           </button>
@@ -32,8 +33,15 @@ export default function DashboardTopNav({
             <input
               type="text"
               placeholder="Search bulk orders, buyers, SKUs, invoices..."
-              className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 pl-10 pr-4 py-2 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 pl-10 pr-10 py-2 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
             />
+            {searchQuery && (
+              <button onClick={() => setSearchQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
+            )}
           </div>
         </div>
 
@@ -42,7 +50,7 @@ export default function DashboardTopNav({
           {/* Quick Wallet Pill */}
           <div
             onClick={onOpenWithdrawModal}
-            className="hidden sm:flex items-center gap-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 cursor-pointer hover:bg-emerald-500/20 transition"
+            className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] hidden sm:flex items-center gap-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 cursor-pointer hover:bg-emerald-500/20 transition"
           >
             <Wallet size={15} className="text-emerald-500" />
             <div className="text-[11px]">
@@ -56,7 +64,7 @@ export default function DashboardTopNav({
           <button
             type="button"
             onClick={onOpenAddProduct}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-3.5 py-2 text-xs font-extrabold text-white shadow transition hover:scale-[1.02]"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-3.5 py-2 text-xs font-extrabold text-white shadow transition hover:scale-[1.02]"
           >
             <Plus size={15} />
             <span className="hidden sm:inline">Add Product</span>
@@ -65,7 +73,7 @@ export default function DashboardTopNav({
           <button
             type="button"
             onClick={toggleDarkMode}
-            className="p-2 text-slate-600 dark:text-slate-300 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-page transition"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 text-slate-600 dark:text-slate-300 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-page transition"
           >
             {darkMode ? <Sun size={17} /> : <Moon size={17} />}
           </button>
@@ -73,7 +81,7 @@ export default function DashboardTopNav({
           <div className="relative">
             <button
               type="button"
-              className="p-2 text-slate-600 dark:text-slate-300 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-page transition relative"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 text-slate-600 dark:text-slate-300 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-page transition relative"
             >
               <Bell size={17} />
               <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-slate-900" />

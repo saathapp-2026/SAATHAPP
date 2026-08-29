@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Clock, Calendar, Check, Coffee, AlertTriangle } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function AvailabilityCard() {
   const [workingDays, setWorkingDays] = useState({
@@ -28,10 +29,8 @@ export default function AvailabilityCard() {
       
       // If toggled on, show notification simulation
       if (nextModes[modeName]) {
-        alert(`${modeName.replace('Mode', '')} mode is now active. You will not receive new booking requests while active.`);
-      } else {
-        alert(`${modeName.replace('Mode', '')} mode deactivated. Standard dispatching resumed.`);
-      }
+        toast.success(`${modeName.replace('Mode', '') } mode is now active. You will not receive new booking requests while active.`)} else {
+        toast.success(`${modeName.replace('Mode', '') } mode deactivated. Standard dispatching resumed.`)}
 
       return nextModes;
     });
@@ -39,8 +38,7 @@ export default function AvailabilityCard() {
 
   const handleSave = (e) => {
     e.preventDefault();
-    alert('Availability parameters saved successfully.');
-  };
+    toast.success('Availability parameters saved successfully.') };
 
   const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -219,7 +217,7 @@ export default function AvailabilityCard() {
         <div className="flex justify-end pt-4 border-t border-slate-100 ">
           <button
             type="submit"
-            className="btn-primary w-full sm:w-auto px-6 cursor-pointer flex items-center justify-center gap-1.5"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none btn-primary w-full sm:w-auto px-6 cursor-pointer flex items-center justify-center gap-1.5"
           >
             <Check size={14} />
             <span>Save Availability</span>

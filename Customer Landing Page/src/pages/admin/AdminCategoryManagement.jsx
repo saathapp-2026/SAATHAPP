@@ -186,7 +186,7 @@ export default function AdminCategoryManagement({
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 font-black text-slate-700 dark:text-slate-300">
+                <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 font-black text-slate-700 dark:text-slate-300">
                   <th className="p-4">Order</th>
                   <th className="p-4">Category Name</th>
                   <th className="p-4">Slug & URL</th>
@@ -199,7 +199,7 @@ export default function AdminCategoryManagement({
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                 {categoriesList.map((cat, idx) => (
-                  <tr key={cat.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+                  <tr key={cat.id} className="hover:bg-emerald-50/30 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
                     <td className="p-4">
                       <div className="flex items-center gap-1">
                         <span className="font-bold text-slate-400 w-5">{idx + 1}</span>
@@ -418,7 +418,7 @@ export default function AdminCategoryManagement({
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 py-2.5 rounded-xl bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider cursor-pointer hover:bg-emerald-600"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-2.5 rounded-xl bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider cursor-pointer hover:bg-emerald-600"
                   >
                     Save Category
                   </button>

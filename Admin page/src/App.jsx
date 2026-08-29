@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate as useRouterNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { EmptyState, ErrorState, TableSkeleton } from './components/common/StateComponents';
 import {
   LayoutDashboard, Users, Store, Wrench, HardHat, Truck, Package, Tag,
   ShoppingCart, Warehouse, CreditCard, Wallet, Percent, Megaphone,
@@ -1138,7 +1139,7 @@ const Modal = ({ title, children, open, onClose, footer }) => {
           <div>
             <p className="sa-font-display text-lg font-bold text-slate-900">{title}</p>
           </div>
-          <button onClick={onClose} className="text-slate-500 hover:text-slate-900 p-2 rounded-full">×</button>
+          <button onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-slate-500 hover:text-slate-900 p-2 rounded-full">×</button>
         </div>
         <div className="max-h-[80vh] overflow-y-auto p-6">{children}</div>
         {footer && <div className="border-t border-slate-200 px-6 py-4 bg-slate-50">{footer}</div>}
@@ -1154,8 +1155,8 @@ const ConfirmDialog = ({ open, title, message, confirmLabel = "Delete", cancelLa
     onClose={onCancel}
     footer={(
       <div className="flex justify-end gap-3">
-        <button onClick={onCancel} className="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 bg-white">{cancelLabel}</button>
-        <button onClick={onConfirm} disabled={loading} className="px-4 py-2 rounded-xl bg-red-600 text-white hover:bg-red-700 disabled:opacity-60">
+        <button onClick={onCancel} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl border border-slate-300 text-slate-700 bg-white">{cancelLabel}</button>
+        <button onClick={onConfirm} disabled={loading} className="transition-all duration-200 active:scale-[0.98] disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl bg-red-600 text-white hover:bg-red-700 disabled:opacity-60">
           {loading ? "Deleting..." : confirmLabel}
         </button>
       </div>
@@ -1199,7 +1200,7 @@ const ViewDialog = ({ open, title, fields, values, onClose }) => {
       onClose={onClose}
       footer={(
         <div className="flex justify-end">
-          <button onClick={onClose} className="px-4 py-2 rounded-xl border border-slate-300 bg-white text-slate-700">Close</button>
+          <button onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl border border-slate-300 bg-white text-slate-700">Close</button>
         </div>
       )}
     >
@@ -1662,7 +1663,7 @@ const KPICard = ({ label, value, delta, up, icon: Icon, index = 0, onClick }) =>
 
   if (!onClick) return content;
   return (
-    <button type="button" onClick={onClick} className="w-full text-left">
+    <button type="button" onClick={onClick} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full text-left">
       {content}
     </button>
   );
@@ -1675,7 +1676,7 @@ const SectionHeader = ({ title, subtitle, action, onAction }) => (
       {subtitle && <p className="sa-font-body text-sm text-slate-500 mt-1">{subtitle}</p>}
     </div>
     {action && (
-      <button onClick={onAction} className="sa-font-body inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-white text-sm font-semibold shadow-sm hover:opacity-90 active:scale-[0.98] transition"
+      <button onClick={onAction} className="transition-all duration-200 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none sa-font-body inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-white text-sm font-semibold shadow-sm hover:opacity-90 active:scale-[0.98] transition"
         style={{ background: `linear-gradient(135deg, ${T.forest}, ${T.forestMid})` }}>
         <Plus size={16} /> {action}
       </button>
@@ -1795,7 +1796,7 @@ const DataTable = ({ columns, rows, onToast, rowActions, onDeleteRows }) => {
           <span>{selectedCount} selected</span>
           <div className="flex items-center gap-2">
             <button onClick={() => exportRows(filteredRows.filter((item) => selectedRows.includes(item.id)), "selected-rows.csv")} className="px-3 py-1 rounded-lg border border-black/10 bg-white text-xs font-medium hover:bg-slate-100">Export selected</button>
-            <button onClick={deleteSelected} className="px-3 py-1 rounded-lg border border-black/10 bg-white text-xs font-medium text-red-600 hover:bg-red-50">Delete selected</button>
+            <button onClick={deleteSelected} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-3 py-1 rounded-lg border border-black/10 bg-white text-xs font-medium text-red-600 hover:bg-red-50">Delete selected</button>
             <button onClick={() => setSelectedRows([])} className="px-3 py-1 rounded-lg border border-black/10 bg-white text-xs font-medium hover:bg-slate-100">Clear selection</button>
           </div>
         </div>
@@ -1803,9 +1804,9 @@ const DataTable = ({ columns, rows, onToast, rowActions, onDeleteRows }) => {
       <div className="overflow-x-auto sa-scrollbar">
         <table className="w-full text-sm sa-font-body">
           <thead>
-            <tr className="text-left text-slate-500 text-xs uppercase tracking-wide bg-slate-50/60">
+            <tr className="transition-colors hover:bg-emerald-50/30 text-left text-slate-500 text-xs uppercase tracking-wide bg-slate-50/60">
               <th className="px-5 py-3 font-semibold whitespace-nowrap">
-                <input type="checkbox" checked={allVisibleSelected} onChange={toggleAllRows} className="rounded text-emerald-600" />
+                <input type="checkbox" checked={allVisibleSelected} onChange={toggleAllRows} className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none rounded text-emerald-600" />
               </th>
               {columns.map((c) => <th key={c} className="px-5 py-3 font-semibold whitespace-nowrap">{c}</th>)}
               <th className="px-5 py-3"></th>
@@ -2529,28 +2530,15 @@ const ModulePage = ({ id, statusFilter, onToast }) => {
       </div>
 
       {isLoading ? (
-        <div className="animate-pulse space-y-4">
-          <div className="h-12 bg-white rounded-xl shadow-sm border border-slate-100 w-full mb-4"></div>
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="h-16 bg-white rounded-xl shadow-sm border border-slate-100 w-full"></div>
-          ))}
-        </div>
+        <TableSkeleton rows={10} columns={cfg.columns.length} />
       ) : apiError ? (
-        <div className="bg-red-50 border border-red-200 text-red-700 p-8 rounded-xl text-center space-y-4">
-          <XCircle size={32} className="mx-auto text-red-500" />
-          <h3 className="text-lg font-semibold">{apiError}</h3>
-          <button onClick={() => window.location.reload()} className="px-6 py-2 bg-red-100 text-red-800 rounded-lg hover:bg-red-200 font-medium">
-            Retry
-          </button>
-        </div>
+        <ErrorState title={apiError} onRetry={() => window.location.reload()} />
       ) : rows.length === 0 ? (
-        <div className="bg-white border border-slate-200 rounded-2xl p-16 text-center space-y-4 shadow-sm">
-          <div className="mx-auto w-16 h-16 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center">
-            <Search size={28} />
-          </div>
-          <h3 className="text-xl font-bold text-slate-700">No {cfg.title.toLowerCase()} found</h3>
-          <p className="text-slate-500">There are currently no records to display.</p>
-        </div>
+        <EmptyState 
+          icon={Search} 
+          title={`No ${cfg.title.toLowerCase()} found`} 
+          description="There are currently no records to display."
+        />
       ) : (
         <DataTable columns={cfg.columns} rows={rows} onToast={onToast} onDeleteRows={removeSelectedRows} rowActions={actions} />
       )}
@@ -2666,7 +2654,7 @@ const DashboardPage = ({ onNavigate, onToast, mounted }) => {
           <p className="sa-font-body text-sm text-slate-500 mt-1">Here's what's happening across SaathApp today — 28 May 2026</p>
         </div>
         <div className="flex items-center gap-2">
-          <button onClick={exportReport} disabled={isExporting} className="sa-font-body inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 bg-white text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-60">
+          <button onClick={exportReport} disabled={isExporting} className="transition-all duration-200 active:scale-[0.98] disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none sa-font-body inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 bg-white text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-60">
             {isExporting ? <RefreshCw size={15} className="animate-spin" /> : <Download size={15} />}
             {isExporting ? "Generating..." : "Export report"}
           </button>
@@ -2804,7 +2792,7 @@ const DashboardPage = ({ onNavigate, onToast, mounted }) => {
           <div className="overflow-x-auto">
             <table className="w-full text-sm sa-font-body">
               <thead>
-                <tr className="text-left text-slate-500 text-xs uppercase tracking-wide bg-slate-50/60">
+                <tr className="transition-colors hover:bg-emerald-50/30 text-left text-slate-500 text-xs uppercase tracking-wide bg-slate-50/60">
                   <th className="px-5 py-3 font-semibold">Order</th>
                   <th className="px-5 py-3 font-semibold">Customer</th>
                   <th className="px-5 py-3 font-semibold">City</th>
@@ -2814,7 +2802,7 @@ const DashboardPage = ({ onNavigate, onToast, mounted }) => {
               </thead>
               <tbody>
                 {recentOrders.map((o) => (
-                  <tr key={o.id} className="border-t border-black/5 hover:bg-emerald-50/30">
+                  <tr key={o.id} className="transition-colors border-t border-black/5 hover:bg-emerald-50/30">
                     <td className="px-5 py-3.5 font-medium text-[#0B1420]">{o.id}</td>
                     <td className="px-5 py-3.5 text-slate-600">{o.customer}</td>
                     <td className="px-5 py-3.5 text-slate-600">{o.city}</td>
@@ -2982,7 +2970,7 @@ const AnalyticsPage = () => {
           <h3 className="font-bold text-lg mb-4 text-slate-800">GROCERY PERFORMANCE</h3>
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="text-slate-500 border-b border-slate-200">
+              <tr className="transition-colors hover:bg-emerald-50/30 text-slate-500 border-b border-slate-200">
                 <th className="pb-2">Tier</th>
                 <th className="pb-2">Views</th>
                 <th className="pb-2">Cart</th>
@@ -2991,7 +2979,7 @@ const AnalyticsPage = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-slate-100">
+              <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100">
                 <td className="py-3 font-semibold text-slate-700">Normal Grocery</td>
                 <td className="py-3">{normalViews}</td>
                 <td className="py-3">{normalCarts}</td>
@@ -3015,7 +3003,7 @@ const AnalyticsPage = () => {
           <h3 className="font-bold text-lg mb-4 text-slate-800">SELLER PERFORMANCE</h3>
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="text-slate-500 border-b border-slate-200">
+              <tr className="transition-colors hover:bg-emerald-50/30 text-slate-500 border-b border-slate-200">
                 <th className="pb-2">Seller</th>
                 <th className="pb-2">Orders Contributed</th>
                 <th className="pb-2">Revenue</th>
@@ -3023,7 +3011,7 @@ const AnalyticsPage = () => {
             </thead>
             <tbody>
               {topSellers.map(s => (
-                <tr key={s.name} className="border-b border-slate-100 last:border-0">
+                <tr key={s.name} className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 last:border-0">
                   <td className="py-3 font-semibold text-slate-700">{s.name}</td>
                   <td className="py-3">{s.orders} items</td>
                   <td className="py-3 font-bold text-emerald-600">₹{s.revenue.toFixed(2)}</td>
@@ -3255,13 +3243,13 @@ const SettingsContent = ({ role, onToast }) => {
           <div className="grid grid-cols-2 gap-3 pt-2">
             <div>
               <p className="text-xs text-slate-500 sa-font-body mb-1">Default Currency</p>
-              <select className="w-full border border-black/10 rounded-lg px-3 py-2 text-sm sa-font-body">
+              <select className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-full border border-black/10 rounded-lg px-3 py-2 text-sm sa-font-body">
                 <option>INR (₹)</option><option>USD ($)</option>
               </select>
             </div>
             <div>
               <p className="text-xs text-slate-500 sa-font-body mb-1">Default Language</p>
-              <select className="w-full border border-black/10 rounded-lg px-3 py-2 text-sm sa-font-body">
+              <select className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-full border border-black/10 rounded-lg px-3 py-2 text-sm sa-font-body">
                 <option>English</option><option>Kannada</option><option>Hindi</option>
               </select>
             </div>
@@ -3540,7 +3528,7 @@ const LoginPage = ({ onLogin, onToast }) => {
               <label className="text-xs font-medium text-slate-600 mb-1.5 block">Employee ID <span className="text-slate-400 font-normal">(optional)</span></label>
               <div className="flex items-center gap-2 border border-black/10 rounded-xl px-3.5 py-2.5 focus-within:border-emerald-300 bg-white">
                 <BadgeCheck size={16} className="text-slate-400" />
-                <input type="text" placeholder="SA-EMP-0000" className="w-full outline-none text-sm bg-transparent" />
+                <input type="text" placeholder="SA-EMP-0000" className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full outline-none text-sm bg-transparent" />
               </div>
             </div>
             <div>
@@ -3570,7 +3558,7 @@ const LoginPage = ({ onLogin, onToast }) => {
               </button>
               {otp && (
                 <div className="flex gap-2 pt-1">
-                  {[0, 1, 2, 3].map((i) => <input key={i} maxLength={1} className="w-10 h-10 text-center border border-black/10 rounded-lg text-sm sa-font-display font-semibold" />)}
+                  {[0, 1, 2, 3].map((i) => <input key={i} maxLength={1} className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-10 h-10 text-center border border-black/10 rounded-lg text-sm sa-font-display font-semibold" />)}
                   <button type="button" onClick={() => onToast?.("OTP sent to your registered admin number.")} className="text-xs font-semibold" style={{ color: T.forest }}>Send OTP</button>
                 </div>
               )}
@@ -3586,7 +3574,7 @@ const LoginPage = ({ onLogin, onToast }) => {
               </label>
             </div>
 
-            <button type="button" onClick={handleLogin} className="w-full py-3 rounded-xl text-white text-sm font-semibold shadow-md hover:opacity-95 active:scale-[0.99] transition"
+            <button type="button" onClick={handleLogin} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-3 rounded-xl text-white text-sm font-semibold shadow-md hover:opacity-95 active:scale-[0.99] transition"
               style={{ background: `linear-gradient(135deg, ${T.forest}, ${T.forestDeep})` }}>
               Sign in to Admin Panel
             </button>
@@ -3610,8 +3598,8 @@ const Sidebar = ({ active, onNavigate, allowedSet, collapsed, mobileOpen, setMob
   const isAllowed = (id) => !allowedSet || allowedSet.has(id);
   return (
     <>
-      {mobileOpen && <div className="fixed inset-0 bg-black/40 z-30 lg:hidden" onClick={() => setMobileOpen(false)} />}
-      <aside className={`fixed lg:sticky top-0 h-screen z-40 ${collapsed ? "w-[76px]" : "w-[264px]"} shrink-0 transition-all duration-300
+      {mobileOpen && <div className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md cursor-pointer active:scale-[0.99] fixed inset-0 bg-black/40 z-30 lg:hidden" onClick={() => setMobileOpen(false)} />}
+      <aside className={`transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded fixed lg:sticky top-0 h-screen z-40 ${collapsed ? "w-[76px]" : "w-[264px]"} shrink-0 transition-all duration-300
         ${mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
         style={{ background: `linear-gradient(180deg, ${T.forestDeep}, #072A1B 70%)` }}>
         <div className="h-full flex flex-col sa-scrollbar overflow-y-auto">
@@ -3672,6 +3660,18 @@ const Sidebar = ({ active, onNavigate, allowedSet, collapsed, mobileOpen, setMob
 const Topbar = ({ title, role, setRole, onLogout, collapsed, setCollapsed, setMobileOpen, onToast, onNavigate }) => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
+  const [adminNotifs, setAdminNotifs] = useState(() => {
+    try {
+      const stored = localStorage.getItem('saath_admin_notifs');
+      if (stored) return JSON.parse(stored);
+    } catch {}
+    return [
+      { id: 'a1', t: "New seller KYC pending review", time: "2m ago", read: false },
+      { id: 'a2', t: "Fraud alert: suspicious order spike in Mumbai", time: "18m ago", read: false },
+      { id: 'a3', t: "Low stock alert — 12 warehouses affected", time: "1h ago", read: true },
+    ];
+  });
+
   const [searchTerm, setSearchTerm] = useState("");
   const [now, setNow] = useState(new Date());
   useEffect(() => { const t = setInterval(() => setNow(new Date()), 30000); return () => clearInterval(t); }, []);
@@ -3709,25 +3709,40 @@ const Topbar = ({ title, role, setRole, onLogout, collapsed, setCollapsed, setMo
           <div className="relative">
             <button onClick={() => { setNotifOpen((s) => !s); setProfileOpen(false); }} className="p-2 rounded-lg hover:bg-slate-100 text-slate-500 relative">
               <Bell size={17} />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 sa-pulse" />
+              {adminNotifs.some(n => !n.read) && <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 sa-pulse" />}
             </button>
             {notifOpen && (
               <div className="absolute right-0 mt-2 w-80 bg-white rounded-2xl border border-black/10 shadow-xl overflow-hidden sa-rise">
-                <div className="px-4 py-3 border-b border-black/5 font-semibold text-sm sa-font-body">Notifications</div>
+                <div className="flex justify-between items-center px-4 py-3 border-b border-black/5">
+                  <span className="font-semibold text-sm sa-font-body">Notifications</span>
+                  {adminNotifs.some(n => !n.read) && (
+                    <button onClick={() => {
+                      const updated = adminNotifs.map(n => ({...n, read: true}));
+                      setAdminNotifs(updated);
+                      localStorage.setItem('saath_admin_notifs', JSON.stringify(updated));
+                    }} className="text-[10px] text-blue-600 font-bold hover:underline">Mark all read</button>
+                  )}
+                </div>
                 <div className="max-h-80 overflow-y-auto sa-scrollbar">
-                  {[
-                    { t: "New seller KYC pending review", time: "2m ago", icon: Store },
-                    { t: "Fraud alert: suspicious order spike in Mumbai", time: "18m ago", icon: ShieldAlert },
-                    { t: "Low stock alert — 12 warehouses affected", time: "1h ago", icon: AlertTriangle },
-                  ].map((n, i) => (
-                    <div key={i} className="flex gap-3 px-4 py-3 hover:bg-slate-50 border-b border-black/5 last:border-0">
-                      <n.icon size={15} className="mt-0.5 shrink-0" color={T.forest} />
-                      <div>
-                        <p className="text-xs text-[#0B1420] sa-font-body">{n.t}</p>
-                        <p className="text-[10px] text-slate-400 mt-0.5">{n.time}</p>
+                  {adminNotifs.length === 0 ? (
+                    <div className="p-8 text-center text-slate-500 text-xs">No notifications</div>
+                  ) : (
+                    adminNotifs.map((n) => (
+                      <div key={n.id} onClick={() => {
+                        if (!n.read) {
+                          const updated = adminNotifs.map(x => x.id === n.id ? {...x, read: true} : x);
+                          setAdminNotifs(updated);
+                          localStorage.setItem('saath_admin_notifs', JSON.stringify(updated));
+                        }
+                      }} className={`flex gap-3 px-4 py-3 hover:bg-slate-50 border-b border-black/5 last:border-0 cursor-pointer ${n.read ? 'opacity-60' : 'bg-blue-50/30'}`}>
+                        <div className={`w-2 h-2 mt-1.5 rounded-full shrink-0 ${n.read ? 'bg-slate-300' : 'bg-blue-500'}`} />
+                        <div>
+                          <p className="text-xs text-[#0B1420] sa-font-body">{n.t}</p>
+                          <p className="text-[10px] text-slate-400 mt-0.5">{n.time}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))
+                  )}
                 </div>
               </div>
             )}
@@ -3760,7 +3775,7 @@ const Topbar = ({ title, role, setRole, onLogout, collapsed, setCollapsed, setMo
                 </div>
                 <button onClick={() => { onNavigate("settings"); setProfileOpen(false); }} className="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 sa-font-body">Profile settings</button>
                 <button onClick={() => { onNavigate("audit"); setProfileOpen(false); }} className="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 sa-font-body">Login history</button>
-                <button onClick={onLogout} className="w-full text-left px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 flex items-center gap-2 sa-font-body">
+                <button onClick={onLogout} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full text-left px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 flex items-center gap-2 sa-font-body">
                   <LogOut size={14} /> Logout
                 </button>
               </div>

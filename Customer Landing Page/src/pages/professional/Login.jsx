@@ -109,7 +109,7 @@ export default function ProfessionalLoginPage() {
               <label className="text-xs font-black uppercase tracking-wider text-slate-400">Password</label>
               <button
                 type="button"
-                className="text-[10px] font-black uppercase text-indigo-400 hover:text-indigo-300 border-0 bg-transparent cursor-pointer"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-[10px] font-black uppercase text-indigo-400 hover:text-indigo-300 border-0 bg-transparent cursor-pointer"
               >
                 Forgot?
               </button>

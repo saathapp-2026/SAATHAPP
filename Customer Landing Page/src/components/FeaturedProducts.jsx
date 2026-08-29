@@ -160,7 +160,7 @@ export default function FeaturedProducts({
               onClick={() => {
                 setLoading(true);
                 productApi.getProducts({ category: selectedCategory, search: searchQuery })
-                  .then(data => { setFeaturedProducts(data.products || []); setError(null); })
+                  .then(data => { setFeaturedProducts(data.products || []); setError(null) })
                   .catch(() => setError('Unable to load products.'))
                   .finally(() => setLoading(false));
               }}

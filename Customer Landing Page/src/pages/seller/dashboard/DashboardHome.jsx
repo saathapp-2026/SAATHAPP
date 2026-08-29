@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ConfirmDialog from '../../../components/seller/orders/ConfirmDialog';
 import { motion } from 'framer-motion';
 import {
   Package,
@@ -61,6 +62,7 @@ export default function DashboardHome() {
   const [renewing, setRenewing] = useState(false);
   const [banner, setBanner] = useState(null);
   const [invoice, setInvoice] = useState(null);
+  const [confirmCancel, setConfirmCancel] = useState(false);
   const [stats, setStats] = useState([
     { label: 'Total Orders', value: '—', icon: ShoppingCart, color: 'text-blue-500' },
     { label: 'Products', value: '—', icon: Package, color: 'text-purple-500' },
@@ -150,11 +152,7 @@ export default function DashboardHome() {
   };
 
   const handleMembershipCancel = async () => {
-    if (!window.confirm('Cancel membership and revert to Free plan?')) return;
-    const auth = getStoredSellerAuth();
-    const result = await cancelMembership(auth?.seller?.id);
-    updateSection('membership', result.membership);
-    showBanner('info', 'Membership Cancelled', result.message);
+    setConfirmCancel(true);
   };
 
   const handleDownloadInvoice = async (invoiceId) => {
@@ -229,6 +227,22 @@ export default function DashboardHome() {
           ))}
         </div>
       </div>
+      <ConfirmDialog
+        open={confirmCancel}
+        title="Cancel Membership"
+        message="Cancel membership and revert to Free plan?"
+        danger={true}
+        confirmLabel="Yes, Cancel"
+        cancelLabel="Keep Plan"
+        onCancel={() => setConfirmCancel(false)}
+        onConfirm={async () => {
+          setConfirmCancel(false);
+          const auth = getStoredSellerAuth();
+          const result = await cancelMembership(auth?.seller?.id);
+          updateSection('membership', result.membership);
+          showBanner('info', 'Membership Cancelled', result.message);
+        }}
+      />
     </div>
   );
 }

@@ -275,7 +275,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
           <button
             type="button"
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center justify-center font-bold"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-8 h-8 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center justify-center font-bold"
           >
             <X size={18} />
           </button>
@@ -927,7 +927,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                   <button
                     type="button"
                     onClick={handleAdvanceStatus}
-                    className="px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-extrabold text-[11px] shadow hover:bg-emerald-500 flex items-center gap-1 cursor-pointer"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-extrabold text-[11px] shadow hover:bg-emerald-500 flex items-center gap-1 cursor-pointer"
                   >
                     Advance Status Stage ➔
                   </button>
@@ -1012,14 +1012,14 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2.5 rounded-2xl border border-slate-300 text-xs font-extrabold text-slate-700 dark:text-slate-300 hover:bg-page transition cursor-pointer"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 rounded-2xl border border-slate-300 text-xs font-extrabold text-slate-700 dark:text-slate-300 hover:bg-page transition cursor-pointer"
           >
             Cancel
           </button>
           <button
             type="button"
             onClick={handleConfirmTransfer}
-            className="px-6 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-xs font-black text-white shadow-lg transition hover:scale-[1.02] flex items-center gap-1.5 cursor-pointer"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-6 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-xs font-black text-white shadow-lg transition hover:scale-[1.02] flex items-center gap-1.5 cursor-pointer"
           >
             Confirm Transfer 🚀
           </button>

@@ -19,7 +19,7 @@ export default function Address({ onBack }) {
           <div className="font-semibold text-slate-800">Office</div>
           <div className="mt-1 text-sm text-slate-600">Connaught Place, Central Delhi, 110001</div>
         </div>
-        <button className="flex items-center gap-2 rounded-2xl border border-dashed border-slate-300 px-4 py-3 text-sm font-semibold text-slate-700">
+        <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex items-center gap-2 rounded-2xl border border-dashed border-slate-300 px-4 py-3 text-sm font-semibold text-slate-700">
           <Plus size={16} /> Add New Address
         </button>
       </div>

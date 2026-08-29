@@ -15,7 +15,7 @@ export default function InvoicePreviewModal({ invoice, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
+    <div className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md cursor-pointer active:scale-[0.99] fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -27,7 +27,7 @@ export default function InvoicePreviewModal({ invoice, onClose }) {
             <FileText size={20} className="text-violet-500" />
             <h3 className="font-bold">Invoice Preview</h3>
           </div>
-          <button type="button" onClick={onClose} className="text-slate-400 hover:text-slate-600">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-slate-400 hover:text-slate-600">
             <X size={20} />
           </button>
         </div>
@@ -63,7 +63,7 @@ export default function InvoicePreviewModal({ invoice, onClose }) {
           <button
             type="button"
             onClick={handleDownload}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-violet-500 text-white font-semibold hover:bg-violet-600 transition-colors"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-violet-500 text-white font-semibold hover:bg-violet-600 transition-colors"
           >
             <Download size={18} />
             Download Invoice

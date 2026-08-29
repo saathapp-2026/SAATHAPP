@@ -256,7 +256,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
         </div>
 
         <script>
-          setTimeout(() => { window.print(); }, 500);
+          setTimeout(() => { window.print() }, 500);
         </script>
       </body>
       </html>
@@ -829,7 +829,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                   {transactions
                     .filter((t) => txnFilter === 'All' || t.type.toLowerCase() === txnFilter.toLowerCase() || (txnFilter === 'Credits' && t.type === 'Credit') || (txnFilter === 'Debits' && t.type === 'Debit'))
                     .map((t, idx) => (
-                      <tr key={idx} className="hover:bg-page">
+                      <tr key={idx} className="transition-colors hover:bg-emerald-50/30 hover:bg-page">
                         <td className="p-3 font-mono font-extrabold text-emerald-600 dark:text-emerald-400">{t.txn}</td>
                         <td className="p-3 font-bold text-slate-900 dark:text-white">{t.desc}</td>
                         <td className="p-3 text-slate-500">{t.channel}</td>
@@ -876,7 +876,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
                 <ArrowUpRight className="text-[#00986C]" size={20} /> Withdraw Funds to Bank
               </h3>
-              <button type="button" onClick={handleCloseWithdrawModal} className="text-slate-400 hover:text-slate-200 font-bold p-1"><X size={18} /></button>
+              <button type="button" onClick={handleCloseWithdrawModal} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-slate-400 hover:text-slate-200 font-bold p-1"><X size={18} /></button>
             </div>
 
             {withdrawStep === 1 && (
@@ -911,8 +911,8 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                 </div>
 
                 <div className="pt-2 flex justify-end gap-2 border-t border-slate-200 dark:border-slate-800">
-                  <button type="button" onClick={handleCloseWithdrawModal} className="px-4 py-2 rounded-xl border border-slate-300 font-bold">Cancel</button>
-                  <button type="submit" className="px-6 py-2 rounded-xl bg-[#00986C] hover:bg-emerald-700 text-white font-extrabold shadow">Proceed to Payout</button>
+                  <button type="button" onClick={handleCloseWithdrawModal} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl border border-slate-300 font-bold">Cancel</button>
+                  <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-6 py-2 rounded-xl bg-[#00986C] hover:bg-emerald-700 text-white font-extrabold shadow">Proceed to Payout</button>
                 </div>
               </form>
             )}
@@ -926,7 +926,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                 </div>
                 <div className="pt-2 flex justify-end gap-2">
                   <button type="button" onClick={() => setWithdrawStep(1)} className="px-4 py-2 rounded-xl border border-slate-300 font-bold">Back</button>
-                  <button type="submit" className="px-6 py-2 rounded-xl bg-[#00986C] hover:bg-emerald-700 text-white font-extrabold shadow">Confirm Transfer</button>
+                  <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-6 py-2 rounded-xl bg-[#00986C] hover:bg-emerald-700 text-white font-extrabold shadow">Confirm Transfer</button>
                 </div>
               </form>
             )}
@@ -944,7 +944,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
                 <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-[#00986C] flex items-center justify-center mx-auto text-2xl font-bold">✓</div>
                 <h4 className="text-base font-black text-slate-900 dark:text-white">Payout Transferred Successfully!</h4>
                 <p className="text-xs text-slate-500">₹{Number(withdrawAmount).toLocaleString('en-IN')} has been sent to {selectedBank}.</p>
-                <button type="button" onClick={handleCloseWithdrawModal} className="px-6 py-2 bg-[#00986C] text-white font-bold rounded-xl">Done</button>
+                <button type="button" onClick={handleCloseWithdrawModal} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-6 py-2 bg-[#00986C] text-white font-bold rounded-xl">Done</button>
               </div>
             )}
           </div>
@@ -1000,7 +1000,7 @@ export default function FinanceTab({ isWithdrawModalOpen: externalWithdrawOpen, 
 
             <div className="pt-2 flex justify-end gap-2">
               <button type="button" onClick={() => setIsGstModalOpen(false)} className="px-4 py-2 rounded-xl border border-slate-300 font-bold">Cancel</button>
-              <button type="button" onClick={handleDownloadGstReport} className="px-6 py-2 rounded-xl bg-[#00986C] hover:bg-emerald-700 text-white font-extrabold shadow flex items-center gap-1.5"><Download size={15} /> Download</button>
+              <button type="button" onClick={handleDownloadGstReport} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-6 py-2 rounded-xl bg-[#00986C] hover:bg-emerald-700 text-white font-extrabold shadow flex items-center gap-1.5"><Download size={15} /> Download</button>
             </div>
           </div>
         </div>

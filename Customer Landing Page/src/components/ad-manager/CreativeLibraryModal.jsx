@@ -26,7 +26,7 @@ export default function CreativeLibraryModal({ open, onClose }) {
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">Reusable banners, posters, videos & headlines</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close"><X size={16} /></button>
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close"><X size={16} /></button>
         </div>
         {loading ? <p className="text-sm text-slate-500 text-center py-8">Loading…</p> : (
           <ul className="space-y-2">

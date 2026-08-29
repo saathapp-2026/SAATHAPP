@@ -4,7 +4,7 @@ export default function ProductCategoryCard({ category, onClick }) {
   return (
     <button 
       onClick={onClick}
-      className="flex flex-col items-center min-w-[100px] gap-3 p-4 rounded-2xl bg-surface border border-theme-border hover:border-primary dark:hover:border-primary hover:shadow-md transition-all cursor-pointer group shrink-0"
+      className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex flex-col items-center min-w-[100px] gap-3 p-4 rounded-2xl bg-surface border border-theme-border hover:border-primary dark:hover:border-primary hover:shadow-md transition-all cursor-pointer group shrink-0"
     >
       <div className="w-14 h-14 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-primary/5 transition-colors overflow-hidden">
         {category.icon ? (

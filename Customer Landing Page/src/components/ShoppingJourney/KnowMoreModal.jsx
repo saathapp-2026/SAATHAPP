@@ -22,7 +22,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
         <button 
           onClick={onClose}
           aria-label="Close modal"
-          className="absolute top-4 right-4 z-50 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-gray-600 shadow-sm transition-colors"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute top-4 right-4 z-50 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-gray-600 shadow-sm transition-colors"
         >
           <X size={18} />
         </button>

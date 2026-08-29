@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Wallet, ShieldCheck, Download, ArrowUpRight } from 'lucide-react';
+import toast from 'react-hot-toast';
 export default function WalletCard() {
   const [balance, setBalance] = useState(0);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
@@ -87,7 +88,7 @@ export default function WalletCard() {
           <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Withdraw History</h3>
           <button
             type="button"
-            onClick={() => alert('Statement downloaded.')}
+            onClick={() => toast.success('Statement downloaded.') }
             className="flex items-center gap-1.5 text-xs font-black text-primary uppercase"
           >
             <Download size={13} /> Download
@@ -96,7 +97,7 @@ export default function WalletCard() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-100 dark:border-slate-800 text-[10px] font-black uppercase text-slate-400">
+              <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800 text-[10px] font-black uppercase text-slate-400">
                 <th className="pb-3">ID</th>
                 <th className="pb-3">Date</th>
                 <th className="pb-3">Description</th>
@@ -113,7 +114,7 @@ export default function WalletCard() {
                 </tr>
               ) : (
                 ledger.map((row) => (
-                  <tr key={row.id} className="hover:bg-slate-50/50">
+                  <tr key={row.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-slate-50/50">
                     <td className="py-3 font-bold text-slate-700 dark:text-slate-300">{row.id}</td>
                     <td className="py-3 text-slate-500">{row.date}</td>
                     <td className="py-3">{row.desc}</td>
@@ -162,7 +163,7 @@ export default function WalletCard() {
                   <button type="button" onClick={() => setShowWithdrawModal(false)} className="flex-1 py-2.5 border border-slate-200 rounded-xl text-sm font-bold">
                     Cancel
                   </button>
-                  <button type="submit" className="flex-1 py-2.5 bg-primary text-white rounded-xl text-sm font-bold flex items-center justify-center gap-1">
+                  <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-2.5 bg-primary text-white rounded-xl text-sm font-bold flex items-center justify-center gap-1">
                     <ArrowUpRight size={14} /> Withdraw
                   </button>
                 </div>

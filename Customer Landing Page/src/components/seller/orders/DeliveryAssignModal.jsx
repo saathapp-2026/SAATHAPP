@@ -26,14 +26,14 @@ export default function DeliveryAssignModal({ open, order, loading, onAssign, on
 
   return (
     <div className="fixed inset-0 z-[80] flex items-end sm:items-center justify-center p-0 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="assign-title">
-      <button type="button" className="absolute inset-0 bg-black/50" aria-label="Close" onClick={onClose} />
+      <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute inset-0 bg-black/50" aria-label="Close" onClick={onClose} />
       <div className="relative w-full sm:max-w-2xl max-h-[90vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl">
         <div className="sticky top-0 flex items-center justify-between gap-3 p-4 border-b border-slate-200 dark:border-slate-800 bg-surface">
           <div>
             <h2 id="assign-title" className="font-bold text-lg">Assign Delivery Agent</h2>
             <p className="text-sm text-slate-500">Order {order.id} · {order.customer.name}</p>
           </div>
-          <button type="button" onClick={onClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>

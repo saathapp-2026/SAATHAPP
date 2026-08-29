@@ -102,7 +102,7 @@ export default function ReviewCard() {
                     />
                     <button
                       type="submit"
-                      className="p-2 bg-primary hover:bg-primary-dark text-white rounded-lg flex items-center justify-center"
+                      className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 bg-primary hover:bg-primary-dark text-white rounded-lg flex items-center justify-center"
                     >
                       <Send size={14} />
                     </button>

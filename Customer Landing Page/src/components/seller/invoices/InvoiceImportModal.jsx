@@ -31,7 +31,7 @@ export default function InvoiceImportModal({ open, onClose, onImported }) {
             <h2 id="import-inv-title" className="font-bold text-lg">Import Invoices</h2>
             <p className="text-xs text-slate-500 mt-0.5">Upload CSV / Excel export</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -57,7 +57,7 @@ export default function InvoiceImportModal({ open, onClose, onImported }) {
           <input
             type="file"
             accept=".csv,text/csv"
-            className="hidden"
+            className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden"
             onChange={async (e) => {
               const file = e.target.files?.[0];
               if (!file) return;
@@ -65,12 +65,11 @@ export default function InvoiceImportModal({ open, onClose, onImported }) {
               const text = await file.text();
               const parsed = parseCsv(text);
               setRows(parsed);
-              toast.success(`${parsed.length} rows ready`);
-            }}
+              toast.success(`${parsed.length} rows ready`) }}
           />
         </label>
         <div className="flex justify-end gap-2">
-          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200">Cancel</button>
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm border border-slate-200">Cancel</button>
           <button
             type="button"
             disabled={loading || !rows.length}

@@ -122,6 +122,13 @@ export default function Header({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      setIsSearchFocused(false);
+      searchRef.current?.querySelector('input')?.blur();
+    }
+  };
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -161,7 +168,7 @@ export default function Header({
 
                 <button
                   onClick={onCartClick}
-                  className="relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0"
                 >
                   <ShoppingCart size={22} />
                   {cartCount > 0 && (
@@ -219,11 +226,17 @@ export default function Header({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="input-field pl-10"
+                    onKeyDown={handleKeyDown}
+                    className="input-field pl-10 pr-10"
                   />
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-theme-secondary">
+                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-theme-secondary pointer-events-none">
                     <Search size={18} />
                   </div>
+                  {searchQuery && (
+                    <button type="button" onClick={() => setSearchQuery('')} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+                      <X size={16} />
+                    </button>
+                  )}
                 </div>
               </form>
 
@@ -243,7 +256,7 @@ export default function Header({
                           <div className="mb-4">
                             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between mb-2">
                               <span className="flex items-center gap-1.5"><History size={12} /> Recent Searches</span>
-                              <button onClick={(e) => { e.stopPropagation(); setRecentSearches([]); window.localStorage.removeItem('saathapp_recent_searches'); }} className="text-primary hover:underline text-[9px]">Clear all</button>
+                              <button onClick={(e) => { e.stopPropagation(); setRecentSearches([]); window.localStorage.removeItem('saathapp_recent_searches') }} className="text-primary hover:underline text-[9px]">Clear Recent Searches</button>
                             </span>
                             <div className="flex flex-wrap gap-1.5">
                               {recentSearches.map((term, i) => (
@@ -343,11 +356,17 @@ export default function Header({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="w-full h-11 pl-11 pr-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-surface text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
+                    onKeyDown={handleKeyDown}
+                    className="w-full h-11 pl-11 pr-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-surface text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
                   />
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">
                     <Search size={18} />
                   </div>
+                  {searchQuery && (
+                    <button type="button" onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+                      <X size={16} />
+                    </button>
+                  )}
                 </div>
               </form>
 
@@ -367,7 +386,7 @@ export default function Header({
                           <div className="mb-4">
                             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between mb-2.5">
                               <span className="flex items-center gap-1.5"><History size={13} /> Recent Searches</span>
-                              <button onClick={(e) => { e.stopPropagation(); setRecentSearches([]); window.localStorage.removeItem('saathapp_recent_searches'); }} className="text-primary hover:underline text-[10px]">Clear all</button>
+                              <button onClick={(e) => { e.stopPropagation(); setRecentSearches([]); window.localStorage.removeItem('saathapp_recent_searches') }} className="text-primary hover:underline text-[10px]">Clear Recent Searches</button>
                             </span>
                             <div className="flex flex-wrap gap-2">
                               {recentSearches.map((term, i) => (
@@ -425,7 +444,7 @@ export default function Header({
                 {darkMode ? <Sun size={24} className="text-amber-400" /> : <Moon size={24} />}
               </motion.button>
 
-              <button className="relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0">
+              <button onClick={() => navigate('/profile?tab=notifications')} className="relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0">
                 <Bell size={24} />
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-rose-500 rounded-full border-2 border-white dark:border-slate-900" />
               </button>
@@ -433,7 +452,7 @@ export default function Header({
               {canInstall && !isInstalled && (
                 <button
                   onClick={installApp}
-                  className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-transparent border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer shrink-0"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-transparent border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer shrink-0"
                 >
                   <Download size={16} />
                   <span>Install App</span>
@@ -442,7 +461,7 @@ export default function Header({
 
               <button
                 onClick={onCartClick}
-                className="relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer shrink-0"
                 title="Cart"
               >
                 <ShoppingCart size={26} />
@@ -512,7 +531,7 @@ export default function Header({
                   </motion.button>
 
                   {/* Notification Bell */}
-                  <button className="relative p-2 rounded-xl text-theme-secondary bg-surface border border-theme-border shadow-xs cursor-pointer">
+                  <button onClick={() => { setIsCustomerMenuOpen(false); navigate('/profile?tab=notifications'); }} className="relative p-2 rounded-xl text-theme-secondary bg-surface border border-theme-border shadow-xs cursor-pointer">
                     <Bell size={17} />
                     <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-danger rounded-full" />
                   </button>

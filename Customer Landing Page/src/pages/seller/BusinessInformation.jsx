@@ -139,7 +139,7 @@ export default function BusinessInformation() {
                   type="checkbox"
                   name={`service_${s.id}`}
                   defaultChecked={info.services?.includes(s.id)}
-                  className="rounded border-white/20 bg-white/5 text-emerald-500"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none rounded border-white/20 bg-white/5 text-emerald-500"
                 />
                 {s.label}
               </label>
@@ -147,7 +147,7 @@ export default function BusinessInformation() {
           </div>
         </div>
 
-        <button type="submit" className="w-full py-3 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors">
+        <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-3 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors">
           Continue to Address
         </button>
       </form>

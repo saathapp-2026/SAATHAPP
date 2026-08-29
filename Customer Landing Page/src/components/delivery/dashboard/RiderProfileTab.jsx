@@ -383,7 +383,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
               <button
                 type="button"
                 onClick={handleConfirmLogout}
-                className="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black cursor-pointer shadow active:scale-95 transition"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black cursor-pointer shadow active:scale-95 transition"
               >
                 Confirm Logout
               </button>
@@ -586,7 +586,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
                   type="file"
                   id="riderPhotoFileInput"
                   accept="image/*"
-                  className="hidden"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden"
                   onChange={(e) => {
                     if (e.target.files && e.target.files[0]) {
                       const file = e.target.files[0];

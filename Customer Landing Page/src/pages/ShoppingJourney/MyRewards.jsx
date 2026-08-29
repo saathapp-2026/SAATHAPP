@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const MyRewards = () => {
   const [activeTab, setActiveTab] = useState('UNLOCKED');
@@ -62,7 +63,7 @@ const MyRewards = () => {
         {['UNLOCKED', 'REDEEMED', 'EXPIRED', 'LOCKED'].map(tab => (
           <button
             key={tab}
-            className={`py-2 px-5 font-bold text-sm whitespace-nowrap rounded-t-lg transition-colors ${
+            className={`transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none py-2 px-5 font-bold text-sm whitespace-nowrap rounded-t-lg transition-colors ${
               activeTab === tab 
                 ? 'border-b-2 border-green-500 text-green-700 bg-green-50' 
                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
@@ -144,7 +145,7 @@ const MyRewards = () => {
             
             <button 
               onClick={() => {
-                alert('Claim action dispatched to backend. (Mock)');
+                toast.success('Claim action dispatched to backend. (Mock);');
                 setSelectedReward(null);
               }}
               className="w-full bg-green-600 text-white font-bold py-3.5 rounded-xl hover:bg-green-700 transition-colors shadow-md"

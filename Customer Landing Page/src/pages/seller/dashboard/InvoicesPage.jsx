@@ -313,7 +313,7 @@ export default function InvoicesPage() {
           <button
             type="button"
             onClick={openCreate}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm"
           >
             <Plus size={15} />
             Create Invoice
@@ -361,7 +361,7 @@ export default function InvoicesPage() {
       {error ? (
         <div className="rounded-xl border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/20 p-6 text-center" role="alert">
           <p className="text-sm text-red-600 mb-3">{error}</p>
-          <button type="button" onClick={loadInvoices} className="text-sm font-medium text-red-600 hover:underline">
+          <button type="button" onClick={loadInvoices} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-sm font-medium text-red-600 hover:underline">
             Try again
           </button>
         </div>
@@ -459,7 +459,7 @@ export default function InvoicesPage() {
             ))}
             <button
               type="button"
-              className="text-emerald-600 font-semibold"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-emerald-600 font-semibold"
               onClick={() => {
                 setNoteInvoice(viewInvoice);
                 setViewInvoice(null);

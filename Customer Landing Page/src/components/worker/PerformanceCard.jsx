@@ -52,7 +52,7 @@ export default function PerformanceCard() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-100 dark:border-slate-800 text-[10px] font-black uppercase text-slate-400">
+                <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800 text-[10px] font-black uppercase text-slate-400">
                   <th className="pb-3 pr-4">Rank</th>
                   <th className="pb-3 pr-4">Worker</th>
                   <th className="pb-3 pr-4">Skill</th>

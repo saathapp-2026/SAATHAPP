@@ -155,7 +155,7 @@ export default function Step11_SubscriptionPlans({ onNext, onPrev }) {
                   <div className="mt-5 pt-3 border-t border-slate-200 dark:border-slate-800 text-center">
                     <button
                       type="button"
-                      className={`w-full rounded-xl py-2 text-xs font-extrabold transition ${isSelected
+                      className={`transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full rounded-xl py-2 text-xs font-extrabold transition ${isSelected
                           ? 'bg-emerald-600 text-white'
                           : 'bg-white border border-slate-300 text-slate-800 dark:text-slate-200'
                         }`}
@@ -217,14 +217,14 @@ export default function Step11_SubscriptionPlans({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous
             </button>
             <button
               type="submit"
-              className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-extrabold text-white shadow-lg transition hover:scale-[1.02]"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-extrabold text-white shadow-lg transition hover:scale-[1.02]"
             >
               Review & Pay Onboarding Fee
               <ArrowRight size={16} />

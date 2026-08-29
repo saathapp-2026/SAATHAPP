@@ -1,9 +1,9 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 
 export default function PaymentsTab({ orders, _transactions, walletBalance, setShowAddMoneyModal }) {
   const handleDownloadBill = (orderId) => {
-    alert(`Downloading PDF Invoice for ${orderId}...`);
-  };
+    toast.success(`Downloading PDF Invoice for ${orderId}...`) };
 
   return (
     <div className="space-y-6 text-left">

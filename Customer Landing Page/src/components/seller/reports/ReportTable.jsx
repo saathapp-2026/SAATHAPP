@@ -77,7 +77,7 @@ function ActionsMenu({ report, onAction, loadingId }) {
       </button>
       {open ? (
         <>
-          <button type="button" className="fixed inset-0 z-10" aria-label="Close menu" onClick={() => setOpen(false)} />
+          <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none fixed inset-0 z-10" aria-label="Close menu" onClick={() => setOpen(false)} />
           <div role="menu" className="absolute right-0 top-8 z-20 w-44 rounded-xl border border-slate-200 bg-surface shadow-xl py-1">
             {items.map((item) => {
               const Icon = item.icon;
@@ -189,7 +189,7 @@ export default function ReportTable({
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead className="sticky top-0 z-[1] bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur border-b border-slate-200 dark:border-slate-800">
-              <tr className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+              <tr className="transition-colors hover:bg-emerald-50/30 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                 <th className="px-4 py-3"><SortBtn id="name">Report Name</SortBtn></th>
                 <th className="px-4 py-3"><SortBtn id="format">Type</SortBtn></th>
                 <th className="px-4 py-3">Date Range</th>
@@ -203,7 +203,7 @@ export default function ReportTable({
               {reports.map((r) => {
                 const Icon = FORMAT_ICONS[r.format] || FileText;
                 return (
-                  <tr key={r.id} className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80">
+                  <tr key={r.id} className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80">
                     <td className="px-4 py-3">
                       <div className="flex items-start gap-2.5 min-w-0">
                         <Icon size={16} className={`mt-0.5 shrink-0 ${FORMAT_ICON_COLOR[r.format]}`} />

@@ -293,14 +293,14 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
         {/* Arrow Navigation */}
         <button
           onClick={handlePrev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/20 hover:bg-black/45 text-white border border-white/10 hidden md:flex items-center justify-center backdrop-blur-sm z-30 transition-all"
+          className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/20 hover:bg-black/45 text-white border border-white/10 hidden md:flex items-center justify-center backdrop-blur-sm z-30 transition-all"
           title="Previous slide"
         >
           <ChevronLeft size={20} />
         </button>
         <button
           onClick={handleNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/20 hover:bg-black/45 text-white border border-white/10 hidden md:flex items-center justify-center backdrop-blur-sm z-30 transition-all"
+          className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/20 hover:bg-black/45 text-white border border-white/10 hidden md:flex items-center justify-center backdrop-blur-sm z-30 transition-all"
           title="Next slide"
         >
           <ChevronRight size={20} />

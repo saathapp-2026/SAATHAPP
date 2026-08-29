@@ -92,7 +92,7 @@ export default function Step2_AuthOtp({ onNext, onPrev }) {
                   <button
                     type="button"
                     onClick={handleSendOtp}
-                    className="absolute right-2 text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 px-3 py-1.5 rounded-xl transition"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute right-2 text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 px-3 py-1.5 rounded-xl transition"
                   >
                     Resend OTP
                   </button>
@@ -153,13 +153,13 @@ export default function Step2_AuthOtp({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               Back
             </button>
             <button
               type="submit"
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-extrabold text-white shadow-lg transition hover:scale-[1.02]"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-extrabold text-white shadow-lg transition hover:scale-[1.02]"
             >
               Verify & Continue
               <ArrowRight size={16} />

@@ -57,7 +57,7 @@ export default function Footer() {
                   href="https://instagram.com/saathapp.tech"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-surface hover:bg-primary hover:text-theme flex items-center justify-center transition-colors text-theme-secondary hover:text-theme"
+                  className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-8 h-8 rounded-full bg-surface hover:bg-primary hover:text-theme flex items-center justify-center transition-colors text-theme-secondary hover:text-theme"
                   title="Instagram"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -68,7 +68,7 @@ export default function Footer() {
                   href="https://x.com/saathappT"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-surface hover:bg-primary hover:text-theme flex items-center justify-center transition-colors text-theme-secondary hover:text-theme"
+                  className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-8 h-8 rounded-full bg-surface hover:bg-primary hover:text-theme flex items-center justify-center transition-colors text-theme-secondary hover:text-theme"
                   title="X (Twitter)"
                 >
                   <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@ export default function Footer() {
                   href="https://linkedin.com/company/saathapp-tech"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-surface hover:bg-primary hover:text-theme flex items-center justify-center transition-colors text-theme-secondary hover:text-theme"
+                  className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-8 h-8 rounded-full bg-surface hover:bg-primary hover:text-theme flex items-center justify-center transition-colors text-theme-secondary hover:text-theme"
                   title="LinkedIn"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -90,7 +90,7 @@ export default function Footer() {
                   href="https://youtube.com/@saathappofficial"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-surface hover:bg-primary hover:text-theme flex items-center justify-center transition-colors text-theme-secondary hover:text-theme"
+                  className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-8 h-8 rounded-full bg-surface hover:bg-primary hover:text-theme flex items-center justify-center transition-colors text-theme-secondary hover:text-theme"
                   title="YouTube"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -149,7 +149,7 @@ export default function Footer() {
                     href="https://www.saathappnova.co.in/careers"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-theme transition-colors"
+                    className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded hover:text-theme transition-colors"
                   >
                     Careers
                   </a>
@@ -231,7 +231,7 @@ export default function Footer() {
                         href="https://www.saathappnova.co.in/contact"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:text-theme transition-colors"
+                        className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded hover:text-theme transition-colors"
                       >
                         Contact Us
                       </a>
@@ -379,7 +379,7 @@ export default function Footer() {
                   />
                   <button
                     type="submit"
-                    className="h-11 px-6 rounded-btn bg-primary hover:bg-primary-dark text-white font-extrabold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none h-11 px-6 rounded-btn bg-primary hover:bg-primary-dark text-white font-extrabold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
                   >
                     <span>{subscribed ? 'Subscribed!' : 'Subscribe'}</span>
                     <Send size={12} />
@@ -407,14 +407,14 @@ export default function Footer() {
                   <Mail size={14} className="text-primary shrink-0 mt-0.5" />
                   <div>
                     <span className="block text-theme font-bold mb-0.5">Help & Support:</span>
-                    <a href="mailto:support@saathapp.in" className="hover:text-theme transition-colors break-all">support@saathapp.in</a>
+                    <a href="mailto:support@saathapp.in" className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded hover:text-theme transition-colors break-all">support@saathapp.in</a>
                   </div>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <Mail size={14} className="text-primary shrink-0 mt-0.5" />
                   <div>
                     <span className="block text-theme font-bold mb-0.5">Company:</span>
-                    <a href="mailto:company@saathapp.in" className="hover:text-theme transition-colors break-all">company@saathapp.in</a>
+                    <a href="mailto:company@saathapp.in" className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded hover:text-theme transition-colors break-all">company@saathapp.in</a>
                   </div>
                 </li>
                 <li className="flex items-start gap-2.5">
@@ -432,7 +432,7 @@ export default function Footer() {
                       href="https://www.saathappnova.co.in"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-theme transition-colors break-all"
+                      className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded hover:text-theme transition-colors break-all"
                     >
                       www.saathappnova.co.in
                     </a>

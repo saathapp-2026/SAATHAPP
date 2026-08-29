@@ -139,7 +139,7 @@ export default function InvoiceTable({
                   checked={allSelected}
                   onChange={onToggleSelectAll}
                   aria-label="Select all invoices"
-                  className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
                 />
               </th>
               <SortTh label="Invoice #" sortKey="number" sortBy={sortBy} sortDir={sortDir} onSort={onSort} />

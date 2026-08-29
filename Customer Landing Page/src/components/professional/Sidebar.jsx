@@ -42,12 +42,12 @@ export default function Sidebar({
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm lg:hidden transition-all duration-300"
+          className="hover:-translate-y-0.5 hover:shadow-md cursor-pointer active:scale-[0.99] fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm lg:hidden transition-all duration-300"
           onClick={() => setIsOpen(false)}
         />
       )}
 
-      <aside className={`fixed top-0 bottom-0 left-0 z-50 w-72 bg-surface border-r border-slate-200/60 dark:border-slate-800 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 ${
+      <aside className={`transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded fixed top-0 bottom-0 left-0 z-50 w-72 bg-surface border-r border-slate-200/60 dark:border-slate-800 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       } lg:sticky lg:h-screen lg:top-0`}>
 
@@ -57,7 +57,7 @@ export default function Sidebar({
               <ThemeLogo />
             </div>
             <button
-              className="lg:hidden text-slate-400 hover:text-slate-600 cursor-pointer"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none lg:hidden text-slate-400 hover:text-slate-600 cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
               <X size={20} />
@@ -132,7 +132,7 @@ export default function Sidebar({
 
           <button
             onClick={onLogout}
-            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider text-left text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-955 transition-all duration-200 cursor-pointer"
+            className="active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider text-left text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-955 transition-all duration-200 cursor-pointer"
           >
             <LogOut size={16} />
             <span>Logout</span>

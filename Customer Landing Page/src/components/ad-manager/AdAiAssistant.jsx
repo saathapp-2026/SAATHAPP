@@ -43,7 +43,7 @@ export default function AdAiAssistant({ open, onClose }) {
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">Mock AI — ready for live model wiring</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close"><X size={16} /></button>
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close"><X size={16} /></button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
           {ACTIONS.map((a) => (
@@ -54,7 +54,7 @@ export default function AdAiAssistant({ open, onClose }) {
           <ul className="space-y-2">
             {results.map((r) => (
               <li key={r}>
-                <button type="button" onClick={async () => { try { await navigator.clipboard.writeText(r); toast.success('Copied'); } catch { toast.success(r); } }} className="w-full text-left rounded-xl border border-slate-200 px-3 py-2.5 text-sm hover:bg-page">{r}</button>
+                <button type="button" onClick={async () => { try { await navigator.clipboard.writeText(r); toast.success('Copied') } catch { toast.success(r) } }} className="w-full text-left rounded-xl border border-slate-200 px-3 py-2.5 text-sm hover:bg-page">{r}</button>
               </li>
             ))}
             {!results.length ? <li className="text-sm text-slate-500 text-center py-6">Pick an action to generate suggestions</li> : null}

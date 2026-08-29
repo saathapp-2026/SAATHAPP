@@ -212,7 +212,7 @@ export default function InvoicesTab() {
         <button
           type="button"
           onClick={handleExportAllInvoicesCSV}
-          className="inline-flex items-center gap-1.5 rounded-2xl bg-[#00986C] hover:bg-emerald-700 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition hover:scale-[1.02] cursor-pointer"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 rounded-2xl bg-[#00986C] hover:bg-emerald-700 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition hover:scale-[1.02] cursor-pointer"
         >
           <FileSpreadsheet size={16} /> Export Invoices CSV / Excel
         </button>
@@ -235,7 +235,7 @@ export default function InvoicesTab() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
               {invoices.map((inv) => (
-                <tr key={inv.inv} className="hover:bg-page transition">
+                <tr key={inv.inv} className="transition-colors hover:bg-emerald-50/30 hover:bg-page transition">
                   <td className="p-3 font-mono font-bold text-[#00986C]">{inv.inv}</td>
                   <td className="p-3 font-mono text-slate-500">{inv.orderId}</td>
                   <td className="p-3 font-extrabold text-slate-900 dark:text-white">{inv.buyer}</td>
@@ -306,7 +306,7 @@ export default function InvoicesTab() {
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                   {previewModalData.rows.map((row, idx) => (
-                    <tr key={idx} className="hover:bg-page">
+                    <tr key={idx} className="transition-colors hover:bg-emerald-50/30 hover:bg-page">
                       {row.map((cell, cIdx) => (
                         <td key={cIdx} className="p-3 font-mono">{cell}</td>
                       ))}

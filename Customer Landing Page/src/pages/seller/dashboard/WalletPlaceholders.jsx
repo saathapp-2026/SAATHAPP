@@ -54,7 +54,7 @@ export function SettlementsPlaceholder() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {data.map(row => (
-                <tr key={row.id} className="hover:bg-page">
+                <tr key={row.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-page">
                   <td className="px-4 py-3 font-medium text-slate-900 dark:text-slate-100">{row.ref}</td>
                   <td className="px-4 py-3 text-slate-500">{new Date(row.date).toLocaleDateString()}</td>
                   <td className="px-4 py-3 text-slate-500">{row.name}</td>
@@ -118,7 +118,7 @@ export function WithdrawalsPlaceholder() {
               <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Amount (₹)</label>
               <input type="number" required value={reqAmount} onChange={e => setReqAmount(e.target.value)} className="w-full rounded-lg border border-slate-300 bg-surface px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" placeholder="e.g. 5000" />
             </div>
-            <button type="submit" disabled={loading} className="w-full px-4 py-2 text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 rounded-lg hover:bg-slate-800 disabled:opacity-50">
+            <button type="submit" disabled={loading} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full px-4 py-2 text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 rounded-lg hover:bg-slate-800 disabled:opacity-50">
               {loading ? 'Processing...' : 'Withdraw Funds'}
             </button>
           </form>
@@ -145,7 +145,7 @@ export function WithdrawalsPlaceholder() {
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {data.map(row => (
-                  <tr key={row.id} className="hover:bg-page">
+                  <tr key={row.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-page">
                     <td className="px-4 py-2 font-medium text-slate-900 dark:text-slate-100">{row.ref}</td>
                     <td className="px-4 py-2 text-slate-500">{new Date(row.date).toLocaleDateString()}</td>
                     <td className="px-4 py-2 font-medium">₹{row.amount.toLocaleString('en-IN')}</td>
@@ -187,7 +187,7 @@ export function StatementPlaceholder() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
             <input type="text" placeholder="Search reference..." value={search} onChange={e => setSearch(e.target.value)} className="w-full sm:w-64 pl-9 pr-4 py-2 text-sm rounded-lg border border-slate-300 bg-surface outline-none focus:border-emerald-500" />
           </div>
-          <button className="p-2 border border-slate-300 rounded-lg hover:bg-page">
+          <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 border border-slate-300 rounded-lg hover:bg-page">
             <Filter size={16} className="text-slate-500" />
           </button>
         </div>
@@ -207,7 +207,7 @@ export function StatementPlaceholder() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {filtered.map(row => (
-                <tr key={row.id} className="hover:bg-page">
+                <tr key={row.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-page">
                   <td className="px-4 py-3 text-slate-500">{new Date(row.date).toLocaleString('en-IN')}</td>
                   <td className="px-4 py-3 text-slate-900 dark:text-slate-100">{row.name}</td>
                   <td className="px-4 py-3 text-slate-500 text-xs font-mono">{row.ref}</td>

@@ -617,8 +617,8 @@ export default function ProductListing({
   }
 
   // Apply sorting
-  if (sort === 'price-low') filteredProducts.sort((a, b) => a.price - b.price);
-  else if (sort === 'price-high') filteredProducts.sort((a, b) => b.price - a.price);
+  if (sort === 'price_low') filteredProducts.sort((a, b) => a.price - b.price);
+  else if (sort === 'price_high') filteredProducts.sort((a, b) => b.price - a.price);
   else if (sort === 'rating') filteredProducts.sort((a, b) => (b.rating || 0) - (a.rating || 0));
 
   // Handle sidebar category filter selection

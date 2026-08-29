@@ -15,6 +15,7 @@ export default function Topbar({
   searchQuery = '',
   onSearchChange,
 }) {
+  
   const [langDropdown, setLangDropdown] = useState(false);
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [selectedLang, setSelectedLang] = useState('English');
@@ -68,7 +69,7 @@ export default function Topbar({
         <button
           type="button"
           onClick={toggleDarkMode}
-          className="p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-white/80 transition-colors"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-white/80 transition-colors"
           title="Toggle theme"
         >
           {darkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -174,7 +175,7 @@ export default function Topbar({
                 <button
                   type="button"
                   onClick={onLogout}
-                  className="w-full px-3 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 flex items-center gap-2 border-t border-slate-100 dark:border-slate-800"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full px-3 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 flex items-center gap-2 border-t border-slate-100 dark:border-slate-800"
                 >
                   <LogOut size={14} /> Logout
                 </button>

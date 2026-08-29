@@ -52,8 +52,7 @@ export default function CustomerImportModal({ open, onClose, onImported }) {
       return;
     }
     setRows(parsed);
-    toast.success(`${parsed.length} rows ready to import`);
-  };
+    toast.success(`${parsed.length} rows ready to import`) };
 
   const handleImport = async () => {
     if (!rows.length) return toast.error('Select a valid CSV/Excel file first');
@@ -90,12 +89,12 @@ export default function CustomerImportModal({ open, onClose, onImported }) {
             <h2 id="import-customers-title" className="font-bold text-lg">Import Customers</h2>
             <p className="text-xs text-slate-500 mt-0.5">Upload Excel or CSV. Duplicates are skipped.</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
 
-        <button type="button" onClick={downloadTemplate} className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-600 hover:underline">
+        <button type="button" onClick={downloadTemplate} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-600 hover:underline">
           <Download size={14} />
           Download Sample Template
         </button>
@@ -104,7 +103,7 @@ export default function CustomerImportModal({ open, onClose, onImported }) {
           <Upload size={22} className="text-slate-400" />
           <span className="text-sm font-medium">Drop CSV / Excel or click to browse</span>
           <span className="text-xs text-slate-400">{fileName || 'No file selected'}</span>
-          <input type="file" accept=".csv,.xlsx,.xls,text/csv" className="hidden" onChange={(e) => onFile(e.target.files?.[0])} />
+          <input type="file" accept=".csv,.xlsx,.xls,text/csv" className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" onChange={(e) => onFile(e.target.files?.[0])} />
         </label>
 
         {rows.length > 0 && (
@@ -126,14 +125,14 @@ export default function CustomerImportModal({ open, onClose, onImported }) {
         )}
 
         <div className="flex justify-end gap-2">
-          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm border border-slate-200">
             Cancel
           </button>
           <button
             type="button"
             disabled={loading || !rows.length}
             onClick={handleImport}
-            className="px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
+            className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
           >
             {loading ? 'Importing…' : 'Import Customers'}
           </button>

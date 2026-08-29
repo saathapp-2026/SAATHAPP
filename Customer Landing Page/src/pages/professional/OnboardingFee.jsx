@@ -24,7 +24,7 @@ function GroupFeeTable({ title, groups }) {
       <h3 className="font-semibold text-sm mb-3">{title}</h3>
       <table className="w-full text-left text-xs">
         <thead>
-          <tr className="text-slate-500 border-b border-white/10">
+          <tr className="transition-colors hover:bg-emerald-50/30 text-slate-500 border-b border-white/10">
             <th className="py-2 pr-3 font-medium">Group</th>
             <th className="py-2 pr-3 font-medium">Fee</th>
             <th className="py-2 pr-3 font-medium">Commission</th>
@@ -33,7 +33,7 @@ function GroupFeeTable({ title, groups }) {
         </thead>
         <tbody>
           {rows.map((g) => (
-            <tr key={g.label} className="border-b border-white/5 text-slate-300">
+            <tr key={g.label} className="transition-colors hover:bg-emerald-50/30 border-b border-white/5 text-slate-300">
               <td className="py-2 pr-3">{g.label}</td>
               <td className="py-2 pr-3">{formatRange(g.min, g.max)}</td>
               <td className="py-2 pr-3">{g.commissionMin}–{g.commissionMax}%</td>
@@ -54,7 +54,7 @@ function VillageFeeTable({ villageFees, categoryLabels }) {
       <h3 className="font-semibold text-sm mb-3">Village Pricing Table</h3>
       <table className="w-full text-left text-xs">
         <thead className="sticky top-0 bg-slate-900">
-          <tr className="text-slate-500 border-b border-white/10">
+          <tr className="transition-colors hover:bg-emerald-50/30 text-slate-500 border-b border-white/10">
             <th className="py-2 pr-3 font-medium">Profession</th>
             <th className="py-2 pr-3 font-medium">Fee</th>
             <th className="py-2 pr-3 font-medium">Commission</th>
@@ -65,7 +65,7 @@ function VillageFeeTable({ villageFees, categoryLabels }) {
           {ids.map((id) => {
             const row = villageFees[id];
             return (
-              <tr key={id} className="border-b border-white/5 text-slate-300">
+              <tr key={id} className="transition-colors hover:bg-emerald-50/30 border-b border-white/5 text-slate-300">
                 <td className="py-2 pr-3">{categoryLabels?.[id] || id}</td>
                 <td className="py-2 pr-3">{formatRange(row.min, row.max)}</td>
                 <td className="py-2 pr-3">{row.commissionMin}–{row.commissionMax}%</td>

@@ -18,7 +18,7 @@ export default function ViewReportModal({ open, onClose, report, onDownload, onP
               {report.dateFrom} → {report.dateTo} · {formatReportTime(report.generatedOn)}
             </p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -63,7 +63,7 @@ export default function ViewReportModal({ open, onClose, report, onDownload, onP
               </thead>
               <tbody>
                 {(report.preview?.rows || []).map((r) => (
-                  <tr key={r.label} className="border-t border-slate-100 dark:border-slate-800">
+                  <tr key={r.label} className="transition-colors hover:bg-emerald-50/30 border-t border-slate-100 dark:border-slate-800">
                     <td className="px-3 py-2">{r.label}</td>
                     <td className="px-3 py-2 tabular-nums font-medium">{r.value}</td>
                   </tr>

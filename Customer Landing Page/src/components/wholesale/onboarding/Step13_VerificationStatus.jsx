@@ -68,7 +68,7 @@ export default function Step13_VerificationStatus({ onGoToDashboard }) {
               type="button"
               onClick={handleSimulateApproval}
               disabled={isSimulating || isApproved}
-              className="inline-flex items-center gap-1.5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-2.5 text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition disabled:opacity-50"
+              className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-2.5 text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition disabled:opacity-50"
             >
               <RefreshCw size={14} className={isSimulating ? 'animate-spin' : ''} />
               {isApproved ? 'Approved' : 'Verify Application'}
@@ -78,7 +78,7 @@ export default function Step13_VerificationStatus({ onGoToDashboard }) {
               <button
                 type="button"
                 onClick={onGoToDashboard}
-                className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-6 py-2.5 text-xs font-extrabold text-white shadow-lg transition hover:scale-[1.03]"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-6 py-2.5 text-xs font-extrabold text-white shadow-lg transition hover:scale-[1.03]"
               >
                 <LayoutDashboard size={16} />
                 Open Dashboard
@@ -172,7 +172,7 @@ export default function Step13_VerificationStatus({ onGoToDashboard }) {
             <button
               type="button"
               onClick={onGoToDashboard}
-              className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-white text-slate-950 hover:bg-page px-8 py-3.5 text-sm font-extrabold shadow-2xl transition hover:scale-105"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-6 inline-flex items-center gap-2 rounded-2xl bg-white text-slate-950 hover:bg-page px-8 py-3.5 text-sm font-extrabold shadow-2xl transition hover:scale-105"
             >
               <LayoutDashboard size={18} />
               Launch Wholesale Dashboard

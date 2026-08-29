@@ -5,7 +5,7 @@ export default function Settings({ onBack }) {
   return (
     <div className="min-h-screen bg-page text-theme px-4 py-8 sm:px-6 lg:px-8 transition-colors duration-300 font-sans">
       <div className="mx-auto max-w-5xl rounded-[28px] border border-theme-border bg-surface p-6 shadow-xl">
-        <button onClick={onBack} className="flex items-center gap-2 text-sm font-semibold text-theme-secondary hover:text-theme transition-colors">
+        <button onClick={onBack} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex items-center gap-2 text-sm font-semibold text-theme-secondary hover:text-theme transition-colors">
           <ArrowLeft size={16} /> Back
         </button>
         <div className="mt-8 flex flex-col items-center justify-center rounded-[24px] border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-6 py-16 text-center">

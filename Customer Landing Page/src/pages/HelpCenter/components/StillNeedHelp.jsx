@@ -73,7 +73,7 @@ function StillNeedHelp() {
             <div>
               <button
                 onClick={scrollToContact}
-                className="h-[54px] px-8 rounded-[14px] bg-[#16A34A] text-white text-[16px] font-[600] shadow-[0_4px_14px_rgba(22,163,74,.25)] hover:bg-[#15803D] hover:shadow-[0_6px_20px_rgba(22,163,74,.35)] hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
+                className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none h-[54px] px-8 rounded-[14px] bg-[#16A34A] text-white text-[16px] font-[600] shadow-[0_4px_14px_rgba(22,163,74,.25)] hover:bg-[#15803D] hover:shadow-[0_6px_20px_rgba(22,163,74,.35)] hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
               >
                 <span>Start Live Assistance</span>
                 <ArrowRight size={18} />
@@ -109,7 +109,7 @@ function StillNeedHelp() {
               <div
                 key={item.title}
                 onClick={item.action}
-                className="
+                className="hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] 
                   group
                   rounded-[16px]
                   bg-white

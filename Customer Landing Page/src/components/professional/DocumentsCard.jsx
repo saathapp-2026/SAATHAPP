@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FileText, ShieldCheck, AlertCircle, UploadCloud, Check, Loader2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function DocumentsCard() {
   const [documents, setDocuments] = useState([
@@ -57,9 +58,7 @@ export default function DocumentsCard() {
         return doc;
       }));
       setUploadingId(null);
-      alert('Document uploaded successfully. Verification pending.');
-    }, 2000);
-  };
+      toast.success('Document uploaded successfully. Verification pending.') }, 2000)};
 
   return (
     <div className="bg-surface border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft hover:shadow-premium transition-all text-left space-y-6">

@@ -99,7 +99,7 @@ export default function MessagesTab() {
         )}
 
         <form onSubmit={handleSend} className="p-3 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2">
-          <button type="button" className="p-2 text-slate-400 hover:text-slate-200">
+          <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 text-slate-400 hover:text-slate-200">
             <Paperclip size={18} />
           </button>
           <input
@@ -111,7 +111,7 @@ export default function MessagesTab() {
           />
           <button
             type="submit"
-            className="rounded-2xl bg-emerald-600 hover:bg-emerald-500 p-2.5 text-white transition shadow"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-2xl bg-emerald-600 hover:bg-emerald-500 p-2.5 text-white transition shadow"
           >
             <Send size={16} />
           </button>

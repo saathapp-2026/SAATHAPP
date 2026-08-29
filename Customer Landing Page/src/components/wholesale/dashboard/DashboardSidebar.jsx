@@ -40,7 +40,7 @@ export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboa
   const { formData, addToast } = useWholesale();
 
   return (
-    <aside className="w-64 shrink-0 bg-slate-950 text-slate-300 border-r border-slate-800 flex flex-col h-screen sticky top-0 z-30 font-sans">
+    <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded w-64 shrink-0 bg-slate-950 text-slate-300 border-r border-slate-800 flex flex-col h-screen sticky top-0 z-30 font-sans">
       {/* Header Profile Brand with Official SaathApp Logo */}
       <div
         onClick={() => onSelectTab('profile')}
@@ -100,7 +100,7 @@ export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboa
         <button
           type="button"
           onClick={onBackToOnboarding}
-          className="w-full flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/60 p-2.5 text-xs font-bold text-slate-300 hover:bg-slate-800 transition"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/60 p-2.5 text-xs font-bold text-slate-300 hover:bg-slate-800 transition"
         >
           <span>Onboarding Progress</span>
           <ChevronRight size={14} className="text-emerald-400" />

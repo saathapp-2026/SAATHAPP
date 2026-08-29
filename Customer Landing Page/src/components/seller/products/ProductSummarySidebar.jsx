@@ -30,7 +30,7 @@ export default function ProductSummarySidebar({ draft, errors = {} }) {
   Object.values(errors).forEach((e) => e && warnings.push(e));
 
   return (
-    <aside className="space-y-3 sticky top-4 w-full min-w-0 overflow-x-hidden">
+    <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded space-y-3 sticky top-4 w-full min-w-0 overflow-x-hidden">
       <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-surface overflow-hidden">
         <div className="aspect-[4/3] bg-gradient-to-br from-amber-50 to-orange-100 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center overflow-hidden">
           {draft.media?.mainImage?.url?.startsWith('data:') || draft.media?.mainImage?.url?.startsWith('blob:') || draft.media?.mainImage?.url?.startsWith('http') ? (

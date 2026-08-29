@@ -67,8 +67,7 @@ export default function ExportReportModal({
       });
       if (res.success) {
         setPreview(res.data);
-        toast.success('Preview ready');
-      }
+        toast.success('Preview ready') }
     } catch {
       toast.error('Preview failed');
     } finally {
@@ -105,7 +104,7 @@ export default function ExportReportModal({
             <h2 id="export-report-title" className="font-bold text-lg">Export Report</h2>
             <p className="text-xs text-slate-500 mt-0.5">Configure filters and generate a downloadable report</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -245,14 +244,14 @@ export default function ExportReportModal({
         </div>
 
         <div className="sticky bottom-0 flex flex-wrap justify-end gap-2 px-5 py-4 border-t border-slate-200 dark:border-slate-800 bg-white/95">
-          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200 hover:bg-page">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm border border-slate-200 hover:bg-page">
             Cancel
           </button>
           <button
             type="button"
             disabled={loading}
             onClick={handlePreview}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-page disabled:opacity-50"
+            className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-page disabled:opacity-50"
           >
             <Eye size={14} />
             Preview Report
@@ -261,7 +260,7 @@ export default function ExportReportModal({
             type="button"
             disabled={loading}
             onClick={handleGenerate}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
+            className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
           >
             <Download size={14} />
             {loading ? 'Generating…' : 'Generate Report'}

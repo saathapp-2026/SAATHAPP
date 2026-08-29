@@ -48,7 +48,7 @@ export default function DeliveryRiderTopNav({
         <button
           type="button"
           onClick={onToggleMobileSidebar}
-          className="md:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer active:scale-95 transition-all duration-150 hover:bg-page"
+          className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none md:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer active:scale-95 transition-all duration-150 hover:bg-page"
         >
           <Truck size={20} />
         </button>
@@ -57,7 +57,7 @@ export default function DeliveryRiderTopNav({
         <button
           type="button"
           onClick={toggleOnlineShift}
-          className={`flex items-center gap-2 rounded-2xl px-4 py-2 text-xs font-black transition-all duration-150 shadow-sm cursor-pointer active:scale-95 ${isOnline
+          className={`duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex items-center gap-2 rounded-2xl px-4 py-2 text-xs font-black transition-all duration-150 shadow-sm cursor-pointer active:scale-95 ${isOnline
             ? 'bg-emerald-500 text-slate-950 hover:bg-emerald-400 ring-2 ring-emerald-500/20'
             : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
             }`}
@@ -107,7 +107,7 @@ export default function DeliveryRiderTopNav({
         <button
           type="button"
           onClick={onTriggerSos}
-          className="flex items-center gap-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 px-2.5 sm:px-3 py-1.5 text-xs font-black text-white shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+          className="duration-200 active:scale-[0.98] flex items-center gap-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 px-2.5 sm:px-3 py-1.5 text-xs font-black text-white shadow-md cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-rose-500/50"
           title="Emergency SOS"
         >
           <AlertTriangle size={14} className="animate-pulse" />
@@ -118,7 +118,7 @@ export default function DeliveryRiderTopNav({
         <button
           type="button"
           onClick={handleSupportClick}
-          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-300 text-slate-800 dark:text-slate-200 hover:bg-page cursor-pointer font-extrabold text-xs shadow-sm active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
+          className="duration-200 active:scale-[0.98] flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-300 text-slate-800 dark:text-slate-200 hover:bg-page cursor-pointer font-extrabold text-xs shadow-sm active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
           title="SaathApp Support & Help Center"
         >
           <HelpCircle size={15} className="text-amber-500" />
@@ -213,7 +213,7 @@ export default function DeliveryRiderTopNav({
         <button
           type="button"
           onClick={onOpenWithdrawModal}
-          className="flex items-center gap-1.5 sm:gap-2 rounded-2xl bg-amber-500/10 border border-amber-500/30 px-2.5 sm:px-3.5 py-1.5 text-xs font-extrabold text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
+          className="duration-200 active:scale-[0.98] flex items-center gap-1.5 sm:gap-2 rounded-2xl bg-amber-500/10 border border-amber-500/30 px-2.5 sm:px-3.5 py-1.5 text-xs font-extrabold text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
         >
           <Wallet size={15} />
           <span>Wallet ₹{dashboardData.kpis.walletBalance.toLocaleString('en-IN')}</span>
@@ -223,7 +223,7 @@ export default function DeliveryRiderTopNav({
         <button
           type="button"
           onClick={toggleDarkMode}
-          className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-page transition cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
+          className="duration-200 active:scale-[0.98] p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-page transition cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none focus:ring-2 focus:ring-amber-500/40"
         >
           {darkMode ? <Sun size={17} className="text-amber-400" /> : <Moon size={17} />}
         </button>

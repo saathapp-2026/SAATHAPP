@@ -154,7 +154,7 @@ export default function RatingCard() {
                   />
                   <button
                     type="submit"
-                    className="px-3.5 py-1.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-black uppercase flex items-center justify-center cursor-pointer shadow-sm"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-3.5 py-1.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-black uppercase flex items-center justify-center cursor-pointer shadow-sm"
                   >
                     <Send size={12} />
                   </button>

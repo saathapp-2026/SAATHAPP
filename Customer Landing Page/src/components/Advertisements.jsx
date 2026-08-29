@@ -42,14 +42,14 @@ export default function Advertisements() {
       {/* Full-width Carousel Controls */}
       <button
         onClick={handlePrev}
-        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300"
+        className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300"
         title="Previous ad"
       >
         <ChevronLeft size={16} />
       </button>
       <button
         onClick={handleNext}
-        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300"
+        className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300"
         title="Next ad"
       >
         <ChevronRight size={16} />

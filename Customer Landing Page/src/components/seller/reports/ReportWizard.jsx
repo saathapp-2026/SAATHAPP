@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { X, ChevronLeft, ChevronRight, AlertTriangle } from 'lucide-react';
 import toast from 'react-hot-toast';
 import SellerOverlay from '../SellerOverlay';
+import ConfirmDialog from '../orders/ConfirmDialog';
 import { SELLER_Z } from '../../../config/seller/sellerZIndex';
 import {
   REPORT_TYPES,
@@ -27,6 +28,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
   const [draft, setDraft] = useState(() => loadWizardDraft());
   const [busy, setBusy] = useState(false);
   const [dirty, setDirty] = useState(false);
+  const [confirmCancel, setConfirmCancel] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -58,7 +60,10 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
   };
 
   const requestClose = () => {
-    if (dirty && !window.confirm('You have unsaved draft selections. Leave without generating?')) return;
+    if (dirty) {
+      setConfirmCancel(true);
+      return;
+    }
     onClose?.();
   };
 
@@ -128,7 +133,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
               Step {draft.step} of 5 · Draft auto-saved
             </p>
           </div>
-          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={requestClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -362,13 +367,26 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
               type="button"
               disabled={busy || !canNext()}
               onClick={handleGenerate}
-              className="rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 text-sm font-semibold disabled:opacity-40"
+              className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 text-sm font-semibold disabled:opacity-40"
             >
               {busy ? 'Generating…' : 'Generate & Export'}
             </button>
           )}
         </div>
       </div>
+      <ConfirmDialog
+        open={confirmCancel}
+        title="Discard changes?"
+        message="Your unsaved draft selections will be lost."
+        danger={true}
+        confirmLabel="Discard Changes"
+        cancelLabel="Keep Editing"
+        onCancel={() => setConfirmCancel(false)}
+        onConfirm={() => {
+          setConfirmCancel(false);
+          onClose();
+        }}
+      />
     </SellerOverlay>
   );
 }

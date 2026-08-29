@@ -324,40 +324,25 @@ function getAuthApiUrl() {
 }
 
 export async function requestRealOtp(phone) {
-  if (isDevMockEnabled) {
-    console.warn("DEV MOCK MODE: Faking OTP request for", phone);
-    return new Promise(resolve => setTimeout(() => resolve({ success: true }), 1000));
-  }
-  const apiUrl = getAuthApiUrl();
-  const response = await fetch(`${apiUrl}/api/auth/otp/send`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ phone: `+91${phone}` })
-  });
-  if (!response.ok) {
-    throw new Error('Failed to request OTP');
-  }
-  return response.json();
+  // STRICT MOCK FOR STEP 4
+  console.warn("MOCK MODE: Faking OTP request for", phone);
+  return new Promise(resolve => setTimeout(() => resolve({ success: true }), 500));
 }
 
+export const TEST_OTP = '123456';
 export async function verifyRealOtp(phone, otp) {
-  if (isDevMockEnabled) {
-    console.warn("DEV MOCK MODE: Faking OTP verification");
-    return new Promise(resolve => setTimeout(() => resolve({
-      user: { id: 'dev-user-1', name: 'Developer User', phone, role: 'customer' },
-      token: 'mock-jwt-token-123'
-    }), 1500));
-  }
-  const apiUrl = getAuthApiUrl();
-  const response = await fetch(`${apiUrl}/api/auth/otp/verify`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ phone: `+91${phone}`, otp })
-  });
-  if (!response.ok) {
-    throw new Error('Invalid or expired OTP');
-  }
-  return response.json(); // Expected to return { user, token }
+  // STRICT MOCK FOR STEP 4
+  console.warn("MOCK MODE: Faking OTP verification");
+  return new Promise((resolve, reject) => setTimeout(() => {
+    if (otp !== TEST_OTP) {
+      reject(new Error('Invalid OTP. Please enter 123456 for testing.'));
+    } else {
+      resolve({
+        user: { id: 'mock-user-1', name: 'Test User', phone, role: 'customer' },
+        token: 'mock-jwt-token-123'
+      });
+    }
+  }, 500));
 }
 
 export async function authenticateWithGoogle(googleCredential) {

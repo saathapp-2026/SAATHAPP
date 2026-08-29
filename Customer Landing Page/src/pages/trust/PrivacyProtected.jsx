@@ -243,7 +243,7 @@ export default function PrivacyProtectedPage() {
             <div className="mt-3 flex items-center justify-center gap-4">
               <a
                 href="mailto:privacy@saathapp.in"
-                className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-xs font-bold text-white transition hover:bg-slate-800"
+                className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-xs font-bold text-white transition hover:bg-slate-800"
               >
                 <Mail size={14} /> Contact Privacy Desk
               </a>

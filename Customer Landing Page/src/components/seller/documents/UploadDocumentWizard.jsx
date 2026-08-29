@@ -206,7 +206,7 @@ export default function UploadDocumentWizard({
               Step {draft.step}/5 · Draft auto-saves
             </p>
           </div>
-          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={requestClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -319,7 +319,7 @@ export default function UploadDocumentWizard({
                     type="button"
                     disabled
                     title="Camera capture — coming soon"
-                    className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium text-slate-400 cursor-not-allowed"
+                    className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1 rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium text-slate-400 cursor-not-allowed"
                   >
                     <Camera size={14} /> Camera
                   </button>
@@ -328,7 +328,7 @@ export default function UploadDocumentWizard({
                   ref={inputRef}
                   type="file"
                   accept=".pdf,.jpg,.jpeg,.png,.webp,.docx,.xlsx,image/*,application/pdf"
-                  className="hidden"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden"
                   onChange={(e) => acceptFile(e.target.files?.[0])}
                 />
               </div>
@@ -452,7 +452,7 @@ export default function UploadDocumentWizard({
             <button
               type="button"
               onClick={requestClose}
-              className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium"
             >
               Cancel
             </button>
@@ -461,7 +461,7 @@ export default function UploadDocumentWizard({
                 type="button"
                 disabled={busy}
                 onClick={saveDraft}
-                className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium"
+                className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium"
               >
                 Save Draft
               </button>
@@ -478,7 +478,7 @@ export default function UploadDocumentWizard({
                 <button
                   type="button"
                   onClick={continueStep}
-                  className="rounded-xl bg-emerald-600 text-white px-4 py-2 text-sm font-semibold hover:bg-emerald-700"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-xl bg-emerald-600 text-white px-4 py-2 text-sm font-semibold hover:bg-emerald-700"
                 >
                   Continue
                 </button>
@@ -487,7 +487,7 @@ export default function UploadDocumentWizard({
                   type="button"
                   disabled={busy}
                   onClick={submit}
-                  className="rounded-xl bg-emerald-600 text-white px-4 py-2 text-sm font-semibold hover:bg-emerald-700 disabled:opacity-60"
+                  className="transition-all duration-200 active:scale-[0.98] disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-xl bg-emerald-600 text-white px-4 py-2 text-sm font-semibold hover:bg-emerald-700 disabled:opacity-60"
                 >
                   {busy ? 'Submitting…' : 'Submit'}
                 </button>

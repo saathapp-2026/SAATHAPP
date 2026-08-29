@@ -23,7 +23,7 @@ export default function MarketingNotificationsPage() {
             <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50">Campaign alerts & review updates</h2>
             <p className="max-w-2xl text-sm text-slate-500 dark:text-slate-400">Stay on top of campaign approvals, payment confirmations and review results with real-time alerts.</p>
           </div>
-          <button type="button" onClick={handleMarkAll} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
+          <button type="button" onClick={handleMarkAll} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
             Mark all read {unreadCount ? `(${unreadCount})` : ''}
           </button>
         </div>

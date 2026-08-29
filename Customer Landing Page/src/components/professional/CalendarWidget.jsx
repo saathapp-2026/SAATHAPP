@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, Info, Plus } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function CalendarWidget() {
   const [blockedDates, setBlockedDates] = useState([]); // Empty default state
@@ -15,7 +16,7 @@ export default function CalendarWidget() {
   const handleDayClick = (day) => {
     // Cannot block days with active jobs
     if (jobDays[day]) {
-      alert('Cannot block this date. You have active jobs scheduled.');
+      toast.success('Cannot block this date. You have active jobs scheduled.');
       return;
     }
     
@@ -32,11 +33,11 @@ export default function CalendarWidget() {
     e.preventDefault();
     const dayVal = parseInt(newLeave.date);
     if (isNaN(dayVal) || dayVal < 1 || dayVal > 31) {
-      alert('Please enter a valid day between 1 and 31.');
+      toast.success('Please enter a valid day between 1 and 31.');
       return;
     }
     if (jobDays[dayVal]) {
-      alert('Cannot request leave. You have active jobs scheduled on this day.');
+      toast.success('Cannot request leave. You have active jobs scheduled on this day.');
       return;
     }
 
@@ -51,8 +52,7 @@ export default function CalendarWidget() {
     setLeaveRequests(prev => [newReq, ...prev]);
     setBlockedDates(prev => [...prev, dayVal]);
     setNewLeave({ date: '', reason: '' });
-    alert('Leave request submitted and approved successfully!');
-  };
+    toast.success('Leave request submitted and approved successfully!') };
 
   // July 2026 starts on a Wednesday (3 empty spots in Sunday-start calendar week)
   const emptyDays = 3;
@@ -186,7 +186,7 @@ export default function CalendarWidget() {
 
             <button
               type="submit"
-              className="btn-primary w-full cursor-pointer flex items-center justify-center gap-1.5 text-xs py-2.5"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none btn-primary w-full cursor-pointer flex items-center justify-center gap-1.5 text-xs py-2.5"
             >
               <Plus size={14} />
               <span>Submit Leave Request</span>

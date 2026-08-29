@@ -39,7 +39,7 @@ export default function ShareReportModal({ open, onClose, report }) {
             <h2 id="share-title" className="text-lg font-bold">Share Report</h2>
             <p className="text-xs text-slate-500 mt-0.5 truncate max-w-[280px]">{report.name}</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -52,8 +52,7 @@ export default function ShareReportModal({ open, onClose, report }) {
             onClick={async () => {
               try {
                 await navigator.clipboard.writeText(link);
-                toast.success('Link copied');
-              } catch {
+                toast.success('Link copied') } catch {
                 toast.error('Copy failed');
               }
             }}

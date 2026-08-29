@@ -33,14 +33,14 @@ export default function Reviews() {
         <>
           <button
             onClick={handlePrev}
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-page hover:bg-slate-200 text-slate-600 dark:text-slate-300 hidden sm:flex items-center justify-center transition-colors shadow-sm border border-slate-200 z-10"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-page hover:bg-slate-200 text-slate-600 dark:text-slate-300 hidden sm:flex items-center justify-center transition-colors shadow-sm border border-slate-200 z-10"
             title="Previous Review"
           >
             <ChevronLeft size={16} />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-page hover:bg-slate-200 text-slate-600 dark:text-slate-300 hidden sm:flex items-center justify-center transition-colors shadow-sm border border-slate-200 z-10"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-page hover:bg-slate-200 text-slate-600 dark:text-slate-300 hidden sm:flex items-center justify-center transition-colors shadow-sm border border-slate-200 z-10"
             title="Next Review"
           >
             <ChevronRight size={16} />

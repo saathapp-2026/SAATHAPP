@@ -17,8 +17,20 @@ export default function SellerOverlay({
   label,
   className = 'flex items-center justify-center p-4',
   contentClassName = '',
+  preventBackdropClose = false,
 }) {
   useScrollLock(!!open);
+  
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose?.();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [open, onClose]);
 
   if (!open) return null;
 
@@ -31,12 +43,11 @@ export default function SellerOverlay({
       aria-labelledby={labelledBy}
       aria-label={label}
     >
-      <button
-        type="button"
-        className="absolute inset-0 bg-black/50"
+      <div
+        className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md cursor-pointer active:scale-[0.99] absolute inset-0 bg-black/50"
         style={{ zIndex: 0 }}
         aria-label="Close dialog"
-        onClick={onClose}
+        onClick={() => { if (!preventBackdropClose) onClose?.() }}
       />
       <div className={`relative ${contentClassName}`} style={{ zIndex: 1 }}>
         {children}

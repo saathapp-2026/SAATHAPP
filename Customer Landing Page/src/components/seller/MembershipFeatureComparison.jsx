@@ -68,7 +68,7 @@ export default function MembershipFeatureComparison({ variant = 'dark' }) {
             {features.map((row, i) => (
               <tr
                 key={row.feature}
-                className={`border-t ${isLight ? 'border-slate-100 dark:border-slate-800' : 'border-white/5'} ${
+                className={`transition-colors hover:bg-emerald-50/30 border-t ${isLight ? 'border-slate-100 dark:border-slate-800' : 'border-white/5'} ${
                   i % 2 === 0 ? '' : isLight ? 'bg-slate-50/50' : 'bg-white/[0.02]'
                 }`}
               >

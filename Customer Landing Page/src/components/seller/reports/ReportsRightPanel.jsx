@@ -54,7 +54,7 @@ export default function ReportsRightPanel({
   const recentDl = useMemo(() => downloads.slice(0, 4), [downloads]);
 
   return (
-    <aside className="space-y-4 lg:sticky lg:top-4 lg:self-start" aria-label="Report shortcuts">
+    <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded space-y-4 lg:sticky lg:top-4 lg:self-start" aria-label="Report shortcuts">
       <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 space-y-3 shadow-sm">
         <div>
           <h3 className="text-sm font-bold text-slate-900 dark:text-slate-50">Generate Report</h3>
@@ -140,7 +140,7 @@ export default function ReportsRightPanel({
       <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 shadow-sm">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-bold text-slate-900 dark:text-slate-50">Scheduled Reports</h3>
-          <button type="button" onClick={onViewAllSchedules} className="text-[11px] font-semibold text-emerald-600 hover:underline">
+          <button type="button" onClick={onViewAllSchedules} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-[11px] font-semibold text-emerald-600 hover:underline">
             View All
           </button>
         </div>
@@ -212,7 +212,7 @@ export default function ReportsRightPanel({
         <button
           type="button"
           onClick={onViewAllDownloads}
-          className="w-full rounded-xl border border-slate-200 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-page"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full rounded-xl border border-slate-200 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-page"
         >
           View All Downloads
         </button>

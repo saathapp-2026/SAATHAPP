@@ -25,7 +25,7 @@ const RewardUnlockModal = ({ isOpen, onClose, rewardDetails }) => {
         
         <button 
           onClick={onClose}
-          className="w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700"
         >
           Awesome!
         </button>

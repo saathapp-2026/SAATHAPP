@@ -242,7 +242,7 @@ export default function SaathPackLandingPage({
                 </div>
                 <h3 className="font-bold text-slate-900 text-sm group-hover:text-primary transition-colors">{cat.name}</h3>
                 <p className="text-xs text-slate-500 mt-1 mb-4 h-8 flex items-center justify-center">{cat.desc}</p>
-                <button className="w-full py-1.5 border border-primary text-primary text-xs font-bold rounded-lg group-hover:bg-primary group-hover:text-white transition-colors mt-auto">
+                <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-1.5 border border-primary text-primary text-xs font-bold rounded-lg group-hover:bg-primary group-hover:text-white transition-colors mt-auto">
                   Shop Now
                 </button>
               </div>

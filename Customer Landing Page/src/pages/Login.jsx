@@ -196,7 +196,7 @@ export default function Login({ onLogin, onSignup, onBack, error, defaultMode = 
                 Genuine authentication is enforced. To test the login journey, please configure VITE_AUTH_API_URL and VITE_GOOGLE_CLIENT_ID in your environment variables, and connect a real authentication backend (e.g. Firebase or custom REST API).
               </p>
               <button 
-                onClick={() => { setConfigError(false); setLocalError(''); }}
+                onClick={() => { setConfigError(false); setLocalError('') }}
                 className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-xl hover:opacity-90 transition-opacity"
               >
                 Go Back
@@ -278,7 +278,7 @@ export default function Login({ onLogin, onSignup, onBack, error, defaultMode = 
                 <button 
                   type="submit" 
                   disabled={phone.length < 10}
-                  className="w-full bg-primary hover:bg-primary/90 active:scale-[0.98] disabled:opacity-50 disabled:active:scale-100 text-white font-black py-4 rounded-xl transition-all flex items-center justify-center gap-2 tracking-wide shadow-md shadow-primary/20"
+                  className="duration-200 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full bg-primary hover:bg-primary/90 active:scale-[0.98] disabled:opacity-50 disabled:active:scale-100 text-white font-black py-4 rounded-xl transition-all flex items-center justify-center gap-2 tracking-wide shadow-md shadow-primary/20"
                 >
                   Continue <ChevronRight size={18} />
                 </button>
@@ -321,13 +321,13 @@ export default function Login({ onLogin, onSignup, onBack, error, defaultMode = 
 
               <div className="mt-8 text-center">
                 <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-relaxed px-4">
-                  By continuing, you agree to our <a href="/terms-of-service" className="text-primary hover:underline">Terms & Conditions</a> and <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
+                  By continuing, you agree to our <a href="/terms-of-service" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-primary hover:underline">Terms & Conditions</a> and <a href="/privacy-policy" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-primary hover:underline">Privacy Policy</a>.
                 </p>
               </div>
             </>
           ) : (
             <>
-              <button onClick={() => { setStep(1); setOtp(['','','','','','']); }} className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors mb-6">
+              <button onClick={() => { setStep(1); setOtp(['','','','','','']) }} className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors mb-6">
                 <ArrowLeft size={18} />
               </button>
 
@@ -363,7 +363,7 @@ export default function Login({ onLogin, onSignup, onBack, error, defaultMode = 
                 <button 
                   type="submit" 
                   disabled={otp.join('').length < 6}
-                  className="w-full bg-primary hover:bg-primary/90 active:scale-[0.98] disabled:opacity-50 disabled:active:scale-100 text-white font-black py-4 rounded-xl transition-all flex items-center justify-center gap-2 tracking-wide shadow-md shadow-primary/20"
+                  className="duration-200 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full bg-primary hover:bg-primary/90 active:scale-[0.98] disabled:opacity-50 disabled:active:scale-100 text-white font-black py-4 rounded-xl transition-all flex items-center justify-center gap-2 tracking-wide shadow-md shadow-primary/20"
                 >
                   Verify & Continue
                 </button>
@@ -383,7 +383,7 @@ export default function Login({ onLogin, onSignup, onBack, error, defaultMode = 
                   </button>
                   <div className="w-px h-4 bg-slate-300 dark:bg-slate-700"></div>
                   <button 
-                    onClick={() => { setStep(1); setOtp(['','','','','','']); }}
+                    onClick={() => { setStep(1); setOtp(['','','','','','']) }}
                     className="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
                   >
                     Change mobile number

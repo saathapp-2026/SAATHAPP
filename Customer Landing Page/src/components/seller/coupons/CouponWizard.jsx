@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { X, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 import toast from 'react-hot-toast';
+import ConfirmDialog from '../orders/ConfirmDialog';
 import SellerOverlay from '../SellerOverlay';
 import { SELLER_Z } from '../../../config/seller/sellerZIndex';
 import {
@@ -23,6 +24,7 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
   const [draft, setDraft] = useState(() => emptyCouponDraft(initialTypeId || 'percentage'));
   const [busy, setBusy] = useState(false);
   const [dirty, setDirty] = useState(false);
+  const [confirmCancel, setConfirmCancel] = useState(false);
   const [previewDevice, setPreviewDevice] = useState('desktop');
   const [aiBusy, setAiBusy] = useState(false);
 
@@ -61,7 +63,10 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
   };
 
   const requestClose = () => {
-    if (dirty && !window.confirm('Leave without publishing? Draft will be kept.')) return;
+    if (dirty) {
+      setConfirmCancel(true);
+      return;
+    }
     onClose?.();
   };
 
@@ -71,8 +76,7 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
       const res = await getAiMarketingSuggestion(kind, { category: draft.categories?.[0] });
       const first = res.data?.[0];
       if (first && fieldMap) patch(fieldMap(first));
-      toast.success('AI suggestion applied');
-    } catch {
+      toast.success('AI suggestion applied') } catch {
       toast.error('AI suggestion failed');
     } finally {
       setAiBusy(false);
@@ -115,7 +119,7 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
               {type.label} · Step {draft.step} of 6
             </p>
           </div>
-          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={requestClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -362,6 +366,19 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
           </div>
         </div>
       </div>
+      <ConfirmDialog
+        open={confirmCancel}
+        title="Discard changes?"
+        message="Your unsaved changes will be lost."
+        danger={true}
+        confirmLabel="Discard Changes"
+        cancelLabel="Keep Editing"
+        onCancel={() => setConfirmCancel(false)}
+        onConfirm={() => {
+          setConfirmCancel(false);
+          onClose();
+        }}
+      />
     </SellerOverlay>
   );
 }

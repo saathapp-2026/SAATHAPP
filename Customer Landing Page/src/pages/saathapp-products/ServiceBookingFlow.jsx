@@ -253,7 +253,7 @@ export default function ServiceBookingFlow({
               <button 
                 onClick={handleNext}
                 disabled={(step === 1 && (!selectedDate || !selectedTime)) || (step === 2 && !selectedAddress)}
-                className="w-full bg-gradient-primary text-white py-3.5 rounded-xl font-black text-sm uppercase tracking-wider shadow-premium hover:shadow-glow-primary transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="duration-200 active:scale-[0.98] disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full bg-gradient-primary text-white py-3.5 rounded-xl font-black text-sm uppercase tracking-wider shadow-premium hover:shadow-glow-primary transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {step === 3 ? 'Confirm Booking' : 'Continue'}
               </button>

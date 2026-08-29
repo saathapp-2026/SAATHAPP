@@ -290,7 +290,7 @@ function SectionBody({ section }) {
           <p className="font-semibold text-slate-900">Customer Support:</p>
           <p className="mt-1 flex items-center gap-2">
             <Mail size={16} className="shrink-0 text-primary" />
-            <a href="mailto:support@saathapp.in" className="text-primary hover:underline">
+            <a href="mailto:support@saathapp.in" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-primary hover:underline">
               support@saathapp.in
             </a>
           </p>
@@ -299,7 +299,7 @@ function SectionBody({ section }) {
           <p className="font-semibold text-slate-900">Service Support:</p>
           <p className="mt-1 flex items-center gap-2">
             <Mail size={16} className="shrink-0 text-primary" />
-            <a href="mailto:company@saathapp.in" className="text-primary hover:underline">
+            <a href="mailto:company@saathapp.in" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-primary hover:underline">
               company@saathapp.in
             </a>
           </p>

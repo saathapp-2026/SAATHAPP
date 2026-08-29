@@ -621,7 +621,7 @@ export default function RiderActiveDeliveriesTab() {
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow shrink-0 cursor-pointer"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow shrink-0 cursor-pointer"
                   >
                     Verify OTP
                   </button>
@@ -993,7 +993,7 @@ export default function RiderActiveDeliveriesTab() {
           <button
             type="button"
             onClick={handleCompleteDelivery}
-            className="py-2.5 px-3 rounded-2xl bg-[#00986C] hover:bg-emerald-700 text-white shadow-lg ring-2 ring-emerald-500/20 flex items-center gap-2 transition cursor-pointer"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none py-2.5 px-3 rounded-2xl bg-[#00986C] hover:bg-emerald-700 text-white shadow-lg ring-2 ring-emerald-500/20 flex items-center gap-2 transition cursor-pointer"
           >
             <CheckCircle2 size={20} className="shrink-0" />
             <div className="text-left min-w-0">
@@ -1130,7 +1130,7 @@ export default function RiderActiveDeliveriesTab() {
                 onChange={(e) => setChatInput(e.target.value)}
                 className="flex-1 px-3 py-2 rounded-xl border border-slate-300 bg-page dark:bg-slate-950 text-xs font-semibold text-slate-900 dark:text-white focus:outline-none"
               />
-              <button type="submit" className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs flex items-center gap-1">
+              <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs flex items-center gap-1">
                 <Send size={14} /> Send
               </button>
             </form>
@@ -1340,7 +1340,7 @@ export default function RiderActiveDeliveriesTab() {
               <button
                 type="button"
                 onClick={handleFinishDeliveryFlow}
-                className="py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-center shadow cursor-pointer"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-center shadow cursor-pointer"
               >
                 ⭐ Rate Customer
               </button>

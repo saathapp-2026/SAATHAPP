@@ -112,9 +112,9 @@ export default function SaathPackProductDetails({
                   <label className="block text-sm font-bold text-slate-700 mb-2">Quantity (Packs)</label>
                   <div className="flex items-center gap-4">
                     <div className="flex items-center border border-slate-300 rounded-lg bg-white">
-                      <button onClick={decrement} className="p-3 text-slate-500 hover:text-primary hover:bg-slate-50 rounded-l-lg transition-colors"><Minus className="w-4 h-4" /></button>
+                      <button onClick={decrement} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-3 text-slate-500 hover:text-primary hover:bg-slate-50 rounded-l-lg transition-colors"><Minus className="w-4 h-4" /></button>
                       <span className="w-12 text-center font-bold text-slate-800">{quantity}</span>
-                      <button onClick={increment} className="p-3 text-slate-500 hover:text-primary hover:bg-slate-50 rounded-r-lg transition-colors"><Plus className="w-4 h-4" /></button>
+                      <button onClick={increment} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-3 text-slate-500 hover:text-primary hover:bg-slate-50 rounded-r-lg transition-colors"><Plus className="w-4 h-4" /></button>
                     </div>
                     <div className="text-sm text-slate-500">
                       Total: <span className="font-bold text-slate-700">{quantity * product.packSize} pcs</span>

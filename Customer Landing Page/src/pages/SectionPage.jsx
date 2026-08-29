@@ -5,7 +5,7 @@ export default function SectionPage({ title, subtitle, icon: Icon = Sparkles, on
   return (
     <div className="min-h-screen bg-page text-theme px-4 py-8 sm:px-6 lg:px-8 transition-colors duration-300 font-sans">
       <div className="mx-auto max-w-5xl rounded-[28px] border border-theme-border bg-surface p-5 shadow-xl sm:p-8">
-        <button onClick={onBack} className="flex items-center gap-2 text-sm font-semibold text-theme-secondary hover:text-theme transition-colors">
+        <button onClick={onBack} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex items-center gap-2 text-sm font-semibold text-theme-secondary hover:text-theme transition-colors">
           <ArrowLeft size={16} /> Back to profile
         </button>
 

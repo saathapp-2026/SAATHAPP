@@ -116,7 +116,7 @@ export default function ProductPreview({ draft, onGoToImages }) {
                     <button
                       type="button"
                       onClick={onGoToImages}
-                      className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-white"
+                      className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-white"
                     >
                       <Upload size={12} /> Go to Images
                     </button>
@@ -280,7 +280,7 @@ export default function ProductPreview({ draft, onGoToImages }) {
               <p className="text-slate-500 text-xs mt-0.5">SAATHAPP Verified Partner · GST invoice available</p>
             </div>
 
-            <button type="button" className="w-full py-2.5 rounded-xl bg-emerald-500 text-white text-sm font-bold">
+            <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-2.5 rounded-xl bg-emerald-500 text-white text-sm font-bold">
               Add to Cart
             </button>
           </div>

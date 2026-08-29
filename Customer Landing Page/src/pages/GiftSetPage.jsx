@@ -538,14 +538,14 @@ export default function GiftSetPage({
         {/* MAIN LAYOUT: LEFT FILTERS SIDEBAR + PRODUCT GRID */}
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           {/* LEFT FILTERS SIDEBAR */}
-          <aside className="w-full lg:w-64 shrink-0 bg-white dark:bg-slate-900 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-6">
+          <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full lg:w-64 shrink-0 bg-white dark:bg-slate-900 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-6">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="font-black text-sm uppercase tracking-wider flex items-center gap-2">
                 <Filter size={16} className="text-rose-500" /> Filters
               </h3>
               <button
                 onClick={clearAllFilters}
-                className="text-xs font-bold text-rose-500 hover:underline cursor-pointer"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-xs font-bold text-rose-500 hover:underline cursor-pointer"
               >
                 Clear All
               </button>
@@ -693,7 +693,7 @@ export default function GiftSetPage({
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-1.5 rounded-lg bg-rose-500 text-white font-bold text-xs cursor-pointer hover:bg-rose-600 transition-colors shadow-2xs"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-1.5 rounded-lg bg-rose-500 text-white font-bold text-xs cursor-pointer hover:bg-rose-600 transition-colors shadow-2xs"
                 >
                   Apply Price Range
                 </button>
@@ -755,7 +755,7 @@ export default function GiftSetPage({
                 <select
                   value={sortBy}
                   onChange={handleSortChange}
-                  className="bg-slate-100 dark:bg-slate-800 border-none rounded-xl text-xs font-bold py-2 px-3 outline-none focus:ring-2 focus:ring-rose-500 cursor-pointer"
+                  className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 bg-slate-100 dark:bg-slate-800 border-none rounded-xl text-xs font-bold py-2 px-3 outline-none focus:ring-2 focus:ring-rose-500 cursor-pointer"
                 >
                   <option value="popular">Popularity</option>
                   <option value="price_low">Price: Low to High</option>
@@ -776,7 +776,7 @@ export default function GiftSetPage({
                 </p>
                 <button
                   onClick={clearAllFilters}
-                  className="px-5 py-2.5 rounded-xl bg-rose-500 text-white font-bold text-xs uppercase tracking-wider shadow-md cursor-pointer hover:bg-rose-600"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 rounded-xl bg-rose-500 text-white font-bold text-xs uppercase tracking-wider shadow-md cursor-pointer hover:bg-rose-600"
                 >
                   Reset All Filters
                 </button>
@@ -948,7 +948,7 @@ export default function GiftSetPage({
                   <div className="flex items-center gap-3">
                     <label className="px-4 py-2 rounded-xl border border-dashed border-rose-400 text-rose-600 dark:text-rose-400 font-bold cursor-pointer hover:bg-rose-500/10 flex items-center gap-1.5">
                       <ImageIcon size={14} /> Choose Image
-                      <input type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
+                      <input type="file" accept="image/*" onChange={handlePhotoUpload} className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" />
                     </label>
                     {customizationForm.photo && (
                       <span className="text-slate-500 font-bold truncate max-w-[200px]">{customizationForm.photo}</span>
@@ -1007,7 +1007,7 @@ export default function GiftSetPage({
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold uppercase tracking-wider cursor-pointer shadow-md"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold uppercase tracking-wider cursor-pointer shadow-md"
                   >
                     Confirm & Add to Cart
                   </button>

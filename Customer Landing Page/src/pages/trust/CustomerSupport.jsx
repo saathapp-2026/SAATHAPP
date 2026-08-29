@@ -163,7 +163,7 @@ export default function CustomerSupportPage() {
                   </p>
                   <a
                     href="tel:+919128842027"
-                    className="mt-6 inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-xs font-bold text-slate-950 hover:bg-emerald-400 transition"
+                    className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-6 inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-xs font-bold text-slate-950 hover:bg-emerald-400 transition"
                   >
                     <Phone size={16} /> Call +91 9128842027
                   </a>
@@ -189,7 +189,7 @@ export default function CustomerSupportPage() {
                   </div>
                   <a
                     href={card.link}
-                    className="mt-6 w-full text-center rounded-xl bg-page py-3 text-xs font-bold text-slate-700 transition hover:bg-emerald-600 hover:text-white"
+                    className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-6 w-full text-center rounded-xl bg-page py-3 text-xs font-bold text-slate-700 transition hover:bg-emerald-600 hover:text-white"
                   >
                     {card.action}
                   </a>
@@ -223,7 +223,7 @@ export default function CustomerSupportPage() {
                     href={item.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-2 block break-all text-sm font-bold text-emerald-600 hover:underline"
+                    className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded mt-2 block break-all text-sm font-bold text-emerald-600 hover:underline"
                   >
                     {item.value}
                   </a>

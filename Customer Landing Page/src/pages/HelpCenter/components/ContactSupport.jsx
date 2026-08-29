@@ -242,7 +242,7 @@ function ContactSupport() {
                 />
                 <button
                   type="submit"
-                  className="h-[42px] px-4 rounded-[10px] bg-[#00A651] text-white hover:bg-[#008f44] transition-colors"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none h-[42px] px-4 rounded-[10px] bg-[#00A651] text-white hover:bg-[#008f44] transition-colors"
                 >
                   <Send size={16} />
                 </button>

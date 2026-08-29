@@ -56,7 +56,7 @@ export default function BrandingHardwareStoreTab() {
           <button
             type="button"
             onClick={handleClaimFreeKit}
-            className="rounded-2xl bg-white text-slate-950 hover:bg-page px-6 py-3 text-xs font-black shadow-lg transition shrink-0"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-2xl bg-white text-slate-950 hover:bg-page px-6 py-3 text-xs font-black shadow-lg transition shrink-0"
           >
             Claim FREE Kit Now
           </button>
