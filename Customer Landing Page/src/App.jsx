@@ -81,6 +81,8 @@ import SaathAppPlusPage from './pages/SaathAppPlusPage';
 import MembershipDashboardPage from './pages/MembershipDashboardPage';
 import GiftSetPage from './pages/GiftSetPage';
 import AdminCategoryManagement from './pages/admin/AdminCategoryManagement';
+import ReferAndGrow from './pages/customer/ReferAndGrow';
+import AdminReferrals from './pages/admin/AdminReferrals';
 import { ShoppingJourneyProvider } from './context/ShoppingJourneyContext';
 import ShoppingJourneyDashboard from './pages/ShoppingJourney/Dashboard';
 import MyJourney from './pages/ShoppingJourney/MyJourney';
@@ -124,7 +126,7 @@ function AppContent() {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  
+
   const [orders, setOrders] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = window.localStorage.getItem('saathapp_customer_orders');
@@ -260,14 +262,14 @@ function AppContent() {
         const adminOrdersJson = window.localStorage.getItem('saathapp_admin_orders');
         let adminOrders = [];
         if (adminOrdersJson) {
-           adminOrders = JSON.parse(adminOrdersJson);
+          adminOrders = JSON.parse(adminOrdersJson);
         } else {
-           adminOrders = [
-             ["ORD-99120", "Ravi Kumar", "₹420", "Mysuru", "Today", "Delivered", {}],
-             ["ORD-99121", "Aisha Fernandes", "₹1,280", "Mumbai", "Today", "Processing", {}]
-           ]; // Initial mock from Admin config
+          adminOrders = [
+            ["ORD-99120", "Ravi Kumar", "₹420", "Mysuru", "Today", "Delivered", {}],
+            ["ORD-99121", "Aisha Fernandes", "₹1,280", "Mumbai", "Today", "Processing", {}]
+          ]; // Initial mock from Admin config
         }
-        
+
         // City parsing from address
         let city = "New Delhi";
         if (newOrder.deliveryAddress) {
@@ -326,15 +328,15 @@ function AppContent() {
     setUser(response.user);
     setIsAuthenticated(true);
     saveAuthSession(response.user);
-    
+
     // Merge cart
     const mergedCart = mergeGuestCart(response.user.id || response.user.email, cartItems);
     setCartState(mergedCart);
-    
+
     setAuthView('home');
     setActivePage('home');
     setErrorMessage('');
-    
+
     const returnTo = routerLocation.state?.from || '/';
     navigate(returnTo, { replace: true });
   };
@@ -356,15 +358,15 @@ function AppContent() {
     setUsers(result.users);
     setUser(result.user);
     setIsAuthenticated(true);
-    
+
     // Merge cart
     const mergedCart = mergeGuestCart(result.user.id || result.user.email, cartItems);
     setCartState(mergedCart);
-    
+
     setAuthView('home');
     setActivePage('home');
     setErrorMessage('');
-    
+
     if (routerLocation.pathname === '/customer/dashboard' || routerLocation.pathname === '/profile' || routerLocation.state?.from === '/customer/dashboard') {
       navigate('/customer/dashboard');
     } else {
@@ -406,9 +408,9 @@ function AppContent() {
   // Legacy activePage overrides (priority)
   if (activePage === 'cart' || routerLocation.pathname === '/cart') {
     return (
-      <CartPage 
+      <CartPage
         onCheckout={() => { setActivePage('checkout'); navigate('/checkout'); }}
-        onBack={() => { setActivePage('home'); navigate('/'); }} 
+        onBack={() => { setActivePage('home'); navigate('/'); }}
       />
     );
   }
@@ -426,24 +428,24 @@ function AppContent() {
     }
     return (
 
-      <CheckoutPage 
-        onBack={() => { setActivePage('cart'); navigate('/cart'); }} 
+      <CheckoutPage
+        onBack={() => { setActivePage('cart'); navigate('/cart'); }}
         onConfirmOrder={(data) => {
           handleCheckoutProcess(data.orderBreakdown, data.address, data.deliveryMethod, data.paymentMethod, cartItems);
           clearCart();
           setActivePage('order-confirmation');
           navigate('/order-confirmation');
-        }} 
+        }}
       />
     );
   }
 
   if (activePage === 'order-confirmation' || routerLocation.pathname === '/order-confirmation') {
     return (
-      <OrderConfirmationPage 
-        order={latestOrder} 
-        onBack={() => { setActivePage('home'); navigate('/'); }} 
-        onViewOrders={() => { setActivePage('orders'); navigate('/orders'); }} 
+      <OrderConfirmationPage
+        order={latestOrder}
+        onBack={() => { setActivePage('home'); navigate('/'); }}
+        onViewOrders={() => { setActivePage('orders'); navigate('/orders'); }}
       />
     );
   }
@@ -493,6 +495,8 @@ function AppContent() {
     routerLocation.pathname === '/plus' ||
     routerLocation.pathname === '/membership' ||
     routerLocation.pathname === '/account/membership' ||
+    routerLocation.pathname.startsWith('/refer') ||
+    routerLocation.pathname.startsWith('/admin') ||
     partnerRoutes.includes(routerLocation.pathname) ||
     trustRoutes.includes(routerLocation.pathname) ||
     isSellerRoute;
@@ -511,6 +515,41 @@ function AppContent() {
 
   if (isSellerRoute) {
     return <SellerRoutes />;
+  }
+
+  if (
+    routerLocation.pathname === '/refer' ||
+    routerLocation.pathname === '/refer/' ||
+    routerLocation.pathname.startsWith('/refer/') ||
+    routerLocation.pathname === '/referral' ||
+    routerLocation.pathname === '/referral-program'
+  ) {
+    return (
+      <ReferAndGrow
+        cartCount={cartCount}
+        location={location}
+        onCartClick={() => setActivePage('cart')}
+        onLocationClick={() => setIsLocationModalOpen(true)}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          navigate('/products/search');
+        }}
+        onLogin={() => { setAuthView('login'); navigate('/login'); }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
+    );
+  }
+
+  if (
+    routerLocation.pathname === '/admin/referrals' ||
+    routerLocation.pathname === '/admin/growth/referrals'
+  ) {
+    return <AdminReferrals />;
   }
 
   if (routerLocation.pathname === '/shopping-journey') {
@@ -646,12 +685,12 @@ function AppContent() {
   }
 
   const isServiceListing = routerLocation.pathname === '/products/services/service' || routerLocation.pathname === '/products/services/service/';
-  
+
   if (routerLocation.pathname === '/services' || routerLocation.pathname === '/services/' || routerLocation.pathname === '/products/services' || routerLocation.pathname === '/products/services/') {
     navigate('/products/services/service', { replace: true });
     return null;
   }
-  
+
   if (isServiceListing) {
     return (
       <ServiceListing
@@ -673,14 +712,14 @@ function AppContent() {
       />
     );
   }
-  
+
   const isServiceBookingConfirmed = routerLocation.pathname === '/products/services/booking-confirmed';
-  
+
   if (routerLocation.pathname === '/services/booking-confirmed') {
     navigate('/products/services/booking-confirmed', { replace: true });
     return null;
   }
-  
+
   if (isServiceBookingConfirmed) {
     return (
       <ServiceBookingConfirmation
@@ -697,12 +736,12 @@ function AppContent() {
   }
 
   const isServiceBookingFlow = routerLocation.pathname.startsWith('/products/services/book/');
-  
+
   if (routerLocation.pathname.startsWith('/services/book/')) {
     navigate(routerLocation.pathname.replace('/services/book/', '/products/services/book/'), { replace: true });
     return null;
   }
-  
+
   if (isServiceBookingFlow) {
     return (
       <ServiceBookingFlow
@@ -720,12 +759,12 @@ function AppContent() {
   }
 
   const isServiceDetails = routerLocation.pathname.startsWith('/products/services/') && !routerLocation.pathname.startsWith('/products/services/book');
-  
+
   if (routerLocation.pathname.startsWith('/services/') && !routerLocation.pathname.startsWith('/services/book')) {
     navigate(routerLocation.pathname.replace('/services/', '/products/services/'), { replace: true });
     return null;
   }
-  
+
   if (isServiceDetails) {
     return (
       <ServiceDetails
@@ -758,9 +797,9 @@ function AppContent() {
   const isOffers = routerLocation.pathname === '/offers';
   const isAllCategories = routerLocation.pathname === '/products' || routerLocation.pathname === '/products/';
   const isProductListing = (
-    routerLocation.pathname.startsWith('/products/') && 
-    routerLocation.pathname !== '/products/saathapp' && 
-    routerLocation.pathname !== '/products/saathapp/' && 
+    routerLocation.pathname.startsWith('/products/') &&
+    routerLocation.pathname !== '/products/saathapp' &&
+    routerLocation.pathname !== '/products/saathapp/' &&
     !routerLocation.pathname.startsWith('/products/gift-set') &&
     !routerLocation.pathname.startsWith('/products/saathpack') &&
     !routerLocation.pathname.startsWith('/products/services')
@@ -822,7 +861,7 @@ function AppContent() {
 
   if (routerLocation.pathname === '/products/saathpack/landing' || routerLocation.pathname === '/products/saathpack/landing/') {
     return (
-      <SaathPackLandingPage 
+      <SaathPackLandingPage
         cartCount={cartCount}
         location={location}
         onCartClick={() => setActivePage('cart')}
@@ -843,7 +882,7 @@ function AppContent() {
   }
   if (routerLocation.pathname === '/products/saathpack' || routerLocation.pathname === '/products/saathpack/') {
     return (
-      <SaathPackProductListing 
+      <SaathPackProductListing
         cartCount={cartCount}
         location={location}
         onCartClick={() => setActivePage('cart')}
@@ -864,7 +903,7 @@ function AppContent() {
   }
   if (routerLocation.pathname.startsWith('/products/saathpack/product/')) {
     return (
-      <SaathPackProductDetails 
+      <SaathPackProductDetails
         cartCount={cartCount}
         location={location}
         onCartClick={() => setActivePage('cart')}
@@ -883,7 +922,7 @@ function AppContent() {
       />
     );
   }
-  
+
   if (routerLocation.pathname === '/saathpack' || routerLocation.pathname === '/saathpack/') {
     navigate('/products/saathpack', { replace: true });
     return null;
@@ -1475,7 +1514,7 @@ function AppContent() {
         onImageSearchClick={() => setIsImageModalOpen(true)}
         onDetectGPS={handleGPSDetect}
         onAddToCart={handleAddToCart}
-        onQuickView={() => {}}
+        onQuickView={() => { }}
         onCategorySelect={(category) => {
           setSelectedCategory(category);
           document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -1519,7 +1558,7 @@ function AppContent() {
         }}
         onCheckout={() => handleCheckoutProcess(cartTotal)}
         onCloseCart={() => setIsCartOpen(false)}
-        onCloseQuickView={() => {}}
+        onCloseQuickView={() => { }}
         onCloseVoiceModal={() => setIsVoiceModalOpen(false)}
         onCloseImageModal={() => setIsImageModalOpen(false)}
         onCloseLocationModal={() => setIsLocationModalOpen(false)}
@@ -1528,7 +1567,7 @@ function AppContent() {
         getCartQuantity={getCartQuantity}
         handleAddToCart={handleAddToCart}
         setIsCartOpen={setIsCartOpen}
-        setQuickViewProduct={() => {}}
+        setQuickViewProduct={() => { }}
         setIsVoiceModalOpen={setIsVoiceModalOpen}
         setIsImageModalOpen={setIsImageModalOpen}
         setIsLocationModalOpen={setIsLocationModalOpen}
@@ -1672,7 +1711,7 @@ function AppContent() {
         navigate('/signup');
       }}
       onProfile={() => navigate('/profile')}
-        onLogout={handleLogout}
+      onLogout={handleLogout}
       onCartPage={() => setActivePage('cart')}
       onOrdersPage={() => setActivePage('orders')}
       onWishlistPage={() => setActivePage('wishlist')}
@@ -1686,7 +1725,7 @@ function AppContent() {
       onImageSearchClick={() => setIsImageModalOpen(true)}
       onDetectGPS={() => handleGPSDetect(() => setIsLocationModalOpen(false))}
       onAddToCart={handleAddToCart}
-      onQuickView={() => {}}
+      onQuickView={() => { }}
       onCategorySelect={(category) => {
         setSelectedCategory(category);
         document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -1730,7 +1769,7 @@ function AppContent() {
       }}
       onCheckout={() => handleCheckoutProcess(cartTotal)}
       onCloseCart={() => setIsCartOpen(false)}
-      onCloseQuickView={() => {}}
+      onCloseQuickView={() => { }}
       onCloseVoiceModal={() => setIsVoiceModalOpen(false)}
       onCloseImageModal={() => setIsImageModalOpen(false)}
       onCloseLocationModal={() => setIsLocationModalOpen(false)}
@@ -1739,7 +1778,7 @@ function AppContent() {
       getCartQuantity={getCartQuantity}
       handleAddToCart={handleAddToCart}
       setIsCartOpen={setIsCartOpen}
-      setQuickViewProduct={() => {}}
+      setQuickViewProduct={() => { }}
       setIsVoiceModalOpen={setIsVoiceModalOpen}
       setIsImageModalOpen={setIsImageModalOpen}
       setIsLocationModalOpen={setIsLocationModalOpen}
