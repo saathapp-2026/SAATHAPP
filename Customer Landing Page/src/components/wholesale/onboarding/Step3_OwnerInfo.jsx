@@ -20,8 +20,18 @@ export default function Step3_OwnerInfo({ onNext, onPrev }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.fullName.trim()) {
+    if (!formData.fullName || !formData.fullName.trim()) {
       addToast('Please enter full owner name', 'error');
+      return;
+    }
+    const cleanMobile = (formData.ownerMobile || '').replace(/\D/g, '');
+    if (cleanMobile.length !== 10) {
+      addToast('Please enter a valid 10-digit mobile number', 'error');
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.ownerEmail || !emailRegex.test(formData.ownerEmail.trim())) {
+      addToast('Please enter a valid official email address', 'error');
       return;
     }
     addToast('Owner details saved!', 'success');

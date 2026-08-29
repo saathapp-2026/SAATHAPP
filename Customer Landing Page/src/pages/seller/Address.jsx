@@ -5,7 +5,7 @@ import { useOnboarding } from '../../context/SellerOnboardingContext';
 import { LOCATION_TIERS } from '../../config/sellerOnboardingConfig';
 
 const inputClass =
-  'w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500';
+  'w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 [&>option]:bg-slate-900 [&>option]:text-white';
 
 export default function Address() {
   const navigate = useNavigate();
@@ -15,12 +15,26 @@ export default function Address() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
+    const state = (form.get('state') || '').trim();
+    const city = (form.get('city') || '').trim();
+    const address = (form.get('address') || '').trim();
+    const pincode = (form.get('pincode') || '').replace(/\D/g, '');
+
+    if (!state || !city || !address) {
+      alert('Please fill in all required address fields.');
+      return;
+    }
+    if (pincode.length !== 6) {
+      alert('Please enter a valid 6-digit PIN code.');
+      return;
+    }
+
     updateSection('address', {
-      state: form.get('state'),
+      state,
       district: form.get('district'),
-      city: form.get('city'),
-      pincode: form.get('pincode'),
-      address: form.get('address'),
+      city,
+      pincode,
+      address,
       landmark: form.get('landmark'),
       locationTier: form.get('locationTier'),
     });
@@ -34,7 +48,7 @@ export default function Address() {
           <label className="block text-sm text-slate-400 mb-1.5">Location Tier *</label>
           <select name="locationTier" defaultValue={addr.locationTier} className={inputClass} required>
             {LOCATION_TIERS.map((t) => (
-              <option key={t.id} value={t.id}>{t.label}</option>
+              <option key={t.id} value={t.id} className="bg-slate-900 text-white">{t.label}</option>
             ))}
           </select>
           <p className="text-xs text-slate-500 mt-1">Affects your onboarding fee calculation</p>

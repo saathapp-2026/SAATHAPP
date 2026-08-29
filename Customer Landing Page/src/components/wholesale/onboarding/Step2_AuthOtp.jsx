@@ -15,7 +15,20 @@ export default function Step2_AuthOtp({ onNext, onPrev }) {
 
   const handleVerifyOtp = (e) => {
     e.preventDefault();
-    if (formData.otp.length === 6) {
+    if (activeMode === 'mobile') {
+      const cleanMobile = (formData.mobileNumber || '').replace(/\D/g, '');
+      if (cleanMobile.length !== 10) {
+        addToast('Please enter a valid 10-digit mobile number', 'error');
+        return;
+      }
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!formData.emailLogin || !emailRegex.test(formData.emailLogin.trim())) {
+        addToast('Please enter a valid email address', 'error');
+        return;
+      }
+    }
+    if (formData.otp && formData.otp.length === 6) {
       updateFormData({ isOtpVerified: true });
       addToast('OTP verified successfully!', 'success');
       onNext();

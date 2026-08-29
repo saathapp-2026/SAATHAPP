@@ -4,7 +4,7 @@ import OnboardingLayout from '../../components/seller/OnboardingLayout';
 import { useOnboarding } from '../../context/SellerOnboardingContext';
 
 const inputClass =
-  'w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500';
+  'w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 [&>option]:bg-slate-900 [&>option]:text-white';
 
 export default function BasicInformation() {
   const navigate = useNavigate();
@@ -14,10 +14,28 @@ export default function BasicInformation() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
+    const fullName = (form.get('fullName') || '').trim();
+    const email = (form.get('email') || '').trim();
+    const mobile = (form.get('mobile') || '').replace(/\D/g, '');
+
+    if (!fullName) {
+      alert('Please enter your full name');
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+    if (mobile.length !== 10) {
+      alert('Please enter a valid 10-digit mobile number');
+      return;
+    }
+
     updateSection('basicInfo', {
-      fullName: form.get('fullName'),
-      email: form.get('email'),
-      mobile: form.get('mobile'),
+      fullName,
+      email,
+      mobile,
       dob: form.get('dob'),
       businessType: form.get('businessType'),
     });
@@ -49,10 +67,10 @@ export default function BasicInformation() {
         <div>
           <label className="block text-sm text-slate-400 mb-1.5">Business Type *</label>
           <select name="businessType" defaultValue={info.businessType} className={inputClass}>
-            <option value="individual">Individual / Proprietor</option>
-            <option value="partnership">Partnership</option>
-            <option value="private_limited">Private Limited</option>
-            <option value="llp">LLP</option>
+            <option value="individual" className="bg-slate-900 text-white">Individual / Proprietor</option>
+            <option value="partnership" className="bg-slate-900 text-white">Partnership</option>
+            <option value="private_limited" className="bg-slate-900 text-white">Private Limited</option>
+            <option value="llp" className="bg-slate-900 text-white">LLP</option>
           </select>
         </div>
 

@@ -78,8 +78,13 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.registeredAddress.trim() || !formData.pincode) {
-      addToast('Please enter registered business address and pincode', 'error');
+    if (!formData.registeredAddress || !formData.registeredAddress.trim()) {
+      addToast('Please enter registered business address', 'error');
+      return;
+    }
+    const cleanPin = (formData.pincode || '').replace(/\D/g, '');
+    if (cleanPin.length !== 6) {
+      addToast('Please enter a valid 6-digit PIN code', 'error');
       return;
     }
     addToast('Address & Warehouse details saved!', 'success');

@@ -8,9 +8,21 @@ export default function Step3_RiderProfile({ onNext, onPrev }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.fullName.trim()) {
+    if (!formData.fullName || !formData.fullName.trim()) {
       addToast('Please enter your full name', 'error');
       return;
+    }
+    const cleanEmergency = (formData.emergencyContact || '').replace(/\D/g, '');
+    if (cleanEmergency.length !== 10) {
+      addToast('Please enter a valid 10-digit emergency contact number', 'error');
+      return;
+    }
+    if (formData.email && formData.email.trim()) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email.trim())) {
+        addToast('Please enter a valid email address', 'error');
+        return;
+      }
     }
     addToast('Rider profile saved successfully!', 'success');
     onNext();

@@ -11,8 +11,13 @@ export default function Step2_RiderAuthOtp({ onNext, onPrev }) {
 
   const handleVerify = (e) => {
     e.preventDefault();
-    if (mobile.length < 10) {
+    const cleanMobile = mobile.replace(/\D/g, '');
+    if (cleanMobile.length !== 10) {
       addToast('Please enter a valid 10-digit mobile number', 'error');
+      return;
+    }
+    if (!otp || otp.length !== 6) {
+      addToast('Please enter a valid 6-digit OTP', 'error');
       return;
     }
     setIsVerifying(true);

@@ -10,7 +10,7 @@ import {
 import { useDelivery } from '../../../context/DeliveryContext';
 
 export default function RiderActiveDeliveriesTab() {
-  const { dashboardData, addToast } = useDelivery();
+  const { formData = {}, dashboardData, addToast } = useDelivery();
 
   // Active Order State matching updated specification
   const [activeOrder, setActiveOrder] = useState({

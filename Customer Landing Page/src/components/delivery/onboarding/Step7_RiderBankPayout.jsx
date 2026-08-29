@@ -8,8 +8,17 @@ export default function Step7_RiderBankPayout({ onNext, onPrev }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.accountNumber || !formData.ifscCode) {
-      addToast('Please enter complete bank account details', 'error');
+    if (!formData.accountHolderName || !formData.accountHolderName.trim()) {
+      addToast('Please enter account holder name', 'error');
+      return;
+    }
+    if (!formData.accountNumber || !formData.accountNumber.trim()) {
+      addToast('Please enter complete bank account number', 'error');
+      return;
+    }
+    const cleanIfsc = (formData.ifscCode || '').trim();
+    if (cleanIfsc.length !== 11) {
+      addToast('Please enter a valid 11-character IFSC code', 'error');
       return;
     }
     addToast('Rider bank payout details saved!', 'success');
