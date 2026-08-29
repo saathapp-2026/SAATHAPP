@@ -94,7 +94,7 @@ export default function Categories({ onCategorySelect, activeCategory }) {
                 transition={{ delay: index * 0.02 }}
                 onClick={() => onCategorySelect(category.id)}
                 whileHover={{ y: -4 }}
-                className={`w-20 sm:w-32 md:w-36 shrink-0 snap-start cursor-pointer rounded-2xl sm:rounded-3xl p-2 sm:p-3.5 text-center transition-all bg-white dark:bg-slate-900 border flex flex-col items-center justify-center ${
+                className={`w-20 sm:w-32 md:w-36 shrink-0 snap-start cursor-pointer rounded-2xl sm:rounded-3xl p-2 sm:p-3.5 text-center transition-all bg-surface border-theme-border border flex flex-col items-center justify-center ${
                   isActive 
                     ? 'border-emerald-500 ring-1 sm:ring-2 ring-emerald-500/30 shadow-md sm:shadow-lg' 
                     : 'border-slate-200/80 dark:border-slate-800 shadow-2xs hover:border-emerald-400 hover:shadow-md'

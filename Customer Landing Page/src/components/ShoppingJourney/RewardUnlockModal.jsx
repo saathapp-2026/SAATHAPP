@@ -1,6 +1,8 @@
 import React from 'react';
+import useScrollLock from '../../hooks/useScrollLock';
 
 const RewardUnlockModal = ({ isOpen, onClose, rewardDetails }) => {
+  useScrollLock(isOpen);
   if (!isOpen) return null;
 
   return (

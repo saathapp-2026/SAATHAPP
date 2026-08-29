@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 import { X, Gift, Wallet, ShoppingBag, Percent, Shirt, Trophy, Check, Smartphone, Download, Star, Sparkles, HelpCircle, Activity } from 'lucide-react';
 import InstallPWAButton from '../PWA/InstallPWAButton';
+import useScrollLock from '../../hooks/useScrollLock';
 
 export default function KnowMoreModal({ isOpen, onClose }) {
+  useScrollLock(isOpen);
   const [activeTab, setActiveTab] = useState('overview');
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-center items-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm">
+    <div 
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="know-more-title"
+    >
       <div className="bg-[#f8f9fa] rounded-3xl w-full max-w-5xl h-[90vh] sm:h-[85vh] flex flex-col shadow-2xl relative animate-in fade-in zoom-in duration-200">
         
         {/* Close Button */}
         <button 
           onClick={onClose}
+          aria-label="Close modal"
           className="absolute top-4 right-4 z-50 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-gray-600 shadow-sm transition-colors"
         >
           <X size={18} />

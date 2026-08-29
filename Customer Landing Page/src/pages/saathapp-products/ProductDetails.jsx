@@ -156,7 +156,7 @@ export default function ProductDetails({
           <span className="text-slate-800 dark:text-slate-300 line-clamp-1">{product.name}</span>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-10 lg:gap-16">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-16">
           {/* Image Gallery */}
           <div className="w-full md:w-1/2 lg:w-5/12 flex flex-col gap-4">
             <div className="w-full aspect-[4/5] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden flex items-center justify-center p-8 relative">

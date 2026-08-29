@@ -28,7 +28,7 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
         const qty = getCartQuantity(product.id);
 
         return (
-        <div key={product.id} className={`flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-4 border transition-all group ${isPremium ? 'border-amber-200 dark:border-amber-900/50 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)]' : 'border-slate-100 dark:border-slate-800 hover:shadow-lg'}`}>
+        <div key={product.id} className={`flex flex-col bg-surface rounded-2xl p-4 border transition-all group ${isPremium ? 'border-amber-200 dark:border-amber-900/50 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)]' : 'border-theme-border hover:shadow-lg'}`}>
           
           {/* Badges */}
           <div className="flex flex-wrap gap-2 mb-2 relative z-10">
@@ -54,7 +54,7 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
                 Normal Grocery
               </span>
             ) : product.productTier === 'NORMAL' ? (
-              <span className="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide shadow-sm flex items-center gap-1">
+              <span className="bg-surface text-slate-700 dark:text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide shadow-sm flex items-center gap-1 border border-theme-border">
                 Normal
               </span>
             ) : null}

@@ -58,7 +58,7 @@ export default function Cart({ onCheckout, onBack }) {
 
         {cartItems.length === 0 ? (
           <div className="mt-8 flex flex-col items-center justify-center rounded-[24px] border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 px-6 py-16 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+            <div className="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
               <ShoppingCart size={28} />
             </div>
             <h2 className="mt-4 text-2xl font-black">Your cart is empty</h2>

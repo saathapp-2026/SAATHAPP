@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Heart, Eye, ShoppingCart } from 'lucide-react';
-// Removed mockData dependency
+import { Star, Heart, Eye, ShoppingCart, AlertCircle, RefreshCw } from 'lucide-react';
+import { productApi } from '../services/productApi';
 
 export default function FeaturedProducts({ 
   onAddToCart, 
@@ -13,19 +13,28 @@ export default function FeaturedProducts({
   searchQuery = ''
 }) {
   const navigate = useNavigate();
-  const [featuredProducts, setFeaturedProducts] = useState(Array.from({ length: 8 }, (_, i) => ({
-    id: `placeholder-${i}`,
-    name: '\u00A0',
-    category: 'all',
-    price: '0',
-    oldPrice: '0',
-    rating: '0',
-    reviewsCount: '0',
-    deliveryTime: '—',
-    badge: '',
-    image: ''
-  })));
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [wishlistedIds, setWishlistedIds] = useState([]);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await productApi.getProducts({ category: selectedCategory, search: searchQuery });
+        setFeaturedProducts(data.products || []);
+      } catch (err) {
+        console.error('Failed to load products:', err);
+        setError('Unable to load products. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    // Debounce or call directly
+    loadProducts();
+  }, [selectedCategory, searchQuery]);
 
   const toggleWishlist = (id) => {
     setWishlistedIds((prev) => 
@@ -126,8 +135,42 @@ export default function FeaturedProducts({
         </div>
 
         {/* Products Grid Layout */}
-        {filteredProducts.length === 0 ? (
-          <div className="rounded-card border border-dashed border-slate-300 bg-page p-8 text-center text-sm font-medium text-slate-500 dark:border-slate-800  dark:text-slate-400">
+        {loading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-6">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <div key={i} className="bg-surface rounded-card p-3 sm:p-4 border border-slate-200/60 shadow-soft animate-pulse flex flex-col justify-between">
+                <div>
+                  <div className="w-full aspect-square rounded-card bg-slate-200 dark:bg-slate-700 mb-3"></div>
+                  <div className="w-1/2 h-3 bg-slate-200 dark:bg-slate-700 rounded mb-2"></div>
+                  <div className="w-full h-4 bg-slate-200 dark:bg-slate-700 rounded mb-1"></div>
+                  <div className="w-3/4 h-4 bg-slate-200 dark:bg-slate-700 rounded"></div>
+                </div>
+                <div className="flex justify-between items-center mt-4 pt-2.5 border-t border-slate-100/80">
+                  <div className="w-1/3 h-5 bg-slate-200 dark:bg-slate-700 rounded"></div>
+                  <div className="w-16 h-8 bg-slate-200 dark:bg-slate-700 rounded-btn"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : error ? (
+          <div className="rounded-card border border-rose-200 bg-rose-50 dark:bg-rose-900/20 p-8 text-center flex flex-col items-center">
+            <AlertCircle className="text-rose-500 mb-2" size={32} />
+            <p className="text-sm font-medium text-rose-600 dark:text-rose-400 mb-4">{error}</p>
+            <button 
+              onClick={() => {
+                setLoading(true);
+                productApi.getProducts({ category: selectedCategory, search: searchQuery })
+                  .then(data => { setFeaturedProducts(data.products || []); setError(null); })
+                  .catch(() => setError('Unable to load products.'))
+                  .finally(() => setLoading(false));
+              }}
+              className="flex items-center gap-2 bg-rose-100 hover:bg-rose-200 dark:bg-rose-800 text-rose-700 dark:text-rose-300 px-4 py-2 rounded-lg font-bold text-sm transition-colors"
+            >
+              <RefreshCw size={16} /> Try Again
+            </button>
+          </div>
+        ) : filteredProducts.length === 0 ? (
+          <div className="rounded-card border border-dashed border-slate-300 bg-page p-8 text-center text-sm font-medium text-slate-500 dark:border-slate-800 dark:text-slate-400">
             No products available at the moment.
           </div>
         ) : (
@@ -149,7 +192,7 @@ export default function FeaturedProducts({
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.2 }}
                   whileHover={{ y: -6 }}
-                  className="bg-surface rounded-card p-3 sm:p-4 border border-slate-200/60  shadow-soft hover:shadow-premium relative flex flex-col justify-between group"
+                  className="bg-surface rounded-card p-3 sm:p-4 border border-theme-border shadow-soft hover:shadow-premium relative flex flex-col justify-between group"
                 >
                   
                   {/* Floating Left: Badges */}

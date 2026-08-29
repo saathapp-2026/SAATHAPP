@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ProductCardSkeleton() {
   return (
-    <div className="flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-100 dark:border-slate-800 animate-pulse">
+    <div className="flex flex-col bg-surface rounded-2xl p-4 border border-theme-border animate-pulse">
       {/* Image Skeleton */}
       <div className="w-full aspect-square bg-slate-200 dark:bg-slate-800 rounded-xl mb-4"></div>
       

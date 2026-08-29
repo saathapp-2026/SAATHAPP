@@ -9,7 +9,7 @@ export default function Wishlist({ onBack }) {
           <ArrowLeft size={16} /> Back
         </button>
         <div className="mt-8 flex flex-col items-center justify-center rounded-[24px] border border-dashed border-slate-300 bg-page px-6 py-16 text-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-pink-100 text-pink-600">
+          <div className="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-pink-100 text-pink-600">
             <Heart size={28} />
           </div>
           <h2 className="mt-4 text-2xl font-black text-slate-900">Your wishlist is empty</h2>

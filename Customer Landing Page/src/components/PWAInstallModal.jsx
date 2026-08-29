@@ -2,14 +2,25 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Share } from 'lucide-react';
 import { usePWA } from '../context/PWAContext';
+import useScrollLock from '../hooks/useScrollLock';
 
 export default function PWAInstallModal() {
   const { showIOSPrompt, closeIOSPrompt } = usePWA();
+  
+  useScrollLock(showIOSPrompt);
 
   return (
     <AnimatePresence>
       {showIOSPrompt && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm p-4 pb-8 sm:p-6">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="pwa-install-title"
+        >
           <motion.div
             initial={{ opacity: 0, y: 100, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -60,7 +71,7 @@ export default function PWAInstallModal() {
               </button>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );

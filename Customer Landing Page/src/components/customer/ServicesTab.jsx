@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
+import useScrollLock from '../../hooks/useScrollLock';
 
 export default function ServicesTab({ _bookings, setBookings, _walletBalance, _setWalletBalance, _transactions, _setTransactions, _orders, _setOrders, setActiveTab }) {
   const [filter, setFilter] = useState('All');
@@ -11,6 +12,8 @@ export default function ServicesTab({ _bookings, setBookings, _walletBalance, _s
   const [bookingDate, setBookingDate] = useState('');
   const [bookingTime, setBookingTime] = useState('09:00 AM - 11:00 AM');
   const [bookingDesc, setBookingDesc] = useState('');
+
+  useScrollLock(showBookingFormModal);
 
   const servicesList = [
     { id: 'srv-1', category: 'Electrician', name: 'Fan Installation & Repair', price: 299, rating: 4.8, description: 'Fixing or installing ceiling, exhaust or wall fans.' },

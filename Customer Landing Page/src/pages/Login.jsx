@@ -3,8 +3,9 @@ import { ArrowLeft, Smartphone, ShieldCheck, ChevronRight, AlertTriangle } from 
 import { GoogleLogin } from '@react-oauth/google';
 import { requestRealOtp, verifyRealOtp, authenticateWithGoogle, AuthConfigurationError } from '../services/authService';
 
-export default function Login({ onLogin, onSignup, onBack, error }) {
+export default function Login({ onLogin, onSignup, onBack, error, defaultMode = 'login' }) {
   const [step, setStep] = useState(1);
+  const [mode, setMode] = useState(defaultMode);
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [localError, setLocalError] = useState(error || '');
@@ -16,6 +17,10 @@ export default function Login({ onLogin, onSignup, onBack, error }) {
   useEffect(() => {
     if (error) setLocalError(error);
   }, [error]);
+
+  useEffect(() => {
+    setMode(defaultMode);
+  }, [defaultMode]);
 
   useEffect(() => {
     let timer;
@@ -44,7 +49,12 @@ export default function Login({ onLogin, onSignup, onBack, error }) {
         setConfigError(true);
         setLocalError(err.message);
       } else {
-        setLocalError('Failed to send OTP. Please try again.');
+        // Special logic: If backend returns not found and we are on login mode
+        if (err.message && err.message.toLowerCase().includes('not found') && mode === 'login') {
+          setLocalError('No account found with this mobile number.');
+        } else {
+          setLocalError('Failed to send OTP. Please try again.');
+        }
       }
     } finally {
       setIsLoading(false);
@@ -98,7 +108,12 @@ export default function Login({ onLogin, onSignup, onBack, error }) {
     
     try {
       const response = await verifyRealOtp(phone, otpString);
-      onLogin({ user: response.user, token: response.token });
+      // Depending on mode, we could fire onSignup if this is a new account
+      if (mode === 'signup' && onSignup) {
+        onSignup({ user: response.user, token: response.token });
+      } else {
+        onLogin({ user: response.user, token: response.token });
+      }
     } catch (err) {
       if (err.name === 'AuthConfigurationError' || err instanceof AuthConfigurationError) {
         setConfigError(true);
@@ -135,7 +150,11 @@ export default function Login({ onLogin, onSignup, onBack, error }) {
     setIsLoading(true);
     try {
       const response = await authenticateWithGoogle(credentialResponse.credential);
-      onLogin({ user: response.user, token: response.token });
+      if (mode === 'signup' && onSignup) {
+        onSignup({ user: response.user, token: response.token });
+      } else {
+        onLogin({ user: response.user, token: response.token });
+      }
     } catch (err) {
       if (err.name === 'AuthConfigurationError' || err instanceof AuthConfigurationError) {
         setConfigError(true);
@@ -186,11 +205,42 @@ export default function Login({ onLogin, onSignup, onBack, error }) {
           ) : step === 1 ? (
             <>
               <div className="flex flex-col items-center mb-8 text-center">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-4 shadow-sm">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 shadow-sm">
                   <Smartphone size={28} strokeWidth={2.5} />
                 </div>
-                <h1 className="text-2xl font-black text-slate-900 dark:text-white leading-tight">Welcome back <span className="text-2xl">👋</span></h1>
-                <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mt-2">Login or sign up to continue shopping</p>
+                
+                {/* Tabs */}
+                <div className="w-full flex bg-slate-100 dark:bg-slate-800 p-1.5 rounded-2xl mb-8">
+                  <button
+                    type="button"
+                    onClick={() => setMode('login')}
+                    className={`flex-1 py-3 text-sm font-bold rounded-xl transition-all ${
+                      mode === 'login' ? 'bg-white dark:bg-slate-700 shadow-sm text-primary' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                    }`}
+                  >
+                    Login
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMode('signup')}
+                    className={`flex-1 py-3 text-sm font-bold rounded-xl transition-all ${
+                      mode === 'signup' ? 'bg-white dark:bg-slate-700 shadow-sm text-primary' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                    }`}
+                  >
+                    Sign Up
+                  </button>
+                </div>
+
+                <h1 className="text-2xl font-black text-slate-900 dark:text-white leading-tight">
+                  {mode === 'login' ? (
+                    <>Welcome back <span className="text-2xl">👋</span></>
+                  ) : (
+                    'Create your account'
+                  )}
+                </h1>
+                <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mt-2">
+                  {mode === 'login' ? 'Login to continue shopping' : 'Sign up to start shopping with SaathApp'}
+                </p>
               </div>
 
               <form onSubmit={handlePhoneSubmit} className="space-y-5">
@@ -207,7 +257,22 @@ export default function Login({ onLogin, onSignup, onBack, error }) {
                       placeholder="Enter mobile number"
                     />
                   </div>
-                  {localError && <p className="text-xs font-bold text-rose-500 mt-2 ml-1 flex items-center gap-1"><AlertTriangle size={12}/> {localError}</p>}
+                  {localError && (
+                    <div className="mt-2 text-left">
+                      <p className="text-xs font-bold text-rose-500 ml-1 flex items-center gap-1">
+                        <AlertTriangle size={12}/> {localError}
+                      </p>
+                      {localError.includes('No account found') && mode === 'login' && (
+                        <button
+                          type="button"
+                          onClick={() => setMode('signup')}
+                          className="mt-2 text-xs font-bold text-primary hover:underline ml-1"
+                        >
+                          Create Account →
+                        </button>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 <button 
@@ -233,7 +298,7 @@ export default function Login({ onLogin, onSignup, onBack, error }) {
                     theme="filled_blue"
                     shape="rectangular"
                     width="100%"
-                    text="continue_with"
+                    text={mode === 'login' ? 'continue_with' : 'signup_with'}
                   />
                 ) : (
                   <button 
@@ -249,7 +314,7 @@ export default function Login({ onLogin, onSignup, onBack, error }) {
                       <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
                       <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                     </svg>
-                    Continue with Google
+                    {mode === 'login' ? 'Continue with Google' : 'Sign up with Google'}
                   </button>
                 )}
               </div>
@@ -275,21 +340,21 @@ export default function Login({ onLogin, onSignup, onBack, error }) {
 
               <form onSubmit={handleVerifyOtp} className="space-y-8">
                 <div 
-                  className="flex justify-between gap-2"
+                  className="flex justify-between gap-1 sm:gap-2"
                   onPaste={handleOtpPaste}
                 >
                   {otp.map((digit, index) => (
                     <input
-                      key={index}
-                      ref={el => inputRefs.current[index] = el}
-                      type="text"
-                      inputMode="numeric"
-                      maxLength={1}
-                      value={digit}
-                      onChange={(e) => handleOtpChange(index, e.target.value)}
-                      onKeyDown={(e) => handleOtpKeyDown(index, e)}
-                      className="w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-black text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-700 rounded-xl focus:border-primary dark:focus:border-primary focus:bg-white dark:focus:bg-slate-900 focus:outline-none transition-all"
-                    />
+                        key={index}
+                        ref={el => inputRefs.current[index] = el}
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={1}
+                        value={digit}
+                        onChange={(e) => handleOtpChange(index, e.target.value)}
+                        onKeyDown={(e) => handleOtpKeyDown(index, e)}
+                        className="w-10 h-12 sm:w-14 sm:h-16 text-center text-xl sm:text-2xl font-black text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-700 rounded-xl focus:border-primary dark:focus:border-primary focus:bg-white dark:focus:bg-slate-900 focus:outline-none transition-all"
+                      />
                   ))}
                 </div>
                 
@@ -335,6 +400,20 @@ export default function Login({ onLogin, onSignup, onBack, error }) {
           )}
         </div>
       </div>
+      
+      {step === 1 && (
+        <div className="mt-8 text-center">
+          <p className="text-sm font-bold text-slate-600 dark:text-slate-400">
+            {mode === 'login' ? "Don't have an account? " : "Already have an account? "}
+            <button 
+              onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
+              className="text-primary hover:underline transition-colors"
+            >
+              {mode === 'login' ? 'Sign up' : 'Login'}
+            </button>
+          </p>
+        </div>
+      )}
     </div>
   );
 }

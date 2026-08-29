@@ -5,10 +5,8 @@ import LocationBar from '../components/LocationBar';
 import HeroSection from '../components/HeroSection';
 import Categories from '../components/Categories';
 import FlashDeals from '../components/FlashDeals';
-import FeaturedProducts from '../components/FeaturedProducts';
 import NearbyShops from '../components/NearbyShops';
 import ServiceSection from '../components/ServiceSection';
-import Advertisements from '../components/Advertisements';
 
 import BecomePartner from '../components/BecomePartner';
 import SaathAppPlusHomeSection from '../components/plus/SaathAppPlusHomeSection';
@@ -147,14 +145,6 @@ export default function Home({
         <NearbyShops onShopSelect={onShopSelect} />
 
         <div id="products-section">
-          <FeaturedProducts
-            onAddToCart={handleAddToCart}
-            onQuickView={setQuickViewProduct}
-            cartItems={cartItems}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            searchQuery={searchQuery}
-          />
         </div>
 
         <div id="services-section">
@@ -168,7 +158,7 @@ export default function Home({
           </div>
         </div>
 
-        <Advertisements />
+
 
 
         <div id="partner-section">

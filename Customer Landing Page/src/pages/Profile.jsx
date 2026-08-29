@@ -261,7 +261,7 @@ export default function Profile({ user, onBack, onLogout }) {
   // SKELETON LOADER COMPONENT
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#F8F9FC] dark:bg-slate-950 px-4 py-8 sm:px-6 lg:px-8 text-left">
+      <div className="min-h-screen bg-page text-theme px-4 py-8 sm:px-6 lg:px-8 text-left">
         <div className="mx-auto max-w-7xl flex flex-col md:flex-row gap-6">
           <div className="w-full md:w-[280px] bg-surface h-[600px] rounded-[18px] p-6 space-y-6 animate-pulse border border-slate-200/50 dark:border-slate-800">
             <div className="flex items-center gap-3">
@@ -294,13 +294,13 @@ export default function Profile({ user, onBack, onLogout }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F9FC] dark:bg-slate-950 px-4 py-8 sm:px-6 lg:px-8 text-left transition-colors duration-300 font-sans">
+    <div className="min-h-screen bg-page px-4 py-8 sm:px-6 lg:px-8 text-left text-theme transition-colors duration-300 font-sans">
       <div className="mx-auto max-w-7xl">
         
         {/* Navigation breadcrumb */}
         <button
           onClick={onBack}
-          className="mb-6 inline-flex items-center gap-2 text-xs font-black uppercase text-slate-700 dark:text-slate-300 hover:text-[#6C3BFF] dark:hover:text-[#8B5CF6] transition-colors cursor-pointer"
+          className="mb-6 inline-flex items-center gap-2 text-xs font-black uppercase text-slate-700 dark:text-slate-300 hover:text-primary transition-colors cursor-pointer"
         >
           <ArrowLeft size={14} />
           <span>{t('return_to_homepage')}</span>
@@ -316,7 +316,7 @@ export default function Profile({ user, onBack, onLogout }) {
             
             {/* Sidebar Profile Card */}
             <div className="bg-surface border border-slate-200/50 dark:border-slate-800 rounded-[18px] p-5 shadow-sm text-center">
-              <div className="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-[#6C3BFF] to-[#FF5A7A] text-white flex items-center justify-center font-black text-2xl mx-auto border-2 border-white dark:border-slate-800 shadow-md">
+              <div className="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center font-black text-2xl mx-auto border-2 border-white dark:border-slate-800 shadow-md">
                 <span>{(profile?.name || 'U').charAt(0).toUpperCase()}</span>
               </div>
               <h3 className="mt-3 text-sm font-black text-slate-800 dark:text-white truncate">{profile?.name}</h3>
@@ -333,7 +333,7 @@ export default function Profile({ user, onBack, onLogout }) {
               </div>
               <button
                 onClick={() => setShowAddMoneyModal(true)}
-                className="mt-4 w-full py-2 bg-white text-[#6C3BFF] hover:bg-[#F8F9FC] active:scale-97 transition-all rounded-xl text-xs font-black uppercase tracking-wider shadow-sm cursor-pointer"
+                className="mt-4 w-full py-2 bg-white text-primary hover:bg-[#F8F9FC] active:scale-97 transition-all rounded-xl text-xs font-black uppercase tracking-wider shadow-sm cursor-pointer"
               >
                 {t('add_money')}
               </button>
@@ -363,7 +363,7 @@ export default function Profile({ user, onBack, onLogout }) {
                   <input
                     type="text"
                     placeholder="Search dashboard..."
-                    className="w-48 xl:w-60 h-9 px-3 pl-8 text-xs bg-page dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-200 dark:border-slate-800 rounded-xl outline-none focus:border-[#6C3BFF]"
+                    className="w-48 xl:w-60 h-9 px-3 pl-8 text-xs bg-page dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-200 dark:border-slate-800 rounded-xl outline-none focus:border-primary"
                   />
                   <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                 </div>
@@ -371,7 +371,7 @@ export default function Profile({ user, onBack, onLogout }) {
                 {/* Language button dropdown */}
                 <div className="relative group">
                   <button className="p-2 bg-page dark:bg-slate-900 hover:bg-slate-200 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer">
-                    <Globe size={16} className="text-[#6C3BFF]" />
+                    <Globe size={16} className="text-primary" />
                   </button>
                   {/* Hover dropdown list */}
                   <div className="absolute right-0 mt-2 w-36 bg-surface border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg p-1.5 hidden group-hover:block z-50">
@@ -385,7 +385,7 @@ export default function Profile({ user, onBack, onLogout }) {
                         key={lang.code}
                         onClick={() => changeLanguage(lang.code)}
                         className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-page ${
-                          language === lang.code ? 'text-[#6C3BFF] bg-[#6C3BFF]/5' : 'text-slate-800 dark:text-slate-300'
+                          language === lang.code ? 'text-primary bg-[#6C3BFF]/5' : 'text-slate-800 dark:text-slate-300'
                         }`}
                       >
                         {lang.label}
@@ -399,7 +399,7 @@ export default function Profile({ user, onBack, onLogout }) {
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                   className="p-2 bg-page dark:bg-slate-900 hover:bg-slate-200 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer"
                 >
-                  {theme === 'dark' ? <Sun size={16} className="text-amber-500" /> : <Moon size={16} className="text-[#6C3BFF]" />}
+                  {theme === 'dark' ? <Sun size={16} className="text-amber-500" /> : <Moon size={16} className="text-primary" />}
                 </button>
                 
                 {/* Notification Bell */}
@@ -407,7 +407,7 @@ export default function Profile({ user, onBack, onLogout }) {
                   onClick={() => setActiveTab('notifications')}
                   className="relative p-2 bg-page dark:bg-slate-900 hover:bg-slate-200 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer"
                 >
-                  <Bell size={16} className="text-[#6C3BFF]" />
+                  <Bell size={16} className="text-primary" />
                   {notifications.some(n => !n.read) && (
                     <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
                   )}
@@ -442,7 +442,7 @@ export default function Profile({ user, onBack, onLogout }) {
 
                     {/* Statistics Cards */}
                     <div className="grid grid-cols-2 lg:grid-cols-5 gap-3.5">
-                      <div className="bg-[#6C3BFF]/5 p-4.5 rounded-2xl border border-[#6C3BFF]/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
+                      <div className="bg-[#6C3BFF]/5 p-4.5 rounded-2xl border border-primary/10 dark:border-slate-800 hover:shadow-soft transition-all text-left">
                         <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Orders</p>
                         <p className="mt-1 text-2xl font-black text-slate-900 dark:text-white">{orders.length}</p>
                       </div>
@@ -478,7 +478,7 @@ export default function Profile({ user, onBack, onLogout }) {
                         <div className="bg-slate-50/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Recent Orders</h4>
-                            <button onClick={() => setActiveTab('orders')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">View All</button>
+                            <button onClick={() => setActiveTab('orders')} className="text-[10px] font-black uppercase text-primary hover:underline cursor-pointer">View All</button>
                           </div>
                           <div className="space-y-2">
                             {orders.slice(0, 2).map((order) => (
@@ -502,7 +502,7 @@ export default function Profile({ user, onBack, onLogout }) {
                         <div className="bg-slate-50/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Upcoming Services</h4>
-                            <button onClick={() => setActiveTab('bookings')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">View Schedule</button>
+                            <button onClick={() => setActiveTab('bookings')} className="text-[10px] font-black uppercase text-primary hover:underline cursor-pointer">View Schedule</button>
                           </div>
                           <div className="space-y-2">
                             {bookings.filter(b => b.status === 'Scheduled' || b.status === 'In Progress').slice(0, 2).map((booking) => (
@@ -521,7 +521,7 @@ export default function Profile({ user, onBack, onLogout }) {
                         <div className="bg-slate-50/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Saved Addresses</h4>
-                            <button onClick={() => setActiveTab('addresses')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">Manage</button>
+                            <button onClick={() => setActiveTab('addresses')} className="text-[10px] font-black uppercase text-primary hover:underline cursor-pointer">Manage</button>
                           </div>
                           <div className="space-y-2">
                             {addresses.slice(0, 2).map((addr) => (
@@ -542,7 +542,7 @@ export default function Profile({ user, onBack, onLogout }) {
                         <div className="bg-slate-50/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Recent Notifications</h4>
-                            <button onClick={() => setActiveTab('notifications')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">Read All</button>
+                            <button onClick={() => setActiveTab('notifications')} className="text-[10px] font-black uppercase text-primary hover:underline cursor-pointer">Read All</button>
                           </div>
                           <div className="space-y-2">
                             {notifications.slice(0, 2).map((notif) => (
@@ -564,12 +564,12 @@ export default function Profile({ user, onBack, onLogout }) {
                             <div className="bg-surface p-4 border border-slate-200 dark:border-slate-800 rounded-xl text-left shadow-sm">
                               <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Available Cash</p>
                               <p className="text-lg font-black text-slate-900 dark:text-white mt-0.5">₹{walletBalance.toFixed(2)}</p>
-                              <button onClick={() => setShowAddMoneyModal(true)} className="mt-2 text-[9px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">Add cash</button>
+                              <button onClick={() => setShowAddMoneyModal(true)} className="mt-2 text-[9px] font-black uppercase text-primary hover:underline cursor-pointer">Add cash</button>
                             </div>
                             <div className="bg-surface p-4 border border-slate-200 dark:border-slate-800 rounded-xl text-left shadow-sm">
                               <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Reward Points</p>
                               <p className="text-lg font-black text-slate-900 dark:text-white mt-0.5">{(rewards?.points || 0)} pts</p>
-                              <button onClick={() => setActiveTab('rewards')} className="mt-2 text-[9px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">Redeem</button>
+                              <button onClick={() => setActiveTab('rewards')} className="mt-2 text-[9px] font-black uppercase text-primary hover:underline cursor-pointer">Redeem</button>
                             </div>
                           </div>
                         </div>
@@ -578,7 +578,7 @@ export default function Profile({ user, onBack, onLogout }) {
                         <div className="bg-slate-50/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                           <div className="flex items-center justify-between">
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Active Support Tickets</h4>
-                            <button onClick={() => setActiveTab('support')} className="text-[10px] font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer">New Ticket</button>
+                            <button onClick={() => setActiveTab('support')} className="text-[10px] font-black uppercase text-primary hover:underline cursor-pointer">New Ticket</button>
                           </div>
                           <div className="space-y-2">
                             {tickets.slice(0, 2).map((ticket) => (
@@ -689,7 +689,7 @@ export default function Profile({ user, onBack, onLogout }) {
                         <div key={booking.id} className="p-5 border border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 space-y-4">
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/50  pb-3 text-xs">
                             <div>
-                              <p className="font-black text-[#6C3BFF] dark:text-[#8B5CF6] uppercase">{booking.id}</p>
+                              <p className="font-black text-primary dark:text-[#8B5CF6] uppercase">{booking.id}</p>
                               <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold mt-0.5">Scheduled for: {booking.date} at {booking.time}</p>
                             </div>
                             <span className={`px-2.5 py-0.5 rounded-full font-bold text-[9px] uppercase ${
@@ -765,7 +765,7 @@ export default function Profile({ user, onBack, onLogout }) {
                             onClick={act.action}
                             className="flex flex-col items-center gap-2 p-3 bg-page hover:bg-[#6C3BFF]/5 dark:bg-slate-900 dark:hover:bg-[#6C3BFF]/10 rounded-xl border border-slate-200 dark:border-slate-800 transition-colors cursor-pointer text-center"
                           >
-                            <div className="w-8 h-8 rounded-lg bg-surface text-[#6C3BFF] shadow-sm flex items-center justify-center">
+                            <div className="w-8 h-8 rounded-lg bg-surface text-primary shadow-sm flex items-center justify-center">
                               <Icon size={14} />
                             </div>
                             <span className="font-black uppercase tracking-wider text-[10px] text-slate-700 dark:text-slate-300">{act.label}</span>
@@ -845,7 +845,7 @@ export default function Profile({ user, onBack, onLogout }) {
                                 navigator.clipboard.writeText(coupon.code);
                                 alert(`Coupon code ${coupon.code} copied to clipboard!`);
                               }}
-                              className="py-1.5 px-3 bg-surface border border-slate-200 dark:border-slate-800 rounded-lg font-black uppercase text-[10px] text-[#6C3BFF] cursor-pointer shadow-sm"
+                              className="py-1.5 px-3 bg-surface border border-slate-200 dark:border-slate-800 rounded-lg font-black uppercase text-[10px] text-primary cursor-pointer shadow-sm"
                             >
                               Copy Code
                             </button>
@@ -897,7 +897,7 @@ export default function Profile({ user, onBack, onLogout }) {
                       {addresses.map((addr) => (
                         <div key={addr.id} className={`p-5 rounded-2xl border text-xs space-y-4 shadow-sm flex flex-col justify-between ${
                           addr.isDefault
-                            ? 'border-[#6C3BFF] bg-[#6C3BFF]/5 dark:bg-[#6C3BFF]/10'
+                            ? 'border-primary bg-[#6C3BFF]/5 dark:bg-[#6C3BFF]/10'
                             : 'border-slate-205 dark:border-slate-800'
                         }`}>
                           <div className="space-y-2">
@@ -906,7 +906,7 @@ export default function Profile({ user, onBack, onLogout }) {
                                 {addr.type}
                               </span>
                               {addr.isDefault && (
-                                <span className="inline-flex items-center gap-1 text-[9px] text-[#6C3BFF] font-black uppercase tracking-wider">
+                                <span className="inline-flex items-center gap-1 text-[9px] text-primary font-black uppercase tracking-wider">
                                   <Check size={10} />
                                   <span>Default</span>
                                 </span>
@@ -919,7 +919,7 @@ export default function Profile({ user, onBack, onLogout }) {
                             {!addr.isDefault ? (
                               <button
                                 onClick={() => handleSetDefaultAddress(addr.id)}
-                                className="text-[#6C3BFF] hover:underline font-black uppercase text-[10px] cursor-pointer"
+                                className="text-primary hover:underline font-black uppercase text-[10px] cursor-pointer"
                               >
                                 Set as Default
                               </button>
@@ -967,7 +967,7 @@ export default function Profile({ user, onBack, onLogout }) {
                           setNotifications(prev => prev.map(n => ({ ...n, read: true })));
                           alert('All notifications marked as read.');
                         }}
-                        className="text-xs font-black uppercase text-[#6C3BFF] hover:underline cursor-pointer"
+                        className="text-xs font-black uppercase text-primary hover:underline cursor-pointer"
                       >
                         Mark all as read
                       </button>
@@ -976,7 +976,7 @@ export default function Profile({ user, onBack, onLogout }) {
                     <div className="space-y-3">
                       {notifications.map((notif) => (
                         <div key={notif.id} className={`p-4 border rounded-2xl flex items-start gap-3.5 text-xs text-left transition-all ${
-                          notif.read ? 'bg-slate-50/30 dark:bg-slate-950/10 border-slate-100 dark:border-slate-800' : 'bg-[#6C3BFF]/5 dark:bg-[#6C3BFF]/10 border-[#6C3BFF]/20'
+                          notif.read ? 'bg-slate-50/30 dark:bg-slate-950/10 border-slate-100 dark:border-slate-800' : 'bg-[#6C3BFF]/5 dark:bg-[#6C3BFF]/10 border-primary/20'
                         }`}>
                           <div className={`w-2.5 h-2.5 rounded-full shrink-0 mt-1.5 ${notif.read ? 'bg-slate-300' : 'bg-[#6C3BFF]'}`} />
                           <div className="space-y-1">
@@ -1008,7 +1008,7 @@ export default function Profile({ user, onBack, onLogout }) {
                           { label: 'Payments', icon: CreditCard, color: 'text-blue-500 bg-blue-500/5 border-blue-500/10' },
                           { label: 'Refunds', icon: RefreshCw, color: 'text-rose-500 bg-rose-500/5 border-rose-500/10' },
                           { label: 'Wallet', icon: Wallet, color: 'text-emerald-500 bg-emerald-500/5 border-emerald-500/10' },
-                          { label: 'Offers', icon: Gift, color: 'text-[#6C3BFF] bg-[#6C3BFF]/5 border-[#6C3BFF]/10' },
+                          { label: 'Offers', icon: Gift, color: 'text-primary bg-[#6C3BFF]/5 border-primary/10' },
                           { label: 'Delivery', icon: MapPin, color: 'text-cyan-500 bg-cyan-500/5 border-cyan-500/10' },
                           { label: 'General', icon: Info, color: 'text-slate-500 bg-slate-500/5 border-slate-500/10' },
                           { label: 'Contact Us', icon: Globe, color: 'text-[#FF5A7A] bg-[#FF5A7A]/5 border-[#FF5A7A]/10' }
@@ -1080,10 +1080,10 @@ export default function Profile({ user, onBack, onLogout }) {
                             <button
                               key={idx}
                               onClick={() => alert(`Opening settings for ${c.title}...`)}
-                              className="flex items-center justify-between p-4 border border-slate-205 dark:border-slate-800 hover:border-[#6C3BFF]/50 hover:bg-slate-50/50 rounded-xl transition-all cursor-pointer text-left group"
+                              className="flex items-center justify-between p-4 border border-slate-205 dark:border-slate-800 hover:border-primary/50 hover:bg-slate-50/50 rounded-xl transition-all cursor-pointer text-left group"
                             >
                               <div className="flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-lg bg-page dark:bg-slate-900 text-[#6C3BFF] flex items-center justify-center shrink-0">
+                                <div className="w-9 h-9 rounded-lg bg-page dark:bg-slate-900 text-primary flex items-center justify-center shrink-0">
                                   <Icon size={16} />
                                 </div>
                                 <div>
@@ -1194,11 +1194,11 @@ export default function Profile({ user, onBack, onLogout }) {
                               onClick={() => setTheme(item.value)}
                               className={`flex flex-col items-center gap-2 p-4 border rounded-2xl cursor-pointer transition-all ${
                                 isSelected
-                                  ? 'border-[#6C3BFF] bg-[#6C3BFF]/5 text-[#6C3BFF] dark:bg-[#6C3BFF]/20 dark:text-white'
-                                  : 'border-slate-205 dark:border-slate-800 bg-page dark:bg-slate-955/20 hover:border-[#6C3BFF]/50'
+                                  ? 'border-primary bg-[#6C3BFF]/5 text-primary dark:bg-[#6C3BFF]/20 dark:text-white'
+                                  : 'border-slate-205 dark:border-slate-800 bg-page dark:bg-slate-955/20 hover:border-primary/50'
                               }`}
                             >
-                              <Icon size={16} className="text-[#6C3BFF]" />
+                              <Icon size={16} className="text-primary" />
                               <span className="font-black uppercase tracking-wider text-[9px]">{item.label}</span>
                             </button>
                           );
@@ -1223,7 +1223,7 @@ export default function Profile({ user, onBack, onLogout }) {
                               onClick={() => changeLanguage(lang.code)}
                               className={`px-4.5 py-2 border rounded-xl cursor-pointer transition-all ${
                                 isSelected
-                                  ? 'border-[#6C3BFF] bg-[#6C3BFF]/5 text-[#6C3BFF] dark:bg-[#6C3BFF]/20 dark:text-white'
+                                  ? 'border-primary bg-[#6C3BFF]/5 text-primary dark:bg-[#6C3BFF]/20 dark:text-white'
                                   : 'border-slate-200 dark:border-slate-800 hover:bg-page'
                               }`}
                             >
@@ -1421,7 +1421,7 @@ export default function Profile({ user, onBack, onLogout }) {
                         onClick={() => setNewAddressType(t)}
                         className={`px-4.5 py-2 border rounded-xl font-bold uppercase cursor-pointer ${
                           newAddressType === t
-                            ? 'border-[#6C3BFF] bg-[#6C3BFF]/5 text-[#6C3BFF]'
+                            ? 'border-primary bg-[#6C3BFF]/5 text-primary'
                             : 'border-slate-200 dark:border-slate-800 hover:bg-page'
                         }`}
                       >
@@ -1599,7 +1599,7 @@ function ProfileForm({ profile, onSave }) {
         </div>
         <div>
           <p className="text-xs text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider">Profile Photo</p>
-          <button type="button" onClick={() => alert('Mock: Uploader modal')} className="mt-1 text-[#6C3BFF] font-black uppercase text-[10px] hover:underline cursor-pointer">
+          <button type="button" onClick={() => alert('Mock: Uploader modal')} className="mt-1 text-primary font-black uppercase text-[10px] hover:underline cursor-pointer">
             Upload New Photo
           </button>
         </div>
@@ -1618,7 +1618,7 @@ function ProfileForm({ profile, onSave }) {
             disabled={!isEditing}
             onChange={(e) => setName(e.target.value)}
             style={inputStyle}
-            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
+            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-primary disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
           />
         </div>
 
@@ -1632,7 +1632,7 @@ function ProfileForm({ profile, onSave }) {
             disabled={!isEditing}
             onChange={(e) => setEmail(e.target.value)}
             style={inputStyle}
-            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
+            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-primary disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
           />
         </div>
 
@@ -1660,7 +1660,7 @@ function ProfileForm({ profile, onSave }) {
             disabled={!isEditing}
             onChange={(e) => setGender(e.target.value)}
             style={inputStyle}
-            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
+            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-primary disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
           >
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -1678,7 +1678,7 @@ function ProfileForm({ profile, onSave }) {
             disabled={!isEditing}
             onChange={(e) => setDob(e.target.value)}
             style={inputStyle}
-            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-[#6C3BFF] disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
+            className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 dark:text-white bg-page dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#6C3BFF]/20 focus:border-primary disabled:bg-page disabled:text-slate-900 disabled:opacity-100 dark:disabled:bg-slate-900 dark:disabled:text-white shadow-sm transition-colors"
           />
         </div>
 

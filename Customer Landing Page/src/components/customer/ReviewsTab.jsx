@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import useScrollLock from '../../hooks/useScrollLock';
 
 export default function ReviewsTab({ bookings, reviewsList, setReviewsList }) {
   const [showReviewFormModal, setShowReviewFormModal] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [rating, setRating] = useState(5);
   const [reviewText, setReviewText] = useState('');
+
+  useScrollLock(showReviewFormModal);
 
   const handleReviewSubmit = () => {
     if (!reviewText.trim()) {

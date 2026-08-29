@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import SplashScreen from './pages/SplashScreen';
 import HomePage from './pages/Home';
 import LoginPage from './pages/Login';
-import SignupPage from './pages/Signup';
 import ProfilePage from './pages/Profile';
 import CartPage from './pages/Cart';
 import CheckoutPage from './pages/Checkout';
@@ -150,6 +149,18 @@ function AppContent() {
     }
     setAuthReady(true);
   }, [routerLocation.pathname]);
+
+  useEffect(() => {
+    const handleSessionExpired = () => {
+      clearAuthSession();
+      setUser(null);
+      setIsAuthenticated(false);
+      setErrorMessage('Your session has expired. Please log in again.');
+      navigate('/login');
+    };
+    window.addEventListener('session-expired', handleSessionExpired);
+    return () => window.removeEventListener('session-expired', handleSessionExpired);
+  }, [navigate]);
 
   useEffect(() => {
     if (!authReady) return;
@@ -1407,20 +1418,11 @@ function AppContent() {
   }
 
   if (routerLocation.pathname === '/login') {
-    return <LoginPage onLogin={handleLogin} onSignup={() => {
-      setAuthView('signup');
-      navigate('/signup');
-    }} onForgotPassword={() => {
-      setAuthView('forgot-password');
-      navigate('/login');
-    }} onOtpLogin={() => {
-      setAuthView('verify-otp');
-      navigate('/login');
-    }} error={errorMessage} />;
+    return <LoginPage onLogin={handleLogin} onSignup={handleLogin} onBack={() => navigate(-1)} defaultMode="login" error={errorMessage} />;
   }
 
   if (routerLocation.pathname === '/signup') {
-    return <SignupPage onLogin={() => navigate('/login')} onSignup={handleSignup} />;
+    return <LoginPage onLogin={handleLogin} onSignup={handleLogin} onBack={() => navigate(-1)} defaultMode="signup" error={errorMessage} />;
   }
 
   if (routerLocation.pathname === '/search') {
@@ -1565,6 +1567,20 @@ function AppContent() {
         setActivePage(view);
       }
     }} />;
+  }
+
+  const protectedActivePages = ['edit-profile', 'wallet', 'rewards', 'addresses', 'notifications', 'payment', 'wishlist', 'settings'];
+  
+  if (protectedActivePages.includes(activePage)) {
+    if (!isAuthenticated) {
+      if (typeof window !== 'undefined') {
+        setTimeout(() => {
+          setActivePage('login');
+          navigate('/login', { state: { from: `/${activePage}` } });
+        }, 0);
+      }
+      return null;
+    }
   }
 
   if (activePage === 'edit-profile') {

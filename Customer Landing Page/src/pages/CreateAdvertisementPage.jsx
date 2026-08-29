@@ -86,9 +86,13 @@ export default function CreateAdvertisementPage({ user }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans">
+    <div className="min-h-screen bg-page text-theme transition-colors font-sans pb-12">
       <Toaster position="top-right" />
-      <WizardHeader user={user} onBack={() => navigate('/advertise')} />
+      
+      {/* Top App Bar with back button */}
+      <div className="sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-theme-border p-4 flex items-center justify-between">
+        <WizardHeader user={user} onBack={() => navigate('/advertise')} />
+      </div>
       
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <WizardProgressBar currentStep={currentStep} />

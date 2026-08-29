@@ -8,6 +8,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { getCustomerMenu } from '../config/customerMenu';
 import { useTheme } from "../context/ThemeContext";
 import TopNav from './TopNav';
+import useScrollLock from '../hooks/useScrollLock';
 
 import { products, subcategories } from '../data/products';
 import { mockSaathAppProducts } from '../data/saathAppProducts';
@@ -46,6 +47,8 @@ export default function Header({
   const [suggestions, setSuggestions] = useState([]);
   const searchRef = useRef(null);
   const navigate = useNavigate();
+
+  useScrollLock(isCustomerMenuOpen || showLogoutConfirm);
 
   const popularSearches = [
     'Gift Set', 'Notebooks', 'Slippers', 'Household Items', 'Diya & Puja', 'Groceries', 'Mobiles', 'Hardware'
@@ -128,7 +131,7 @@ export default function Header({
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shadow-sm">
+      <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-white dark:bg-slate-950 border-b border-theme-border shadow-sm">
         <div className="saath-container">
 
           {/* ========================================================= */}
@@ -136,7 +139,7 @@ export default function Header({
           {/* ========================================================= */}
           <div className="flex flex-col gap-3 py-3 sm:hidden">
             {/* Top Row: Logo & Icons */}
-            <div className="flex items-center justify-between gap-3 overflow-x-auto no-scrollbar pb-1 -mx-2 px-2">
+            <div className="flex items-center justify-between gap-2 overflow-x-auto no-scrollbar pb-1 px-1 sm:px-2">
               <Link
                 to="/"
                 onClick={(event) => {
@@ -154,7 +157,7 @@ export default function Header({
               </Link>
 
               {/* Right Group: Icons */}
-              <div className="flex items-center gap-4 shrink-0 ml-auto">
+              <div className="flex items-center gap-2 sm:gap-4 shrink-0 ml-auto">
 
                 <button
                   onClick={onCartClick}
@@ -162,7 +165,7 @@ export default function Header({
                 >
                   <ShoppingCart size={22} />
                   {cartCount > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 bg-[#16a34a] text-white font-bold text-[10px] min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-950">
+                    <span className="absolute -top-1.5 -right-1.5 bg-emerald-600 text-white font-bold text-[10px] min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-950">
                       {cartCount}
                     </span>
                   )}
@@ -216,9 +219,9 @@ export default function Header({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="w-full h-11 pl-10 pr-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm"
+                    className="input-field pl-10"
                   />
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500">
+                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-theme-secondary">
                     <Search size={18} />
                   </div>
                 </div>
@@ -232,7 +235,7 @@ export default function Header({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute left-0 right-0 mt-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden z-50 text-left"
+                    className="absolute left-0 right-0 mt-2 bg-surface border border-theme-border rounded-xl shadow-lg overflow-hidden z-50 text-left"
                   >
                     {searchQuery.trim() === '' ? (
                       <div className="p-4">
@@ -340,7 +343,7 @@ export default function Header({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="w-full h-11 pl-11 pr-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
+                    className="w-full h-11 pl-11 pr-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-surface text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
                   />
                   <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
                     <Search size={18} />
@@ -356,7 +359,7 @@ export default function Header({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute left-0 right-0 mt-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden z-50 text-left"
+                    className="absolute left-0 right-0 mt-2 bg-surface border border-theme-border rounded-xl shadow-lg overflow-hidden z-50 text-left"
                   >
                     {searchQuery.trim() === '' ? (
                       <div className="p-5">
@@ -444,7 +447,7 @@ export default function Header({
               >
                 <ShoppingCart size={26} />
                 {cartCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-[#16a34a] text-white font-bold text-[11px] min-w-[20px] h-[20px] px-1 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-950">
+                  <span className="absolute -top-2 -right-2 bg-emerald-600 text-white font-bold text-[11px] min-w-[20px] h-[20px] px-1 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-950">
                     {cartCount}
                   </span>
                 )}
@@ -590,7 +593,7 @@ export default function Header({
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl text-center space-y-4"
+              className="w-full max-w-sm bg-surface border border-theme-border rounded-2xl p-6 shadow-xl text-center space-y-4"
             >
               <div className="w-12 h-12 rounded-full bg-rose-50 dark:bg-rose-500/10 text-rose-500 border border-rose-200/50 dark:border-rose-500/20 flex items-center justify-center mx-auto">
                 <LogOut size={22} className="ml-0.5" />
@@ -605,7 +608,7 @@ export default function Header({
                 <button
                   type="button"
                   onClick={() => setShowLogoutConfirm(false)}
-                  className="w-full py-3 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl font-bold uppercase cursor-pointer transition-colors"
+                  className="w-full py-3 border border-theme-border hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl font-bold uppercase cursor-pointer transition-colors"
                 >
                   Cancel
                 </button>

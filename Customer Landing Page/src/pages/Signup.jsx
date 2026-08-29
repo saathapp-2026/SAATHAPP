@@ -55,7 +55,7 @@ export default function Signup({ onLogin, onSignup, onBack }) {
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
                 Full Name
               </label>
-              <div className="flex items-center gap-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 focus-within:border-[#6C3BFF] dark:focus-within:border-[#6C3BFF] bg-slate-50 dark:bg-slate-950 px-4 py-3.5 transition-colors">
+              <div className="flex items-center gap-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 focus-within:border-primary dark:focus-within:border-primary bg-slate-50 dark:bg-slate-950 px-4 py-3 transition-colors">
                 <User size={18} className="text-slate-400" />
                 <input
                   type="text"
@@ -72,7 +72,7 @@ export default function Signup({ onLogin, onSignup, onBack }) {
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
                 Email Address
               </label>
-              <div className="flex items-center gap-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 focus-within:border-[#6C3BFF] dark:focus-within:border-[#6C3BFF] bg-slate-50 dark:bg-slate-950 px-4 py-3.5 transition-colors">
+              <div className="flex items-center gap-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 focus-within:border-primary dark:focus-within:border-primary bg-slate-50 dark:bg-slate-950 px-4 py-3 transition-colors">
                 <Mail size={18} className="text-slate-400" />
                 <input
                   type="email"
@@ -88,14 +88,14 @@ export default function Signup({ onLogin, onSignup, onBack }) {
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
                 Mobile Number
               </label>
-              <div className="flex items-center rounded-xl border-2 border-slate-200 dark:border-slate-700 focus-within:border-[#6C3BFF] dark:focus-within:border-[#6C3BFF] bg-slate-50 dark:bg-slate-950 overflow-hidden transition-colors">
-                <span className="px-4 py-3.5 text-slate-500 dark:text-slate-400 font-bold border-r-2 border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900">+91</span>
+              <div className="flex items-center rounded-xl border-2 border-slate-200 dark:border-slate-700 focus-within:border-primary dark:focus-within:border-primary bg-slate-50 dark:bg-slate-950 overflow-hidden transition-colors">
+                <span className="px-4 py-3 text-slate-500 dark:text-slate-400 font-bold border-r-2 border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900">+91</span>
                 <input
                   type="tel"
                   maxLength={10}
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, '') })}
-                  className="w-full bg-transparent outline-none px-4 py-3.5 font-bold text-slate-900 dark:text-white tracking-wider placeholder:text-slate-400 dark:placeholder:text-slate-600"
+                  className="w-full bg-transparent outline-none px-4 py-3 font-bold text-slate-900 dark:text-white tracking-wider placeholder:text-slate-400 dark:placeholder:text-slate-600"
                   placeholder="9999999999"
                 />
               </div>
@@ -106,7 +106,7 @@ export default function Signup({ onLogin, onSignup, onBack }) {
             <div className="pt-4">
               <button 
                 type="submit" 
-                className="w-full bg-[#6C3BFF] hover:bg-[#582cd6] active:scale-[0.98] text-white font-black py-4 rounded-xl transition-all flex items-center justify-center gap-2 tracking-wider"
+                className="btn-primary"
               >
                 Create Account <ChevronRight size={18} />
               </button>

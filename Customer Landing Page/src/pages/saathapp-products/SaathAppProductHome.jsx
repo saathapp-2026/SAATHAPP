@@ -146,7 +146,7 @@ export default function SaathAppProductHome({
             </div>
             
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
-              <h3 className="font-bold text-lg mb-4">Why SaathApp Products?</h3>
+              <h3 className="font-bold text-lg mb-4 text-theme">Why SaathApp Products?</h3>
               <ul className="space-y-4">
                 <li className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
                   <div className="w-1.5 h-1.5 rounded-full bg-slate-300"></div> Designed by SaathApp
@@ -169,7 +169,7 @@ export default function SaathAppProductHome({
           
           <div className="flex-1">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-              <h2 className="text-2xl font-bold">All SaathApp Products</h2>
+              <h2 className="text-3xl font-black text-theme">All SaathApp Products</h2>
               <div className="flex items-center gap-2">
                 <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
                   <button className="px-4 py-1.5 text-sm font-semibold bg-white dark:bg-slate-700 rounded-md shadow-sm">All</button>

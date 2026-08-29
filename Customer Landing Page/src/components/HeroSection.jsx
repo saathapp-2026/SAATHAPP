@@ -149,7 +149,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
             transition={{ x: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.3 } }}
             className={`w-full h-full bg-gradient-to-r ${current.color} text-white flex items-center py-10 sm:py-12 md:py-14 lg:py-20`}
           >
-            <div className="w-full px-5 sm:px-8 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-6 lg:gap-12 items-center">
+            <div className="w-full px-4 sm:px-8 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-6 lg:gap-12 items-center">
               
               {/* Left Side: Slide Text Information */}
               <div className="lg:col-span-7 text-left space-y-6 z-20">
