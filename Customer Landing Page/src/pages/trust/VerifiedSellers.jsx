@@ -66,16 +66,14 @@ const sellerFaqs = [
   },
 ];
 
-export default function VerifiedSellersPage() {
+export default function VerifiedSellersPage({ location, onLocationClick }) {
   const [openFaq, setOpenFaq] = useState(null);
 
   return (
     <div className="min-h-screen bg-page font-sans text-slate-800">
-      <Header
+      <Header location={location} onLocationClick={onLocationClick}
         cartCount={0}
         onCartClick={() => {}}
-        location="Green Park, New Delhi"
-        onLocationClick={() => {}}
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}
@@ -102,7 +100,7 @@ export default function VerifiedSellersPage() {
             <Link
               to="/"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-page"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-surface px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-page"
             >
               <ArrowLeft size={16} />
               Back
@@ -174,7 +172,7 @@ export default function VerifiedSellersPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                  className="rounded-3xl border border-slate-200 bg-surface p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
                 >
                   <span className="text-3xl font-black text-emerald-500">{item.step}</span>
                   <h3 className="mt-3 text-lg font-bold text-slate-900">{item.title}</h3>
@@ -185,7 +183,7 @@ export default function VerifiedSellersPage() {
           </section>
 
           {/* Anti-Fraud & Scam Warning Section */}
-          <section className="mt-16 rounded-[34px] border border-slate-200 bg-white p-8 shadow-sm lg:p-12">
+          <section className="mt-16 rounded-[34px] border border-slate-200 bg-surface p-8 shadow-sm lg:p-12">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-100 text-red-600">
                 <AlertTriangle size={26} />
@@ -222,7 +220,7 @@ export default function VerifiedSellersPage() {
           </section>
 
           {/* FAQs */}
-          <section className="mt-16 rounded-[34px] border border-slate-200 bg-white p-8 shadow-sm lg:p-12">
+          <section className="mt-16 rounded-[34px] border border-slate-200 bg-surface p-8 shadow-sm lg:p-12">
             <div className="text-center">
               <h2 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
                 Verified Seller FAQs

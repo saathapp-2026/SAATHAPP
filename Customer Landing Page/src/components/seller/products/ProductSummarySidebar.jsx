@@ -37,7 +37,7 @@ export default function ProductSummarySidebar({ draft, errors = {} }) {
             <img src={draft.media.mainImage.url} alt="" className="h-full w-full object-contain p-1.5" />
           ) : draft.media?.mainImage ? (
             <div className="flex flex-col items-center gap-1 px-3 text-center">
-              <span className="h-12 w-12 rounded-xl bg-white/80 flex items-center justify-center text-lg font-bold text-emerald-600">
+              <span className="h-12 w-12 rounded-xl bg-surface/80 flex items-center justify-center text-lg font-bold text-emerald-600">
                 {(draft.media.mainImage.name || draft.basic?.name || 'P').charAt(0)}
               </span>
               <span className="text-[10px] text-slate-500 line-clamp-2">{draft.media.mainImage.name || 'Image attached'}</span>

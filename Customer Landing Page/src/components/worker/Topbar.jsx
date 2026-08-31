@@ -35,7 +35,7 @@ export default function Topbar({
   const unreadNotifications = notifications.filter((n) => !n.read).length;
 
   return (
-    <header className="sticky top-0 z-30 border-b border-white/40 dark:border-slate-800/80 bg-white/70 backdrop-blur-xl py-3 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-30 border-b border-white/40 dark:border-slate-800/80 bg-surface/70 backdrop-blur-xl py-3 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
       <div className="flex items-center gap-3 min-w-0">
         <button
           type="button"
@@ -61,7 +61,7 @@ export default function Topbar({
           value={searchQuery}
           onChange={(e) => onSearchChange?.(e.target.value)}
           placeholder="Search jobs, customers, earnings..."
-          className="w-full pl-10 pr-4 py-2.5 text-sm bg-white/80 dark:bg-slate-950/80 border border-slate-200/80 dark:border-slate-800 rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 text-slate-700 dark:text-slate-200 shadow-sm"
+          className="w-full pl-10 pr-4 py-2.5 text-sm bg-surface/80 dark:bg-slate-950/80 border border-slate-200/80 dark:border-slate-800 rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 text-slate-700 dark:text-slate-200 shadow-sm"
         />
       </div>
 
@@ -69,7 +69,7 @@ export default function Topbar({
         <button
           type="button"
           onClick={toggleDarkMode}
-          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-white/80 transition-colors"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-surface/80 transition-colors"
           title="Toggle theme"
         >
           {darkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -80,7 +80,7 @@ export default function Topbar({
             type="button"
             onClick={() => setLangDropdown(!langDropdown)}
             onBlur={() => setTimeout(() => setLangDropdown(false), 200)}
-            className="flex items-center gap-1 px-2.5 py-2 rounded-xl border border-slate-200/60 hover:bg-white/80 text-xs font-bold text-slate-600 dark:text-slate-300"
+            className="flex items-center gap-1 px-2.5 py-2 rounded-xl border border-slate-200/60 hover:bg-surface/80 text-xs font-bold text-slate-600 dark:text-slate-300"
           >
             <Globe size={14} />
             <span className="hidden sm:inline">{selectedLang}</span>
@@ -93,7 +93,7 @@ export default function Topbar({
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
-                className="absolute right-0 mt-1.5 w-36 bg-white/95 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-premium py-1 z-50"
+                className="absolute right-0 mt-1.5 w-36 bg-surface/95 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-premium py-1 z-50"
               >
                 {['English', 'Hindi', 'Bengali'].map((lang) => (
                   <button
@@ -117,7 +117,7 @@ export default function Topbar({
         <button
           type="button"
           onClick={() => onNavigateTab?.('notifications')}
-          className="p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-white/80 relative"
+          className="p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-surface/80 relative"
         >
           <Bell size={18} />
           {unreadNotifications > 0 && (
@@ -146,7 +146,7 @@ export default function Topbar({
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
-                className="absolute right-0 mt-1.5 w-52 bg-white/95 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-premium py-1 z-50"
+                className="absolute right-0 mt-1.5 w-52 bg-surface/95 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-premium py-1 z-50"
               >
                 <div className="px-3 py-2.5 border-b border-slate-100 dark:border-slate-800">
                   <p className="text-xs font-black text-slate-800 dark:text-white">Service Worker</p>

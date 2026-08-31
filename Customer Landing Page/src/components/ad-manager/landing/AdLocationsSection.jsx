@@ -55,7 +55,7 @@ export default function AdLocationsSection() {
           {LOCATIONS.map((loc, i) => (
             <div 
               key={i} 
-              className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center gap-3"
+              className="flex flex-col items-center justify-center p-4 rounded-2xl bg-surface dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center gap-3"
             >
               <loc.icon size={20} className="text-emerald-600 dark:text-emerald-500" />
               <span className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">

@@ -53,7 +53,7 @@ export default function CustomerSearch({ value, onChange, onCommit, placeholder 
         }}
         placeholder={placeholder}
         aria-label="Smart customer search"
-        className="w-full pl-9 pr-9 py-2.5 rounded-xl border border-slate-200 bg-white dark:bg-slate-950 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        className="w-full pl-9 pr-9 py-2.5 rounded-xl border border-slate-200 bg-surface dark:bg-slate-950 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
       />
       {local && (
         <button

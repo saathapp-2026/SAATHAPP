@@ -581,7 +581,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
                 <p className="text-[11px] text-emerald-300 font-semibold pt-1">Authorized Wholesale Supplier Badge</p>
               </div>
 
-              <div className="w-12 h-12 bg-white p-1 rounded-xl mx-auto shadow-md">
+              <div className="w-12 h-12 bg-surface p-1 rounded-xl mx-auto shadow-md">
                 <QrCode size={40} className="text-slate-950" />
               </div>
             </div>

@@ -124,7 +124,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
       contentClassName="w-full max-w-3xl"
     >
       <div className="max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl">
-        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur px-5 py-4">
+        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-surface/95 backdrop-blur px-5 py-4">
           <div>
             <h2 id="report-wizard-title" className="text-lg font-bold">
               Generate Report
@@ -338,7 +338,7 @@ export default function ReportWizard({ open, onClose, onGenerated, initialTypeId
           )}
         </div>
 
-        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-white/95 px-5 py-4">
+        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-surface/95 px-5 py-4">
           <button
             type="button"
             disabled={draft.step <= 1 || busy}

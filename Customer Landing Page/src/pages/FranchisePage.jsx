@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Building2, Award, Download, ArrowRight, ArrowLeft, Home, MapPin, Zap, Users, Globe, DollarSign,
   CheckCircle2, ChevronDown, Phone, PhoneCall, Calendar, Mail, Send, ShieldCheck, Sparkles, TrendingUp,
-  Package, Truck, Store, Layers, HelpCircle, FileText, Check, Clock, ChevronRight, X, Info, ExternalLink, Share2, Printer,
-  Briefcase, UserCheck, Coins, Rocket, Tag
+  Package, Truck, Store, Layers, HelpCircle, FileText, Check, Clock, X,ExternalLink,Printer,
+  UserCheck, Rocket, Tag
 } from 'lucide-react';
-import Header from '../components/Header';
+
 import Footer from '../components/Footer';
 import toast from 'react-hot-toast';
 import saathFranchiseLogoImg from '../assets/saath-franchise-logo.png';

@@ -157,7 +157,7 @@ export default function Step11_SubscriptionPlans({ onNext, onPrev }) {
                       type="button"
                       className={`transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full rounded-xl py-2 text-xs font-extrabold transition ${isSelected
                           ? 'bg-emerald-600 text-white'
-                          : 'bg-white border border-slate-300 text-slate-800 dark:text-slate-200'
+                          : 'bg-surface border border-slate-300 text-slate-800 dark:text-slate-200'
                         }`}
                     >
                       {isSelected ? 'Selected Plan' : 'Select Plan'}

@@ -21,7 +21,7 @@ export default function BusinessSummaryCard({ data }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.15 }}
-      className="rounded-2xl bg-white/5 backdrop-blur border border-white/10 p-6"
+      className="rounded-2xl bg-surface/5 backdrop-blur border border-white/10 p-6"
     >
       <h3 className="font-semibold text-lg mb-4">Business Summary</h3>
       <div className="grid sm:grid-cols-2 gap-4">

@@ -194,7 +194,7 @@ const faqSections = [
   },
 ];
 
-export default function Faq({ onBack, isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
+export default function Faq({ location = "Bhatahar, Nalanda", onLocationClick = () => {},  onBack, isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [openSection, setOpenSection] = useState('General Questions');
@@ -239,10 +239,10 @@ export default function Faq({ onBack, isAuthenticated = false, user = null, dark
   return (
     <div className="min-h-screen bg-page text-slate-800" style={{ scrollBehavior: 'smooth' }}>
       <Header
+        location={location}
+        onLocationClick={onLocationClick}
         cartCount={0}
         onCartClick={() => {}}
-        location="Bhatahar, Nalanda"
-        onLocationClick={() => {}}
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}

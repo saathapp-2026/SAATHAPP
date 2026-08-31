@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, Smartphone, ShieldCheck, ChevronRight, AlertTriangle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { requestRealOtp, verifyRealOtp, authenticateWithGoogle, AuthConfigurationError } from '../services/authService';
 
@@ -321,7 +322,7 @@ export default function Login({ onLogin, onSignup, onBack, error, defaultMode = 
 
               <div className="mt-8 text-center">
                 <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-relaxed px-4">
-                  By continuing, you agree to our <a href="/terms-of-service" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-primary hover:underline">Terms & Conditions</a> and <a href="/privacy-policy" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-primary hover:underline">Privacy Policy</a>.
+                  By continuing, you agree to our <Link to="/terms-of-service" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-primary hover:underline">Terms & Conditions</Link> and <Link to="/privacy-policy" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-primary hover:underline">Privacy Policy</Link>.
                 </p>
               </div>
             </>

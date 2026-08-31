@@ -356,7 +356,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
 
       {/* Sticky footer — stays inside content column, not under sidebar */}
       <div className="sticky bottom-0 z-20 mt-4 -mx-0">
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur shadow-lg px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface/95 backdrop-blur shadow-lg px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2">
           <button
             type="button"
             onClick={handleClose}

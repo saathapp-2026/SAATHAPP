@@ -52,7 +52,7 @@ export default function Sidebar({
       )}
 
       <aside
-        className={`transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded fixed top-0 bottom-0 left-0 z-50 w-72 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 border-r border-white/20 dark:border-slate-800/80 bg-white/75 backdrop-blur-2xl shadow-[4px_0_24px_rgba(15,23,42,0.06)] ${
+        className={`transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded fixed top-0 bottom-0 left-0 z-50 w-72 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 border-r border-white/20 dark:border-slate-800/80 bg-surface/75 backdrop-blur-2xl shadow-[4px_0_24px_rgba(15,23,42,0.06)] ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:sticky lg:h-screen lg:top-0`}
       >
@@ -109,7 +109,7 @@ export default function Sidebar({
               >
                 <motion.span
                   layout
-                  className="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow"
+                  className="absolute top-0.5 left-0.5 w-5 h-5 bg-surface rounded-full shadow"
                   animate={{ x: isOnline ? 20 : 0 }}
                   transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                 />
@@ -132,7 +132,7 @@ export default function Sidebar({
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-left text-xs font-bold transition-all ${
                   isActive
                     ? 'bg-gradient-to-r from-primary to-brand-600 text-white shadow-md shadow-primary/25'
-                    : 'text-slate-600 dark:text-slate-400 hover:bg-white/70 hover:text-slate-900 dark:hover:text-white'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-surface/70 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <Icon size={17} className={isActive ? 'text-white' : 'text-slate-400'} />

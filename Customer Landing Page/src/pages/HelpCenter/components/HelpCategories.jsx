@@ -72,7 +72,7 @@ function HelpCategories() {
   };
 
   return (
-    <section id="categories" className="py-[80px] bg-white border-t border-[#EEF2F7]">
+    <section id="categories" className="py-[80px] bg-surface border-t border-[#EEF2F7]">
       <div className="saas-container">
         
         {/* Centered Section Heading (800px max width, 48px heading) */}
@@ -105,7 +105,7 @@ function HelpCategories() {
                 onClick={scrollToFaq}
                 className="
                   group cursor-pointer
-                  bg-white
+                  bg-surface
                   border border-[#EEF2F7]
                   rounded-[20px]
                   p-[28px]

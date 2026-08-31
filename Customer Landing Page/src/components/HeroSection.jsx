@@ -157,7 +157,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full bg-white/15 backdrop-blur-md border border-white/15 text-xs font-bold text-secondary tracking-wide shadow-sm"
+                  className="inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full bg-surface/15 backdrop-blur-md border border-white/15 text-xs font-bold text-secondary tracking-wide shadow-sm"
                 >
                   <Sparkles size={12} className="text-secondary" />
                   <span>{current.badge}</span>
@@ -226,7 +226,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                     }}
                     whileHover={{ scale: 1.03, background: 'rgba(255,255,255,0.2)' }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-7 py-3.5 rounded-btn bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-sm flex items-center gap-2 backdrop-blur-sm transition-all"
+                    className="px-7 py-3.5 rounded-btn bg-surface/10 hover:bg-surface/15 text-white border border-white/20 font-bold text-sm flex items-center gap-2 backdrop-blur-sm transition-all"
                   >
                     <span>{current.secondaryCta}</span>
                     <ArrowRight size={14} />
@@ -257,7 +257,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -bottom-4 -left-4 sm:-left-8 p-3.5 rounded-card shadow-premium border border-white/20 bg-white/90 backdrop-blur-md text-slate-800 dark:text-slate-100 flex items-center gap-3"
+                  className="absolute -bottom-4 -left-4 sm:-left-8 p-3.5 rounded-card shadow-premium border border-white/20 bg-surface/90 backdrop-blur-md text-slate-800 dark:text-slate-100 flex items-center gap-3"
                 >
                   <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-primary dark:text-emerald-400 font-bold text-sm">
                     ✓
@@ -283,7 +283,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                 setCurrentSlide(index);
               }}
               className={`h-2 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'w-8 bg-secondary' : 'w-2 bg-white/40 hover:bg-white/60'
+                index === currentSlide ? 'w-8 bg-secondary' : 'w-2 bg-surface/40 hover:bg-surface/60'
               }`}
               title={`Go to slide ${index + 1}`}
             />

@@ -59,7 +59,7 @@ export default function CTASection({ onStartRegistration }) {
                 </button>
                 <a
                   href="mailto:wholesale@saathapp.in"
-                  className="transition-colors hover:text-emerald-600 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center justify-center gap-2 rounded-[16px] border border-slate-200 bg-white px-8 py-3.5 text-sm font-extrabold text-slate-700 dark:text-slate-200 transition hover:bg-page focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A8F3D]"
+                  className="transition-colors hover:text-emerald-600 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center justify-center gap-2 rounded-[16px] border border-slate-200 bg-surface px-8 py-3.5 text-sm font-extrabold text-slate-700 dark:text-slate-200 transition hover:bg-page focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A8F3D]"
                 >
                   <Mail size={16} />
                   Contact Sales

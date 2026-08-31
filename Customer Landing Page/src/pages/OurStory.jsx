@@ -8,7 +8,7 @@ import {
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-export default function OurStory({ onBack, onLogout, isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
+export default function OurStory({ location = "Bhatahar, Nalanda", onLocationClick = () => {},  onBack, onLogout, isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
   const navigate = useNavigate();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -76,8 +76,6 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
       <Header
         cartCount={0}
         onCartClick={() => {}}
-        location="Bhatahar, Nalanda"
-        onLocationClick={() => {}}
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}

@@ -54,12 +54,12 @@ export default function PWAInstallModal() {
               {/* Instructions Box */}
               <div className="bg-page rounded-2xl p-4 text-left border border-slate-100">
                 <p className="text-sm text-slate-700 dark:text-slate-300 font-medium flex items-center gap-2 mb-2">
-                  <span className="w-6 h-6 flex items-center justify-center bg-white rounded-full shadow-sm text-xs font-bold text-slate-900 dark:text-white">1</span>
+                  <span className="w-6 h-6 flex items-center justify-center bg-surface rounded-full shadow-sm text-xs font-bold text-slate-900 dark:text-white">1</span>
                   Tap the <Share size={16} className="text-blue-500 mx-1" /> Share button
                 </p>
                 <p className="text-sm text-slate-700 dark:text-slate-300 font-medium flex items-center gap-2">
-                  <span className="w-6 h-6 flex items-center justify-center bg-white rounded-full shadow-sm text-xs font-bold text-slate-900 dark:text-white">2</span>
-                  Select <span className="font-bold bg-white px-2 py-0.5 rounded shadow-sm">Add to Home Screen</span>
+                  <span className="w-6 h-6 flex items-center justify-center bg-surface rounded-full shadow-sm text-xs font-bold text-slate-900 dark:text-white">2</span>
+                  Select <span className="font-bold bg-surface px-2 py-0.5 rounded shadow-sm">Add to Home Screen</span>
                 </p>
               </div>
 

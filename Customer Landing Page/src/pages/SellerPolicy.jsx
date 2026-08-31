@@ -495,7 +495,7 @@ function SectionBody({ section }) {
   );
 }
 
-export default function SellerPolicyPage() {
+export default function SellerPolicyPage({ location, onLocationClick }) {
   const [activeSection, setActiveSection] = useState('eligibility');
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -549,10 +549,10 @@ export default function SellerPolicyPage() {
   return (
     <div className="min-h-screen bg-page text-slate-800">
       <Header
+        location={location}
+        onLocationClick={onLocationClick}
         cartCount={0}
         onCartClick={() => {}}
-        location="Bhatahar, Nalanda"
-        onLocationClick={() => {}}
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}

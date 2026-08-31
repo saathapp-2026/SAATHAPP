@@ -66,16 +66,14 @@ const paymentFaqs = [
   },
 ];
 
-export default function SecureOnlinePaymentsPage() {
+export default function SecureOnlinePaymentsPage({ location, onLocationClick }) {
   const [openFaq, setOpenFaq] = useState(null);
 
   return (
     <div className="min-h-screen bg-page font-sans text-slate-800">
-      <Header
+      <Header location={location} onLocationClick={onLocationClick}
         cartCount={0}
         onCartClick={() => {}}
-        location="Green Park, New Delhi"
-        onLocationClick={() => {}}
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}
@@ -100,7 +98,7 @@ export default function SecureOnlinePaymentsPage() {
             <Link
               to="/"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-page"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-surface px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-page"
             >
               <ArrowLeft size={16} />
               Back
@@ -168,7 +166,7 @@ export default function SecureOnlinePaymentsPage() {
               {paymentFeatures.map((feat, index) => (
                 <div
                   key={index}
-                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                  className="rounded-3xl border border-slate-200 bg-surface p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50">
                     {feat.icon}
@@ -181,7 +179,7 @@ export default function SecureOnlinePaymentsPage() {
           </section>
 
           {/* Guidelines */}
-          <section className="mt-16 rounded-[34px] border border-slate-200 bg-white p-8 shadow-sm lg:p-12">
+          <section className="mt-16 rounded-[34px] border border-slate-200 bg-surface p-8 shadow-sm lg:p-12">
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
                 <AlertCircle size={26} />
@@ -210,7 +208,7 @@ export default function SecureOnlinePaymentsPage() {
           </section>
 
           {/* FAQs */}
-          <section className="mt-16 rounded-[34px] border border-slate-200 bg-white p-8 shadow-sm lg:p-12">
+          <section className="mt-16 rounded-[34px] border border-slate-200 bg-surface p-8 shadow-sm lg:p-12">
             <div className="text-center">
               <h2 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
                 Payment Security FAQs

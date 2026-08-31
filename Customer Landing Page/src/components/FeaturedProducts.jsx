@@ -213,7 +213,7 @@ export default function FeaturedProducts({
                       className={`w-7.5 h-7.5 rounded-full flex items-center justify-center shadow-md border ${
                         isWishlisted 
                           ? 'bg-danger text-white border-transparent' 
-                          : 'bg-white/95 text-slate-400 hover:text-danger border-slate-100'
+                          : 'bg-surface/95 text-slate-400 hover:text-danger border-slate-100'
                       }`}
                       title={isWishlisted ? "Remove Wishlist" : "Wishlist"}
                     >
@@ -223,7 +223,7 @@ export default function FeaturedProducts({
                       onClick={() => navigate(`/product/${product.slug || product.id}`)}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="w-7.5 h-7.5 rounded-full bg-white/95 text-slate-400 hover:text-primary flex items-center justify-center shadow-md border border-slate-100"
+                      className="w-7.5 h-7.5 rounded-full bg-surface/95 text-slate-400 hover:text-primary flex items-center justify-center shadow-md border border-slate-100"
                       title="Quick View"
                     >
                       <Eye size={14} />
@@ -242,7 +242,7 @@ export default function FeaturedProducts({
                       )}
                       
                       {/* Delivery Time counter */}
-                      <span className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200/30">
+                      <span className="absolute bottom-2 left-2 bg-surface/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200/30">
                         ⏱ {product.deliveryTime}
                       </span>
                     </div>

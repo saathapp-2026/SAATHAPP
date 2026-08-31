@@ -37,7 +37,7 @@ export default function AdFinalCtaSection({ onStart }) {
               onClick={onStart}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-emerald-800 hover:bg-emerald-50 rounded-full font-bold text-base shadow-lg transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-surface text-emerald-800 hover:bg-emerald-50 rounded-full font-bold text-base shadow-lg transition-colors"
             >
               Start Advertising Now
               <ArrowRight size={18} className="text-emerald-600" />

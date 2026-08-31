@@ -5,7 +5,7 @@ import { Star, ShieldCheck, Timer, Calendar, UserCheck } from 'lucide-react';
 
 export default function ServiceSection({ onBookService }) {
   const [services, setServices] = useState(Array.from({ length: 3 }, (_, i) => ({
-    id: `placeholder-${i}`,
+    id: `skeleton-${i}`,
     name: '\u00A0',
     category: '',
     rating: '0',

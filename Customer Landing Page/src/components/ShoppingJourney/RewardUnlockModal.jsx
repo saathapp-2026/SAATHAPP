@@ -7,7 +7,7 @@ const RewardUnlockModal = ({ isOpen, onClose, rewardDetails }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
-      <div className="bg-white rounded-2xl p-6 max-w-sm w-full text-center shadow-xl animate-bounce-in">
+      <div className="bg-surface rounded-2xl p-6 max-w-sm w-full text-center shadow-xl animate-bounce-in">
         <div className="text-5xl mb-4">🎉</div>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Reward Unlocked!</h2>
         <p className="text-gray-600 mb-6">

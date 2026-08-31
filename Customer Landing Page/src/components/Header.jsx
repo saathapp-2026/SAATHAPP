@@ -138,7 +138,7 @@ export default function Header({
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-white dark:bg-slate-950 border-b border-theme-border shadow-sm">
+      <header className="sticky top-0 z-50 w-full transition-all duration-300 bg-surface dark:bg-slate-950 border-b border-theme-border shadow-sm">
         <div className="saath-container">
 
           {/* ========================================================= */}

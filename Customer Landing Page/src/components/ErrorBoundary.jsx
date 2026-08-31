@@ -34,7 +34,7 @@ export default class ErrorBoundary extends React.Component {
           for (const registration of registrations) {
             await registration.unregister();
           }
-        } catch (e) {}
+        } catch (_e) {}
       }
       if (window.caches) {
         try {
@@ -42,7 +42,7 @@ export default class ErrorBoundary extends React.Component {
           for (const name of names) {
             await caches.delete(name);
           }
-        } catch (e) {}
+        } catch (_e) {}
       }
       const newUrl = new URL(window.location.href);
       newUrl.searchParams.set('v', Date.now().toString());

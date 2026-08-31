@@ -470,7 +470,7 @@ function AppContent() {
     isSellerRoute;
 
   if (routerLocation.pathname === '/seller-policy') {
-    return <SellerPolicyPage />;
+    return <SellerPolicyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/advertise') {
@@ -956,23 +956,23 @@ function AppContent() {
   }
 
   if (routerLocation.pathname === '/about') {
-    return <AboutPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <AboutPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/service-warranty') {
-    return <ServiceWarrantyPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <ServiceWarrantyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/our-story') {
-    return <OurStoryPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <OurStoryPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/faq') {
-    return <FaqPage onBack={() => navigate('/')} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <FaqPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => navigate('/')} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/delivery-partner-agreement') {
-    return <DeliveryPartnerAgreementPage isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <DeliveryPartnerAgreementPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/franchise') {
@@ -1302,19 +1302,19 @@ function AppContent() {
   }
 
   if (routerLocation.pathname === '/privacy-policy') {
-    return <PrivacyPolicyPublicPage />;
+    return <PrivacyPolicyPublicPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/service-warranty-policy') {
-    return <ServiceWarrantyPolicyPage />;
+    return <ServiceWarrantyPolicyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/seller-policy') {
-    return <SellerPolicyPage />;
+    return <SellerPolicyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/refund-cancellation-policy') {
-    return <RefundCancellationPolicyPage />;
+    return <RefundCancellationPolicyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname.startsWith('/become-delivery-partner') || routerLocation.pathname.startsWith('/delivery')) {
@@ -1392,19 +1392,19 @@ function AppContent() {
   }
 
   if (routerLocation.pathname === '/verified-sellers') {
-    return <VerifiedSellersPage />;
+    return <VerifiedSellersPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/secure-online-payments') {
-    return <SecureOnlinePaymentsPage />;
+    return <SecureOnlinePaymentsPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/privacy-protected') {
-    return <PrivacyProtectedPage />;
+    return <PrivacyProtectedPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/customer-support') {
-    return <CustomerSupportPage />;
+    return <CustomerSupportPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/location') {
@@ -1616,23 +1616,23 @@ function AppContent() {
   }
 
   if (activePage === 'privacy-policy') {
-    return <PrivacyPolicyPage onBack={() => setActivePage('profile')} />;
+    return <PrivacyPolicyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => setActivePage('profile')} />;
   }
 
   if (activePage === 'terms') {
-    return <TermsPage onBack={() => setActivePage('profile')} />;
+    return <TermsPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => setActivePage('profile')} />;
   }
 
   if (activePage === 'about') {
-    return <AboutPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <AboutPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (activePage === 'service-warranty') {
-    return <ServiceWarrantyPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <ServiceWarrantyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (activePage === 'our-story') {
-    return <OurStoryPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <OurStoryPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
 

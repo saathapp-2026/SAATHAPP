@@ -513,7 +513,7 @@ function SectionBody({ section }) {
   );
 }
 
-export default function PrivacyPolicyPublicPage() {
+export default function PrivacyPolicyPublicPage({ location, onLocationClick }) {
   const [activeSection, setActiveSection] = useState('company-information');
   const [showScrollTop, setShowScrollTop] = useState(false);
   const isClickScrolling = useRef(false);
@@ -581,10 +581,12 @@ export default function PrivacyPolicyPublicPage() {
   return (
     <div className="min-h-screen bg-slate-50/80 text-slate-800">
       <Header
+        location={location}
+        onLocationClick={onLocationClick}
         cartCount={0}
         onCartClick={() => { }}
-        location="Bhatahar, Nalanda"
-        onLocationClick={() => { }}
+
+
         onSearch={() => { }}
         onLogin={() => { }}
         onSignup={() => { }}

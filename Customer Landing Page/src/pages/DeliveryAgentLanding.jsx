@@ -86,8 +86,8 @@ export default function DeliveryAgentLandingPage() {
       <Header
         cartCount={0}
         onCartClick={() => { }}
-        location="Bhatahar, Nalanda"
-        onLocationClick={() => { }}
+
+
         onSearch={() => { }}
         onLogin={() => { }}
         onSignup={() => { }}

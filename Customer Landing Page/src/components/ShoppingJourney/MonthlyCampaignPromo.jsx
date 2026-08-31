@@ -2,7 +2,7 @@ import React from 'react';
 
 const MonthlyCampaignPromo = ({ isEligible = true }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+    <div className="bg-surface rounded-2xl shadow-sm border border-gray-100 p-8">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-bold text-gray-900">Your Chance to Win!</h2>
         {isEligible ? (

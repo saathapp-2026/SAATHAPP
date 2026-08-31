@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import toast from 'react-hot-toast';
 import { loginSeller, getStoredOnboarding, normalizeEmail } from '../../services/sellerAuthService';
 import { getPostLoginRedirect } from '../../utils/sellerRouteUtils';
 
@@ -27,6 +28,7 @@ export default function SellerLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
     if (!validateForm()) return;
     
     setLoading(true);
@@ -37,15 +39,23 @@ export default function SellerLogin() {
         password,
       });
       if (result.success) {
+        toast.success('Login successful');
         const onboarding = getStoredOnboarding(result.seller?.id);
         const dest = getPostLoginRedirect(onboarding, result.seller);
         navigate(dest, { replace: true });
       } else {
-        setError(result.message);
+        const msg = result.message || 'Invalid credentials. Please try again.';
+        setError(msg);
+        toast.error(msg);
       }
     } catch (err) {
       console.error('[SellerAuth] Login error', err);
-      setError('Login failed. Please try again.');
+      let msg = 'Unable to sign in. Please try again.';
+      if (err instanceof TypeError || err.message === 'Failed to fetch' || err.name === 'NetworkError') {
+        msg = 'Network error. Please check your connection and try again.';
+      }
+      setError(msg);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }

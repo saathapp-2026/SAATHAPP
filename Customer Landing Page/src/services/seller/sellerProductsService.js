@@ -14,7 +14,7 @@ const DRAFT_KEY = 'saathapp-seller-product-draft-v2';
 function seedProducts() {
   return Array.from({ length: 3 }, (_, i) => ({
     ...emptyProductDraft(),
-    id: `placeholder-prd-${i}`,
+    id: crypto.randomUUID(),
     status: PRODUCT_STATUS.PUBLISHED,
     basic: { ...emptyProductDraft().basic, name: '\u00A0', sku: '\u00A0', category: '\u00A0' },
     pricing: { ...emptyProductDraft().pricing, mrp: 0, sellingPrice: 0, offerPrice: 0 },

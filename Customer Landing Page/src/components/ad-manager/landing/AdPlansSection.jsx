@@ -38,7 +38,7 @@ export default function AdPlansSection() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           
           {/* Daily Plans */}
-          <div className="bg-white dark:bg-slate-950 rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-slate-800 flex flex-col">
+          <div className="bg-surface dark:bg-slate-950 rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-slate-800 flex flex-col">
             <div className="bg-emerald-600 px-6 py-4 flex items-center justify-center gap-2">
               <Calendar className="text-white" size={20} />
               <h3 className="text-white font-bold text-lg">Daily Advertisement Plans</h3>
@@ -81,7 +81,7 @@ export default function AdPlansSection() {
           </div>
 
           {/* Monthly Plans */}
-          <div className="bg-white dark:bg-slate-950 rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-slate-800 flex flex-col">
+          <div className="bg-surface dark:bg-slate-950 rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-slate-800 flex flex-col">
             <div className="bg-emerald-700 px-6 py-4 flex items-center justify-center gap-2">
               <CalendarDays className="text-white" size={20} />
               <h3 className="text-white font-bold text-lg">Monthly Advertisement Plans</h3>

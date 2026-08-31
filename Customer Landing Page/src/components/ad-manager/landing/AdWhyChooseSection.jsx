@@ -41,7 +41,7 @@ const REASONS = [
 
 export default function AdWhyChooseSection() {
   return (
-    <section className="py-16 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800">
+    <section className="py-16 bg-surface dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         <div className="flex items-center justify-center gap-4">
@@ -56,7 +56,7 @@ export default function AdWhyChooseSection() {
           {REASONS.map((r, i) => (
             <div 
               key={i} 
-              className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 bg-slate-50/50 hover:bg-white transition-all duration-300 flex flex-col sm:flex-row lg:flex-col items-center sm:items-start lg:items-center text-center sm:text-left lg:text-center gap-4 shadow-sm hover:shadow-xl hover:-translate-y-1"
+              className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 bg-slate-50/50 hover:bg-surface transition-all duration-300 flex flex-col sm:flex-row lg:flex-col items-center sm:items-start lg:items-center text-center sm:text-left lg:text-center gap-4 shadow-sm hover:shadow-xl hover:-translate-y-1"
             >
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${r.bg} ${r.color}`}>
                 <r.icon size={24} strokeWidth={2.5} className="group-hover:scale-110 transition-transform" />

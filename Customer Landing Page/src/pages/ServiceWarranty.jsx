@@ -202,8 +202,6 @@ export default function ServiceWarranty({ onBack, onLogout, isAuthenticated = fa
       <Header
         cartCount={0}
         onCartClick={() => {}}
-        location="Bhatahar, Nalanda"
-        onLocationClick={() => {}}
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}

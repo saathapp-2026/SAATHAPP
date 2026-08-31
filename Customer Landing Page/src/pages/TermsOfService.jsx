@@ -487,7 +487,7 @@ function SectionBody({ section }) {
   );
 }
 
-export default function TermsOfServicePage() {
+export default function TermsOfServicePage({ location, onLocationClick }) {
   const [activeSection, setActiveSection] = useState('definitions');
   const [showScrollTop, setShowScrollTop] = useState(false);
   const isClickScrolling = useRef(false);
@@ -554,11 +554,11 @@ export default function TermsOfServicePage() {
 
   return (
     <div className="min-h-screen bg-slate-50/80 text-slate-800">
-      <Header
+      <Header location={location} onLocationClick={onLocationClick}
         cartCount={0}
         onCartClick={() => { }}
-        location="Bhatahar, Nalanda"
-        onLocationClick={() => { }}
+
+
         onSearch={() => { }}
         onLogin={() => { }}
         onSignup={() => { }}

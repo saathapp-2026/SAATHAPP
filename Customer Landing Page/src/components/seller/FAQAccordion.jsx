@@ -33,7 +33,7 @@ export default function FAQAccordion() {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <div className="rounded-2xl bg-white/5 backdrop-blur border border-white/10 p-6">
+    <div className="rounded-2xl bg-surface/5 backdrop-blur border border-white/10 p-6">
       <div className="flex items-center gap-2 mb-4">
         <HelpCircle size={18} className="text-emerald-400" />
         <h3 className="font-semibold text-lg">Frequently Asked Questions</h3>
@@ -45,7 +45,7 @@ export default function FAQAccordion() {
             <button
               type="button"
               onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              className="w-full flex items-center justify-between p-4 text-left hover:bg-white/5 transition-colors"
+              className="w-full flex items-center justify-between p-4 text-left hover:bg-surface/5 transition-colors"
               aria-expanded={openIndex === index}
             >
               <span className="text-sm font-medium pr-4">{item.q}</span>

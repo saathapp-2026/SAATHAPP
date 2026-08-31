@@ -99,7 +99,7 @@ export default function ExportReportModal({
   return (
     <SellerOverlay open={open} onClose={onClose} labelledBy="export-report-title" zIndex={SELLER_Z.modal}>
       <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl">
-        <div className="sticky top-0 z-[1] flex items-center justify-between gap-3 px-5 py-4 border-b border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur">
+        <div className="sticky top-0 z-[1] flex items-center justify-between gap-3 px-5 py-4 border-b border-slate-200 dark:border-slate-800 bg-surface/95 backdrop-blur">
           <div>
             <h2 id="export-report-title" className="font-bold text-lg">Export Report</h2>
             <p className="text-xs text-slate-500 mt-0.5">Configure filters and generate a downloadable report</p>
@@ -243,7 +243,7 @@ export default function ExportReportModal({
           )}
         </div>
 
-        <div className="sticky bottom-0 flex flex-wrap justify-end gap-2 px-5 py-4 border-t border-slate-200 dark:border-slate-800 bg-white/95">
+        <div className="sticky bottom-0 flex flex-wrap justify-end gap-2 px-5 py-4 border-t border-slate-200 dark:border-slate-800 bg-surface/95">
           <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm border border-slate-200 hover:bg-page">
             Cancel
           </button>

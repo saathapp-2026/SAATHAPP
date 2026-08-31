@@ -440,7 +440,7 @@ export function ProfileSettingsSection({
                   darkMode ? 'bg-primary' : 'bg-slate-300'
                 }`}
               >
-                <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
+                <div className={`w-4 h-4 bg-surface rounded-full shadow-md transform transition-transform duration-300 ${
                   darkMode ? 'translate-x-4' : 'translate-x-0'
                 }`} />
               </button>
@@ -455,7 +455,7 @@ export function ProfileSettingsSection({
                 onClick={() => toast.success('Preferences toggled.') }
                 className="w-10 h-6 rounded-full p-1 cursor-pointer bg-primary flex items-center"
               >
-                <div className="w-4 h-4 bg-white rounded-full shadow-md translate-x-4" />
+                <div className="w-4 h-4 bg-surface rounded-full shadow-md translate-x-4" />
               </button>
             </div>
 
@@ -849,7 +849,7 @@ export function HelpSupportModule({
           </div>
           <a
             href="tel:1800123456"
-            className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-1.5 bg-white text-slate-900 text-center font-extrabold text-[10px] uppercase rounded-btn block hover:bg-page shadow-sm transition-colors"
+            className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-1.5 bg-surface text-slate-900 text-center font-extrabold text-[10px] uppercase rounded-btn block hover:bg-page shadow-sm transition-colors"
           >
             Call Helpline Now
           </a>

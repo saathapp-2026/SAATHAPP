@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { Timer, ShoppingCart, Heart, Eye, Star, Flame } from 'lucide-react';
 // Removed mockData dependency
 
-export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
+export default function FlashDeals({ onAddToCart, cartItems }) {
   const navigate = useNavigate();
-  const [flashDeals, setFlashDeals] = useState(Array.from({ length: 5 }, (_, i) => ({
-    id: `placeholder-${i}`,
+  const [flashDeals] = useState(Array.from({ length: 5 }, (_, i) => ({
+    id: `skeleton-${i}`,
     name: '\u00A0',
     price: '0',
     oldPrice: '0',
@@ -117,7 +117,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                   <motion.button 
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="w-7.5 h-7.5 rounded-full bg-white/95 text-slate-400 hover:text-danger flex items-center justify-center shadow-md border border-slate-100"
+                    className="w-7.5 h-7.5 rounded-full bg-surface/95 text-slate-400 hover:text-danger flex items-center justify-center shadow-md border border-slate-100"
                     title="Add to Wishlist"
                   >
                     <Heart size={14} />
@@ -126,7 +126,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                     onClick={() => navigate(`/product/${deal.slug || deal.id}`)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="w-7.5 h-7.5 rounded-full bg-white/95 text-slate-400 hover:text-primary flex items-center justify-center shadow-md border border-slate-100"
+                    className="w-7.5 h-7.5 rounded-full bg-surface/95 text-slate-400 hover:text-primary flex items-center justify-center shadow-md border border-slate-100"
                     title="Quick View"
                   >
                     <Eye size={14} />
@@ -145,7 +145,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                     )}
                     
                     {/* Delivery Time Badge */}
-                    <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200/30">
+                    <div className="absolute bottom-2 left-2 bg-surface/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200/30">
                       ⏱ {deal.deliveryTime}
                     </div>
                   </div>

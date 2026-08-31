@@ -224,7 +224,7 @@ export default function DocumentTable({
           <select
             value={pageSize}
             onChange={(e) => onPageSize(Number(e.target.value))}
-            className="rounded-lg border border-slate-200 bg-white dark:bg-slate-950 px-2 py-1.5"
+            className="rounded-lg border border-slate-200 bg-surface dark:bg-slate-950 px-2 py-1.5"
           >
             {[5, 10, 20, 50].map((n) => (
               <option key={n} value={n}>

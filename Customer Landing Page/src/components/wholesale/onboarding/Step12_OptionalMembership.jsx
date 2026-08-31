@@ -198,7 +198,7 @@ export default function Step12_OptionalMembership({ onNext, onPrev }) {
                       className={`w-full rounded-xl py-2 text-xs font-extrabold transition ${
                         isSelected
                           ? 'bg-emerald-600 text-white'
-                          : 'bg-white border border-slate-300 text-slate-800 dark:text-slate-200 hover:bg-emerald-600 hover:text-white'
+                          : 'bg-surface border border-slate-300 text-slate-800 dark:text-slate-200 hover:bg-emerald-600 hover:text-white'
                       }`}
                     >
                       {isSelected ? '✓ Plan Selected' : 'Select Plan'}

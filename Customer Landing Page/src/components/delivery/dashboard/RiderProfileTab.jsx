@@ -505,7 +505,7 @@ export default function RiderProfileTab({ onSelectTab, onLogout }) {
                   <span>Official Agent Digital Badge</span><br />
                   <span className="text-amber-400 font-mono font-bold">Authorized Patna Zone</span>
                 </div>
-                <div className="w-12 h-12 bg-white p-1 rounded-xl shadow-md shrink-0">
+                <div className="w-12 h-12 bg-surface p-1 rounded-xl shadow-md shrink-0">
                   <QrCode size={40} className="text-slate-950" />
                 </div>
               </div>

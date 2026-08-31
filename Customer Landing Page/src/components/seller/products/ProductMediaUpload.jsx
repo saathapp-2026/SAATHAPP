@@ -121,6 +121,7 @@ function ImageSlot({ item, label, onRemove, onReplace, large, disabled }) {
       return;
     }
     setReading(true);
+    const originalItem = item;
     const id = `img_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
     let blobUrl = '';
     try {
@@ -145,10 +146,21 @@ function ImageSlot({ item, label, onRemove, onReplace, large, disabled }) {
         mimeType: file.type || 'image/jpeg',
         size: file.size,
       });
-      toast.success('Image uploaded') } catch (err) {
+      toast.success('Image uploaded');
+    } catch (err) {
       console.error('[ImageSlot] upload failed', err);
-      toast.error('Failed to read image. Try JPG or PNG.');
-      onReplace(null);
+      toast.error('Upload service unavailable. Please try again later.');
+      onReplace({
+        id,
+        url: blobUrl,
+        name: file.name || 'image.jpg',
+        progress: 0,
+        error: true,
+        mimeType: file.type || 'image/jpeg',
+        size: file.size,
+      });
+      // Do not revoke blobUrl on failure so we can show preview
+      blobUrl = '';
     } finally {
       if (blobUrl) URL.revokeObjectURL(blobUrl);
       setReading(false);
@@ -171,16 +183,21 @@ function ImageSlot({ item, label, onRemove, onReplace, large, disabled }) {
               <div className="h-full bg-emerald-500 transition-all" style={{ width: `${item.progress}%` }} />
             </div>
           )}
-          {reading && (
+          {reading && !item.error && (
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center z-20">
               <Loader2 size={22} className="text-white animate-spin" />
             </div>
           )}
+          {item.error && (
+            <div className="absolute inset-0 bg-red-500/20 flex flex-col items-center justify-center z-20 backdrop-blur-[2px]">
+              <span className="text-white bg-red-600 px-2 py-1 rounded text-[10px] font-bold mb-1">Upload Failed</span>
+            </div>
+          )}
           <div className="absolute top-1 right-1 flex gap-1 z-20">
-            <button type="button" onClick={openPicker} disabled={disabled || reading} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none h-6 px-2 rounded bg-white/95 text-[10px] font-semibold shadow">
+            <button type="button" onClick={openPicker} disabled={disabled || reading} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none h-6 px-2 rounded bg-surface/95 text-[10px] font-semibold shadow">
               Replace
             </button>
-            <button type="button" onClick={() => onRemove?.()} disabled={disabled || reading} className="h-6 w-6 rounded bg-white/95 inline-flex items-center justify-center shadow" aria-label="Remove">
+            <button type="button" onClick={() => onRemove?.()} disabled={disabled || reading} className="h-6 w-6 rounded bg-surface/95 inline-flex items-center justify-center shadow" aria-label="Remove">
               <X size={12} />
             </button>
           </div>
@@ -477,7 +494,7 @@ export default function ProductMediaUpload({ value, errors = {}, onChange, onUpl
               value={media.youtubeUrl || ''}
               onChange={(e) => commit((prev) => ({ ...prev, youtubeUrl: e.target.value }))}
               placeholder="https://youtube.com/watch?v=…"
-              className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white dark:bg-slate-950 text-sm"
+              className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-surface dark:bg-slate-950 text-sm"
             />
           </div>
           <div>

@@ -308,7 +308,7 @@ function SubcategoryScrollStrip({ items, activeSubcategoryId, onSelectSubcategor
         <h2 className="text-xl font-black text-slate-800 dark:text-slate-100 tracking-tight">Shop by Category</h2>
         <button
           type="button"
-          onClick={() => { }}
+          onClick={() => window.location.href = '/products'}
           className="text-xs sm:text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:underline cursor-pointer transition-colors"
         >
           View All Categories

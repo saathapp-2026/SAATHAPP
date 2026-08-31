@@ -47,7 +47,7 @@ export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboa
         className="p-4 border-b border-slate-800 flex items-center gap-3 cursor-pointer hover:bg-slate-900/60 transition group"
         title="View Wholesale Enterprise Profile"
       >
-        <div className="h-10 w-10 rounded-2xl bg-white flex items-center justify-center p-1 shadow-lg overflow-hidden shrink-0 border border-emerald-500/30 group-hover:scale-105 transition">
+        <div className="h-10 w-10 rounded-2xl bg-surface flex items-center justify-center p-1 shadow-lg overflow-hidden shrink-0 border border-emerald-500/30 group-hover:scale-105 transition">
           <img src={saathAppLogo} alt="SaathApp Always With You" className="w-full h-full object-contain" />
         </div>
         <div className="overflow-hidden">

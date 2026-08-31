@@ -373,7 +373,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                     <select
                       value={formData.selectedProductId}
                       onChange={(e) => handleFieldChange('selectedProductId', e.target.value)}
-                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-3 font-bold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none"
+                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-3 font-bold text-slate-900 dark:text-white focus:border-emerald-500 focus:outline-none"
                     >
                       {MOCK_TRANSFER_PRODUCTS.map((p) => (
                         <option key={p.id} value={p.id}>
@@ -533,7 +533,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                       required
                       value={formData.quantity}
                       onChange={(e) => handleFieldChange('quantity', e.target.value)}
-                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-3 font-mono font-bold text-slate-900 dark:text-white"
+                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-3 font-mono font-bold text-slate-900 dark:text-white"
                     />
                     <span className="text-[10px] text-slate-500 mt-1 block">Maximum transferable: {fromWh.available} Units</span>
                   </div>
@@ -579,7 +579,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                   <select
                     value={formData.transferType}
                     onChange={(e) => handleFieldChange('transferType', e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
+                    className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
                   >
                     <option value="Stock Transfer">Stock Transfer</option>
                     <option value="Emergency Transfer">Emergency Transfer</option>
@@ -598,7 +598,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                     type="date"
                     value={formData.transferDate}
                     onChange={(e) => handleFieldChange('transferDate', e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
+                    className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
                   />
                 </div>
 
@@ -608,7 +608,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                     type="date"
                     value={formData.expectedPickupDate}
                     onChange={(e) => handleFieldChange('expectedPickupDate', e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
+                    className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
                   />
                 </div>
 
@@ -618,7 +618,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                     type="date"
                     value={formData.expectedDeliveryDate}
                     onChange={(e) => handleFieldChange('expectedDeliveryDate', e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
+                    className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
                   />
                 </div>
               </div>
@@ -635,7 +635,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                     <select
                       value={formData.transportType}
                       onChange={(e) => handleFieldChange('transportType', e.target.value)}
-                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
+                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-2.5 font-bold text-slate-900 dark:text-white"
                     >
                       <option value="Own Vehicle">Own Vehicle</option>
                       <option value="Partner Logistics">Partner Logistics</option>
@@ -651,7 +651,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                       value={formData.vehicleNumber}
                       onChange={(e) => handleFieldChange('vehicleNumber', e.target.value)}
                       placeholder="MH-02-EQ-8891"
-                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-mono font-bold"
+                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-2.5 font-mono font-bold"
                     />
                   </div>
 
@@ -662,7 +662,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                       value={formData.driverName}
                       onChange={(e) => handleFieldChange('driverName', e.target.value)}
                       placeholder="Suresh Kumar"
-                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-semibold"
+                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-2.5 font-semibold"
                     />
                   </div>
 
@@ -673,7 +673,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                       value={formData.driverMobile}
                       onChange={(e) => handleFieldChange('driverMobile', e.target.value)}
                       placeholder="Enter 10-digit mobile number"
-                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-mono"
+                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-2.5 font-mono"
                     />
                   </div>
 
@@ -683,7 +683,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                       type="text"
                       value={formData.trackingNumber}
                       onChange={(e) => handleFieldChange('trackingNumber', e.target.value)}
-                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-mono"
+                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-2.5 font-mono"
                     />
                   </div>
 
@@ -693,7 +693,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                       type="text"
                       value={formData.lrNumber}
                       onChange={(e) => handleFieldChange('lrNumber', e.target.value)}
-                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-mono"
+                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-2.5 font-mono"
                     />
                   </div>
 
@@ -703,7 +703,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                       type="number"
                       value={formData.shippingCost}
                       onChange={(e) => handleFieldChange('shippingCost', e.target.value)}
-                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-mono font-bold"
+                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-2.5 font-mono font-bold"
                     />
                   </div>
 
@@ -713,7 +713,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                       type="text"
                       value={formData.insurance}
                       onChange={(e) => handleFieldChange('insurance', e.target.value)}
-                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-2.5 font-semibold"
+                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-2.5 font-semibold"
                     />
                   </div>
                 </div>
@@ -747,7 +747,7 @@ export default function InterWarehouseTransferModal({ isOpen, onClose }) {
                   value={formData.reason}
                   onChange={(e) => handleFieldChange('reason', e.target.value)}
                   placeholder="Explain why stock is being transferred between warehouses..."
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 p-3 text-xs font-semibold text-slate-900 dark:text-white"
+                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-surface dark:bg-slate-950 p-3 text-xs font-semibold text-slate-900 dark:text-white"
                 />
               </div>
             </div>

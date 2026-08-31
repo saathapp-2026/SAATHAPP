@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { User, Mail, Phone, Lock, Eye, EyeOff } from 'lucide-react';
 import { registerSeller, saveOnboarding, normalizeEmail } from '../../services/sellerAuthService';
 import { defaultOnboardingData } from '../../config/sellerOnboardingConfig';
+import toast from 'react-hot-toast';
 
 export default function SellerRegister() {
   const navigate = useNavigate();
@@ -70,10 +71,16 @@ export default function SellerRegister() {
         navigate('/seller/basic-information', { replace: true });
       } else {
         setError(result.message);
+        toast.error(result.message);
       }
     } catch (err) {
       console.error('[SellerAuth] Register error', err);
-      setError('Registration failed. Please try again.');
+      let msg = 'Registration failed. Please try again.';
+      if (err instanceof TypeError || err.message === 'Failed to fetch' || err.name === 'NetworkError') {
+        msg = 'Network error. Please check your connection and try again.';
+      }
+      setError(msg);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }

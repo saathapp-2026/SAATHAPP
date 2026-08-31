@@ -193,7 +193,7 @@ export default function OrderFilters({
             >
               {pill.label}
               {count != null && count > 0 && (
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${active ? 'bg-white/25' : 'bg-page'}`}>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${active ? 'bg-surface/25' : 'bg-page'}`}>
                   {count}
                 </span>
               )}

@@ -331,7 +331,7 @@ function SectionBody({ section }) {
   );
 }
 
-export default function ServiceWarrantyPolicyPage() {
+export default function ServiceWarrantyPolicyPage({ location, onLocationClick }) {
   useEffect(() => {
     document.title = 'Service Warranty Policy | SaathApp';
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -351,10 +351,12 @@ export default function ServiceWarrantyPolicyPage() {
   return (
     <div className="min-h-screen bg-page text-slate-800">
       <Header
+        location={location}
+        onLocationClick={onLocationClick}
         cartCount={0}
         onCartClick={() => { }}
-        location="Bhatahar, Nalanda"
-        onLocationClick={() => { }}
+
+
         onSearch={() => { }}
         onLogin={() => { }}
         onSignup={() => { }}

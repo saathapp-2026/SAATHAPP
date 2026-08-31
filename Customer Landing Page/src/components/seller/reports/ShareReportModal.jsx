@@ -56,7 +56,7 @@ export default function ShareReportModal({ open, onClose, report }) {
                 toast.error('Copy failed');
               }
             }}
-            className="p-1.5 rounded-lg hover:bg-white"
+            className="p-1.5 rounded-lg hover:bg-surface"
             aria-label="Copy link"
           >
             <Copy size={14} />

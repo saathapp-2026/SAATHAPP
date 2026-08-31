@@ -55,7 +55,7 @@ export default function UploadSection({ draft, updateDraft }) {
             <input 
               type="text" 
               placeholder="https://saathapp.in/store/your-store"
-              className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-white"
+              className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-surface"
               value={draft.adLink || ''}
               onChange={(e) => updateDraft({ adLink: e.target.value })}
             />
@@ -68,7 +68,7 @@ export default function UploadSection({ draft, updateDraft }) {
               placeholder="Enter ad description"
               rows={4}
               maxLength={200}
-              className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-white resize-none"
+              className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-surface resize-none"
               value={draft.description || ''}
               onChange={(e) => updateDraft({ description: e.target.value })}
             />

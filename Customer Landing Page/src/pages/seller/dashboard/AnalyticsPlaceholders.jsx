@@ -18,7 +18,7 @@ const customerData = [
   { name: 'Segment C', value: 1, color: '#f1f5f9' },
 ];
 const productData = Array.from({ length: 3 }, (_, i) => ({
-  id: `placeholder-${i}`,
+  id: crypto.randomUUID(),
   name: '\u00A0',
   sales: 0,
   revenue: 0,

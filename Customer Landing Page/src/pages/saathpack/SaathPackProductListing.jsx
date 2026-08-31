@@ -95,7 +95,7 @@ export default function SaathPackProductListing({
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fafafa] font-sans pb-20">
+    <div className="min-h-screen flex flex-col bg-page font-sans pb-20">
       <Header
         cartCount={cartCount}
         location={location}

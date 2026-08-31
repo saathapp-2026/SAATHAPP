@@ -82,7 +82,7 @@ export default function Advertisements() {
 
               {/* Text contents */}
               <div className="relative z-10 p-6 sm:p-8 max-w-xl text-left space-y-3.5">
-                <span className="inline-flex items-center gap-1 py-1 px-2.5 rounded-full bg-white/20 text-[9px] font-black uppercase tracking-wider">
+                <span className="inline-flex items-center gap-1 py-1 px-2.5 rounded-full bg-surface/20 text-[9px] font-black uppercase tracking-wider">
                   <Tag size={10} />
                   {active.tag}
                 </span>
@@ -99,7 +99,7 @@ export default function Advertisements() {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="h-8 px-4 rounded-full bg-white text-slate-900 font-extrabold text-[11px] flex items-center gap-1 hover:bg-page transition-colors shadow-sm"
+                  className="h-8 px-4 rounded-full bg-surface text-slate-900 font-extrabold text-[11px] flex items-center gap-1 hover:bg-page transition-colors shadow-sm"
                 >
                   <span>{active.cta}</span>
                   <ArrowRight size={11} />
@@ -116,7 +116,7 @@ export default function Advertisements() {
                 key={i}
                 onClick={() => setCurrentIndex(i)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === currentIndex ? 'w-5 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/60'
+                  i === currentIndex ? 'w-5 bg-surface' : 'w-1.5 bg-surface/40 hover:bg-surface/60'
                 }`}
                 title={`Ad slide ${i + 1}`}
               />

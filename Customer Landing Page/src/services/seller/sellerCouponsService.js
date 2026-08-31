@@ -41,7 +41,7 @@ function save(key, value) {
 
 function seedPromos() {
   return Array.from({ length: 3 }, (_, i) => ({
-    id: `placeholder-cpn-${i}`,
+    id: crypto.randomUUID(),
     kind: 'coupon',
     typeId: 'percentage',
     name: '\u00A0',

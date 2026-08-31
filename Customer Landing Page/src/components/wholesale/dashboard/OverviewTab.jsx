@@ -56,7 +56,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
           <button
             type="button"
             onClick={onOpenAddProduct}
-            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-2xl border border-white/20 bg-white/10 hover:bg-white/20 px-5 py-2.5 text-xs font-extrabold text-white backdrop-blur-sm transition cursor-pointer"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-2xl border border-white/20 bg-surface/10 hover:bg-surface/20 px-5 py-2.5 text-xs font-extrabold text-white backdrop-blur-sm transition cursor-pointer"
           >
             + Add New SKU
           </button>

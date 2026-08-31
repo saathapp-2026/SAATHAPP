@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {
-  CheckCircle2, Circle, ChevronRight, ChevronLeft, Plus, Trash2, Upload, RefreshCw,
-  Edit, Copy, FileDown, FileUp, Archive, Eye, Sparkles, Check, Package, DollarSign,
-  Layers, Truck, Search, Image, Video, ShieldCheck, AlertCircle, Calendar, X,
-  FileSpreadsheet, Star, Award, Info, RotateCw, Crop, Zap, Tag, Sliders, Globe,
-  Percent, HelpCircle, Wrench, Clock, CheckSquare, Layers2, ShieldAlert
+  CheckCircle2, ChevronRight, ChevronLeft, Plus, Trash2, Upload, RefreshCw,
+  Copy, FileDown, FileUp, Archive, Eye, Package, DollarSign,
+  Layers, Truck, Image, Video, Calendar, X,
+  FileSpreadsheet, Info, RotateCw, Crop, Tag, Sliders, Globe,
+  HelpCircle, ShieldAlert, CheckSquare
 } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
 import toast from 'react-hot-toast';

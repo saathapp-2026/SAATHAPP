@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import OnboardingLayout from '../../components/seller/OnboardingLayout';
 import { useOnboarding } from '../../context/SellerOnboardingContext';
 import { LOCATION_TIERS } from '../../config/sellerOnboardingConfig';
+import { toast } from 'react-hot-toast';
 
 const inputClass =
   'w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 [&>option]:bg-slate-900 [&>option]:text-white';
@@ -21,11 +22,11 @@ export default function Address() {
     const pincode = (form.get('pincode') || '').replace(/\D/g, '');
 
     if (!state || !city || !address) {
-      alert('Please fill in all required address fields.');
+      toast.error('Please fill in all required address fields.');
       return;
     }
     if (pincode.length !== 6) {
-      alert('Please enter a valid 6-digit PIN code.');
+      toast.error('Please enter a valid 6-digit PIN code.');
       return;
     }
 

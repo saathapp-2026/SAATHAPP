@@ -26,12 +26,12 @@ export default function OnboardingLayout({ title, subtitle, children, showSteppe
         </div>
 
         {showStepper && (
-          <div className="mb-8 p-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10">
+          <div className="mb-8 p-4 rounded-2xl bg-surface/5 backdrop-blur-xl border border-white/10">
             <ProgressStepper />
           </div>
         )}
 
-        <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-5 md:p-8 shadow-2xl">
+        <div className="rounded-2xl bg-surface/5 backdrop-blur-xl border border-white/10 p-5 md:p-8 shadow-2xl">
           {children}
         </div>
       </div>

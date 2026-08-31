@@ -43,7 +43,7 @@ function FAQ() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="pt-[80px] pb-[100px] bg-white border-t border-[#EEF2F7]">
+    <section id="faq" className="pt-[80px] pb-[100px] bg-surface border-t border-[#EEF2F7]">
       <div className="saas-container">
         
         {/* Centered Section Heading (800px max width, 48px heading) */}
@@ -70,7 +70,7 @@ function FAQ() {
                 relative overflow-hidden
                 rounded-[18px]
                 border
-                bg-white
+                bg-surface
                 shadow-[0_8px_30px_rgba(15,23,42,.06)]
                 transition-all duration-300
                 ${

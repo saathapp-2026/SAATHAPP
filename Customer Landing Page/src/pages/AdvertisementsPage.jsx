@@ -57,7 +57,7 @@ export default function AdvertisementsPage({
       <main className="flex-1 w-full bg-white dark:bg-slate-950">
         <Toaster position="top-right" />
         
-        <AdHeroSection onCreateAds={() => navigate('/advertise/create')} />
+        <AdHeroSection onCreateAds={() => openCreate('banner')} />
         <AdPlansSection />
         
         <section className="py-16 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800">
@@ -71,7 +71,7 @@ export default function AdvertisementsPage({
         </section>
         
         <AdWhyChooseSection />
-        <AdFinalCtaSection onStart={() => navigate('/advertise/create')} />
+        <AdFinalCtaSection onStart={() => openCreate('banner')} />
 
         <AdWizard
           open={wizardOpen}

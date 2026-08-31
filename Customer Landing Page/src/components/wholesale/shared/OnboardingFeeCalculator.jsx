@@ -149,7 +149,7 @@ export default function OnboardingFeeCalculator({
             </div>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-[#0A8F3D]/20 bg-white/70 dark:bg-slate-950/50 p-4">
+          <div className="mt-6 rounded-2xl border border-[#0A8F3D]/20 bg-surface/70 dark:bg-slate-950/50 p-4">
             <div className="flex items-start gap-2">
               <ShieldCheck size={16} className="text-[#0A8F3D] shrink-0 mt-0.5" />
               <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed font-medium">

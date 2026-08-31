@@ -102,7 +102,7 @@ export default function Sidebar({
             >
               <motion.div
                 layout
-                className="w-4 h-4 bg-white rounded-full shadow-md"
+                className="w-4 h-4 bg-surface rounded-full shadow-md"
                 animate={{ x: isOnline ? 16 : 0 }}
                 transition={{ type: 'spring', stiffness: 500, damping: 30 }}
               />
@@ -141,7 +141,7 @@ export default function Sidebar({
 
         <div className="p-4 border-t border-slate-100 dark:border-slate-800/60">
           <div className="bg-gradient-to-tr from-brand-600 to-emerald-700 rounded-card p-4 text-white text-left relative overflow-hidden shadow-md">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-surface/10 rounded-full blur-xl pointer-events-none" />
             <div className="relative z-10 space-y-2.5">
               <div className="flex items-center gap-1.5 bg-slate-900/30 px-2 py-0.5 rounded-full w-max border border-white/10 text-[9px] font-black uppercase text-secondary">
                 <TrendingUp size={10} />

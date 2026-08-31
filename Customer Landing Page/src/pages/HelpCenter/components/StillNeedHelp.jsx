@@ -55,7 +55,7 @@ function StillNeedHelp() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[32px]">
           
           {/* Left Card ("Need Personal Assistance?") */}
-          <div className="rounded-[20px] bg-white border border-[#EEF2F7] p-[28px] shadow-[0_4px_18px_rgba(15,23,42,.05)] hover:shadow-[0_14px_36px_rgba(15,23,42,.1)] transition-all flex flex-col justify-between">
+          <div className="rounded-[20px] bg-surface border border-[#EEF2F7] p-[28px] shadow-[0_4px_18px_rgba(15,23,42,.05)] hover:shadow-[0_14px_36px_rgba(15,23,42,.1)] transition-all flex flex-col justify-between">
             <div>
               <div className="w-[40px] h-[40px] rounded-full bg-[#ECFDF3] text-[#16A34A] border border-[#A7F3D0]/60 flex items-center justify-center flex-shrink-0 mb-[18px]">
                 <HelpCircle size={18} strokeWidth={1.8} />
@@ -112,7 +112,7 @@ function StillNeedHelp() {
                 className="hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] 
                   group
                   rounded-[16px]
-                  bg-white
+                  bg-surface
                   border border-[#E2E8F0]
                   p-6
                   shadow-[0_6px_20px_rgba(15,23,42,.04)]

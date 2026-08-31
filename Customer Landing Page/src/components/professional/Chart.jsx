@@ -250,7 +250,7 @@ export default function Chart() {
                   left: `${points[hoveredPoint].x - 45}px`,
                   top: `${points[hoveredPoint].y - 45}px`
                 }}
-                className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-3 py-1.5 rounded-lg shadow-premium text-center z-10 pointer-events-none"
+                className="bg-slate-900 dark:bg-surface text-white dark:text-slate-900 px-3 py-1.5 rounded-lg shadow-premium text-center z-10 pointer-events-none"
               >
                 <p className="text-[9px] font-black uppercase tracking-wider text-slate-450 dark:text-slate-500 leading-none">
                   {points[hoveredPoint].label}

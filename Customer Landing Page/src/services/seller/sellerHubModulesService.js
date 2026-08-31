@@ -28,7 +28,7 @@ function save(key, value) {
 
 function seedInventory() {
   return Array.from({ length: 3 }, (_, i) => ({
-    id: `placeholder-inv-${i}`,
+    id: crypto.randomUUID(),
     name: '\u00A0',
     sku: '\u00A0',
     category: '\u00A0',
@@ -42,7 +42,7 @@ function seedInventory() {
 
 function seedMarketing() {
   return Array.from({ length: 2 }, (_, i) => ({
-    id: `placeholder-mkt-${i}`,
+    id: crypto.randomUUID(),
     name: '\u00A0',
     type: '\u00A0',
     status: 'active',
@@ -55,7 +55,7 @@ function seedMarketing() {
 
 function seedWallet() {
   return Array.from({ length: 4 }, (_, i) => ({
-    id: `placeholder-wlt-${i}`,
+    id: crypto.randomUUID(),
     date: new Date().toISOString(),
     type: 'credit',
     amount: 0,
@@ -67,7 +67,7 @@ function seedWallet() {
 
 function seedPayments() {
   return Array.from({ length: 3 }, (_, i) => ({
-    id: `placeholder-pay-${i}`,
+    id: crypto.randomUUID(),
     date: new Date().toISOString(),
     amount: 0,
     status: 'success',
@@ -78,7 +78,7 @@ function seedPayments() {
 
 function seedSupport() {
   return Array.from({ length: 2 }, (_, i) => ({
-    id: `placeholder-sup-${i}`,
+    id: crypto.randomUUID(),
     subject: '\u00A0',
     status: 'open',
     priority: 'low',

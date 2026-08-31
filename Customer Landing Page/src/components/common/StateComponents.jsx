@@ -42,7 +42,7 @@ export function ErrorState({
       {onRetry && (
         <button 
           onClick={onRetry}
-          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-6 px-4 py-2 flex items-center gap-2 bg-white dark:bg-surface border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-6 px-4 py-2 flex items-center gap-2 bg-surface dark:bg-surface border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
         >
           <RefreshCw size={16} /> Try Again
         </button>

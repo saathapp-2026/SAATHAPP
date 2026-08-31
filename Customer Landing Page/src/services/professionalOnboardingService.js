@@ -1,4 +1,4 @@
-import { getProfessionalPricingConfig, getProfessionalCommissionConfig } from '../config/professionalOnboardingConfig';
+import { getProfessionalPricingConfig, getProfessionalCommissionConfig } from '../config/professionalOnboardingConfig.js';
 
 export function normalizeCategoryKey(category) {
   if (!category) return null;

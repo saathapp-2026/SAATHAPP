@@ -216,7 +216,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                 <button
                   type="button"
                   onClick={() => catalogInputRef.current?.click()}
-                  className="rounded-xl bg-white border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
+                  className="rounded-xl bg-surface border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
                 >
                   Choose PDF / Excel File
                 </button>
@@ -251,7 +251,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                 <button
                   type="button"
                   onClick={() => imageInputRef.current?.click()}
-                  className="rounded-xl bg-white border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
+                  className="rounded-xl bg-surface border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
                 >
                   Choose Images
                 </button>

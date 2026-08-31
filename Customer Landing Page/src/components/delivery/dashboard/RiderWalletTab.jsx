@@ -667,7 +667,7 @@ export default function RiderWalletTab() {
                 <span className="text-xs font-black uppercase tracking-wider text-slate-950 bg-slate-950/10 px-3 py-1 rounded-full">
                   Wallet Balance
                 </span>
-                <span className="text-[10px] font-extrabold text-slate-900 bg-white/30 backdrop-blur-md px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                <span className="text-[10px] font-extrabold text-slate-900 bg-surface/30 backdrop-blur-md px-2.5 py-0.5 rounded-full flex items-center gap-1">
                   <CheckCircle2 size={11} /> Auto Payout Active
                 </span>
               </div>
@@ -694,21 +694,21 @@ export default function RiderWalletTab() {
                 <button
                   type="button"
                   onClick={() => setActiveModal('schedulePayout')}
-                  className="py-2 rounded-xl bg-white/20 hover:bg-white/30 text-slate-950 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-center select-none"
+                  className="py-2 rounded-xl bg-surface/20 hover:bg-surface/30 text-slate-950 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-center select-none"
                 >
                   Schedule Payout
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveModal('addBank')}
-                  className="py-2 rounded-xl bg-white/20 hover:bg-white/30 text-slate-950 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-center select-none"
+                  className="py-2 rounded-xl bg-surface/20 hover:bg-surface/30 text-slate-950 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-center select-none"
                 >
                   Add Bank
                 </button>
                 <button
                   type="button"
                   onClick={() => generateAndDownloadStatement('pdf')}
-                  className="py-2 rounded-xl bg-white/20 hover:bg-white/30 text-slate-950 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-center select-none"
+                  className="py-2 rounded-xl bg-surface/20 hover:bg-surface/30 text-slate-950 cursor-pointer active:scale-95 transition-all duration-150 touch-manipulation text-center select-none"
                 >
                   Statement
                 </button>
@@ -1450,19 +1450,19 @@ export default function RiderWalletTab() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs pt-1">
-            <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
+            <div className="p-3 rounded-2xl bg-surface/5 border border-white/10">
               <span className="text-[10px] font-extrabold text-slate-400 block uppercase">Today's Earnings</span>
               <strong className="text-lg font-black font-mono text-white mt-0.5 block">₹0</strong>
             </div>
-            <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
+            <div className="p-3 rounded-2xl bg-surface/5 border border-white/10">
               <span className="text-[10px] font-extrabold text-slate-400 block uppercase">Weekly Earnings</span>
               <strong className="text-lg font-black font-mono text-white mt-0.5 block">₹0</strong>
             </div>
-            <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
+            <div className="p-3 rounded-2xl bg-surface/5 border border-white/10">
               <span className="text-[10px] font-extrabold text-slate-400 block uppercase">Monthly Earnings</span>
               <strong className="text-lg font-black font-mono text-white mt-0.5 block">₹0</strong>
             </div>
-            <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
+            <div className="p-3 rounded-2xl bg-surface/5 border border-white/10">
               <span className="text-[10px] font-extrabold text-slate-400 block uppercase">Expected Payout</span>
               <strong className="text-lg font-black font-mono text-amber-400 mt-0.5 block">₹0</strong>
             </div>

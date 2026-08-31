@@ -7,7 +7,7 @@ export default function StatisticsSection() {
   return (
     <section aria-labelledby="stats-heading" className="relative overflow-hidden py-16 sm:py-20 bg-gradient-to-r from-[#087a34] via-[#0A8F3D] to-emerald-600 text-white">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-surface/10 blur-3xl" />
         <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-emerald-300/10 blur-3xl" />
       </div>
 
@@ -34,7 +34,7 @@ export default function StatisticsSection() {
               <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-secondary tracking-tight">
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="mx-auto mt-3 h-0.5 w-10 rounded-full bg-white/30" />
+              <div className="mx-auto mt-3 h-0.5 w-10 rounded-full bg-surface/30" />
               <p className="mt-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-emerald-100/90">
                 {stat.label}
               </p>

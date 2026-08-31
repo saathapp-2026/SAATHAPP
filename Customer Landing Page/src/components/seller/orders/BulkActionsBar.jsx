@@ -23,7 +23,7 @@ export default function BulkActionsBar({ count, onAction, loading }) {
   return (
     <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 w-[min(920px,calc(100%-1.5rem))]">
       <div
-        className="rounded-2xl border border-slate-200 bg-white/95 backdrop-blur shadow-2xl px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-3"
+        className="rounded-2xl border border-slate-200 bg-surface/95 backdrop-blur shadow-2xl px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-3"
         role="region"
         aria-label="Bulk actions"
       >

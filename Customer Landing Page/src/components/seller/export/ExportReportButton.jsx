@@ -54,7 +54,7 @@ export default function ExportReportButton({
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 text-sm font-semibold text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
+        className="inline-flex items-center gap-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-surface dark:bg-gray-900 px-3 py-2 text-sm font-semibold text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
       >
         <Download className="h-4 w-4" />
         {label}
@@ -62,7 +62,7 @@ export default function ExportReportButton({
       </button>
 
       {open ? (
-        <div className="absolute right-0 z-50 mt-2 w-64 overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-xl">
+        <div className="absolute right-0 z-50 mt-2 w-64 overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-surface dark:bg-gray-900 shadow-xl">
           {ITEMS.map((item) => {
             const Icon = item.icon;
             return (

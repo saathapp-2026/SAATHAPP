@@ -5,7 +5,7 @@
  */
 
 import {
-  Leaf, Smartphone, Cross, Shirt, Package, Hammer, Wrench, BookOpen,
+  
   Footprints, Gift, Sparkles, Sprout, HardHat, Car, Flame, ShoppingBag, Box
 } from 'lucide-react';
 

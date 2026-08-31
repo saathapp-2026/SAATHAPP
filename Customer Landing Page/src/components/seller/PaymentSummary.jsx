@@ -8,7 +8,7 @@ export default function PaymentSummary({ fee, commission, loading, onPay, disabl
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
-      className="rounded-2xl bg-white/5 backdrop-blur border border-white/10 p-6"
+      className="rounded-2xl bg-surface/5 backdrop-blur border border-white/10 p-6"
     >
       <h3 className="font-semibold text-lg mb-4">Payment Summary</h3>
 

@@ -197,7 +197,7 @@ export default function UploadDocumentWizard({
       contentClassName="w-full max-w-3xl"
     >
       <div className="max-h-[94vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl">
-        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur px-5 py-4">
+        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-surface/95 backdrop-blur px-5 py-4">
           <div>
             <h2 id="doc-wizard-title" className="text-lg font-bold text-slate-900 dark:text-slate-50">
               {replaceItem ? 'Replace Document' : editItem ? 'Edit Document' : 'Upload Document'}

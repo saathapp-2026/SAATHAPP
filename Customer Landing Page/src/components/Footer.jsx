@@ -457,12 +457,12 @@ export default function Footer() {
               Supported Payment Methods
             </div>
             <div className="flex flex-wrap gap-2 text-[10px] sm:text-[11px] font-bold text-theme-secondary justify-center items-center">
-              <img src={UpiLogo} alt="UPI" className="h-6 w-10 object-contain rounded bg-white border border-theme-border/30" />
-              <img src={RuPayLogo} alt="RuPay" className="h-6 w-10 object-contain rounded bg-white border border-theme-border/30" />
-              <img src={VisaLogo} alt="Visa" className="h-6 w-10 object-contain rounded bg-white border border-theme-border/30" />
-              <img src={MastercardLogo} alt="Mastercard" className="h-6 w-10 object-contain rounded bg-white border border-theme-border/30" />
-              <img src={NetBankingLogo} alt="Net Banking" className="h-6 w-10 object-contain rounded bg-white border border-theme-border/30" />
-              <img src={CodLogo} alt="Cash on Delivery" className="h-6 w-10 object-contain rounded bg-white border border-theme-border/30" />
+              <img src={UpiLogo} alt="UPI" className="h-6 w-10 object-contain rounded bg-surface border border-theme-border/30" />
+              <img src={RuPayLogo} alt="RuPay" className="h-6 w-10 object-contain rounded bg-surface border border-theme-border/30" />
+              <img src={VisaLogo} alt="Visa" className="h-6 w-10 object-contain rounded bg-surface border border-theme-border/30" />
+              <img src={MastercardLogo} alt="Mastercard" className="h-6 w-10 object-contain rounded bg-surface border border-theme-border/30" />
+              <img src={NetBankingLogo} alt="Net Banking" className="h-6 w-10 object-contain rounded bg-surface border border-theme-border/30" />
+              <img src={CodLogo} alt="Cash on Delivery" className="h-6 w-10 object-contain rounded bg-surface border border-theme-border/30" />
             </div>
           </div>
         </div>

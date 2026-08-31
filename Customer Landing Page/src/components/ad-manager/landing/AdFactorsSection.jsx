@@ -50,7 +50,7 @@ export default function AdFactorsSection() {
         {FACTORS.map((factor, i) => (
           <div 
             key={i} 
-            className="group flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-lg transition-all duration-300 text-center gap-3 cursor-default"
+            className="group flex flex-col items-center justify-center p-4 rounded-2xl bg-surface dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-lg transition-all duration-300 text-center gap-3 cursor-default"
           >
             <div className="w-10 h-10 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform">
               <factor.icon size={20} />

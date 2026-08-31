@@ -7,9 +7,9 @@ const NAV_ITEMS = [
   { label: 'Marketing', path: '/seller/marketing', active: true }
 ];
 
-export default function WizardHeader({ user, onBack }) {
+export default function WizardHeader({ user }) {
   return (
-    <div className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm px-4 sm:px-6 lg:px-8">
+    <div className="sticky top-0 z-50 bg-surface border-b border-slate-200 shadow-sm px-4 sm:px-6 lg:px-8">
       <div className="max-w-[1600px] mx-auto h-16 flex items-center justify-between">
         
         {/* Left - Logo */}

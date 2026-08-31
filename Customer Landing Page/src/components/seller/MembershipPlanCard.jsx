@@ -25,8 +25,8 @@ export default function MembershipPlanCard({ plan, selected, onSelect, index = 0
         isSelected
           ? `${colors.ring} ${colors.bg} shadow-lg`
           : isLight
-            ? 'border-slate-200 bg-white/80 hover:border-violet-300'
-            : 'border-white/10 bg-white/5 hover:border-white/20'
+            ? 'border-slate-200 bg-surface/80 hover:border-violet-300'
+            : 'border-white/10 bg-surface/5 hover:border-white/20'
       } ${plan.recommended ? 'ring-2 ring-amber-500/30' : ''}`}
     >
       {plan.recommended && (

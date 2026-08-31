@@ -314,7 +314,7 @@ function BulletList({ items }) {
   );
 }
 
-export default function DeliveryPartnerAgreement({ isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => { } }) {
+export default function DeliveryPartnerAgreement({ location = "Bhatahar, Nalanda", onLocationClick = () => {},  isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => { } }) {
   const [activeSection, setActiveSection] = useState('purpose');
   const [progress, setProgress] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -393,8 +393,8 @@ export default function DeliveryPartnerAgreement({ isAuthenticated = false, user
       <Header
         cartCount={0}
         onCartClick={() => { }}
-        location="Bhatahar, Nalanda"
-        onLocationClick={() => { }}
+
+
         onSearch={() => { }}
         onLogin={() => { }}
         onSignup={() => { }}

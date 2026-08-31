@@ -6,10 +6,10 @@ export default function PricingCard({ feeData, loading, title = 'Seller Onboardi
   if (loading) {
     return (
       <div className="rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/10 border border-emerald-500/30 p-6 animate-pulse">
-        <div className="h-4 bg-white/10 rounded w-1/3 mb-4" />
-        <div className="h-12 bg-white/10 rounded w-2/3 mb-4" />
-        <div className="h-3 bg-white/10 rounded w-full mb-2" />
-        <div className="h-3 bg-white/10 rounded w-4/5" />
+        <div className="h-4 bg-surface/10 rounded w-1/3 mb-4" />
+        <div className="h-12 bg-surface/10 rounded w-2/3 mb-4" />
+        <div className="h-3 bg-surface/10 rounded w-full mb-2" />
+        <div className="h-3 bg-surface/10 rounded w-4/5" />
       </div>
     );
   }
@@ -47,14 +47,14 @@ export default function PricingCard({ feeData, loading, title = 'Seller Onboardi
         </p>
 
         <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-xl bg-white/5 border border-white/10 p-3">
+          <div className="rounded-xl bg-surface/5 border border-white/10 p-3">
             <div className="flex items-center gap-1.5 text-xs text-slate-400 mb-1">
               <Clock size={12} />
               Validity
             </div>
             <p className="text-sm font-semibold">{feeData.validityYears} Years</p>
           </div>
-          <div className="rounded-xl bg-white/5 border border-white/10 p-3">
+          <div className="rounded-xl bg-surface/5 border border-white/10 p-3">
             <div className="flex items-center gap-1.5 text-xs text-slate-400 mb-1">
               <RefreshCw size={12} />
               Renewal

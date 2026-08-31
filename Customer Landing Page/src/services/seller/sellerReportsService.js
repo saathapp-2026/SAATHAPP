@@ -40,7 +40,7 @@ function save(key, value) {
 
 function seedReports() {
   return Array.from({ length: 3 }, (_, i) => ({
-    id: `placeholder-rpt-${i}`,
+    id: crypto.randomUUID(),
     typeId: 'sales',
     name: '\u00A0',
     description: '\u00A0',

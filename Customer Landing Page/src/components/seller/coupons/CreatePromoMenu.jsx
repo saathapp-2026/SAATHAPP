@@ -67,7 +67,7 @@ export default function CreatePromoMenu({ onSelect }) {
                     className={`flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-xs font-semibold ${
                       activeGroup === g.id
                         ? 'bg-emerald-600 text-white'
-                        : 'text-slate-700 dark:text-slate-200 hover:bg-white'
+                        : 'text-slate-700 dark:text-slate-200 hover:bg-surface'
                     }`}
                   >
                     <Icon size={14} />

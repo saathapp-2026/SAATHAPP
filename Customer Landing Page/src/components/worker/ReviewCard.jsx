@@ -23,7 +23,7 @@ export default function ReviewCard() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft">
+      <div className="bg-surface/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft">
         <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">Overall Rating</span>
         <div className="flex items-center gap-4 my-6">
           <span className="text-5xl font-black text-slate-800 dark:text-white">0.0</span>
@@ -49,7 +49,7 @@ export default function ReviewCard() {
         </div>
       </div>
 
-      <div className="lg:col-span-2 bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft">
+      <div className="lg:col-span-2 bg-surface/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Latest Reviews</h3>
           <span className="text-xs font-bold text-slate-500 flex items-center gap-1">

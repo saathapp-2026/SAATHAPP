@@ -35,7 +35,7 @@ export default function Topbar({
   const unreadNotifications = notifications.filter(n => !n.read).length;
 
   return (
-    <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-800 py-3 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 shadow-sm">
+    <header className="sticky top-0 z-40 bg-surface/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-800 py-3 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 shadow-sm">
       
       {/* Left side: Hamburger & Title */}
       <div className="flex items-center gap-3">

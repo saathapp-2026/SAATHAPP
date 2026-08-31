@@ -727,7 +727,7 @@ export default function InvoiceWizard({ open, onClose, onSaved, editInvoice = nu
           )}
         </div>
 
-        <div className="sticky bottom-0 flex flex-wrap gap-2 p-4 border-t border-slate-200 dark:border-slate-800 bg-white/95">
+        <div className="sticky bottom-0 flex flex-wrap gap-2 p-4 border-t border-slate-200 dark:border-slate-800 bg-surface/95">
           <button type="button" onClick={handleClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm border border-slate-200">
             Cancel
           </button>

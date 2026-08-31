@@ -98,7 +98,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
   ];
 
   return (
-    <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 px-4 py-3">
+    <header className="sticky top-0 z-30 bg-surface/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 px-4 py-3">
       <div className="flex items-center gap-3">
         <button
           type="button"

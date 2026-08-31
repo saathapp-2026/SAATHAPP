@@ -31,7 +31,7 @@ export default function CustomerBulkBar({ count, onAction, loading, hidden = fal
 
   return (
     <div className="sticky bottom-3 z-[30] mt-3 isolate" aria-hidden={hidden}>
-      <div className="rounded-2xl border border-slate-200 bg-white/95 backdrop-blur shadow-xl px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-3">
+      <div className="rounded-2xl border border-slate-200 bg-surface/95 backdrop-blur shadow-xl px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-3">
         <p className="text-sm font-bold tabular-nums shrink-0">
           <span className="inline-flex h-7 min-w-7 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 px-2 mr-2">
             {count}

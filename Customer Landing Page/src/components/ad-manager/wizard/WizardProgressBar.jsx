@@ -38,7 +38,7 @@ export default function WizardProgressBar({ currentStep }) {
                       ? 'bg-[#15803D] text-white' 
                       : isCompleted
                       ? 'bg-[#15803D] text-white'
-                      : 'bg-white border-2 border-slate-200 text-slate-400'
+                      : 'bg-surface border-2 border-slate-200 text-slate-400'
                   }`}
                 >
                   {isCompleted ? <Check size={14} strokeWidth={3} /> : stepNumber}

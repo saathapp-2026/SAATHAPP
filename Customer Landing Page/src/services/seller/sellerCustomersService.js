@@ -63,7 +63,7 @@ function daysAgo(n, hours = 10, mins = 30) {
 
 function buildSeed() {
   return Array.from({ length: 3 }, (_, i) => ({
-    id: `placeholder-cust-${i}`,
+    id: crypto.randomUUID(),
     name: '\u00A0',
     phone: '\u00A0',
     email: '\u00A0',

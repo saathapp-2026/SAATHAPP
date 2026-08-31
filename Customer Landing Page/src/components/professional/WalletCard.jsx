@@ -192,7 +192,7 @@ export default function WalletCard({ onboarding }) {
 
             {/* Available Balance Card */}
             <div className="bg-gradient-to-tr from-brand-600 to-emerald-700 text-white rounded-card p-6 shadow-premium relative overflow-hidden flex flex-col justify-between h-44">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none" />
+              <div className="absolute top-0 right-0 w-24 h-24 bg-surface/10 rounded-full blur-xl pointer-events-none" />
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-black uppercase tracking-wider text-white/80">Available Balance</span>
                 <Wallet size={20} className="text-white/70" />
@@ -206,7 +206,7 @@ export default function WalletCard({ onboarding }) {
               </div>
               <button
                 onClick={() => setShowWithdrawModal(true)}
-                className="w-full py-2 bg-white text-slate-900 font-extrabold text-[11px] uppercase tracking-wider rounded-btn hover:bg-page transition-colors cursor-pointer shadow-sm"
+                className="w-full py-2 bg-surface text-slate-900 font-extrabold text-[11px] uppercase tracking-wider rounded-btn hover:bg-page transition-colors cursor-pointer shadow-sm"
               >
                 Instant Withdrawal
               </button>

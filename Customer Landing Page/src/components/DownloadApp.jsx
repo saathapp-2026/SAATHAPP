@@ -29,11 +29,11 @@ export default function DownloadApp() {
         <div className="bg-gradient-primary rounded-card text-white p-8 md:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative overflow-hidden shadow-premium">
           
           {/* Glass Overlay Details */}
-          <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[1px] pointer-events-none" />
+          <div className="absolute inset-0 bg-surface/[0.03] backdrop-blur-[1px] pointer-events-none" />
 
           {/* Left Text Column */}
           <div className="lg:col-span-7 text-left space-y-6 z-10">
-            <span className="inline-flex items-center gap-1.5 py-1 px-3.5 rounded-full bg-white/15 backdrop-blur-md border border-white/10 text-xs font-bold text-secondary">
+            <span className="inline-flex items-center gap-1.5 py-1 px-3.5 rounded-full bg-surface/15 backdrop-blur-md border border-white/10 text-xs font-bold text-secondary">
               📱 Mobile App
             </span>
 
@@ -69,7 +69,7 @@ export default function DownloadApp() {
             {/* Downloader Action */}
             <div className="flex flex-wrap items-center gap-6 pt-4">
               {isInstalled ? (
-                <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 text-white py-3 px-6 rounded-btn shadow-lg">
+                <div className="flex items-center gap-3 bg-surface/10 backdrop-blur-md border border-white/20 text-white py-3 px-6 rounded-btn shadow-lg">
                   <Check size={20} className="text-secondary" />
                   <span className="font-bold">App Installed</span>
                 </div>
@@ -139,7 +139,7 @@ export default function DownloadApp() {
                   initial={{ y: 50, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 1 }}
-                  className="absolute bottom-4 left-3 right-3 bg-white/95 backdrop-blur-md p-2 rounded-2xl border border-slate-200/50 dark:border-slate-800/80 shadow-lg text-left flex items-center gap-2"
+                  className="absolute bottom-4 left-3 right-3 bg-surface/95 backdrop-blur-md p-2 rounded-2xl border border-slate-200/50 dark:border-slate-800/80 shadow-lg text-left flex items-center gap-2"
                 >
                   <div className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">
                     ✓

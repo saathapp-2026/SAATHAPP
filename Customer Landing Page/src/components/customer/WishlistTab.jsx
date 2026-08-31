@@ -44,7 +44,7 @@ export default function WishlistTab({ wishlist, setWishlist, handleAddToCart }) 
           {wishlist.map((item) => (
             <div key={item.id} className="p-4 bg-slate-50/50 dark:bg-slate-950/10 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <span className="text-2xl w-12 h-12 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-center shadow-sm">
+                <span className="text-2xl w-12 h-12 bg-surface dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-center shadow-sm">
                   {item.image || '💡'}
                 </span>
                 <div>

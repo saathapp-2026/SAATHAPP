@@ -49,7 +49,7 @@ export default function ProgressStepper({ currentPath }) {
               {!isLast && (
                 <div
                   className={`h-0.5 w-6 md:w-10 mb-5 rounded-full transition-colors ${
-                    index < currentIndex ? 'bg-[#0A8F3D]' : 'bg-white/10'
+                    index < currentIndex ? 'bg-[#0A8F3D]' : 'bg-surface/10'
                   }`}
                 />
               )}

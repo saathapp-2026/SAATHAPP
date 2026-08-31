@@ -5,9 +5,9 @@ import { Receipt } from 'lucide-react';
 export default function FeeBreakdownCard({ breakdown, loading }) {
   if (loading) {
     return (
-      <div className="rounded-2xl bg-white/5 border border-white/10 p-6 animate-pulse space-y-3">
+      <div className="rounded-2xl bg-surface/5 border border-white/10 p-6 animate-pulse space-y-3">
         {[1, 2, 3, 4, 5].map((i) => (
-          <div key={i} className="h-4 bg-white/10 rounded" />
+          <div key={i} className="h-4 bg-surface/10 rounded" />
         ))}
       </div>
     );
@@ -20,7 +20,7 @@ export default function FeeBreakdownCard({ breakdown, loading }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
-      className="rounded-2xl bg-white/5 backdrop-blur border border-white/10 p-6"
+      className="rounded-2xl bg-surface/5 backdrop-blur border border-white/10 p-6"
     >
       <div className="flex items-center gap-2 mb-4">
         <Receipt size={18} className="text-emerald-400" />
@@ -50,7 +50,7 @@ export default function FeeBreakdownCard({ breakdown, loading }) {
             <span className="text-slate-400">Fee Position in Range</span>
             <span className="font-medium">{Math.round(breakdown.weightedScore * 100)}%</span>
           </div>
-          <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+          <div className="h-2 rounded-full bg-surface/10 overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${breakdown.weightedScore * 100}%` }}

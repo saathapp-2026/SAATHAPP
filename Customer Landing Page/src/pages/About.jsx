@@ -8,7 +8,7 @@ import {
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-export default function About({ onBack, onLogout, isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
+export default function About({ location = "Bhatahar, Nalanda", onLocationClick = () => {},  onBack, onLogout, isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,10 +74,10 @@ export default function About({ onBack, onLogout, isAuthenticated = false, user 
   return (
     <div className="min-h-screen bg-page dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300" style={{ scrollBehavior: 'smooth' }}>
       <Header
+        location={location}
+        onLocationClick={onLocationClick}
         cartCount={0}
         onCartClick={() => {}}
-        location="Bhatahar, Nalanda"
-        onLocationClick={() => {}}
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}

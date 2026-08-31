@@ -87,7 +87,7 @@ export default function Step3_OwnerInfo({ onNext, onPrev }) {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="mt-3 inline-flex items-center gap-2 rounded-xl bg-white border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
+                className="mt-3 inline-flex items-center gap-2 rounded-xl bg-surface border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
               >
                 <Camera size={14} />
                 Upload Photo

@@ -110,7 +110,7 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
   return (
     <SellerOverlay open={open} onClose={requestClose} labelledBy="coupon-wizard-title" zIndex={SELLER_Z.modal} className="flex items-end sm:items-center justify-center p-0 sm:p-4" contentClassName="w-full max-w-3xl">
       <div className="max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl">
-        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur px-5 py-4">
+        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-surface/95 backdrop-blur px-5 py-4">
           <div>
             <h2 id="coupon-wizard-title" className="text-lg font-bold">
               {editItem ? 'Edit Coupon' : 'Create Coupon'}
@@ -333,7 +333,7 @@ export default function CouponWizard({ open, onClose, onSaved, initialTypeId, ed
           )}
         </div>
 
-        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-white/95 px-5 py-4">
+        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-surface/95 px-5 py-4">
           <button type="button" disabled={draft.step <= 1 || busy} onClick={() => patch({ step: draft.step - 1 })} className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold disabled:opacity-40">
             <ChevronLeft size={16} /> Back
           </button>

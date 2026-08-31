@@ -37,7 +37,7 @@ export default function AdSelectionSection({ draft, updateDraft }) {
                 className={`relative flex items-center gap-3 p-3.5 rounded-xl border-2 text-left transition-all duration-150 ${
                   isSelected
                     ? 'border-[#15803D] bg-emerald-50/50 shadow-sm'
-                    : 'border-slate-200 hover:border-slate-300 bg-white'
+                    : 'border-slate-200 hover:border-slate-300 bg-surface'
                 }`}
               >
                 <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
@@ -65,7 +65,7 @@ export default function AdSelectionSection({ draft, updateDraft }) {
                 key={type.id}
                 type="button"
                 onClick={() => updateDraft({ typeId: type.id })}
-                className={`relative flex flex-col items-center text-center p-6 rounded-2xl border-2 transition-all duration-200 bg-white ${
+                className={`relative flex flex-col items-center text-center p-6 rounded-2xl border-2 transition-all duration-200 bg-surface ${
                   isSelected 
                     ? 'border-[#15803D] shadow-sm' 
                     : 'border-slate-200 hover:border-slate-300 shadow-sm'

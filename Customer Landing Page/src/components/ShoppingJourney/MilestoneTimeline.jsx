@@ -28,8 +28,8 @@ const MilestoneTimeline = ({ currentStreak = 18 }) => {
               
               <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${
                 isPassed ? 'bg-green-500 border-green-500 text-white' : 
-                isCurrentTarget ? 'bg-white border-green-500 text-green-500 shadow-[0_0_0_4px_rgba(34,197,94,0.2)]' : 
-                'bg-white border-gray-300 text-gray-300'
+                isCurrentTarget ? 'bg-surface border-green-500 text-green-500 shadow-[0_0_0_4px_rgba(34,197,94,0.2)]' : 
+                'bg-surface border-gray-300 text-gray-300'
               }`}>
                 {isPassed ? '✓' : (isCurrentTarget ? '⏳' : '🔒')}
               </div>

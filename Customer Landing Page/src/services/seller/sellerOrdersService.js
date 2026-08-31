@@ -44,7 +44,7 @@ function makeTimeline(events) {
 
 function seedOrders() {
   return Array.from({ length: 3 }, (_, i) => ({
-    id: `placeholder-ord-${i}`,
+    id: crypto.randomUUID(),
     status: ORDER_STATUS.NEW,
     createdAt: Date.now(),
     customer: { name: '\u00A0', phone: '\u00A0', id: '' },

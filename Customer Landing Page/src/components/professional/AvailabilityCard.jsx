@@ -175,7 +175,7 @@ export default function AvailabilityCard() {
                 modes.holidayMode ? 'bg-primary' : 'bg-slate-300'
               }`}
             >
-              <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
+              <div className={`w-4 h-4 bg-surface rounded-full shadow-md transform transition-transform duration-300 ${
                 modes.holidayMode ? 'translate-x-4' : 'translate-x-0'
               }`} />
             </button>
@@ -195,7 +195,7 @@ export default function AvailabilityCard() {
                 modes.vacationMode ? 'bg-primary' : 'bg-slate-300'
               }`}
             >
-              <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
+              <div className={`w-4 h-4 bg-surface rounded-full shadow-md transform transition-transform duration-300 ${
                 modes.vacationMode ? 'translate-x-4' : 'translate-x-0'
               }`} />
             </button>

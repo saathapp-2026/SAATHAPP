@@ -32,12 +32,12 @@ export default function TopNav() {
   };
 
   return (
-    <div className="block w-full border-t border-theme-border text-theme-secondary text-[11px] sm:text-xs font-bold uppercase tracking-wide bg-white dark:bg-slate-950 transition-colors relative z-40 group">
+    <div className="block w-full border-t border-theme-border text-theme-secondary text-[11px] sm:text-xs font-bold uppercase tracking-wide bg-surface dark:bg-slate-950 transition-colors relative z-40 group">
       <div className="saath-container relative">
         
         {/* Left Arrow */}
         <div className={`absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white dark:from-slate-950 via-white/80 dark:via-slate-950/80 to-transparent z-10 flex items-center justify-start transition-opacity duration-300 ${showLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-          <button onClick={() => scroll('left')} className="w-7 h-7 flex items-center justify-center rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 hover:text-primary shadow-sm cursor-pointer ml-1">
+          <button onClick={() => scroll('left')} className="w-7 h-7 flex items-center justify-center rounded-full bg-surface dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 hover:text-primary shadow-sm cursor-pointer ml-1">
             <ChevronLeft size={14} />
           </button>
         </div>
@@ -111,7 +111,7 @@ export default function TopNav() {
 
         {/* Right Arrow */}
         <div className={`absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white dark:from-slate-950 via-white/80 dark:via-slate-950/80 to-transparent z-10 flex items-center justify-end transition-opacity duration-300 ${showRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-          <button onClick={() => scroll('right')} className="w-7 h-7 flex items-center justify-center rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 hover:text-primary shadow-sm cursor-pointer mr-1">
+          <button onClick={() => scroll('right')} className="w-7 h-7 flex items-center justify-center rounded-full bg-surface dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 hover:text-primary shadow-sm cursor-pointer mr-1">
             <ChevronRight size={14} />
           </button>
         </div>

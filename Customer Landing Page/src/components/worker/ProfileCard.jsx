@@ -41,7 +41,7 @@ export default function ProfileCard() {
   ];
 
   return (
-    <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left max-w-4xl">
+    <div className="bg-surface/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left max-w-4xl">
       <div className="flex flex-col sm:flex-row sm:items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-800 mb-6">
         <div className="w-24 h-24 rounded-2xl overflow-hidden ring-4 ring-primary/15 shadow-premium shrink-0 bg-primary flex items-center justify-center text-white font-black text-4xl">
           SW
@@ -81,7 +81,7 @@ export default function ProfileCard() {
                       name={key}
                       value={formData[key]}
                       onChange={(e) => setFormData((prev) => ({ ...prev, [key]: e.target.value }))}
-                      className="w-full px-3 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-950 text-sm outline-none focus:border-primary/50"
+                      className="w-full px-3 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-surface dark:bg-slate-950 text-sm outline-none focus:border-primary/50"
                     />
                   ) : (
                     <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 bg-page dark:bg-slate-950/50 px-3 py-2.5 rounded-xl">

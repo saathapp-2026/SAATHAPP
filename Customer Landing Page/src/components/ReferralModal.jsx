@@ -112,13 +112,13 @@ export default function ReferralModal({ isOpen, onClose, user = null }) {
         <div className="bg-gradient-to-r from-emerald-600 to-teal-700 p-6 text-white relative">
           <button
             onClick={handleClose}
-            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute top-4 right-4 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors cursor-pointer"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute top-4 right-4 text-white/80 hover:text-white bg-surface/10 hover:bg-surface/20 p-2 rounded-full transition-colors cursor-pointer"
             aria-label="Close modal"
           >
             <X size={18} />
           </button>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center backdrop-blur-md shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-surface/15 flex items-center justify-center backdrop-blur-md shrink-0">
               <Gift className="w-6 h-6 text-white" />
             </div>
             <div>

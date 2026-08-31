@@ -190,14 +190,11 @@ export default function ProfessionalRegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // TODO: Restore document validation for production
-    /*
     const missingRequired = VERIFICATION_DOCUMENTS.filter((d) => d.required && !files[d.key]);
     if (missingRequired.length) {
       setError(`Please upload: ${missingRequired.map((d) => d.label).join(', ')}`);
       return;
     }
-    */
     
     if (!termsAccepted) {
       setError('Please accept the Terms & Conditions.');

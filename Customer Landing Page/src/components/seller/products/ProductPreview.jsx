@@ -40,7 +40,7 @@ function ImageFrame({ image, className = '' }) {
   if (image) {
     return (
       <div className={`flex flex-col items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-emerald-50 dark:from-slate-800 dark:to-slate-700 ${className}`}>
-        <div className="h-16 w-16 rounded-2xl bg-white/80 shadow flex items-center justify-center mb-2">
+        <div className="h-16 w-16 rounded-2xl bg-surface/80 shadow flex items-center justify-center mb-2">
           <span className="text-2xl font-bold text-emerald-600">{(image.name || 'P').charAt(0).toUpperCase()}</span>
         </div>
         <p className="text-xs font-semibold text-slate-600 dark:text-slate-300 px-4 text-center line-clamp-2">
@@ -101,7 +101,7 @@ export default function ProductPreview({ draft, onGoToImages }) {
           ))}
         </div>
 
-        <div className={`mx-auto ${widthClass} w-full rounded-2xl border border-slate-200 overflow-hidden bg-white dark:bg-slate-950 shadow-sm`}>
+        <div className={`mx-auto ${widthClass} w-full rounded-2xl border border-slate-200 overflow-hidden bg-surface dark:bg-slate-950 shadow-sm`}>
           {/* Image gallery */}
           <div className="bg-page dark:bg-slate-900">
             <div className="aspect-[4/3] w-full relative">

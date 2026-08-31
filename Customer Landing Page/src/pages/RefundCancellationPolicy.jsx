@@ -424,7 +424,7 @@ function SectionBody({ section }) {
   );
 }
 
-export default function RefundCancellationPolicyPage() {
+export default function RefundCancellationPolicyPage({ location, onLocationClick }) {
   const [activeSection, setActiveSection] = useState('purpose');
   const [progress, setProgress] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -503,10 +503,12 @@ export default function RefundCancellationPolicyPage() {
   return (
     <div className="min-h-screen bg-slate-50/80 text-slate-800">
       <Header
+        location={location}
+        onLocationClick={onLocationClick}
         cartCount={0}
         onCartClick={() => { }}
-        location="Bhatahar, Nalanda"
-        onLocationClick={() => { }}
+
+
         onSearch={() => { }}
         onLogin={() => { }}
         onSignup={() => { }}

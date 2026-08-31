@@ -465,21 +465,21 @@ export default function RiderActiveDeliveriesTab() {
                 <button
                   type="button"
                   onClick={() => addToast?.('Opening Store Navigation...', 'info')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
                 >
                   <Navigation size={13} className="text-amber-500" /> Navigate
                 </button>
                 <button
                   type="button"
                   onClick={() => triggerCall(`Store (${activeOrder.storeManager})`, activeOrder.storeMobile, 'Store Manager')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
                 >
                   <Phone size={13} className="text-amber-500" /> Call Store
                 </button>
                 <button
                   type="button"
                   onClick={() => triggerChat(`${activeOrder.storeManager} (Store)`, 'Store')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
                 >
                   <MessageSquare size={13} className="text-blue-500" /> Chat Store
                 </button>
@@ -550,28 +550,28 @@ export default function RiderActiveDeliveriesTab() {
                 <button
                   type="button"
                   onClick={() => triggerCall(activeOrder.customerName, activeOrder.customerMobile, 'Customer')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
                 >
                   <Phone size={13} className="text-emerald-500" /> Call Customer
                 </button>
                 <button
                   type="button"
                   onClick={() => triggerChat(activeOrder.customerName, 'Customer')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
                 >
                   <MessageSquare size={13} className="text-blue-500" /> Chat Customer
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveModal('shareLocation')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer shadow-sm"
                 >
                   <Share2 size={13} className="text-purple-500" /> Share Location
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveModal('moreCustomer')}
-                  className="px-3 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-600 dark:text-slate-300 hover:bg-page cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 font-bold text-xs text-slate-600 dark:text-slate-300 hover:bg-page cursor-pointer"
                 >
                   ••• More
                 </button>
@@ -762,7 +762,7 @@ export default function RiderActiveDeliveriesTab() {
                   {/* Landmarks */}
                   <div className="absolute top-4 left-6 flex items-center gap-1">
                     <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-[10px] shadow">📍</div>
-                    <span className="text-[9px] font-black text-slate-800 dark:text-slate-200 bg-white/90 px-1.5 py-0.5 rounded shadow">
+                    <span className="text-[9px] font-black text-slate-800 dark:text-slate-200 bg-surface/90 px-1.5 py-0.5 rounded shadow">
                       Gandhi Maidan
                     </span>
                   </div>
@@ -775,7 +775,7 @@ export default function RiderActiveDeliveriesTab() {
 
                   <div className="absolute bottom-6 left-28 flex items-center gap-1">
                     <div className="w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center font-black text-[10px] shadow">📍</div>
-                    <span className="text-[9px] font-black text-slate-800 dark:text-slate-200 bg-white/90 px-1.5 py-0.5 rounded shadow">
+                    <span className="text-[9px] font-black text-slate-800 dark:text-slate-200 bg-surface/90 px-1.5 py-0.5 rounded shadow">
                       Kankarbagh
                     </span>
                   </div>
@@ -785,7 +785,7 @@ export default function RiderActiveDeliveriesTab() {
                 </div>
 
                 {/* Map Floating Info Panel */}
-                <div className="w-32 bg-white/95 border-l border-slate-200 dark:border-slate-800 p-3 flex flex-col justify-center space-y-3 shrink-0">
+                <div className="w-32 bg-surface/95 border-l border-slate-200 dark:border-slate-800 p-3 flex flex-col justify-center space-y-3 shrink-0">
                   <div>
                     <span className="text-[9px] text-slate-400 font-bold uppercase block">Distance</span>
                     <strong className="text-sm font-black text-slate-900 dark:text-white font-mono">3.2 KM</strong>
@@ -806,7 +806,7 @@ export default function RiderActiveDeliveriesTab() {
                 <button
                   type="button"
                   onClick={() => addToast?.('Opening Google Maps Live Route...', 'info')}
-                  className="py-2 px-3 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-900 dark:text-white text-center hover:bg-page transition flex items-center justify-center gap-1 cursor-pointer shadow-sm"
+                  className="py-2 px-3 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 font-bold text-xs text-slate-900 dark:text-white text-center hover:bg-page transition flex items-center justify-center gap-1 cursor-pointer shadow-sm"
                 >
                   📍 Open in Maps
                 </button>
@@ -868,7 +868,7 @@ export default function RiderActiveDeliveriesTab() {
                     setIsBreakActive(!isBreakActive);
                     addToast?.(`Break ${!isBreakActive ? 'Started' : 'Ended'}`, 'info');
                   }}
-                  className="py-2 px-3 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 text-center hover:bg-page cursor-pointer flex items-center justify-center gap-1"
+                  className="py-2 px-3 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 text-center hover:bg-page cursor-pointer flex items-center justify-center gap-1"
                 >
                   <Pause size={13} className="text-amber-500" /> {isBreakActive ? 'End Break' : 'Start Break'}
                 </button>
@@ -921,7 +921,7 @@ export default function RiderActiveDeliveriesTab() {
       ) : null}
 
       {/* STICKY BOTTOM ACTION BAR (Positioned inside page area only, starting after sidebar) */}
-      <div className="fixed bottom-0 left-0 md:left-64 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 p-2.5 sm:p-3 shadow-2xl">
+      <div className="fixed bottom-0 left-0 md:left-64 right-0 z-30 bg-surface/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 p-2.5 sm:p-3 shadow-2xl">
         <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
 
           {/* Button 1: Navigate */}

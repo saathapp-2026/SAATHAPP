@@ -113,7 +113,7 @@ function ContactSupport() {
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 className="
                   group
-                  bg-white
+                  bg-surface
                   border border-[#EEF2F7]
                   rounded-[20px]
                   p-[28px]
@@ -183,13 +183,13 @@ function ContactSupport() {
                 relative w-full max-w-lg
                 h-[540px] flex flex-col
                 rounded-[20px] border border-[#E2E8F0]
-                bg-white shadow-2xl overflow-hidden
+                bg-surface shadow-2xl overflow-hidden
               "
             >
               {/* Modal Header */}
               <div className="bg-[#00A651] p-5 text-white flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
+                  <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-surface/20">
                     <MessageCircle size={20} />
                     <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-300 border-2 border-[#00A651]" />
                   </div>
@@ -202,7 +202,7 @@ function ContactSupport() {
                 </div>
                 <button
                   onClick={() => setActiveModal(null)}
-                  className="rounded-full p-1.5 text-white/80 hover:bg-white/20 hover:text-white transition-colors"
+                  className="rounded-full p-1.5 text-white/80 hover:bg-surface/20 hover:text-white transition-colors"
                 >
                   <X size={20} />
                 </button>
@@ -221,7 +221,7 @@ function ContactSupport() {
                         ${
                           msg.sender === "user"
                             ? "bg-[#00A651] text-white rounded-br-none"
-                            : "bg-white text-[#0F172A] border border-[#E2E8F0] rounded-bl-none"
+                            : "bg-surface text-[#0F172A] border border-[#E2E8F0] rounded-bl-none"
                         }
                       `}
                     >
@@ -232,7 +232,7 @@ function ContactSupport() {
               </div>
 
               {/* Chat Input Form */}
-              <form onSubmit={handleSendMessage} className="p-3 border-t border-[#E2E8F0] bg-white flex items-center gap-2">
+              <form onSubmit={handleSendMessage} className="p-3 border-t border-[#E2E8F0] bg-surface flex items-center gap-2">
                 <input
                   type="text"
                   value={inputMessage}

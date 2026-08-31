@@ -82,16 +82,14 @@ const supportFaqs = [
   },
 ];
 
-export default function CustomerSupportPage() {
+export default function CustomerSupportPage({ location, onLocationClick }) {
   const [openFaq, setOpenFaq] = useState(null);
 
   return (
     <div className="min-h-screen bg-page font-sans text-slate-800">
-      <Header
+      <Header location={location} onLocationClick={onLocationClick}
         cartCount={0}
         onCartClick={() => {}}
-        location="Green Park, New Delhi"
-        onLocationClick={() => {}}
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}
@@ -116,7 +114,7 @@ export default function CustomerSupportPage() {
             <Link
               to="/"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-page"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-surface px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-page"
             >
               <ArrowLeft size={16} />
               Back
@@ -178,7 +176,7 @@ export default function CustomerSupportPage() {
               {featuresList.map((card, i) => (
                 <div
                   key={i}
-                  className="rounded-[30px] bg-white p-8 border border-slate-200 shadow-sm transition hover:-translate-y-1 hover:shadow-md flex flex-col justify-between"
+                  className="rounded-[30px] bg-surface p-8 border border-slate-200 shadow-sm transition hover:-translate-y-1 hover:shadow-md flex flex-col justify-between"
                 >
                   <div>
                     <div className={`flex h-14 w-14 items-center justify-center rounded-full ${card.color} text-3xl`}>
@@ -213,7 +211,7 @@ export default function CustomerSupportPage() {
               {contactsList.map((item, index) => (
                 <div
                   key={index}
-                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                  className="rounded-3xl border border-slate-200 bg-surface p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
                 >
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50">
                     {item.icon}
@@ -234,7 +232,7 @@ export default function CustomerSupportPage() {
           </section>
 
           {/* Official Channels Verification */}
-          <section id="official-channels" className="mt-16 rounded-[34px] border border-slate-200 bg-white p-8 shadow-sm lg:p-12">
+          <section id="official-channels" className="mt-16 rounded-[34px] border border-slate-200 bg-surface p-8 shadow-sm lg:p-12">
             <h2 className="flex items-center gap-3 text-2xl font-extrabold text-slate-900 sm:text-3xl">
               🛡️ Official Communication Channels
             </h2>
@@ -242,7 +240,7 @@ export default function CustomerSupportPage() {
               <div className="rounded-3xl border border-slate-200 bg-page p-6">
                 <h3 className="text-lg font-bold text-slate-900">Website & Apps</h3>
                 <p className="mt-2 text-xs text-slate-600">Always check that the URL matches exactly:</p>
-                <div className="mt-4 rounded-xl border border-emerald-500 bg-white px-4 py-3 font-bold text-emerald-700 text-sm">
+                <div className="mt-4 rounded-xl border border-emerald-500 bg-surface px-4 py-3 font-bold text-emerald-700 text-sm">
                   https://saathapp.in
                 </div>
               </div>
@@ -250,7 +248,7 @@ export default function CustomerSupportPage() {
               <div className="rounded-3xl border border-slate-200 bg-page p-6">
                 <h3 className="text-lg font-bold text-slate-900">Official Emails</h3>
                 <p className="mt-2 text-xs text-slate-600">Official support emails always end with:</p>
-                <div className="mt-4 rounded-xl border border-blue-500 bg-white px-4 py-3 font-bold text-blue-600 text-sm">
+                <div className="mt-4 rounded-xl border border-blue-500 bg-surface px-4 py-3 font-bold text-blue-600 text-sm">
                   @saathapp.in
                 </div>
               </div>
@@ -261,7 +259,7 @@ export default function CustomerSupportPage() {
           </section>
 
           {/* FAQs */}
-          <section className="mt-16 rounded-[34px] border border-slate-200 bg-white p-8 shadow-sm lg:p-12">
+          <section className="mt-16 rounded-[34px] border border-slate-200 bg-surface p-8 shadow-sm lg:p-12">
             <div className="text-center">
               <h2 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
                 Frequently Asked Questions
