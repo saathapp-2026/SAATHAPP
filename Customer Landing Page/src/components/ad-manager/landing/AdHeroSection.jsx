@@ -11,7 +11,7 @@ export default function AdHeroSection({ onCreateAds }) {
   ];
 
   return (
-    <section className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 overflow-hidden bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800">
+    <section className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 overflow-hidden bg-surface dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           
@@ -46,9 +46,9 @@ export default function AdHeroSection({ onCreateAds }) {
               <button
                 type="button"
                 onClick={onCreateAds}
-                className="group relative flex items-center gap-2.5 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-bold text-lg shadow-[0_8px_20px_rgb(5,150,105,0.3)] hover:shadow-[0_10px_25px_rgb(5,150,105,0.4)] hover:-translate-y-0.5 transition-all duration-300"
+                className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none group relative flex items-center gap-2.5 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-bold text-lg shadow-[0_8px_20px_rgb(5,150,105,0.3)] hover:shadow-[0_10px_25px_rgb(5,150,105,0.4)] hover:-translate-y-0.5 transition-all duration-300"
               >
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20 group-hover:bg-white/30 transition-colors">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-surface/20 group-hover:bg-surface/30 transition-colors">
                   <Plus size={16} strokeWidth={3} className="text-white" />
                 </div>
                 Create Ads

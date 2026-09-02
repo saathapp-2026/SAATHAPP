@@ -8,7 +8,7 @@ import {
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-export default function OurStory({ onBack, onLogout, isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
+export default function OurStory({ location = "Bhatahar, Nalanda", onLocationClick = () => {},  onBack, onLogout, isAuthenticated = false, user = null, darkMode = false, toggleDarkMode = () => {} }) {
   const navigate = useNavigate();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -76,8 +76,6 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
       <Header
         cartCount={0}
         onCartClick={() => {}}
-        location="Bhatahar, Nalanda"
-        onLocationClick={() => {}}
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}
@@ -102,7 +100,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
             <button
               type="button"
               onClick={handleBack}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 px-4 py-2 text-sm font-semibold text-slate-750 dark:text-slate-300 shadow-sm transition-all duration-300 hover:bg-page hover:shadow-md cursor-pointer"
+              className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 px-4 py-2 text-sm font-semibold text-slate-750 dark:text-slate-300 shadow-sm transition-all duration-300 hover:bg-page hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
               Back
@@ -338,7 +336,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
                     </p>
                     <a 
                       href="mailto:founder@saathapp.in" 
-                      className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline block"
+                      className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline block"
                     >
                       founder@saathapp.in
                     </a>
@@ -352,7 +350,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
                       href="https://www.saurabhkumar15689.live" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline block"
+                      className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline block"
                     >
                       www.saurabhkumar15689.live
                     </a>
@@ -373,7 +371,7 @@ export default function OurStory({ onBack, onLogout, isAuthenticated = false, us
             <button
               type="button"
               onClick={handleBack}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-surface px-5 py-3 text-sm font-semibold text-slate-700 dark:text-slate-350 shadow-sm transition-all duration-300 hover:bg-page hover:shadow-md cursor-pointer"
+              className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-surface px-5 py-3 text-sm font-semibold text-slate-700 dark:text-slate-350 shadow-sm transition-all duration-300 hover:bg-page hover:shadow-md cursor-pointer"
             >
               <ArrowLeft size={16} />
               Back

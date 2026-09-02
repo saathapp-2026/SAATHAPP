@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Building2, Award, Download, ArrowRight, ArrowLeft, Home, MapPin, Zap, Users, Globe, DollarSign,
   CheckCircle2, ChevronDown, Phone, PhoneCall, Calendar, Mail, Send, ShieldCheck, Sparkles, TrendingUp,
-  Package, Truck, Store, Layers, HelpCircle, FileText, Check, Clock, ChevronRight, X, Info, ExternalLink, Share2, Printer,
-  Briefcase, UserCheck, Coins, Rocket, Tag
+  Package, Truck, Store, Layers, HelpCircle, FileText, Check, Clock, X,ExternalLink,Printer,
+  UserCheck, Rocket, Tag
 } from 'lucide-react';
-import Header from '../components/Header';
+
 import Footer from '../components/Footer';
 import toast from 'react-hot-toast';
 import saathFranchiseLogoImg from '../assets/saath-franchise-logo.png';
@@ -118,9 +118,7 @@ export default function FranchisePage({
       };
       setSubmissionReceipt(receipt);
       setIsSubmittedModalOpen(true);
-      toast.success(`Application ${receipt.refId} submitted successfully!`);
-    }, 1200);
-  };
+      toast.success(`Application ${receipt.refId} submitted successfully!`) }, 1200)};
 
   const toggleFaq = (index) => {
     setOpenFaqs((prev) => ({ ...prev, [index]: !prev[index] }));
@@ -177,8 +175,7 @@ Website: www.saathappnova.co.in
 ===========================================================`;
 
     triggerFileDownload('SaathApp_Franchise_Brochure_2026.txt', brochureText);
-    toast.success('Official SAATH Franchise Brochure downloaded!');
-  };
+    toast.success('Official SAATH Franchise Brochure downloaded!') };
 
   const handleOpenScheduleModal = () => {
     setScheduleData((prev) => ({
@@ -207,9 +204,7 @@ Website: www.saathappnova.co.in
         phone: scheduleData.phone
       };
       setScheduledResult(booking);
-      toast.success('Consultation Call Scheduled Successfully!');
-    }, 1000);
-  };
+      toast.success('Consultation Call Scheduled Successfully!') }, 1000)};
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
@@ -515,7 +510,7 @@ Website: www.saathappnova.co.in
               </button>
               <button 
                 onClick={handleDownloadBrochure}
-                className="w-full sm:w-auto bg-white hover:bg-page border-2 border-slate-300 hover:border-saath-green/60 text-slate-900 dark:text-white font-extrabold text-xs xs:text-sm sm:text-base text-center px-5 xs:px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap shadow-sm group hover:shadow-md"
+                className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full sm:w-auto bg-white hover:bg-page border-2 border-slate-300 hover:border-saath-green/60 text-slate-900 dark:text-white font-extrabold text-xs xs:text-sm sm:text-base text-center px-5 xs:px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap shadow-sm group hover:shadow-md"
               >
                 <Download className="w-4 h-4 sm:w-5 sm:h-5 text-saath-green group-hover:translate-y-0.5 transition-transform shrink-0" /> 
                 <span>Download Brochure</span>
@@ -566,7 +561,7 @@ Website: www.saathappnova.co.in
           {/* Right Image / Hero Graphic */}
           <div className="lg:col-span-6 flex justify-center relative">
             <div className="absolute inset-0 bg-gradient-to-tr from-saath-green/10 to-transparent rounded-3xl filter blur-2xl pointer-events-none" />
-            <div className="relative border border-slate-200/60 dark:border-slate-800 bg-page p-8 rounded-3xl shadow-2xl shadow-slate-300/40 dark:shadow-none max-w-full w-full min-h-[320px] flex flex-col items-center justify-center text-center cursor-pointer group" onClick={handleDownloadBrochure}>
+            <div className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] relative border border-slate-200/60 dark:border-slate-800 bg-page p-8 rounded-3xl shadow-2xl shadow-slate-300/40 dark:shadow-none max-w-full w-full min-h-[320px] flex flex-col items-center justify-center text-center cursor-pointer group" onClick={handleDownloadBrochure}>
               <Building2 size={48} className="text-saath-green mb-3 group-hover:scale-110 transition-transform" />
               <h4 className="text-sm font-black text-slate-900 dark:text-white">SaathApp Franchise Network</h4>
               <p className="text-xs text-slate-500 font-semibold mt-1">Hyperlocal Ecosystem & Territory Distribution</p>
@@ -794,7 +789,7 @@ Website: www.saathappnova.co.in
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[500px]">
                   <thead>
-                    <tr className="border-b border-slate-200 text-[11px] sm:text-xs font-extrabold uppercase text-slate-700 dark:text-slate-200">
+                    <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-200 text-[11px] sm:text-xs font-extrabold uppercase text-slate-700 dark:text-slate-200">
                       <th className="py-3 px-2">Franchise Model</th>
                       <th className="py-3 px-2">Est. Capital</th>
                       <th className="py-3 px-2">Setup Time</th>
@@ -814,8 +809,7 @@ Website: www.saathappnova.co.in
                         key={i} 
                         onClick={() => {
                           setCalculatorModel(row.name);
-                          toast.success(`Calculated metrics for: ${row.name}`);
-                        }}
+                          toast.success(`Calculated metrics for: ${row.name}`) }}
                         className={`hover:bg-white cursor-pointer transition-colors ${
                           calculatorModel === row.name ? 'bg-white text-saath-green font-black' : ''
                         }`}
@@ -899,8 +893,7 @@ Website: www.saathappnova.co.in
                 onClick={() => {
                   setFormData(prev => ({ ...prev, capital: selectedCalc.capital }));
                   scrollToSection('apply-form');
-                  toast.success(`Selected model ${calculatorModel} pre-filled in application form!`);
-                }}
+                  toast.success(`Selected model ${calculatorModel} pre-filled in application form!`) }}
                 className="w-full bg-saath-green hover:bg-saath-green-dark text-white font-extrabold text-xs sm:text-base py-3.5 sm:py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-saath-green/20 active:scale-95"
               >
                 Request Custom Proposal <ArrowRight className="w-4 h-4" />
@@ -1104,8 +1097,7 @@ Website: www.saathappnova.co.in
                   onClick={() => {
                     setFormData(prev => ({ ...prev, occupation: p.role }));
                     scrollToSection('apply-form');
-                    toast.success(`Selected profile: ${p.role}`);
-                  }}
+                    toast.success(`Selected profile: ${p.role}`) }}
                   className="group bg-surface p-6 sm:p-8 rounded-3xl border-2 border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-xl hover:shadow-saath-green/10 hover:border-saath-green dark:hover:border-saath-green hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden cursor-pointer flex flex-col justify-between active:scale-[0.98]"
                 >
                   {/* Subtle Corner Background Glow */}
@@ -1179,8 +1171,7 @@ Website: www.saathappnova.co.in
                 key={i} 
                 onClick={() => {
                   scrollToSection('apply-form');
-                  toast.success(`Milestone Step ${st.step}: ${st.title}. Submit application to begin!`);
-                }}
+                  toast.success(`Milestone Step ${st.step}: ${st.title}. Submit application to begin!`) }}
                 className="group bg-surface p-4 sm:p-5 rounded-3xl border-2 border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-lg hover:border-saath-green hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-between cursor-pointer active:scale-95"
               >
                 <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-saath-green text-white font-black text-sm sm:text-base flex items-center justify-center shadow-md shadow-saath-green/20 group-hover:scale-110 transition-transform">
@@ -1360,7 +1351,7 @@ Website: www.saathappnova.co.in
                     </div>
                     <div>
                       <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider block">WhatsApp Business Help</span>
-                      <a href="https://wa.me/91180072284277" target="_blank" rel="noopener noreferrer" className="text-base sm:text-lg font-black text-slate-900 dark:text-white hover:text-saath-green">
+                      <a href="https://wa.me/91180072284277" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-base sm:text-lg font-black text-slate-900 dark:text-white hover:text-saath-green">
                         +91 1800-SAATHAPP
                       </a>
                     </div>
@@ -1372,7 +1363,7 @@ Website: www.saathappnova.co.in
                     </div>
                     <div>
                       <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider block">Franchise Helpdesk</span>
-                      <a href="mailto:support@saathapp.in" className="text-base sm:text-lg font-black text-slate-900 dark:text-white hover:text-saath-green">
+                      <a href="mailto:support@saathapp.in" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded text-base sm:text-lg font-black text-slate-900 dark:text-white hover:text-saath-green">
                         support@saathapp.in
                       </a>
                     </div>
@@ -1410,7 +1401,7 @@ Website: www.saathappnova.co.in
                       placeholder="Enter your full name"
                       value={formData.fullName}
                       onChange={handleFormChange}
-                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1423,7 +1414,7 @@ Website: www.saathappnova.co.in
                       placeholder="Enter 10-digit mobile number"
                       value={formData.phone}
                       onChange={handleFormChange}
-                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1440,7 +1431,7 @@ Website: www.saathappnova.co.in
                       placeholder="Enter email address"
                       value={formData.email}
                       onChange={handleFormChange}
-                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1452,7 +1443,7 @@ Website: www.saathappnova.co.in
                       placeholder="Business / Manager / Retailer"
                       value={formData.occupation}
                       onChange={handleFormChange}
-                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1469,7 +1460,7 @@ Website: www.saathappnova.co.in
                       placeholder="City name"
                       value={formData.city}
                       onChange={handleFormChange}
-                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1482,7 +1473,7 @@ Website: www.saathappnova.co.in
                       placeholder="District name"
                       value={formData.district}
                       onChange={handleFormChange}
-                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     />
                   </div>
 
@@ -1492,7 +1483,7 @@ Website: www.saathappnova.co.in
                       name="state"
                       value={formData.state}
                       onChange={handleFormChange}
-                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     >
                       <option value="Bihar">Bihar</option>
                       <option value="Jharkhand">Jharkhand</option>
@@ -1512,7 +1503,7 @@ Website: www.saathappnova.co.in
                       name="capital"
                       value={formData.capital}
                       onChange={handleFormChange}
-                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     >
                       <option value="₹50K - ₹2 Lakhs">₹50K - ₹2 Lakhs</option>
                       <option value="₹2L - ₹5 Lakhs">₹2L - ₹5 Lakhs</option>
@@ -1529,7 +1520,7 @@ Website: www.saathappnova.co.in
                       name="experience"
                       value={formData.experience}
                       onChange={handleFormChange}
-                      className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green"
                     >
                       <option value="No prior business experience">No prior business experience</option>
                       <option value="1 - 3 Years">1 - 3 Years</option>
@@ -1548,7 +1539,7 @@ Website: www.saathappnova.co.in
                     placeholder="Provide details about your preferred location or specific franchise requirements..."
                     value={formData.message}
                     onChange={handleFormChange}
-                    className="w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green resize-none"
+                    className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-surface border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-saath-green resize-none"
                   />
                 </div>
 
@@ -1557,7 +1548,7 @@ Website: www.saathappnova.co.in
                   <button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto bg-saath-green hover:bg-saath-green-dark text-white font-extrabold text-xs xs:text-sm sm:text-base px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl shadow-lg shadow-saath-green/20 transition-all duration-300 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 whitespace-nowrap group"
+                    className="duration-200 active:scale-[0.98] disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full sm:w-auto bg-saath-green hover:bg-saath-green-dark text-white font-extrabold text-xs xs:text-sm sm:text-base px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl shadow-lg shadow-saath-green/20 transition-all duration-300 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 whitespace-nowrap group"
                   >
                     {isSubmitting ? 'Submitting Application...' : 'Submit Application'} <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -1565,7 +1556,7 @@ Website: www.saathappnova.co.in
                   <button 
                     type="button"
                     onClick={handleOpenScheduleModal}
-                    className="w-full sm:w-auto bg-surface hover:bg-saath-green-light/40 border-2 border-slate-200 hover:border-saath-green/60 text-slate-800 dark:text-slate-100 font-extrabold text-xs xs:text-sm sm:text-base px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap shadow-sm group hover:shadow-md"
+                    className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full sm:w-auto bg-surface hover:bg-saath-green-light/40 border-2 border-slate-200 hover:border-saath-green/60 text-slate-800 dark:text-slate-100 font-extrabold text-xs xs:text-sm sm:text-base px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap shadow-sm group hover:shadow-md"
                   >
                     <PhoneCall className="w-4 h-4 text-saath-green group-hover:rotate-12 transition-transform shrink-0" />
                     <span>Schedule Call</span>
@@ -1746,7 +1737,7 @@ Website: www.saathappnova.co.in
                   <button 
                     type="submit"
                     disabled={isScheduling}
-                    className="w-full bg-saath-green hover:bg-saath-green-dark text-white font-extrabold py-3.5 rounded-xl shadow-lg shadow-saath-green/20 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                    className="duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full bg-saath-green hover:bg-saath-green-dark text-white font-extrabold py-3.5 rounded-xl shadow-lg shadow-saath-green/20 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
                   >
                     {isScheduling ? 'Scheduling Call...' : 'Confirm Call Appointment'} <Calendar className="w-4 h-4" />
                   </button>
@@ -1843,8 +1834,7 @@ Website: www.saathappnova.co.in
                   onClick={() => {
                     const text = `SAATHAPP FRANCHISE APPLICATION RECEIPT\nRef: ${submissionReceipt.refId}\nDate: ${submissionReceipt.date}\nApplicant: ${submissionReceipt.fullName}\nLocation: ${submissionReceipt.city}, ${submissionReceipt.district}, ${submissionReceipt.state}\nCapital: ${submissionReceipt.capital}`;
                     triggerFileDownload(`Application_Receipt_${submissionReceipt.refId}.txt`, text);
-                    toast.success('Receipt downloaded!');
-                  }}
+                    toast.success('Receipt downloaded!') }}
                   className="w-full sm:w-auto bg-saath-green hover:bg-saath-green-dark text-white font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Download className="w-4 h-4" /> Save Receipt
@@ -1930,8 +1920,7 @@ Website: www.saathappnova.co.in
                     setFormData(prev => ({ ...prev, capital: selectedModelDetail.investment }));
                     setSelectedModelDetail(null);
                     scrollToSection('apply-form');
-                    toast.success(`Selected ${selectedModelDetail.title} for application!`);
-                  }}
+                    toast.success(`Selected ${selectedModelDetail.title} for application!`) }}
                   className="w-full sm:w-auto bg-saath-green hover:bg-saath-green-dark text-white font-extrabold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-lg shadow-saath-green/20 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
                 >
                   Select & Apply for this Model <ArrowRight className="w-4 h-4" />

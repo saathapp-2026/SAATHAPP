@@ -40,7 +40,7 @@ export default function FloatingQuickActionBar({ badgeCount = 0, onAction }) {
       </div>
       <button
         type="button"
-        className="sm:hidden h-12 w-12 rounded-full bg-emerald-500 text-white shadow-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        className="transition-all duration-200 active:scale-[0.98] sm:hidden h-12 w-12 rounded-full bg-emerald-500 text-white shadow-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-emerald-500"
         onClick={() => setExpanded((v) => !v)}
         aria-expanded={expanded}
         aria-label={expanded ? 'Collapse quick actions' : 'Expand quick actions'}

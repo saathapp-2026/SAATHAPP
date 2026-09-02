@@ -49,14 +49,14 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
           <button
             type="button"
             onClick={onOpenWithdrawModal}
-            className="rounded-2xl bg-[#00986C] hover:bg-emerald-700 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition cursor-pointer"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-2xl bg-[#00986C] hover:bg-emerald-700 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition cursor-pointer"
           >
             Withdraw Funds
           </button>
           <button
             type="button"
             onClick={onOpenAddProduct}
-            className="rounded-2xl border border-white/20 bg-white/10 hover:bg-white/20 px-5 py-2.5 text-xs font-extrabold text-white backdrop-blur-sm transition cursor-pointer"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-2xl border border-white/20 bg-surface/10 hover:bg-surface/20 px-5 py-2.5 text-xs font-extrabold text-white backdrop-blur-sm transition cursor-pointer"
           >
             + Add New SKU
           </button>
@@ -70,7 +70,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
           return (
             <div
               key={idx}
-              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 shadow-sm hover:shadow-md transition cursor-pointer"
+              className="transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.99] rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 shadow-sm hover:shadow-md transition cursor-pointer"
               onClick={() => addToast?.(`View ${kpi.label} details`, 'info')}
             >
               <div className="flex items-center justify-between text-slate-400">
@@ -118,7 +118,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
                 { month: 'Jul', height: '0%', rev: '₹0' },
                 { month: 'Aug', height: '0%', rev: '₹0' },
               ].map((bar, i) => (
-                <div key={i} className="flex-1 flex flex-col items-center justify-end h-full gap-2 group cursor-pointer" onClick={() => addToast?.(`Revenue for ${bar.month}: ${bar.rev}`, 'info')}>
+                <div key={i} className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] flex-1 flex flex-col items-center justify-end h-full gap-2 group cursor-pointer" onClick={() => addToast?.(`Revenue for ${bar.month}: ${bar.rev}`, 'info')}>
                   <span className="text-xs font-mono font-black text-[#00986C] group-hover:scale-110 transition">
                     {bar.rev}
                   </span>
@@ -138,7 +138,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
           <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-4">Top Category Revenue</h3>
           <div className="space-y-4">
             {dashboardData.topSellingCategories.map((cat, i) => (
-              <div key={i} className="cursor-pointer" onClick={() => addToast?.(`Category ${cat.name}: ₹${cat.amount.toLocaleString('en-IN')}`, 'info')}>
+              <div key={i} className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] cursor-pointer" onClick={() => addToast?.(`Category ${cat.name}: ₹${cat.amount.toLocaleString('en-IN')}`, 'info')}>
                 <div className="flex items-center justify-between text-xs font-bold mb-1">
                   <span className="text-slate-800 dark:text-slate-200">{cat.name}</span>
                   <span className="text-[#00986C] font-mono">₹{cat.amount.toLocaleString('en-IN')}</span>
@@ -173,7 +173,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-400 font-bold uppercase tracking-wider">
+                <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-200 dark:border-slate-800 text-slate-400 font-bold uppercase tracking-wider">
                   <th className="pb-3">Order ID</th>
                   <th className="pb-3">Buyer Name</th>
                   <th className="pb-3">Amount</th>
@@ -183,7 +183,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                 {dashboardData.recentOrders.map((ord) => (
-                  <tr key={ord.id} className="hover:bg-page transition cursor-pointer" onClick={() => onSelectTab('orders')}>
+                  <tr key={ord.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-page transition cursor-pointer" onClick={() => onSelectTab('orders')}>
                     <td className="py-3 font-mono font-bold text-[#00986C]">{ord.id}</td>
                     <td className="py-3 font-bold text-slate-800 dark:text-slate-200">{ord.buyer}</td>
                     <td className="py-3 font-extrabold text-slate-900 dark:text-white font-mono">₹{ord.amount.toLocaleString('en-IN')}</td>
@@ -215,7 +215,7 @@ export default function OverviewTab({ onSelectTab, onOpenAddProduct, onOpenWithd
             <div className="space-y-3">
               {(dashboardData.inventorySummary || []).length > 0 ? (
                 dashboardData.inventorySummary.map((item, idx) => (
-                  <div key={idx} className="p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex justify-between items-center cursor-pointer" onClick={() => onSelectTab('inventory')}>
+                  <div key={idx} className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] p-3 rounded-2xl bg-page dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex justify-between items-center cursor-pointer" onClick={() => onSelectTab('inventory')}>
                     <div>
                       <strong className="text-slate-900 dark:text-white font-extrabold text-xs block truncate max-w-[150px]">{item.name}</strong>
                       <span className="text-[10px] text-slate-500 font-bold">{item.warehouse}</span>

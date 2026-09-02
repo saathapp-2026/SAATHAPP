@@ -20,7 +20,7 @@ export default function MembershipPaymentModal({ planId, onClose, onSuccess }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
+    <div className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md cursor-pointer active:scale-[0.99] fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -29,7 +29,7 @@ export default function MembershipPaymentModal({ planId, onClose, onSuccess }) {
       >
         <div className="flex items-center justify-between p-5 border-b border-slate-200 dark:border-slate-800">
           <h3 className="font-bold">Complete Payment</h3>
-          <button type="button" onClick={onClose} disabled={processing} className="text-slate-400 hover:text-slate-600">
+          <button type="button" onClick={onClose} disabled={processing} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-slate-400 hover:text-slate-600">
             <X size={20} />
           </button>
         </div>
@@ -72,7 +72,7 @@ export default function MembershipPaymentModal({ planId, onClose, onSuccess }) {
               placeholder="Card / UPI ID"
               defaultValue="demo@upi"
               aria-label="Payment identifier"
-              className="w-full px-3 py-2 rounded-lg bg-page border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+              className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-3 py-2 rounded-lg bg-page border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
               readOnly
             />
             <p className="text-[10px] text-slate-400 flex items-center gap-1">
@@ -85,7 +85,7 @@ export default function MembershipPaymentModal({ planId, onClose, onSuccess }) {
             type="button"
             onClick={handlePay}
             disabled={processing}
-            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-violet-500 to-purple-600 text-white font-semibold hover:from-violet-600 hover:to-purple-700 disabled:opacity-50 transition-all"
+            className="duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-violet-500 to-purple-600 text-white font-semibold hover:from-violet-600 hover:to-purple-700 disabled:opacity-50 transition-all"
           >
             {processing ? (
               <>

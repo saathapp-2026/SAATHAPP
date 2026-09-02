@@ -31,7 +31,7 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
           <input 
             type="text" 
             placeholder="Enter campaign name"
-            className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-white"
+            className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-surface"
             value={draft.name || ''}
             onChange={(e) => updateDraft({ name: e.target.value })}
           />
@@ -39,7 +39,7 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
         <div className="space-y-2">
           <label className="text-sm font-semibold text-slate-700">Campaign Objective <span className="text-rose-500">*</span></label>
           <select 
-            className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-white appearance-none"
+            className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-surface appearance-none"
             value={draft.objective || ''}
             onChange={(e) => updateDraft({ objective: e.target.value })}
           >
@@ -53,7 +53,7 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
           <label className="text-sm font-semibold text-slate-700">Start Date <span className="text-rose-500">*</span></label>
           <input 
             type="date" 
-            className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-white"
+            className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-surface"
             value={draft.startDate || ''}
             onChange={(e) => updateDraft({ startDate: e.target.value })}
           />
@@ -62,7 +62,7 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
           <label className="text-sm font-semibold text-slate-700">End Date <span className="text-rose-500">*</span></label>
           <input 
             type="date" 
-            className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-white"
+            className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-surface"
             value={draft.endDate || ''}
             onChange={(e) => updateDraft({ endDate: e.target.value })}
           />
@@ -88,14 +88,14 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
             ].map(loc => (
               <label key={loc.id} className="flex items-center gap-3 cursor-pointer group">
                 <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
-                  draft.locationType === loc.id ? 'border-[#15803D] bg-white' : 'border-slate-300 group-hover:border-slate-400'
+                  draft.locationType === loc.id ? 'border-[#15803D] bg-surface' : 'border-slate-300 group-hover:border-slate-400'
                 }`}>
                   {draft.locationType === loc.id && <div className="w-2 h-2 rounded-full bg-[#15803D]" />}
                 </div>
                 <span className="text-sm font-medium text-slate-700">{loc.label}</span>
                 <input 
                   type="radio" 
-                  className="hidden" 
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" 
                   checked={draft.locationType === loc.id}
                   onChange={() => toggleLocationType(loc.id)}
                 />
@@ -103,7 +103,7 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
             ))}
           </div>
 
-          <div className="bg-white p-5 rounded-xl border border-slate-200 space-y-4">
+          <div className="bg-surface p-5 rounded-xl border border-slate-200 space-y-4">
             <div>
               <label className="block text-sm font-bold text-slate-900 mb-3">Select Cities</label>
               <div className="flex flex-wrap gap-2 mb-4">
@@ -117,7 +117,7 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
                 ))}
               </div>
               <select 
-                className="w-full p-0 border-none focus:outline-none focus:ring-0 text-slate-500 text-sm bg-transparent appearance-none cursor-pointer"
+                className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full p-0 border-none focus:outline-none focus:ring-0 text-slate-500 text-sm bg-transparent appearance-none cursor-pointer"
                 onChange={(e) => {
                   if (e.target.value && !(draft.targetCities || []).includes(e.target.value)) {
                     toggleCity(e.target.value);
@@ -167,7 +167,7 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
           <div className="space-y-2">
             <label className="text-xs font-semibold text-slate-500">Gender</label>
             <select 
-              className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-white appearance-none text-sm"
+              className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-surface appearance-none text-sm"
               value={draft.audienceGender || 'All'}
               onChange={(e) => updateDraft({ audienceGender: e.target.value })}
             >
@@ -177,7 +177,7 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
           <div className="space-y-2">
             <label className="text-xs font-semibold text-slate-500">Age Group</label>
             <select 
-              className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-white appearance-none text-sm"
+              className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-surface appearance-none text-sm"
               value={draft.audienceAge || 'All'}
               onChange={(e) => updateDraft({ audienceAge: e.target.value })}
             >
@@ -187,7 +187,7 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
           <div className="space-y-2">
             <label className="text-xs font-semibold text-slate-500">Language</label>
             <select 
-              className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-white appearance-none text-sm"
+              className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-surface appearance-none text-sm"
               value={draft.audienceLanguage || 'All Languages'}
               onChange={(e) => updateDraft({ audienceLanguage: e.target.value })}
             >
@@ -205,14 +205,14 @@ export default function CampaignDetailsSection({ draft, updateDraft }) {
           ].map(type => (
             <label key={type.id} className="flex items-center gap-2 cursor-pointer group">
               <div className={`w-4 h-4 rounded-[4px] border-2 flex items-center justify-center transition-colors ${
-                (draft.customerTypes || []).includes(type.id) ? 'border-[#15803D] bg-[#15803D]' : 'border-slate-300 group-hover:border-slate-400 bg-white'
+                (draft.customerTypes || []).includes(type.id) ? 'border-[#15803D] bg-[#15803D]' : 'border-slate-300 group-hover:border-slate-400 bg-surface'
               }`}>
                 {(draft.customerTypes || []).includes(type.id) && <Check size={10} className="text-white" strokeWidth={4} />}
               </div>
               <span className="text-sm font-medium text-slate-600">{type.label}</span>
               <input 
                 type="checkbox" 
-                className="hidden" 
+                className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" 
                 checked={(draft.customerTypes || []).includes(type.id)}
                 onChange={(e) => {
                   const types = new Set(draft.customerTypes || []);

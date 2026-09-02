@@ -66,7 +66,7 @@ export default function ProductVariants({ value, errors = {}, onChange, baseSku 
                 ))}
               </TextSelect>
             </Field>
-            <button type="button" onClick={bulkGenerate} className="px-3 py-2 rounded-lg text-xs font-semibold border border-slate-200 hover:bg-page">
+            <button type="button" onClick={bulkGenerate} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-3 py-2 rounded-lg text-xs font-semibold border border-slate-200 hover:bg-page">
               Bulk Variant Generator
             </button>
             <button
@@ -94,7 +94,7 @@ export default function ProductVariants({ value, errors = {}, onChange, baseSku 
               </thead>
               <tbody>
                 {value.items.map((item) => (
-                  <tr key={item.id} className="border-t border-slate-100 dark:border-slate-800">
+                  <tr key={item.id} className="transition-colors hover:bg-emerald-50/30 border-t border-slate-100 dark:border-slate-800">
                     <td className="px-3 py-2"><TextInput value={item.value} onChange={(e) => updateItem(item.id, { value: e.target.value })} /></td>
                     <td className="px-3 py-2"><TextInput value={item.sku} onChange={(e) => updateItem(item.id, { sku: e.target.value })} /></td>
                     <td className="px-3 py-2"><TextInput type="number" value={item.price} onChange={(e) => updateItem(item.id, { price: e.target.value })} /></td>

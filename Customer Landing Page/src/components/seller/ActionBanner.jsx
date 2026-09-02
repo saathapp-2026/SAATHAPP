@@ -32,7 +32,7 @@ export default function ActionBanner({ banner, onDismiss }) {
           <p className="text-sm opacity-90">{banner.message}</p>
         </div>
         {onDismiss && (
-          <button type="button" onClick={onDismiss} className="opacity-60 hover:opacity-100">
+          <button type="button" onClick={onDismiss} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none opacity-60 hover:opacity-100">
             <X size={16} />
           </button>
         )}

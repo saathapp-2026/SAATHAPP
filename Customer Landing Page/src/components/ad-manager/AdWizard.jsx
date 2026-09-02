@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { X, ChevronLeft, ChevronRight, Sparkles, Search } from 'lucide-react';
 import toast from 'react-hot-toast';
 import SellerOverlay from '../seller/SellerOverlay';
+import ConfirmDialog from '../seller/orders/ConfirmDialog';
 import { SELLER_Z } from '../../config/seller/sellerZIndex';
 import {
   WIZARD_STEPS,
@@ -24,7 +25,7 @@ import {
   loadAdDraft,
   saveAdDraft,
   clearAdDraft,
-  saveAd,
+  saveAd, deleteAd,
   getAdProducts,
   getAiAdSuggestion,
   estimateReach,
@@ -35,14 +36,15 @@ import {
   SPONSORSHIP_AREAS,
 } from '../../services/advertisingPricingEngine';
 
-const CTA_OPTIONS = ['Shop Now', 'Buy Now', 'Visit Store', 'Order Now', 'Book Service', 'Learn More', 'Contact Seller', 'Call Now'];
-const DEVICE_PREVIEWS = ['desktop', 'tablet', 'mobile'];
-const PREVIEW_PAGES = ['homepage', 'search', 'store', 'category'];
+
+
+
 
 export default function AdWizard({ open, onClose, onSaved, initialTypeId, editItem }) {
   const [draft, setDraft] = useState(() => emptyAdDraft(initialTypeId || 'banner'));
   const [busy, setBusy] = useState(false);
   const [dirty, setDirty] = useState(false);
+  const [confirmCancel, setConfirmCancel] = useState(false);
   const [products, setProducts] = useState([]);
   const [productSearch, setProductSearch] = useState('');
   const [previewDevice, setPreviewDevice] = useState('desktop');
@@ -168,7 +170,10 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
   };
 
   const requestClose = () => {
-    if (dirty && !window.confirm('You have unsaved changes. Leave without submitting?')) return;
+    if (dirty) {
+      setConfirmCancel(true);
+      return;
+    }
     onClose?.();
   };
 
@@ -177,8 +182,7 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
       const res = await getAiAdSuggestion(kind);
       const first = res.data?.[0];
       if (first) patch(apply(first));
-      toast.success('AI suggestion applied');
-    } catch {
+      toast.success('AI suggestion applied') } catch {
       toast.error('AI suggestion failed');
     }
   };
@@ -229,12 +233,12 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
   return (
     <SellerOverlay open={open} onClose={requestClose} labelledBy="ad-wizard-title" zIndex={SELLER_Z.modal} className="flex items-end sm:items-center justify-center p-0 sm:p-4" contentClassName="w-full max-w-4xl">
       <div className="max-h-[94vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-2xl">
-        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur px-5 py-4">
+        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-surface/95 backdrop-blur px-5 py-4">
           <div>
             <h2 id="ad-wizard-title" className="text-lg font-bold">{editItem ? 'Edit Advertisement' : 'Create Advertisement'}</h2>
             <p className="text-xs text-slate-500 mt-0.5">{type.label} · Step {draft.step}/14 · Draft auto-saves</p>
           </div>
-          <button type="button" onClick={requestClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close"><X size={18} /></button>
+          <button type="button" onClick={requestClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-lg hover:bg-page" aria-label="Close"><X size={18} /></button>
         </div>
 
         <div className="px-5 pt-4">
@@ -749,14 +753,38 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           )}
         </div>
 
-        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-white/95 px-5 py-4">
+        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800 bg-surface/95 px-5 py-4">
           <button type="button" disabled={draft.step <= 1 || busy} onClick={() => patch({ step: draft.step - 1 })} className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold disabled:opacity-40">
             <ChevronLeft size={16} /> Back
           </button>
           <div className="flex gap-2">
+            {editItem && (
+              <button 
+                type="button" 
+                disabled={busy} 
+                onClick={async () => {
+                  if (confirm('Are you sure you want to delete this ad?')) {
+                    setBusy(true);
+                    try {
+                      await deleteAd(draft.id);
+                      toast.success('Ad deleted');
+                      onSaved?.({ status: 'deleted', id: draft.id });
+                      onClose?.();
+                    } catch {
+                      toast.error('Failed to delete ad');
+                    } finally {
+                      setBusy(false);
+                    }
+                  }
+                }} 
+                className="rounded-xl border border-red-200 text-red-600 px-4 py-2 text-sm font-semibold hover:bg-red-50"
+              >
+                Delete
+              </button>
+            )}
             <button type="button" disabled={busy} onClick={() => publish({ asDraft: true })} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold">Save Draft</button>
             {draft.step < 14 ? (
-              <button type="button" disabled={!canNext() || busy} onClick={() => { if (!canNext()) { toast.error('Complete required fields'); return; } patch({ step: draft.step + 1 }); }} className="inline-flex items-center gap-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 text-sm font-semibold disabled:opacity-40">
+              <button type="button" disabled={!canNext() || busy} onClick={() => { if (!canNext()) { toast.error('Complete required fields'); return; } patch({ step: draft.step + 1 }) }} className="inline-flex items-center gap-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 text-sm font-semibold disabled:opacity-40">
                 Continue <ChevronRight size={16} />
               </button>
             ) : (
@@ -767,6 +795,19 @@ export default function AdWizard({ open, onClose, onSaved, initialTypeId, editIt
           </div>
         </div>
       </div>
+      <ConfirmDialog
+        open={confirmCancel}
+        title="Discard changes?"
+        message="Your unsaved changes will be lost."
+        danger={true}
+        confirmLabel="Discard Changes"
+        cancelLabel="Keep Editing"
+        onCancel={() => setConfirmCancel(false)}
+        onConfirm={() => {
+          setConfirmCancel(false);
+          onClose();
+        }}
+      />
     </SellerOverlay>
   );
 }

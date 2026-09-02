@@ -53,11 +53,11 @@ export default function LiveStats() {
       
       {/* Background shape overlays */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
-        <div className="absolute w-72 h-72 rounded-full bg-white/20 blur-3xl -top-10 -right-10" />
-        <div className="absolute w-72 h-72 rounded-full bg-white/20 blur-3xl -bottom-10 -left-10" />
+        <div className="absolute w-72 h-72 rounded-full bg-surface/20 blur-3xl -top-10 -right-10" />
+        <div className="absolute w-72 h-72 rounded-full bg-surface/20 blur-3xl -bottom-10 -left-10" />
       </div>
 
-      <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="saath-container relative z-10">
         
         {/* Statistics Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
@@ -74,7 +74,7 @@ export default function LiveStats() {
                   <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
                 </div>
                 
-                <div className="h-0.5 w-10 bg-white/35 mx-auto rounded-full" />
+                <div className="h-0.5 w-10 bg-surface/35 mx-auto rounded-full" />
                 
                 <p className="text-xs sm:text-sm font-bold text-white/85 tracking-wide uppercase">
                   {stat.label}

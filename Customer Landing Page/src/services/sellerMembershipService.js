@@ -5,8 +5,8 @@ import { isWelcomeKitEligible as checkWelcomeKitEligible } from '../config/selle
 const MEMBERSHIP_STORAGE_KEY = 'saathapp-seller-membership';
 const BRANDING_REQUESTS_KEY = 'saathapp-seller-branding-requests';
 
-function delay(ms = 400) {
-  return new Promise((r) => setTimeout(r, ms));
+function delay(ms = 0) {
+  return new Promise((r) => setTimeout(r, 0));
 }
 
 export function getMembershipConfig() {

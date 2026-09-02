@@ -103,7 +103,7 @@ export default function ProfessionalSubmitted() {
             type="button"
             onClick={handleCheckStatus}
             disabled={checking}
-            className="w-full py-2.5 bg-transparent border border-white/20 hover:border-white/40 text-slate-300 font-black text-xs uppercase tracking-wider rounded-btn transition-colors cursor-pointer"
+            className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-2.5 bg-transparent border border-white/20 hover:border-white/40 text-slate-300 font-black text-xs uppercase tracking-wider rounded-btn transition-colors cursor-pointer"
           >
             {checking ? 'Checking...' : 'Check Verification Status'}
           </button>

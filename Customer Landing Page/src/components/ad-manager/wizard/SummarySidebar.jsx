@@ -24,7 +24,7 @@ function getDurationLabel(days) {
   return `${d} Days`;
 }
 
-export default function SummarySidebar({ draft, reach, updateDraft }) {
+export default function SummarySidebar({ draft, reach }) {
   // Official pricing engine calculation
   const calcResult = calculateAdvertisingPrice({
     adType: draft.typeId || 'banner',
@@ -50,7 +50,7 @@ export default function SummarySidebar({ draft, reach, updateDraft }) {
     <div className="space-y-6">
       
       {/* Selected Plan Summary */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-surface rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         <div className="bg-slate-50/50 px-5 py-4 border-b border-slate-200 flex items-center justify-between">
           <h3 className="font-bold text-[#15803D]">Dynamic Pricing Summary</h3>
           <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md">Live Calculation</span>
@@ -146,7 +146,7 @@ export default function SummarySidebar({ draft, reach, updateDraft }) {
       </div>
 
       {/* Why Dynamic Rate Cards? */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
+      <div className="bg-surface rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
         <h3 className="font-bold text-[#15803D]">Why Dynamic Rate Cards?</h3>
         <div className="grid grid-cols-1 gap-3">
           {BENEFITS.map(b => (
@@ -159,7 +159,7 @@ export default function SummarySidebar({ draft, reach, updateDraft }) {
       </div>
 
       {/* Payment Options */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-surface rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         <div className="px-5 py-4 border-b border-slate-200 flex items-center justify-between">
           <h3 className="font-bold text-slate-900">Payment Options</h3>
           <span className="flex items-center gap-1 text-xs font-bold text-[#15803D]">
@@ -168,10 +168,10 @@ export default function SummarySidebar({ draft, reach, updateDraft }) {
         </div>
         
         <div className="flex border-b border-slate-200">
-          <button className="flex-1 py-3 text-sm font-bold text-[#15803D] border-b-2 border-[#15803D] bg-emerald-50/30">UPI</button>
-          <button className="flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Card</button>
-          <button className="flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Net Banking</button>
-          <button className="flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Wallet</button>
+          <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-3 text-sm font-bold text-[#15803D] border-b-2 border-[#15803D] bg-emerald-50/30">UPI</button>
+          <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Card</button>
+          <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Net Banking</button>
+          <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-3 text-sm font-semibold text-slate-500 hover:text-slate-700">Wallet</button>
         </div>
 
         <div className="p-5 flex flex-col items-center">
@@ -189,7 +189,7 @@ export default function SummarySidebar({ draft, reach, updateDraft }) {
           <div className="w-40 h-40 bg-page rounded-xl mb-4 border border-slate-200 flex items-center justify-center relative overflow-hidden">
              {/* Fake QR code pattern */}
              <div className="w-32 h-32 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMzMzIiAvPgo8cmVjdCB4PSI0IiB5PSI0IiB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMzMzIiAvPgo8L3N2Zz4=')] opacity-80" />
-             <div className="absolute inset-0 m-auto w-10 h-10 bg-white rounded-lg shadow-md flex items-center justify-center">
+             <div className="absolute inset-0 m-auto w-10 h-10 bg-surface rounded-lg shadow-md flex items-center justify-center">
                <div className="w-6 h-6 bg-[#15803D] rounded flex items-center justify-center">
                  <span className="text-white text-xs font-bold">S</span>
                </div>

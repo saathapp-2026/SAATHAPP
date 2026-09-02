@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Gift, Heart, Star, Sparkles, Truck, ShieldCheck, Box, Clock,
-  ChevronRight, ChevronLeft, Home, Filter, RefreshCw, X, CheckCircle2, ChevronDown,
+  ChevronRight, Home, Filter, RefreshCw, X, CheckCircle2, ChevronDown,
   ShoppingBag, SlidersHorizontal, Image as ImageIcon, Check, Eye
 } from 'lucide-react';
 import Header from '../components/Header';
@@ -68,29 +68,6 @@ export default function GiftSetPage({
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const gridTopRef = useRef(null);
-  const categoryScrollRef = useRef(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  const handleCategoryScroll = () => {
-    if (categoryScrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = categoryScrollRef.current;
-      const maxScroll = scrollWidth - clientWidth;
-      const progress = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
-      setScrollProgress(progress);
-    }
-  };
-
-  const scrollCategoryLeft = () => {
-    if (categoryScrollRef.current) {
-      categoryScrollRef.current.scrollBy({ left: -320, behavior: 'smooth' });
-    }
-  };
-
-  const scrollCategoryRight = () => {
-    if (categoryScrollRef.current) {
-      categoryScrollRef.current.scrollBy({ left: 320, behavior: 'smooth' });
-    }
-  };
 
   // Toast Notification state
   const [toastMessage, setToastMessage] = useState(null);
@@ -401,7 +378,7 @@ export default function GiftSetPage({
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300 relative">
+    <div className="min-h-screen flex flex-col bg-surface dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300 relative">
       {/* Toast Notification Banner */}
       <AnimatePresence>
         {toastMessage && (
@@ -517,121 +494,58 @@ export default function GiftSetPage({
           </div>
         </div>
 
-        {/* QUICK CATEGORY ICON ROW (Reference Design Style - "Shop by Category") */}
-        <div className="mb-10 w-full max-w-full relative z-10 isolate box-border">
-          {/* Header Title Section */}
-          <div className="flex items-center justify-between mb-4 px-1">
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-              Shop by Category
-            </h2>
-            <span className="text-xs font-bold text-rose-500 hover:underline cursor-pointer">
-              {filteredProducts.length} Items Available
-            </span>
-          </div>
-
-          <div className="relative w-full max-w-full">
-            {/* Left Circular Arrow Scroll Button */}
-            <button
-              type="button"
-              onClick={scrollCategoryLeft}
-              aria-label="Scroll Left"
-              className="absolute left-1 top-[46%] -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow-md border border-slate-200/90 dark:border-slate-700 flex items-center justify-center cursor-pointer hover:bg-rose-50 dark:hover:bg-slate-700 hover:text-rose-500 hover:scale-105 active:scale-95 transition-all"
-            >
-              <ChevronLeft size={20} />
-            </button>
-
-            {/* Right Circular Arrow Scroll Button */}
-            <button
-              type="button"
-              onClick={scrollCategoryRight}
-              aria-label="Scroll Right"
-              className="absolute right-1 top-[46%] -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow-md border border-slate-200/90 dark:border-slate-700 flex items-center justify-center cursor-pointer hover:bg-rose-50 dark:hover:bg-slate-700 hover:text-rose-500 hover:scale-105 active:scale-95 transition-all"
-            >
-              <ChevronRight size={20} />
-            </button>
-
-            {/* Scrollable Container with ~150-160px Cards */}
-            <div
-              ref={categoryScrollRef}
-              onScroll={handleCategoryScroll}
-              className="flex flex-nowrap items-center gap-4 sm:gap-5 overflow-x-auto pb-4 pt-2 px-10 sm:px-12 scrollbar-none snap-x snap-mandatory w-full max-w-full box-border scroll-smooth"
-            >
-              {[
-                { id: 'All', label: 'All', icon: '🎁', image: allGiftsImg },
-                { id: 'Chocolate', label: 'Chocolate', icon: '🍫', image: chocolatesImg },
-                { id: 'Flower', label: 'Flowers', icon: '💐', image: flowersImg },
-                { id: 'Sweets', label: 'Sweets', icon: '🍬', image: sweetsImg },
-                { id: 'Dry Fruit', label: 'Dry Fruits', icon: '🥜', image: dryFruitsImg },
-                { id: 'Stationery', label: 'Stationery', icon: '✏️', image: stationeryImg },
-                { id: 'Crockery', label: 'Crockery', icon: '🍵', image: crockeryImg },
-                { id: 'Clothes', label: 'Clothes', icon: '👔', image: clothesImg },
-                { id: 'Perfume', label: 'Perfume', icon: '✨', image: perfumesImg },
-                { id: 'Glass & Cup', label: 'Glass & Cup', icon: '☕', image: glassCupImg },
-                { id: 'Personalized', label: 'Personalized', icon: '🖼️', image: personalizedImg },
-              ].map(cat => {
-                const active = selectedSubCategory === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => handleSubCategorySelect(cat.id)}
-                    className={`group flex flex-col items-center justify-between p-3.5 sm:p-4 rounded-2xl sm:rounded-[22px] min-w-[145px] sm:min-w-[155px] w-[145px] sm:w-[155px] h-[150px] sm:h-[160px] shrink-0 flex-shrink-0 snap-start transition-all duration-200 cursor-pointer ${
-                      active
-                        ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/30 border border-rose-500 ring-2 ring-rose-500/30 scale-[1.02] font-black z-20'
-                        : 'bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 text-slate-800 dark:text-slate-200 hover:border-rose-300 dark:hover:border-rose-900 hover:shadow-md hover:scale-[1.02] font-bold'
-                    }`}
-                  >
-                    {cat.image ? (
-                      <div className={`w-20 h-20 sm:w-[84px] sm:h-[84px] rounded-xl overflow-hidden flex items-center justify-center p-1.5 transition-transform duration-300 group-hover:scale-105 ${
-                        active ? 'bg-white/20 ring-2 ring-white/40 shadow-inner' : 'bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60'
-                      }`}>
-                        <img
-                          src={cat.image}
-                          alt={cat.label}
-                          className="w-full h-full object-cover object-center rounded-lg"
-                          style={{ imageRendering: 'auto' }}
-                        />
-                      </div>
-                    ) : (
-                      <div className={`w-20 h-20 sm:w-[84px] sm:h-[84px] rounded-xl flex items-center justify-center text-4xl ${
-                        active ? 'bg-white/20 ring-2 ring-white/40' : 'bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60'
-                      }`}>
-                        <span>{cat.icon}</span>
-                      </div>
-                    )}
-                    <span className={`text-xs sm:text-[13.5px] font-bold text-center leading-snug line-clamp-2 mt-2 px-1 tracking-tight ${active ? 'text-white' : 'text-slate-800 dark:text-slate-200'}`}>
-                      {cat.label}
-                    </span>
-                  </button>
-                );
-              })}
-              {/* End spacer padding */}
-              <div className="w-4 shrink-0 flex-shrink-0" aria-hidden="true" />
-            </div>
-          </div>
-
-          {/* Thin Custom Scrollbar Track Bar Below Row (Matching Reference) */}
-          <div className="w-48 sm:w-64 h-1.5 bg-slate-200/80 dark:bg-slate-800 rounded-full mx-auto mt-3 overflow-hidden relative">
-            <div
-              className="h-full bg-slate-400 dark:bg-slate-600 rounded-full transition-all duration-150"
-              style={{
-                width: '35%',
-                transform: `translateX(${(scrollProgress / 100) * 180}%)`
-              }}
-            />
+        {/* QUICK CATEGORY ICON ROW (Fully Functional) */}
+        <div className="mb-8">
+          <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
+            {[
+              { id: 'All', label: 'All', icon: '🎁', image: allGiftsImg },
+              { id: 'Chocolate', label: 'Chocolate', icon: '🍫', image: chocolatesImg },
+              { id: 'Flower', label: 'Flowers', icon: '💐', image: flowersImg },
+              { id: 'Sweets', label: 'Sweets', icon: '🍬', image: sweetsImg },
+              { id: 'Dry Fruit', label: 'Dry Fruits', icon: '🥜', image: dryFruitsImg },
+              { id: 'Stationery', label: 'Stationery', icon: '✏️', image: stationeryImg },
+              { id: 'Crockery', label: 'Crockery', icon: '🍵', image: crockeryImg },
+              { id: 'Clothes', label: 'Clothes', icon: '👔', image: clothesImg },
+              { id: 'Perfume', label: 'Perfume', icon: '✨', image: perfumesImg },
+              { id: 'Glass & Cup', label: 'Glass & Cup', icon: '☕', image: glassCupImg },
+              { id: 'Personalized', label: 'Personalized', icon: '🖼️', image: personalizedImg },
+            ].map(cat => {
+              const active = selectedSubCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => handleSubCategorySelect(cat.id)}
+                  className={`flex flex-col items-center gap-1.5 p-3 rounded-2xl min-w-[76px] transition-all cursor-pointer ${
+                    active
+                      ? 'bg-rose-500 text-white shadow-md shadow-rose-500/25 scale-105 font-black'
+                      : 'bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-rose-400 hover:shadow-xs font-semibold'
+                  }`}
+                >
+                  {cat.image ? (
+                    <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-slate-50 dark:bg-slate-800">
+                      <img src={cat.image} alt={cat.label} className="w-full h-full object-contain p-1" />
+                    </div>
+                  ) : (
+                    <span className="text-2xl h-8 flex items-center justify-center">{cat.icon}</span>
+                  )}
+                  <span className="text-[11px] tracking-tight whitespace-nowrap">{cat.label}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
         {/* MAIN LAYOUT: LEFT FILTERS SIDEBAR + PRODUCT GRID */}
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           {/* LEFT FILTERS SIDEBAR */}
-          <aside className="w-full lg:w-64 shrink-0 bg-white dark:bg-slate-900 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-6">
+          <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full lg:w-64 shrink-0 bg-white dark:bg-slate-900 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-6">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="font-black text-sm uppercase tracking-wider flex items-center gap-2">
                 <Filter size={16} className="text-rose-500" /> Filters
               </h3>
               <button
                 onClick={clearAllFilters}
-                className="text-xs font-bold text-rose-500 hover:underline cursor-pointer"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-xs font-bold text-rose-500 hover:underline cursor-pointer"
               >
                 Clear All
               </button>
@@ -779,7 +693,7 @@ export default function GiftSetPage({
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-1.5 rounded-lg bg-rose-500 text-white font-bold text-xs cursor-pointer hover:bg-rose-600 transition-colors shadow-2xs"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-1.5 rounded-lg bg-rose-500 text-white font-bold text-xs cursor-pointer hover:bg-rose-600 transition-colors shadow-2xs"
                 >
                   Apply Price Range
                 </button>
@@ -841,7 +755,7 @@ export default function GiftSetPage({
                 <select
                   value={sortBy}
                   onChange={handleSortChange}
-                  className="bg-slate-100 dark:bg-slate-800 border-none rounded-xl text-xs font-bold py-2 px-3 outline-none focus:ring-2 focus:ring-rose-500 cursor-pointer"
+                  className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 bg-slate-100 dark:bg-slate-800 border-none rounded-xl text-xs font-bold py-2 px-3 outline-none focus:ring-2 focus:ring-rose-500 cursor-pointer"
                 >
                   <option value="popular">Popularity</option>
                   <option value="price_low">Price: Low to High</option>
@@ -862,7 +776,7 @@ export default function GiftSetPage({
                 </p>
                 <button
                   onClick={clearAllFilters}
-                  className="px-5 py-2.5 rounded-xl bg-rose-500 text-white font-bold text-xs uppercase tracking-wider shadow-md cursor-pointer hover:bg-rose-600"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 rounded-xl bg-rose-500 text-white font-bold text-xs uppercase tracking-wider shadow-md cursor-pointer hover:bg-rose-600"
                 >
                   Reset All Filters
                 </button>
@@ -893,7 +807,7 @@ export default function GiftSetPage({
                           <img
                             src={p.image}
                             alt={p.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                           />
                         ) : null}
                       </div>
@@ -1034,7 +948,7 @@ export default function GiftSetPage({
                   <div className="flex items-center gap-3">
                     <label className="px-4 py-2 rounded-xl border border-dashed border-rose-400 text-rose-600 dark:text-rose-400 font-bold cursor-pointer hover:bg-rose-500/10 flex items-center gap-1.5">
                       <ImageIcon size={14} /> Choose Image
-                      <input type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
+                      <input type="file" accept="image/*" onChange={handlePhotoUpload} className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" />
                     </label>
                     {customizationForm.photo && (
                       <span className="text-slate-500 font-bold truncate max-w-[200px]">{customizationForm.photo}</span>
@@ -1093,7 +1007,7 @@ export default function GiftSetPage({
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold uppercase tracking-wider cursor-pointer shadow-md"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold uppercase tracking-wider cursor-pointer shadow-md"
                   >
                     Confirm & Add to Cart
                   </button>

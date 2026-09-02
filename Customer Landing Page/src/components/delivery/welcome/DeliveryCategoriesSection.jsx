@@ -120,7 +120,7 @@ export default function DeliveryCategoriesSection({ onStartRegistration }) {
             <button
               type="button"
               onClick={onStartRegistration}
-              className="inline-flex items-center gap-2 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 px-8 py-3.5 text-xs font-black shadow-lg transition hover:scale-105"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 px-8 py-3.5 text-xs font-black shadow-lg transition hover:scale-105"
             >
               Apply as Rider Now
               <ArrowRight size={16} />

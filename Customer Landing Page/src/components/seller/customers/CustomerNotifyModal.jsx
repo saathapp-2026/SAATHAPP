@@ -47,7 +47,7 @@ export default function CustomerNotifyModal({ open, onClose, customerIds = [] })
             <h2 id="notify-customers-title" className="font-bold text-lg">Send Notification</h2>
             <p className="text-xs text-slate-500 mt-0.5">{customerIds.length} recipient(s)</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -97,14 +97,14 @@ export default function CustomerNotifyModal({ open, onClose, customerIds = [] })
         )}
 
         <div className="flex justify-end gap-2">
-          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm border border-slate-200">
             Cancel
           </button>
           <button
             type="button"
             disabled={loading}
             onClick={handleSend}
-            className="px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
+            className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
           >
             {loading ? 'Sending…' : 'Send'}
           </button>

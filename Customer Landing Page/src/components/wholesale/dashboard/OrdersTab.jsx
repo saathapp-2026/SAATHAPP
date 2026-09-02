@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Search, Filter, Download, Eye, CheckCircle2, Truck, RefreshCw, XCircle, ArrowUpDown, FileSpreadsheet, X, Printer, Check } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
-import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
+import saathAppLogo from '../../../assets/saathapp-logo.png';
 
 import InvoicesTab from './InvoicesTab';
 
@@ -19,10 +19,16 @@ export const ORDER_STATUS_TABS = [
   'Invoices',
 ];
 
-export const MOCK_FULL_ORDERS = [];
+export const MOCK_FULL_ORDERS = [
+  { id: 'ORD-SA-2026-8001', buyer: 'SuperMart Delhi', category: 'Groceries', status: 'Pending', payment: 'Awaiting', total: '₹ 45,000', items: 120, date: '29 Aug 2026' },
+  { id: 'ORD-SA-2026-8002', buyer: 'Metro Retail', category: 'Electronics', status: 'Accepted', payment: 'Paid', total: '₹ 1,20,000', items: 45, date: '28 Aug 2026' },
+  { id: 'ORD-SA-2026-8003', buyer: 'Fresh Farm Hub', category: 'Groceries', status: 'Delivered', payment: 'Paid', total: '₹ 32,500', items: 200, date: '25 Aug 2026' },
+  { id: 'ORD-SA-2026-8004', buyer: 'Tech Store Bangalore', category: 'Electronics', status: 'Cancelled', payment: 'Refunded', total: '₹ 55,000', items: 10, date: '24 Aug 2026' }
+];
 
 export default function OrdersTab() {
-  const { addToast, formData } = useWholesale ? useWholesale() : { addToast: console.log, formData: {} };
+  const _wc = useWholesale();
+  const { addToast, formData } = _wc || { addToast: console.log, formData: {} };
   const [activeStatusTab, setActiveStatusTab] = useState('All Orders');
   const [searchQuery, setSearchQuery] = useState('');
   const [orders, setOrders] = useState(MOCK_FULL_ORDERS);
@@ -122,7 +128,7 @@ export default function OrdersTab() {
       <body>
         <div class="header">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <img src="${window.location.origin}/src/assets/saathapp-logo.jpeg" class="logo-img" alt="SaathApp" onerror="this.style.display='none'" />
+            <img src="${window.location.origin}/src/assets/saathapp-logo.png" class="logo-img" alt="SaathApp" onerror="this.style.display='none'" />
             <div>
               <div class="title">TAX INVOICE</div>
               <div style="font-size: 12px; color: #64748b;">${sellerName}</div>
@@ -192,7 +198,7 @@ export default function OrdersTab() {
         <button
           type="button"
           onClick={handleExportCSV}
-          className="inline-flex items-center gap-1.5 rounded-2xl bg-[#00986C] hover:bg-emerald-700 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition hover:scale-[1.02] cursor-pointer"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 rounded-2xl bg-[#00986C] hover:bg-emerald-700 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition hover:scale-[1.02] cursor-pointer"
         >
           <FileSpreadsheet size={16} /> Export CSV / Excel
         </button>
@@ -283,7 +289,7 @@ export default function OrdersTab() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
               {filteredOrders.map((o) => (
-                <tr key={o.id} className="hover:bg-page transition">
+                <tr key={o.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-page transition">
                   <td className="p-4 font-mono font-bold text-[#00986C]">{o.id}</td>
                   <td className="p-4 font-extrabold text-slate-900 dark:text-white">{o.buyer}</td>
                   <td className="p-4">{o.category} ({o.itemsCount} SKUs)</td>
@@ -408,7 +414,7 @@ export default function OrdersTab() {
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                   {previewModalData.rows.map((row, idx) => (
-                    <tr key={idx} className="hover:bg-page">
+                    <tr key={idx} className="transition-colors hover:bg-emerald-50/30 hover:bg-page">
                       {row.map((cell, cIdx) => (
                         <td key={cIdx} className="p-3 font-mono">{cell}</td>
                       ))}

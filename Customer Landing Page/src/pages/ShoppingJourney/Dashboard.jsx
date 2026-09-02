@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import InstallPWAButton from '../../components/PWA/InstallPWAButton';
 import { Gift, ShoppingBag, Trophy, Users, Smartphone, Wallet, Shirt, Flame, Check, Star, ShieldCheck, Sparkles, Info, ArrowRight, Percent, X, FileText } from 'lucide-react';
 import KnowMoreModal from '../../components/ShoppingJourney/KnowMoreModal';
+import toast from 'react-hot-toast';
 
 const ShoppingJourneyDashboard = () => {
   const navigate = useNavigate();
@@ -378,7 +379,7 @@ const ShoppingJourneyDashboard = () => {
             </div>
             
             <button 
-              onClick={() => alert("Winner list for this month is currently being generated!")}
+              onClick={() => toast.success("Winner list for this month is currently being generated!") }
               className="w-full bg-[#00a86b] hover:bg-green-700 text-white font-bold py-3.5 px-6 rounded-xl transition-colors shadow-sm flex items-center justify-center"
             >
               View Winners <ArrowRight size={16} className="ml-2" />

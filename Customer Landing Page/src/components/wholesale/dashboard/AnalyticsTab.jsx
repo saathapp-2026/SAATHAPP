@@ -7,10 +7,11 @@ import {
   RotateCcw, Target, Copy, Check, ExternalLink, Filter
 } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
-import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
+import saathAppLogo from '../../../assets/saathapp-logo.png';
 
 export default function AnalyticsTab() {
-  const { addToast, formData } = useWholesale ? useWholesale() : { addToast: console.log, formData: {} };
+  const _wc = useWholesale();
+  const { addToast, formData } = _wc || { addToast: console.log, formData: {} };
 
   const [activeAnalyticsTab, setActiveAnalyticsTab] = useState('Overview');
   const [dateRange, setDateRange] = useState('1 Aug – 31 Aug 2026');
@@ -88,7 +89,7 @@ export default function AnalyticsTab() {
       <body>
         <div class="header">
           <div class="logo-container">
-            <img src="${window.location.origin}/src/assets/saathapp-logo.jpeg" class="logo-img" alt="SaathApp Logo" onerror="this.style.display='none'" />
+            <img src="${window.location.origin}/src/assets/saathapp-logo.png" class="logo-img" alt="SaathApp Logo" onerror="this.style.display='none'" />
             <div>
               <div class="brand-title">SaathApp Wholesale</div>
               <div class="report-name">Analytics & Performance Report</div>
@@ -160,7 +161,7 @@ export default function AnalyticsTab() {
         </div>
 
         <script>
-          setTimeout(() => { window.print(); }, 500);
+          setTimeout(() => { window.print() }, 500);
         </script>
       </body>
       </html>
@@ -333,7 +334,7 @@ export default function AnalyticsTab() {
         <title>${config.fileName}</title>
         <style>
           body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: white; padding: 20px; }
-          .slide { width: 900px; height: 500px; background: #1e293b; border: 2px solid #00986C; border-radius: 20px; padding: 40px; margin: 20px auto; page-break-after: always; display: flex; flex-col; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+          .slide { width: 900px; height: 500px; background: #1e293b; border: 2px solid #00986C; border-radius: 20px; padding: 40px; margin: 20px auto; page-break-after: always; display: flex; flex-col; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.5) }
           .slide-title { font-size: 28px; font-weight: 900; color: #00986C; border-bottom: 2px solid #334155; pb-10px; }
           .slide-content { font-size: 18px; color: #cbd5e1; margin-top: 20px; line-height: 1.6; }
           .slide-num { text-align: right; font-size: 12px; color: #64748b; font-weight: bold; }
@@ -738,7 +739,7 @@ export default function AnalyticsTab() {
                     { name: 'Packaging & Supplies', orders: 198, gmv: '₹3.6L', growth: '↑ 12.1%' },
                     { name: 'Hardware & Tools', orders: 135, gmv: '₹2.1L', growth: '↑ 10.7%' },
                   ].map((c, i) => (
-                    <tr key={i} className="hover:bg-page transition cursor-pointer" onClick={() => addToast?.(`Category: ${c.name} (${c.orders} orders)`, 'info')}>
+                    <tr key={i} className="transition-colors hover:bg-emerald-50/30 hover:bg-page transition cursor-pointer" onClick={() => addToast?.(`Category: ${c.name} (${c.orders} orders)`, 'info')}>
                       <td className="py-2.5 font-extrabold text-slate-900 dark:text-white truncate max-w-[130px]">{c.name}</td>
                       <td className="py-2.5 text-right font-mono text-slate-500">{c.orders}</td>
                       <td className="py-2.5 text-right font-mono font-bold">{c.gmv}</td>
@@ -779,7 +780,7 @@ export default function AnalyticsTab() {
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
                   {[].map((p, i) => (
-                    <tr key={i} className="hover:bg-page transition cursor-pointer" onClick={() => addToast?.(`Product: ${p.title} (${p.gmv})`, 'info')}>
+                    <tr key={i} className="transition-colors hover:bg-emerald-50/30 hover:bg-page transition cursor-pointer" onClick={() => addToast?.(`Product: ${p.title} (${p.gmv})`, 'info')}>
                       <td className="py-2.5 font-extrabold text-slate-900 dark:text-white flex items-center gap-2 truncate max-w-[150px]">
                         <img src={p.img} alt={p.title} className="w-7 h-7 rounded-lg object-cover border border-slate-200 shrink-0" />
                         <span className="truncate">{p.title}</span>
@@ -828,7 +829,7 @@ export default function AnalyticsTab() {
                   { name: 'Delhi', val: '₹2.8L (9.9%)', color: 'bg-teal-500' },
                   { name: 'Others', val: '₹2.6L (9.1%)', color: 'bg-slate-400' },
                 ].map((st, i) => (
-                  <div key={i} className="flex items-center justify-between text-[11px] hover:bg-page p-1 rounded transition cursor-pointer" onClick={() => addToast?.(`State: ${st.name} - ${st.val}`, 'info')}>
+                  <div key={i} className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] flex items-center justify-between text-[11px] hover:bg-page p-1 rounded transition cursor-pointer" onClick={() => addToast?.(`State: ${st.name} - ${st.val}`, 'info')}>
                     <div className="flex items-center gap-1.5 truncate">
                       <span className={`w-2 h-2 rounded-full ${st.color} shrink-0`} />
                       <span className="text-slate-700 dark:text-slate-300 truncate">{st.name}</span>
@@ -990,7 +991,7 @@ export default function AnalyticsTab() {
               <button
                 type="button"
                 onClick={handleDownloadReport}
-                className="px-6 py-2 rounded-2xl bg-[#00986C] hover:bg-emerald-500 text-white font-extrabold shadow-lg flex items-center gap-1.5 cursor-pointer"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-6 py-2 rounded-2xl bg-[#00986C] hover:bg-emerald-500 text-white font-extrabold shadow-lg flex items-center gap-1.5 cursor-pointer"
               >
                 <Download size={15} /> Download Report
               </button>
@@ -1073,12 +1074,12 @@ export default function AnalyticsTab() {
                 type="text"
                 readOnly
                 value="https://saathapp.com/wholesale/analytics/report/share-98214"
-                className="bg-transparent font-mono text-xs text-slate-800 dark:text-slate-200 w-full focus:outline-none"
+                className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-transparent font-mono text-xs text-slate-800 dark:text-slate-200 w-full focus:outline-none"
               />
               <button
                 type="button"
                 onClick={handleCopyShareLink}
-                className="px-3 py-1.5 bg-[#00986C] text-white rounded-lg font-bold shrink-0 hover:bg-emerald-700 transition flex items-center gap-1"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-3 py-1.5 bg-[#00986C] text-white rounded-lg font-bold shrink-0 hover:bg-emerald-700 transition flex items-center gap-1"
               >
                 {isCopied ? <Check size={14} /> : <Copy size={14} />} {isCopied ? 'Copied' : 'Copy'}
               </button>
@@ -1120,7 +1121,7 @@ export default function AnalyticsTab() {
                     { name: 'Plumbing & Bathroom', orders: 110, gmv: '₹1.8L', growth: '+9.4%' },
                     { name: 'Safety & Protection', orders: 90, gmv: '₹1.3L', growth: '+8.2%' },
                   ].map((c, i) => (
-                    <tr key={i} className="hover:bg-page">
+                    <tr key={i} className="transition-colors hover:bg-emerald-50/30 hover:bg-page">
                       <td className="py-2.5 font-bold text-slate-900 dark:text-white">{c.name}</td>
                       <td className="py-2.5 text-right font-mono">{c.orders}</td>
                       <td className="py-2.5 text-right font-mono font-bold">{c.gmv}</td>

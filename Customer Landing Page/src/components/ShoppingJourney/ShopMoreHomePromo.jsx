@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import MilestoneTimeline from './MilestoneTimeline';
+
 import InstallPWAButton from '../PWA/InstallPWAButton';
 
 export default function ShopMoreHomePromo() {
   const navigate = useNavigate();
   
   return (
-    <div className="w-full h-full bg-white rounded-[32px] p-5 lg:p-6 border border-gray-100 shadow-sm flex flex-col">
+    <div className="w-full h-full bg-surface rounded-[32px] p-5 lg:p-6 border border-gray-100 shadow-sm flex flex-col">
       <div className="flex items-center gap-2 px-3.5 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-700 text-[9px] font-black uppercase tracking-wider w-fit mb-3">
         <span className="mr-1 text-xs">🎁</span> SHOP MORE, WIN MORE
       </div>
@@ -30,7 +30,7 @@ export default function ShopMoreHomePromo() {
               <InstallPWAButton />
             </div>
           </div>
-          <div className="hidden sm:flex text-xl bg-white p-2 rounded-xl border border-gray-100 shadow-sm">📱</div>
+          <div className="hidden sm:flex text-xl bg-surface p-2 rounded-xl border border-gray-100 shadow-sm">📱</div>
         </div>
       </div>
       

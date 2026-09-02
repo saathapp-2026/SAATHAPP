@@ -12,7 +12,7 @@ export default function SaathAppPlusHomeSection() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-[32px] p-5 lg:p-6 bg-white border border-gray-100 shadow-sm flex flex-col justify-center h-full"
+        className="relative overflow-hidden rounded-[32px] p-5 lg:p-6 bg-surface border border-gray-100 shadow-sm flex flex-col justify-center h-full"
       >
         <div className="relative z-10 flex flex-col items-center justify-center gap-4 h-full">
           <div className="space-y-3 text-center lg:text-left flex-1 flex flex-col justify-center w-full">

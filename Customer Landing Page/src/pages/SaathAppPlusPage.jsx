@@ -673,7 +673,7 @@ export default function SaathAppPlusPage({
               <div className="lg:col-span-7 overflow-x-auto rounded-[28px] border border-theme-border/80 dark:border-slate-800 bg-surface dark:bg-slate-900/90 shadow-xl">
                 <table className="w-full text-left text-xs border-collapse">
                   <thead>
-                    <tr className="border-b border-theme-border dark:border-slate-800 bg-page/70 dark:bg-slate-950/80 text-theme dark:text-slate-100 font-black">
+                    <tr className="transition-colors hover:bg-emerald-50/30 border-b border-theme-border dark:border-slate-800 bg-page/70 dark:bg-slate-950/80 text-theme dark:text-slate-100 font-black">
                       <th className="p-4 sm:p-5">Feature</th>
                       <th className="p-4 sm:p-5 text-center">Basic</th>
                       <th className="p-4 sm:p-5 text-center">Smart</th>

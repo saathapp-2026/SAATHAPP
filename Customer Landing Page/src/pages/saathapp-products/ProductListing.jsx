@@ -308,7 +308,7 @@ function SubcategoryScrollStrip({ items, activeSubcategoryId, onSelectSubcategor
         <h2 className="text-xl font-black text-slate-800 dark:text-slate-100 tracking-tight">Shop by Category</h2>
         <button
           type="button"
-          onClick={() => { }}
+          onClick={() => window.location.href = '/products'}
           className="text-xs sm:text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:underline cursor-pointer transition-colors"
         >
           View All Categories
@@ -397,7 +397,8 @@ const CATEGORY_ICON_MAP = {
   vehicles: Car,
   'spiritual-puja': Flame,
   furniture: Box,
-  'beauty-products': Sparkles
+  'beauty-products': Sparkles,
+  pottery: Box
 };
 
 export default function ProductListing({
@@ -616,8 +617,8 @@ export default function ProductListing({
   }
 
   // Apply sorting
-  if (sort === 'price-low') filteredProducts.sort((a, b) => a.price - b.price);
-  else if (sort === 'price-high') filteredProducts.sort((a, b) => b.price - a.price);
+  if (sort === 'price_low') filteredProducts.sort((a, b) => a.price - b.price);
+  else if (sort === 'price_high') filteredProducts.sort((a, b) => b.price - a.price);
   else if (sort === 'rating') filteredProducts.sort((a, b) => (b.rating || 0) - (a.rating || 0));
 
   // Handle sidebar category filter selection
@@ -634,7 +635,7 @@ export default function ProductListing({
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-page dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
       <Header
         cartCount={cartCount}
         onCartClick={onCartClick}
@@ -694,84 +695,84 @@ export default function ProductListing({
             <div className="grid grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
               <button onClick={() => setFilters({ ...filters, groceryTier: 'Normal Grocery' })} className="flex flex-col items-center justify-start p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-primary hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-slate-50 dark:bg-slate-800">
-                  <img src={normalGroceryImg} alt="Normal Grocery" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img src={normalGroceryImg} alt="Normal Grocery" className="w-full h-full object-contain p-1.5 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-slate-800 dark:text-slate-200">Normal Grocery</span>
                 <span className="text-[10px] text-slate-500 mt-1 text-center">Daily essentials for your home</span>
               </button>
               <button onClick={() => setFilters({ ...filters, groceryTier: 'Premium Grocery' })} className="flex flex-col items-center justify-start p-4 bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 border border-amber-200 dark:border-amber-800/50 rounded-2xl hover:shadow-lg transition-all group relative h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-amber-100/50 dark:bg-amber-800/20">
-                  <img src={premiumGroceryImg} alt="Premium Grocery" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img src={premiumGroceryImg} alt="Premium Grocery" className="w-full h-full object-contain p-1.5 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-amber-900 dark:text-amber-100">Premium Grocery</span>
                 <span className="text-[10px] text-amber-700/70 dark:text-amber-400/70 mt-1 text-center">Premium quality products</span>
               </button>
               <button onClick={() => navigate('/products/grocery/fruits-vegetables')} className="flex flex-col items-center justify-start p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-emerald-100/50 dark:bg-emerald-800/20">
-                  <img src={fruitsVegImg} alt="Fresh Fruits & Veg" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img src={fruitsVegImg} alt="Fresh Fruits & Veg" className="w-full h-full object-contain p-1.5 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-emerald-900 dark:text-emerald-100">Fresh Fruits & Veg</span>
                 <span className="text-[10px] text-emerald-700/70 dark:text-emerald-400/70 mt-1 text-center">Farm fresh & handpicked</span>
               </button>
               <button onClick={() => navigate('/products/grocery/meat-chicken')} className="flex flex-col items-center justify-start p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-red-100/50 dark:bg-red-800/20">
-                  <img src={meatChickenImg} alt="Meat / Chicken" className="w-full h-full object-cover scale-[1.2] group-hover:scale-[1.3] transition-transform duration-300" />
+                  <img src={meatChickenImg} alt="Meat / Chicken" className="w-full h-full object-contain p-1.5 scale-[1.2] group-hover:scale-[1.3] transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-red-900 dark:text-red-100">Meat / Chicken</span>
                 <span className="text-[10px] text-red-700/70 dark:text-red-400/70 mt-1 text-center">Fresh & hygienic cuts</span>
               </button>
               <button onClick={() => navigate('/products/grocery/dairy-bakery')} className="flex flex-col items-center justify-start p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-blue-100/50 dark:bg-blue-800/20">
-                  <img src={dairyBakeryImg} alt="Dairy & Bakery" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img src={dairyBakeryImg} alt="Dairy & Bakery" className="w-full h-full object-contain p-1.5 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-blue-900 dark:text-blue-100">Dairy & Bakery</span>
                 <span className="text-[10px] text-blue-700/70 dark:text-blue-400/70 mt-1 text-center">Milk, bread, butter and more</span>
               </button>
               <button onClick={() => navigate('/products/grocery/dry-fruits')} className="flex flex-col items-center justify-start p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-orange-100/50 dark:bg-orange-800/20">
-                  <img src={dryFruitsImg} alt="Dry Fruits" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img src={dryFruitsImg} alt="Dry Fruits" className="w-full h-full object-contain p-1.5 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-orange-900 dark:text-orange-100">Dry Fruits</span>
                 <span className="text-[10px] text-orange-700/70 dark:text-orange-400/70 mt-1 text-center">Premium nuts & dates</span>
               </button>
               <button onClick={() => navigate('/products/offers')} className="flex flex-col items-center justify-start p-4 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-rose-100/50 dark:bg-rose-800/20">
-                  <img src={dealsImg} alt="Deals" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img src={dealsImg} alt="Deals" className="w-full h-full object-contain p-1.5 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-rose-900 dark:text-rose-100">Deals</span>
                 <span className="text-[10px] text-rose-700/70 dark:text-rose-400/70 mt-1 text-center">Best offers & discounts</span>
               </button>
               <button onClick={() => navigate('/products/grocery/snacks-packaged-food')} className="flex flex-col items-center justify-start p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-yellow-100/50 dark:bg-yellow-800/20">
-                  <img src={snacksImg} alt="Snacks" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img src={snacksImg} alt="Snacks" className="w-full h-full object-contain p-1.5 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-yellow-900 dark:text-yellow-100">Snacks</span>
                 <span className="text-[10px] text-yellow-700/70 dark:text-yellow-400/70 mt-1 text-center">Chips & Namkeen</span>
               </button>
               <button onClick={() => navigate('/products/grocery/sweets')} className="flex flex-col items-center justify-start p-4 bg-pink-50 dark:bg-pink-900/20 border border-pink-200 dark:border-pink-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-pink-100/50 dark:bg-pink-800/20">
-                  <img src={sweetsImg} alt="Sweets" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img src={sweetsImg} alt="Sweets" className="w-full h-full object-contain p-1.5 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-pink-900 dark:text-pink-100">Sweets</span>
                 <span className="text-[10px] text-pink-700/70 dark:text-pink-400/70 mt-1 text-center">Traditional Mithai</span>
               </button>
               <button onClick={() => navigate('/products/grocery/ice-creams')} className="flex flex-col items-center justify-start p-4 bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-cyan-100/50 dark:bg-cyan-800/20">
-                  <img src={iceCreamsImg} alt="Ice Creams" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img src={iceCreamsImg} alt="Ice Creams" className="w-full h-full object-contain p-1.5 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-cyan-900 dark:text-cyan-100">Ice Creams</span>
                 <span className="text-[10px] text-cyan-700/70 dark:text-cyan-400/70 mt-1 text-center">Frozen treats</span>
               </button>
               <button onClick={() => navigate('/products/grocery/biscuits')} className="flex flex-col items-center justify-start p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-amber-100/50 dark:bg-amber-800/20">
-                  <img src={biscuitsImg} alt="Biscuits" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img src={biscuitsImg} alt="Biscuits" className="w-full h-full object-contain p-1.5 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-amber-900 dark:text-amber-100">Biscuits</span>
                 <span className="text-[10px] text-amber-700/70 dark:text-amber-400/70 mt-1 text-center">Cookies & Rusks</span>
               </button>
               <button onClick={() => navigate('/products/grocery/beverages')} className="flex flex-col items-center justify-start p-4 bg-sky-50 dark:bg-sky-900/20 border border-sky-200 dark:border-sky-800/50 rounded-2xl hover:shadow-lg transition-all group h-full">
                 <div className="w-full aspect-[4/3] mb-3 rounded-xl overflow-hidden flex items-center justify-center bg-sky-100/50 dark:bg-sky-800/20">
-                  <img src={coldDrinksImg} alt="Cold Drinks" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img src={coldDrinksImg} alt="Cold Drinks" className="w-full h-full object-contain p-1.5 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <span className="font-bold text-sm text-center text-sky-900 dark:text-sky-100">Cold Drinks</span>
                 <span className="text-[10px] text-sky-700/70 dark:text-sky-400/70 mt-1 text-center">Sodas & Juices</span>
@@ -929,7 +930,7 @@ export default function ProductListing({
                 >
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-2 overflow-hidden ${sub.image ? '' : (subCategoryId === sub.id ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-400')}`}>
                     {sub.image ? (
-                      <img src={sub.image} alt={sub.name} className="w-full h-full object-cover rounded-xl" />
+                      <img src={sub.image} alt={sub.name} className="w-full h-full object-contain p-1.5 rounded-xl" />
                     ) : (
                       <span className="text-[10px] font-medium text-slate-400 dark:text-slate-500">Image</span>
                     )}
@@ -982,7 +983,7 @@ export default function ProductListing({
                   >
                     <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 overflow-hidden ${fest.image ? '' : (festivalFilter === fest.id ? 'bg-amber-100 text-amber-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-500')}`}>
                       {fest.image ? (
-                        <img src={fest.image} alt={fest.name} className="w-full h-full object-cover rounded-full" />
+                        <img src={fest.image} alt={fest.name} className="w-full h-full object-contain p-1.5 rounded-full" />
                       ) : (
                         <Sparkles size={20} />
                       )}
@@ -1027,21 +1028,25 @@ export default function ProductListing({
                       <div
                         key={cat.id}
                         onClick={() => navigate(cat.url)}
-                        className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:border-emerald-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group aspect-square"
+                        className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl flex flex-col cursor-pointer hover:border-emerald-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group aspect-square overflow-hidden"
                       >
-                        <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs overflow-hidden">
+                        <div className="w-full flex-1 flex items-center justify-center overflow-hidden">
                           {cat.image ? (
-                            <img src={cat.image} alt={cat.name} className="w-full h-full object-cover rounded-2xl" />
+                            <img src={`${cat.image}?v=4`} alt={cat.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
                           ) : (
-                            <IconComponent size={28} />
+                            <div className="w-full h-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                              <IconComponent size={48} className="group-hover:scale-110 transition-transform duration-500" />
+                            </div>
                           )}
                         </div>
-                        <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                          {cat.name}
-                        </h3>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 font-medium">
-                          {dynamicCount} Products
-                        </p>
+                        <div className="p-3 sm:p-4 flex flex-col items-center justify-center text-center shrink-0 bg-white dark:bg-slate-900 z-10">
+                          <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-1">
+                            {cat.name}
+                          </h3>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 font-medium">
+                            {dynamicCount} Products
+                          </p>
+                        </div>
                       </div>
                     );
                   })}

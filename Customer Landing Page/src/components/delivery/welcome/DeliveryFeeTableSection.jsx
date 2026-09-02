@@ -86,7 +86,7 @@ export default function DeliveryFeeTableSection({ onStartRegistration }) {
                   { tier: 'Tier 1 City', desc: 'Large Commercial City', fee: '₹2,000' },
                   { tier: 'Metro City', desc: 'Metropolitan Metro Hub', fee: '₹2,500' },
                 ].map((row, idx) => (
-                  <tr key={idx} className="hover:bg-slate-900/60 transition">
+                  <tr key={idx} className="transition-colors hover:bg-emerald-50/30 hover:bg-slate-900/60 transition">
                     <td className="p-3.5 font-bold text-white flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-amber-400" />
                       {row.tier}
@@ -106,7 +106,7 @@ export default function DeliveryFeeTableSection({ onStartRegistration }) {
             <button
               type="button"
               onClick={onStartRegistration}
-              className="inline-flex items-center gap-2 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 px-8 py-3.5 text-xs font-black shadow-lg transition hover:scale-105"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 px-8 py-3.5 text-xs font-black shadow-lg transition hover:scale-105"
             >
               Apply as Rider Now
               <ArrowRight size={16} />

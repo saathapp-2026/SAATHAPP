@@ -47,7 +47,7 @@ const WinnerSelection = () => {
         <button 
           onClick={handleSelectWinners}
           disabled={isSelecting}
-          className={`px-6 py-2 rounded text-white font-medium ${isSelecting ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700'}`}
+          className={`transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-6 py-2 rounded text-white font-medium ${isSelecting ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700'}`}
         >
           {isSelecting ? 'Executing Secure Selection...' : 'Execute Winner Selection'}
         </button>

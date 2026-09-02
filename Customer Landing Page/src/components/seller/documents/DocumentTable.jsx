@@ -77,7 +77,7 @@ export default function DocumentTable({
         <div className="overflow-x-auto max-h-[560px]">
           <table className="min-w-full text-sm">
             <thead className="sticky top-0 z-10 bg-page dark:bg-slate-950 text-slate-600 dark:text-slate-300">
-              <tr className="border-b border-slate-200 dark:border-slate-800">
+              <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-200 dark:border-slate-800">
                 <th className="px-4 py-3 text-left w-10">
                   <input
                     type="checkbox"
@@ -109,7 +109,7 @@ export default function DocumentTable({
                 return (
                   <tr
                     key={row.id}
-                    className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80"
+                    className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80"
                   >
                     <td className="px-4 py-3">
                       <input
@@ -224,7 +224,7 @@ export default function DocumentTable({
           <select
             value={pageSize}
             onChange={(e) => onPageSize(Number(e.target.value))}
-            className="rounded-lg border border-slate-200 bg-white dark:bg-slate-950 px-2 py-1.5"
+            className="rounded-lg border border-slate-200 bg-surface dark:bg-slate-950 px-2 py-1.5"
           >
             {[5, 10, 20, 50].map((n) => (
               <option key={n} value={n}>
@@ -292,7 +292,7 @@ function RowActions({ row, onAction, compact }) {
       </button>
       {open ? (
         <>
-          <button type="button" className="fixed inset-0 z-20 cursor-default" aria-label="Close menu" onClick={() => setOpen(false)} />
+          <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none fixed inset-0 z-20 cursor-default" aria-label="Close menu" onClick={() => setOpen(false)} />
           <div className="absolute right-0 top-8 z-30 w-48 rounded-xl border border-slate-200 bg-surface shadow-xl py-1">
             {items.map((item) => {
               const Icon = item.icon;

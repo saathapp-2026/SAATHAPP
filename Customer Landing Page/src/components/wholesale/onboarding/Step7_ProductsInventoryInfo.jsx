@@ -165,7 +165,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
               <button
                 type="button"
                 onClick={handleAddTier}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 text-xs font-bold text-white transition shadow"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 text-xs font-bold text-white transition shadow"
               >
                 <Plus size={14} /> Add Tier
               </button>
@@ -216,7 +216,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                 <button
                   type="button"
                   onClick={() => catalogInputRef.current?.click()}
-                  className="rounded-xl bg-white border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
+                  className="rounded-xl bg-surface border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
                 >
                   Choose PDF / Excel File
                 </button>
@@ -225,7 +225,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                   type="file"
                   accept=".pdf,.xlsx,.csv"
                   onChange={handleCatalogUpload}
-                  className="hidden"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden"
                 />
               </div>
             </div>
@@ -251,7 +251,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                 <button
                   type="button"
                   onClick={() => imageInputRef.current?.click()}
-                  className="rounded-xl bg-white border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
+                  className="rounded-xl bg-surface border border-slate-300 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-page transition"
                 >
                   Choose Images
                 </button>
@@ -261,7 +261,7 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
                   multiple
                   accept="image/*"
                   onChange={handleImageUpload}
-                  className="hidden"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden"
                 />
               </div>
             </div>
@@ -271,14 +271,14 @@ export default function Step7_ProductsInventoryInfo({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous
             </button>
             <button
               type="submit"
-              className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-extrabold text-white shadow-lg transition hover:scale-[1.02]"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-extrabold text-white shadow-lg transition hover:scale-[1.02]"
             >
               Save & Next Phase
               <ArrowRight size={16} />

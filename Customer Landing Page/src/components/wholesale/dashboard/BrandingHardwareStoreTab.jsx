@@ -41,7 +41,7 @@ export default function BrandingHardwareStoreTab() {
       {/* Complimentary Welcome Kit Banner */}
       <div className="rounded-3xl bg-gradient-to-r from-[#0A8F3D] via-emerald-800 to-slate-900 p-6 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-200">
+          <div className="inline-flex items-center gap-2 rounded-full bg-surface/20 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-200">
             <Gift size={14} /> Complimentary Welcome Business Kit
           </div>
           <h3 className="text-xl font-black">
@@ -56,7 +56,7 @@ export default function BrandingHardwareStoreTab() {
           <button
             type="button"
             onClick={handleClaimFreeKit}
-            className="rounded-2xl bg-white text-slate-950 hover:bg-page px-6 py-3 text-xs font-black shadow-lg transition shrink-0"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-2xl bg-surface text-slate-950 hover:bg-page px-6 py-3 text-xs font-black shadow-lg transition shrink-0"
           >
             Claim FREE Kit Now
           </button>

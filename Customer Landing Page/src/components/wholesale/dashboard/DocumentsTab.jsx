@@ -3,7 +3,8 @@ import { FileBadge2, CheckCircle2, Upload, FileText, ShieldCheck, Check } from '
 import { useWholesale } from '../../../context/WholesaleContext';
 
 export default function DocumentsTab() {
-  const { formData, addToast } = useWholesale ? useWholesale() : { formData: {}, addToast: console.log };
+  const _wc = useWholesale();
+  const { formData, addToast } = _wc || { formData: {}, addToast: console.log };
 
   // Initial Documents Repository State matching screenshot Page 40 of PDF
   const [docList, setDocList] = useState({

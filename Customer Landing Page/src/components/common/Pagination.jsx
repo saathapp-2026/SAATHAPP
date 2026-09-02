@@ -60,7 +60,7 @@ export default function Pagination({
           type="button"
           onClick={handlePrev}
           aria-label="Previous Page"
-          className={`w-8 h-8 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center transition-colors cursor-pointer ${hoverBorderClass}`}
+          className={`transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-8 h-8 rounded-lg bg-surface dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center transition-colors cursor-pointer ${hoverBorderClass}`}
         >
           ←
         </button>
@@ -90,7 +90,7 @@ export default function Pagination({
             className={`w-8 h-8 rounded-lg font-bold text-xs flex items-center justify-center transition-all cursor-pointer ${
               isCurrent
                 ? `${activeColorClass}`
-                : `bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 ${hoverBorderClass}`
+                : `bg-surface dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 ${hoverBorderClass}`
             }`}
           >
             {p}
@@ -104,7 +104,7 @@ export default function Pagination({
           type="button"
           onClick={handleNext}
           aria-label="Next Page"
-          className={`w-8 h-8 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center transition-colors cursor-pointer ${hoverBorderClass}`}
+          className={`transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-8 h-8 rounded-lg bg-surface dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center transition-colors cursor-pointer ${hoverBorderClass}`}
         >
           →
         </button>

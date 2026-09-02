@@ -1,28 +1,21 @@
 import React from 'react';
 import { ShoppingCart, Trash2, Heart } from 'lucide-react';
+import { EmptyState } from '../common/StateComponents';
+import toast from 'react-hot-toast';
 
-export default function WishlistTab({ wishlist, setWishlist, cart, setCart }) {
+export default function WishlistTab({ wishlist, setWishlist, handleAddToCart }) {
   const handleMoveToCart = (item) => {
-    const updatedCart = [...cart];
-    const idx = updatedCart.findIndex(c => c.name === item.name);
-    if (idx !== -1) {
-      updatedCart[idx].count += 1;
-    } else {
-      updatedCart.push({
-        id: `c-${Date.now()}`,
-        name: item.name,
-        price: item.price,
-        count: 1,
-        image: item.image || '📦'
-      });
-    }
-    localStorage.setItem('saath_cart', JSON.stringify(updatedCart));
-    setCart(updatedCart);
+    handleAddToCart({
+      id: item.id || `w-${Date.now()}`,
+      name: item.name,
+      price: item.price,
+      image: item.image || '📦'
+    }, 1);
 
     const updatedWish = wishlist.filter(w => w.id !== item.id);
     localStorage.setItem('saath_wishlist', JSON.stringify(updatedWish));
     setWishlist(updatedWish);
-    alert(`${item.name} moved to cart!`);
+    toast.success(`${item.name} moved to cart!`);
   };
 
   const handleRemove = (itemId) => {
@@ -39,17 +32,19 @@ export default function WishlistTab({ wishlist, setWishlist, cart, setCart }) {
       </div>
 
       {wishlist.length === 0 ? (
-        <div className="p-8 text-center bg-page dark:bg-slate-950/20 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-2">
-          <Heart size={32} className="mx-auto text-slate-400" />
-          <p className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">Your wishlist is empty</p>
-          <p className="text-[11px] text-slate-500 font-semibold">Save your favorite services or products to quickly access them later.</p>
-        </div>
+        <EmptyState 
+          icon={Heart} 
+          title="Your wishlist is empty" 
+          description="Save products you like to find them here later."
+          actionLabel="Start Shopping"
+          onAction={() => window.location.href = '/'}
+        />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {wishlist.map((item) => (
             <div key={item.id} className="p-4 bg-slate-50/50 dark:bg-slate-950/10 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <span className="text-2xl w-12 h-12 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-center shadow-sm">
+                <span className="text-2xl w-12 h-12 bg-surface dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-center shadow-sm">
                   {item.image || '💡'}
                 </span>
                 <div>

@@ -11,19 +11,20 @@ export default function ConfirmDialog({
   cancelLabel = 'Cancel',
   danger = false,
   loading = false,
+  confirmDisabled = false,
   onConfirm,
   onCancel,
   children,
 }) {
   return (
-    <SellerOverlay open={open} onClose={onCancel} labelledBy="confirm-title" zIndex={SELLER_Z.modal}>
+    <SellerOverlay open={open} onClose={onCancel} preventBackdropClose={danger} labelledBy="confirm-title" zIndex={SELLER_Z.modal}>
       <div className="w-full max-w-md rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl p-5 space-y-4">
         <div className="flex items-start justify-between gap-3">
           <div>
             <h2 id="confirm-title" className="font-bold text-lg">{title}</h2>
             {message && <p className="text-sm text-slate-500 mt-1">{message}</p>}
           </div>
-          <button type="button" onClick={onCancel} className="p-1 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onCancel} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -32,16 +33,16 @@ export default function ConfirmDialog({
           <button
             type="button"
             onClick={onCancel}
-            disabled={loading}
-            className="px-4 py-2 rounded-xl text-sm border border-slate-200 hover:bg-page"
+            disabled={loading || confirmDisabled}
+            className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm border border-slate-200 hover:bg-page"
           >
             {cancelLabel}
           </button>
           <button
             type="button"
             onClick={onConfirm}
-            disabled={loading}
-            className={`px-4 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-50 ${
+            disabled={loading || confirmDisabled}
+            className={`transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-50 ${
               danger ? 'bg-red-500 hover:bg-red-600' : 'bg-emerald-500 hover:bg-emerald-600'
             }`}
           >

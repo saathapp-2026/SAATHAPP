@@ -98,7 +98,7 @@ function Hero() {
               h-[64px] w-full
               rounded-[18px]
               border border-[#E2E8F0]
-              bg-white
+              bg-surface
               px-5
               shadow-[0_8px_30px_rgba(15,23,42,.06)]
               transition-all duration-300
@@ -147,7 +147,7 @@ function Hero() {
                 className="
                   absolute left-0 right-0 top-full z-40 mt-3
                   overflow-hidden rounded-[18px] border border-[#E2E8F0]
-                  bg-white p-3 text-left shadow-xl
+                  bg-surface p-3 text-left shadow-xl
                 "
               >
                 <p className="px-3 py-1.5 text-[12px] font-semibold uppercase tracking-wider text-[#94A3B8]">
@@ -199,7 +199,7 @@ function Hero() {
                   flex items-center gap-2
                   rounded-full
                   border border-[#E2E8F0]
-                  bg-white
+                  bg-surface
                   px-5 py-2.5
                   text-[14px] font-[500] text-[#0F172A]
                   shadow-sm

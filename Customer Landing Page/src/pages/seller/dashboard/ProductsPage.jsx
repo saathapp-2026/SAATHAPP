@@ -1,3 +1,4 @@
+import ConfirmDialog from '../../../components/seller/orders/ConfirmDialog';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import {
@@ -59,6 +60,7 @@ export default function ProductsPage() {
   const [analytics, setAnalytics] = useState(null);
   const [showAnalytics, setShowAnalytics] = useState(false);
   const [products, setProducts] = useState([]);
+  const [confirmState, setConfirmState] = useState(null);
   const [meta, setMeta] = useState({ total: 0, totalPages: 1 });
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -126,16 +128,27 @@ export default function ProductsPage() {
   const handleBulk = async (action) => {
     const ids = [...selected];
     if (!ids.length) return toast.error('Select products first');
+    
     if (action === 'duplicate') {
       for (const id of ids) await duplicateProduct(id);
       toast.success('Duplicated');
-    } else {
-      if (!window.confirm(`Apply "${action}" to ${ids.length} product(s)?`)) return;
-      await bulkUpdateProducts(ids, action);
-      toast.success('Bulk action completed');
+      setSelected(new Set());
+      load();
+      return;
     }
-    setSelected(new Set());
-    load();
+
+    setConfirmState({
+      title: 'Bulk Action',
+      message: `Apply "${action}" to ${ids.length} product(s)?`,
+      danger: action === 'delete',
+      onConfirm: async () => {
+        setConfirmState(null);
+        await bulkUpdateProducts(ids, action);
+        toast.success('Bulk action completed');
+        setSelected(new Set());
+        load();
+      }
+    });
   };
 
   const exportCsv = () => {
@@ -179,8 +192,8 @@ export default function ProductsPage() {
         <Toaster position="top-right" />
         <ProductWizard
           initialDraft={editDraft}
-          onClose={() => { setWizardOpen(false); setEditDraft(null); }}
-          onSaved={() => { load(); }}
+          onClose={() => { setWizardOpen(false); setEditDraft(null) }}
+          onSaved={() => { load() }}
         />
       </>
     );
@@ -214,7 +227,7 @@ export default function ProductsPage() {
           <button
             type="button"
             onClick={openCreate}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm"
           >
             <Plus size={14} /> Add Product SKU
           </button>
@@ -299,7 +312,7 @@ export default function ProductsPage() {
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
               value={search}
-              onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+              onChange={(e) => { setSearch(e.target.value); setPage(1) }}
               placeholder="Search name, SKU, barcode, brand, category…"
               aria-label="Search products"
               className="w-full pl-9 pr-3 py-2 rounded-lg border border-slate-200 bg-page dark:bg-slate-950 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -307,7 +320,7 @@ export default function ProductsPage() {
           </div>
           <select
             value={stock}
-            onChange={(e) => { setStock(e.target.value); setPage(1); }}
+            onChange={(e) => { setStock(e.target.value); setPage(1) }}
             className="px-3 py-2 rounded-lg border border-slate-200 bg-surface text-sm"
           >
             <option value="">All stock</option>
@@ -358,7 +371,7 @@ export default function ProductsPage() {
           <button type="button" onClick={() => handleBulk('hide')} className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 bg-surface inline-flex items-center gap-1"><EyeOff size={11} /> Hide</button>
           <button type="button" onClick={() => handleBulk('archive')} className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 bg-surface inline-flex items-center gap-1"><Archive size={11} /> Archive</button>
           <button type="button" onClick={() => handleBulk('duplicate')} className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 bg-surface inline-flex items-center gap-1"><Copy size={11} /> Duplicate</button>
-          <button type="button" onClick={exportCsv} className="px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 bg-surface inline-flex items-center gap-1"><Download size={11} /> Export</button>
+          <button type="button" onClick={exportCsv} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-2.5 py-1 rounded-lg text-xs font-semibold border border-slate-200 bg-surface inline-flex items-center gap-1"><Download size={11} /> Export</button>
           <button type="button" onClick={() => handleBulk('delete')} className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-red-500 text-white inline-flex items-center gap-1"><Trash2 size={11} /> Delete</button>
         </div>
       )}
@@ -376,7 +389,7 @@ export default function ProductsPage() {
             <Package size={36} className="mx-auto text-slate-300 mb-2" />
             <h3 className="font-semibold">No products yet</h3>
             <p className="text-sm text-slate-500 mb-3">Create your first wholesale SKU to get started.</p>
-            <button type="button" onClick={openCreate} className="px-4 py-2 rounded-lg text-sm font-bold bg-emerald-500 text-white">
+            <button type="button" onClick={openCreate} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-lg text-sm font-bold bg-emerald-500 text-white">
               Add Product SKU
             </button>
           </div>
@@ -411,7 +424,7 @@ export default function ProductsPage() {
                     const cat = PRODUCT_CATEGORIES.find((c) => c.id === p.basic.category);
                     const low = Number(p.inventory.initialStock) <= Number(p.inventory.minStockAlert || 10);
                     return (
-                      <tr key={p.id} className="border-t border-slate-100 dark:border-slate-800 hover:bg-slate-50/80">
+                      <tr key={p.id} className="transition-colors hover:bg-emerald-50/30 border-t border-slate-100 dark:border-slate-800 hover:bg-slate-50/80">
                         <td className="px-3 py-3">
                           <input
                             type="checkbox"
@@ -483,7 +496,16 @@ export default function ProductsPage() {
       <BulkUploadModal
         open={bulkOpen}
         onClose={() => setBulkOpen(false)}
-        onImported={() => { setBulkOpen(false); load(); toast.success('Import finished'); }}
+        onImported={() => { setBulkOpen(false); load(); toast.success('Import finished') }}
+      />
+
+      <ConfirmDialog
+        open={!!confirmState}
+        title={confirmState?.title}
+        message={confirmState?.message}
+        danger={confirmState?.danger}
+        onCancel={() => setConfirmState(null)}
+        onConfirm={confirmState?.onConfirm}
       />
     </div>
   );

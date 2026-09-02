@@ -35,7 +35,7 @@ export default function TermsCheckbox({
           type="checkbox"
           checked={accepted}
           onChange={(e) => onChange(e.target.checked)}
-          className="mt-1 w-4 h-4 rounded border-white/20 bg-white/5 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-0"
+          className="mt-1 w-4 h-4 rounded border-white/20 bg-surface/5 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-0"
         />
         <span className="text-sm text-slate-300 group-hover:text-white transition-colors">
           I have read and agree to the{' '}

@@ -24,6 +24,7 @@ import { getWelcomeKitEligibilityStatus } from '../../config/professional/welcom
 import { getStoredPartnerSession } from '../../services/authService';
 import { getProfessionalPricingConfig } from '../../config/professionalOnboardingConfig';
 import { ProfessionalProfileSection, MembershipSection, DocumentsSection, EquipmentSection, ProfileSettingsSection, HelpSupportModule } from '../../components/professional/ControlSections';
+import toast from 'react-hot-toast';
 
 const EMPTY_STATS = {
   totalEarnings: 0,
@@ -49,7 +50,18 @@ export default function ProfessionalDashboardPage({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [bookings, setBookings] = useState([]);
-  const [bookingFilter, setBookingFilter] = useState('all');  const [notifications, setNotifications] = useState([]);
+  const [bookingFilter, setBookingFilter] = useState('all');  const [notifications, setNotifications] = useState(() => {
+    try {
+      const stored = localStorage.getItem('saath_professional_notifs');
+      if (stored) return JSON.parse(stored);
+    } catch {}
+    return [
+      { id: '1', type: 'new_booking', title: 'New Booking Request', description: 'Plumbing service request for Tomorrow 10 AM.', time: '5 min ago', read: false },
+      { id: '2', type: 'payment', title: 'Payment Settled', description: '₹1,500 settled for Booking #BK-1204.', time: '1 hr ago', read: false },
+      { id: '3', type: 'system', title: 'Document Verified', description: 'Your submitted ID proof has been verified successfully.', time: 'Yesterday', read: true }
+    ];
+  });
+
 
   const onboarding = getStoredProfessionalOnboarding();
   const session = getStoredPartnerSession();
@@ -116,45 +128,51 @@ export default function ProfessionalDashboardPage({
   // Booking handlers
   const handleAcceptJob = (bookingId) => {
     setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'confirmed', paymentStatus: 'secured' } : b));
-    alert('Booking Confirmed! You can schedule the time with the customer if needed.');
-  };
+    toast.success('Booking Confirmed! You can schedule the time with the customer if needed.') };
 
   const handleRejectJob = (bookingId) => {
     setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'cancelled' } : b));
-    alert('Booking Rejected.');
-  };
+    toast.success('Booking Rejected.') };
 
   const handleReschedule = (bookingId) => {
     setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'scheduled' } : b));
-    alert('Booking Scheduled successfully.');
-  };
+    toast.success('Booking Scheduled successfully.') };
 
   const handleNavigateGPS = (bookingId) => {
     setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'arrived' } : b));
-    alert('Navigation initialized. Status set to Arrived.');
-  };
+    toast.success('Navigation initialized. Status set to Arrived.') };
 
   const handleStartService = (bookingId) => {
     setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'in_progress' } : b));
-    alert('Service Started!');
-  };
+    toast.success('Service Started!') };
 
   const handleCompleteService = (bookingId) => {
     setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'completed', paymentStatus: 'released', rating: 5 } : b));
-    alert('Service Completed. Payment Released.');
-  };
+    toast.success('Service Completed. Payment Released.') };
 
   const handleReportIssue = (bookingId) => {
-    alert(`Issue reported to support team for booking ${bookingId}.`);
+    setConfirmState({
+      title: 'Report Issue',
+      message: 'Report an issue with this booking to the support team?',
+      danger: true,
+      confirmLabel: 'Report',
+      onConfirm: () => {
+        toast.success(`Issue reported to support team for booking ${bookingId}.`);
+        setConfirmState(null);
+      }
+    });
   };
 
   // Notification handlers
   const handleMarkRead = (id) => {
-    setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
+    const updated = notifications.map(n => n.id === id ? { ...n, read: true } : n);
+    setNotifications(updated);
+    localStorage.setItem('saath_professional_notifs', JSON.stringify(updated));
   };
 
   const handleClearAllNotifs = () => {
     setNotifications([]);
+    localStorage.setItem('saath_professional_notifs', JSON.stringify([]));
   };
 
   // Support ticket handler
@@ -171,8 +189,7 @@ export default function ProfessionalDashboardPage({
 
     setSupportTickets(prev => [newTicket, ...prev]);
     setTicketSubject('');
-    alert('Support ticket raised successfully!');
-  };
+    toast.success('Support ticket raised successfully!') };
 
   return (
     <div className="min-h-screen bg-page dark:bg-slate-950 text-slate-800 dark:text-slate-200 flex flex-col justify-between overflow-x-hidden transition-colors duration-300">
@@ -389,7 +406,7 @@ export default function ProfessionalDashboardPage({
                       <div className="overflow-x-auto">
                         <table className="w-full text-left text-xs font-semibold text-slate-650 dark:text-slate-450">
                           <thead>
-                            <tr className="border-b border-slate-100 dark:border-slate-800/80 text-[10px] font-black uppercase text-slate-400">
+                            <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800/80 text-[10px] font-black uppercase text-slate-400">
                               <th className="pb-3">Customer</th>
                               <th className="pb-3">Service</th>
                               <th className="pb-3 text-center">Amount</th>
@@ -405,7 +422,7 @@ export default function ProfessionalDashboardPage({
                               </tr>
                             ) : (
                               bookings.map((b, idx) => (
-                                <tr key={idx} className="hover:bg-slate-50/50">
+                                <tr key={idx} className="transition-colors hover:bg-emerald-50/30 hover:bg-slate-50/50">
                                   <td className="py-3 font-bold text-slate-800 dark:text-slate-200">{b.customerName}</td>
                                   <td className="py-3 text-primary">{b.serviceName}</td>
                                   <td className="py-3 text-center font-bold">₹{b.amount}</td>

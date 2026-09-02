@@ -185,7 +185,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
               <button
                 type="button"
                 onClick={handleOpenGateway}
-                className={`w-full flex items-center justify-center gap-2 rounded-2xl py-3.5 text-xs font-black transition shadow-lg ${isPaid
+                className={`transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full flex items-center justify-center gap-2 rounded-2xl py-3.5 text-xs font-black transition shadow-lg ${isPaid
                     ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-500/20'
                     : 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-amber-500/20 hover:scale-[1.02]'
                   }`}
@@ -211,7 +211,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
           <button
             type="button"
             onClick={onPrev}
-            className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
           >
             <ArrowLeft size={16} />
             Previous
@@ -219,7 +219,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
           <button
             type="button"
             onClick={handleProceedNext}
-            className={`inline-flex items-center gap-2 rounded-2xl px-8 py-3.5 text-sm font-extrabold text-white transition ${isPaid
+            className={`transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl px-8 py-3.5 text-sm font-extrabold text-white transition ${isPaid
                 ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-lg hover:scale-105'
                 : 'bg-slate-800 hover:bg-slate-700'
               }`}
@@ -296,7 +296,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
                         <input
                           type="text"
                           defaultValue="08/28"
-                          className="w-full rounded-xl border border-slate-300 bg-page dark:bg-slate-950 px-3.5 py-2.5 font-mono text-xs text-slate-900 dark:text-white"
+                          className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-full rounded-xl border border-slate-300 bg-page dark:bg-slate-950 px-3.5 py-2.5 font-mono text-xs text-slate-900 dark:text-white"
                         />
                       </div>
                       <div>
@@ -304,7 +304,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
                         <input
                           type="password"
                           defaultValue="•••"
-                          className="w-full rounded-xl border border-slate-300 bg-page dark:bg-slate-950 px-3.5 py-2.5 font-mono text-xs text-slate-900 dark:text-white"
+                          className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-full rounded-xl border border-slate-300 bg-page dark:bg-slate-950 px-3.5 py-2.5 font-mono text-xs text-slate-900 dark:text-white"
                         />
                       </div>
                     </div>
@@ -314,7 +314,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
                 {selectedMethod === 'NetBanking' && (
                   <div className="space-y-2">
                     <label className="block font-bold text-slate-700 dark:text-slate-300">Select NetBanking Bank</label>
-                    <select className="w-full rounded-xl border border-slate-300 bg-page dark:bg-slate-950 p-3 font-semibold text-xs text-slate-900 dark:text-white">
+                    <select className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-full rounded-xl border border-slate-300 bg-page dark:bg-slate-950 p-3 font-semibold text-xs text-slate-900 dark:text-white">
                       <option>State Bank of India (SBI)</option>
                       <option>HDFC Bank</option>
                       <option>ICICI Bank</option>
@@ -326,7 +326,7 @@ export default function Step8_DeliveryFeePayment({ onNext, onPrev }) {
                 <button
                   type="submit"
                   disabled={isProcessing}
-                  className="w-full mt-4 flex items-center justify-center gap-2 rounded-2xl bg-amber-500 hover:bg-amber-400 py-3.5 text-xs font-black text-slate-950 shadow-xl transition hover:scale-[1.02] disabled:opacity-50"
+                  className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full mt-4 flex items-center justify-center gap-2 rounded-2xl bg-amber-500 hover:bg-amber-400 py-3.5 text-xs font-black text-slate-950 shadow-xl transition hover:scale-[1.02] disabled:opacity-50"
                 >
                   <Lock size={14} />
                   {isProcessing ? 'Authorizing Payment...' : `Authorize & Pay ₹${feeCalc.fee.toLocaleString('en-IN')}`}

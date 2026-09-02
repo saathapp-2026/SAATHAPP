@@ -61,7 +61,7 @@ function Footer() {
                     href={social.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="
+                    className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none 
                       w-9 h-9 rounded-full bg-slate-800
                       flex items-center justify-center
                       text-slate-300
@@ -92,7 +92,7 @@ function Footer() {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    onClick={(e) => { e.preventDefault(); scrollToSection(item.href); }}
+                    onClick={(e) => { e.preventDefault(); scrollToSection(item.href) }}
                     className="text-slate-400 hover:text-[#16A34A] transition-colors"
                   >
                     {item.label}
@@ -118,7 +118,7 @@ function Footer() {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    onClick={(e) => { e.preventDefault(); scrollToSection(item.href); }}
+                    onClick={(e) => { e.preventDefault(); scrollToSection(item.href) }}
                     className="text-slate-400 hover:text-[#16A34A] transition-colors"
                   >
                     {item.label}
@@ -135,11 +135,11 @@ function Footer() {
             </h3>
 
             <div className="space-y-3 text-[15px] font-normal">
-              <a href="tel:+919128842027" className="flex items-center gap-3 text-slate-400 hover:text-[#16A34A] transition-colors">
+              <a href="tel:+919128842027" className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded flex items-center gap-3 text-slate-400 hover:text-[#16A34A] transition-colors">
                 <Phone size={16} className="text-[#16A34A]" />
                 <span>+91 91288 42027</span>
               </a>
-              <a href="mailto:support@saathapp.in" className="flex items-center gap-3 text-slate-400 hover:text-[#00A651] transition-colors">
+              <a href="mailto:support@saathapp.in" className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded flex items-center gap-3 text-slate-400 hover:text-[#00A651] transition-colors">
                 <Mail size={16} className="text-[#00A651]" />
                 <span>support@saathapp.in</span>
               </a>

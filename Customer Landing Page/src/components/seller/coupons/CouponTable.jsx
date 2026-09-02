@@ -51,7 +51,7 @@ function ActionsMenu({ item, onAction, loadingId }) {
       </button>
       {open ? (
         <>
-          <button type="button" className="fixed inset-0 z-10" aria-label="Close" onClick={() => setOpen(false)} />
+          <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none fixed inset-0 z-10" aria-label="Close" onClick={() => setOpen(false)} />
           <div role="menu" className="absolute right-0 top-8 z-20 w-44 rounded-xl border border-slate-200 bg-surface shadow-xl py-1 max-h-72 overflow-y-auto">
             {items.map((a) => {
               const Icon = a.icon;
@@ -169,9 +169,9 @@ export default function CouponTable({
         <div className="overflow-x-auto max-h-[520px]">
           <table className="w-full text-left text-sm">
             <thead className="sticky top-0 z-[1] bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur border-b border-slate-200 dark:border-slate-800">
-              <tr className="text-[11px] uppercase tracking-wide text-slate-500">
+              <tr className="transition-colors hover:bg-emerald-50/30 text-[11px] uppercase tracking-wide text-slate-500">
                 <th className="px-3 py-3 w-10">
-                  <input type="checkbox" checked={allSelected} onChange={onToggleAll} aria-label="Select all" className="rounded border-slate-300" />
+                  <input type="checkbox" checked={allSelected} onChange={onToggleAll} aria-label="Select all" className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none rounded border-slate-300" />
                 </th>
                 <th className="px-3 py-3"><SortBtn id="code">Code</SortBtn></th>
                 <th className="px-3 py-3"><SortBtn id="name">Name</SortBtn></th>
@@ -186,7 +186,7 @@ export default function CouponTable({
             </thead>
             <tbody>
               {items.map((item) => (
-                <tr key={item.id} className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80">
+                <tr key={item.id} className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80">
                   <td className="px-3 py-3">
                     <input
                       type="checkbox"

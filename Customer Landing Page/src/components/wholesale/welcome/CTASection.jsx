@@ -52,14 +52,14 @@ export default function CTASection({ onStartRegistration }) {
                 <button
                   type="button"
                   onClick={handleStartRegistration}
-                  className="group inline-flex items-center justify-center gap-2 rounded-[16px] bg-gradient-to-r from-[#0A8F3D] to-[#087a34] px-8 py-3.5 text-sm font-extrabold text-white shadow-[0_0_20px_rgba(10,143,61,0.35)] transition hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A8F3D] focus-visible:ring-offset-2"
+                  className="transition-all duration-200 active:scale-[0.98] group inline-flex items-center justify-center gap-2 rounded-[16px] bg-gradient-to-r from-[#0A8F3D] to-[#087a34] px-8 py-3.5 text-sm font-extrabold text-white shadow-[0_0_20px_rgba(10,143,61,0.35)] transition hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A8F3D] focus-visible:ring-offset-2"
                 >
                   Start Registration
                   <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
                 </button>
                 <a
                   href="mailto:wholesale@saathapp.in"
-                  className="inline-flex items-center justify-center gap-2 rounded-[16px] border border-slate-200 bg-white px-8 py-3.5 text-sm font-extrabold text-slate-700 dark:text-slate-200 transition hover:bg-page focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A8F3D]"
+                  className="transition-colors hover:text-emerald-600 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center justify-center gap-2 rounded-[16px] border border-slate-200 bg-surface px-8 py-3.5 text-sm font-extrabold text-slate-700 dark:text-slate-200 transition hover:bg-page focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A8F3D]"
                 >
                   <Mail size={16} />
                   Contact Sales

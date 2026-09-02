@@ -15,6 +15,7 @@ import NotificationPanel from '../../components/worker/NotificationPanel';
 import ProfileCard from '../../components/worker/ProfileCard';
 import CalendarWidget from '../../components/worker/CalendarWidget';
 import { workerJobs as initialWorkerJobs, workerStats, workerEarnings, workerAttendance as initialAttendance, workerDocuments, workerNotifications as initialWorkerNotifications, workerSupportFaqs, workerTrainingVideos } from '../../data/mockData';
+import toast from 'react-hot-toast';
 
 export default function WorkerDashboardPage({
   darkMode,
@@ -60,13 +61,11 @@ export default function WorkerDashboardPage({
       read: false
     };
     setNotifications(prev => [newNotif, ...prev]);
-    alert(`Job accepted! Settle checkups inside today's timeline.`);
-  };
+    toast.success(`Job accepted! Settle checkups inside today's timeline.`) };
 
   const handleRejectJob = (jobId) => {
     setJobs(prev => prev.map(j => j.id === jobId ? { ...j, status: 'cancelled' } : j));
-    alert(`Job declined successfully.`);
-  };
+    toast.success(`Job declined successfully.`) };
 
   const handleSelectLiveJob = (jobObj) => {
     setActiveLiveJob(jobObj);
@@ -90,14 +89,12 @@ export default function WorkerDashboardPage({
       read: false
     };
     setNotifications(prev => [newNotif, ...prev]);
-    alert(`Job completed! Incentive of ₹${matchedJob.incentive} credited to wallet.`);
-  };
+    toast.success(`Job completed! Incentive of ₹${matchedJob.incentive} credited to wallet.`) };
 
   // Shift Punch handlers
   const handleClockIn = () => {
     setAttendance(prev => ({ ...prev, isClockedIn: true }));
-    alert('Clocked In successfully! Active shift timer started.');
-  };
+    toast.success('Clocked In successfully! Active shift timer started.') };
 
   const handleClockOut = () => {
     setAttendance(prev => ({ 
@@ -105,16 +102,18 @@ export default function WorkerDashboardPage({
       isClockedIn: false,
       totalHours: prev.totalHours + 8 
     }));
-    alert('Clocked Out successfully! Shift log saved.');
-  };
+    toast.success('Clocked Out successfully! Shift log saved.') };
 
   // Notification handlers
   const handleMarkRead = (id) => {
-    setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
+    const updated = notifications.map(n => n.id === id ? { ...n, read: true } : n);
+    setNotifications(updated);
+    localStorage.setItem('saath_worker_notifs', JSON.stringify(updated));
   };
 
   const handleClearAllNotifs = () => {
     setNotifications([]);
+    localStorage.setItem('saath_worker_notifs', JSON.stringify([]));
   };
 
   // Ticket handler
@@ -131,8 +130,7 @@ export default function WorkerDashboardPage({
 
     setSupportTickets(prev => [newTicket, ...prev]);
     setTicketSubject('');
-    alert('Support ticket raised.');
-  };
+    toast.success('Support ticket raised.') };
 
   const filteredJobs = searchQuery.trim()
     ? jobs.filter((j) =>
@@ -394,7 +392,7 @@ export default function WorkerDashboardPage({
                     <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Completed Jobs History</h3>
                     <table className="w-full text-left text-xs min-w-[640px]">
                       <thead>
-                        <tr className="border-b border-slate-100 dark:border-slate-800 text-[10px] font-black uppercase text-slate-400">
+                        <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800 text-[10px] font-black uppercase text-slate-400">
                           <th className="pb-3 pr-4">Customer</th>
                           <th className="pb-3 pr-4">Service</th>
                           <th className="pb-3 pr-4">Date</th>
@@ -405,7 +403,7 @@ export default function WorkerDashboardPage({
                       </thead>
                       <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
                         {filteredJobs.filter(j => j.status === 'completed').map((job) => (
-                          <tr key={job.id} className="hover:bg-slate-50/50">
+                          <tr key={job.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-slate-50/50">
                             <td className="py-3 font-bold text-slate-800 dark:text-slate-200">{job.customerName}</td>
                             <td className="py-3 text-slate-600 dark:text-slate-400">{job.serviceName}</td>
                             <td className="py-3 text-slate-500">{job.date}</td>
@@ -432,7 +430,7 @@ export default function WorkerDashboardPage({
                         <p className="text-[10px] text-slate-450 mt-0.5">Overview of settled salary logs, bonus payouts, and incentives</p>
                       </div>
                       <button
-                        onClick={() => alert('Salary statement downloaded.')}
+                        onClick={() => toast.success('Salary statement downloaded.')}
                         className="px-3.5 py-1.5 bg-primary text-white text-xs font-black uppercase rounded-xl cursor-pointer"
                       >
                         Download Statement
@@ -538,7 +536,7 @@ export default function WorkerDashboardPage({
                         <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Raise Ticket</h3>
                         <form onSubmit={handleRaiseTicket} className="mt-4 space-y-3">
                           <input type="text" required value={ticketSubject} onChange={(e) => setTicketSubject(e.target.value)} placeholder="Subject" className="input-field w-full dark:border-slate-800 dark:text-white" />
-                          <button type="submit" className="btn-primary w-full cursor-pointer text-xs">Submit Support Ticket</button>
+                          <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none btn-primary w-full cursor-pointer text-xs">Submit Support Ticket</button>
                         </form>
                       </div>
                       <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
@@ -556,7 +554,7 @@ export default function WorkerDashboardPage({
                         <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Training Videos</h3>
                         <div className="space-y-2">
                           {workerTrainingVideos.map((video, i) => (
-                            <button key={i} type="button" onClick={() => alert(`Playing: ${video.title}`)} className="w-full flex items-center justify-between p-3 bg-page dark:bg-slate-950 rounded-xl border border-slate-200/40 hover:border-primary/30 cursor-pointer">
+                            <button key={i} type="button" onClick={() => toast.success(`Playing: ${video.title}`)} className="w-full flex items-center justify-between p-3 bg-page dark:bg-slate-950 rounded-xl border border-slate-200/40 hover:border-primary/30 cursor-pointer">
                               <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{video.title}</span>
                               <span className="text-[10px] text-slate-400">{video.duration}</span>
                             </button>
@@ -568,12 +566,12 @@ export default function WorkerDashboardPage({
                       <div className="bg-gradient-to-tr from-brand-600 to-emerald-700 text-white rounded-card p-6 shadow-soft">
                         <span className="text-[10px] font-black uppercase text-white/80">Call Support</span>
                         <h4 className="text-lg font-black mt-2">1800 123 456</h4>
-                        <a href="tel:1800123456" className="mt-4 block w-full py-2 bg-white text-slate-900 text-center font-extrabold text-[10px] uppercase rounded-btn">Call Now</a>
+                        <a href="tel:1800123456" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-4 block w-full py-2 bg-white text-slate-900 text-center font-extrabold text-[10px] uppercase rounded-btn">Call Now</a>
                       </div>
                       <div className="bg-gradient-to-tr from-blue-600 to-indigo-700 text-white rounded-card p-6 shadow-soft">
                         <span className="text-[10px] font-black uppercase text-white/80">Manager Hotline</span>
                         <h4 className="text-lg font-black mt-2">Rahul Kumar</h4>
-                        <a href="tel:+919876543299" className="mt-4 block w-full py-2 bg-white text-slate-900 text-center font-extrabold text-[10px] uppercase rounded-btn">Call Supervisor</a>
+                        <a href="tel:+919876543299" className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-4 block w-full py-2 bg-white text-slate-900 text-center font-extrabold text-[10px] uppercase rounded-btn">Call Supervisor</a>
                       </div>
                     </div>
                   </div>
@@ -606,7 +604,7 @@ export default function WorkerDashboardPage({
                         <button
                           type="button"
                           onClick={item.onToggle}
-                          className={`w-11 h-6 rounded-full p-0.5 transition-colors ${item.toggle ? 'bg-primary' : 'bg-slate-300'}`}
+                          className={`transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-11 h-6 rounded-full p-0.5 transition-colors ${item.toggle ? 'bg-primary' : 'bg-slate-300'}`}
                         >
                           <span className={`block w-5 h-5 bg-white rounded-full shadow transition-transform ${item.toggle ? 'translate-x-5' : 'translate-x-0'}`} />
                         </button>
@@ -614,13 +612,13 @@ export default function WorkerDashboardPage({
                     ))}
 
                     <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
-                      <button type="button" onClick={() => alert('Privacy settings saved.')} className="w-full py-2.5 text-left px-4 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-700 dark:text-slate-300 hover:border-primary/30">
+                      <button type="button" onClick={() => toast.success('Privacy settings saved.')} className="w-full py-2.5 text-left px-4 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-700 dark:text-slate-300 hover:border-primary/30">
                         Privacy Settings
                       </button>
-                      <button type="button" onClick={() => alert('Security settings opened.')} className="w-full py-2.5 text-left px-4 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-700 dark:text-slate-300 hover:border-primary/30">
+                      <button type="button" onClick={() => toast.success('Security settings opened.')} className="w-full py-2.5 text-left px-4 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-700 dark:text-slate-300 hover:border-primary/30">
                         Security
                       </button>
-                      <button type="button" onClick={onLogout} className="w-full py-2.5 px-4 rounded-xl bg-rose-50 dark:bg-rose-950/30 text-rose-600 text-sm font-black uppercase">
+                      <button type="button" onClick={onLogout} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-2.5 px-4 rounded-xl bg-rose-50 dark:bg-rose-950/30 text-rose-600 text-sm font-black uppercase">
                         Logout
                       </button>
                     </div>
@@ -632,7 +630,7 @@ export default function WorkerDashboardPage({
 
             {/* Job Details Modal */}
             {selectedJob && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm" onClick={() => setSelectedJob(null)}>
+              <div className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md cursor-pointer active:scale-[0.99] fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm" onClick={() => setSelectedJob(null)}>
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -654,8 +652,8 @@ export default function WorkerDashboardPage({
                     )}
                   </div>
                   <div className="flex gap-2 pt-2">
-                    <a href={`tel:${selectedJob.customerPhone}`} className="flex-1 py-2.5 bg-primary text-white text-center rounded-xl text-xs font-black uppercase">Call Customer</a>
-                    <button type="button" onClick={() => alert('GPS navigation started.')} className="flex-1 py-2.5 border border-slate-200 rounded-xl text-xs font-black uppercase">Navigate</button>
+                    <a href={`tel:${selectedJob.customerPhone}`} className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-2.5 bg-primary text-white text-center rounded-xl text-xs font-black uppercase">Call Customer</a>
+                    <button type="button" onClick={() => toast.success('GPS navigation started.')} className="flex-1 py-2.5 border border-slate-200 rounded-xl text-xs font-black uppercase">Navigate</button>
                   </div>
                 </motion.div>
               </div>

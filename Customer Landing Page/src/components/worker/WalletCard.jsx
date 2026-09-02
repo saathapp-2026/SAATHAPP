@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Wallet, ShieldCheck, Download, ArrowUpRight } from 'lucide-react';
+import toast from 'react-hot-toast';
 export default function WalletCard() {
   const [balance, setBalance] = useState(0);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
@@ -40,7 +41,7 @@ export default function WalletCard() {
     <div className="space-y-6 text-left">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         <div className="bg-gradient-to-br from-primary via-brand-600 to-accent text-white rounded-card p-6 shadow-premium relative overflow-hidden min-h-[180px] flex flex-col justify-between">
-          <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+          <div className="absolute -top-8 -right-8 w-32 h-32 bg-surface/10 rounded-full blur-2xl" />
           <div className="flex items-center justify-between relative z-10">
             <span className="text-[10px] font-black uppercase text-white/80">Wallet Balance</span>
             <Wallet size={20} className="text-white/70" />
@@ -54,13 +55,13 @@ export default function WalletCard() {
           <button
             type="button"
             onClick={() => setShowWithdrawModal(true)}
-            className="relative z-10 w-full py-2.5 bg-white text-primary font-extrabold text-xs uppercase rounded-xl hover:bg-page transition-colors"
+            className="relative z-10 w-full py-2.5 bg-surface text-primary font-extrabold text-xs uppercase rounded-xl hover:bg-page transition-colors"
           >
             Withdraw
           </button>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex flex-col justify-between min-h-[180px]">
+        <div className="bg-surface/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex flex-col justify-between min-h-[180px]">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-black uppercase text-slate-400">Salary Status</span>
             <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 text-[9px] font-black uppercase border border-emerald-200/50">
@@ -73,7 +74,7 @@ export default function WalletCard() {
           </div>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex flex-col justify-between min-h-[180px]">
+        <div className="bg-surface/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 rounded-card p-6 shadow-soft flex flex-col justify-between min-h-[180px]">
           <span className="text-[10px] font-black uppercase text-slate-400">Pending Salary</span>
           <div>
             <h3 className="text-2xl font-black text-slate-800 dark:text-white">₹0</h3>
@@ -82,12 +83,12 @@ export default function WalletCard() {
         </div>
       </div>
 
-      <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
+      <div className="bg-surface/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
         <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
           <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Withdraw History</h3>
           <button
             type="button"
-            onClick={() => alert('Statement downloaded.')}
+            onClick={() => toast.success('Statement downloaded.') }
             className="flex items-center gap-1.5 text-xs font-black text-primary uppercase"
           >
             <Download size={13} /> Download
@@ -96,7 +97,7 @@ export default function WalletCard() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-100 dark:border-slate-800 text-[10px] font-black uppercase text-slate-400">
+              <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800 text-[10px] font-black uppercase text-slate-400">
                 <th className="pb-3">ID</th>
                 <th className="pb-3">Date</th>
                 <th className="pb-3">Description</th>
@@ -113,7 +114,7 @@ export default function WalletCard() {
                 </tr>
               ) : (
                 ledger.map((row) => (
-                  <tr key={row.id} className="hover:bg-slate-50/50">
+                  <tr key={row.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-slate-50/50">
                     <td className="py-3 font-bold text-slate-700 dark:text-slate-300">{row.id}</td>
                     <td className="py-3 text-slate-500">{row.date}</td>
                     <td className="py-3">{row.desc}</td>
@@ -162,7 +163,7 @@ export default function WalletCard() {
                   <button type="button" onClick={() => setShowWithdrawModal(false)} className="flex-1 py-2.5 border border-slate-200 rounded-xl text-sm font-bold">
                     Cancel
                   </button>
-                  <button type="submit" className="flex-1 py-2.5 bg-primary text-white rounded-xl text-sm font-bold flex items-center justify-center gap-1">
+                  <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-2.5 bg-primary text-white rounded-xl text-sm font-bold flex items-center justify-center gap-1">
                     <ArrowUpRight size={14} /> Withdraw
                   </button>
                 </div>

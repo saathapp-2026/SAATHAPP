@@ -18,7 +18,7 @@ export default function CreditDebitNoteModal({ open, onClose, invoice, onSaved }
             <h2 id="cdn-title" className="font-bold text-lg">Credit / Debit Note</h2>
             <p className="text-xs text-slate-500 mt-0.5">{invoice?.number}</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -45,7 +45,7 @@ export default function CreditDebitNoteModal({ open, onClose, invoice, onSaved }
           <textarea value={reason} onChange={(e) => setReason(e.target.value)} rows={3} className="mt-1 w-full rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm" />
         </label>
         <div className="flex justify-end gap-2">
-          <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-sm border border-slate-200">Cancel</button>
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 rounded-xl text-sm border border-slate-200">Cancel</button>
           <button
             type="button"
             disabled={loading}

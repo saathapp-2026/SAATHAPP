@@ -105,9 +105,9 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
   const IconComponent = current.icon;
 
   return (
-    <section className="relative w-full overflow-hidden bg-slate-950 min-h-[500px] md:min-h-[550px] lg:min-h-[600px] flex items-center">
-      
-      {/* Background shape particles */}
+    <section className="relative saath-container py-4 sm:py-6 lg:py-8">
+      {/* Main Container Card */}
+      <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-950 min-h-[500px] sm:min-h-[400px] lg:min-h-[550px] flex items-center shadow-2xl">
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-10 opacity-30">
         <div className="absolute w-96 h-96 rounded-full bg-gradient-to-tr from-primary/30 to-transparent blur-3xl -top-20 -left-20 animate-blob-1" />
         <div className="absolute w-96 h-96 rounded-full bg-gradient-to-br from-accent/30 to-transparent blur-3xl -bottom-20 -right-20 animate-blob-2" />
@@ -147,9 +147,9 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
             animate="center"
             exit="exit"
             transition={{ x: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.3 } }}
-            className={`w-full h-full bg-gradient-to-r ${current.color} text-white flex items-center py-16 md:py-20 lg:py-24`}
+            className={`w-full h-full bg-gradient-to-r ${current.color} text-white flex items-center py-10 sm:py-12 md:py-14 lg:py-20`}
           >
-            <div className="w-full px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="w-full px-4 sm:px-8 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-6 lg:gap-12 items-center">
               
               {/* Left Side: Slide Text Information */}
               <div className="lg:col-span-7 text-left space-y-6 z-20">
@@ -157,7 +157,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full bg-white/15 backdrop-blur-md border border-white/15 text-xs font-bold text-secondary tracking-wide shadow-sm"
+                  className="inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full bg-surface/15 backdrop-blur-md border border-white/15 text-xs font-bold text-secondary tracking-wide shadow-sm"
                 >
                   <Sparkles size={12} className="text-secondary" />
                   <span>{current.badge}</span>
@@ -226,7 +226,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                     }}
                     whileHover={{ scale: 1.03, background: 'rgba(255,255,255,0.2)' }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-7 py-3.5 rounded-btn bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-sm flex items-center gap-2 backdrop-blur-sm transition-all"
+                    className="px-7 py-3.5 rounded-btn bg-surface/10 hover:bg-surface/15 text-white border border-white/20 font-bold text-sm flex items-center gap-2 backdrop-blur-sm transition-all"
                   >
                     <span>{current.secondaryCta}</span>
                     <ArrowRight size={14} />
@@ -240,7 +240,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                   initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
-                  className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-card overflow-hidden border-4 border-white/10 shadow-2xl bg-slate-900"
+                  className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-card overflow-hidden border-4 border-white/10 shadow-2xl bg-slate-900 mx-auto lg:mx-0"
                 >
                   {/* Image with gradient mask overlay */}
                   {current.image && (
@@ -257,7 +257,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -bottom-4 -left-4 sm:-left-8 p-3.5 rounded-card shadow-premium border border-white/20 bg-white/90 backdrop-blur-md text-slate-800 dark:text-slate-100 flex items-center gap-3"
+                  className="absolute -bottom-4 -left-4 sm:-left-8 p-3.5 rounded-card shadow-premium border border-white/20 bg-surface/90 backdrop-blur-md text-slate-800 dark:text-slate-100 flex items-center gap-3"
                 >
                   <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-primary dark:text-emerald-400 font-bold text-sm">
                     ✓
@@ -283,7 +283,7 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
                 setCurrentSlide(index);
               }}
               className={`h-2 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'w-8 bg-secondary' : 'w-2 bg-white/40 hover:bg-white/60'
+                index === currentSlide ? 'w-8 bg-secondary' : 'w-2 bg-surface/40 hover:bg-surface/60'
               }`}
               title={`Go to slide ${index + 1}`}
             />
@@ -293,20 +293,21 @@ export default function HeroSection({ onShopNow, onBookService, onBecomeSeller }
         {/* Arrow Navigation */}
         <button
           onClick={handlePrev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/20 hover:bg-black/45 text-white border border-white/10 hidden md:flex items-center justify-center backdrop-blur-sm z-30 transition-all"
+          className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/20 hover:bg-black/45 text-white border border-white/10 hidden md:flex items-center justify-center backdrop-blur-sm z-30 transition-all"
           title="Previous slide"
         >
           <ChevronLeft size={20} />
         </button>
         <button
           onClick={handleNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/20 hover:bg-black/45 text-white border border-white/10 hidden md:flex items-center justify-center backdrop-blur-sm z-30 transition-all"
+          className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/20 hover:bg-black/45 text-white border border-white/10 hidden md:flex items-center justify-center backdrop-blur-sm z-30 transition-all"
           title="Next slide"
         >
           <ChevronRight size={20} />
         </button>
       </div>
 
+      </div>
     </section>
   );
 }

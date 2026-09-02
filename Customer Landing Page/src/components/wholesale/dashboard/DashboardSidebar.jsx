@@ -22,7 +22,7 @@ import {
   User
 } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
-import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
+import saathAppLogo from '../../../assets/saathapp-logo.png';
 
 export const SIDEBAR_ITEMS = [
   { id: 'overview', label: 'Dashboard', icon: LayoutDashboard, badge: null },
@@ -40,14 +40,14 @@ export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboa
   const { formData, addToast } = useWholesale();
 
   return (
-    <aside className="w-64 shrink-0 bg-slate-950 text-slate-300 border-r border-slate-800 flex flex-col h-screen sticky top-0 z-30 font-sans">
+    <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded w-64 shrink-0 bg-slate-950 text-slate-300 border-r border-slate-800 flex flex-col h-screen sticky top-0 z-30 font-sans">
       {/* Header Profile Brand with Official SaathApp Logo */}
       <div
         onClick={() => onSelectTab('profile')}
         className="p-4 border-b border-slate-800 flex items-center gap-3 cursor-pointer hover:bg-slate-900/60 transition group"
         title="View Wholesale Enterprise Profile"
       >
-        <div className="h-10 w-10 rounded-2xl bg-white flex items-center justify-center p-1 shadow-lg overflow-hidden shrink-0 border border-emerald-500/30 group-hover:scale-105 transition">
+        <div className="h-10 w-10 rounded-2xl bg-surface flex items-center justify-center p-1 shadow-lg overflow-hidden shrink-0 border border-emerald-500/30 group-hover:scale-105 transition">
           <img src={saathAppLogo} alt="SaathApp Always With You" className="w-full h-full object-contain" />
         </div>
         <div className="overflow-hidden">
@@ -100,7 +100,7 @@ export default function DashboardSidebar({ activeTab, onSelectTab, onBackToOnboa
         <button
           type="button"
           onClick={onBackToOnboarding}
-          className="w-full flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/60 p-2.5 text-xs font-bold text-slate-300 hover:bg-slate-800 transition"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/60 p-2.5 text-xs font-bold text-slate-300 hover:bg-slate-800 transition"
         >
           <span>Onboarding Progress</span>
           <ChevronRight size={14} className="text-emerald-400" />

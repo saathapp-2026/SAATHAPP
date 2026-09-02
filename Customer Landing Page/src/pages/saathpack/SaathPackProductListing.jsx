@@ -95,7 +95,7 @@ export default function SaathPackProductListing({
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fafafa] font-sans pb-20">
+    <div className="min-h-screen flex flex-col bg-page font-sans pb-20">
       <Header
         cartCount={cartCount}
         location={location}
@@ -180,7 +180,7 @@ export default function SaathPackProductListing({
               <h2 className="font-black text-slate-800 text-sm tracking-wide">FILTERS</h2>
               <button 
                 onClick={clearAllFilters} 
-                className="text-primary text-xs font-bold hover:underline"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-primary text-xs font-bold hover:underline"
               >
                 Clear All
               </button>
@@ -224,7 +224,7 @@ export default function SaathPackProductListing({
                   <label key={size} className="flex items-center gap-3 cursor-pointer group">
                     <input 
                       type="checkbox" 
-                      className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" 
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" 
                       checked={selectedSizes.includes(size)}
                       onChange={() => toggleFilter(setSelectedSizes, size)}
                     />
@@ -245,7 +245,7 @@ export default function SaathPackProductListing({
                   <label key={mat} className="flex items-center gap-3 cursor-pointer group">
                     <input 
                       type="checkbox" 
-                      className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" 
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" 
                       checked={selectedMaterials.includes(mat)}
                       onChange={() => toggleFilter(setSelectedMaterials, mat)}
                     />
@@ -266,7 +266,7 @@ export default function SaathPackProductListing({
                   <label key={qty} className="flex items-center gap-3 cursor-pointer group">
                     <input 
                       type="checkbox" 
-                      className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" 
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" 
                       checked={selectedPackQty.includes(qty)}
                       onChange={() => toggleFilter(setSelectedPackQty, qty)}
                     />
@@ -316,7 +316,7 @@ export default function SaathPackProductListing({
               <div className="flex items-center gap-2">
                 <span className="text-sm text-slate-500">Sort by:</span>
                 <select 
-                  className="border-none bg-transparent text-sm font-bold text-slate-800 focus:ring-0 cursor-pointer pr-8 py-1 appearance-none"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none border-none bg-transparent text-sm font-bold text-slate-800 focus:ring-0 cursor-pointer pr-8 py-1 appearance-none"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                 >
@@ -328,8 +328,8 @@ export default function SaathPackProductListing({
               </div>
 
               <div className="flex items-center gap-1 border border-slate-200 rounded-lg p-1 bg-white">
-                <button className="p-1.5 bg-slate-100 rounded text-slate-800"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></button>
-                <button className="p-1.5 text-slate-400 hover:text-slate-800"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></button>
+                <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 bg-slate-100 rounded text-slate-800"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></button>
+                <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 text-slate-400 hover:text-slate-800"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></button>
               </div>
 
               {/* Top Pagination */}
@@ -349,7 +349,7 @@ export default function SaathPackProductListing({
             {filteredProducts.map((product, idx) => (
               <div key={product.id} className="bg-white rounded-2xl border border-slate-100 hover:border-green-200 hover:shadow-lg hover:shadow-green-900/5 transition-all group flex flex-col overflow-hidden">
                 <div 
-                  className="relative aspect-[4/3] bg-white cursor-pointer p-6 flex items-center justify-center border-b border-slate-50"
+                  className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] relative aspect-[4/3] bg-white cursor-pointer p-6 flex items-center justify-center border-b border-slate-50"
                   onClick={() => navigate(`/products/saathpack/product/${product.id}`)}
                 >
                   {product.image ? (

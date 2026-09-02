@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import SplashScreen from './pages/SplashScreen';
 import HomePage from './pages/Home';
 import LoginPage from './pages/Login';
-import SignupPage from './pages/Signup';
 import ProfilePage from './pages/Profile';
 import CartPage from './pages/Cart';
 import CheckoutPage from './pages/Checkout';
@@ -152,6 +151,18 @@ function AppContent() {
     }
     setAuthReady(true);
   }, [routerLocation.pathname]);
+
+  useEffect(() => {
+    const handleSessionExpired = () => {
+      clearAuthSession();
+      setUser(null);
+      setIsAuthenticated(false);
+      setErrorMessage('Your session has expired. Please log in again.');
+      navigate('/login');
+    };
+    window.addEventListener('session-expired', handleSessionExpired);
+    return () => window.removeEventListener('session-expired', handleSessionExpired);
+  }, [navigate]);
 
   useEffect(() => {
     if (!authReady) return;
@@ -331,38 +342,6 @@ function AppContent() {
   };
 
 
-  const handleSignup = async (form) => {
-    const result = await registerUser(users, {
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      password: form.password,
-    });
-
-    if (!result.success) {
-      setErrorMessage(result.message);
-      return;
-    }
-
-    setUsers(result.users);
-    setUser(result.user);
-    setIsAuthenticated(true);
-
-    // Merge cart
-    const mergedCart = mergeGuestCart(result.user.id || result.user.email, cartItems);
-    setCartState(mergedCart);
-
-    setAuthView('home');
-    setActivePage('home');
-    setErrorMessage('');
-
-    if (routerLocation.pathname === '/customer/dashboard' || routerLocation.pathname === '/profile' || routerLocation.state?.from === '/customer/dashboard') {
-      navigate('/customer/dashboard');
-    } else {
-      navigate('/');
-    }
-  };
-
 
   const handleLogout = () => {
     clearAuthSession();
@@ -398,8 +377,8 @@ function AppContent() {
   if (activePage === 'cart' || routerLocation.pathname === '/cart') {
     return (
       <CartPage
-        onCheckout={() => { setActivePage('checkout'); navigate('/checkout'); }}
-        onBack={() => { setActivePage('home'); navigate('/'); }}
+        onCheckout={() => { setActivePage('checkout'); navigate('/checkout') }}
+        onBack={() => { setActivePage('home'); navigate('/') }}
       />
     );
   }
@@ -418,7 +397,7 @@ function AppContent() {
     return (
 
       <CheckoutPage
-        onBack={() => { setActivePage('cart'); navigate('/cart'); }}
+        onBack={() => { setActivePage('cart'); navigate('/cart') }}
         onConfirmOrder={(data) => {
           handleCheckoutProcess(data.orderBreakdown, data.address, data.deliveryMethod, data.paymentMethod, cartItems);
           clearCart();
@@ -433,8 +412,8 @@ function AppContent() {
     return (
       <OrderConfirmationPage
         order={latestOrder}
-        onBack={() => { setActivePage('home'); navigate('/'); }}
-        onViewOrders={() => { setActivePage('orders'); navigate('/orders'); }}
+        onBack={() => { setActivePage('home'); navigate('/') }}
+        onViewOrders={() => { setActivePage('orders'); navigate('/orders') }}
       />
     );
   }
@@ -450,7 +429,7 @@ function AppContent() {
       }
       return null;
     }
-    return <OrdersPage orders={orders} onBack={() => { setActivePage('home'); navigate('/'); }} />;
+    return <OrdersPage orders={orders} onBack={() => { setActivePage('home'); navigate('/') }} />;
   }
 
   const trustRoutes = ['/verified-sellers', '/secure-online-payments', '/privacy-protected', '/customer-support'];
@@ -491,7 +470,7 @@ function AppContent() {
     isSellerRoute;
 
   if (routerLocation.pathname === '/seller-policy') {
-    return <SellerPolicyPage />;
+    return <SellerPolicyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/advertise') {
@@ -523,8 +502,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -567,8 +546,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/saathapp/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -590,8 +569,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/saathapp/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -612,8 +591,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/saathapp/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -639,8 +618,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -662,8 +641,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -691,8 +670,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/services');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -765,8 +744,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/services');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -806,8 +785,8 @@ function AppContent() {
           navigate('/products/search'); // updated search path
         }}
         searchQuery={searchQuery}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -836,8 +815,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -859,8 +838,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -880,8 +859,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -901,8 +880,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -937,8 +916,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -960,8 +939,8 @@ function AppContent() {
           setSearchQuery(query);
           navigate('/products/search');
         }}
-        onLogin={() => { setAuthView('login'); navigate('/login'); }}
-        onSignup={() => { setAuthView('signup'); navigate('/signup'); }}
+        onLogin={() => { setAuthView('login'); navigate('/login') }}
+        onSignup={() => { setAuthView('signup'); navigate('/signup') }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
         user={user}
@@ -977,23 +956,23 @@ function AppContent() {
   }
 
   if (routerLocation.pathname === '/about') {
-    return <AboutPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <AboutPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/service-warranty') {
-    return <ServiceWarrantyPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <ServiceWarrantyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/our-story') {
-    return <OurStoryPage onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <OurStoryPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => navigate('/', { replace: true })} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/faq') {
-    return <FaqPage onBack={() => navigate('/')} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <FaqPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => navigate('/')} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/delivery-partner-agreement') {
-    return <DeliveryPartnerAgreementPage isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <DeliveryPartnerAgreementPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (routerLocation.pathname === '/franchise') {
@@ -1323,19 +1302,19 @@ function AppContent() {
   }
 
   if (routerLocation.pathname === '/privacy-policy') {
-    return <PrivacyPolicyPublicPage />;
+    return <PrivacyPolicyPublicPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/service-warranty-policy') {
-    return <ServiceWarrantyPolicyPage />;
+    return <ServiceWarrantyPolicyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/seller-policy') {
-    return <SellerPolicyPage />;
+    return <SellerPolicyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/refund-cancellation-policy') {
-    return <RefundCancellationPolicyPage />;
+    return <RefundCancellationPolicyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname.startsWith('/become-delivery-partner') || routerLocation.pathname.startsWith('/delivery')) {
@@ -1413,19 +1392,19 @@ function AppContent() {
   }
 
   if (routerLocation.pathname === '/verified-sellers') {
-    return <VerifiedSellersPage />;
+    return <VerifiedSellersPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/secure-online-payments') {
-    return <SecureOnlinePaymentsPage />;
+    return <SecureOnlinePaymentsPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/privacy-protected') {
-    return <PrivacyProtectedPage />;
+    return <PrivacyProtectedPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/customer-support') {
-    return <CustomerSupportPage />;
+    return <CustomerSupportPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} />;
   }
 
   if (routerLocation.pathname === '/location') {
@@ -1446,20 +1425,11 @@ function AppContent() {
   }
 
   if (routerLocation.pathname === '/login') {
-    return <LoginPage onLogin={handleLogin} onSignup={() => {
-      setAuthView('signup');
-      navigate('/signup');
-    }} onForgotPassword={() => {
-      setAuthView('forgot-password');
-      navigate('/login');
-    }} onOtpLogin={() => {
-      setAuthView('verify-otp');
-      navigate('/login');
-    }} error={errorMessage} />;
+    return <LoginPage onLogin={handleLogin} onSignup={handleLogin} onBack={() => navigate(-1)} defaultMode="login" error={errorMessage} />;
   }
 
   if (routerLocation.pathname === '/signup') {
-    return <SignupPage onLogin={() => navigate('/login')} onSignup={handleSignup} />;
+    return <LoginPage onLogin={handleLogin} onSignup={handleLogin} onBack={() => navigate(-1)} defaultMode="signup" error={errorMessage} />;
   }
 
   if (routerLocation.pathname === '/search') {
@@ -1546,14 +1516,11 @@ function AppContent() {
             navigate('/advertise');
             return;
           }
-          alert(`Partner application loading for: ${role}`);
-        }}
+          toast.success(`Partner application loading for: ${role}`) }}
         onShopSelect={(shop) => {
-          alert(`Selected Store: ${shop.name}. Browsing inventory catalog in simulation.`);
-        }}
+          toast.success(`Selected Store: ${shop.name}. Browsing inventory catalog in simulation.`) }}
         onServiceBook={(service) => {
-          alert(`Booking created for: ${service.name}. Starting scheduler flow.`);
-        }}
+          toast.success(`Booking created for: ${service.name}. Starting scheduler flow.`) }}
         onCheckout={() => handleCheckoutProcess(cartTotal)}
         onCloseCart={() => setIsCartOpen(false)}
         onCloseQuickView={() => { }}
@@ -1606,6 +1573,20 @@ function AppContent() {
     }} />;
   }
 
+  const protectedActivePages = ['edit-profile', 'wallet', 'rewards', 'addresses', 'notifications', 'payment', 'wishlist', 'settings'];
+  
+  if (protectedActivePages.includes(activePage)) {
+    if (!isAuthenticated) {
+      if (typeof window !== 'undefined') {
+        setTimeout(() => {
+          setActivePage('login');
+          navigate('/login', { state: { from: `/${activePage}` } });
+        }, 0);
+      }
+      return null;
+    }
+  }
+
   if (activePage === 'edit-profile') {
     return <EditProfilePage onBack={() => setActivePage('profile')} />;
   }
@@ -1635,23 +1616,23 @@ function AppContent() {
   }
 
   if (activePage === 'privacy-policy') {
-    return <PrivacyPolicyPage onBack={() => setActivePage('profile')} />;
+    return <PrivacyPolicyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => setActivePage('profile')} />;
   }
 
   if (activePage === 'terms') {
-    return <TermsPage onBack={() => setActivePage('profile')} />;
+    return <TermsPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => setActivePage('profile')} />;
   }
 
   if (activePage === 'about') {
-    return <AboutPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <AboutPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (activePage === 'service-warranty') {
-    return <ServiceWarrantyPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <ServiceWarrantyPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
   if (activePage === 'our-story') {
-    return <OurStoryPage onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+    return <OurStoryPage location={location} onLocationClick={() => setIsLocationModalOpen(true)} onBack={() => setActivePage('home')} onLogout={handleLogout} isAuthenticated={isAuthenticated} user={user} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
 
 
@@ -1743,14 +1724,11 @@ function AppContent() {
           navigate('/advertise');
           return;
         }
-        alert(`Partner application loading for: ${role}`);
-      }}
+        toast.success(`Partner application loading for: ${role}`) }}
       onShopSelect={(shop) => {
-        alert(`Selected Store: ${shop.name}. Browsing inventory catalog in simulation.`);
-      }}
+        toast.success(`Selected Store: ${shop.name}. Browsing inventory catalog in simulation.`) }}
       onServiceBook={(service) => {
-        alert(`Booking created for: ${service.name}. Starting scheduler flow.`);
-      }}
+        toast.success(`Booking created for: ${service.name}. Starting scheduler flow.`) }}
       onCheckout={() => handleCheckoutProcess(cartTotal)}
       onCloseCart={() => setIsCartOpen(false)}
       onCloseQuickView={() => { }}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Bell, Globe, Menu, ChevronDown, Check, Sun, Moon, Sparkles, User, LogOut } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function Topbar({
   sidebarOpen,
@@ -11,6 +12,7 @@ export default function Topbar({
   notifications,
   onLogout
 }) {
+  
   const [langDropdown, setLangDropdown] = useState(false);
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [selectedLang, setSelectedLang] = useState('English');
@@ -33,7 +35,7 @@ export default function Topbar({
   const unreadNotifications = notifications.filter(n => !n.read).length;
 
   return (
-    <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-800 py-3 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 shadow-sm">
+    <header className="sticky top-0 z-40 bg-surface/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-800 py-3 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 shadow-sm">
       
       {/* Left side: Hamburger & Title */}
       <div className="flex items-center gap-3">
@@ -59,8 +61,15 @@ export default function Topbar({
         <input
           type="text"
           placeholder="Search bookings, invoices, customers..."
-          className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-page dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 rounded-xl outline-none focus:border-primary/50 dark:focus:border-primary/50 transition-all text-slate-700 dark:text-slate-200"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full pl-10 pr-10 py-2 text-xs sm:text-sm bg-page dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 rounded-xl outline-none focus:border-primary/50 dark:focus:border-primary/50 transition-all text-slate-700 dark:text-slate-200"
         />
+        {searchQuery && (
+          <button onClick={() => setSearchQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        )}
       </div>
 
       {/* Right side: Quick widgets */}
@@ -69,7 +78,7 @@ export default function Topbar({
         {/* Dark Mode toggle */}
         <button
           onClick={toggleDarkMode}
-          className="p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-page cursor-pointer transition-colors"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-page cursor-pointer transition-colors"
           title="Toggle Theme"
         >
           {darkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -115,8 +124,8 @@ export default function Topbar({
 
         {/* Notifications Bell */}
         <button
-          className="p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-page relative cursor-pointer"
-          onClick={() => alert('View notifications via the Sidebar menu option.')}
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-xl text-slate-500 hover:text-primary hover:bg-page relative cursor-pointer"
+          onClick={() => onNavigateTab?.('notifications') }
         >
           <Bell size={18} />
           {unreadNotifications > 0 && (
@@ -154,7 +163,7 @@ export default function Topbar({
                   <p className="text-[10px] text-slate-450 truncate">rahulkumar@saathapp.com</p>
                 </div>
                 <button
-                  onClick={() => alert('Edit profile settings via the profile tab.')}
+                  onClick={() => toast.success('Edit profile settings via the profile tab.') }
                   className="w-full px-3 py-2 text-xs font-semibold text-slate-650 dark:text-slate-350 hover:bg-page flex items-center gap-2 cursor-pointer"
                 >
                   <User size={14} className="text-slate-400" />
@@ -162,7 +171,7 @@ export default function Topbar({
                 </button>
                 <button
                   onClick={onLogout}
-                  className="w-full px-3 py-2 text-xs font-semibold text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-955 flex items-center gap-2 cursor-pointer border-t border-slate-100 "
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full px-3 py-2 text-xs font-semibold text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-955 flex items-center gap-2 cursor-pointer border-t border-slate-100 "
                 >
                   <LogOut size={14} />
                   <span>Logout</span>

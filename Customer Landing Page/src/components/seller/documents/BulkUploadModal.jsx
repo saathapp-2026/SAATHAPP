@@ -66,7 +66,7 @@ export default function BulkUploadModal({ open, onClose, onDone }) {
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">Bulk PDF, images, or ZIP</p>
           </div>
-          <button type="button" onClick={handleClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={handleClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -101,7 +101,7 @@ export default function BulkUploadModal({ open, onClose, onDone }) {
               type="file"
               multiple
               accept=".pdf,.jpg,.jpeg,.png,.webp,.zip,image/*,application/pdf,application/zip"
-              className="hidden"
+              className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden"
               onChange={(e) => addFiles(e.target.files)}
             />
           </div>
@@ -148,14 +148,14 @@ export default function BulkUploadModal({ open, onClose, onDone }) {
           ) : null}
 
           <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={handleClose} className="rounded-xl border border-slate-200 px-4 py-2 text-sm">
+            <button type="button" onClick={handleClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-xl border border-slate-200 px-4 py-2 text-sm">
               Close
             </button>
             <button
               type="button"
               disabled={!files.length || busy}
               onClick={startUpload}
-              className="rounded-xl bg-emerald-600 text-white px-4 py-2 text-sm font-semibold disabled:opacity-50"
+              className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-xl bg-emerald-600 text-white px-4 py-2 text-sm font-semibold disabled:opacity-50"
             >
               {busy ? 'Uploading…' : 'Start Upload'}
             </button>

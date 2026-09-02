@@ -127,8 +127,7 @@ export function LocationProvider({ children }) {
             navigate('/');
           }
           if (typeof onComplete === 'function') onComplete();
-          toast.success('Exact location detected successfully!', { icon: '📍' });
-        } catch (error) {
+          toast.success('Exact location detected successfully!', { icon: '📍' }) } catch (error) {
           toast.error('Unable to resolve the current location right now.');
         } finally {
           setIsGpsLoading(false);
@@ -169,8 +168,7 @@ export function LocationProvider({ children }) {
                 navigate('/');
               }
               if (typeof onComplete === 'function') onComplete();
-              toast.success('Exact location detected successfully!', { icon: '📍' });
-            } else {
+              toast.success('Exact location detected successfully!', { icon: '📍' }) } else {
               toast.error('Location detection failed. Please add manually.');
             }
           }

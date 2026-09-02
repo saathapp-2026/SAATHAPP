@@ -79,7 +79,7 @@ export default function AdFilters({ search, onSearch, filters, onChange, onReset
         <button
           type="button"
           onClick={onReset}
-          className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold"
         >
           <RotateCcw size={12} /> Reset
         </button>

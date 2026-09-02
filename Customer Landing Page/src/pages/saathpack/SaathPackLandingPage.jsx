@@ -236,13 +236,13 @@ export default function SaathPackLandingPage({
                   <img 
                     src={cat.img} 
                     alt={cat.name} 
-                    className="w-full h-full group-hover:scale-105 transition-transform rounded-lg" 
+                    className="w-full h-full group-hover:scale-105 transition-transform rounded-lg mix-blend-multiply" 
                     style={{ width: '100%', height: '100%', objectFit: (typeof cat.img === 'string' && cat.img.startsWith('http')) ? 'contain' : 'cover' }} 
                   />
                 </div>
                 <h3 className="font-bold text-slate-900 text-sm group-hover:text-primary transition-colors">{cat.name}</h3>
                 <p className="text-xs text-slate-500 mt-1 mb-4 h-8 flex items-center justify-center">{cat.desc}</p>
-                <button className="w-full py-1.5 border border-primary text-primary text-xs font-bold rounded-lg group-hover:bg-primary group-hover:text-white transition-colors mt-auto">
+                <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-1.5 border border-primary text-primary text-xs font-bold rounded-lg group-hover:bg-primary group-hover:text-white transition-colors mt-auto">
                   Shop Now
                 </button>
               </div>

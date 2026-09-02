@@ -1,14 +1,53 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { HEADER_NAV_ITEMS } from '../config/categoryConfig';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function TopNav() {
   const location = useLocation();
+  const scrollRef = useRef(null);
+  const [showLeft, setShowLeft] = useState(false);
+  const [showRight, setShowRight] = useState(true);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    setShowLeft(scrollLeft > 0);
+    // 5px tolerance to hide the right arrow when fully scrolled
+    setShowRight(scrollLeft < scrollWidth - clientWidth - 5);
+  };
+
+  useEffect(() => {
+    // Initial check
+    setTimeout(handleScroll, 100);
+    window.addEventListener('resize', handleScroll);
+    return () => window.removeEventListener('resize', handleScroll);
+  }, []);
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = direction === 'left' ? -250 : 250;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   return (
-    <div className="block w-full border-t border-theme-border text-theme-secondary text-[10px] sm:text-[10.5px] md:text-[11px] lg:text-xs font-semibold uppercase tracking-tight sm:tracking-normal lg:tracking-wider py-2 transition-colors relative z-40 overflow-x-auto scrollbar-none">
-      <div className="w-full px-3 sm:px-6 lg:px-8 min-w-max">
-        <div className="flex items-center justify-start md:justify-center w-full gap-4 sm:gap-2.5 md:gap-3.5 lg:gap-4.5 xl:gap-6">
+    <div className="block w-full border-t border-theme-border text-theme-secondary text-[11px] sm:text-xs font-bold uppercase tracking-wide bg-surface dark:bg-slate-950 transition-colors relative z-40 group">
+      <div className="saath-container relative">
+        
+        {/* Left Arrow */}
+        <div className={`absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white dark:from-slate-950 via-white/80 dark:via-slate-950/80 to-transparent z-10 flex items-center justify-start transition-opacity duration-300 ${showLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+          <button onClick={() => scroll('left')} className="w-7 h-7 flex items-center justify-center rounded-full bg-surface dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 hover:text-primary shadow-sm cursor-pointer ml-1">
+            <ChevronLeft size={14} />
+          </button>
+        </div>
+
+        {/* Scrollable Nav Container */}
+        <div 
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="flex items-center justify-start w-full gap-6 md:gap-8 overflow-x-auto no-scrollbar py-2 sm:py-2.5 px-2"
+        >
           
           <Link
             to="/"
@@ -69,6 +108,14 @@ export default function TopNav() {
             );
           })}
         </div>
+
+        {/* Right Arrow */}
+        <div className={`absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white dark:from-slate-950 via-white/80 dark:via-slate-950/80 to-transparent z-10 flex items-center justify-end transition-opacity duration-300 ${showRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+          <button onClick={() => scroll('right')} className="w-7 h-7 flex items-center justify-center rounded-full bg-surface dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 hover:text-primary shadow-sm cursor-pointer mr-1">
+            <ChevronRight size={14} />
+          </button>
+        </div>
+
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ export default function TrustBadges() {
   ];
 
   return (
-    <div className="w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-6 md:p-8">
+    <div className="w-full bg-surface border border-theme-border rounded-2xl p-6 md:p-8">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {badges.map((badge, i) => {
           const Icon = badge.icon;

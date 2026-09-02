@@ -242,7 +242,7 @@ export default function Step12_ReviewSubmit({ onNext, onPrev, onSelectStep }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous
@@ -251,7 +251,7 @@ export default function Step12_ReviewSubmit({ onNext, onPrev, onSelectStep }) {
               type="button"
               onClick={handleSubmitApplication}
               disabled={!formData.onboardingPaymentCompleted}
-              className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-base font-extrabold text-white shadow-xl transition hover:scale-[1.03] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-base font-extrabold text-white shadow-xl transition hover:scale-[1.03] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               <Send size={18} />
               Submit Wholesale Application

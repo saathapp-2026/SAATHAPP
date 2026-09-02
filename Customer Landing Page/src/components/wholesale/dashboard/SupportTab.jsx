@@ -181,7 +181,7 @@ export default function SupportTab() {
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3 text-xs font-extrabold text-white shadow"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3 text-xs font-extrabold text-white shadow"
                 >
                   <Send size={15} /> Create Ticket
                 </button>

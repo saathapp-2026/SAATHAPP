@@ -881,7 +881,7 @@ export default function ServiceProfessionalPage({
                   </button>
                   <a
                     href="tel:+911800123456"
-                    className="py-3 px-8 rounded-btn border border-white/40 hover:bg-white/10 text-white font-extrabold text-sm sm:text-base cursor-pointer transition-all"
+                    className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none py-3 px-8 rounded-btn border border-white/40 hover:bg-white/10 text-white font-extrabold text-sm sm:text-base cursor-pointer transition-all"
                   >
                     Contact Support
                   </a>
@@ -954,7 +954,7 @@ export default function ServiceProfessionalPage({
                           value={formData.fullName}
                           onChange={handleInputChange}
                           placeholder="Enter your legal full name"
-                          className="input-field dark:border-slate-800 dark:text-white"
+                          className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                         />
                       </div>
 
@@ -969,7 +969,7 @@ export default function ServiceProfessionalPage({
                           onChange={handleInputChange}
                           pattern="[0-9]{10}"
                           placeholder="10-digit mobile number"
-                          className="input-field dark:border-slate-800 dark:text-white"
+                          className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                         />
                       </div>
 
@@ -984,7 +984,7 @@ export default function ServiceProfessionalPage({
                             value={formData.city}
                             onChange={handleInputChange}
                             placeholder="e.g. Patna, Nalanda"
-                            className="input-field dark:border-slate-800 dark:text-white"
+                            className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                           />
                         </div>
 
@@ -995,7 +995,7 @@ export default function ServiceProfessionalPage({
                             name="experience"
                             value={formData.experience}
                             onChange={handleInputChange}
-                            className="input-field dark:border-slate-800 dark:text-white"
+                            className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                           >
                             <option>Fresher (&lt; 1 Year)</option>
                             <option>1-3 Years</option>
@@ -1012,7 +1012,7 @@ export default function ServiceProfessionalPage({
                           name="category"
                           value={formData.category}
                           onChange={handleInputChange}
-                          className="input-field dark:border-slate-800 dark:text-white"
+                          className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none input-field dark:border-slate-800 dark:text-white"
                         >
                           <option>Electrician</option>
                           <option>Plumber</option>
@@ -1036,7 +1036,7 @@ export default function ServiceProfessionalPage({
                           name="terms"
                           checked={formData.terms}
                           onChange={handleInputChange}
-                          className="mt-1 accent-primary"
+                          className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none mt-1 accent-primary"
                         />
                         <label htmlFor="terms" className="text-[11px] text-slate-400 dark:text-slate-500 leading-normal font-medium cursor-pointer">
                           I agree to share my government details, documents, and submit background credentials for verification as per SaathApp Partner Agreements.
@@ -1046,7 +1046,7 @@ export default function ServiceProfessionalPage({
                       {/* Submit */}
                       <button
                         type="submit"
-                        className="btn-primary w-full cursor-pointer mt-4"
+                        className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none btn-primary w-full cursor-pointer mt-4"
                       >
                         Submit Application
                       </button>

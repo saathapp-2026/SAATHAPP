@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import OnboardingLayout from '../../components/seller/OnboardingLayout';
 import { useOnboarding } from '../../context/SellerOnboardingContext';
+import { toast } from 'react-hot-toast';
 
 const inputClass =
   'w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 [&>option]:bg-slate-900 [&>option]:text-white';
@@ -19,16 +20,16 @@ export default function BasicInformation() {
     const mobile = (form.get('mobile') || '').replace(/\D/g, '');
 
     if (!fullName) {
-      alert('Please enter your full name');
+      toast.error('Please enter your full name');
       return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
-      alert('Please enter a valid email address');
+      toast.error('Please enter a valid email address');
       return;
     }
     if (mobile.length !== 10) {
-      alert('Please enter a valid 10-digit mobile number');
+      toast.error('Please enter a valid 10-digit mobile number');
       return;
     }
 
@@ -74,7 +75,7 @@ export default function BasicInformation() {
           </select>
         </div>
 
-        <button type="submit" className="w-full py-3 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors">
+        <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-3 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors">
           Continue to Business Info
         </button>
       </form>

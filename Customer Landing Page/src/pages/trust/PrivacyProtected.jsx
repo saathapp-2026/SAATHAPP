@@ -66,16 +66,14 @@ const privacyFaqs = [
   },
 ];
 
-export default function PrivacyProtectedPage() {
+export default function PrivacyProtectedPage({ location, onLocationClick }) {
   const [openFaq, setOpenFaq] = useState(null);
 
   return (
     <div className="min-h-screen bg-page font-sans text-slate-800">
-      <Header
+      <Header location={location} onLocationClick={onLocationClick}
         cartCount={0}
         onCartClick={() => {}}
-        location="Green Park, New Delhi"
-        onLocationClick={() => {}}
         onSearch={() => {}}
         onLogin={() => {}}
         onSignup={() => {}}
@@ -100,7 +98,7 @@ export default function PrivacyProtectedPage() {
             <Link
               to="/"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-page"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-surface px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-page"
             >
               <ArrowLeft size={16} />
               Back
@@ -168,7 +166,7 @@ export default function PrivacyProtectedPage() {
               {privacyPillars.map((item, index) => (
                 <div
                   key={index}
-                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                  className="rounded-3xl border border-slate-200 bg-surface p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50">
                     {item.icon}
@@ -181,7 +179,7 @@ export default function PrivacyProtectedPage() {
           </section>
 
           {/* Safety Tips */}
-          <section className="mt-16 rounded-[34px] border border-slate-200 bg-white p-8 shadow-sm lg:p-12">
+          <section className="mt-16 rounded-[34px] border border-slate-200 bg-surface p-8 shadow-sm lg:p-12">
             <div className="text-center">
               <h2 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
                 Account Safety Practices
@@ -205,7 +203,7 @@ export default function PrivacyProtectedPage() {
           </section>
 
           {/* FAQs */}
-          <section className="mt-16 rounded-[34px] border border-slate-200 bg-white p-8 shadow-sm lg:p-12">
+          <section className="mt-16 rounded-[34px] border border-slate-200 bg-surface p-8 shadow-sm lg:p-12">
             <div className="text-center">
               <h2 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
                 Privacy FAQs
@@ -243,7 +241,7 @@ export default function PrivacyProtectedPage() {
             <div className="mt-3 flex items-center justify-center gap-4">
               <a
                 href="mailto:privacy@saathapp.in"
-                className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-xs font-bold text-white transition hover:bg-slate-800"
+                className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-xs font-bold text-white transition hover:bg-slate-800"
               >
                 <Mail size={14} /> Contact Privacy Desk
               </a>

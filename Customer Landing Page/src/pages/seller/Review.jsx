@@ -100,7 +100,7 @@ export default function Review() {
           type="button"
           onClick={handleSubmit}
           disabled={!allComplete || saving}
-          className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold hover:from-emerald-600 hover:to-teal-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          className="duration-200 active:scale-[0.98] disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold hover:from-emerald-600 hover:to-teal-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
           {saving ? 'Submitting...' : 'Submit Application'}
           <ArrowRight size={18} />

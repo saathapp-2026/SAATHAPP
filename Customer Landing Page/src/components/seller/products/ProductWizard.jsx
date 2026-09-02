@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
+import ConfirmDialog from '../orders/ConfirmDialog';
 import { X } from 'lucide-react';
 import StepProgress from './StepProgress';
 import ProductBasicInfo from './ProductBasicInfo';
@@ -39,6 +40,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
   const [dirty, setDirty] = useState(false);
+  const [confirmCancel, setConfirmCancel] = useState(false);
   const [aiLoading, setAiLoading] = useState(null);
   const [suggesting, setSuggesting] = useState(false);
   const draftRef = useRef(draft);
@@ -120,7 +122,10 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
   }, [step]);
 
   const handleClose = () => {
-    if (dirty && !window.confirm('You have unsaved changes. Leave without saving draft?')) return;
+    if (dirty) {
+      setConfirmCancel(true);
+      return;
+    }
     onClose?.();
   };
 
@@ -208,8 +213,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
     const res = await autoGenerateSku(draft.basic.name);
     if (res.success) {
       updateDraft({ basic: { ...draft.basic, sku: res.data, skuManual: false } });
-      toast.success('SKU generated');
-    }
+      toast.success('SKU generated') }
   };
 
   const handleSuggestCategory = async () => {
@@ -225,8 +229,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
             tags: res.data.tags,
           },
         });
-        toast.success('Category suggested');
-      }
+        toast.success('Category suggested') }
     } finally {
       setSuggesting(false);
     }
@@ -243,12 +246,10 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
         updateDraft({ description: { ...draft.description, long: res.data.text, seoKeywords: res.data.keywords } });
       } else if (action === 'keywords') {
         updateDraft({ description: { ...draft.description, seoKeywords: (res.data.keywords || []).join(', ') } });
-        toast.success('Keywords suggested');
-      } else {
+        toast.success('Keywords suggested') } else {
         updateDraft({ description: { ...draft.description, long: res.data.text } });
       }
-      toast.success(`AI ${action} done`);
-    } finally {
+      toast.success(`AI ${action} done`) } finally {
       setAiLoading(null);
     }
   };
@@ -265,7 +266,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
           <button
             type="button"
             onClick={handleClose}
-            className="p-2 rounded-lg hover:bg-page shrink-0"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-lg hover:bg-page shrink-0"
             aria-label="Close wizard"
           >
             <X size={18} />
@@ -355,11 +356,11 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
 
       {/* Sticky footer — stays inside content column, not under sidebar */}
       <div className="sticky bottom-0 z-20 mt-4 -mx-0">
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur shadow-lg px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface/95 backdrop-blur shadow-lg px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2">
           <button
             type="button"
             onClick={handleClose}
-            className="px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200 hover:bg-page"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200 hover:bg-page"
           >
             Cancel
           </button>
@@ -368,7 +369,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
               type="button"
               disabled={saving}
               onClick={saveDraftNow}
-              className="px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200 hover:bg-page disabled:opacity-50"
+              className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200 hover:bg-page disabled:opacity-50"
             >
               Save Draft
             </button>
@@ -376,7 +377,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
               <button
                 type="button"
                 onClick={goPrev}
-                className="px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2.5 rounded-xl text-sm font-medium border border-slate-200"
               >
                 Previous
               </button>
@@ -386,7 +387,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
                 type="button"
                 onClick={goNext}
                 disabled={mediaUploading}
-                className="px-5 py-2.5 rounded-xl text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
+                className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 rounded-xl text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
               >
                 {mediaUploading ? 'Uploading…' : 'Save & Continue'}
               </button>
@@ -395,7 +396,7 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
                 type="button"
                 disabled={saving}
                 onClick={publish}
-                className="px-5 py-2.5 rounded-xl text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
+                className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 rounded-xl text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
               >
                 Publish Product
               </button>
@@ -404,6 +405,19 @@ export default function ProductWizard({ initialDraft, onClose, onSaved }) {
         </div>
         <p className="sr-only">{WIZARD_STEPS.find((s) => s.id === step)?.label}</p>
       </div>
+      <ConfirmDialog
+        open={confirmCancel}
+        title="Discard changes?"
+        message="Your unsaved changes will be lost."
+        danger={true}
+        confirmLabel="Discard Changes"
+        cancelLabel="Keep Editing"
+        onCancel={() => setConfirmCancel(false)}
+        onConfirm={() => {
+          setConfirmCancel(false);
+          onClose();
+        }}
+      />
     </div>
   );
 }

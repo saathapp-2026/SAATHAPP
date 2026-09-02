@@ -7,8 +7,8 @@ import { getStoredSellerAuth } from '../../services/sellerAuthService';
 const inputClass = (isLight) =>
   `w-full px-4 py-2.5 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 ${
     isLight
-      ? 'bg-white border-slate-200 text-slate-900 dark:text-white'
-      : 'bg-white/5 border-white/10 text-white placeholder-slate-500'
+      ? 'bg-surface border-slate-200 text-slate-900 dark:text-white'
+      : 'bg-surface/5 border-white/10 text-white placeholder-slate-500'
   }`;
 
 export default function BrandingQuoteForm({ product, onClose, variant = 'dark', businessName = '', onSuccess }) {
@@ -45,7 +45,7 @@ export default function BrandingQuoteForm({ product, onClose, variant = 'dark', 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         className={`rounded-2xl border p-8 text-center ${
-          isLight ? 'bg-surface border-slate-200 dark:border-slate-800' : 'bg-white/5 border-white/10'
+          isLight ? 'bg-surface border-slate-200 dark:border-slate-800' : 'bg-surface/5 border-white/10'
         }`}
       >
         <CheckCircle2 size={48} className="text-emerald-500 mx-auto mb-4" />
@@ -53,7 +53,7 @@ export default function BrandingQuoteForm({ product, onClose, variant = 'dark', 
         <p className={`text-sm mb-4 ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
           Our branding team will contact you within 2 business days with a custom quote.
         </p>
-        <button type="button" onClick={onClose} className="text-sm text-violet-500 hover:text-violet-600 font-medium">
+        <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-sm text-violet-500 hover:text-violet-600 font-medium">
           Close
         </button>
       </motion.div>
@@ -65,18 +65,18 @@ export default function BrandingQuoteForm({ product, onClose, variant = 'dark', 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-2xl border p-6 ${
-        isLight ? 'bg-surface border-slate-200 dark:border-slate-800' : 'bg-white/5 border-white/10'
+        isLight ? 'bg-surface border-slate-200 dark:border-slate-800' : 'bg-surface/5 border-white/10'
       }`}
     >
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-bold text-lg">Request Branding Quote</h3>
-        <button type="button" onClick={onClose} className="text-slate-400 hover:text-slate-600">
+        <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-slate-400 hover:text-slate-600">
           <X size={20} />
         </button>
       </div>
 
       {product && (
-        <div className={`mb-4 p-3 rounded-xl flex items-center gap-3 ${isLight ? 'bg-page' : 'bg-white/5'}`}>
+        <div className={`mb-4 p-3 rounded-xl flex items-center gap-3 ${isLight ? 'bg-page' : 'bg-surface/5'}`}>
           <span className="text-2xl">{product.icon}</span>
           <span className="font-medium text-sm">{product.name}</span>
         </div>
@@ -111,7 +111,7 @@ export default function BrandingQuoteForm({ product, onClose, variant = 'dark', 
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-violet-500 text-white font-semibold hover:bg-violet-600 disabled:opacity-50 transition-colors"
+            className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-violet-500 text-white font-semibold hover:bg-violet-600 disabled:opacity-50 transition-colors"
           >
             <Send size={16} />
             {loading ? 'Submitting...' : 'Submit Request'}

@@ -120,7 +120,7 @@ export function SellerProfilePlaceholder() {
           {!isEditing && (
             <button 
               onClick={handleEditClick}
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-slate-300 transition-colors"
+              className="transition-all duration-200 active:scale-[0.98] inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-slate-300 transition-colors"
             >
               <Edit2 size={16} /> Edit Profile
             </button>
@@ -131,7 +131,7 @@ export function SellerProfilePlaceholder() {
           <div className="flex items-center gap-6 pb-6 border-b border-slate-200 dark:border-slate-800">
             <div 
               onClick={handleUploadClick}
-              className={`h-24 w-24 rounded-full flex items-center justify-center text-2xl font-bold shadow-sm relative overflow-hidden flex-shrink-0 transition-all ${
+              className={`duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] h-24 w-24 rounded-full flex items-center justify-center text-2xl font-bold shadow-sm relative overflow-hidden flex-shrink-0 transition-all ${
                 isEditing ? 'cursor-pointer ring-4 ring-emerald-500/20 hover:ring-emerald-500/40' : ''
               } ${!currentData.profileImage ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400 border-2 border-emerald-500' : ''}`}
             >
@@ -157,7 +157,7 @@ export function SellerProfilePlaceholder() {
                 ref={fileInputRef} 
                 onChange={handleImageChange} 
                 accept="image/png, image/jpeg, image/jpg, image/gif, image/webp" 
-                className="hidden" 
+                className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" 
               />
               
               {isEditing ? (
@@ -165,7 +165,7 @@ export function SellerProfilePlaceholder() {
                   <button 
                     type="button" 
                     onClick={handleUploadClick}
-                    className="text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1.5 focus:outline-none"
+                    className="transition-all duration-200 active:scale-[0.98] text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1.5 focus:outline-none"
                   >
                     <Upload size={14} /> Upload New Photo
                   </button>
@@ -238,7 +238,7 @@ export function SellerProfilePlaceholder() {
                 required 
                 value={currentData.mobile} 
                 disabled
-                className="w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-page px-3.5 py-2.5 text-sm outline-none cursor-not-allowed text-slate-500 dark:text-slate-400" 
+                className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 disabled:bg-slate-50 disabled:cursor-not-allowed w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-page px-3.5 py-2.5 text-sm outline-none cursor-not-allowed text-slate-500 dark:text-slate-400" 
                 title="Mobile number cannot be changed directly" 
               />
             </div>
@@ -249,14 +249,14 @@ export function SellerProfilePlaceholder() {
               <button 
                 type="button" 
                 onClick={handleDiscard}
-                className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white border border-slate-300 rounded-lg hover:bg-page transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500"
+                className="transition-all duration-200 active:scale-[0.98] px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white border border-slate-300 rounded-lg hover:bg-page transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500"
               >
                 Discard Changes
               </button>
               <button 
                 type="submit" 
                 disabled={loading} 
-                className="px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 disabled:opacity-50 flex items-center gap-2 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 disabled:opacity-50 flex items-center gap-2 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
               >
                 <Save size={16} />
                 {loading ? 'Saving...' : 'Save Profile'}
@@ -339,7 +339,7 @@ export function BankDetailsPlaceholder() {
           </div>
 
           <div className="flex justify-end pt-4 border-t border-slate-200 dark:border-slate-800">
-            <button type="submit" disabled={loading} className="px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 disabled:opacity-50 flex items-center gap-2 shadow-sm">
+            <button type="submit" disabled={loading} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 disabled:opacity-50 flex items-center gap-2 shadow-sm">
               <Shield size={16} />
               {loading ? 'Submitting...' : 'Update & Verify'}
             </button>
@@ -353,8 +353,7 @@ export function BankDetailsPlaceholder() {
 export function AccountSettingsPlaceholder() {
   const handleSave = (e) => {
     e.preventDefault();
-    toast.success('Account settings saved');
-  };
+    toast.success('Account settings saved') };
 
   return (
     <div className="max-w-3xl space-y-6">
@@ -371,18 +370,18 @@ export function AccountSettingsPlaceholder() {
         <form onSubmit={handleSave} className="p-6 space-y-5">
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Current Password</label>
-            <input type="password" required className="w-full max-w-md rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
+            <input type="password" required className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 w-full max-w-md rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">New Password</label>
-            <input type="password" required className="w-full max-w-md rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
+            <input type="password" required className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 w-full max-w-md rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Confirm New Password</label>
-            <input type="password" required className="w-full max-w-md rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
+            <input type="password" required className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 w-full max-w-md rounded-lg border border-slate-300 bg-surface px-3.5 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" />
           </div>
           <div>
-            <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 rounded-lg hover:bg-slate-800 shadow-sm">
+            <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 rounded-lg hover:bg-slate-800 shadow-sm">
               Update Password
             </button>
           </div>
@@ -406,7 +405,7 @@ export function AccountSettingsPlaceholder() {
           ].map(item => (
             <div key={item.id} className="flex items-start gap-4">
               <div className="pt-1">
-                <input type="checkbox" id={item.id} defaultChecked={item.defaultChecked} className="w-4 h-4 text-emerald-600 border-slate-300 rounded focus:ring-emerald-500" />
+                <input type="checkbox" id={item.id} defaultChecked={item.defaultChecked} className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-4 h-4 text-emerald-600 border-slate-300 rounded focus:ring-emerald-500" />
               </div>
               <div>
                 <label htmlFor={item.id} className="text-sm font-medium text-slate-900 dark:text-slate-100 cursor-pointer">{item.title}</label>
@@ -415,7 +414,7 @@ export function AccountSettingsPlaceholder() {
             </div>
           ))}
           <div className="pt-4">
-            <button onClick={handleSave} className="px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 shadow-sm">
+            <button onClick={handleSave} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 shadow-sm">
               Save Preferences
             </button>
           </div>

@@ -78,8 +78,14 @@ export default function ProfessionalRegisterPage() {
   };
 
   const handleFileChange = (e, docType) => {
+    setError('');
     if (e.target.files && e.target.files[0]) {
-      setFiles((prev) => ({ ...prev, [docType]: e.target.files[0].name }));
+      const file = e.target.files[0];
+      if (file.size > 5 * 1024 * 1024) {
+        setError(`File must be smaller than 5MB.`);
+        return;
+      }
+      setFiles((prev) => ({ ...prev, [docType]: file.name }));
     }
   };
 
@@ -184,14 +190,11 @@ export default function ProfessionalRegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // TODO: Restore document validation for production
-    /*
     const missingRequired = VERIFICATION_DOCUMENTS.filter((d) => d.required && !files[d.key]);
     if (missingRequired.length) {
       setError(`Please upload: ${missingRequired.map((d) => d.label).join(', ')}`);
       return;
     }
-    */
     
     if (!termsAccepted) {
       setError('Please accept the Terms & Conditions.');
@@ -279,7 +282,7 @@ export default function ProfessionalRegisterPage() {
                   <label className="text-xs font-black uppercase tracking-wider text-slate-400">{field.label}</label>
                   <div className="relative">
                     <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500"><Icon size={16} /></span>
-                    <input type={field.type} name={field.name} required placeholder={field.placeholder} value={formData[field.name]} onChange={handleInputChange} className="w-full bg-white/5 border border-white/10 rounded-btn py-3 pl-10 pr-4 text-xs font-medium text-white focus:border-indigo-500 outline-none" />
+                    <input type={field.type} name={field.name} required placeholder={field.placeholder} value={formData[field.name]} onChange={handleInputChange} className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-white/5 border border-white/10 rounded-btn py-3 pl-10 pr-4 text-xs font-medium text-white focus:border-indigo-500 outline-none" />
                   </div>
                 </div>
               );
@@ -289,7 +292,7 @@ export default function ProfessionalRegisterPage() {
               <label className="text-xs font-black uppercase tracking-wider text-slate-400">Password</label>
               <div className="relative">
                 <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500"><Lock size={16} /></span>
-                <input type={showPassword ? 'text' : 'password'} name="password" required placeholder="••••••••" value={formData.password} onChange={handleInputChange} className="w-full bg-white/5 border border-white/10 rounded-btn py-3 pl-10 pr-10 text-xs font-medium text-white focus:border-indigo-500 outline-none" />
+                <input type={showPassword ? 'text' : 'password'} name="password" required placeholder="••••••••" value={formData.password} onChange={handleInputChange} className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-white/5 border border-white/10 rounded-btn py-3 pl-10 pr-10 text-xs font-medium text-white focus:border-indigo-500 outline-none" />
                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-white border-0 bg-transparent cursor-pointer">
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>

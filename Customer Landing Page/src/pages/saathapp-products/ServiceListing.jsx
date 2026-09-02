@@ -119,7 +119,7 @@ export default function ServiceListing({
                   >
                     <div className="h-48 bg-slate-200 dark:bg-slate-800 relative overflow-hidden flex items-center justify-center">
                        {service.image ? (
-                          <img src={service.image} alt={service.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                          <img src={service.image} alt={service.name} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500" />
                        ) : null}
                        <div className="absolute top-3 left-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 shadow-sm">
                          {serviceCategories.find(c => c.id === service.category)?.name}
@@ -152,7 +152,7 @@ export default function ServiceListing({
                           <p className="text-xl font-black text-slate-900 dark:text-white">₹{service.startingPrice}</p>
                         </div>
                         <button 
-                          onClick={(e) => { e.stopPropagation(); navigate(`/products/services/service/${service.id}`); }}
+                          onClick={(e) => { e.stopPropagation(); navigate(`/products/services/service/${service.id}`) }}
                           className="bg-primary text-white px-4 py-2 rounded-btn font-black text-xs uppercase tracking-wider hover:bg-primary-dark transition-colors"
                         >
                           Book Now

@@ -36,7 +36,7 @@ export default function DeliveryRiderSidebar({ activeTab, onSelectTab, onBackToO
   const { formData, addToast } = useDelivery();
 
   return (
-    <aside className="w-64 shrink-0 bg-slate-950 text-slate-300 border-r border-slate-800/80 flex flex-col h-screen sticky top-0 z-30 font-sans">
+    <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded w-64 shrink-0 bg-slate-950 text-slate-300 border-r border-slate-800/80 flex flex-col h-screen sticky top-0 z-30 font-sans">
       {/* Header Brand */}
       <div
         onClick={() => onSelectTab('profile')}
@@ -111,7 +111,7 @@ export default function DeliveryRiderSidebar({ activeTab, onSelectTab, onBackToO
         <button
           type="button"
           onClick={onBackToOnboarding}
-          className="w-full flex items-center justify-between rounded-2xl border border-slate-800 bg-slate-900/80 p-2.5 text-xs font-bold text-slate-200 hover:bg-slate-800 transition-all duration-150 cursor-pointer active:scale-95"
+          className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full flex items-center justify-between rounded-2xl border border-slate-800 bg-slate-900/80 p-2.5 text-xs font-bold text-slate-200 hover:bg-slate-800 transition-all duration-150 cursor-pointer active:scale-95"
         >
           <span className="font-extrabold">Onboarding Progress</span>
           <ChevronRight size={16} className="text-amber-400 shrink-0" />

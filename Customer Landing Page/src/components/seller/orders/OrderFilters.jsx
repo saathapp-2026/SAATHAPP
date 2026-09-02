@@ -116,7 +116,7 @@ export default function OrderFilters({
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border border-slate-200 hover:bg-page"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border border-slate-200 hover:bg-page"
           >
             <RotateCcw size={14} /> Reset
           </button>
@@ -193,7 +193,7 @@ export default function OrderFilters({
             >
               {pill.label}
               {count != null && count > 0 && (
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${active ? 'bg-white/25' : 'bg-page'}`}>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${active ? 'bg-surface/25' : 'bg-page'}`}>
                   {count}
                 </span>
               )}

@@ -261,7 +261,7 @@ export default function ReferAndGrow({
                       </div>
                       <button
                         onClick={handleReset}
-                        className="mt-3 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all shadow-md cursor-pointer"
+                        className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-3 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all shadow-md cursor-pointer"
                       >
                         Submit Another Referral
                       </button>
@@ -377,7 +377,7 @@ export default function ReferAndGrow({
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full h-11 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-extrabold text-xs sm:text-sm rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                          className="duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full h-11 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-extrabold text-xs sm:text-sm rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                         >
                           <Send size={15} />
                           <span>{isSubmitting ? 'Sending...' : 'Send Referral'}</span>
@@ -473,11 +473,11 @@ export default function ReferAndGrow({
                       type="text"
                       readOnly
                       value={referralLink}
-                      className="flex-1 bg-slate-900 border border-emerald-800/90 rounded-xl px-3.5 py-2.5 text-xs font-mono text-emerald-300 focus:outline-none selection:bg-emerald-600"
+                      className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 flex-1 bg-slate-900 border border-emerald-800/90 rounded-xl px-3.5 py-2.5 text-xs font-mono text-emerald-300 focus:outline-none selection:bg-emerald-600"
                     />
                     <button
                       onClick={handleCopyLink}
-                      className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-slate-950 font-black rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer shrink-0 shadow-md"
+                      className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-slate-950 font-black rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer shrink-0 shadow-md"
                     >
                       {copiedLink ? <Check size={15} /> : <Copy size={15} />}
                       <span>{copiedLink ? 'Copied!' : 'Copy Link'}</span>
@@ -515,7 +515,7 @@ export default function ReferAndGrow({
                       href={socialLinks.whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="py-2 px-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
+                      className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none py-2 px-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
                     >
                       <MessageSquare size={14} />
                       <span>WhatsApp</span>
@@ -524,7 +524,7 @@ export default function ReferAndGrow({
                     {/* Copy Link */}
                     <button
                       onClick={handleCopyLink}
-                      className="py-2 px-3 bg-emerald-800 hover:bg-emerald-700 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
+                      className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none py-2 px-3 bg-emerald-800 hover:bg-emerald-700 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
                     >
                       {copiedLink ? <Check size={14} /> : <Copy size={14} />}
                       <span>{copiedLink ? 'Copied!' : 'Copy Link'}</span>
@@ -533,7 +533,7 @@ export default function ReferAndGrow({
                     {/* SMS */}
                     <a
                       href={socialLinks.sms}
-                      className="py-2 px-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
+                      className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none py-2 px-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
                     >
                       <Smartphone size={14} />
                       <span>SMS</span>
@@ -542,7 +542,7 @@ export default function ReferAndGrow({
                     {/* Email */}
                     <a
                       href={socialLinks.email}
-                      className="py-2 px-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
+                      className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none py-2 px-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
                     >
                       <Mail size={14} />
                       <span>Email</span>
@@ -553,7 +553,7 @@ export default function ReferAndGrow({
                       href={socialLinks.facebook}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="py-2 px-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
+                      className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none py-2 px-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
                     >
                       <span>Facebook</span>
                     </a>
@@ -563,7 +563,7 @@ export default function ReferAndGrow({
                       href={socialLinks.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="py-2 px-3 bg-slate-900 hover:bg-black border border-slate-700 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
+                      className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none py-2 px-3 bg-slate-900 hover:bg-black border border-slate-700 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
                     >
                       <span>𝕏 X</span>
                     </a>
@@ -573,7 +573,7 @@ export default function ReferAndGrow({
                       href={socialLinks.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="col-span-2 py-2 px-3 bg-blue-700 hover:bg-blue-600 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
+                      className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none col-span-2 py-2 px-3 bg-blue-700 hover:bg-blue-600 text-white rounded-xl flex items-center gap-2 transition-all shadow cursor-pointer justify-center"
                     >
                       <span>LinkedIn</span>
                     </a>

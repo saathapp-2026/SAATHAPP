@@ -165,8 +165,7 @@ export default function OrdersPage() {
   const notify = (title, body) => {
     addNotification({ title, body });
     playNotifySound();
-    toast.success(title);
-  };
+    toast.success(title) };
 
   const runWithLoading = async (key, fn, successMsg) => {
     setLoadingAction(key);
@@ -405,12 +404,10 @@ export default function OrdersPage() {
             a.download = res.data.filename;
             a.click();
             URL.revokeObjectURL(url);
-            toast.success('Exported');
-          } else if (actionId === 'print_invoice' || actionId === 'print_labels') {
+            toast.success('Exported') } else if (actionId === 'print_invoice' || actionId === 'print_labels') {
             const selected = orders.filter((o) => selectedIds.has(o.id));
             selected.forEach((o) => (actionId === 'print_invoice' ? printInvoice(o) : printShippingLabel(o)));
-            toast.success('Print jobs opened');
-          } else if (actionId === 'assign') {
+            toast.success('Print jobs opened') } else if (actionId === 'assign') {
             toast('Open an order and use Assign Delivery for agent selection', { icon: '🚚' });
           } else if (actionId === 'refund') {
             toast.success('Bulk refund logged on selected orders');
@@ -523,16 +520,16 @@ export default function OrdersPage() {
       <OrderFilters
         filters={filters}
         search={search}
-        onSearchChange={(v) => { setSearch(v); setPage(1); }}
-        onChange={(f) => { setFilters(f); setPage(1); }}
-        onReset={() => { setFilters(DEFAULT_FILTERS); setSearch(''); setActiveCard(null); setPage(1); }}
+        onSearchChange={(v) => { setSearch(v); setPage(1) }}
+        onChange={(f) => { setFilters(f); setPage(1) }}
+        onReset={() => { setFilters(DEFAULT_FILTERS); setSearch(''); setActiveCard(null); setPage(1) }}
         statusCounts={statusCounts}
       />
 
       {error ? (
         <div className="rounded-xl border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/20 p-6 text-center" role="alert">
           <p className="text-sm text-red-600 mb-3">{error}</p>
-          <button type="button" onClick={loadOrders} className="text-sm font-medium text-red-600 hover:underline">
+          <button type="button" onClick={loadOrders} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-sm font-medium text-red-600 hover:underline">
             Try again
           </button>
         </div>
@@ -552,7 +549,7 @@ export default function OrdersPage() {
           totalPages={meta.totalPages}
           total={meta.total}
           onPageChange={setPage}
-          onPageSizeChange={(n) => { setPageSize(n); setPage(1); }}
+          onPageSizeChange={(n) => { setPageSize(n); setPage(1) }}
           onAction={handleAction}
           loadingAction={loadingAction}
           onRowClick={openDetails}

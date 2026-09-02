@@ -207,7 +207,7 @@ export default function ServiceBookingFlow({
                 <div className="space-y-4">
                   <div className="flex items-start gap-4 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
                     <div className="w-16 h-16 bg-slate-200 dark:bg-slate-800 rounded-lg overflow-hidden shrink-0">
-                       {service.image ? <img src={service.image} alt="" className="w-full h-full object-cover"/> : <div className="w-full h-full flex items-center justify-center text-2xl">🛠️</div>}
+                       {service.image ? <img src={service.image} alt="" className="w-full h-full object-contain p-1"/> : <div className="w-full h-full flex items-center justify-center text-2xl">🛠️</div>}
                     </div>
                     <div>
                       <h4 className="font-bold text-slate-900 dark:text-white mb-1">{service.name}</h4>
@@ -253,7 +253,7 @@ export default function ServiceBookingFlow({
               <button 
                 onClick={handleNext}
                 disabled={(step === 1 && (!selectedDate || !selectedTime)) || (step === 2 && !selectedAddress)}
-                className="w-full bg-gradient-primary text-white py-3.5 rounded-xl font-black text-sm uppercase tracking-wider shadow-premium hover:shadow-glow-primary transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="duration-200 active:scale-[0.98] disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full bg-gradient-primary text-white py-3.5 rounded-xl font-black text-sm uppercase tracking-wider shadow-premium hover:shadow-glow-primary transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {step === 3 ? 'Confirm Booking' : 'Continue'}
               </button>

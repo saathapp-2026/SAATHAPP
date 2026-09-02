@@ -39,7 +39,7 @@ function makeItems(seed) {
 
 function buildSeed() {
   return Array.from({ length: 3 }, (_, i) => ({
-    id: `placeholder-inv-${i}`,
+    id: crypto.randomUUID(),
     number: `INV-2026-00${i+1}`,
     orderId: '',
     customer: { name: '\u00A0', phone: '\u00A0' },

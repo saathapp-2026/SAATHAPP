@@ -34,8 +34,7 @@ export default function MarketingReportsPage() {
     a.download = `${report.id}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    toast.success('Report downloaded');
-  };
+    toast.success('Report downloaded') };
 
   return (
     <div className="space-y-5">
@@ -46,7 +45,7 @@ export default function MarketingReportsPage() {
             <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50">Export campaign performance</h2>
             <p className="max-w-2xl text-sm text-slate-500 dark:text-slate-400">Download CSV, Excel or PDF-ready summaries for campaigns, billing, and live performance metrics.</p>
           </div>
-          <button type="button" className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700">
+          <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700">
             <Download size={16} /> Generate Report
           </button>
         </div>

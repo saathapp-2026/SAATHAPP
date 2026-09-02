@@ -1,3 +1,4 @@
+import ConfirmDialog from '../../components/seller/orders/ConfirmDialog';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -36,6 +37,8 @@ export default function Membership({ mode = 'onboarding' }) {
   const [selectedPlan, setSelectedPlan] = useState(data.membership?.planId || 'free');
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('plans');
+  const [billing, setBilling] = useState('monthly');
+  const [confirmCancel, setConfirmCancel] = useState(null);
   const [banner, setBanner] = useState(null);
   const [showPayment, setShowPayment] = useState(false);
   const [invoice, setInvoice] = useState(null);
@@ -77,17 +80,23 @@ export default function Membership({ mode = 'onboarding' }) {
   };
 
   const handleDowngrade = async () => {
-    if (!window.confirm(`Downgrade to ${getPlanById(selectedPlan).name} plan?`)) return;
-    setLoading(true);
-    try {
-      const auth = getStoredSellerAuth();
-      const result = await downgradeMembership({ sellerId: auth?.seller?.id, planId: selectedPlan });
-      updateSection('membership', result.membership);
-      setSelectedPlan(result.membership.planId);
-      showSuccess(result.message, 'Plan Updated');
-    } finally {
-      setLoading(false);
-    }
+    setConfirmCancel({
+      title: 'Downgrade Plan',
+      message: `Downgrade to ${getPlanById(selectedPlan).name} plan?`,
+      confirmLabel: 'Downgrade',
+      action: async () => {
+        setLoading(true);
+        try {
+          const auth = getStoredSellerAuth();
+          const result = await downgradeMembership({ sellerId: auth?.seller?.id, planId: selectedPlan });
+          updateSection('membership', result.membership);
+          setSelectedPlan(result.membership.planId);
+          showSuccess(result.message, 'Plan Updated');
+        } finally {
+          setLoading(false);
+        }
+      }
+    });
   };
 
   const handlePaymentComplete = async (paymentMethod) => {
@@ -125,17 +134,24 @@ export default function Membership({ mode = 'onboarding' }) {
   };
 
   const handleCancel = async () => {
-    if (!window.confirm('Cancel your membership? You will revert to the Free plan.')) return;
-    setLoading(true);
-    try {
-      const auth = getStoredSellerAuth();
-      const result = await cancelMembership(auth?.seller?.id);
-      updateSection('membership', result.membership);
-      setSelectedPlan('free');
-      showSuccess(result.message);
-    } finally {
-      setLoading(false);
-    }
+    setConfirmCancel({
+      title: 'Cancel Membership',
+      message: 'Cancel your membership? You will revert to the Free plan.',
+      confirmLabel: 'Cancel Membership',
+      danger: true,
+      action: async () => {
+        setLoading(true);
+        try {
+          const auth = getStoredSellerAuth();
+          const result = await cancelMembership(auth?.seller?.id);
+          updateSection('membership', result.membership);
+          setSelectedPlan('free');
+          showSuccess(result.message);
+        } finally {
+          setLoading(false);
+        }
+      }
+    });
   };
 
   const handleRenew = async () => {
@@ -250,7 +266,7 @@ export default function Membership({ mode = 'onboarding' }) {
           type="button"
           onClick={handleSubscribeClick}
           disabled={loading}
-          className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-violet-500 to-purple-600 text-white font-semibold hover:from-violet-600 hover:to-purple-700 disabled:opacity-50 transition-all shadow-lg shadow-violet-500/20"
+          className="duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-violet-500 to-purple-600 text-white font-semibold hover:from-violet-600 hover:to-purple-700 disabled:opacity-50 transition-all shadow-lg shadow-violet-500/20"
         >
           {loading ? 'Processing...' : selectedPlan === 'free'
             ? 'Continue with Free Plan'
@@ -258,17 +274,17 @@ export default function Membership({ mode = 'onboarding' }) {
           <ArrowRight size={18} />
         </button>
         {isOnboarding && (
-          <button type="button" onClick={handleSkip} className={`flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-medium transition-colors ${isOnboarding ? 'bg-white/10 border border-white/20 text-white hover:bg-white/15' : 'bg-page'}`}>
+          <button type="button" onClick={handleSkip} className={`transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-medium transition-colors ${isOnboarding ? 'bg-white/10 border border-white/20 text-white hover:bg-white/15' : 'bg-page'}`}>
             <SkipForward size={16} />
             Skip for Now
           </button>
         )}
         {!isOnboarding && membership?.subscribed && (
           <>
-            <button type="button" onClick={handleRenew} disabled={loading} className="py-3.5 px-6 rounded-xl border border-slate-200 font-medium hover:bg-page transition-colors">
+            <button type="button" onClick={handleRenew} disabled={loading} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none py-3.5 px-6 rounded-xl border border-slate-200 font-medium hover:bg-page transition-colors">
               Renew
             </button>
-            <button type="button" onClick={handleCancel} disabled={loading} className="py-3.5 px-6 rounded-xl border border-red-200 text-red-500 font-medium hover:bg-red-50 transition-colors">
+            <button type="button" onClick={handleCancel} disabled={loading} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none py-3.5 px-6 rounded-xl border border-red-200 text-red-500 font-medium hover:bg-red-50 transition-colors">
               Cancel
             </button>
           </>
@@ -352,6 +368,18 @@ export default function Membership({ mode = 'onboarding' }) {
           </Link>
         </div>
       )}
+      <ConfirmDialog
+        open={!!confirmCancel}
+        title={confirmCancel?.title}
+        message={confirmCancel?.message}
+        danger={confirmCancel?.danger}
+        confirmLabel={confirmCancel?.confirmLabel || 'Confirm'}
+        onCancel={() => setConfirmCancel(null)}
+        onConfirm={() => {
+          confirmCancel?.action();
+          setConfirmCancel(null);
+        }}
+      />
     </>
   );
 }

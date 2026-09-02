@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { Headphones, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const navItems = [
-  { label: "Help Center", href: "#hero" },
-  { label: "Categories", href: "#categories" },
-  { label: "Popular Articles", href: "#articles" },
-  { label: "FAQs", href: "#faq" },
-  { label: "Contact", href: "#contact" },
-  { label: "Report Issue", href: "#report" },
+  { label: "Home", to: "/" },
+  { label: "Help Center", to: "/help-support" },
+  { label: "FAQs", to: "/faq" },
+  { label: "Contact", to: "/customer-support" },
 ];
 
 function Navbar() {
@@ -30,13 +29,12 @@ function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-[9999] h-[80px] w-full bg-white/90 backdrop-blur-[20px] border-b border-[#E2E8F0] shadow-sm transition-all duration-300">
+    <header className="sticky top-0 z-[9999] h-[80px] w-full bg-surface/90 backdrop-blur-[20px] border-b border-[#E2E8F0] shadow-sm transition-all duration-300">
       <div className="saas-container h-full flex items-center justify-between">
         
         {/* Logo Aligned Left */}
-        <a
-          href="#"
-          onClick={(e) => scrollToSection(e, "#hero")}
+        <Link
+          to="/"
           className="flex items-center gap-2 cursor-pointer flex-shrink-0"
         >
           <img
@@ -44,15 +42,15 @@ function Navbar() {
             alt="SAATH"
             className="h-10 sm:h-12 w-auto object-contain"
           />
-        </a>
+        </Link>
 
         {/* Navigation Centered */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}
-              onClick={(e) => scrollToSection(e, item.href)}
+              to={item.to}
+              onClick={() => setMobileMenuOpen(false)}
               className="
                 relative
                 text-[16px]
@@ -67,15 +65,14 @@ function Navbar() {
             >
               {item.label}
               <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#16A34A] transition-all duration-300 group-hover:w-full rounded-full" />
-            </a>
+            </Link>
           ))}
         </nav>
 
         {/* Support Button Aligned Right */}
         <div className="flex items-center gap-3 flex-shrink-0">
-          <a
-            href="#contact"
-            onClick={(e) => scrollToSection(e, "#contact")}
+          <Link
+            to="/customer-support"
             className="
               hidden sm:inline-flex
               items-center justify-center gap-2
@@ -97,7 +94,7 @@ function Navbar() {
           >
             <Headphones size={18} />
             <span>Support</span>
-          </a>
+          </Link>
 
           {/* Mobile Hamburger Menu Toggle */}
           <button
@@ -127,14 +124,14 @@ function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden overflow-hidden border-b border-[#E2E8F0] bg-white/95 backdrop-blur-[20px] px-6 py-6 shadow-xl"
+            className="lg:hidden overflow-hidden border-b border-[#E2E8F0] bg-surface/95 backdrop-blur-[20px] px-6 py-6 shadow-xl"
           >
             <nav className="flex flex-col gap-3">
               {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={(e) => scrollToSection(e, item.href)}
+                <Link
+              key={item.label}
+              to={item.to}
+              onClick={() => setMobileMenuOpen(false)}
                   className="
                     flex items-center justify-between
                     rounded-[10px]
@@ -147,11 +144,10 @@ function Navbar() {
                 >
                   <span>{item.label}</span>
                   <span className="text-[#16A34A] font-bold">→</span>
-                </a>
+                </Link>
               ))}
-              <a
-                href="#contact"
-                onClick={(e) => scrollToSection(e, "#contact")}
+              <Link
+            to="/customer-support"
                 className="
                   mt-2 flex items-center justify-center gap-2
                   h-[52px] w-full
@@ -164,7 +160,7 @@ function Navbar() {
               >
                 <Headphones size={20} />
                 <span>Contact Customer Support</span>
-              </a>
+              </Link>
             </nav>
           </motion.div>
         )}

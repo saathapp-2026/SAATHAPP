@@ -2643,3 +2643,93 @@ if (typeof window !== 'undefined') {
     console.warn('Could not sync admin products', e);
   }
 }
+
+// Dummy Pottery Products
+products.push(
+  {
+    id: 'pottery-1',
+    name: 'Clay Mug',
+    category: 'pottery',
+    subCategory: 'Mugs',
+    price: 150,
+    rating: 4.8,
+    reviews: 12,
+    image: '/images/categories/pottery.jpg',
+    description: 'Handmade मिट्टी का मग'
+  },
+  {
+    id: 'pottery-2',
+    name: 'Clay Jug',
+    category: 'pottery',
+    subCategory: 'Jugs',
+    price: 350,
+    rating: 4.6,
+    reviews: 8,
+    image: '/images/categories/pottery.jpg',
+    description: 'Traditional मिट्टी का घड़ा/jug'
+  },
+  {
+    id: 'pottery-3',
+    name: 'Clay Glass',
+    category: 'pottery',
+    subCategory: 'Glasses',
+    price: 80,
+    rating: 4.9,
+    reviews: 24,
+    image: '/images/categories/pottery.jpg',
+    description: 'Handmade मिट्टी का गिलास'
+  }
+);
+
+// Add Pottery to subcategories
+subcategories['pottery'] = [
+  { id: 'pottery-clay', name: 'Pottery Clay', image: '/images/pottery/pottery-clay.jpg' },
+  { id: 'terracotta-clay', name: 'Terracotta Clay', image: '/images/pottery/terracotta-clay.jpg' },
+  { id: 'white-kaolin-clay', name: 'White & Kaolin Clay', image: '/images/pottery/white-kaolin-clay.jpg' },
+  { id: 'black-red-clay', name: 'Black & Red Clay', image: '/images/pottery/black-red-clay.jpg' },
+  { id: 'fire-stoneware', name: 'Fire Stoneware', image: '/images/pottery/fire-stoneware.jpg' },
+  { id: 'modeling-craft-clay', name: 'Modeling & Craft Clay', image: '/images/pottery/modeling-craft-clay.jpg' },
+  { id: 'natural-mud-soil', name: 'Natural Mud & Soil', image: '/images/pottery/natural-mud-soil.jpg' },
+  { id: 'clay-powder-granules', name: 'Clay Powder & Granules', image: '/images/pottery/clay-powder-granules.jpg' },
+  { id: 'ready-mix-pottery-clay', name: 'Ready Mix Pottery Clay', image: '/images/pottery/ready-mix-pottery-clay.jpg' },
+  { id: 'grog-clay-additives', name: 'Grog & Clay Additives', image: '/images/pottery/grog-clay-additives.jpg' },
+  { id: 'glaze-ceramic-materials', name: 'Glaze & Ceramic Materials', image: '/images/pottery/glaze-ceramic-materials.jpg' },
+  { id: 'other-pottery-products', name: 'Other Pottery Products', image: '/images/pottery/other-pottery-products.jpg' }
+];
+
+// Dummy Pottery Materials Products
+products.push(
+  {
+    id: 'pottery-clay-1',
+    name: 'Natural Pottery Clay',
+    category: 'pottery',
+    subCategory: 'Pottery Clay',
+    price: 150,
+    rating: 4.5,
+    reviews: 10,
+    image: '/images/pottery/pottery-clay.jpg',
+    description: 'High quality natural pottery clay.'
+  },
+  {
+    id: 'terracotta-clay-1',
+    name: 'Terracotta Clay Pack',
+    category: 'pottery',
+    subCategory: 'Terracotta Clay',
+    price: 200,
+    rating: 4.7,
+    reviews: 5,
+    image: '/images/pottery/terracotta-clay.jpg',
+    description: 'Premium terracotta clay for crafting.'
+  },
+  {
+    id: 'white-kaolin-1',
+    name: 'White Kaolin Clay Powder',
+    category: 'pottery',
+    subCategory: 'White & Kaolin Clay',
+    price: 300,
+    rating: 4.9,
+    reviews: 20,
+    image: '/images/pottery/white-kaolin-clay.jpg',
+    description: 'Pure white kaolin clay.'
+  }
+);

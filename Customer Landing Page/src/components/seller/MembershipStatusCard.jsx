@@ -82,23 +82,23 @@ export default function MembershipStatusCard({ membership, onRenew, onCancel, on
           {isSubscribed ? 'Manage Membership' : 'Upgrade Now'}
         </Link>
         {isSubscribed && onRenew && (
-          <button type="button" onClick={onRenew} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-200 text-sm font-medium hover:bg-page transition-colors">
+          <button type="button" onClick={onRenew} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface border border-slate-200 text-sm font-medium hover:bg-page transition-colors">
             <RefreshCw size={14} />
             Renew
           </button>
         )}
         {lastPayment?.invoiceId && onDownloadInvoice && (
-          <button type="button" onClick={() => onDownloadInvoice(lastPayment.invoiceId)} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-200 text-sm font-medium hover:bg-page transition-colors">
+          <button type="button" onClick={() => onDownloadInvoice(lastPayment.invoiceId)} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface border border-slate-200 text-sm font-medium hover:bg-page transition-colors">
             <Download size={14} />
             Download Invoice
           </button>
         )}
-        <Link to="/seller/dashboard/membership" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-200 text-sm font-medium hover:bg-page transition-colors">
+        <Link to="/seller/dashboard/membership" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface border border-slate-200 text-sm font-medium hover:bg-page transition-colors">
           <History size={14} />
           Payment History
         </Link>
         {isSubscribed && onCancel && (
-          <button type="button" onClick={onCancel} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-red-500 border border-red-200 dark:border-red-900 text-sm font-medium hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors">
+          <button type="button" onClick={onCancel} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-red-500 border border-red-200 dark:border-red-900 text-sm font-medium hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors">
             <XCircle size={14} />
             Cancel
           </button>
@@ -106,7 +106,7 @@ export default function MembershipStatusCard({ membership, onRenew, onCancel, on
         {isSubscribed && membership?.planId !== 'free' && (
           <Link
             to="/seller/dashboard/membership"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-200 text-sm font-medium hover:bg-page transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface border border-slate-200 text-sm font-medium hover:bg-page transition-colors"
           >
             Downgrade
           </Link>

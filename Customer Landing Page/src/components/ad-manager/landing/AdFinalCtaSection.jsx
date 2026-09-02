@@ -37,7 +37,7 @@ export default function AdFinalCtaSection({ onStart }) {
               onClick={onStart}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-emerald-800 hover:bg-emerald-50 rounded-full font-bold text-base shadow-lg transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-surface text-emerald-800 hover:bg-emerald-50 rounded-full font-bold text-base shadow-lg transition-colors"
             >
               Start Advertising Now
               <ArrowRight size={18} className="text-emerald-600" />
@@ -85,10 +85,10 @@ export default function AdFinalCtaSection({ onStart }) {
             <div className="flex items-center gap-2">
               <span className="font-bold text-slate-700 dark:text-slate-300">Need Help?</span>
             </div>
-            <a href="tel:+919123456780" className="flex items-center gap-1.5 hover:text-emerald-600 transition-colors">
+            <a href="tel:+919123456780" className="focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded flex items-center gap-1.5 hover:text-emerald-600 transition-colors">
               <span className="font-semibold">+91 9123456780</span>
             </a>
-            <a href="mailto:advertise@saathapp.in" className="flex items-center gap-1.5 hover:text-emerald-600 transition-colors">
+            <a href="mailto:advertise@saathapp.in" className="focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded flex items-center gap-1.5 hover:text-emerald-600 transition-colors">
               <span className="font-semibold">advertise@saathapp.in</span>
             </a>
           </div>

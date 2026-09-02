@@ -2,6 +2,7 @@ import React from 'react';
 import { ShoppingCart, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ProductCardSkeleton from './ProductCardSkeleton';
+import { EmptyState } from '../common/StateComponents';
 import { useCart } from '../../hooks/useCart';
 
 export default function ProductGrid({ products, onAddToCart, isLoading = false }) {
@@ -10,16 +11,28 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-          <ProductCardSkeleton key={n} />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-6">
+        {[...Array(12)].map((_, i) => (
+          <ProductCardSkeleton key={i} />
         ))}
       </div>
     );
   }
 
+  if (products.length === 0) {
+    return (
+      <EmptyState
+        icon={ShoppingCart}
+        title="No products found"
+        description="Try adjusting your filters or search to find what you're looking for."
+      />
+    );
+  }
+
+
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-6">
       {products.map((product) => {
         if (!product) return null;
         const isPremium = product.productTier === 'PREMIUM';
@@ -28,7 +41,7 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
         const qty = getCartQuantity(product.id);
 
         return (
-        <div key={product.id} className={`flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-4 border transition-all group ${isPremium ? 'border-amber-200 dark:border-amber-900/50 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)]' : 'border-slate-100 dark:border-slate-800 hover:shadow-lg'}`}>
+        <div key={product.id} className={`flex flex-col bg-surface rounded-2xl p-4 border transition-all group ${isPremium ? 'border-amber-200 dark:border-amber-900/50 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)]' : 'border-theme-border hover:shadow-lg'}`}>
           
           {/* Badges */}
           <div className="flex flex-wrap gap-2 mb-2 relative z-10">
@@ -54,7 +67,7 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
                 Normal Grocery
               </span>
             ) : product.productTier === 'NORMAL' ? (
-              <span className="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide shadow-sm flex items-center gap-1">
+              <span className="bg-surface text-slate-700 dark:text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide shadow-sm flex items-center gap-1 border border-theme-border">
                 Normal
               </span>
             ) : null}
@@ -72,7 +85,7 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
 
           {/* Image */}
           <div 
-            className="w-full aspect-square bg-slate-50 dark:bg-slate-800 rounded-xl mb-4 cursor-pointer relative overflow-hidden flex items-center justify-center"
+            className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] w-full aspect-square bg-slate-50 dark:bg-slate-800 rounded-xl mb-4 cursor-pointer relative overflow-hidden flex items-center justify-center"
             onClick={() => navigate(`/product/${product.slug || product.id}`)}
           >
             {/* Image removed as requested */}
@@ -80,7 +93,7 @@ export default function ProductGrid({ products, onAddToCart, isLoading = false }
 
           {/* Info */}
           <div 
-            className="flex-1 cursor-pointer"
+            className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] flex-1 cursor-pointer"
             onClick={() => navigate(`/product/${product.slug || product.id}`)}
           >
             <h3 className="font-bold text-sm text-slate-800 dark:text-slate-100 line-clamp-1 mb-1">{product.name}</h3>

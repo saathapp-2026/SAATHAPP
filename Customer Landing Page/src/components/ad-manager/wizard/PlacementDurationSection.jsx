@@ -44,14 +44,14 @@ export default function PlacementDurationSection({ draft, updateDraft }) {
           {PLACEMENTS.map(p => (
             <label key={p.id} className="flex items-center gap-3 cursor-pointer group">
               <div className={`w-5 h-5 rounded-[4px] border-2 flex items-center justify-center transition-colors ${
-                (draft.placements || []).includes(p.id) ? 'border-[#15803D] bg-[#15803D]' : 'border-slate-300 group-hover:border-slate-400 bg-white'
+                (draft.placements || []).includes(p.id) ? 'border-[#15803D] bg-[#15803D]' : 'border-slate-300 group-hover:border-slate-400 bg-surface'
               }`}>
                 {(draft.placements || []).includes(p.id) && <Check size={14} className="text-white" strokeWidth={3} />}
               </div>
               <span className="text-sm font-semibold text-slate-700">{p.label}</span>
               <input 
                 type="checkbox" 
-                className="hidden" 
+                className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" 
                 checked={(draft.placements || []).includes(p.id)}
                 onChange={() => togglePlacement(p.id)}
               />
@@ -68,14 +68,14 @@ export default function PlacementDurationSection({ draft, updateDraft }) {
           {DURATIONS.map(d => (
             <label key={d.value} className="flex items-center gap-3 cursor-pointer group">
               <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${
-                draft.duration === d.value ? 'border-[#15803D] bg-white' : 'border-slate-300 group-hover:border-slate-400'
+                draft.duration === d.value ? 'border-[#15803D] bg-surface' : 'border-slate-300 group-hover:border-slate-400'
               }`}>
                 {draft.duration === d.value && <div className="w-2.5 h-2.5 rounded-full bg-[#15803D]" />}
               </div>
               <span className="text-sm font-semibold text-slate-700">{d.label}</span>
               <input 
                 type="radio" 
-                className="hidden" 
+                className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" 
                 checked={draft.duration === d.value}
                 onChange={() => updateDraft({ duration: d.value })}
               />

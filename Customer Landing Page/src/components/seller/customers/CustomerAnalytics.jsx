@@ -136,7 +136,7 @@ export default function CustomerAnalytics({
         <div className="mt-4">
           <div className="flex items-center justify-between mb-2">
             <h4 className="text-xs font-semibold text-slate-500">Top Spending Customers</h4>
-            <button type="button" className="text-[10px] font-semibold text-emerald-600" onClick={() => toast('Showing all top spenders')}>
+            <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-[10px] font-semibold text-emerald-600" onClick={() => toast('Showing all top spenders')}>
               View All
             </button>
           </div>
@@ -179,7 +179,7 @@ export default function CustomerAnalytics({
               key={id}
               type="button"
               onClick={onClick}
-              className="flex flex-col items-center gap-1.5 rounded-xl border border-slate-200 p-3 text-xs font-semibold hover:bg-page transition-colors"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex flex-col items-center gap-1.5 rounded-xl border border-slate-200 p-3 text-xs font-semibold hover:bg-page transition-colors"
             >
               <Icon size={16} className="text-emerald-600" />
               {label}
@@ -197,8 +197,7 @@ export default function CustomerAnalytics({
               type="button"
               onClick={async () => {
                 await generateModuleReport({ moduleKey: 'customers', format: f.id, options: { includeCharts: true } });
-                toast.success(`${f.label} report ready`);
-              }}
+                toast.success(`${f.label} report ready`) }}
               className="px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border border-slate-200 hover:bg-page"
             >
               {f.label}

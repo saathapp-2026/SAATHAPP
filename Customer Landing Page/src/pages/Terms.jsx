@@ -2,7 +2,7 @@ import React from 'react';
 import { FileText } from 'lucide-react';
 import SectionPage from './SectionPage';
 
-export default function Terms({ onBack }) {
+export default function Terms({ onBack, location, onLocationClick }) {
   return (
     <SectionPage title="Terms & Conditions" subtitle="Read the terms for buying, selling, and service bookings." icon={FileText} onBack={onBack}>
       <div className="rounded-2xl border border-slate-200 bg-page p-5 text-sm text-slate-600">

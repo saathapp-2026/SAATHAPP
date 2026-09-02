@@ -13,6 +13,7 @@ export default function Checkout({ onBack, onConfirmOrder }) {
   const [deliveryMethod, setDeliveryMethod] = useState('standard');
   const [paymentMethod, setPaymentMethod] = useState('upi');
   const [paymentError, setPaymentError] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
     if (savedAddresses.length > 0 && !selectedAddress) {
@@ -40,7 +41,7 @@ export default function Checkout({ onBack, onConfirmOrder }) {
       <div className="min-h-screen bg-slate-50 dark:bg-slate-950 px-4 py-6 sm:px-6 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
-          <button onClick={onBack} className="px-6 py-2 bg-primary text-white rounded-xl font-bold">Go Back</button>
+          <button onClick={onBack} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-6 py-2 bg-primary text-white rounded-xl font-bold">Go Back</button>
         </div>
       </div>
     );
@@ -67,26 +68,32 @@ export default function Checkout({ onBack, onConfirmOrder }) {
     });
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     const isDevMockEnabled = import.meta.env.VITE_ENABLE_DEV_MOCK_LOGIN === 'true';
     if (paymentMethod !== 'cod' && !import.meta.env.VITE_PAYMENT_GATEWAY_KEY && !isDevMockEnabled) {
       setPaymentError("Payment Configuration Error: VITE_PAYMENT_GATEWAY_KEY is missing. Real payment gateways cannot be initialized. Please configure your payment provider in .env.local or select Cash on Delivery.");
       return;
     }
     setPaymentError('');
-    onConfirmOrder({
-      address: selectedAddress,
-      deliveryMethod,
-      paymentMethod,
-      orderBreakdown: totals
-    });
+    setIsProcessing(true);
+    try {
+      await onConfirmOrder({
+        address: selectedAddress,
+        deliveryMethod,
+        paymentMethod,
+        orderBreakdown: totals
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
+
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 px-4 py-6 sm:px-6 lg:px-8 text-slate-800 dark:text-slate-100">
       <div className="mx-auto max-w-3xl rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xl">
         <div className="flex items-center mb-8 border-b border-slate-200 dark:border-slate-800 pb-4">
-          <button onClick={step === 1 ? onBack : handlePrev} className="mr-4 p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+          <button onClick={step === 1 ? onBack : handlePrev} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mr-4 p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
             <ArrowLeft size={20} />
           </button>
           <h1 className="text-2xl font-black">Checkout</h1>
@@ -138,19 +145,29 @@ export default function Checkout({ onBack, onConfirmOrder }) {
                   <textarea 
                     autoFocus
                     value={newAddress}
-                    onChange={(e) => setNewAddress(e.target.value)}
+                    onChange={(e) => {
+                      setNewAddress(e.target.value);
+                      if (paymentError === 'address') setPaymentError('');
+                    }}
                     placeholder="e.g. Apartment, Building, Street, City"
-                    className="w-full border border-slate-200 dark:border-slate-700 rounded-lg p-3 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:outline-none min-h-[80px]"
+                    className={`input-field min-h-[100px] ${paymentError === 'address' ? 'border-red-500 focus:border-red-500' : ''}`}
                   />
+                  {paymentError === 'address' && <p className="text-red-500 text-xs font-bold mt-1">Full address is required.</p>}
                   <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 mt-3">
-                    <button onClick={() => setIsAddingAddress(false)} className="w-full sm:w-auto px-4 py-2 font-bold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">Cancel</button>
-                    <button onClick={handleAddNewAddress} disabled={!newAddress.trim()} className="w-full sm:w-auto px-4 py-2 bg-primary text-white font-bold rounded-lg disabled:opacity-50">Save Address</button>
+                    <button onClick={() => { setIsAddingAddress(false); setPaymentError('') }} className="btn-secondary w-auto">Cancel</button>
+                    <button onClick={() => {
+                      if (!newAddress.trim()) {
+                        setPaymentError('address');
+                      } else {
+                        handleAddNewAddress();
+                      }
+                    }} className="btn-primary w-auto">Save Address</button>
                   </div>
                 </div>
               )}
 
               <div className="mt-8 flex flex-col sm:flex-row justify-end gap-3">
-                <button disabled={!selectedAddress} onClick={handleNext} className="w-full sm:w-auto px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors disabled:bg-slate-300 disabled:cursor-not-allowed dark:disabled:bg-slate-700">Continue to Delivery</button>
+                <button disabled={!selectedAddress} onClick={handleNext} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none btn-primary w-auto sm:px-8">Continue to Delivery</button>
               </div>
             </div>
           )}
@@ -175,8 +192,8 @@ export default function Checkout({ onBack, onConfirmOrder }) {
                 </label>
               ))}
               <div className="mt-8 flex flex-col-reverse sm:flex-row justify-between gap-3">
-                <button onClick={handlePrev} className="w-full sm:w-auto px-6 py-3 border border-slate-300 rounded-xl font-bold hover:bg-slate-50 transition-colors dark:hover:bg-slate-800">Back</button>
-                <button onClick={handleNext} className="w-full sm:w-auto px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors">Continue to Payment</button>
+                <button onClick={handlePrev} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none btn-secondary w-auto">Back</button>
+                <button onClick={handleNext} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none btn-primary w-auto sm:px-8">Continue to Payment</button>
               </div>
             </div>
           )}
@@ -198,8 +215,8 @@ export default function Checkout({ onBack, onConfirmOrder }) {
                 </label>
               ))}
               <div className="mt-8 flex flex-col-reverse sm:flex-row justify-between gap-3">
-                <button onClick={handlePrev} className="w-full sm:w-auto px-6 py-3 border border-slate-300 rounded-xl font-bold hover:bg-slate-50 transition-colors dark:hover:bg-slate-800">Back</button>
-                <button onClick={handleNext} className="w-full sm:w-auto px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors">Review Order</button>
+                <button onClick={handlePrev} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none btn-secondary w-auto">Back</button>
+                <button onClick={handleNext} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none btn-primary w-auto sm:px-8">Review Order</button>
               </div>
             </div>
           )}
@@ -259,9 +276,9 @@ export default function Checkout({ onBack, onConfirmOrder }) {
                 </div>
               )}
               <div className="mt-8 flex flex-col-reverse sm:flex-row justify-between gap-3 pt-4">
-                <button onClick={handlePrev} className="w-full sm:w-auto px-6 py-3 border border-slate-300 rounded-xl font-bold hover:bg-slate-50 transition-colors dark:hover:bg-slate-800">Back</button>
-                <button onClick={handleConfirm} className="w-full sm:w-auto px-8 py-3 bg-emerald-600 text-white rounded-xl font-black hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-500/20 hover:scale-[1.02]">
-                  Place Order
+                <button onClick={handlePrev} disabled={isProcessing} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none btn-secondary w-auto">Back</button>
+                <button onClick={handleConfirm} disabled={isProcessing} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full sm:w-auto px-8 py-3 bg-emerald-600 text-white rounded-xl font-black hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-500/20 hover:scale-[1.02] disabled:opacity-75 disabled:hover:scale-100 flex justify-center items-center">
+                  {isProcessing ? 'Processing...' : 'Place Order'}
                 </button>
               </div>
             </div>

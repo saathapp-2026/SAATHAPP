@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, CheckCircle2, Award, Clock, Wallet, TrendingUp, BookOpen, ShieldCheck, ChevronUp, Wrench, Sparkles, ArrowRight, FileText, Camera, Shield, Zap, Info, Hammer, Clipboard, HardHat } from 'lucide-react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import toast from 'react-hot-toast';
 
 export default function WorkerPortal({
   _cartItems,
@@ -125,9 +126,7 @@ export default function WorkerPortal({
         experience: 'Fresher (< 1 Year)',
         terms: true
       });
-      alert('Application submitted successfully! Our partner agency will contact you.');
-    }, 2000);
-  };
+      toast.success('Application submitted successfully! Our partner agency will contact you.') }, 2000)};
 
   const benefits = [
     { title: 'Flexible Working Hours', text: 'Work on your own schedule. Activate your duty status in the app whenever you are free and ready for jobs.', icon: Clock, color: 'from-blue-500 to-indigo-600' },
@@ -495,7 +494,7 @@ export default function WorkerPortal({
                         value={formData.fullName}
                         onChange={handleInputChange}
                         placeholder="Legal full name as in Aadhaar card"
-                        className="w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-950 text-slate-800 dark:text-white font-semibold"
+                        className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-950 text-slate-800 dark:text-white font-semibold"
                       />
                     </div>
 
@@ -509,7 +508,7 @@ export default function WorkerPortal({
                         onChange={handleInputChange}
                         pattern="[0-9]{10}"
                         placeholder="10-digit phone number"
-                        className="w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-950 text-slate-800 dark:text-white font-semibold"
+                        className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-950 text-slate-800 dark:text-white font-semibold"
                       />
                     </div>
 
@@ -523,7 +522,7 @@ export default function WorkerPortal({
                           value={formData.city}
                           onChange={handleInputChange}
                           placeholder="e.g. Patna"
-                          className="w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-950 text-slate-800 dark:text-white font-semibold"
+                          className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-950 text-slate-800 dark:text-white font-semibold"
                         />
                       </div>
                       <div className="space-y-1">
@@ -532,7 +531,7 @@ export default function WorkerPortal({
                           name="experience"
                           value={formData.experience}
                           onChange={handleInputChange}
-                          className="w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-950 font-semibold"
+                          className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-950 font-semibold"
                         >
                           <option>Fresher (&lt; 1 Year)</option>
                           <option>1-2 Years</option>
@@ -548,7 +547,7 @@ export default function WorkerPortal({
                         name="category"
                         value={formData.category}
                         onChange={handleInputChange}
-                        className="w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-950 font-semibold"
+                        className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none dark:bg-slate-950 font-semibold"
                       >
                         <option>Electrician Assistant</option>
                         <option>Plumbing Helper</option>
@@ -562,7 +561,7 @@ export default function WorkerPortal({
 
                     <button
                       type="submit"
-                      className="w-full py-3 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer shadow-md text-center"
+                      className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-3 bg-[#6C3BFF] hover:bg-[#6C3BFF]/95 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer shadow-md text-center"
                     >
                       Submit Onboarding Application
                     </button>

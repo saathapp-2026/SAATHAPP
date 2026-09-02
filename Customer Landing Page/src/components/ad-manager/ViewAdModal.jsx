@@ -22,7 +22,7 @@ export default function ViewAdModal({ open, onClose, ad, onEdit }) {
             <h2 id="view-ad-title" className="text-lg font-bold">{ad.name}</h2>
             <p className="text-xs text-slate-500 mt-0.5">{ad.id}</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close"><X size={16} /></button>
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close"><X size={16} /></button>
         </div>
         <div className="p-5 space-y-3">
           <div className="flex flex-wrap gap-2">

@@ -68,7 +68,7 @@ export default function AdTypeSelector({ onSelect, onViewGuide }) {
           <button type="button" onClick={() => setShowAll((v) => !v)} className="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:underline">
             {showAll ? 'Show Less' : 'View All Types'}
           </button>
-          <button type="button" onClick={onViewGuide} className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:underline">
+          <button type="button" onClick={onViewGuide} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:underline">
             <BookOpen size={13} /> View Guide
           </button>
         </div>

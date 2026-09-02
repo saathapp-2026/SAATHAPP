@@ -34,7 +34,7 @@ export default class ErrorBoundary extends React.Component {
           for (const registration of registrations) {
             await registration.unregister();
           }
-        } catch (e) {}
+        } catch (_e) {}
       }
       if (window.caches) {
         try {
@@ -42,7 +42,7 @@ export default class ErrorBoundary extends React.Component {
           for (const name of names) {
             await caches.delete(name);
           }
-        } catch (e) {}
+        } catch (_e) {}
       }
       const newUrl = new URL(window.location.href);
       newUrl.searchParams.set('v', Date.now().toString());
@@ -83,7 +83,7 @@ export default class ErrorBoundary extends React.Component {
             </p>
             <button
               onClick={this.handleReload}
-              className="w-full rounded-2xl bg-emerald-600 hover:bg-emerald-500 py-3 text-xs font-black text-white shadow-lg transition cursor-pointer"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full rounded-2xl bg-emerald-600 hover:bg-emerald-500 py-3 text-xs font-black text-white shadow-lg transition cursor-pointer"
             >
               Refresh Page
             </button>

@@ -25,7 +25,7 @@ export default function AdsRightPanel({
   ];
 
   return (
-    <aside className="space-y-4 lg:sticky lg:top-4 lg:self-start" aria-label="Ad insights">
+    <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded space-y-4 lg:sticky lg:top-4 lg:self-start" aria-label="Ad insights">
       <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface p-4 shadow-sm">
         <h3 className="text-sm font-bold mb-3">Ad Summary</h3>
         <ul className="space-y-2.5">
@@ -88,7 +88,7 @@ export default function AdsRightPanel({
         <button
           type="button"
           onClick={onViewAllPerformance}
-          className="mt-3 w-full rounded-xl border border-slate-200 py-2 text-xs font-semibold hover:bg-page"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-3 w-full rounded-xl border border-slate-200 py-2 text-xs font-semibold hover:bg-page"
         >
           View All Performance
         </button>

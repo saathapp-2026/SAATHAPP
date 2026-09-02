@@ -68,7 +68,7 @@ export default function AttendanceCard({
           {!attendance.isClockedIn ? (
             <button
               onClick={onClockIn}
-              className="w-full py-2.5 bg-primary hover:bg-primary-dark text-white font-extrabold text-xs uppercase tracking-wider rounded-btn flex items-center justify-center gap-1.5 cursor-pointer shadow-sm transition-colors"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-2.5 bg-primary hover:bg-primary-dark text-white font-extrabold text-xs uppercase tracking-wider rounded-btn flex items-center justify-center gap-1.5 cursor-pointer shadow-sm transition-colors"
             >
               <Play size={14} className="fill-white" />
               <span>Clock In</span>
@@ -76,7 +76,7 @@ export default function AttendanceCard({
           ) : (
             <button
               onClick={onClockOut}
-              className="w-full py-2.5 bg-rose-600 hover:bg-rose-750 text-white font-extrabold text-xs uppercase tracking-wider rounded-btn flex items-center justify-center gap-1.5 cursor-pointer shadow-sm transition-colors"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-2.5 bg-rose-600 hover:bg-rose-750 text-white font-extrabold text-xs uppercase tracking-wider rounded-btn flex items-center justify-center gap-1.5 cursor-pointer shadow-sm transition-colors"
             >
               <Square size={14} className="fill-white" />
               <span>Clock Out</span>

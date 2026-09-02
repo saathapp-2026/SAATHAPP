@@ -28,7 +28,7 @@ export default function WholesaleLayout({
   showBackLink = true,
 }) {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 flex flex-col">
+    <div className="min-h-screen bg-surface dark:bg-slate-950 flex flex-col">
       <Header
         cartCount={cartCount}
         onCartClick={onCartClick}
@@ -53,7 +53,7 @@ export default function WholesaleLayout({
 
       <main id="main-content" className="flex-1">
         {showBackLink && (
-          <div className="border-b border-slate-200/70 dark:border-slate-800/60 bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm">
+          <div className="border-b border-slate-200/70 dark:border-slate-800/60 bg-surface/80 dark:bg-slate-950/80 backdrop-blur-sm">
             <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
               <Link
                 to="/"

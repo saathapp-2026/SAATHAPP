@@ -179,7 +179,7 @@ export default function CustomerTable({
                   checked={allSelected}
                   onChange={onToggleSelectAll}
                   aria-label="Select all customers"
-                  className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
                 />
               </th>
               <SortTh label="Customer" sortKey="name" sortBy={sortBy} sortDir={sortDir} onSort={onSort} />

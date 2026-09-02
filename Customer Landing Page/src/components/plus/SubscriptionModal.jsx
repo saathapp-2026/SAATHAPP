@@ -74,7 +74,7 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlanId = 'p
             {step !== 'processing' && (
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-full hover:bg-page dark:hover:bg-slate-800 transition-colors text-theme-secondary dark:text-slate-400 cursor-pointer"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-full hover:bg-page dark:hover:bg-slate-800 transition-colors text-theme-secondary dark:text-slate-400 cursor-pointer"
               >
                 <X size={18} />
               </button>
@@ -271,13 +271,13 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlanId = 'p
                           <input
                             type="text"
                             placeholder="MM / YY"
-                            className="text-xs p-3 rounded-xl border border-theme-border bg-surface text-theme"
+                            className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none text-xs p-3 rounded-xl border border-theme-border bg-surface text-theme"
                           />
                           <input
                             type="password"
                             placeholder="CVV"
                             maxLength={4}
-                            className="text-xs p-3 rounded-xl border border-theme-border bg-surface text-theme"
+                            className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none text-xs p-3 rounded-xl border border-theme-border bg-surface text-theme"
                           />
                         </div>
                       </motion.div>
@@ -350,7 +350,7 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlanId = 'p
                   </button>
                   <button
                     type="submit"
-                    className="w-2/3 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white font-black text-xs shadow-lg hover:shadow-amber-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-2/3 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white font-black text-xs shadow-lg hover:shadow-amber-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <span>Pay ₹{priceToPay} & Activate</span>
                   </button>
@@ -411,7 +411,7 @@ export default function SubscriptionModal({ isOpen, onClose, selectedPlanId = 'p
                 <button
                   type="button"
                   onClick={handleFinishAndNavigate}
-                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white font-black text-sm shadow-lg hover:shadow-amber-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white font-black text-sm shadow-lg hover:shadow-amber-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Sparkles size={16} />
                   <span>Go to Membership Dashboard</span>

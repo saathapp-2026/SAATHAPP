@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bell, XCircle, Star, Info, Wallet } from 'lucide-react';
+import { EmptyState } from '../common/StateComponents';
 
 export default function NotificationPanel({
   notifications,
@@ -30,16 +31,18 @@ export default function NotificationPanel({
         </div>
         <button
           onClick={onClearAll}
-          className="text-[10px] font-black uppercase text-slate-400 hover:text-slate-600 cursor-pointer"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-[10px] font-black uppercase text-slate-400 hover:text-slate-600 cursor-pointer"
         >
           Clear Logs
         </button>
       </div>
 
       {notifications.length === 0 ? (
-        <div className="py-12 text-center text-slate-400 text-xs sm:text-sm font-semibold">
-          No new alerts. You're completely caught up!
-        </div>
+        <EmptyState 
+          icon={Bell} 
+          title="No notifications yet" 
+          description="We'll let you know when there's an update on your account."
+        />
       ) : (
         <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 scrollbar-none">
           {notifications.map((notif) => (

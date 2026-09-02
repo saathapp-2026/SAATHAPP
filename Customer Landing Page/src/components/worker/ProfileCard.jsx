@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { User, Briefcase, CreditCard, Shield, Check, Edit2, Lock } from 'lucide-react';
+import toast from 'react-hot-toast';
 export default function ProfileCard() {
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState({
@@ -40,7 +41,7 @@ export default function ProfileCard() {
   ];
 
   return (
-    <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left max-w-4xl">
+    <div className="bg-surface/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 sm:p-8 rounded-card shadow-soft text-left max-w-4xl">
       <div className="flex flex-col sm:flex-row sm:items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-800 mb-6">
         <div className="w-24 h-24 rounded-2xl overflow-hidden ring-4 ring-primary/15 shadow-premium shrink-0 bg-primary flex items-center justify-center text-white font-black text-4xl">
           SW
@@ -80,7 +81,7 @@ export default function ProfileCard() {
                       name={key}
                       value={formData[key]}
                       onChange={(e) => setFormData((prev) => ({ ...prev, [key]: e.target.value }))}
-                      className="w-full px-3 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-950 text-sm outline-none focus:border-primary/50"
+                      className="w-full px-3 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-surface dark:bg-slate-950 text-sm outline-none focus:border-primary/50"
                     />
                   ) : (
                     <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 bg-page dark:bg-slate-950/50 px-3 py-2.5 rounded-xl">
@@ -95,11 +96,11 @@ export default function ProfileCard() {
 
         <div className="flex flex-wrap gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
           {isEditing ? (
-            <button type="submit" className="px-6 py-2.5 bg-primary text-white rounded-xl text-xs font-black uppercase flex items-center gap-1.5">
+            <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-6 py-2.5 bg-primary text-white rounded-xl text-xs font-black uppercase flex items-center gap-1.5">
               <Check size={14} /> Save Changes
             </button>
           ) : (
-            <button type="button" onClick={() => alert('Password change flow would open here.')} className="px-6 py-2.5 border border-slate-200 rounded-xl text-xs font-black uppercase flex items-center gap-1.5 text-slate-600">
+            <button type="button" onClick={() => toast.success('Password change flow would open here.') } className="px-6 py-2.5 border border-slate-200 rounded-xl text-xs font-black uppercase flex items-center gap-1.5 text-slate-600">
               <Lock size={14} /> Change Password
             </button>
           )}

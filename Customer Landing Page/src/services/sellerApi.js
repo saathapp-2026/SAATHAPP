@@ -27,7 +27,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-function delay(ms = 400) {
+function delay(ms = 0) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 

@@ -2,25 +2,7 @@ import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { SELLER_Z } from '../../config/seller/sellerZIndex';
 
-/** Lock body scroll while any overlay is mounted. */
-export function useScrollLock(locked) {
-  useEffect(() => {
-    if (!locked) return undefined;
-    const { overflow, paddingRight } = document.body.style;
-    const scrollbar = window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.overflow = 'hidden';
-    if (scrollbar > 0) document.body.style.paddingRight = `${scrollbar}px`;
-    document.body.dataset.sellerOverlay = String(Number(document.body.dataset.sellerOverlay || 0) + 1);
-    return () => {
-      const next = Math.max(0, Number(document.body.dataset.sellerOverlay || 1) - 1);
-      document.body.dataset.sellerOverlay = String(next);
-      if (next === 0) {
-        document.body.style.overflow = overflow;
-        document.body.style.paddingRight = paddingRight;
-      }
-    };
-  }, [locked]);
-}
+import useScrollLock from '../../hooks/useScrollLock';
 
 /**
  * Renders overlay into document.body so sticky headers / toolbars
@@ -35,8 +17,20 @@ export default function SellerOverlay({
   label,
   className = 'flex items-center justify-center p-4',
   contentClassName = '',
+  preventBackdropClose = false,
 }) {
   useScrollLock(!!open);
+  
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose?.();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [open, onClose]);
 
   if (!open) return null;
 
@@ -49,12 +43,11 @@ export default function SellerOverlay({
       aria-labelledby={labelledBy}
       aria-label={label}
     >
-      <button
-        type="button"
-        className="absolute inset-0 bg-black/50"
+      <div
+        className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md cursor-pointer active:scale-[0.99] absolute inset-0 bg-black/50"
         style={{ zIndex: 0 }}
         aria-label="Close dialog"
-        onClick={onClose}
+        onClick={() => { if (!preventBackdropClose) onClose?.() }}
       />
       <div className={`relative ${contentClassName}`} style={{ zIndex: 1 }}>
         {children}

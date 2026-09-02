@@ -8,7 +8,7 @@ import { PROFESSIONAL_STORAGE_KEYS } from '../config/professionalOnboardingConfi
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://api.saathapp.in/v1';
 
-function delay(ms = 400) {
+function delay(ms = 0) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 

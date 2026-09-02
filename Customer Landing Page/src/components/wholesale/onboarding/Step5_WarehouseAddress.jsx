@@ -115,7 +115,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
             type="button"
             onClick={handleDetectGps}
             disabled={isGpsLoading}
-            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-2.5 text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition"
+            className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-2.5 text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition"
           >
             <Navigation size={14} className={isGpsLoading ? 'animate-spin' : ''} />
             {isGpsLoading ? 'Detecting GPS...' : 'Detect GPS Location'}
@@ -212,7 +212,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
                   type="checkbox"
                   checked={formData.sameAsRegistered}
                   onChange={handleToggleSameAsRegistered}
-                  className="rounded text-emerald-600 focus:ring-emerald-500"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none rounded text-emerald-600 focus:ring-emerald-500"
                 />
                 Same as Registered Address
               </label>
@@ -284,7 +284,7 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
               <button
                 type="button"
                 onClick={handleAddWarehouse}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-3.5 py-2 text-xs font-bold text-white transition shadow"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-3.5 py-2 text-xs font-bold text-white transition shadow"
               >
                 <Plus size={14} /> Add Warehouse
               </button>
@@ -319,14 +319,14 @@ export default function Step5_WarehouseAddress({ onNext, onPrev }) {
             <button
               type="button"
               onClick={onPrev}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-page transition"
             >
               <ArrowLeft size={16} />
               Previous
             </button>
             <button
               type="submit"
-              className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-extrabold text-white shadow-lg transition hover:scale-[1.02]"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-extrabold text-white shadow-lg transition hover:scale-[1.02]"
             >
               Save & Next Phase
               <ArrowRight size={16} />

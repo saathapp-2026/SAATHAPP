@@ -66,7 +66,7 @@ export default function Submitted() {
           type="button"
           onClick={handleCheckStatus}
           disabled={checking}
-          className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/15 transition-colors mb-3 disabled:opacity-50"
+          className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/15 transition-colors mb-3 disabled:opacity-50"
         >
           <RefreshCw size={18} className={checking ? 'animate-spin' : ''} />
           {checking ? 'Checking Status...' : 'Check Verification Status'}

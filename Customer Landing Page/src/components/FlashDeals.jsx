@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { Timer, ShoppingCart, Heart, Eye, Star, Flame } from 'lucide-react';
 // Removed mockData dependency
 
-export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
+export default function FlashDeals({ onAddToCart, cartItems }) {
   const navigate = useNavigate();
-  const [flashDeals, setFlashDeals] = useState(Array.from({ length: 5 }, (_, i) => ({
-    id: `placeholder-${i}`,
+  const [flashDeals] = useState(Array.from({ length: 5 }, (_, i) => ({
+    id: `skeleton-${i}`,
     name: '\u00A0',
     price: '0',
     oldPrice: '0',
@@ -42,32 +42,52 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
 
   return (
     <section className="py-10 bg-page  border-b border-slate-100 ">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="saath-container">
         
-        {/* Section Header with Countdown Timer */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-          <div className="text-left flex flex-wrap items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-danger/10 flex items-center justify-center text-danger animate-pulse">
-              <Flame size={20} fill="currentColor" />
+        {/* Section Header with Countdown Timer & See All */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
+          <div className="flex items-start justify-between w-full sm:w-auto">
+            <div className="text-left flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-danger/10 flex items-center justify-center text-danger animate-pulse shrink-0">
+                <Flame size={20} fill="currentColor" />
+              </div>
+              <div>
+                <span className="text-[10px] sm:text-xs font-extrabold text-danger tracking-wider uppercase block">Rush Hours</span>
+                <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-0.5 leading-tight">Flash Deals</h2>
+              </div>
             </div>
-            <div>
-              <span className="text-xs font-extrabold text-danger tracking-wider uppercase block">Rush Hours</span>
-              <h2 className="text-2xl font-black text-slate-900 dark:text-white mt-0.5">Flash Deals Today</h2>
-            </div>
+            
+            {/* Mobile See All */}
+            <button 
+              onClick={() => navigate('/flash-deals')}
+              className="sm:hidden text-[11px] font-bold text-primary flex items-center gap-1 mt-2 hover:underline active:text-primary-dark transition-colors"
+            >
+              See All <span className="text-lg leading-none mb-0.5">›</span>
+            </button>
           </div>
 
-          {/* Countdown Clock Widget */}
-          <div className="flex items-center gap-2 bg-danger text-white py-2 px-4 rounded-btn shadow-md text-sm font-extrabold">
-            <Timer size={16} className="animate-spin-slow" />
-            <span>ENDS IN:</span>
-            <span className="font-mono text-base tracking-wider bg-black/20 py-0.5 px-2 rounded-md">
-              {formatTime(timeLeft)}
-            </span>
-          </div>
+          <div className="flex items-center gap-3 justify-between sm:justify-end">
+            {/* Countdown Clock Widget */}
+            <div className="flex items-center gap-1.5 sm:gap-2 bg-danger text-white py-1 sm:py-2 px-2.5 sm:px-4 rounded-lg sm:rounded-btn shadow-sm sm:shadow-md text-[9px] sm:text-sm font-bold sm:font-extrabold w-max">
+              <Timer size={14} className="animate-spin-slow sm:w-4 sm:h-4" />
+              <span className="opacity-90">ENDS IN:</span>
+              <span className="font-mono text-xs sm:text-base tracking-widest sm:tracking-wider bg-black/20 py-0.5 px-1.5 sm:px-2 rounded sm:rounded-md ml-0.5">
+                {formatTime(timeLeft)}
+              </span>
+            </div>
+
+          {/* Desktop See All */}
+          <button 
+            onClick={() => navigate('/flash-deals')}
+            className="hidden sm:flex text-sm font-bold text-primary items-center gap-1 hover:underline active:text-primary-dark transition-colors"
+          >
+            See All <span className="text-xl leading-none mb-0.5">›</span>
+          </button>
         </div>
+      </div>
 
-        {/* Horizontal Slider Layout */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+      {/* Horizontal Slider Layout */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-6">
           {flashDeals.length === 0 ? (
             <div className="col-span-full py-10 text-center text-sm font-semibold text-slate-400">
               No active flash deals at the moment.
@@ -97,7 +117,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                   <motion.button 
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="w-7.5 h-7.5 rounded-full bg-white/95 text-slate-400 hover:text-danger flex items-center justify-center shadow-md border border-slate-100"
+                    className="w-7.5 h-7.5 rounded-full bg-surface/95 text-slate-400 hover:text-danger flex items-center justify-center shadow-md border border-slate-100"
                     title="Add to Wishlist"
                   >
                     <Heart size={14} />
@@ -106,7 +126,7 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                     onClick={() => navigate(`/product/${deal.slug || deal.id}`)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="w-7.5 h-7.5 rounded-full bg-white/95 text-slate-400 hover:text-primary flex items-center justify-center shadow-md border border-slate-100"
+                    className="w-7.5 h-7.5 rounded-full bg-surface/95 text-slate-400 hover:text-primary flex items-center justify-center shadow-md border border-slate-100"
                     title="Quick View"
                   >
                     <Eye size={14} />
@@ -120,12 +140,12 @@ export default function FlashDeals({ onAddToCart, onQuickView, cartItems }) {
                       <img 
                         src={deal.image} 
                         alt={deal.name} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
                       />
                     )}
                     
                     {/* Delivery Time Badge */}
-                    <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200/30">
+                    <div className="absolute bottom-2 left-2 bg-surface/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 dark:text-slate-200 border border-slate-200/30">
                       ⏱ {deal.deliveryTime}
                     </div>
                   </div>

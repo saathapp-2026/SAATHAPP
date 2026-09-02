@@ -30,7 +30,7 @@ export default function PerformanceCard() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05 }}
               whileHover={{ y: -3 }}
-              className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-5 rounded-card shadow-soft hover:shadow-premium transition-all"
+              className="bg-surface/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-5 rounded-card shadow-soft hover:shadow-premium transition-all"
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">{m.label}</span>
@@ -44,7 +44,7 @@ export default function PerformanceCard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
+        <div className="lg:col-span-2 bg-surface/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider">Leaderboard</h3>
             <span className="text-[10px] font-bold text-slate-400">Rank - of -</span>
@@ -52,7 +52,7 @@ export default function PerformanceCard() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-100 dark:border-slate-800 text-[10px] font-black uppercase text-slate-400">
+                <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800 text-[10px] font-black uppercase text-slate-400">
                   <th className="pb-3 pr-4">Rank</th>
                   <th className="pb-3 pr-4">Worker</th>
                   <th className="pb-3 pr-4">Skill</th>
@@ -83,7 +83,7 @@ export default function PerformanceCard() {
           </div>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
+        <div className="bg-surface/80 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800 p-6 rounded-card shadow-soft">
           <h3 className="text-sm font-black text-slate-800 dark:text-white uppercase tracking-wider mb-4">Achievement Badges</h3>
           <div className="space-y-4">
             {badges.length === 0 ? (

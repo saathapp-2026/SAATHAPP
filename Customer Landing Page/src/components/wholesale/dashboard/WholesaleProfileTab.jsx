@@ -112,19 +112,19 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
             <div>
               <label className="block font-bold text-slate-400 uppercase mb-1">Company Legal Name</label>
-              <input type="text" readOnly value={profile.companyName} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 font-bold text-slate-900 dark:text-white" />
+              <input type="text" readOnly value={profile.companyName} className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 font-bold text-slate-900 dark:text-white" />
             </div>
             <div>
               <label className="block font-bold text-slate-400 uppercase mb-1">Trade / Brand Name</label>
-              <input type="text" readOnly value={profile.tradeName} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 font-bold text-slate-900 dark:text-white" />
+              <input type="text" readOnly value={profile.tradeName} className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 font-bold text-slate-900 dark:text-white" />
             </div>
             <div>
               <label className="block font-bold text-slate-400 uppercase mb-1">GSTIN Identifier</label>
-              <input type="text" readOnly value={profile.gstin} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 font-mono font-bold text-emerald-500" />
+              <input type="text" readOnly value={profile.gstin} className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 font-mono font-bold text-emerald-500" />
             </div>
             <div>
               <label className="block font-bold text-slate-400 uppercase mb-1">Trade License Number</label>
-              <input type="text" readOnly value={profile.tradeLicense} className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 font-mono font-bold text-slate-900 dark:text-white" />
+              <input type="text" readOnly value={profile.tradeLicense} className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-page dark:bg-slate-950 p-3 font-mono font-bold text-slate-900 dark:text-white" />
             </div>
           </div>
         </div>
@@ -489,7 +489,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
               <button
                 type="button"
                 onClick={handleConfirmLogout}
-                className="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black cursor-pointer shadow active:scale-95 transition"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black cursor-pointer shadow active:scale-95 transition"
               >
                 Confirm Logout
               </button>
@@ -581,7 +581,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
                 <p className="text-[11px] text-emerald-300 font-semibold pt-1">Authorized Wholesale Supplier Badge</p>
               </div>
 
-              <div className="w-12 h-12 bg-white p-1 rounded-xl mx-auto shadow-md">
+              <div className="w-12 h-12 bg-surface p-1 rounded-xl mx-auto shadow-md">
                 <QrCode size={40} className="text-slate-950" />
               </div>
             </div>
@@ -653,7 +653,7 @@ export default function WholesaleProfileTab({ onSelectTab, onLogout, initialSubT
                   type="file"
                   id="wholesalePhotoFileInput"
                   accept="image/*"
-                  className="hidden"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden"
                   onChange={(e) => {
                     if (e.target.files && e.target.files[0]) {
                       const file = e.target.files[0];

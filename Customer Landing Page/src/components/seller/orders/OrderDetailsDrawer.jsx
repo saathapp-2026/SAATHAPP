@@ -45,8 +45,8 @@ export default function OrderDetailsDrawer({
 
   return (
     <div className="fixed inset-0 z-[70]" role="dialog" aria-modal="true" aria-labelledby="order-drawer-title">
-      <button type="button" className="absolute inset-0 bg-black/40" aria-label="Close panel" onClick={onClose} />
-      <aside className="absolute right-0 top-0 h-full w-full max-w-md bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
+      <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute inset-0 bg-black/40" aria-label="Close panel" onClick={onClose} />
+      <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded absolute right-0 top-0 h-full w-full max-w-md bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
         {/* Header */}
         <header className="flex items-start justify-between gap-3 p-4 border-b border-slate-200 dark:border-slate-800 shrink-0">
           <div>
@@ -56,7 +56,7 @@ export default function OrderDetailsDrawer({
             </div>
             <p className="text-xs text-slate-500 mt-0.5">{order.invoiceNumber}</p>
           </div>
-          <button type="button" onClick={onClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </header>

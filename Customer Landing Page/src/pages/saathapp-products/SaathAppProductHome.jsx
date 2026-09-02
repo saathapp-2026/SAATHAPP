@@ -33,7 +33,7 @@ export default function SaathAppProductHome({
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-surface text-slate-800 dark:text-slate-100 transition-colors duration-300">
       <Header
         cartCount={cartCount}
         onCartClick={onCartClick}
@@ -83,7 +83,7 @@ export default function SaathAppProductHome({
                 <h3 className="text-2xl font-bold mb-2">NORMAL PRODUCTS</h3>
                 <p className="text-lg font-medium text-slate-700 dark:text-slate-300 mb-4">Made for Everyone.</p>
                 <p className="text-slate-600 dark:text-slate-400 mb-6">Affordable, reliable and quality-assured products designed for everyday use.</p>
-                <button className="bg-primary text-white px-6 py-3 rounded-lg font-semibold w-full sm:w-auto hover:bg-primary/90 transition-colors">
+                <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none bg-primary text-white px-6 py-3 rounded-lg font-semibold w-full sm:w-auto hover:bg-primary/90 transition-colors">
                   Explore Normal Products
                 </button>
               </div>
@@ -107,7 +107,7 @@ export default function SaathAppProductHome({
                 </div>
                 <p className="text-lg font-medium text-slate-300 mb-4">Made for Those Who Value More.</p>
                 <p className="text-slate-400 mb-6">Superior materials, refined design and genuinely limited availability.</p>
-                <button className="bg-amber-500 text-slate-900 px-6 py-3 rounded-lg font-semibold w-full sm:w-auto hover:bg-amber-400 transition-colors">
+                <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none bg-amber-500 text-slate-900 px-6 py-3 rounded-lg font-semibold w-full sm:w-auto hover:bg-amber-400 transition-colors">
                   Explore Premium Products
                 </button>
               </div>
@@ -130,7 +130,7 @@ export default function SaathAppProductHome({
         </section>
 
         <section className="flex flex-col md:flex-row gap-8">
-          <aside className="w-full md:w-64 shrink-0 space-y-8">
+          <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded w-full md:w-64 shrink-0 space-y-8">
             <div>
               <h3 className="font-bold text-lg mb-4">Categories</h3>
               <ul className="space-y-3">
@@ -146,7 +146,7 @@ export default function SaathAppProductHome({
             </div>
             
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
-              <h3 className="font-bold text-lg mb-4">Why SaathApp Products?</h3>
+              <h3 className="font-bold text-lg mb-4 text-theme">Why SaathApp Products?</h3>
               <ul className="space-y-4">
                 <li className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
                   <div className="w-1.5 h-1.5 rounded-full bg-slate-300"></div> Designed by SaathApp
@@ -169,15 +169,15 @@ export default function SaathAppProductHome({
           
           <div className="flex-1">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-              <h2 className="text-2xl font-bold">All SaathApp Products</h2>
+              <h2 className="text-3xl font-black text-theme">All SaathApp Products</h2>
               <div className="flex items-center gap-2">
                 <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
-                  <button className="px-4 py-1.5 text-sm font-semibold bg-white dark:bg-slate-700 rounded-md shadow-sm">All</button>
-                  <button className="px-4 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-300">New Arrivals</button>
-                  <button className="px-4 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-300">Best Sellers</button>
-                  <button className="px-4 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-300">On Sale</button>
+                  <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-1.5 text-sm font-semibold bg-white dark:bg-slate-700 rounded-md shadow-sm">All</button>
+                  <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-300">New Arrivals</button>
+                  <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-300">Best Sellers</button>
+                  <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-300">On Sale</button>
                 </div>
-                <select className="bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm font-medium py-2 px-3 outline-none focus:ring-2 focus:ring-primary">
+                <select className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm font-medium py-2 px-3 outline-none focus:ring-2 focus:ring-primary">
                   <option>Sort by: Popular</option>
                   <option>Price: Low to High</option>
                   <option>Price: High to Low</option>

@@ -18,7 +18,7 @@ const customerData = [
   { name: 'Segment C', value: 1, color: '#f1f5f9' },
 ];
 const productData = Array.from({ length: 3 }, (_, i) => ({
-  id: `placeholder-${i}`,
+  id: crypto.randomUUID(),
   name: '\u00A0',
   sales: 0,
   revenue: 0,
@@ -131,7 +131,7 @@ export function ProductsAnalyticsPlaceholder() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {productData.map(item => (
-                <tr key={item.id} className="hover:bg-page">
+                <tr key={item.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-page">
                   <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">{item.name}</td>
                   <td className="px-6 py-4 text-right text-slate-600 dark:text-slate-400">{item.sales}</td>
                   <td className="px-6 py-4 text-right text-slate-600 dark:text-slate-400">₹{item.revenue.toLocaleString('en-IN')}</td>
@@ -222,7 +222,7 @@ export function FinancialAnalyticsPlaceholder() {
             ))}
           </div>
           <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-end">
-            <button className="px-4 py-2 text-sm font-medium text-emerald-700 bg-emerald-50 dark:bg-emerald-900/30 dark:text-emerald-400 rounded-lg hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors">
+            <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 text-sm font-medium text-emerald-700 bg-emerald-50 dark:bg-emerald-900/30 dark:text-emerald-400 rounded-lg hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors">
               Download Tax Report
             </button>
           </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, MapPin, Calendar, Clock, ChevronDown, ChevronUp, CheckCircle, Navigation, Play } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function BookingCard({
   booking,
@@ -206,7 +207,7 @@ export default function BookingCard({
                     <span className="text-[10px] font-black uppercase text-slate-400 block">Notes & Attachments</span>
                     <p className="text-xs text-slate-500 mt-1">{booking.notes || 'No additional notes provided by customer.'}</p>
                     <div className="flex gap-2 mt-2">
-                      <button className="px-2 py-1 text-[9px] border border-slate-200 rounded-md bg-page text-slate-500">View Photo 1</button>
+                      <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-2 py-1 text-[9px] border border-slate-200 rounded-md bg-page text-slate-500">View Photo 1</button>
                     </div>
                   </div>
                 </div>
@@ -217,12 +218,12 @@ export default function BookingCard({
                     <span className="font-bold text-slate-800 dark:text-slate-205">{booking.customerPhone}</span>
                     <a
                       href={`tel:${booking.customerPhone}`}
-                      className="px-2.5 py-1 rounded-full bg-page hover:bg-primary hover:text-white text-slate-500 font-extrabold text-[10px] transition-colors"
+                      className="hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-2.5 py-1 rounded-full bg-page hover:bg-primary hover:text-white text-slate-500 font-extrabold text-[10px] transition-colors"
                     >
                       Call User
                     </a>
                     <button
-                      onClick={() => alert('Chat interface opened.')}
+                      onClick={() => toast.success('Chat interface opened.') }
                       className="px-2.5 py-1 rounded-full bg-page hover:bg-primary hover:text-white text-slate-500 font-extrabold text-[10px] transition-colors cursor-pointer"
                     >
                       Chat
@@ -255,7 +256,7 @@ export default function BookingCard({
                     />
                     <button
                       type="submit"
-                      className="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-black uppercase cursor-pointer"
+                      className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-black uppercase cursor-pointer"
                     >
                       Verify & Start
                     </button>

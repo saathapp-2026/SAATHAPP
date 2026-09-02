@@ -111,7 +111,7 @@ function PopularArticles() {
               onClick={() => setSelectedArticle(article)}
               className="
                 group cursor-pointer
-                bg-white
+                bg-surface
                 border border-[#EEF2F7]
                 rounded-[20px]
                 p-[28px]
@@ -173,7 +173,7 @@ function PopularArticles() {
                 relative w-full max-w-2xl
                 max-h-[85vh] overflow-y-auto
                 rounded-[20px] border border-[#E2E8F0]
-                bg-white p-8 shadow-2xl
+                bg-surface p-8 shadow-2xl
               "
             >
               <button

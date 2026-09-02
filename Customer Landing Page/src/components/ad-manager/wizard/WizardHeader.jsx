@@ -1,15 +1,15 @@
 import React from 'react';
 import { Bell, HelpCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import logoUrl from '../../../assets/saathapp-logo.jpeg';
+import logoUrl from '../../../assets/saathapp-logo.png';
 
 const NAV_ITEMS = [
   { label: 'Marketing', path: '/seller/marketing', active: true }
 ];
 
-export default function WizardHeader({ user, onBack }) {
+export default function WizardHeader({ user }) {
   return (
-    <div className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm px-4 sm:px-6 lg:px-8">
+    <div className="sticky top-0 z-50 bg-surface border-b border-slate-200 shadow-sm px-4 sm:px-6 lg:px-8">
       <div className="max-w-[1600px] mx-auto h-16 flex items-center justify-between">
         
         {/* Left - Logo */}
@@ -36,14 +36,14 @@ export default function WizardHeader({ user, onBack }) {
 
         {/* Right - Profile & Actions */}
         <div className="flex items-center gap-4">
-          <button className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold text-[#15803D] border border-[#15803D] rounded-full hover:bg-emerald-50 transition-colors">
+          <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold text-[#15803D] border border-[#15803D] rounded-full hover:bg-emerald-50 transition-colors">
             <HelpCircle size={16} />
             How Advertising Works?
           </button>
           
           <div className="w-px h-6 bg-slate-200 hidden sm:block" />
           
-          <button className="relative p-2 text-slate-400 hover:bg-page rounded-full transition-colors">
+          <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none relative p-2 text-slate-400 hover:bg-page rounded-full transition-colors">
             <Bell size={20} />
             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white" />
           </button>

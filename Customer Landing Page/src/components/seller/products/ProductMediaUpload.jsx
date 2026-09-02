@@ -121,6 +121,7 @@ function ImageSlot({ item, label, onRemove, onReplace, large, disabled }) {
       return;
     }
     setReading(true);
+    const originalItem = item;
     const id = `img_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
     let blobUrl = '';
     try {
@@ -148,8 +149,18 @@ function ImageSlot({ item, label, onRemove, onReplace, large, disabled }) {
       toast.success('Image uploaded');
     } catch (err) {
       console.error('[ImageSlot] upload failed', err);
-      toast.error('Failed to read image. Try JPG or PNG.');
-      onReplace(null);
+      toast.error('Upload service unavailable. Please try again later.');
+      onReplace({
+        id,
+        url: blobUrl,
+        name: file.name || 'image.jpg',
+        progress: 0,
+        error: true,
+        mimeType: file.type || 'image/jpeg',
+        size: file.size,
+      });
+      // Do not revoke blobUrl on failure so we can show preview
+      blobUrl = '';
     } finally {
       if (blobUrl) URL.revokeObjectURL(blobUrl);
       setReading(false);
@@ -166,22 +177,27 @@ function ImageSlot({ item, label, onRemove, onReplace, large, disabled }) {
     >
       {hasImage ? (
         <>
-          <img src={item.url} alt={item.name || label} className="absolute inset-0 h-full w-full object-cover" />
+          <img src={item.url} alt={item.name || label} className="absolute inset-0 h-full w-full object-contain p-1.5" />
           {typeof item.progress === 'number' && item.progress < 100 && (
             <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-200/80 z-10">
               <div className="h-full bg-emerald-500 transition-all" style={{ width: `${item.progress}%` }} />
             </div>
           )}
-          {reading && (
+          {reading && !item.error && (
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center z-20">
               <Loader2 size={22} className="text-white animate-spin" />
             </div>
           )}
+          {item.error && (
+            <div className="absolute inset-0 bg-red-500/20 flex flex-col items-center justify-center z-20 backdrop-blur-[2px]">
+              <span className="text-white bg-red-600 px-2 py-1 rounded text-[10px] font-bold mb-1">Upload Failed</span>
+            </div>
+          )}
           <div className="absolute top-1 right-1 flex gap-1 z-20">
-            <button type="button" onClick={openPicker} disabled={disabled || reading} className="h-6 px-2 rounded bg-white/95 text-[10px] font-semibold shadow">
+            <button type="button" onClick={openPicker} disabled={disabled || reading} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none h-6 px-2 rounded bg-surface/95 text-[10px] font-semibold shadow">
               Replace
             </button>
-            <button type="button" onClick={() => onRemove?.()} disabled={disabled || reading} className="h-6 w-6 rounded bg-white/95 inline-flex items-center justify-center shadow" aria-label="Remove">
+            <button type="button" onClick={() => onRemove?.()} disabled={disabled || reading} className="h-6 w-6 rounded bg-surface/95 inline-flex items-center justify-center shadow" aria-label="Remove">
               <X size={12} />
             </button>
           </div>
@@ -196,7 +212,7 @@ function ImageSlot({ item, label, onRemove, onReplace, large, disabled }) {
           type="button"
           onClick={openPicker}
           disabled={disabled || reading}
-          className="absolute inset-0 flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20 disabled:opacity-50"
+          className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute inset-0 flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20 disabled:opacity-50"
         >
           {reading ? <Loader2 size={large ? 28 : 18} className="animate-spin" /> : <ImagePlus size={large ? 28 : 18} />}
           <span className="text-[10px] font-medium">{reading ? 'Uploading…' : label}</span>
@@ -206,7 +222,7 @@ function ImageSlot({ item, label, onRemove, onReplace, large, disabled }) {
         ref={inputRef}
         type="file"
         accept="image/*,.jpg,.jpeg,.png,.webp,.gif,.bmp,.heic,.heif"
-        className="sr-only"
+        className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none disabled:bg-slate-50 disabled:cursor-not-allowed sr-only"
         tabIndex={-1}
         disabled={disabled || reading}
         onChange={async (e) => {
@@ -280,8 +296,7 @@ export default function ProductMediaUpload({ value, errors = {}, onChange, onUpl
         });
       }
       commit((prev) => ({ ...prev, gallery: current.slice(0, 10) }));
-      toast.success(`Added ${Math.min(fileList.length, 10)} gallery image(s)`);
-    } catch {
+      toast.success(`Added ${Math.min(fileList.length, 10)} gallery image(s)`) } catch {
       toast.error('Gallery upload failed');
     } finally {
       setUploading(false);
@@ -315,8 +330,7 @@ export default function ProductMediaUpload({ value, errors = {}, onChange, onUpl
         enhance: 'Enhanced',
         removeBg: 'Background cleaned',
       };
-      toast.success(labels[action] || 'Image updated');
-    } catch (err) {
+      toast.success(labels[action] || 'Image updated') } catch (err) {
       console.error('[media tool]', action, err);
       toast.error(`Could not apply ${action}`);
     } finally {
@@ -335,7 +349,7 @@ export default function ProductMediaUpload({ value, errors = {}, onChange, onUpl
         )}
 
         <div
-          onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+          onDragOver={(e) => { e.preventDefault(); setDragOver(true) }}
           onDragLeave={() => setDragOver(false)}
           onDrop={async (e) => {
             e.preventDefault();
@@ -399,7 +413,7 @@ export default function ProductMediaUpload({ value, errors = {}, onChange, onUpl
               type="file"
               accept="image/*,.jpg,.jpeg,.png,.webp,.gif"
               multiple
-              className="hidden"
+              className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden"
               onChange={(e) => {
                 addGallery(e.target.files);
                 e.target.value = '';
@@ -480,7 +494,7 @@ export default function ProductMediaUpload({ value, errors = {}, onChange, onUpl
               value={media.youtubeUrl || ''}
               onChange={(e) => commit((prev) => ({ ...prev, youtubeUrl: e.target.value }))}
               placeholder="https://youtube.com/watch?v=…"
-              className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white dark:bg-slate-950 text-sm"
+              className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-surface dark:bg-slate-950 text-sm"
             />
           </div>
           <div>

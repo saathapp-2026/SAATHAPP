@@ -14,14 +14,14 @@ export default function DashboardLayout({ seller, onLogout }) {
     <div className="min-h-screen bg-page dark:bg-slate-950 flex">
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md cursor-pointer active:scale-[0.99] fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
           aria-hidden="true"
         />
       )}
 
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 bg-surface border-r border-slate-200 dark:border-slate-800 transform transition-all lg:translate-x-0 flex flex-col ${
+        className={`transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded fixed lg:static inset-y-0 left-0 z-50 bg-surface border-r border-slate-200 dark:border-slate-800 transform transition-all lg:translate-x-0 flex flex-col ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } ${sidebarCollapsed ? 'w-16 lg:w-16' : 'w-64'}`}
         aria-label="Seller dashboard navigation"
@@ -34,13 +34,13 @@ export default function DashboardLayout({ seller, onLogout }) {
           <div className="flex items-center gap-1">
             <button
               type="button"
-              className="hidden lg:flex p-1 rounded-lg hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="transition-all duration-200 active:scale-[0.98] hidden lg:flex p-1 rounded-lg hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500"
               onClick={toggleSidebarCollapsed}
               aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             >
               {sidebarCollapsed ? <PanelLeft size={18} /> : <PanelLeftClose size={18} />}
             </button>
-            <button type="button" className="lg:hidden p-1" onClick={() => setSidebarOpen(false)} aria-label="Close menu">
+            <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none lg:hidden p-1" onClick={() => setSidebarOpen(false)} aria-label="Close menu">
               <X size={20} />
             </button>
           </div>
@@ -81,7 +81,7 @@ export default function DashboardLayout({ seller, onLogout }) {
           <button
             type="button"
             onClick={onLogout}
-            className={`flex items-center gap-2 w-full text-sm text-red-500 hover:text-red-600 font-medium focus:outline-none focus:ring-2 focus:ring-red-500 rounded ${sidebarCollapsed ? 'justify-center' : ''}`}
+            className={`transition-all duration-200 active:scale-[0.98] flex items-center gap-2 w-full text-sm text-red-500 hover:text-red-600 font-medium focus:outline-none focus:ring-2 focus:ring-red-500 rounded ${sidebarCollapsed ? 'justify-center' : ''}`}
             aria-label="Logout"
           >
             <LogOut size={16} />

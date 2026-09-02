@@ -5,11 +5,9 @@ import LocationBar from '../components/LocationBar';
 import HeroSection from '../components/HeroSection';
 import Categories from '../components/Categories';
 import FlashDeals from '../components/FlashDeals';
-import FeaturedProducts from '../components/FeaturedProducts';
 import NearbyShops from '../components/NearbyShops';
 import ServiceSection from '../components/ServiceSection';
-import Advertisements from '../components/Advertisements';
-import LiveStats from '../components/LiveStats';
+
 import BecomePartner from '../components/BecomePartner';
 import SaathAppPlusHomeSection from '../components/plus/SaathAppPlusHomeSection';
 import ShopMoreHomePromo from '../components/ShoppingJourney/ShopMoreHomePromo';
@@ -88,7 +86,7 @@ export default function Home({
   const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen flex flex-col justify-between overflow-x-hidden bg-background text-slate-800 dark:text-slate-100 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col justify-between overflow-x-hidden bg-page dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
       <Header
         cartCount={cartCount}
         onCartClick={onCartClick}
@@ -120,13 +118,12 @@ export default function Home({
       />
 
       <main className="flex-1">
+        
         <HeroSection
           onShopNow={() => document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' })}
           onBookService={() => document.getElementById('services-section')?.scrollIntoView({ behavior: 'smooth' })}
           onBecomeSeller={() => document.getElementById('partner-section')?.scrollIntoView({ behavior: 'smooth' })}
         />
-
-
 
         <div id="categories-section">
           <Categories
@@ -148,29 +145,21 @@ export default function Home({
         <NearbyShops onShopSelect={onShopSelect} />
 
         <div id="products-section">
-          <FeaturedProducts
-            onAddToCart={handleAddToCart}
-            onQuickView={setQuickViewProduct}
-            cartItems={cartItems}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            searchQuery={searchQuery}
-          />
         </div>
 
         <div id="services-section">
           <ServiceSection onBookService={onServiceBook} />
         </div>
 
-        <div className="w-full px-4 sm:px-6 py-12">
+        <div className="saath-container py-12">
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-10">
             <SaathAppPlusHomeSection />
             <ShopMoreHomePromo />
           </div>
         </div>
 
-        <Advertisements />
-        <LiveStats />
+
+
 
         <div id="partner-section">
           <BecomePartner onBecomePartnerSelect={onBecomePartnerSelect} />
@@ -185,7 +174,7 @@ export default function Home({
 
       {cartCount > 0 && !isCartOpen && (
         <motion.div initial={{ scale: 0, y: 50 }} animate={{ scale: 1, y: 0 }} className="hidden md:block fixed bottom-6 right-6 z-40">
-          <button onClick={onCartPage} className="flex items-center gap-3 bg-gradient-primary text-white py-3.5 px-6 rounded-full shadow-premium hover:shadow-glow-primary transition-all font-black text-sm cursor-pointer">
+          <button onClick={onCartPage} className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex items-center gap-3 bg-gradient-primary text-white py-3.5 px-6 rounded-full shadow-premium hover:shadow-glow-primary transition-all font-black text-sm cursor-pointer">
             <div className="relative">
               <ShoppingCart size={18} />
               <span className="absolute -top-2.5 -right-2 bg-secondary text-slate-900 border border-primary font-black text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center">

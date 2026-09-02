@@ -51,7 +51,7 @@ function pushAudit(entry) {
 
 function seedDocuments() {
   return Array.from({ length: 3 }, (_, i) => ({
-    id: `placeholder-doc-${i}`,
+    id: crypto.randomUUID(),
     name: '\u00A0',
     categoryId: 'kyc',
     typeId: 'aadhaar',

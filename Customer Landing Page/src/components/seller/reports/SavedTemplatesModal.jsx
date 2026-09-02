@@ -53,7 +53,7 @@ export default function SavedTemplatesModal({ open, onClose, onApply, draftSeed 
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">Reuse filter combinations</p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -68,7 +68,7 @@ export default function SavedTemplatesModal({ open, onClose, onApply, draftSeed 
           <button
             type="button"
             onClick={create}
-            className="rounded-xl bg-emerald-600 text-white px-3 py-2 text-xs font-semibold"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-xl bg-emerald-600 text-white px-3 py-2 text-xs font-semibold"
           >
             Save Current
           </button>
@@ -100,8 +100,7 @@ export default function SavedTemplatesModal({ open, onClose, onApply, draftSeed 
                       onClick={() => {
                         onApply?.(t);
                         onClose?.();
-                        toast.success('Template applied');
-                      }}
+                        toast.success('Template applied') }}
                       className="p-1.5 rounded-lg hover:bg-page"
                     >
                       <Copy size={14} />

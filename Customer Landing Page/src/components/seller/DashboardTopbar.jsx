@@ -4,6 +4,7 @@ import {
   Search, Bell, Globe, Menu, ChevronDown, Sun, Moon, User, Settings, LogOut, X,
   CreditCard, HelpCircle, Building2, CheckCheck,
 } from 'lucide-react';
+import { EmptyState } from '../common/StateComponents';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { resolveDashboardSearch } from '../../config/sellerDashboardSearch';
@@ -97,11 +98,11 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
   ];
 
   return (
-    <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 px-4 py-3">
+    <header className="sticky top-0 z-30 bg-surface/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 px-4 py-3">
       <div className="flex items-center gap-3">
         <button
           type="button"
-          className="lg:hidden p-2 rounded-lg hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          className="transition-all duration-200 active:scale-[0.98] lg:hidden p-2 rounded-lg hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500"
           onClick={onMenuClick}
           aria-label="Open navigation menu"
         >
@@ -133,7 +134,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
           <div className="relative" ref={langRef}>
             <button
               type="button"
-              onClick={() => { setShowLang(!showLang); setShowNotifications(false); setShowProfile(false); }}
+              onClick={() => { setShowLang(!showLang); setShowNotifications(false); setShowProfile(false) }}
               className="flex items-center gap-1 p-2 rounded-lg text-slate-500 hover:bg-page text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
               aria-label="Change language"
               aria-expanded={showLang}
@@ -149,7 +150,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
                     key={lang.code}
                     type="button"
                     role="menuitem"
-                    onClick={() => { changeLanguage(lang.code); setShowLang(false); }}
+                    onClick={() => { changeLanguage(lang.code); setShowLang(false) }}
                     className={`w-full text-left px-4 py-2 text-sm hover:bg-page focus:outline-none focus:bg-page dark:focus:bg-slate-800 ${language === lang.code ? 'text-emerald-600 font-medium' : ''}`}
                   >
                     {lang.label}
@@ -162,7 +163,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
           <div className="relative" ref={notifRef}>
             <button
               type="button"
-              onClick={() => { setShowNotifications(!showNotifications); setShowLang(false); setShowProfile(false); }}
+              onClick={() => { setShowNotifications(!showNotifications); setShowLang(false); setShowProfile(false) }}
               className="relative p-2 rounded-lg text-slate-500 hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500"
               aria-label={`Notifications${unread > 0 ? `, ${unread} unread` : ''}`}
               aria-expanded={showNotifications}
@@ -183,7 +184,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
                       <button
                         type="button"
                         onClick={handleMarkAllRead}
-                        className="text-xs text-emerald-600 hover:text-emerald-700 flex items-center gap-1 focus:outline-none focus:underline"
+                        className="transition-all duration-200 active:scale-[0.98] text-xs text-emerald-600 hover:text-emerald-700 flex items-center gap-1 focus:outline-none focus:underline"
                       >
                         <CheckCheck size={14} />
                         Mark all read
@@ -196,13 +197,19 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
                 </div>
                 <div className="max-h-72 overflow-y-auto">
                   {notifications.length === 0 ? (
-                    <p className="px-4 py-6 text-sm text-slate-500 text-center">No notifications yet</p>
+                    <div className="p-4"><EmptyState icon={Bell} title="No notifications yet" description="" className="min-h-[150px] border-0" /></div>
                   ) : (
                     notifications.map((n) => (
                       <button
                         key={n.id}
                         type="button"
-                        onClick={() => handleMarkRead(n.id)}
+                        onClick={() => {
+                          handleMarkRead(n.id);
+                          setShowNotifications(false);
+                          if (n.type === 'order') navigate('/seller/orders');
+                          else if (n.type === 'payment') navigate('/seller/wallet');
+                          else if (n.type === 'inventory') navigate('/seller/products');
+                        }}
                         className={`w-full text-left px-4 py-3 border-b border-slate-100 dark:border-slate-800 hover:bg-page focus:outline-none focus:bg-page dark:focus:bg-slate-800/50 ${!n.read ? 'bg-emerald-50/50 dark:bg-emerald-950/20' : ''}`}
                       >
                         <p className="text-sm font-medium">{n.title}</p>
@@ -219,7 +226,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
           <div className="relative" ref={profileRef}>
             <button
               type="button"
-              onClick={() => { setShowProfile(!showProfile); setShowLang(false); setShowNotifications(false); }}
+              onClick={() => { setShowProfile(!showProfile); setShowLang(false); setShowNotifications(false) }}
               className="flex items-center gap-2 p-1.5 pr-3 rounded-xl hover:bg-page focus:outline-none focus:ring-2 focus:ring-emerald-500"
               aria-label="Profile menu"
               aria-expanded={showProfile}
@@ -251,7 +258,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
                     key={label}
                     type="button"
                     role="menuitem"
-                    onClick={() => { navigate(path); setShowProfile(false); }}
+                    onClick={() => { navigate(path); setShowProfile(false) }}
                     className="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-page focus:outline-none focus:bg-page dark:focus:bg-slate-800"
                   >
                     <Icon size={16} /> {label}
@@ -261,7 +268,7 @@ export default function DashboardTopbar({ seller, onLogout, onMenuClick }) {
                   type="button"
                   role="menuitem"
                   onClick={onLogout}
-                  className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 focus:outline-none focus:bg-red-50 dark:focus:bg-red-950/30 border-t border-slate-200 dark:border-slate-800 mt-1"
+                  className="transition-all duration-200 active:scale-[0.98] w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 focus:outline-none focus:bg-red-50 dark:focus:bg-red-950/30 border-t border-slate-200 dark:border-slate-800 mt-1"
                 >
                   <LogOut size={16} /> Logout
                 </button>

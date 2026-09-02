@@ -28,7 +28,7 @@ export default function Advertisements() {
   if (!active) {
     return (
       <section className="py-10 bg-surface border-b border-slate-100  relative w-full">
-        <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="saath-container">
           <div className="relative rounded-card overflow-hidden shadow-soft border border-dashed border-slate-300 min-h-[160px] sm:min-h-[180px] flex items-center justify-center bg-page text-slate-400 text-sm font-medium">
             No active advertisements.
           </div>
@@ -42,20 +42,20 @@ export default function Advertisements() {
       {/* Full-width Carousel Controls */}
       <button
         onClick={handlePrev}
-        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300"
+        className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300"
         title="Previous ad"
       >
         <ChevronLeft size={16} />
       </button>
       <button
         onClick={handleNext}
-        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300"
+        className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-300 text-slate-700 dark:text-white hidden md:flex items-center justify-center backdrop-blur-sm z-20 transition-all shadow-sm border border-slate-300"
         title="Next ad"
       >
         <ChevronRight size={16} />
       </button>
 
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="saath-container">
         
         {/* Banner Frame */}
         <div className="relative rounded-card overflow-hidden shadow-soft border border-slate-200/50 dark:border-slate-800 min-h-[160px] sm:min-h-[180px] flex items-center">
@@ -82,7 +82,7 @@ export default function Advertisements() {
 
               {/* Text contents */}
               <div className="relative z-10 p-6 sm:p-8 max-w-xl text-left space-y-3.5">
-                <span className="inline-flex items-center gap-1 py-1 px-2.5 rounded-full bg-white/20 text-[9px] font-black uppercase tracking-wider">
+                <span className="inline-flex items-center gap-1 py-1 px-2.5 rounded-full bg-surface/20 text-[9px] font-black uppercase tracking-wider">
                   <Tag size={10} />
                   {active.tag}
                 </span>
@@ -99,7 +99,7 @@ export default function Advertisements() {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="h-8 px-4 rounded-full bg-white text-slate-900 font-extrabold text-[11px] flex items-center gap-1 hover:bg-page transition-colors shadow-sm"
+                  className="h-8 px-4 rounded-full bg-surface text-slate-900 font-extrabold text-[11px] flex items-center gap-1 hover:bg-page transition-colors shadow-sm"
                 >
                   <span>{active.cta}</span>
                   <ArrowRight size={11} />
@@ -116,7 +116,7 @@ export default function Advertisements() {
                 key={i}
                 onClick={() => setCurrentIndex(i)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === currentIndex ? 'w-5 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/60'
+                  i === currentIndex ? 'w-5 bg-surface' : 'w-1.5 bg-surface/40 hover:bg-surface/60'
                 }`}
                 title={`Ad slide ${i + 1}`}
               />

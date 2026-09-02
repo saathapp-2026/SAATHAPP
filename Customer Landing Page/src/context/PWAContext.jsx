@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const PWAContext = createContext(null);
 
@@ -81,8 +82,7 @@ export function PWAProvider({ children }) {
       }
     } else {
       // Graceful fallback when beforeinstallprompt is missing but user clicked install
-      alert('To install this app, please use your browser\'s "Add to Home Screen" or "Install" option from the menu.');
-    }
+      toast.success('To install this app, please use your browser\'s "Add to Home Screen" or "Install" option from the menu.') }
   };
 
   const closeIOSPrompt = () => {

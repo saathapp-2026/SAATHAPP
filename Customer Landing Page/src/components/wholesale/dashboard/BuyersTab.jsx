@@ -375,7 +375,7 @@ export default function BuyersTab({ onSelectTab }) {
               />
               <button
                 type="submit"
-                className="rounded-2xl bg-emerald-600 hover:bg-emerald-500 p-2.5 text-white transition shadow"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-2xl bg-emerald-600 hover:bg-emerald-500 p-2.5 text-white transition shadow"
               >
                 <Send size={16} />
               </button>

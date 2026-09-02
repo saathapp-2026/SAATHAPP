@@ -1,4 +1,4 @@
-import commissionData from '../professionalCommission.json';
+import commissionData from '../professionalCommission.json' with { type: 'json' };
 
 export const commissionMatrix = commissionData;
 

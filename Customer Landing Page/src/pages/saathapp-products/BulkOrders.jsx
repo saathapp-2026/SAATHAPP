@@ -91,19 +91,19 @@ export default function BulkOrders({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Full Name *</label>
-                <input required type="text" placeholder="John Doe" className="w-full h-12 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all" />
+                <input required type="text" placeholder="John Doe" className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full h-12 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Company Name *</label>
-                <input required type="text" placeholder="Acme Corp" className="w-full h-12 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all" />
+                <input required type="text" placeholder="Acme Corp" className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full h-12 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Email Address *</label>
-                <input required type="email" placeholder="john@company.com" className="w-full h-12 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all" />
+                <input required type="email" placeholder="john@company.com" className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full h-12 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Phone Number *</label>
-                <input required type="tel" placeholder="+91 98765 43210" className="w-full h-12 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all" />
+                <input required type="tel" placeholder="+91 98765 43210" className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full h-12 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all" />
               </div>
             </div>
 
@@ -112,7 +112,7 @@ export default function BulkOrders({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Select Product *</label>
-                <select required className="w-full h-12 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all appearance-none">
+                <select required className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full h-12 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all appearance-none">
                   <option value="">Select a product...</option>
                   {mockSaathAppProducts.map(p => (
                     <option key={p.id} value={p.id}>{p.name}</option>
@@ -122,7 +122,7 @@ export default function BulkOrders({
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Quantity Needed *</label>
-                <select required className="w-full h-12 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all appearance-none">
+                <select required className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full h-12 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all appearance-none">
                   <option value="">Select quantity range...</option>
                   <option value="50-100">50 - 100</option>
                   <option value="101-500">101 - 500</option>
@@ -137,7 +137,7 @@ export default function BulkOrders({
               <textarea 
                 rows="4" 
                 placeholder="E.g., We need 500 T-Shirts with our company logo on the front and event name on the back. Mixed sizes (S-XXL)."
-                className="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all resize-none"
+                className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none transition-all resize-none"
               ></textarea>
             </div>
 
@@ -151,7 +151,7 @@ export default function BulkOrders({
             </div>
 
             <div className="pt-4">
-              <button type="submit" className="w-full md:w-auto px-10 h-14 bg-gradient-primary hover:bg-gradient-primary/90 text-white rounded-xl font-black text-lg shadow-glow-primary transition-all transform active:scale-[0.98]">
+              <button type="submit" className="duration-200 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full md:w-auto px-10 h-14 bg-gradient-primary hover:bg-gradient-primary/90 text-white rounded-xl font-black text-lg shadow-glow-primary transition-all transform active:scale-[0.98]">
                 Request a Quote
               </button>
             </div>

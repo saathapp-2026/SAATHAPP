@@ -4,7 +4,8 @@ import { useWholesale } from '../../../context/WholesaleContext';
 import InterWarehouseTransferModal from './InterWarehouseTransferModal';
 
 export default function InventoryTab() {
-  const { formData, addToast } = useWholesale ? useWholesale() : { formData: {}, addToast: console.log };
+  const _wc = useWholesale();
+  const { formData, addToast } = _wc || { formData: {}, addToast: console.log };
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
 
   const warehousesList = formData?.additionalWarehouses || [];
@@ -73,7 +74,7 @@ export default function InventoryTab() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
               {[].map((row, i) => (
-                <tr key={i} className="hover:bg-page transition">
+                <tr key={i} className="transition-colors hover:bg-emerald-50/30 hover:bg-page transition">
                   <td className="p-3 font-mono font-bold text-emerald-600 dark:text-emerald-400">{row.batch}</td>
                   <td className="p-3 font-extrabold text-slate-900 dark:text-white">{row.item}</td>
                   <td className="p-3">{row.wh}</td>

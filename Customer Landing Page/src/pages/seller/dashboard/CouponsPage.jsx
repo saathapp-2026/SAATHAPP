@@ -212,15 +212,12 @@ export default function CouponsPage() {
         refresh();
       } else if (action === 'analytics') {
         setShowAnalytics(true);
-        toast.success('Analytics opened');
-      } else if (action === 'share') {
+        toast.success('Analytics opened') } else if (action === 'share') {
         const link = `${window.location.origin}/seller/dashboard/coupons?id=${item.id}`;
         try {
           await navigator.clipboard.writeText(link);
-          toast.success('Share link copied');
-        } catch {
-          toast.success('Share ready');
-        }
+          toast.success('Share link copied') } catch {
+          toast.success('Share ready') }
       } else if (action === 'export') {
         const content = JSON.stringify(item, null, 2);
         const blob = new Blob([content], { type: 'application/json' });
@@ -230,8 +227,7 @@ export default function CouponsPage() {
         a.download = `${item.code || item.id}.json`;
         a.click();
         URL.revokeObjectURL(url);
-        toast.success('Exported');
-      } else if (action === 'delete') {
+        toast.success('Exported') } else if (action === 'delete') {
         setConfirmState({
           title: 'Delete promotion?',
           message: `Delete “${item.name}”? This cannot be undone.`,

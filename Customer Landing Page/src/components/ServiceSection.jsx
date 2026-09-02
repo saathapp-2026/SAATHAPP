@@ -5,7 +5,7 @@ import { Star, ShieldCheck, Timer, Calendar, UserCheck } from 'lucide-react';
 
 export default function ServiceSection({ onBookService }) {
   const [services, setServices] = useState(Array.from({ length: 3 }, (_, i) => ({
-    id: `placeholder-${i}`,
+    id: `skeleton-${i}`,
     name: '\u00A0',
     category: '',
     rating: '0',
@@ -17,7 +17,7 @@ export default function ServiceSection({ onBookService }) {
   })));
   return (
     <section className="py-12 bg-surface border-b border-slate-100 ">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="saath-container">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
@@ -33,7 +33,7 @@ export default function ServiceSection({ onBookService }) {
         </div>
 
         {/* Services Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
           {services.length === 0 ? (
             <div className="col-span-full py-10 text-center text-sm font-semibold text-slate-400">
               No services listed at the moment.

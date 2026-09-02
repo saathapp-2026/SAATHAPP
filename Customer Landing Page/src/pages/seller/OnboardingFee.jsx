@@ -158,7 +158,7 @@ export default function OnboardingFee() {
             <button
               type="button"
               onClick={handleSkipToReview}
-              className="flex-1 py-3 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 py-3 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors"
             >
               Continue to Final Review
             </button>

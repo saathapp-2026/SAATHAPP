@@ -178,7 +178,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
             <button
               type="button"
               onClick={handleSosTrigger}
-              className="rounded-2xl bg-red-600 hover:bg-red-500 text-white px-8 py-4 text-xs font-black shadow-2xl transition hover:scale-105 shrink-0 flex items-center justify-center gap-2 cursor-pointer"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-2xl bg-red-600 hover:bg-red-500 text-white px-8 py-4 text-xs font-black shadow-2xl transition hover:scale-105 shrink-0 flex items-center justify-center gap-2 cursor-pointer"
             >
               <AlertTriangle size={18} />
               Trigger Immediate SOS Alert
@@ -302,7 +302,7 @@ export default function RiderSupportTab({ initialSubTab = 'help' }) {
 
             <button
               type="submit"
-              className="w-full py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-lg cursor-pointer active:scale-95 transition flex items-center justify-center gap-2"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-lg cursor-pointer active:scale-95 transition flex items-center justify-center gap-2"
             >
               <Send size={16} /> Submit Support Ticket
             </button>

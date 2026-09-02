@@ -94,7 +94,7 @@ export default function OnboardingFeeTableSection({ onStartRegistration }) {
                   { tier: 'Tier 1 City', r10: '1.00%', r25: '0.60%', r50: '0.40%', r1cr: '0.20%', r10cr: '0.10%' },
                   { tier: 'Metro City', r10: '1.00%', r25: '0.75%', r50: '0.50%', r1cr: '0.25%', r10cr: '0.10%' },
                 ].map((row, idx) => (
-                  <tr key={idx} className="hover:bg-slate-900/60 transition">
+                  <tr key={idx} className="transition-colors hover:bg-emerald-50/30 hover:bg-slate-900/60 transition">
                     <td className="p-3.5 font-bold text-white flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-emerald-400" />
                       {row.tier}
@@ -117,7 +117,7 @@ export default function OnboardingFeeTableSection({ onStartRegistration }) {
             <button
               type="button"
               onClick={onStartRegistration}
-              className="inline-flex items-center gap-2 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-8 py-3.5 text-xs font-black shadow-lg transition hover:scale-105"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-8 py-3.5 text-xs font-black shadow-lg transition hover:scale-105"
             >
               Start Wholesaler Registration
               <ArrowRight size={16} />

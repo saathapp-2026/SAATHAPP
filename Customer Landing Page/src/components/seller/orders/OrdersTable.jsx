@@ -1,3 +1,4 @@
+import { EmptyState } from '../../common/StateComponents';
 import React from 'react';
 import {
   ArrowUpDown,
@@ -197,9 +198,9 @@ export default function OrdersTable({
         <div className="overflow-x-auto max-h-[62vh]">
           <table className="w-full text-sm min-w-[1100px]">
             <thead className="sticky top-0 z-10 bg-page border-b border-slate-200 dark:border-slate-800">
-              <tr className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
+              <tr className="transition-colors hover:bg-emerald-50/30 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
                 <th className="px-3 py-3 w-10">
-                  <input type="checkbox" checked={allSelected} onChange={onToggleSelectAll} aria-label="Select all" className="rounded" />
+                  <input type="checkbox" checked={allSelected} onChange={onToggleSelectAll} aria-label="Select all" className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none rounded" />
                 </th>
                 <th className="px-3 py-3">
                   <button type="button" onClick={() => onSort('createdAt')} className="inline-flex items-center gap-1">
@@ -220,7 +221,19 @@ export default function OrdersTable({
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
+              {orders.length === 0 ? (
+                <tr>
+                  <td colSpan={10} className="p-4">
+                    <EmptyState 
+                      icon={Package} 
+                      title="No orders found" 
+                      description="You don't have any orders matching these filters."
+                      className="border-0 shadow-none bg-transparent"
+                    />
+                  </td>
+                </tr>
+              ) : (
+                orders.map((order) => (
                 <tr
                   key={order.id}
                   onClick={() => onRowClick?.(order)}
@@ -277,7 +290,8 @@ export default function OrdersTable({
                     <RowActions order={order} onAction={onAction} loadingAction={loadingAction} />
                   </td>
                 </tr>
-              ))}
+              ))
+              )}
             </tbody>
           </table>
         </div>
@@ -285,7 +299,14 @@ export default function OrdersTable({
 
       {/* Mobile cards */}
       <div className="lg:hidden space-y-2.5">
-        {orders.map((order) => (
+        {orders.length === 0 ? (
+          <EmptyState 
+            icon={Package} 
+            title="No orders found" 
+            description="You don't have any orders matching these filters."
+          />
+        ) : (
+          orders.map((order) => (
           <article
             key={order.id}
             onClick={() => onRowClick?.(order)}
@@ -319,7 +340,8 @@ export default function OrdersTable({
               <RowActions order={order} onAction={onAction} loadingAction={loadingAction} />
             </div>
           </article>
-        ))}
+        ))
+        )}
       </div>
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm px-1">

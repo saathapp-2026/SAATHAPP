@@ -438,7 +438,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                     setActiveModal('navStore');
                     addToast?.('🧭 Navigating to SaathApp Express Hub Store...', 'info');
                   }}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer active:scale-95 transition touch-manipulation shadow-sm select-none"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer active:scale-95 transition touch-manipulation shadow-sm select-none"
                 >
                   <Navigation size={13} className="text-amber-500" /> Navigate to Store
                 </button>
@@ -446,7 +446,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                 <button type="button" onClick={() => triggerCall(`SaathApp Store (${activeOrder.storeManager})`, activeOrder.storeMobile, 'Store Manager')} className="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs flex items-center gap-1 cursor-pointer active:scale-95 transition touch-manipulation shadow select-none">
                   <Phone size={13} /> Call Store
                 </button>
-                <button type="button" onClick={() => triggerChat(`${activeOrder.storeManager} (Store Manager)`, 'Store Manager')} className="px-3.5 py-1.5 rounded-xl border border-amber-500/40 font-black text-xs text-amber-600 dark:text-amber-400 bg-white dark:bg-slate-950 hover:bg-amber-500/10 cursor-pointer active:scale-95 transition touch-manipulation select-none">
+                <button type="button" onClick={() => triggerChat(`${activeOrder.storeManager} (Store Manager)`, 'Store Manager')} className="px-3.5 py-1.5 rounded-xl border border-amber-500/40 font-black text-xs text-amber-600 dark:text-amber-400 bg-surface dark:bg-slate-950 hover:bg-amber-500/10 cursor-pointer active:scale-95 transition touch-manipulation select-none">
                   <MessageSquare size={13} className="text-blue-500" /> Chat Store
                 </button>
                 <button type="button" onClick={() => setActiveModal('issue')} className="px-3.5 py-1.5 rounded-xl border border-rose-300 dark:border-rose-900 bg-rose-50 dark:bg-rose-950/30 font-bold text-xs text-rose-600 dark:text-rose-400 hover:bg-rose-100 cursor-pointer active:scale-95 transition touch-manipulation select-none">
@@ -512,17 +512,17 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                 <button type="button" onClick={() => triggerCall(activeOrder.customerName, activeOrder.customerMobile, 'Customer')} className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs flex items-center gap-1 cursor-pointer active:scale-95 transition touch-manipulation shadow select-none">
                   <Phone size={13} /> Call Customer
                 </button>
-                <button type="button" onClick={() => triggerChat(activeOrder.customerName, 'Customer')} className="px-3.5 py-1.5 rounded-xl border border-emerald-500/40 font-black text-xs text-emerald-600 dark:text-emerald-400 bg-white dark:bg-slate-950 hover:bg-emerald-500/10 cursor-pointer active:scale-95 transition touch-manipulation select-none">
+                <button type="button" onClick={() => triggerChat(activeOrder.customerName, 'Customer')} className="px-3.5 py-1.5 rounded-xl border border-emerald-500/40 font-black text-xs text-emerald-600 dark:text-emerald-400 bg-surface dark:bg-slate-950 hover:bg-emerald-500/10 cursor-pointer active:scale-95 transition touch-manipulation select-none">
                   <MessageSquare size={13} className="text-blue-500" /> Chat Customer
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveModal('shareEta')}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer active:scale-95 transition touch-manipulation shadow-sm select-none"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer active:scale-95 transition touch-manipulation shadow-sm select-none"
                 >
                   <Clock size={13} className="text-amber-500" /> Share ETA
                 </button>
-                <button type="button" onClick={() => setActiveModal('shareLocation')} className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer active:scale-95 transition touch-manipulation shadow-sm select-none">
+                <button type="button" onClick={() => setActiveModal('shareLocation')} className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 font-bold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1 hover:bg-page cursor-pointer active:scale-95 transition touch-manipulation shadow-sm select-none">
                   <Share2 size={13} className="text-purple-500" /> Share Live Location
                 </button>
               </div>
@@ -597,7 +597,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                   { step: 5, label: 'Reached Customer', done: currentWorkflowStep >= 5 },
                   { step: 6, label: 'Delivered', done: currentWorkflowStep >= 6 },
                 ].map((s) => (
-                  <div key={s.step} className="flex flex-col items-center gap-1 cursor-pointer active:scale-95 transition" onClick={() => setCurrentWorkflowStep(s.step)}>
+                  <div key={s.step} className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] flex flex-col items-center gap-1 cursor-pointer active:scale-95 transition" onClick={() => setCurrentWorkflowStep(s.step)}>
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center font-black ${s.done ? 'bg-amber-500 text-slate-950 shadow' : 'bg-slate-200 text-slate-400'}`}>
                       {s.done ? '✓' : s.step}
                     </div>
@@ -641,7 +641,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                   <button type="button" onClick={() => addToast?.('Resent OTP to customer mobile', 'info')} className="px-3 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-bold hover:bg-slate-700 cursor-pointer active:scale-95 transition select-none">
                     Resend OTP
                   </button>
-                  <button type="submit" className="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs shadow-lg cursor-pointer active:scale-95 transition select-none">
+                  <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs shadow-lg cursor-pointer active:scale-95 transition select-none">
                     Verify OTP
                   </button>
                 </div>
@@ -658,7 +658,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                 <button type="button" onClick={() => setActiveModal('signature')} className="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 text-[11px] font-bold flex items-center gap-1 hover:bg-slate-700 cursor-pointer active:scale-95 transition select-none">
                   <FileCheck size={13} /> {signatureSaved ? 'Signature Saved ✓' : 'Capture Signature'}
                 </button>
-                <button type="button" onClick={() => { setVoiceRecorded(!voiceRecorded); addToast?.(voiceRecorded ? 'Voice note deleted' : '🎤 Recorded delivery audio note!', 'info'); }} className="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 text-[11px] font-bold flex items-center gap-1 hover:bg-slate-700 cursor-pointer active:scale-95 transition select-none">
+                <button type="button" onClick={() => { setVoiceRecorded(!voiceRecorded); addToast?.(voiceRecorded ? 'Voice note deleted' : '🎤 Recorded delivery audio note!', 'info') }} className="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 text-[11px] font-bold flex items-center gap-1 hover:bg-slate-700 cursor-pointer active:scale-95 transition select-none">
                   <Mic size={13} className="text-amber-400" /> {voiceRecorded ? 'Voice Note Saved ✓' : 'Voice Note'}
                 </button>
               </div>
@@ -685,10 +685,10 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                   ⚡ Withdraw Wallet ₹2,450
                 </button>
                 <div className="grid grid-cols-2 gap-2 text-[10px] font-extrabold text-center">
-                  <button type="button" onClick={() => onSelectTab?.('wallet')} className="py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-slate-950 cursor-pointer active:scale-95 transition">
+                  <button type="button" onClick={() => onSelectTab?.('wallet')} className="py-1.5 rounded-lg bg-surface/20 hover:bg-surface/30 text-slate-950 cursor-pointer active:scale-95 transition">
                     Wallet History
                   </button>
-                  <button type="button" onClick={() => onSelectTab?.('wallet')} className="py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-slate-950 cursor-pointer active:scale-95 transition">
+                  <button type="button" onClick={() => onSelectTab?.('wallet')} className="py-1.5 rounded-lg bg-surface/20 hover:bg-surface/30 text-slate-950 cursor-pointer active:scale-95 transition">
                     Statement
                   </button>
                 </div>
@@ -776,7 +776,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                   {/* Pickup Point Marker */}
                   <div className="absolute top-4 left-6 flex items-center gap-1">
                     <div className="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-xs shadow-lg border-2 border-white">📍</div>
-                    <div className="bg-white/90 text-slate-900 dark:text-white px-2 py-0.5 rounded-md text-[10px] font-black shadow border border-slate-200 dark:border-slate-800">Gandhi Maidan</div>
+                    <div className="bg-surface/90 text-slate-900 dark:text-white px-2 py-0.5 rounded-md text-[10px] font-black shadow border border-slate-200 dark:border-slate-800">Gandhi Maidan</div>
                   </div>
 
                   {/* Animated Rider Bike Marker */}
@@ -789,7 +789,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                   {/* Customer Dropoff Marker */}
                   <div className="absolute bottom-5 left-24 flex items-center gap-1">
                     <div className="w-7 h-7 rounded-full bg-rose-600 text-white flex items-center justify-center font-black text-xs shadow-lg border-2 border-white">🎯</div>
-                    <div className="bg-white/90 text-slate-900 dark:text-white px-2 py-0.5 rounded-md text-[10px] font-black shadow border border-slate-200 dark:border-slate-800">Kankarbagh</div>
+                    <div className="bg-surface/90 text-slate-900 dark:text-white px-2 py-0.5 rounded-md text-[10px] font-black shadow border border-slate-200 dark:border-slate-800">Kankarbagh</div>
                   </div>
 
                   {/* City Landmarks Labels */}
@@ -1037,7 +1037,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
               <button
                 type="button"
                 onClick={handleCompleteDelivery}
-                className="w-full sm:w-auto flex-1 md:flex-initial px-6 py-2.5 rounded-2xl bg-[#059669] hover:bg-emerald-700 text-white font-black text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition touch-manipulation select-none"
+                className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full sm:w-auto flex-1 md:flex-initial px-6 py-2.5 rounded-2xl bg-[#059669] hover:bg-emerald-700 text-white font-black text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition touch-manipulation select-none"
               >
                 <CheckCircle2 size={16} /> Complete Delivery
               </button>
@@ -1137,7 +1137,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                 <div key={idx} className={`flex flex-col ${m.sender === 'You' ? 'items-end' : 'items-start'}`}>
                   <div className={`p-2.5 rounded-2xl max-w-[80%] text-xs font-medium ${m.sender === 'You'
                     ? 'bg-blue-600 text-white rounded-br-none'
-                    : 'bg-white text-slate-900 dark:text-white border border-slate-200 rounded-bl-none shadow-sm'
+                    : 'bg-surface text-slate-900 dark:text-white border border-slate-200 rounded-bl-none shadow-sm'
                     }`}>
                     <span className="text-[9px] opacity-75 font-bold block mb-0.5">{m.sender}</span>
                     {m.text}
@@ -1172,9 +1172,9 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 placeholder={`Type message to ${chatDetails.name}...`}
-                className="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-blue-500 font-medium"
+                className="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-300 bg-surface dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-blue-500 font-medium"
               />
-              <button type="submit" className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs cursor-pointer active:scale-95 transition shadow">
+              <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs cursor-pointer active:scale-95 transition shadow">
                 Send
               </button>
             </form>
@@ -1197,7 +1197,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
             </div>
             <div className="flex justify-end gap-2 pt-2">
               <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold">Cancel</button>
-              <button type="button" onClick={() => { setActiveModal(null); addToast?.('🛠️ Roadside Breakdown Assistance Dispatched!', 'success'); }} className="px-5 py-2 rounded-xl bg-amber-500 text-slate-950 font-black">Confirm Dispatch</button>
+              <button type="button" onClick={() => { setActiveModal(null); addToast?.('🛠️ Roadside Breakdown Assistance Dispatched!', 'success') }} className="px-5 py-2 rounded-xl bg-amber-500 text-slate-950 font-black">Confirm Dispatch</button>
             </div>
           </div>
         </div>
@@ -1218,7 +1218,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
             </div>
             <div className="flex justify-end gap-2 pt-2">
               <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold">Cancel</button>
-              <button type="button" onClick={() => { setActiveModal(null); addToast?.('🚲 Mobile Tyre Mechanic Dispatched to your location!', 'success'); }} className="px-5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black">Call Mechanic</button>
+              <button type="button" onClick={() => { setActiveModal(null); addToast?.('🚲 Mobile Tyre Mechanic Dispatched to your location!', 'success') }} className="px-5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black">Call Mechanic</button>
             </div>
           </div>
         </div>
@@ -1460,7 +1460,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
               <button type="button" onClick={() => addToast?.('Speakerphone toggled', 'info')} className="p-3 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 cursor-pointer">
                 <Volume2 size={18} />
               </button>
-              <button type="button" onClick={() => { setActiveModal(null); addToast?.('Call ended', 'info'); }} className="p-3 rounded-full bg-rose-600 text-white hover:bg-rose-500 cursor-pointer shadow-lg">
+              <button type="button" onClick={() => { setActiveModal(null); addToast?.('Call ended', 'info') }} className="p-3 rounded-full bg-rose-600 text-white hover:bg-rose-500 cursor-pointer shadow-lg">
                 <PhoneCall size={18} className="rotate-[135deg]" />
               </button>
             </div>
@@ -1534,7 +1534,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
             </div>
             <div className="flex justify-end gap-2 pt-2">
               <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-page font-bold">Cancel</button>
-              <button type="button" onClick={() => { setPhotoCaptured(true); setActiveModal(null); addToast?.('📸 Delivery Photo Attached!', 'success'); }} className="px-5 py-2 rounded-xl bg-amber-500 text-slate-950 font-black">Attach Photo</button>
+              <button type="button" onClick={() => { setPhotoCaptured(true); setActiveModal(null); addToast?.('📸 Delivery Photo Attached!', 'success') }} className="px-5 py-2 rounded-xl bg-amber-500 text-slate-950 font-black">Attach Photo</button>
             </div>
           </div>
         </div>
@@ -1551,7 +1551,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
             </div>
             <div className="flex justify-end gap-2 pt-2">
               <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-page font-bold">Cancel</button>
-              <button type="button" onClick={() => { setActiveModal(null); addToast?.('✅ Customer QR Code Verified!', 'success'); }} className="px-5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black">Verify Scan</button>
+              <button type="button" onClick={() => { setActiveModal(null); addToast?.('✅ Customer QR Code Verified!', 'success') }} className="px-5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black">Verify Scan</button>
             </div>
           </div>
         </div>
@@ -1635,7 +1635,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
             </div>
             <div className="flex justify-end gap-2 pt-2">
               <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-page font-bold">Close</button>
-              <button type="button" onClick={() => { setActiveModal(null); addToast?.('📲 Live Location Link copied & sent via SMS!', 'success'); }} className="px-5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black">Send SMS</button>
+              <button type="button" onClick={() => { setActiveModal(null); addToast?.('📲 Live Location Link copied & sent via SMS!', 'success') }} className="px-5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black">Send SMS</button>
             </div>
           </div>
         </div>
@@ -1651,7 +1651,7 @@ export default function RiderOverviewTab({ onSelectTab, onOpenWithdrawModal }) {
             </div>
             <div className="flex justify-end gap-2 pt-2">
               <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-page font-bold">Cancel</button>
-              <button type="button" onClick={() => { setSignatureSaved(true); setActiveModal(null); addToast?.('✍️ Customer Signature Saved!', 'success'); }} className="px-5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black">Save Signature</button>
+              <button type="button" onClick={() => { setSignatureSaved(true); setActiveModal(null); addToast?.('✍️ Customer Signature Saved!', 'success') }} className="px-5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black">Save Signature</button>
             </div>
           </div>
         </div>

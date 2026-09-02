@@ -276,7 +276,7 @@ function RecordFormModal({ open, title, fields, initial, onClose, onSubmit, busy
           <h2 id="hub-form-title" className="text-lg font-bold">
             {title}
           </h2>
-          <button type="button" onClick={onClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -318,7 +318,7 @@ function RecordFormModal({ open, title, fields, initial, onClose, onSubmit, busy
           ))}
         </div>
         <div className="flex justify-end gap-2 px-5 py-4 border-t border-slate-200 dark:border-slate-800">
-          <button type="button" onClick={onClose} className="rounded-xl border border-slate-200 px-4 py-2 text-sm">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-xl border border-slate-200 px-4 py-2 text-sm">
             Cancel
           </button>
           <button type="button" disabled={busy} onClick={() => submit(true)} className="rounded-xl border border-slate-200 px-4 py-2 text-sm">
@@ -342,13 +342,13 @@ function ViewDrawer({ open, row, columns, onClose, onEdit }) {
   if (!open || !row) return null;
   return (
     <SellerOverlay open={open} onClose={onClose} label="Record details" zIndex={SELLER_Z.drawer} className="flex justify-end" contentClassName="h-full">
-      <aside className="h-full w-full max-w-md bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
+      <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded h-full w-full max-w-md bg-surface border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col">
         <div className="flex items-start justify-between gap-3 p-4 border-b border-slate-200 dark:border-slate-800">
           <div>
             <h2 className="text-lg font-bold">{row.name || row.subject || row.id}</h2>
             <p className="text-xs text-slate-500 mt-0.5">{row.id}</p>
           </div>
-          <button type="button" onClick={onClose} className="p-2 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-lg hover:bg-page" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -375,7 +375,7 @@ function ViewDrawer({ open, row, columns, onClose, onEdit }) {
           <button type="button" onClick={() => onEdit(row)} className="flex-1 rounded-xl bg-emerald-600 text-white py-2 text-sm font-semibold">
             Edit
           </button>
-          <button type="button" onClick={onClose} className="rounded-xl border border-slate-200 px-4 py-2 text-sm">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded-xl border border-slate-200 px-4 py-2 text-sm">
             Close
           </button>
         </div>
@@ -599,8 +599,7 @@ export default function HubInteractivePage({ moduleKey }) {
       }
       if (editRow) {
         await updateHubRecord(moduleKey, editRow.id, payload);
-        toast.success('Updated');
-      } else {
+        toast.success('Updated') } else {
         await createHubRecord(moduleKey, { ...(meta.createDefaults || {}), ...payload });
         toast.success(moduleKey === 'wallet' ? 'Withdrawal requested' : 'Created');
         addNotification({ title: `${meta.title} updated`, body: payload.name || payload.subject || 'New record' });
@@ -641,11 +640,9 @@ export default function HubInteractivePage({ moduleKey }) {
       });
     } else if (action === 'share') {
       navigator.clipboard?.writeText(`${window.location.href}?id=${row.id}`);
-      toast.success('Link copied');
-    } else if (action === 'print') {
+      toast.success('Link copied') } else if (action === 'print') {
       window.print();
-      toast.success('Print opened');
-    } else if (action === 'download') {
+      toast.success('Print opened') } else if (action === 'download') {
       const blob = new Blob([JSON.stringify(row, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -653,8 +650,7 @@ export default function HubInteractivePage({ moduleKey }) {
       a.download = `${row.id || 'record'}.json`;
       a.click();
       URL.revokeObjectURL(url);
-      toast.success('Downloaded');
-    } else if (action === 'pause') {
+      toast.success('Downloaded') } else if (action === 'pause') {
       updateHubRecord(moduleKey, row.id, { status: 'paused' }).then(() => {
         toast.success('Paused');
         refresh();
@@ -714,7 +710,7 @@ export default function HubInteractivePage({ moduleKey }) {
           <button
             type="button"
             onClick={openCreate}
-            className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 text-white px-3.5 py-2 text-sm font-semibold hover:bg-emerald-700"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 rounded-xl bg-emerald-600 text-white px-3.5 py-2 text-sm font-semibold hover:bg-emerald-700"
           >
             <Plus size={16} /> {meta.createLabel}
           </button>
@@ -965,7 +961,7 @@ export default function HubInteractivePage({ moduleKey }) {
           <div className="p-12 text-center text-slate-500">
             <p className="font-semibold text-slate-800 dark:text-slate-100">No records found</p>
             <p className="text-sm mt-1">Try adjusting filters or create a new record.</p>
-            <button type="button" onClick={openCreate} className="mt-4 rounded-xl bg-emerald-600 text-white px-4 py-2 text-sm font-semibold">
+            <button type="button" onClick={openCreate} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-4 rounded-xl bg-emerald-600 text-white px-4 py-2 text-sm font-semibold">
               {meta.createLabel}
             </button>
           </div>
@@ -973,7 +969,7 @@ export default function HubInteractivePage({ moduleKey }) {
           <div className="overflow-x-auto max-h-[560px]">
             <table className="min-w-full text-sm">
               <thead className="sticky top-0 bg-page dark:bg-slate-950 text-slate-600 dark:text-slate-300">
-                <tr className="border-b border-slate-200 dark:border-slate-800">
+                <tr className="transition-colors hover:bg-emerald-50/30 border-b border-slate-200 dark:border-slate-800">
                   <th className="px-4 py-3 text-left w-10">
                     <input
                       type="checkbox"
@@ -1011,7 +1007,7 @@ export default function HubInteractivePage({ moduleKey }) {
               </thead>
               <tbody>
                 {rows.map((row) => (
-                  <tr key={row.id} className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80">
+                  <tr key={row.id} className="transition-colors hover:bg-emerald-50/30 border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/80">
                     <td className="px-4 py-3">
                       <input
                         type="checkbox"
@@ -1053,7 +1049,7 @@ export default function HubInteractivePage({ moduleKey }) {
                         </button>
                         {menuId === row.id ? (
                           <>
-                            <button type="button" className="fixed inset-0 z-20" aria-label="Close menu" onClick={() => setMenuId(null)} />
+                            <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none fixed inset-0 z-20" aria-label="Close menu" onClick={() => setMenuId(null)} />
                             <div className="absolute right-0 top-8 z-30 w-44 rounded-xl border border-slate-200 bg-surface shadow-xl py-1">
                               {[
                                 { id: 'edit', label: 'Edit', icon: Pencil },

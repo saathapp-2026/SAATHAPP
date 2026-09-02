@@ -1,7 +1,39 @@
-import React from 'react';
-import { ArrowLeft, Box, Package, Truck, CheckCircle2, XCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Package, Truck, CheckCircle2, ChevronRight, Filter, Search, ArrowLeft, RefreshCw, XCircle, MapPin, Box, Store, Star } from 'lucide-react';
+import { EmptyState, ErrorState } from '../components/common/StateComponents';
+import { orderApi } from '../services/orderApi';
+import axios from 'axios';
 
-export default function Orders({ orders = [], onBack }) {
+export default function Orders({ onBack }) {
+  const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+
+    const fetchOrders = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const data = await orderApi.getOrders(1, { cancelToken: source.token });
+        setOrders(data.data || []);
+      } catch (err) {
+        if (!axios.isCancel(err)) {
+          setError('Unable to load orders. Please try again.');
+          // Fallback to local storage for dev demonstration if API is missing
+          const saved = window.localStorage.getItem('saathapp_customer_orders');
+          if (saved) setOrders(JSON.parse(saved));
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchOrders();
+    return () => source.cancel('Component unmounted');
+  }, []);
+
   const getStatusIcon = (status) => {
     switch (status) {
       case 'CONFIRMED': return <CheckCircle2 size={20} className="text-blue-500" />;
@@ -25,23 +57,34 @@ export default function Orders({ orders = [], onBack }) {
   };
 
   return (
-    <div className="min-h-screen bg-page px-4 py-6 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-5xl rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xl">
+    <div className="min-h-screen bg-page text-theme px-4 py-8 sm:px-6 lg:px-8 transition-colors duration-300 font-sans">
+      <div className="mx-auto max-w-5xl rounded-[28px] border border-theme-border bg-surface p-6 shadow-xl">
         <div className="flex items-center gap-4 mb-8">
-          <button onClick={onBack} className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors">
+          <button onClick={onBack} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors">
             <ArrowLeft size={20} />
           </button>
-          <h1 className="text-2xl font-black text-slate-900 dark:text-slate-100">My Orders</h1>
+          <h1 className="text-3xl font-black text-slate-900 dark:text-slate-100">My Orders</h1>
         </div>
 
-        {orders.length === 0 ? (
-          <div className="mt-8 flex flex-col items-center justify-center rounded-[24px] border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 px-6 py-16 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 text-amber-600 mb-4">
-              <Box size={28} />
-            </div>
-            <h2 className="text-2xl font-black text-slate-900 dark:text-slate-100">No orders yet</h2>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Your recent purchases and bookings will appear here.</p>
+        {isLoading ? (
+          <div className="space-y-6">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="animate-pulse border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-slate-900 p-6">
+                <div className="h-6 bg-slate-200 dark:bg-slate-700 rounded w-1/3 mb-4"></div>
+                <div className="h-20 bg-slate-200 dark:bg-slate-700 rounded w-full"></div>
+              </div>
+            ))}
           </div>
+        ) : error && orders.length === 0 ? (
+          <ErrorState title={error} onRetry={() => window.location.reload()} />
+        ) : orders.length === 0 ? (
+          <EmptyState 
+            icon={Box} 
+            title="No orders yet" 
+            description="Your orders will appear here after you place them."
+            actionLabel="Start Shopping"
+            onAction={() => window.location.href = '/'}
+          />
         ) : (
           <div className="space-y-6">
             {orders.map((order) => (
@@ -73,7 +116,7 @@ export default function Orders({ orders = [], onBack }) {
                     {order.items.map((item, idx) => (
                       <div key={idx} className="flex gap-4 items-center">
                         <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden flex items-center justify-center shrink-0 text-2xl">
-                          {item.image ? <img src={item.image} alt={item.name} className="w-full h-full object-cover" /> : '🛍️'}
+                          {item.image ? <img src={item.image} alt={item.name} className="w-full h-full object-contain p-1" /> : '🛍️'}
                         </div>
                         <div className="flex-1 min-w-0">
                           <h4 className="font-bold text-slate-900 dark:text-slate-100 truncate">{item.name}</h4>
@@ -95,7 +138,7 @@ export default function Orders({ orders = [], onBack }) {
                   <div className="text-sm text-slate-600 dark:text-slate-400">
                     <span className="font-semibold text-slate-800 dark:text-slate-200">Delivery to:</span> {order.deliveryAddress}
                   </div>
-                  <button className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-xl font-bold transition-colors text-sm shadow-sm">
+                  <button className="duration-200 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none bg-primary hover:bg-primary/90 active:scale-[0.98] text-white px-6 py-2.5 rounded-xl font-bold transition-all text-sm shadow-md shadow-primary/20">
                     Track Order
                   </button>
                 </div>

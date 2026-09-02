@@ -34,25 +34,26 @@ export default function WorkerRegisterPage() {
   };
 
   const handleFileChange = (e, docType) => {
+    setError('');
     if (e.target.files && e.target.files[0]) {
-      setFiles((prev) => ({ ...prev, [docType]: e.target.files[0].name }));
+      const file = e.target.files[0];
+      const maxMb = docType === 'aadhaar' ? 5 : 2;
+      if (file.size > maxMb * 1024 * 1024) {
+        setError(`File must be smaller than ${maxMb}MB.`);
+        return;
+      }
+      if (!file.type.startsWith('image/')) {
+        setError('Only JPEG/PNG images are supported.');
+        return;
+      }
+      setFiles((prev) => ({ ...prev, [docType]: file.name }));
     }
   };
 
   const handleNextStep = (e) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.phone.trim() || !formData.email.trim() || !formData.password.trim()) {
-      setError('Please fill in all required fields.');
-      return;
-    }
-    const cleanPhone = formData.phone.replace(/\D/g, '');
-    if (cleanPhone.length !== 10) {
-      setError('Please enter a valid 10-digit mobile number.');
-      return;
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email.trim())) {
-      setError('Please enter a valid email address.');
+      setError('Please fill in all fields.');
       return;
     }
     setError('');
@@ -158,7 +159,7 @@ export default function WorkerRegisterPage() {
                   placeholder="Amit Singh"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-btn py-3 pl-10 pr-4 text-xs font-medium text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-white/5 border border-white/10 rounded-btn py-3 pl-10 pr-4 text-xs font-medium text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
                 />
               </div>
             </div>
@@ -176,7 +177,7 @@ export default function WorkerRegisterPage() {
                   placeholder="9876543202"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-btn py-3 pl-10 pr-4 text-xs font-medium text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-white/5 border border-white/10 rounded-btn py-3 pl-10 pr-4 text-xs font-medium text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
                 />
               </div>
             </div>
@@ -194,7 +195,7 @@ export default function WorkerRegisterPage() {
                   placeholder="worker@saathapp.com"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-btn py-3 pl-10 pr-4 text-xs font-medium text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-white/5 border border-white/10 rounded-btn py-3 pl-10 pr-4 text-xs font-medium text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
                 />
               </div>
             </div>
@@ -212,7 +213,7 @@ export default function WorkerRegisterPage() {
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-btn py-3 pl-10 pr-10 text-xs font-medium text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-white/5 border border-white/10 rounded-btn py-3 pl-10 pr-10 text-xs font-medium text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
                 />
                 <button
                   type="button"
@@ -231,14 +232,14 @@ export default function WorkerRegisterPage() {
                   name="category"
                   value={formData.category}
                   onChange={handleInputChange}
-                  className="w-full bg-slate-900 border border-white/10 rounded-btn py-3 px-3 text-xs font-medium text-white focus:border-blue-500 outline-none transition-all [&>option]:bg-slate-900 [&>option]:text-white"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-slate-900 border border-white/10 rounded-btn py-3 px-3 text-xs font-medium text-white focus:border-blue-500 outline-none transition-all"
                 >
-                  <option value="Helper" className="bg-slate-900 text-white">Helper</option>
-                  <option value="Electrician Apprentice" className="bg-slate-900 text-white">Electrician Apprentice</option>
-                  <option value="Plumbing Assistant" className="bg-slate-900 text-white">Plumbing Assistant</option>
-                  <option value="Construction Worker" className="bg-slate-900 text-white">Construction Worker</option>
-                  <option value="Delivery Partner" className="bg-slate-900 text-white">Delivery Partner</option>
-                  <option value="Painter Assistant" className="bg-slate-900 text-white">Painter Assistant</option>
+                  <option value="Helper">Helper</option>
+                  <option value="Electrician Apprentice">Electrician Apprentice</option>
+                  <option value="Plumbing Assistant">Plumbing Assistant</option>
+                  <option value="Construction Worker">Construction Worker</option>
+                  <option value="Delivery Partner">Delivery Partner</option>
+                  <option value="Painter Assistant">Painter Assistant</option>
                 </select>
               </div>
 
@@ -248,11 +249,11 @@ export default function WorkerRegisterPage() {
                   name="experience"
                   value={formData.experience}
                   onChange={handleInputChange}
-                  className="w-full bg-slate-900 border border-white/10 rounded-btn py-3 px-3 text-xs font-medium text-white focus:border-blue-500 outline-none transition-all [&>option]:bg-slate-900 [&>option]:text-white"
+                  className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 w-full bg-slate-900 border border-white/10 rounded-btn py-3 px-3 text-xs font-medium text-white focus:border-blue-500 outline-none transition-all"
                 >
-                  <option value="Under 1 Year" className="bg-slate-900 text-white">Under 1 Year</option>
-                  <option value="1-3 Years" className="bg-slate-900 text-white">1-3 Years</option>
-                  <option value="3+ Years" className="bg-slate-900 text-white">3+ Years</option>
+                  <option value="Under 1 Year">Under 1 Year</option>
+                  <option value="1-3 Years">1-3 Years</option>
+                  <option value="3+ Years">3+ Years</option>
                 </select>
               </div>
             </div>

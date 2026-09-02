@@ -36,6 +36,9 @@ export default function ProductDetails({
     || mockSaathAppProducts.find(p => p.id === slug || p.slug === slug);
 
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [activeTab, setActiveTab] = useState('description');
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -156,11 +159,11 @@ export default function ProductDetails({
           <span className="text-slate-800 dark:text-slate-300 line-clamp-1">{product.name}</span>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-10 lg:gap-16">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-16">
           {/* Image Gallery */}
           <div className="w-full md:w-1/2 lg:w-5/12 flex flex-col gap-4">
             <div className="w-full aspect-[4/5] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden flex items-center justify-center p-8 relative">
-              <button className="absolute top-4 right-4 p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur rounded-full hover:text-rose-500 transition-colors shadow-sm">
+              <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute top-4 right-4 p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur rounded-full hover:text-rose-500 transition-colors shadow-sm">
                 <Heart size={20} />
               </button>
               {currentMainImage ? (
@@ -281,11 +284,13 @@ export default function ProductDetails({
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="font-bold text-sm uppercase tracking-wide">Select Size</h3>
-                      <button className="text-primary text-xs font-semibold hover:underline">Size Chart</button>
+                      <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-primary text-xs font-semibold hover:underline">Size Chart</button>
                     </div>
                     <div className="flex flex-wrap gap-3">
                       {variants.sizes.map(size => (
-                        <button key={size} className="w-12 h-12 rounded-xl border-2 border-slate-200 dark:border-slate-700 font-bold hover:border-primary focus:border-primary focus:bg-primary/5 transition-all">
+                        <button key={size} 
+                          onClick={() => setSelectedSize(size)}
+                          className={`w-12 h-12 rounded-xl border-2 font-bold transition-all ${selectedSize === size ? 'border-primary bg-primary/10 text-primary' : 'border-slate-200 dark:border-slate-700 hover:border-primary'}`}>
                           {size}
                         </button>
                       ))}
@@ -297,7 +302,7 @@ export default function ProductDetails({
                     <h3 className="font-bold text-sm uppercase tracking-wide mb-3">Select Color</h3>
                     <div className="flex flex-wrap gap-4">
                       {variants.colors.map(color => (
-                        <button key={color} className="flex flex-col items-center gap-2 group">
+                        <button key={color} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex flex-col items-center gap-2 group">
                           <div className={`w-10 h-10 rounded-full border-2 border-slate-200 group-hover:border-primary transition-all flex items-center justify-center p-0.5`} style={{ backgroundColor: color.toLowerCase() === 'white' ? '#f8fafc' : color.toLowerCase() }}>
                             <div className="w-full h-full rounded-full bg-transparent border border-white/20"></div>
                           </div>
@@ -312,7 +317,7 @@ export default function ProductDetails({
                     <h3 className="font-bold text-sm uppercase tracking-wide mb-3">Select Capacity</h3>
                     <div className="flex flex-wrap gap-3">
                       {variants.capacity.map(cap => (
-                        <button key={cap} className="px-4 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-700 font-bold hover:border-primary focus:border-primary focus:bg-primary/5 transition-all">
+                        <button key={cap} className="duration-200 active:scale-[0.98] px-4 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-700 font-bold hover:border-primary focus:border-primary focus:bg-primary/5 transition-all">
                           {cap}
                         </button>
                       ))}

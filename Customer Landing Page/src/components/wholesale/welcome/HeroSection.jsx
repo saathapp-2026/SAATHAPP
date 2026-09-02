@@ -37,7 +37,7 @@ export default function HeroSection({ onStartRegistration }) {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-emerald-200 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-surface/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-emerald-200 backdrop-blur-sm">
               <Sparkles size={14} className="text-emerald-300" />
               SaathApp Wholesale Network
             </div>
@@ -58,7 +58,7 @@ export default function HeroSection({ onStartRegistration }) {
               </p>
             </div>
 
-            <div className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md">
+            <div className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-surface/5 px-4 py-3 backdrop-blur-md">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0A8F3D]/20 text-emerald-300">
                 <Clock3 size={20} aria-hidden="true" />
               </div>
@@ -76,7 +76,7 @@ export default function HeroSection({ onStartRegistration }) {
               <button
                 type="button"
                 onClick={handleStart}
-                className="group inline-flex items-center justify-center gap-2 rounded-[16px] bg-gradient-to-r from-[#0A8F3D] to-[#087a34] px-7 py-3.5 text-sm font-extrabold text-white shadow-[0_0_20px_rgba(10,143,61,0.35)] transition hover:scale-[1.02] hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                className="transition-all duration-200 active:scale-[0.98] group inline-flex items-center justify-center gap-2 rounded-[16px] bg-gradient-to-r from-[#0A8F3D] to-[#087a34] px-7 py-3.5 text-sm font-extrabold text-white shadow-[0_0_20px_rgba(10,143,61,0.35)] transition hover:scale-[1.02] hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
               >
                 Start Registration
                 <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
@@ -84,7 +84,7 @@ export default function HeroSection({ onStartRegistration }) {
               <button
                 type="button"
                 onClick={() => scrollTo('benefits')}
-                className="inline-flex items-center justify-center gap-2 rounded-[16px] border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-extrabold text-white backdrop-blur-sm transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                className="inline-flex items-center justify-center gap-2 rounded-[16px] border border-white/15 bg-surface/5 px-7 py-3.5 text-sm font-extrabold text-white backdrop-blur-sm transition hover:bg-surface/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
               >
                 Learn More
                 <ChevronDown size={16} />
@@ -95,7 +95,7 @@ export default function HeroSection({ onStartRegistration }) {
               {partnerTypes.map((type) => (
                 <span
                   key={type}
-                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-slate-300"
+                  className="rounded-full border border-white/10 bg-surface/5 px-3 py-1 text-[11px] font-semibold text-slate-300"
                 >
                   {type}
                 </span>
@@ -110,9 +110,9 @@ export default function HeroSection({ onStartRegistration }) {
             className="relative mx-auto w-full max-w-xl lg:max-w-none"
           >
             <div className="absolute -inset-4 rounded-[32px] bg-gradient-to-br from-[#0A8F3D]/30 to-emerald-400/10 blur-2xl" />
-            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-3 shadow-2xl backdrop-blur-sm">
+            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-surface/5 p-3 shadow-2xl backdrop-blur-sm">
               <div className="w-full rounded-[20px] bg-slate-800/80 border border-slate-700/60 aspect-[4/3] flex flex-col items-center justify-center text-slate-400 gap-3">
-                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
+                <div className="w-16 h-16 rounded-2xl bg-surface/5 border border-white/10 flex items-center justify-center text-emerald-400">
                   <Sparkles size={32} />
                 </div>
                 <span className="text-xs font-semibold text-slate-300">Wholesale Network Platform</span>

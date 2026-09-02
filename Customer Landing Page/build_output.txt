@@ -1,0 +1,163 @@
+
+> customer-landing-page@0.0.0 build
+> vite build
+
+vite v8.1.5 building client environment for production...
+[2Ktransforming...✓ 3413 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/registerSW.js                                        0.13 kB
+dist/manifest.webmanifest                                 0.46 kB
+dist/index.html                                           2.65 kB │ gzip:   0.89 kB
+dist/assets/upi-Cc09LEOr.png                            182.06 kB
+dist/assets/visa-GiFSIY0n.png                           196.90 kB
+dist/assets/mastercard-wPc1-CPk.png                     225.00 kB
+dist/assets/rupay-daTJ6UwP.png                          230.35 kB
+dist/assets/netbanking-CDefv_wY.png                     279.00 kB
+dist/assets/flowers-LCbTi5I2.jpg                        300.71 kB
+dist/assets/saathpack-delivery-bags-C1WUkvfm.png        319.36 kB
+dist/assets/logo-CPL9csCy.png                           326.72 kB
+dist/assets/meat-chicken-DFO8rdAX.jpg                   352.17 kB
+dist/assets/deals-TG9DSGRu.jpg                          352.49 kB
+dist/assets/cat-pens-CAcX0CBJ.png                       354.56 kB
+dist/assets/cold-drinks-DQcEpcl-.jpg                    355.00 kB
+dist/assets/snacks-BgQET7l6.jpg                         372.69 kB
+dist/assets/cat-office-essentials-BvIDu2mK.png          375.38 kB
+dist/assets/premium-grocery-CQCsxf0B.jpg                388.42 kB
+dist/assets/cod-BrwBTcdy.png                            388.48 kB
+dist/assets/cat-id-cards-BTap-LaL.png                   404.51 kB
+dist/assets/sweets-yunR82mT.jpg                         407.10 kB
+dist/assets/dry-fruits-DqkkMCxj.jpg                     412.50 kB
+dist/assets/cat-mugs-BR6DPxRx.png                       420.25 kB
+dist/assets/cat-bottles-D5kqKIgB.png                    422.70 kB
+dist/assets/dairy-bakery-Bwh8cnIi.jpg                   429.47 kB
+dist/assets/glass-cup-BM6MYkWO.jpg                      436.90 kB
+dist/assets/saathapp-logo-dark-veGZB1xD.png             437.02 kB
+dist/assets/normal-grocery-BUTQcYUe.jpg                 439.06 kB
+dist/assets/personalized-B8F6wh7w.jpg                   499.74 kB
+dist/assets/cat-tshirts-apparel-DVrOYq4T.png            512.34 kB
+dist/assets/crockery-CvvHf73m.jpg                       522.29 kB
+dist/assets/fruits-veg-C2BpXE-K.jpg                     541.11 kB
+dist/assets/dry-fruits-Bj7AAEpT.jpg                     542.61 kB
+dist/assets/perfumes-CIdAqDHQ.jpg                       546.99 kB
+dist/assets/saathpack-foil-wraps-WeYUZFe_.png           557.57 kB
+dist/assets/sweets-BK9Lg-Hf.jpg                         622.78 kB
+dist/assets/product-hero-banner-bPBGPxvG.png            628.60 kB
+dist/assets/chocolates-BemqHxwn.jpg                     641.36 kB
+dist/assets/cat-caps-R4cn1fmc.png                       653.97 kB
+dist/assets/all-gifts-B6K4B-D3.png                      669.29 kB
+dist/assets/cat-diaries-B6_vK14m.png                    729.45 kB
+dist/assets/ice-creams-PcPH7MQv.png                     734.62 kB
+dist/assets/cat-pen-stand-C3I2Zk2K.png                  746.93 kB
+dist/assets/saathpack-tapes-labels-DpKGwRL2.png         764.96 kB
+dist/assets/cat-bags-CCpUC-iI.png                       798.03 kB
+dist/assets/saathpack-carton-boxes-ZCnuIPfS.png         881.25 kB
+dist/assets/wholesaler-hero-DMMJYVi5.png                904.02 kB
+dist/assets/saathpack-other-supplies-CMSBUbG9.png       914.01 kB
+dist/assets/saathpack-pouches-Cj23UQdF.png              924.39 kB
+dist/assets/biscuits-O9NmNPyb.png                       951.56 kB
+dist/assets/normal-products-banner-D5VCaF1t.png         981.51 kB
+dist/assets/saathpack-corrugated-boxes-DcRDghMK.png   1,004.69 kB
+dist/assets/saathpack-paper-bags-CCJ-fdRn.png         1,016.35 kB
+dist/assets/warehouse-cta-GlBp-QJB.png                1,022.58 kB
+dist/assets/clothes-CaXQu_Fa.png                      1,025.50 kB
+dist/assets/premium-products-banner-OC4px8PZ.png      1,025.93 kB
+dist/assets/stationery-DDY8yKzp.png                   1,040.54 kB
+dist/assets/index-Ck9a-49v.css                          456.76 kB │ gzip:  50.37 kB
+dist/assets/loader-circle-f1pg6vM_.js                     0.14 kB │ gzip:   0.15 kB
+dist/assets/WalletPage-B-ERkHli.js                        0.18 kB │ gzip:   0.17 kB
+dist/assets/SupportPage-DjKM7fzn.js                       0.19 kB │ gzip:   0.17 kB
+dist/assets/PaymentsPage-DPXihosX.js                      0.19 kB │ gzip:   0.17 kB
+dist/assets/StoreSettingsPage-DdYzEBxS.js                 0.19 kB │ gzip:   0.17 kB
+dist/assets/AnalyticsPage-BEwPb5kv.js                     0.19 kB │ gzip:   0.17 kB
+dist/assets/InventoryPage-DRvjdP8V.js                     0.19 kB │ gzip:   0.17 kB
+dist/assets/MarketingPage-9ojBplW7.js                     0.19 kB │ gzip:   0.17 kB
+dist/assets/log-in-WStkwiR7.js                            0.23 kB │ gzip:   0.18 kB
+dist/assets/arrow-up-down-YJxZY-9B.js                     0.24 kB │ gzip:   0.19 kB
+dist/assets/sticky-note-B8J4kGYQ.js                       0.28 kB │ gzip:   0.21 kB
+dist/assets/ticket-aQ8f7bW8.js                            0.32 kB │ gzip:   0.21 kB
+dist/assets/file-chart-column-increasing-CSbejDCp.js      0.40 kB │ gzip:   0.26 kB
+dist/assets/sliders-horizontal-CjdfXhQh.js                0.42 kB │ gzip:   0.24 kB
+dist/assets/file-archive-BsVFdHl5.js                      0.43 kB │ gzip:   0.28 kB
+dist/assets/Branding-ClAj7w8Z.js                          0.71 kB │ gzip:   0.44 kB
+dist/assets/shim-CU7iwv8V.js                              0.82 kB │ gzip:   0.44 kB
+dist/assets/boxes-BuxeARhv.js                             0.85 kB │ gzip:   0.39 kB
+dist/assets/BrandingStorePage-v_4O3EUr.js                 0.89 kB │ gzip:   0.53 kB
+dist/assets/sellerNotificationService-D0ZkwX7A.js         1.03 kB │ gzip:   0.54 kB
+dist/assets/ActionBanner-CH4ERzE3.js                      1.20 kB │ gzip:   0.61 kB
+dist/assets/SupportLayout-ijo7yU1F.js                     1.30 kB │ gzip:   0.63 kB
+dist/assets/OnboardingDashboard-DBAZ1kc8.js               1.36 kB │ gzip:   0.72 kB
+dist/assets/sellerDashboardNav-CLbYkwlR.js                1.37 kB │ gzip:   0.41 kB
+dist/assets/createLucideIcon-CUOo9Jij.js                  1.38 kB │ gzip:   0.77 kB
+dist/assets/DashboardBreadcrumbs-C110ubXG.js              1.51 kB │ gzip:   0.66 kB
+dist/assets/OrdersLayout-uHX280x2.js                      1.54 kB │ gzip:   0.73 kB
+dist/assets/pricingConfig-BBSizcAS.js                     1.60 kB │ gzip:   0.75 kB
+dist/assets/ProductsLayout-CbOuCOvL.js                    1.60 kB │ gzip:   0.75 kB
+dist/assets/PaymentSuccess-DDn7gG66.js                    1.63 kB │ gzip:   0.77 kB
+dist/assets/MarketingLayout-B4sJVTiL.js                   1.74 kB │ gzip:   0.79 kB
+dist/assets/ProfileSettingsLayout-B819in7y.js             1.79 kB │ gzip:   0.80 kB
+dist/assets/MembershipWelcomeKit-BiNpInAP.js              1.86 kB │ gzip:   0.82 kB
+dist/assets/AnalyticsLayout-aWNvzGLn.js                   1.95 kB │ gzip:   0.88 kB
+dist/assets/WalletLayout-CQxDIDO_.js                      2.03 kB │ gzip:   0.93 kB
+dist/assets/BrandingRequestsList-BY3SHdYE.js              2.18 kB │ gzip:   0.93 kB
+dist/assets/Submitted-BhrFPLkB.js                         2.33 kB │ gzip:   1.12 kB
+dist/assets/OnboardingLayout-9wmHZHVE.js                  2.57 kB │ gzip:   1.10 kB
+dist/assets/WelcomeKitPage-E5KW3do8.js                    2.57 kB │ gzip:   1.10 kB
+dist/assets/sellerRoutes-BhPEaVN_.js                      2.58 kB │ gzip:   0.87 kB
+dist/assets/OnboardingStatusCard-CJhos8Yu.js              2.80 kB │ gzip:   1.10 kB
+dist/assets/InvoicePreviewModal-DUWNpqZX.js               2.80 kB │ gzip:   1.04 kB
+dist/assets/Bank-yVUnwDhQ.js                              2.83 kB │ gzip:   0.95 kB
+dist/assets/Tax-BmpHQTtI.js                               2.91 kB │ gzip:   1.03 kB
+dist/assets/BasicInformation-DGDhRoJ-.js                  2.95 kB │ gzip:   1.07 kB
+dist/assets/Address-jpBHndVc.js                           3.15 kB │ gzip:   1.11 kB
+dist/assets/Delivery-DXZwqj7L.js                          3.15 kB │ gzip:   1.07 kB
+dist/assets/WelcomeKitTracking-DPx6oHs_.js                3.27 kB │ gzip:   1.22 kB
+dist/assets/SellerErrorPage-_MqFq-j7.js                   3.29 kB │ gzip:   1.41 kB
+dist/assets/Review-326m4wlD.js                            3.33 kB │ gzip:   1.42 kB
+dist/assets/Documents-CKN6yDVv.js                         3.61 kB │ gzip:   1.23 kB
+dist/assets/SaathPackOrdersPage-BrGjysL6.js               3.77 kB │ gzip:   1.25 kB
+dist/assets/Login-VQucRO7_.js                             4.14 kB │ gzip:   1.63 kB
+dist/assets/MarketingNotificationsPage-CnkqmBSz.js        4.15 kB │ gzip:   1.34 kB
+dist/assets/MarketingReportsPage-BE5LB8yw.js              4.28 kB │ gzip:   1.49 kB
+dist/assets/MarketingSchedulerPage-C0d_gqji.js            4.48 kB │ gzip:   1.35 kB
+dist/assets/MarketingAnalyticsPage-BScte5ul.js            4.67 kB │ gzip:   1.53 kB
+dist/assets/MarketingBillingPage-CRczBI0v.js              4.71 kB │ gzip:   1.25 kB
+dist/assets/TermsAndConditions-wBg4VV7u.js                4.75 kB │ gzip:   1.93 kB
+dist/assets/Register-BVTSStFu.js                          4.80 kB │ gzip:   1.90 kB
+dist/assets/Pricing-BUoVSXtx.js                           5.31 kB │ gzip:   1.77 kB
+dist/assets/Landing-CuYKD9Tl.js                           5.68 kB │ gzip:   1.84 kB
+dist/assets/BrandingStore-I1P62a5H.js                     6.23 kB │ gzip:   1.85 kB
+dist/assets/Welcome-BxWwfPZr.js                           6.23 kB │ gzip:   1.95 kB
+dist/assets/BusinessInformation-ycbg7898.js               6.51 kB │ gzip:   1.63 kB
+dist/assets/OnboardingFee-C0NtWqVF.js                     8.06 kB │ gzip:   2.84 kB
+dist/assets/HelpCenter-ecFCQ4fu.js                        8.06 kB │ gzip:   2.76 kB
+dist/assets/jsx-runtime-CdArH33I.js                       8.72 kB │ gzip:   3.33 kB
+dist/assets/DashboardHome-buoiwTOe.js                    10.49 kB │ gzip:   3.28 kB
+dist/assets/LineChart-D-t0PZPy.js                        12.01 kB │ gzip:   4.58 kB
+dist/assets/MarketingReviewPage-B_tgHOcp.js              12.07 kB │ gzip:   2.64 kB
+dist/assets/DashboardLayout-C9xTfvLV.js                  15.04 kB │ gzip:   4.35 kB
+dist/assets/sellerProductsService-CmvFulwI.js            15.10 kB │ gzip:   5.84 kB
+dist/assets/sellerHubModulesService-BfyWequg.js          15.70 kB │ gzip:   5.22 kB
+dist/assets/sellerOrdersService-D38DeP8e.js              18.42 kB │ gzip:   5.61 kB
+dist/assets/Membership-DE6oMj4v.js                       18.92 kB │ gzip:   5.53 kB
+dist/assets/advertisementsService-C-H6GxbP.js            23.62 kB │ gzip:   7.62 kB
+dist/assets/HubInteractivePage-exLdayaZ.js               33.29 kB │ gzip:   8.39 kB
+dist/assets/DocumentsPage-hQP6Fqns.js                    54.86 kB │ gzip:  12.69 kB
+dist/assets/CouponsPage-DBuu5d1N.js                      55.87 kB │ gzip:  12.37 kB
+dist/assets/InvoicesPage-CqdT8W6s.js                     56.98 kB │ gzip:  13.27 kB
+dist/assets/CustomersPage-Dp649dLY.js                    58.55 kB │ gzip:  13.37 kB
+dist/assets/ReportsPage-Bdni9pxU.js                      63.70 kB │ gzip:  13.87 kB
+dist/assets/OrdersPage-Bfc1p1Hi.js                       67.46 kB │ gzip:  17.87 kB
+dist/assets/ProductsPage-CKnhXkJK.js                     79.62 kB │ gzip:  19.17 kB
+dist/assets/export-Bd2cP2yP.js                          102.77 kB │ gzip:  29.10 kB
+dist/assets/CartesianChart-DeWEGyya.js                  338.42 kB │ gzip:  99.05 kB
+dist/assets/index-Bu1HBsUM.js                         3,524.31 kB │ gzip: 727.74 kB
+
+✓ built in 1.40s
+
+PWA v1.3.0
+mode      generateSW
+precache  95 entries (5087.86 KiB)
+files generated
+  dist/sw.js
+  dist/workbox-9c191d2f.js

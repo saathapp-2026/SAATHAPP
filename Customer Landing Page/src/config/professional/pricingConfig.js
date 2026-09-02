@@ -1,4 +1,4 @@
-import pricingData from '../professionalPricing.json';
+import pricingData from '../professionalPricing.json' with { type: 'json' };
 
 const pricingConfig = { ...pricingData };
 

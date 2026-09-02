@@ -78,7 +78,7 @@ export default function OnboardingStatusCard({ onboardingFee, onRenew }) {
         <button
           type="button"
           onClick={onRenew}
-          className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-medium text-sm hover:bg-amber-500/20 transition-colors"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-4 w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-medium text-sm hover:bg-amber-500/20 transition-colors"
         >
           <RefreshCw size={16} />
           Renew Now — ₹{onboardingFee?.renewalAmount?.toLocaleString('en-IN')}

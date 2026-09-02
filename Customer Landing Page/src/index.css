@@ -170,6 +170,7 @@
     --bg-modal: #0a0f24;
   }
 
+
   body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-page);
@@ -376,19 +377,33 @@ html.dark footer {
   margin-inline: auto;
 }
 
-/* Fix native select option dropdown popup rendering in dark mode & dark forms */
-select option {
-  background-color: #0f172a;
-  color: #ffffff;
+/* 
+ * Global Responsive Container Configuration
+ * Replaces scattered utility classes with a unified, mathematical layout constraint 
+ */
+.saath-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  /* Mobile (Default): 12px padding on each side (calc(100% - 24px) equivalent content width) */
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
-html.dark select option {
-  background-color: #0f172a;
-  color: #ffffff;
+/* Tablet / Laptop: 20px padding on each side (calc(100% - 40px) equivalent content width) */
+@media (min-width: 768px) {
+  .saath-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
-html:not(.dark) select:not(.text-white):not([class*="text-white"]):not([class*="bg-white/5"]):not([class*="bg-slate"]) option {
-  background-color: #ffffff;
-  color: #0f172a;
+/* Large Desktop: 32px padding on each side, max width locks at 1440px */
+@media (min-width: 1200px) {
+  .saath-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
 }
-

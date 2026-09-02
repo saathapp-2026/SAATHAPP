@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
   CheckCircle2, Truck, Calendar, MapPin, Star, Download, Search, Filter, Eye, FileText,
   AlertTriangle, X, RefreshCw, Printer, Share2, Sparkles, ChevronDown, ChevronUp, ChevronLeft,
@@ -7,6 +7,7 @@ import {
   TrendingUp, BarChart3, Zap, Shield, User, CornerUpRight, AlertCircle, Info, Edit3, Save, Check,
   Award, HelpCircle, PieChart, Activity, Cpu, Sliders, ExternalLink, MoreHorizontal
 } from 'lucide-react';
+import { EmptyState } from '../../common/StateComponents';
 import { useDelivery } from '../../../context/DeliveryContext';
 
 export default function RiderHistoryTab() {
@@ -717,7 +718,7 @@ export default function RiderHistoryTab() {
           <button
             type="button"
             onClick={handleRefresh}
-            className={`p-2.5 rounded-2xl bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150 ${isRefreshing ? 'animate-spin text-amber-500' : ''}`}
+            className={`duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-2.5 rounded-2xl bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150 ${isRefreshing ? 'animate-spin text-amber-500' : ''}`}
             title="Refresh Deliveries Log"
           >
             <RefreshCw size={16} />
@@ -732,7 +733,7 @@ export default function RiderHistoryTab() {
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
         <button
           type="button"
-          onClick={() => { setDateFilter('Today'); addToast?.('Filtered by Today\'s Deliveries', 'info'); }}
+          onClick={() => { setDateFilter('Today'); addToast?.('Filtered by Today\'s Deliveries', 'info') }}
           className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Today's Deliveries</span>
@@ -744,7 +745,7 @@ export default function RiderHistoryTab() {
 
         <button
           type="button"
-          onClick={() => { setSelectedOrder(orders[0]); setActiveModal('earningsDetails'); }}
+          onClick={() => { setSelectedOrder(orders[0]); setActiveModal('earningsDetails') }}
           className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Today's Earnings</span>
@@ -756,7 +757,7 @@ export default function RiderHistoryTab() {
 
         <button
           type="button"
-          onClick={() => { setDateFilter('This Week'); addToast?.('Filtered by Completed Week', 'info'); }}
+          onClick={() => { setDateFilter('This Week'); addToast?.('Filtered by Completed Week', 'info') }}
           className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Completed Week</span>
@@ -768,7 +769,7 @@ export default function RiderHistoryTab() {
 
         <button
           type="button"
-          onClick={() => { setDateFilter('This Month'); addToast?.('Filtered by Completed Month', 'info'); }}
+          onClick={() => { setDateFilter('This Month'); addToast?.('Filtered by Completed Month', 'info') }}
           className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Completed Month</span>
@@ -780,7 +781,7 @@ export default function RiderHistoryTab() {
 
         <button
           type="button"
-          onClick={() => { handleSort('rating'); addToast?.('Sorted by Customer Rating', 'info'); }}
+          onClick={() => { handleSort('rating'); addToast?.('Sorted by Customer Rating', 'info') }}
           className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Average Rating</span>
@@ -792,7 +793,7 @@ export default function RiderHistoryTab() {
 
         <button
           type="button"
-          onClick={() => { handleSort('distanceVal'); addToast?.('Sorted by Distance', 'info'); }}
+          onClick={() => { handleSort('distanceVal'); addToast?.('Sorted by Distance', 'info') }}
           className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Total Distance</span>
@@ -804,7 +805,7 @@ export default function RiderHistoryTab() {
 
         <button
           type="button"
-          onClick={() => { handleSort('durationVal'); addToast?.('Sorted by Delivery Time', 'info'); }}
+          onClick={() => { handleSort('durationVal'); addToast?.('Sorted by Delivery Time', 'info') }}
           className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Avg Delivery Time</span>
@@ -816,7 +817,7 @@ export default function RiderHistoryTab() {
 
         <button
           type="button"
-          onClick={() => { setFilterStatus('Delivered'); addToast?.('Filtered by Delivered status', 'info'); }}
+          onClick={() => { setFilterStatus('Delivered'); addToast?.('Filtered by Delivered status', 'info') }}
           className="p-4 rounded-3xl bg-surface border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-amber-500/50 hover:shadow-md cursor-pointer active:scale-95 transition text-left"
         >
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Completion Rate</span>
@@ -1094,7 +1095,7 @@ export default function RiderHistoryTab() {
             <button
               type="button"
               onClick={handleResetFilters}
-              className="px-3.5 py-2 rounded-2xl bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150"
+              className="duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-3.5 py-2 rounded-2xl bg-page hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold text-xs cursor-pointer active:scale-95 transition-all duration-150"
             >
               Reset Filters
             </button>
@@ -1370,7 +1371,7 @@ export default function RiderHistoryTab() {
             <thead className="bg-page dark:bg-slate-950 text-slate-400 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
               <tr>
                 <th className="p-4 w-10 text-center">
-                  <button type="button" onClick={handleSelectAllRows} className="cursor-pointer text-slate-400 hover:text-amber-500 active:scale-95 transition">
+                  <button type="button" onClick={handleSelectAllRows} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none cursor-pointer text-slate-400 hover:text-amber-500 active:scale-95 transition">
                     {selectedRowIds.length === paginatedOrders.length && paginatedOrders.length > 0 ? (
                       <CheckSquare size={16} className="text-amber-500" />
                     ) : (
@@ -1412,14 +1413,15 @@ export default function RiderHistoryTab() {
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-semibold text-slate-700 dark:text-slate-300">
               {paginatedOrders.length === 0 ? (
                 <tr>
-                  <td colSpan={17} className="text-center py-12 text-slate-400">
-                    <div className="flex flex-col items-center gap-2">
-                      <AlertCircle size={32} className="text-slate-300 dark:text-slate-700" />
-                      <p className="font-bold">No completed deliveries found matching your search or filters.</p>
-                      <button type="button" onClick={handleResetFilters} className="text-amber-500 font-extrabold hover:underline cursor-pointer active:scale-95 transition">
-                        Reset Filters
-                      </button>
-                    </div>
+                  <td colSpan={17} className="py-4">
+                    <EmptyState 
+                      icon={AlertCircle} 
+                      title="No deliveries found" 
+                      description="No completed deliveries found matching your search or filters."
+                      actionLabel="Reset Filters"
+                      onAction={handleResetFilters}
+                      className="border-0 shadow-none bg-transparent"
+                    />
                   </td>
                 </tr>
               ) : (
@@ -1428,7 +1430,7 @@ export default function RiderHistoryTab() {
                   return (
                     <tr
                       key={order.id}
-                      className={`hover:bg-page transition ${isSelected ? 'bg-amber-500/10 dark:bg-amber-500/10' : ''
+                      className={`transition-colors hover:bg-emerald-50/30 hover:bg-page transition ${isSelected ? 'bg-amber-500/10 dark:bg-amber-500/10' : ''
                         }`}
                     >
                       <td className="p-4 text-center">
@@ -1880,7 +1882,7 @@ export default function RiderHistoryTab() {
                 <button
                   key={r.stars}
                   type="button"
-                  onClick={() => { handleSort('rating'); addToast?.(`Filtered by ${r.stars} reviews (${r.count})`, 'info'); }}
+                  onClick={() => { handleSort('rating'); addToast?.(`Filtered by ${r.stars} reviews (${r.count})`, 'info') }}
                   className="w-full flex items-center gap-3 hover:bg-page p-1 rounded-xl cursor-pointer active:scale-95 transition"
                 >
                   <span className="w-14 text-[11px] font-bold text-slate-500 text-left">{r.stars}</span>
@@ -2001,7 +2003,7 @@ export default function RiderHistoryTab() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
           <button
             type="button"
-            onClick={() => { setSelectedOrder(orders[0]); setActiveModal('earningsDetails'); }}
+            onClick={() => { setSelectedOrder(orders[0]); setActiveModal('earningsDetails') }}
             className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 flex items-center gap-3 cursor-pointer active:scale-95 transition text-left"
           >
             <DollarSign size={18} className="text-emerald-500 shrink-0" />
@@ -2025,7 +2027,7 @@ export default function RiderHistoryTab() {
 
           <button
             type="button"
-            onClick={() => { setSelectedOrder(orders[0]); setActiveModal('feedback'); }}
+            onClick={() => { setSelectedOrder(orders[0]); setActiveModal('feedback') }}
             className="p-3.5 rounded-2xl bg-sky-500/10 border border-sky-500/20 hover:bg-sky-500/20 text-sky-700 dark:text-sky-300 flex items-center gap-3 cursor-pointer active:scale-95 transition text-left"
           >
             <Star size={18} className="text-amber-400 shrink-0" />
@@ -2037,7 +2039,7 @@ export default function RiderHistoryTab() {
 
           <button
             type="button"
-            onClick={() => { setSelectedOrder(orders[0]); setActiveModal('invoice'); }}
+            onClick={() => { setSelectedOrder(orders[0]); setActiveModal('invoice') }}
             className="p-3.5 rounded-2xl bg-purple-500/10 border border-purple-500/20 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300 flex items-center gap-3 cursor-pointer active:scale-95 transition text-left"
           >
             <FileText size={18} className="text-purple-500 shrink-0" />
@@ -2146,7 +2148,7 @@ export default function RiderHistoryTab() {
               <div className="space-y-2">
                 <h4 className="font-black text-slate-900 dark:text-white text-xs uppercase flex items-center justify-between">
                   <span>Rider Delivery Notes</span>
-                  <button type="button" onClick={handleSaveRiderNotes} className="text-amber-500 hover:underline flex items-center gap-1 font-bold cursor-pointer active:scale-95 transition">
+                  <button type="button" onClick={handleSaveRiderNotes} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-amber-500 hover:underline flex items-center gap-1 font-bold cursor-pointer active:scale-95 transition">
                     <Save size={12} /> Save Notes
                   </button>
                 </h4>
@@ -2331,7 +2333,7 @@ export default function RiderHistoryTab() {
                   <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 rounded-xl bg-page font-extrabold cursor-pointer active:scale-95 transition">
                     Cancel
                   </button>
-                  <button type="submit" className="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-extrabold cursor-pointer shadow active:scale-95 transition">
+                  <button type="submit" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-extrabold cursor-pointer shadow active:scale-95 transition">
                     Submit Ticket
                   </button>
                 </div>

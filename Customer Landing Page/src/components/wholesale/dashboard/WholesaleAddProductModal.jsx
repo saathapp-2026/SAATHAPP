@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import {
-  CheckCircle2, Circle, ChevronRight, ChevronLeft, Plus, Trash2, Upload, RefreshCw,
-  Edit, Copy, FileDown, FileUp, Archive, Eye, Sparkles, Check, Package, DollarSign,
-  Layers, Truck, Search, Image, Video, ShieldCheck, AlertCircle, Calendar, X,
-  FileSpreadsheet, Star, Award, Info, RotateCw, Crop, Zap, Tag, Sliders, Globe,
-  Percent, HelpCircle, Wrench, Clock, CheckSquare, Layers2, ShieldAlert
+  CheckCircle2, ChevronRight, ChevronLeft, Plus, Trash2, Upload, RefreshCw,
+  Copy, FileDown, FileUp, Archive, Eye, Package, DollarSign,
+  Layers, Truck, Image, Video, Calendar, X,
+  FileSpreadsheet, Info, RotateCw, Crop, Tag, Sliders, Globe,
+  HelpCircle, ShieldAlert, CheckSquare
 } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
+import toast from 'react-hot-toast';
+import ConfirmDialog from '../../seller/orders/ConfirmDialog';
 
 export const STEPS = [
   { id: 1, name: 'Basic Information', icon: Info, desc: 'Name, SKU, Category & Brand' },
@@ -154,7 +156,8 @@ export const INITIAL_FORM_STATE = {
 };
 
 export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduct }) {
-  const { addToast } = useWholesale ? useWholesale() : { addToast: (msg) => alert(msg) };
+  const _wc = useWholesale();
+  const { addToast } = _wc || { addToast: (msg) => toast.success(msg) };
 
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
@@ -366,11 +369,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
   };
 
   const handleDeleteDraft = () => {
-    if (window.confirm('Are you sure you want to reset and clear this product form?')) {
-      setFormData(INITIAL_FORM_STATE);
-      setCurrentStep(1);
-      addToast?.('Form cleared and reset to initial template.', 'info');
-    }
+    setConfirmCancel(true);
   };
 
   const handleSaveDraft = () => {
@@ -443,7 +442,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
               type="button"
               onClick={handleDuplicateProduct}
               title="Duplicate Product"
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-700 bg-slate-800 text-[11px] font-bold text-slate-300 hover:bg-slate-700 hover:text-white transition"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-700 bg-slate-800 text-[11px] font-bold text-slate-300 hover:bg-slate-700 hover:text-white transition"
             >
               <Copy size={13} className="text-emerald-400" /> Duplicate
             </button>
@@ -451,7 +450,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
               type="button"
               onClick={handleImportCSV}
               title="Import CSV Data"
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-700 bg-slate-800 text-[11px] font-bold text-slate-300 hover:bg-slate-700 hover:text-white transition"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-700 bg-slate-800 text-[11px] font-bold text-slate-300 hover:bg-slate-700 hover:text-white transition"
             >
               <FileUp size={13} className="text-blue-400" /> Import CSV
             </button>
@@ -459,7 +458,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
               type="button"
               onClick={handleExportCSV}
               title="Export Product JSON/CSV"
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-700 bg-slate-800 text-[11px] font-bold text-slate-300 hover:bg-slate-700 hover:text-white transition"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-700 bg-slate-800 text-[11px] font-bold text-slate-300 hover:bg-slate-700 hover:text-white transition"
             >
               <FileDown size={13} className="text-amber-400" /> Export CSV
             </button>
@@ -467,7 +466,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
               type="button"
               onClick={handleArchiveProduct}
               title="Archive Product"
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-700 bg-slate-800 text-[11px] font-bold text-slate-300 hover:bg-slate-700 hover:text-white transition"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-700 bg-slate-800 text-[11px] font-bold text-slate-300 hover:bg-slate-700 hover:text-white transition"
             >
               <Archive size={13} className="text-purple-400" /> Archive
             </button>
@@ -475,7 +474,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
               type="button"
               onClick={handleDeleteDraft}
               title="Clear/Reset Form"
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-rose-900/50 bg-rose-950/40 text-[11px] font-bold text-rose-300 hover:bg-rose-900/60 transition"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-rose-900/50 bg-rose-950/40 text-[11px] font-bold text-rose-300 hover:bg-rose-900/60 transition"
             >
               <Trash2 size={13} /> Reset
             </button>
@@ -483,7 +482,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
             <button
               type="button"
               onClick={onClose}
-              className="ml-2 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center font-bold transition"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none ml-2 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center font-bold transition"
             >
               <X size={18} />
             </button>
@@ -640,7 +639,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                           type="button"
                           onClick={generateNewSKU}
                           title="Generate New SKU"
-                          className="px-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/30 transition flex items-center gap-1 font-bold"
+                          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/30 transition flex items-center gap-1 font-bold"
                         >
                           <RefreshCw size={14} /> Auto
                         </button>
@@ -770,7 +769,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                         <button
                           type="button"
                           onClick={handleAddTag}
-                          className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition"
+                          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition"
                         >
                           + Add Tag
                         </button>
@@ -848,7 +847,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                                     type="file"
                                     accept="image/*"
                                     onChange={handleMainImageUpload}
-                                    className="hidden"
+                                    className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden"
                                   />
                                 </label>
                                 <button
@@ -871,7 +870,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                                 type="file"
                                 accept="image/*"
                                 onChange={handleMainImageUpload}
-                                className="hidden"
+                                className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden"
                               />
                             </label>
                           )}
@@ -895,7 +894,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                               type="file"
                               accept="image/*"
                               onChange={handleMainImageUpload}
-                              className="hidden"
+                              className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden"
                             />
                           </label>
                         </div>
@@ -1236,7 +1235,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                       <button
                         type="button"
                         onClick={handleAddBoxItem}
-                        className="text-xs font-bold text-emerald-400 hover:underline flex items-center gap-1"
+                        className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-xs font-bold text-emerald-400 hover:underline flex items-center gap-1"
                       >
                         <Plus size={14} /> Add Package Component
                       </button>
@@ -1420,7 +1419,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                       <button
                         type="button"
                         onClick={handleAddTierRow}
-                        className="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow flex items-center gap-1"
+                        className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow flex items-center gap-1"
                       >
                         <Plus size={14} /> Add Tier Rule
                       </button>
@@ -1438,7 +1437,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                         </thead>
                         <tbody className="divide-y divide-slate-800 font-semibold text-slate-200">
                           {formData.tierPricing.map((tier, idx) => (
-                            <tr key={tier.id} className="hover:bg-slate-950/60">
+                            <tr key={tier.id} className="transition-colors hover:bg-emerald-50/30 hover:bg-slate-950/60">
                               <td className="p-3">
                                 <div className="flex items-center gap-1.5">
                                   <input
@@ -1813,7 +1812,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                       <button
                         type="button"
                         onClick={handleAddCustomSpec}
-                        className="text-xs font-bold text-emerald-400 hover:underline flex items-center gap-1"
+                        className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-xs font-bold text-emerald-400 hover:underline flex items-center gap-1"
                       >
                         <Plus size={14} /> Add Custom Pair
                       </button>
@@ -2238,7 +2237,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                   <button
                     type="button"
                     onClick={goToPrevStep}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-200 transition"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-200 transition"
                   >
                     <ChevronLeft size={16} /> Back
                   </button>
@@ -2249,7 +2248,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                 <button
                   type="button"
                   onClick={handleSaveDraft}
-                  className="px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-300 transition"
+                  className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-300 transition"
                 >
                   Save Draft
                 </button>
@@ -2258,7 +2257,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                   <button
                     type="button"
                     onClick={goToNextStep}
-                    className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold shadow-lg transition"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold shadow-lg transition"
                   >
                     Next Step <ChevronRight size={16} />
                   </button>
@@ -2266,7 +2265,7 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
                   <button
                     type="button"
                     onClick={handlePublishNow}
-                    className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black shadow-xl transition"
+                    className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black shadow-xl transition"
                   >
                     <CheckCircle2 size={18} /> Publish Wholesale SKU
                   </button>
@@ -2329,6 +2328,20 @@ export default function WholesaleAddProductModal({ isOpen, onClose, onSaveProduc
           </div>
         </div>
       )}
+      <ConfirmDialog
+        open={confirmCancel}
+        title="Discard changes?"
+        message="Are you sure you want to reset and clear this product form?"
+        danger={true}
+        confirmLabel="Reset Form"
+        cancelLabel="Keep Editing"
+        onCancel={() => setConfirmCancel(false)}
+        onConfirm={() => {
+          setConfirmCancel(false);
+          setFormData(INITIAL_STATE);
+          setFiles({ main: null, gallery1: null, gallery2: null, gallery3: null });
+        }}
+      />
     </div>
   );
 }

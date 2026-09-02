@@ -1,4 +1,4 @@
-import membershipData from '../professionalMembership.json';
+import membershipData from '../professionalMembership.json' with { type: 'json' };
 
 export function getProfessionalMembershipConfig() {
   return membershipData;

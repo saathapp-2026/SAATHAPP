@@ -29,7 +29,7 @@ export default function BrandingStore({ variant = 'dark', onRequestSubmitted }) 
             className={`rounded-2xl border p-5 flex flex-col ${
               isLight
                 ? 'bg-surface border-slate-200 dark:border-slate-800 hover:border-violet-300 dark:hover:border-violet-700'
-                : 'bg-white/5 border-white/10 hover:border-white/20'
+                : 'bg-surface/5 border-white/10 hover:border-white/20'
             } transition-colors`}
           >
             <div className="text-4xl mb-3">{product.icon}</div>

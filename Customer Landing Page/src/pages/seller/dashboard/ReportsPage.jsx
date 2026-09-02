@@ -216,8 +216,7 @@ export default function ReportsPage() {
         loadSide();
       } else if (action === 'print') {
         printReport(report);
-        toast.success('Print dialog opened');
-      } else if (action === 'share' || action === 'email') {
+        toast.success('Print dialog opened') } else if (action === 'share' || action === 'email') {
         setShareReport(report);
       } else if (action === 'regenerate') {
         const res = await generateReport({
@@ -293,11 +292,9 @@ export default function ReportsPage() {
     try {
       if (action === 'pause') {
         await updateScheduleStatus(schedule.id, 'paused');
-        toast.success('Schedule paused');
-      } else if (action === 'enable') {
+        toast.success('Schedule paused') } else if (action === 'enable') {
         await updateScheduleStatus(schedule.id, 'active');
-        toast.success('Schedule enabled');
-      } else if (action === 'delete') {
+        toast.success('Schedule enabled') } else if (action === 'delete') {
         setConfirmState({
           title: 'Delete schedule?',
           message: `Remove "${schedule.name}"?`,
@@ -372,21 +369,21 @@ export default function ReportsPage() {
             </button>
             {moreOpen ? (
               <>
-                <button type="button" className="fixed inset-0 z-10" aria-label="Close" onClick={() => setMoreOpen(false)} />
+                <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none fixed inset-0 z-10" aria-label="Close" onClick={() => setMoreOpen(false)} />
                 <div className="absolute right-0 z-20 mt-2 w-52 rounded-xl border border-slate-200 bg-surface shadow-xl py-1">
-                  <button type="button" onClick={() => { setShowAnalytics((v) => !v); setMoreOpen(false); }} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page">
+                  <button type="button" onClick={() => { setShowAnalytics((v) => !v); setMoreOpen(false) }} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page">
                     <BarChart3 size={13} /> {showAnalytics ? 'Hide Analytics' : 'Analytics'}
                   </button>
-                  <button type="button" onClick={() => { setShowAllCards((v) => !v); setMoreOpen(false); }} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page">
+                  <button type="button" onClick={() => { setShowAllCards((v) => !v); setMoreOpen(false) }} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page">
                     <LayoutGrid size={13} /> {showAllCards ? 'Primary KPIs' : 'All KPIs'}
                   </button>
-                  <button type="button" disabled={busyGlobal} onClick={handleGenerateAll} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page disabled:opacity-50">
+                  <button type="button" disabled={busyGlobal} onClick={handleGenerateAll} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page disabled:opacity-50">
                     <Layers size={13} /> Generate All
                   </button>
-                  <button type="button" disabled={busyGlobal} onClick={handleBulkZip} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page disabled:opacity-50">
+                  <button type="button" disabled={busyGlobal} onClick={handleBulkZip} className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page disabled:opacity-50">
                     <Archive size={13} /> Bulk ZIP
                   </button>
-                  <button type="button" onClick={() => { setTemplatesOpen(true); setMoreOpen(false); }} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page">
+                  <button type="button" onClick={() => { setTemplatesOpen(true); setMoreOpen(false) }} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs font-medium hover:bg-page">
                     <Bookmark size={13} /> Templates
                   </button>
                 </div>

@@ -193,7 +193,7 @@ export default function ProfessionalReview() {
           type="button"
           onClick={handleSubmit}
           disabled={!allComplete || saving || data.status === 'submitted'}
-          className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer border-0"
+          className="duration-200 active:scale-[0.98] disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer border-0"
         >
           {saving ? 'Submitting...' : data.status === 'submitted' ? 'Already Submitted' : 'Submit Application'}
           <ArrowRight size={18} />

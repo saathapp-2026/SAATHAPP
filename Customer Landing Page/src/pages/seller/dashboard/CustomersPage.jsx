@@ -390,7 +390,7 @@ export default function CustomersPage() {
           {error ? (
             <div className="rounded-xl border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/20 p-6 text-center" role="alert">
               <p className="text-sm text-red-600 mb-3">{error}</p>
-              <button type="button" onClick={loadCustomers} className="text-sm font-medium text-red-600 hover:underline">
+              <button type="button" onClick={loadCustomers} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none text-sm font-medium text-red-600 hover:underline">
                 Try again
               </button>
             </div>
@@ -428,7 +428,7 @@ export default function CustomersPage() {
           />
         </div>
 
-        <aside className="xl:sticky xl:top-4 space-y-4">
+        <aside className="transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded xl:sticky xl:top-4 space-y-4">
           <CustomerAnalytics
             compact
             onAdd={() => setAddOpen(true)}

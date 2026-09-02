@@ -2,6 +2,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Search, ArrowLeft } from 'lucide-react';
 import ProductGrid from '../components/saathapp-product/ProductGrid';
+import { EmptyState } from '../components/common/StateComponents';
 import { products as groceryProducts } from '../data/products';
 import { mockSaathAppProducts as serviceProducts } from '../data/saathAppProducts';
 import { useCart } from '../hooks/useCart';
@@ -16,10 +17,8 @@ export default function SearchPage() {
   
   useEffect(() => {
     setIsLoading(true);
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 400); // simulate network latency
-    return () => clearTimeout(timer);
+    // Remove fake long delays as requested
+    setIsLoading(false);
   }, [query]);
 
   const results = useMemo(() => {
@@ -39,7 +38,7 @@ export default function SearchPage() {
   }, [query]);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-20">
+    <div className="min-h-screen bg-page pb-20">
       <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center gap-4">
           <button onClick={() => navigate(-1)} className="p-2 -ml-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
@@ -69,15 +68,13 @@ export default function SearchPage() {
         ) : results.length > 0 ? (
           <ProductGrid products={results} onAddToCart={handleAddToCart} />
         ) : (
-          <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800">
-            <div className="w-24 h-24 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Search size={40} className="text-slate-400" />
-            </div>
-            <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-2">No results found</h2>
-            <p className="text-slate-500 max-w-md mx-auto">
-              We couldn't find anything matching "{query}". Try checking your spelling or using more general terms.
-            </p>
-          </div>
+          <EmptyState 
+            icon={Search} 
+            title={`No results found for "${query}"`} 
+            description="Try checking the spelling or using another search term."
+            actionLabel="Clear Search"
+            onAction={() => navigate('/search')}
+          />
         )}
       </div>
     </div>

@@ -56,7 +56,7 @@ export default function OrderConfirmation({ order, onBack, onViewOrders }) {
             {order.items.map((item, idx) => (
               <div key={idx} className="flex gap-4 items-center">
                 <div className="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 overflow-hidden flex items-center justify-center shrink-0 text-2xl">
-                  {item.image ? <img src={item.image} alt={item.name} className="w-full h-full object-cover" /> : '🛍️'}
+                  {item.image ? <img src={item.image} alt={item.name} className="w-full h-full object-contain p-1" /> : '🛍️'}
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="font-bold text-sm truncate">{item.name}</h4>
@@ -121,13 +121,13 @@ export default function OrderConfirmation({ order, onBack, onViewOrders }) {
         <div className="flex gap-4">
           <button 
             onClick={onViewOrders}
-            className="flex-1 bg-primary hover:bg-primary/90 text-white py-3 rounded-xl font-bold transition-colors text-center"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 bg-primary hover:bg-primary/90 text-white py-3 rounded-xl font-bold transition-colors text-center"
           >
             Track Order
           </button>
           <button 
             onClick={onBack}
-            className="flex-1 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 py-3 rounded-xl font-bold transition-colors text-center"
+            className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none flex-1 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 py-3 rounded-xl font-bold transition-colors text-center"
           >
             Continue Shopping
           </button>

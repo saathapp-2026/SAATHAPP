@@ -5,7 +5,7 @@ import { Star, ArrowRight, MapPin, ChevronLeft, ChevronRight } from 'lucide-reac
 
 export default function NearbyShops({ onShopSelect }) {
   const [nearbyShops, setNearbyShops] = useState(Array.from({ length: 4 }, (_, i) => ({
-    id: `placeholder-${i}`,
+    id: `skeleton-${i}`,
     name: '\u00A0',
     type: '\u00A0',
     rating: '0',
@@ -34,20 +34,20 @@ export default function NearbyShops({ onShopSelect }) {
       {/* Full-width Carousel Controls */}
       <button
         onClick={() => scroll('left')}
-        className="absolute left-2 sm:left-4 top-[55%] -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white hover:bg-page text-slate-600 dark:text-slate-300 hidden md:flex items-center justify-center transition-colors border border-slate-200/50 shadow-sm"
+        className="absolute left-2 sm:left-4 top-[55%] -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-surface hover:bg-page text-slate-600 dark:text-slate-300 hidden md:flex items-center justify-center transition-colors border border-slate-200/50 shadow-sm"
         title="Scroll Left"
       >
         <ChevronLeft size={16} />
       </button>
       <button
         onClick={() => scroll('right')}
-        className="absolute right-2 sm:right-4 top-[55%] -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white hover:bg-page text-slate-600 dark:text-slate-300 hidden md:flex items-center justify-center transition-colors border border-slate-200/50 shadow-sm"
+        className="absolute right-2 sm:right-4 top-[55%] -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-surface hover:bg-page text-slate-600 dark:text-slate-300 hidden md:flex items-center justify-center transition-colors border border-slate-200/50 shadow-sm"
         title="Scroll Right"
       >
         <ChevronRight size={16} />
       </button>
 
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="saath-container">
         
         {/* Section Title with custom scroll buttons */}
         <div className="flex items-center justify-between mb-8">

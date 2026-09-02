@@ -57,7 +57,7 @@ function ReportIssue() {
   };
 
   return (
-    <section id="report" className="py-[80px] bg-white border-t border-[#EEF2F7]">
+    <section id="report" className="py-[80px] bg-surface border-t border-[#EEF2F7]">
       <div className="saas-container">
         
         {/* Centered Section Heading (800px max width, 48px heading) */}
@@ -90,7 +90,7 @@ function ReportIssue() {
                 onClick={() => setSelectedCategory(item.title)}
                 className="
                   group cursor-pointer
-                  bg-white
+                  bg-surface
                   border border-[#EEF2F7]
                   rounded-[20px]
                   p-[28px]
@@ -130,7 +130,7 @@ function ReportIssue() {
         </div>
 
         {/* Support Ticket CTA Banner (White card with 6px green accent border) */}
-        <div className="mt-16 sm:mt-20 rounded-[20px] bg-white border border-[#EEF2F7] border-l-[6px] border-l-[#16A34A] p-8 sm:p-[32px] shadow-[0_4px_18px_rgba(15,23,42,.05)] hover:shadow-[0_14px_36px_rgba(15,23,42,.1)] transition-all flex flex-col lg:flex-row items-center justify-between gap-6 text-center lg:text-left">
+        <div className="mt-16 sm:mt-20 rounded-[20px] bg-surface border border-[#EEF2F7] border-l-[6px] border-l-[#16A34A] p-8 sm:p-[32px] shadow-[0_4px_18px_rgba(15,23,42,.05)] hover:shadow-[0_14px_36px_rgba(15,23,42,.1)] transition-all flex flex-col lg:flex-row items-center justify-between gap-6 text-center lg:text-left">
           <div className="flex flex-col sm:flex-row items-center gap-5">
             <div className="w-[40px] h-[40px] rounded-full bg-[#ECFDF3] text-[#16A34A] border border-[#A7F3D0]/60 flex items-center justify-center flex-shrink-0">
               <AlertTriangle size={18} strokeWidth={1.8} />
@@ -169,7 +169,7 @@ function ReportIssue() {
                 relative w-full max-w-xl
                 max-h-[90vh] overflow-y-auto
                 rounded-[20px] border border-[#E2E8F0]
-                bg-white p-8 shadow-2xl
+                bg-surface p-8 shadow-2xl
               "
             >
               <button
@@ -256,7 +256,7 @@ function ReportIssue() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="
+                      className="duration-200 active:scale-[0.98] disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none 
                         w-full h-[52px]
                         rounded-[14px]
                         bg-[#16A34A]

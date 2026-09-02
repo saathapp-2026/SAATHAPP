@@ -11,14 +11,14 @@ export default function ViewReportModal({ open, onClose, report, onDownload, onP
   return (
     <SellerOverlay open={open} onClose={onClose} labelledBy="view-report-title" zIndex={SELLER_Z.modal}>
       <div className="w-full max-w-2xl rounded-2xl bg-surface border border-slate-200 dark:border-slate-800 shadow-xl max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 flex items-start justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-white/95 px-5 py-4">
+        <div className="sticky top-0 flex items-start justify-between gap-3 border-b border-slate-200 dark:border-slate-800 bg-surface/95 px-5 py-4">
           <div>
             <h2 id="view-report-title" className="text-lg font-bold">{report.name}</h2>
             <p className="text-xs text-slate-500 mt-0.5">
               {report.dateFrom} → {report.dateTo} · {formatReportTime(report.generatedOn)}
             </p>
           </div>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-page" aria-label="Close">
+          <button type="button" onClick={onClose} className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none p-1.5 rounded-lg hover:bg-page" aria-label="Close">
             <X size={16} />
           </button>
         </div>
@@ -63,7 +63,7 @@ export default function ViewReportModal({ open, onClose, report, onDownload, onP
               </thead>
               <tbody>
                 {(report.preview?.rows || []).map((r) => (
-                  <tr key={r.label} className="border-t border-slate-100 dark:border-slate-800">
+                  <tr key={r.label} className="transition-colors hover:bg-emerald-50/30 border-t border-slate-100 dark:border-slate-800">
                     <td className="px-3 py-2">{r.label}</td>
                     <td className="px-3 py-2 tabular-nums font-medium">{r.value}</td>
                   </tr>

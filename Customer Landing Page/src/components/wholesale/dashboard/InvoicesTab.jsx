@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Receipt, Download, Eye, FileText, FileSpreadsheet, FileCode, ChevronDown, X, Check, Printer, ExternalLink, Sparkles } from 'lucide-react';
 import { useWholesale } from '../../../context/WholesaleContext';
-import saathAppLogo from '../../../assets/saathapp-logo.jpeg';
+import saathAppLogo from '../../../assets/saathapp-logo.png';
 
 export default function InvoicesTab() {
-  const { addToast, formData } = useWholesale ? useWholesale() : { addToast: console.log, formData: {} };
+  const _wc = useWholesale();
+  const { addToast, formData } = _wc || { addToast: console.log, formData: {} };
 
   const [invoices, setInvoices] = useState([]);
 
@@ -105,7 +106,7 @@ export default function InvoicesTab() {
       <body>
         <div class="header">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <img src="${window.location.origin}/src/assets/saathapp-logo.jpeg" class="logo-img" alt="SaathApp Logo" onerror="this.style.display='none'" />
+            <img src="${window.location.origin}/src/assets/saathapp-logo.png" class="logo-img" alt="SaathApp Logo" onerror="this.style.display='none'" />
             <div>
               <div class="title">B2B TAX INVOICE</div>
               <div style="font-size: 12px; color: #64748b;">${seller}</div>
@@ -211,7 +212,7 @@ export default function InvoicesTab() {
         <button
           type="button"
           onClick={handleExportAllInvoicesCSV}
-          className="inline-flex items-center gap-1.5 rounded-2xl bg-[#00986C] hover:bg-emerald-700 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition hover:scale-[1.02] cursor-pointer"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none inline-flex items-center gap-1.5 rounded-2xl bg-[#00986C] hover:bg-emerald-700 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition hover:scale-[1.02] cursor-pointer"
         >
           <FileSpreadsheet size={16} /> Export Invoices CSV / Excel
         </button>
@@ -234,7 +235,7 @@ export default function InvoicesTab() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-semibold text-slate-800 dark:text-slate-200">
               {invoices.map((inv) => (
-                <tr key={inv.inv} className="hover:bg-page transition">
+                <tr key={inv.inv} className="transition-colors hover:bg-emerald-50/30 hover:bg-page transition">
                   <td className="p-3 font-mono font-bold text-[#00986C]">{inv.inv}</td>
                   <td className="p-3 font-mono text-slate-500">{inv.orderId}</td>
                   <td className="p-3 font-extrabold text-slate-900 dark:text-white">{inv.buyer}</td>
@@ -305,7 +306,7 @@ export default function InvoicesTab() {
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                   {previewModalData.rows.map((row, idx) => (
-                    <tr key={idx} className="hover:bg-page">
+                    <tr key={idx} className="transition-colors hover:bg-emerald-50/30 hover:bg-page">
                       {row.map((cell, cIdx) => (
                         <td key={cIdx} className="p-3 font-mono">{cell}</td>
                       ))}

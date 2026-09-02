@@ -34,13 +34,13 @@ function collectImages(media = {}) {
 function ImageFrame({ image, className = '' }) {
   const hasUrl = image?.url && (image.url.startsWith('data:') || image.url.startsWith('http') || image.url.startsWith('blob:'));
   if (hasUrl) {
-    return <img src={image.url} alt={image.name || 'Product'} className={`object-cover ${className}`} />;
+    return <img src={image.url} alt={image.name || 'Product'} className={`object-contain p-1.5 ${className}`} />;
   }
   // Seed / metadata-only image — show branded placeholder with filename
   if (image) {
     return (
       <div className={`flex flex-col items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-emerald-50 dark:from-slate-800 dark:to-slate-700 ${className}`}>
-        <div className="h-16 w-16 rounded-2xl bg-white/80 shadow flex items-center justify-center mb-2">
+        <div className="h-16 w-16 rounded-2xl bg-surface/80 shadow flex items-center justify-center mb-2">
           <span className="text-2xl font-bold text-emerald-600">{(image.name || 'P').charAt(0).toUpperCase()}</span>
         </div>
         <p className="text-xs font-semibold text-slate-600 dark:text-slate-300 px-4 text-center line-clamp-2">
@@ -101,7 +101,7 @@ export default function ProductPreview({ draft, onGoToImages }) {
           ))}
         </div>
 
-        <div className={`mx-auto ${widthClass} w-full rounded-2xl border border-slate-200 overflow-hidden bg-white dark:bg-slate-950 shadow-sm`}>
+        <div className={`mx-auto ${widthClass} w-full rounded-2xl border border-slate-200 overflow-hidden bg-surface dark:bg-slate-950 shadow-sm`}>
           {/* Image gallery */}
           <div className="bg-page dark:bg-slate-900">
             <div className="aspect-[4/3] w-full relative">
@@ -116,7 +116,7 @@ export default function ProductPreview({ draft, onGoToImages }) {
                     <button
                       type="button"
                       onClick={onGoToImages}
-                      className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-white"
+                      className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-white"
                     >
                       <Upload size={12} /> Go to Images
                     </button>
@@ -280,7 +280,7 @@ export default function ProductPreview({ draft, onGoToImages }) {
               <p className="text-slate-500 text-xs mt-0.5">SAATHAPP Verified Partner · GST invoice available</p>
             </div>
 
-            <button type="button" className="w-full py-2.5 rounded-xl bg-emerald-500 text-white text-sm font-bold">
+            <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full py-2.5 rounded-xl bg-emerald-500 text-white text-sm font-bold">
               Add to Cart
             </button>
           </div>

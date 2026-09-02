@@ -25,20 +25,20 @@ export default function UploadSection({ draft, updateDraft }) {
         <div className="space-y-2">
           <label className="text-sm font-semibold text-slate-700">Upload Banner / Image / Video <span className="text-rose-500">*</span></label>
           <div 
-            className="w-full h-64 rounded-2xl border-2 border-dashed border-slate-300 hover:border-[#15803D] bg-page flex flex-col items-center justify-center text-center transition-colors cursor-pointer"
+            className="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] w-full h-64 rounded-2xl border-2 border-dashed border-slate-300 hover:border-[#15803D] bg-page flex flex-col items-center justify-center text-center transition-colors cursor-pointer"
             onClick={handleUploadClick}
           >
             <input 
               type="file" 
               ref={fileInputRef} 
-              className="hidden" 
+              className="transition-colors duration-200 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none hidden" 
               accept="image/*,video/*"
               onChange={handleFileChange}
             />
             <UploadCloud size={40} className="text-slate-400 mb-4" strokeWidth={1.5} />
             <p className="text-sm font-medium text-slate-600 mb-2">Drag & drop your file here</p>
             <p className="text-xs text-slate-400 mb-4">or</p>
-            <button className="px-6 py-2 bg-[#15803D] hover:bg-emerald-700 text-white font-bold rounded-lg transition-colors">
+            <button className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none px-6 py-2 bg-[#15803D] hover:bg-emerald-700 text-white font-bold rounded-lg transition-colors">
               Choose File
             </button>
             {draft.mediaFile && (
@@ -55,7 +55,7 @@ export default function UploadSection({ draft, updateDraft }) {
             <input 
               type="text" 
               placeholder="https://saathapp.in/store/your-store"
-              className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-white"
+              className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-surface"
               value={draft.adLink || ''}
               onChange={(e) => updateDraft({ adLink: e.target.value })}
             />
@@ -68,7 +68,7 @@ export default function UploadSection({ draft, updateDraft }) {
               placeholder="Enter ad description"
               rows={4}
               maxLength={200}
-              className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-white resize-none"
+              className="transition-colors duration-200 focus:ring-emerald-500/20 focus:border-emerald-500 w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#15803D]/20 focus:border-[#15803D] transition-all bg-surface resize-none"
               value={draft.description || ''}
               onChange={(e) => updateDraft({ description: e.target.value })}
             />

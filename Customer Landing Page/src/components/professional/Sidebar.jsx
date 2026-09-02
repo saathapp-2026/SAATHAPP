@@ -5,7 +5,9 @@ import {
   FileCheck, User, LifeBuoy, Settings, LogOut, ShieldCheck, ArrowUpRight, TrendingUp, X,
   Crown, Package, Wrench, Briefcase, ScrollText, IndianRupee, ClipboardList
 } from 'lucide-react';
-import SaathAppLogo from '../../assets/saathapp-logo.jpeg';
+import SaathAppLogo from '../../assets/saathapp-logo.png';
+import ThemeLogo from '../ThemeLogo';
+import SaathAppLogoDark from '../../assets/saathapp-logo-dark.png';
 
 export default function Sidebar({
   activeTab,
@@ -40,22 +42,22 @@ export default function Sidebar({
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm lg:hidden transition-all duration-300"
+          className="hover:-translate-y-0.5 hover:shadow-md cursor-pointer active:scale-[0.99] fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm lg:hidden transition-all duration-300"
           onClick={() => setIsOpen(false)}
         />
       )}
 
-      <aside className={`fixed top-0 bottom-0 left-0 z-50 w-72 bg-surface border-r border-slate-200/60 dark:border-slate-800 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 ${
+      <aside className={`transition-colors hover:text-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none rounded fixed top-0 bottom-0 left-0 z-50 w-72 bg-surface border-r border-slate-200/60 dark:border-slate-800 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       } lg:sticky lg:h-screen lg:top-0`}>
 
         <div className="flex flex-col p-6 border-b border-slate-100 dark:border-slate-800/60">
           <div className="flex items-center justify-between mb-6">
             <div className="h-10 w-36">
-              <img src={SaathAppLogo} alt="SaathApp Logo" className="h-full w-full object-contain" />
+              <ThemeLogo />
             </div>
             <button
-              className="lg:hidden text-slate-400 hover:text-slate-600 cursor-pointer"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none lg:hidden text-slate-400 hover:text-slate-600 cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
               <X size={20} />
@@ -100,7 +102,7 @@ export default function Sidebar({
             >
               <motion.div
                 layout
-                className="w-4 h-4 bg-white rounded-full shadow-md"
+                className="w-4 h-4 bg-surface rounded-full shadow-md"
                 animate={{ x: isOnline ? 16 : 0 }}
                 transition={{ type: 'spring', stiffness: 500, damping: 30 }}
               />
@@ -130,7 +132,7 @@ export default function Sidebar({
 
           <button
             onClick={onLogout}
-            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider text-left text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-955 transition-all duration-200 cursor-pointer"
+            className="active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider text-left text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-955 transition-all duration-200 cursor-pointer"
           >
             <LogOut size={16} />
             <span>Logout</span>
@@ -139,7 +141,7 @@ export default function Sidebar({
 
         <div className="p-4 border-t border-slate-100 dark:border-slate-800/60">
           <div className="bg-gradient-to-tr from-brand-600 to-emerald-700 rounded-card p-4 text-white text-left relative overflow-hidden shadow-md">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-surface/10 rounded-full blur-xl pointer-events-none" />
             <div className="relative z-10 space-y-2.5">
               <div className="flex items-center gap-1.5 bg-slate-900/30 px-2 py-0.5 rounded-full w-max border border-white/10 text-[9px] font-black uppercase text-secondary">
                 <TrendingUp size={10} />

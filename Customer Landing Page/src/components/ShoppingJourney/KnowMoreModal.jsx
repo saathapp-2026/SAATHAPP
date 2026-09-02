@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import { X, Gift, Wallet, ShoppingBag, Percent, Shirt, Trophy, Check, Smartphone, Download, Star, Sparkles, HelpCircle, Activity } from 'lucide-react';
 import InstallPWAButton from '../PWA/InstallPWAButton';
+import useScrollLock from '../../hooks/useScrollLock';
 
 export default function KnowMoreModal({ isOpen, onClose }) {
+  useScrollLock(isOpen);
   const [activeTab, setActiveTab] = useState('overview');
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-center items-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm">
+    <div 
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="know-more-title"
+    >
       <div className="bg-[#f8f9fa] rounded-3xl w-full max-w-5xl h-[90vh] sm:h-[85vh] flex flex-col shadow-2xl relative animate-in fade-in zoom-in duration-200">
         
         {/* Close Button */}
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 z-50 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-gray-600 shadow-sm transition-colors"
+          aria-label="Close modal"
+          className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none absolute top-4 right-4 z-50 w-8 h-8 bg-surface/80 hover:bg-surface rounded-full flex items-center justify-center text-gray-600 shadow-sm transition-colors"
         >
           <X size={18} />
         </button>
@@ -68,7 +76,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
           {activeTab === 'overview' && (
             <>
               {/* Section 1: What can you unlock? */}
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+              <div className="bg-surface rounded-2xl p-6 shadow-sm border border-gray-100">
             <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900 mb-1">
               <Gift className="text-green-500" size={20} /> What can you unlock?
             </h3>
@@ -114,7 +122,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
           </div>
 
           {/* Section 2: How your journey grows */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-surface rounded-2xl p-6 shadow-sm border border-gray-100">
             <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900 mb-1">
               <Activity className="text-orange-500" size={20} /> How your journey grows
             </h3>
@@ -127,7 +135,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
                 {/* 7 Days */}
                 <div className="flex flex-col items-center">
                   <div className="relative mb-4">
-                    <div className="w-16 h-16 rounded-full bg-white border-[3px] border-[#00a86b] flex flex-col items-center justify-center shadow-sm">
+                    <div className="w-16 h-16 rounded-full bg-surface border-[3px] border-[#00a86b] flex flex-col items-center justify-center shadow-sm">
                       <span className="font-black text-lg text-gray-900 leading-none">7</span>
                       <span className="text-[9px] font-bold text-gray-500">Days</span>
                     </div>
@@ -144,7 +152,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
                 {/* 15 Days */}
                 <div className="flex flex-col items-center">
                   <div className="relative mb-4">
-                    <div className="w-16 h-16 rounded-full bg-white border-[3px] border-[#00a86b] flex flex-col items-center justify-center shadow-sm">
+                    <div className="w-16 h-16 rounded-full bg-surface border-[3px] border-[#00a86b] flex flex-col items-center justify-center shadow-sm">
                       <span className="font-black text-lg text-gray-900 leading-none">15</span>
                       <span className="text-[9px] font-bold text-gray-500">Days</span>
                     </div>
@@ -161,7 +169,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
                 {/* 30 Days (Current Target) */}
                 <div className="flex flex-col items-center">
                   <div className="relative mb-4">
-                    <div className="w-20 h-20 -mt-2 rounded-full bg-white border-[4px] border-[#00a86b] flex flex-col items-center justify-center shadow-md shadow-green-100">
+                    <div className="w-20 h-20 -mt-2 rounded-full bg-surface border-[4px] border-[#00a86b] flex flex-col items-center justify-center shadow-md shadow-green-100">
                       <span className="font-black text-2xl text-gray-900 leading-none">30</span>
                       <span className="text-[10px] font-bold text-gray-500">Days</span>
                     </div>
@@ -177,7 +185,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
                 {/* 60 Days */}
                 <div className="flex flex-col items-center opacity-60">
                   <div className="relative mb-4">
-                    <div className="w-16 h-16 rounded-full bg-white border-[3px] border-gray-200 flex flex-col items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-surface border-[3px] border-gray-200 flex flex-col items-center justify-center">
                       <span className="font-black text-lg text-gray-900 leading-none">60</span>
                       <span className="text-[9px] font-bold text-gray-500">Days</span>
                     </div>
@@ -193,7 +201,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
                 {/* 90 Days */}
                 <div className="flex flex-col items-center opacity-60">
                   <div className="relative mb-4">
-                    <div className="w-16 h-16 rounded-full bg-white border-[3px] border-gray-200 flex flex-col items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-surface border-[3px] border-gray-200 flex flex-col items-center justify-center">
                       <span className="font-black text-lg text-gray-900 leading-none">90</span>
                       <span className="text-[9px] font-bold text-gray-500">Days</span>
                     </div>
@@ -213,7 +221,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* Monthly Rewards */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col h-full">
+            <div className="bg-surface rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col h-full">
               <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900 mb-1">
                 <Trophy className="text-yellow-500" size={20} /> Monthly Rewards
               </h3>
@@ -251,7 +259,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
             </div>
 
             {/* Track Everything */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative overflow-hidden flex flex-col h-full">
+            <div className="bg-surface rounded-2xl p-6 shadow-sm border border-gray-100 relative overflow-hidden flex flex-col h-full">
               <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900 mb-1">
                 <Activity className="text-blue-500" size={20} /> Track everything on SaathApp
               </h3>
@@ -281,7 +289,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
                   <div className="absolute top-0 inset-x-0 h-4 bg-gray-900 flex justify-center z-20">
                     <div className="w-10 h-3 bg-black rounded-b-xl"></div>
                   </div>
-                  <div className="bg-white w-full h-full p-2 pt-6">
+                  <div className="bg-surface w-full h-full p-2 pt-6">
                     <div className="text-[6px] text-gray-400 mb-2">← Your Journey</div>
                     <div className="w-16 h-16 mx-auto rounded-full border-[3px] border-green-500 flex flex-col items-center justify-center mb-2">
                       <span className="text-lg font-black leading-none">18</span>
@@ -298,7 +306,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
           {/* Section 4: Install Banner */}
           <div className="bg-[#f0f4fd] rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 border border-blue-50">
             <div className="flex items-center gap-6">
-              <div className="w-16 h-24 bg-white rounded-xl border-[3px] border-gray-900 shadow-md flex flex-col items-center justify-center relative rotate-[-5deg]">
+              <div className="w-16 h-24 bg-surface rounded-xl border-[3px] border-gray-900 shadow-md flex flex-col items-center justify-center relative rotate-[-5deg]">
                 <div className="font-black text-[8px] leading-tight text-center mb-1">SAATH<br/>APP</div>
                 <ShoppingBag size={14}/>
                 <div className="absolute top-1 w-6 h-1 bg-gray-900 rounded-full"></div>
@@ -308,10 +316,10 @@ export default function KnowMoreModal({ isOpen, onClose }) {
                 <h3 className="text-lg font-black text-gray-900 mb-1">Get the full SaathApp experience</h3>
                 <p className="text-xs text-gray-600 font-medium mb-4 max-w-sm">Install SaathApp and manage your journey, track rewards, redeem offers and win big!</p>
                 <div className="flex gap-4">
-                  <div className="flex items-center gap-1.5 text-[9px] font-bold text-gray-700 bg-white px-2.5 py-1.5 rounded-md shadow-sm">
+                  <div className="flex items-center gap-1.5 text-[9px] font-bold text-gray-700 bg-surface px-2.5 py-1.5 rounded-md shadow-sm">
                     <span className="text-green-500">🤖</span> Available on Android
                   </div>
-                  <div className="flex items-center gap-1.5 text-[9px] font-bold text-gray-700 bg-white px-2.5 py-1.5 rounded-md shadow-sm">
+                  <div className="flex items-center gap-1.5 text-[9px] font-bold text-gray-700 bg-surface px-2.5 py-1.5 rounded-md shadow-sm">
                     <span className="text-gray-900">🍎</span> Available on iOS
                   </div>
                 </div>
@@ -338,7 +346,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
           )}
 
           {activeTab === 'milestones' && (
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 animate-in fade-in duration-300">
+            <div className="bg-surface rounded-2xl p-6 shadow-sm border border-gray-100 animate-in fade-in duration-300">
               <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900 mb-6">
                 <Trophy className="text-yellow-500" size={20} /> Your Journey Milestones
               </h3>
@@ -351,7 +359,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
                   { day: 90, title: "Ultimate Champion", reward: "Premium Surprise Reward", desc: "Unlock our highest tier. Gain entry into the mega draw and win high-value rewards!", icon: <Trophy size={18}/>, color: "text-yellow-600", bg: "bg-yellow-100" }
                 ].map((m, idx) => (
                   <div key={idx} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-white bg-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-white bg-surface shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                       <span className={`font-black text-sm ${m.color}`}>{m.day}D</span>
                     </div>
                     <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] p-4 rounded-2xl border border-gray-100 bg-gray-50 shadow-sm hover:shadow-md transition-shadow">
@@ -373,7 +381,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
           )}
 
           {activeTab === 'rewards' && (
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 animate-in fade-in duration-300">
+            <div className="bg-surface rounded-2xl p-6 shadow-sm border border-gray-100 animate-in fade-in duration-300">
               <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900 mb-6">
                 <Gift className="text-green-500" size={20} /> Reward Categories
               </h3>
@@ -403,7 +411,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
           )}
 
           {activeTab === 'monthly' && (
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 animate-in fade-in duration-300">
+            <div className="bg-surface rounded-2xl p-6 shadow-sm border border-gray-100 animate-in fade-in duration-300">
               <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-6 sm:p-10 text-center border border-yellow-100 mb-8 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-200/40 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-orange-200/40 rounded-full blur-3xl"></div>
@@ -440,7 +448,7 @@ export default function KnowMoreModal({ isOpen, onClose }) {
           )}
 
           {activeTab === 'faqs' && (
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 animate-in fade-in duration-300">
+            <div className="bg-surface rounded-2xl p-6 shadow-sm border border-gray-100 animate-in fade-in duration-300">
               <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900 mb-6">
                 <HelpCircle className="text-blue-500" size={20} /> Frequently Asked Questions
               </h3>

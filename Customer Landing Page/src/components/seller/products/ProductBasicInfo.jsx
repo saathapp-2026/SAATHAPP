@@ -46,7 +46,7 @@ export default function ProductBasicInfo({
               type="button"
               onClick={onGenerateSku}
               title="Auto generate SKU"
-              className="h-9 w-9 shrink-0 rounded-lg border border-slate-200 hover:bg-page inline-flex items-center justify-center"
+              className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none h-9 w-9 shrink-0 rounded-lg border border-slate-200 hover:bg-page inline-flex items-center justify-center"
             >
               <RefreshCw size={14} />
             </button>
@@ -78,7 +78,7 @@ export default function ProductBasicInfo({
               disabled={suggesting || !value.name}
               onClick={onSuggestCategory}
               title="AI category suggestion"
-              className="h-9 px-2.5 shrink-0 rounded-lg border border-violet-200 text-violet-600 dark:border-violet-800 hover:bg-violet-50 dark:hover:bg-violet-950/30 inline-flex items-center gap-1 text-xs font-semibold disabled:opacity-40"
+              className="transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none h-9 px-2.5 shrink-0 rounded-lg border border-violet-200 text-violet-600 dark:border-violet-800 hover:bg-violet-50 dark:hover:bg-violet-950/30 inline-flex items-center gap-1 text-xs font-semibold disabled:opacity-40"
             >
               <Sparkles size={12} /> AI
             </button>
@@ -110,7 +110,7 @@ export default function ProductBasicInfo({
         <Field label="Barcode (EAN/UPC)" error={errors.barcode}>
           <div className="flex gap-2">
             <TextInput value={value.barcode} onChange={(e) => set('barcode', e.target.value)} className="flex-1" />
-            <button type="button" className="h-9 w-9 rounded-lg border border-slate-200 inline-flex items-center justify-center" title="Scan">
+            <button type="button" className="transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none h-9 w-9 rounded-lg border border-slate-200 inline-flex items-center justify-center" title="Scan">
               <ScanLine size={14} />
             </button>
           </div>
