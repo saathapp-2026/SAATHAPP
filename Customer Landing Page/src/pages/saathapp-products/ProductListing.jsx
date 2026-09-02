@@ -1019,7 +1019,7 @@ export default function ProductListing({
             {isAllCategories ? (
               /* ALL CATEGORIES 4x4 GRID (Matching PDF Screenshots Page 12 & Page 23-24) */
               <div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5 sm:gap-4 lg:gap-5">
                   {MASTER_CATEGORIES.map(cat => {
                     const IconComponent = CATEGORY_ICON_MAP[cat.id] || ShoppingBag;
                     const dynamicCount = getDynamicProductCount(products, cat.id);
@@ -1028,22 +1028,22 @@ export default function ProductListing({
                       <div
                         key={cat.id}
                         onClick={() => navigate(cat.url)}
-                        className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl flex flex-col cursor-pointer hover:border-emerald-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group aspect-square overflow-hidden"
+                        className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl sm:rounded-3xl flex flex-col items-center cursor-pointer hover:border-emerald-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group overflow-hidden p-2.5 sm:p-3.5"
                       >
-                        <div className="w-full flex-1 flex items-center justify-center overflow-hidden">
+                        <div className="w-full h-24 sm:h-28 md:h-32 flex items-center justify-center overflow-hidden p-1.5 sm:p-2 bg-slate-50/50 dark:bg-slate-800/30 rounded-xl sm:rounded-2xl shrink-0">
                           {cat.image ? (
-                            <img src={`${cat.image}?v=4`} alt={cat.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
+                            <img src={`${cat.image}?v=4`} alt={cat.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500" />
                           ) : (
-                            <div className="w-full h-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
-                              <IconComponent size={48} className="group-hover:scale-110 transition-transform duration-500" />
+                            <div className="w-full h-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 rounded-xl">
+                              <IconComponent className="w-8 h-8 sm:w-10 sm:h-10 group-hover:scale-110 transition-transform duration-500" />
                             </div>
                           )}
                         </div>
-                        <div className="p-3 sm:p-4 flex flex-col items-center justify-center text-center shrink-0 bg-white dark:bg-slate-900 z-10">
-                          <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-1">
+                        <div className="pt-2 sm:pt-2.5 flex flex-col items-center justify-center text-center shrink-0 w-full">
+                          <h3 className="font-extrabold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-1 w-full">
                             {cat.name}
                           </h3>
-                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 font-medium">
+                          <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
                             {dynamicCount} Products
                           </p>
                         </div>
