@@ -17,7 +17,7 @@ export default function HowItWorks() {
           <span className="text-xs font-extrabold text-primary tracking-wider uppercase block">Simple Steps</span>
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">How SaathApp Works</h2>
           <p className="text-xs sm:text-sm text-slate-500 font-medium mt-2 leading-relaxed">
-            Order products or book services locally in under 30 seconds. Here is our seamless end-to-end process.
+            Order local products or book home services in seconds — simple, fast, and transparent.
           </p>
         </div>
 

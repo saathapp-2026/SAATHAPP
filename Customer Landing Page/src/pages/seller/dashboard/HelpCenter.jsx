@@ -15,14 +15,14 @@ function PolicyModal({ open, title, onClose }) {
         </div>
         <div className="p-6 overflow-y-auto">
           <div className="prose prose-sm dark:prose-invert max-w-none">
-            <p>Welcome to the <strong>{title}</strong> document. As part of our SAATHAPP MVP, this is a placeholder document that outlines the standard guidelines and rules associated with this topic.</p>
+            <p>Welcome to the <strong>{title}</strong> overview. This document provides a summary of standard guidelines for sellers on SaathApp while full policy details are being finalized.</p>
             <h4>1. General Guidelines</h4>
             <p>Sellers are expected to maintain accurate stock levels, process orders within 24 hours, and respond to customer queries promptly. Any violation may result in temporary suspension of store privileges.</p>
             <h4>2. Compliance</h4>
             <p>All products listed must comply with local laws and platform regulations. Prohibited items will be removed immediately without prior notice.</p>
             <h4>3. Payment & Settlement</h4>
             <p>Platform fees are deducted automatically before settlements. Settlements occur bi-weekly and require a verified bank account.</p>
-            <p className="text-slate-500 mt-6 italic">Note: In the final production version, this section will contain the full legally binding text.</p>
+            <p className="text-slate-500 mt-6 italic">Note: These summary guidelines are provisional. Official binding legal terms will be provided in your final seller agreement.</p>
           </div>
         </div>
         <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-page flex justify-end">

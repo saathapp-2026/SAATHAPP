@@ -181,7 +181,7 @@ export default function OrdersPage() {
       await refreshAll();
       return res;
     } catch (e) {
-      toast.error(e.message || 'Something went wrong');
+      toast.error(e.message || 'Unable to update order details. Please try again.');
       return null;
     } finally {
       setLoadingAction(null);

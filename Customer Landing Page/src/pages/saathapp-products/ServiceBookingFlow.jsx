@@ -168,7 +168,7 @@ export default function ServiceBookingFlow({
                 
                 {(!savedAddresses || savedAddresses.length === 0) ? (
                   <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-xl p-4 text-amber-800 dark:text-amber-500 text-sm font-medium">
-                    You have no saved addresses. Please select a dummy address to proceed.
+                    You have no saved addresses yet. Choose a default address below to continue.
                     <button onClick={() => setSelectedAddress('123, Green Park, New Delhi - 110016')} className="block mt-3 px-4 py-2 bg-amber-500 text-white rounded-btn font-bold">Use Default Address</button>
                   </div>
                 ) : (

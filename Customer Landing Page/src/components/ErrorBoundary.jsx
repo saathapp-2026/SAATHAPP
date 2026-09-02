@@ -74,9 +74,9 @@ export default class ErrorBoundary extends React.Component {
             <div className="w-14 h-14 mx-auto rounded-full bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-500 text-2xl font-black">
               ⚠️
             </div>
-            <h2 className="text-2xl font-black text-white">Something went wrong</h2>
+            <h2 className="text-2xl font-black text-white">We hit an unexpected snag</h2>
             <p className="text-xs text-slate-400 leading-relaxed font-medium">
-              An unexpected error occurred while loading this view.
+              We couldn't load this screen properly. Refreshing usually fixes it.
             </p>
             <p className="text-[11px] font-mono bg-slate-950 p-3 rounded-xl border border-slate-800 text-rose-300 text-left overflow-x-auto max-h-32">
               {this.state.error?.toString()}
@@ -85,7 +85,7 @@ export default class ErrorBoundary extends React.Component {
               onClick={this.handleReload}
               className="w-full rounded-2xl bg-emerald-600 hover:bg-emerald-500 py-3 text-xs font-black text-white shadow-lg transition cursor-pointer"
             >
-              Reload Application
+              Refresh Page
             </button>
           </div>
         </div>

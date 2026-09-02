@@ -48,7 +48,7 @@ export default function ProfessionalLoginPage() {
         }
       }
     } catch {
-      setError('An error occurred. Please try again.');
+      setError('Unable to sign in. Please check your credentials and try again.');
     } finally {
       setLoading(false);
     }

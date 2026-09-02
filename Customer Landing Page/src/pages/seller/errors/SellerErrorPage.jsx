@@ -23,7 +23,7 @@ const ERROR_CONFIG = {
   500: {
     code: '500',
     title: 'Server Error',
-    message: 'Something went wrong on our end. Please try again later.',
+    message: 'We ran into a server issue. Please refresh or try again in a few moments.',
     icon: ServerCrash,
     color: 'text-red-400',
   },
